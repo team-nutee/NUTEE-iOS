@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -17,6 +17,8 @@
 		5E21445E23C2F8FC0053CFB9 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E21445D23C2F8FC0053CFB9 /* Util.swift */; };
 		5E21446023C2F9040053CFB9 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E21445F23C2F9040053CFB9 /* Extension.swift */; };
 		5E21446223C2F93B0053CFB9 /* InitVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E21446123C2F93B0053CFB9 /* InitVC.swift */; };
+		5E21446523C315160053CFB9 /* FeedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E21446423C315160053CFB9 /* FeedVC.swift */; };
+		5E21446723C318720053CFB9 /* Mypage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E21446623C318720053CFB9 /* Mypage.storyboard */; };
 		7ED848354A2878E251E05E71 /* Pods_Nutee.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5915003F64084812BCF9F67 /* Pods_Nutee.framework */; };
 /* End PBXBuildFile section */
 
@@ -34,6 +36,8 @@
 		5E21445D23C2F8FC0053CFB9 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		5E21445F23C2F9040053CFB9 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		5E21446123C2F93B0053CFB9 /* InitVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitVC.swift; sourceTree = "<group>"; };
+		5E21446423C315160053CFB9 /* FeedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedVC.swift; sourceTree = "<group>"; };
+		5E21446623C318720053CFB9 /* Mypage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Mypage.storyboard; sourceTree = "<group>"; };
 		E5915003F64084812BCF9F67 /* Pods_Nutee.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Nutee.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBCC5FADFAEF6F7815A56200 /* Pods-Nutee.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nutee.release.xcconfig"; path = "Target Support Files/Pods-Nutee/Pods-Nutee.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -114,6 +118,7 @@
 			isa = PBXGroup;
 			children = (
 				5E21446123C2F93B0053CFB9 /* InitVC.swift */,
+				5E21446423C315160053CFB9 /* FeedVC.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -154,6 +159,7 @@
 			isa = PBXGroup;
 			children = (
 				5E21444223C2F8500053CFB9 /* Main.storyboard */,
+				5E21446623C318720053CFB9 /* Mypage.storyboard */,
 			);
 			path = Storyboard;
 			sourceTree = "<group>";
@@ -164,7 +170,6 @@
 				116AAE76128036EFDBA4D11C /* Pods-Nutee.debug.xcconfig */,
 				EBCC5FADFAEF6F7815A56200 /* Pods-Nutee.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -239,6 +244,7 @@
 				5E21444923C2F8560053CFB9 /* LaunchScreen.storyboard in Resources */,
 				5E21444623C2F8560053CFB9 /* Assets.xcassets in Resources */,
 				5E21444423C2F8500053CFB9 /* Main.storyboard in Resources */,
+				5E21446723C318720053CFB9 /* Mypage.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -295,6 +301,7 @@
 				5E21445E23C2F8FC0053CFB9 /* Util.swift in Sources */,
 				5E21446023C2F9040053CFB9 /* Extension.swift in Sources */,
 				5E21446223C2F93B0053CFB9 /* InitVC.swift in Sources */,
+				5E21446523C315160053CFB9 /* FeedVC.swift in Sources */,
 				5E21443D23C2F8500053CFB9 /* AppDelegate.swift in Sources */,
 				5E21443F23C2F8500053CFB9 /* SceneDelegate.swift in Sources */,
 				5E21445A23C2F8E50053CFB9 /* Service.swift in Sources */,

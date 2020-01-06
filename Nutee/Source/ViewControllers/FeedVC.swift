@@ -1,5 +1,5 @@
 //
-//  InitVC.swift
+//  FeedVC.swift
 //  Nutee
 //
 //  Created by Junhyeon on 2020/01/06.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class InitVC : UIViewController {
+class FeedVC: UIViewController {
     
     // MARK: - UI components
     
@@ -21,8 +21,7 @@ class InitVC : UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        setInit()
+    
     }
     
     // MARK: -Helpers
@@ -36,4 +35,5 @@ class InitVC : UIViewController {
 
     }
     
+
 }
