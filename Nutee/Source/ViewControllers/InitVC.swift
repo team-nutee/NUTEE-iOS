@@ -6,4 +6,18 @@
 //  Copyright © 2020 Junhyeon. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+class InitVC : UIViewController {
+    
+    // MARK: - 
+    
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        
+    }
+    
+}
