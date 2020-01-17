@@ -31,8 +31,8 @@ class NoticeBoardVC: UITableViewController {
         return dataNoticeList
     }()
     
-    override func viewDidload( ) {
-    }
+    //override func viewDidload( ) {
+    //}
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.noticeList.count
@@ -42,11 +42,15 @@ class NoticeBoardVC: UITableViewController {
         let row = self.noticeList[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "noticeCell")!
         
-        let title = cell.viewWithTag(101) as? UILabel
-        let desc = cell.viewWithTag(102) as? UILabel
+        /*let title = cell.viewWithTag(101) as? UILabel
+        let wirteDate = cell.viewWithTag(102) as? UILabel
         
         title?.text = row.title
-        writeDate?.text = row.description
+        //writeDate?.text = row.description
+        */
+        
+        cell.textLabel?.text = row.title
+        cell.detailTextLabel?.text = row.writeDate
         
         return cell
     }

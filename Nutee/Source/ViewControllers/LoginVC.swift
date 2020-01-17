@@ -15,6 +15,9 @@ class LoginVC: UIViewController {
     
     @IBAction func btnLogin(_ sender: Any) {
         // <--- 서버에서 로그인 정보 확인
+        let storyboard = UIStoryboard(name: "Home", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "Home") as! NewsFeedVC
+        present(vc, animated: true, completion: nil)
     }
     
 }

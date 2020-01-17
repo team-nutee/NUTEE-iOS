@@ -8,7 +8,6 @@
 
 import Foundation
 
-//VO는 Value Object의 약자
 //공지사항 목록 구현을 위한 목록 형식 틀 클래스 작성
 class NoticeBoardVO {
     var title: String? //글 제목

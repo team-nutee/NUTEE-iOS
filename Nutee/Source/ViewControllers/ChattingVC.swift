@@ -6,4 +6,8 @@
 //  Copyright © 2020 Junhyeon. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+class Chatting: UIViewController {
+    
+}
