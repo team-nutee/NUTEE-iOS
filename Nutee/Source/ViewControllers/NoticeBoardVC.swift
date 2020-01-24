@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NoticeBoardVC: UITableViewController {
+class NoticeBoardVC: UIViewController {
     
     //공지사항 목록 서버(홈페이지 공지사항 크롤링)에서 가져오기
     // <--- 코드 구현구간
@@ -31,14 +31,22 @@ class NoticeBoardVC: UITableViewController {
         return dataNoticeList
     }()
     
-    //override func viewDidload( ) {
-    //}
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+    }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+}
+
+extension NoticeBoardVC : UITableViewDelegate { }
+
+extension NoticeBoardVC : UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.noticeList.count
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let row = self.noticeList[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "noticeCell")!
         
@@ -55,7 +63,7 @@ class NoticeBoardVC: UITableViewController {
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         NSLog("선택된 행은 \(indexPath.row) 번째 행입니다.")
     }
     

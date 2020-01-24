@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="0kd-x6-v0o">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--News FeedVC-->
         <scene sceneID="9GC-xx-RBt">
             <objects>
-                <tableViewController storyboardIdentifier="NewsFeed" id="0kd-x6-v0o" customClass="NewsFeedVC" customModule="Nutee" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="NewsFeedVC" id="0kd-x6-v0o" customClass="NewsFeedVC" customModule="Nutee" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Hu0-me-vb3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="newsFeedCell" rowHeight="300" id="6E9-QF-heT">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="newsFeedCell" rowHeight="300" id="6E9-QF-heT" customClass="NewsFeedCell" customModule="Nutee" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="300"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="6E9-QF-heT" id="jyg-V8-QuN">
@@ -63,8 +63,21 @@
                                             <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                             <state key="normal" title="like" image="suit.heart" catalog="system"/>
                                         </button>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JTe-3F-E6E">
+                                            <rect key="frame" x="107" y="64" width="42" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="imgUserImg" destination="IVy-UH-g2n" id="z6H-zA-prh"/>
+                                    <outlet property="lblContents" destination="lzY-fW-OLG" id="EuD-f4-cF3"/>
+                                    <outlet property="lblPostTime" destination="JTe-3F-E6E" id="YWs-aU-qsF"/>
+                                    <outlet property="lblUserId" destination="uBO-Me-hdy" id="TGp-2p-rbo"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -72,17 +85,21 @@
                             <outlet property="delegate" destination="0kd-x6-v0o" id="yzB-9M-YmF"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="bSm-kH-wtI"/>
+                    <tabBarItem key="tabBarItem" title="" image="square.grid.2x2" catalog="system" selectedImage="square.grid.2x2" id="dYh-4K-OUF"/>
+                    <connections>
+                        <outlet property="newsTV" destination="Hu0-me-vb3" id="885-oO-vbw"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="53u-dQ-B4c" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1613.0434782608697" y="-123.21428571428571"/>
+            <point key="canvasLocation" x="2554.4000000000001" y="-123.39901477832512"/>
         </scene>
     </scenes>
     <resources>
         <image name="arrow.2.squarepath" catalog="system" width="64" height="44"/>
         <image name="ellipses.bubble" catalog="system" width="64" height="54"/>
         <image name="ellipsis" catalog="system" width="64" height="18"/>
+        <image name="square.grid.2x2" catalog="system" width="64" height="56"/>
         <image name="suit.heart" catalog="system" width="64" height="54"/>
     </resources>
 </document>

@@ -10,4 +10,31 @@ import UIKit
 
 class Chatting: UIViewController {
     
+    // MARK: - UI components
+    
+    
+    // MARK: - Variables and Properties
+    
+    
+    // MARK: - Life Cycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+    
+    }
+    
+    // MARK: -Helpers
+
+    // 초기 설정
+    func setInit() {
+        
+    }
+    
+    func setDefault() {
+
+    }
+    
+
+
 }

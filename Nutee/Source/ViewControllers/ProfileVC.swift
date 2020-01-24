@@ -9,30 +9,44 @@
 import UIKit
 
 class ProfileVC: UIViewController {
-    
-    // <--- 로그인 사용자 정보 받아오기 from 서버
-    var dataset = [
-        ("nutee_zigi", "뀨?", "1", "1", "2")
-    ]
-    
-    override func viewDidLoad() {
-        for(userImg, userId, post, following, follower) in self.dataset {
-            imgViewUserImage.image = UIImage(named: userImg)
-            lblUserId.text = userId
-            lblPostNum.text = post
-            lblFollowingNum.text = following
-            lblFollowerNum.text = follower
-        }
-    }
-    
+    // MARK: - UI components
+        
     @IBOutlet var imgViewUserImage: UIImageView!
     @IBOutlet var lblUserId: UILabel!
-    
     @IBOutlet var lblPost: UILabel!
     @IBOutlet var lblPostNum: UILabel!
     @IBOutlet var lblFollowing: UILabel!
     @IBOutlet var lblFollowingNum: UILabel!
     @IBOutlet var lblFollower: UILabel!
     @IBOutlet var lblFollowerNum: UILabel!
+
+    // MARK: - Variables and Properties
+    
+    
+    // MARK: - Life Cycle
+    
+    
+    override func viewDidLoad() {
+//        imgViewUserImage.image = UIImage(named: "nutee_zigi")
+        lblUserId.text = "12"
+        lblPostNum.text = "123"
+        lblFollowingNum.text = "100"
+        lblFollowerNum.text = "123"
+    }
+    
+    // MARK: -Helpers
+
+    // 초기 설정
+    func setInit() {
+        
+    }
+    
+    func setDefault() {
+
+    }
+    
+
+
+
     
 }
