@@ -27,8 +27,8 @@ class ProfileVC: UIViewController {
     
     
     override func viewDidLoad() {
-//        imgViewUserImage.image = UIImage(named: "nutee_zigi")
-        lblUserId.text = "12"
+        imgViewUserImage.image = UIImage(named: "nutee_zigi")
+        lblUserId.text = "zigi"
         lblPostNum.text = "123"
         lblFollowingNum.text = "100"
         lblFollowerNum.text = "123"

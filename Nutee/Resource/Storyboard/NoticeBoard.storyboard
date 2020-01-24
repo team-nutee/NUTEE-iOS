@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="8mq-7V-zXi">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="PY9-rd-QFv">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Notice BoardVC-->
+        <!--공지사항-->
         <scene sceneID="Wqd-8G-i27">
             <objects>
                 <tableViewController id="8mq-7V-zXi" customClass="NoticeBoardVC" customModule="Nutee" customModuleProvider="target" sceneMemberID="viewController">
@@ -14,25 +14,30 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <view key="tableFooterView" contentMode="scaleToFill" id="2v1-jY-4cJ">
+                            <rect key="frame" x="0.0" y="111.5" width="414" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="noticeCell" textLabel="AQa-Nv-z0e" detailTextLabel="tNS-Cb-czk" style="IBUITableViewCellStyleValue1" id="gT5-UY-jcH">
-                                <rect key="frame" x="0.0" y="28" width="414" height="45.5"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="noticeCell" textLabel="AQa-Nv-z0e" detailTextLabel="tNS-Cb-czk" style="IBUITableViewCellStyleSubtitle" id="gT5-UY-jcH">
+                                <rect key="frame" x="0.0" y="28" width="414" height="55.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gT5-UY-jcH" id="2ec-jF-zG7">
-                                    <rect key="frame" x="0.0" y="0.0" width="383" height="45.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="383" height="55.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" tag="101" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="제목" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="AQa-Nv-z0e">
-                                            <rect key="frame" x="20" y="12" width="33" height="23"/>
+                                            <rect key="frame" x="20" y="10" width="29.5" height="20.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" multipleTouchEnabled="YES" tag="102" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="날짜" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="tNS-Cb-czk">
-                                            <rect key="frame" x="349" y="16" width="26" height="18"/>
+                                        <label opaque="NO" multipleTouchEnabled="YES" tag="102" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="날짜" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="tNS-Cb-czk">
+                                            <rect key="frame" x="20" y="31.5" width="21" height="14.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -45,9 +50,28 @@
                             <outlet property="delegate" destination="8mq-7V-zXi" id="OLq-Ad-yTC"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="" image="tag" catalog="system" id="cWe-7D-QN1"/>
+                    <navigationItem key="navigationItem" title="공지사항" id="Et8-c1-ZDn"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ccd-zK-gDo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1928.985507246377" y="97.767857142857139"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="TWp-b5-L23">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="PY9-rd-QFv" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" image="tag" catalog="system" id="cWe-7D-QN1"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="MXB-Vn-qCe">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="8mq-7V-zXi" kind="relationship" relationship="rootViewController" id="0Cn-Os-NF9"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4Ox-Lu-KVF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1018.840579710145" y="97.767857142857139"/>
         </scene>
