@@ -7,10 +7,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--LoginVC-->
+        <!--View Controller-->
         <scene sceneID="rDy-rV-hQH">
             <objects>
-                <viewController id="Cyv-qx-PEW" customClass="LoginVC" customModule="Nutee" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Cyv-qx-PEW" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="o4U-ey-f0O">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -24,9 +24,6 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="로그인"/>
-                                <connections>
-                                    <action selector="btnLogin:" destination="Cyv-qx-PEW" eventType="touchUpInside" id="HDt-Ps-cJb"/>
-                                </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NZ0-3T-fq3">
                                 <rect key="frame" x="98" y="539" width="170" height="34"/>
@@ -58,10 +55,6 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="bB2-px-cux"/>
                     </view>
-                    <connections>
-                        <outlet property="txtLogin" destination="pME-cE-b4E" id="wxi-wH-czF"/>
-                        <outlet property="txtPassword" destination="NZ0-3T-fq3" id="hmG-yx-aJE"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lnq-H0-Ro1" sceneMemberID="firstResponder"/>
             </objects>
@@ -269,7 +262,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h98-ti-NqT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="698" y="381"/>
+            <point key="canvasLocation" x="753" y="57"/>
         </scene>
         <!--Profile-->
         <scene sceneID="rcb-Yq-Bck">

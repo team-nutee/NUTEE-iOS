@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Chatting: UIViewController {
+class ChattingVC: UIViewController {
     
     // MARK: - UI components
     

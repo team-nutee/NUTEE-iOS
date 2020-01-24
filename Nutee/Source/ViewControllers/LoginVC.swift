@@ -10,14 +10,44 @@ import UIKit
 
 class LoginVC: UIViewController {
     
-    @IBOutlet var txtLogin: UITextField!
-    @IBOutlet var txtPassword: UITextField!
+    // MARK: - UI components
+    @IBOutlet weak var idView: UIView!
+    @IBOutlet weak var pwView: UIView!
+    @IBOutlet weak var signInBtn: UIButton!
+    @IBOutlet weak var signUpBtn: UIButton!
+    @IBOutlet weak var findIdBtn: UIButton!
+    @IBOutlet weak var findPwBtn: UIButton!
+    @IBOutlet weak var idTextField: UITextField!
+    @IBOutlet weak var pwTextField: UITextField!
     
-    @IBAction func btnLogin(_ sender: Any) {
-        // <--- 서버에서 로그인 정보 확인
-        let storyboard = UIStoryboard(name: "Home", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "Home") as! NewsFeedVC
-        present(vc, animated: true, completion: nil)
+    // MARK: - Variables and Properties
+    
+    
+    // MARK: - Life Cycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+     
+        setInit()
     }
+    
+    // MARK: -Helpers
+
+    // 초기 설정
+    func setInit() {
+        idView.layer.addBorder([.bottom], color: UIColor.nuteeGreen, width: 1)
+        pwView.layer.addBorder([.bottom], color: UIColor.nuteeGreen, width: 1)
+        
+        signInBtn.tintColor = UIColor.black
+        signUpBtn.tintColor = UIColor.black
+        findIdBtn.tintColor = UIColor.black
+        findPwBtn.tintColor = UIColor.black
+    }
+    
+    func setDefault() {
+
+    }
+    
+
     
 }
