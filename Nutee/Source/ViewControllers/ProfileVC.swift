@@ -32,13 +32,14 @@ class ProfileVC: UIViewController {
         lblPostNum.text = "123"
         lblFollowingNum.text = "100"
         lblFollowerNum.text = "123"
+        setInit()
     }
     
     // MARK: -Helpers
 
     // 초기 설정
     func setInit() {
-        
+        imgViewUserImage.setRounded(radius: nil)
     }
     
     func setDefault() {
