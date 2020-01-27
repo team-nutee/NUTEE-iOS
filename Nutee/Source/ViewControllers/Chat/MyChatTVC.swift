@@ -11,12 +11,15 @@ import UIKit
 class MyChatTVC: UITableViewCell {
 
     @IBOutlet weak var checkView: UIView!
+    @IBOutlet weak var myChatLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         
         checkView.setRounded(radius: nil)
+        checkView.backgroundColor = UIColor.nuteeGreen
+        checkView.isHidden = true
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

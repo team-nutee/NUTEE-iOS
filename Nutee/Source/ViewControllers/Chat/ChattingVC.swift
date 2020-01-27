@@ -21,39 +21,49 @@ class ChattingVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.chatTV.delegate = self
-        self.chatTV.dataSource = self
-        chatTV.register(UINib(nibName: "MyChatTVC", bundle: nil), forCellReuseIdentifier: "MyChatTVC")
+
+        setInit()
+        setTV()
     }
     
     // MARK: -Helpers
-
+    
     // 초기 설정
     func setInit() {
+        chatTV.register(UINib(nibName: "MyChatTVC", bundle: nil), forCellReuseIdentifier: "MyChatTVC")
+        self.chatTV.separatorStyle = .none
+        chatTV.rowHeight = UITableView.automaticDimension
         
     }
     
-    func setDefault() {
-
+    func setTV() {
+        self.chatTV.delegate = self
+        self.chatTV.dataSource = self
     }
     
-
-
+    func setDefault() {
+        
+    }
+    
+    
+    
 }
 
 extension ChattingVC : UITableViewDelegate { }
 
 extension ChattingVC : UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return 10
+    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "MyChatTVC", for: indexPath) as! MyChatTVC
-        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MyChatTVC", for: indexPath) as! MyChatTVC
+        cell.selectionStyle = .none
         return cell
-
     }
     
     
