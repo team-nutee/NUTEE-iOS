@@ -1,10 +1,10 @@
 //
-//  ThreadHelper.swift
+//  RequestModifier.swift
 //  Kingfisher
 //
-//  Created by Wei Wang on 15/10/9.
+//  Created by Wei Wang on 2016/09/05.
 //
-//  Copyright (c) 2015 Wei Wang <onevcat@gmail.com>
+//  Copyright (c) 2018 Wei Wang <onevcat@gmail.com>
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -26,12 +26,28 @@
 
 import Foundation
 
-func dispatch_async_safely_main_queue(block: ()->()) {
-    if NSThread.isMainThread() {
-        block()
-    } else {
-        dispatch_async(dispatch_get_main_queue()) {
-            block()
-        }
+/// Request modifier of image downloader.
+public protocol ImageDownloadRequestModifier {
+    func modified(for request: URLRequest) -> URLRequest?
+}
+
+struct NoModifier: ImageDownloadRequestModifier {
+    static let `default` = NoModifier()
+    private init() {}
+    func modified(for request: URLRequest) -> URLRequest? {
+        return request
+    }
+}
+
+public struct AnyModifier: ImageDownloadRequestModifier {
+    
+    let block: (URLRequest) -> URLRequest?
+    
+    public func modified(for request: URLRequest) -> URLRequest? {
+        return block(request)
+    }
+    
+    public init(modify: @escaping (URLRequest) -> URLRequest? ) {
+        block = modify
     }
 }
