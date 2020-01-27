@@ -1,10 +1,9 @@
 //
-//  Resource.swift
+//  Box.swift
 //  Kingfisher
 //
-//  Created by Wei Wang on 15/4/6.
-//
-//  Copyright (c) 2015 Wei Wang <onevcat@gmail.com>
+//  Created by Wei Wang on 2018/3/17.
+//  Copyright (c) 2018 Wei Wang <onevcat@gmail.com>
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -26,12 +25,10 @@
 
 import Foundation
 
-public struct Resource {
-    public let cacheKey: String
-    public let downloadURL: NSURL
+class Box<T> {
+    let value: T
     
-    public init(downloadURL: NSURL, cacheKey: String? = nil) {
-        self.downloadURL = downloadURL
-        self.cacheKey = cacheKey ?? downloadURL.absoluteString
+    init(_ value: T) {
+        self.value = value
     }
 }

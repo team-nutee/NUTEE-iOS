@@ -15,6 +15,8 @@
 		5E05AD7623DB0F1E00E36AD4 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E05AD7523DB0F1E00E36AD4 /* UIImageView+Extension.swift */; };
 		5E05AD7823DB104600E36AD4 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E05AD7723DB104600E36AD4 /* UIView+Extension.swift */; };
 		5E05AD7A23DB1AC500E36AD4 /* NetworkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E05AD7923DB1AC500E36AD4 /* NetworkResult.swift */; };
+		5E05AD7D23DEA5FB00E36AD4 /* MyChatTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E05AD7B23DEA5FB00E36AD4 /* MyChatTVC.swift */; };
+		5E05AD7E23DEA5FB00E36AD4 /* MyChatTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E05AD7C23DEA5FB00E36AD4 /* MyChatTVC.xib */; };
 		5E21443D23C2F8500053CFB9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E21443C23C2F8500053CFB9 /* AppDelegate.swift */; };
 		5E21443F23C2F8500053CFB9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E21443E23C2F8500053CFB9 /* SceneDelegate.swift */; };
 		5E21444423C2F8500053CFB9 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E21444223C2F8500053CFB9 /* Home.storyboard */; };
@@ -56,6 +58,8 @@
 		5E05AD7523DB0F1E00E36AD4 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 		5E05AD7723DB104600E36AD4 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		5E05AD7923DB1AC500E36AD4 /* NetworkResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResult.swift; sourceTree = "<group>"; };
+		5E05AD7B23DEA5FB00E36AD4 /* MyChatTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyChatTVC.swift; sourceTree = "<group>"; };
+		5E05AD7C23DEA5FB00E36AD4 /* MyChatTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyChatTVC.xib; sourceTree = "<group>"; };
 		5E21443923C2F8500053CFB9 /* Nutee.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nutee.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E21443C23C2F8500053CFB9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5E21443E23C2F8500053CFB9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -102,6 +106,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5E05AD7F23DEC1D600E36AD4 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				D59718A723CEA98300117906 /* ChattingVC.swift */,
+				5E05AD7B23DEA5FB00E36AD4 /* MyChatTVC.swift */,
+				5E05AD7C23DEA5FB00E36AD4 /* MyChatTVC.xib */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
 		5E21443023C2F8500053CFB9 = {
 			isa = PBXGroup;
 			children = (
@@ -168,11 +182,11 @@
 		5E21445323C2F8870053CFB9 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				5E05AD7F23DEC1D600E36AD4 /* Chat */,
 				5E21446123C2F93B0053CFB9 /* InitVC.swift */,
 				D59718A523CEA98300117906 /* LoginVC.swift */,
 				D59718A323CEA98300117906 /* NewsFeedVC.swift */,
 				D597189D23CEA79100117906 /* NoticeBoardVC.swift */,
-				D59718A723CEA98300117906 /* ChattingVC.swift */,
 				D59718A423CEA98300117906 /* ProfileVC.swift */,
 				D59718A823CEA98400117906 /* MainVC.swift */,
 				D59718A623CEA98300117906 /* FeedVC.swift */,
@@ -346,6 +360,7 @@
 				D59718B523CEA9DA00117906 /* Login.storyboard in Resources */,
 				5E21444623C2F8560053CFB9 /* Assets.xcassets in Resources */,
 				5E21444423C2F8500053CFB9 /* Home.storyboard in Resources */,
+				5E05AD7E23DEA5FB00E36AD4 /* MyChatTVC.xib in Resources */,
 				D59718B823CEA9DA00117906 /* Chatting.storyboard in Resources */,
 				D59718B623CEA9DA00117906 /* NoticeBoard.storyboard in Resources */,
 				D55461DF23D04A9F004EC8E3 /* nutee_zigi.png in Resources */,
@@ -412,6 +427,7 @@
 				5E21446223C2F93B0053CFB9 /* InitVC.swift in Sources */,
 				D5EBD78623D0269400C2B7F5 /* NewsFeedVO.swift in Sources */,
 				5E05AD6E23DB0EB800E36AD4 /* UIViewController+Extension.swift in Sources */,
+				5E05AD7D23DEA5FB00E36AD4 /* MyChatTVC.swift in Sources */,
 				D59718AD23CEA98400117906 /* ChattingVC.swift in Sources */,
 				D59718A023CEA87B00117906 /* NoticeBoardVO.swift in Sources */,
 				5E21443D23C2F8500053CFB9 /* AppDelegate.swift in Sources */,
