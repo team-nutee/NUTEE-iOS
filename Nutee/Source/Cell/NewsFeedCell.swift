@@ -15,6 +15,13 @@ class NewsFeedCell: UITableViewCell {
     @IBOutlet var lblPostTime: UILabel!
     @IBOutlet var lblContents: UILabel!
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+
+        initUserImage()
+    }
+
+    
     @IBAction func btnRepost(_ sender: Any) { }
     
     @IBAction func btnLike(_ sender: Any) { }
@@ -22,5 +29,10 @@ class NewsFeedCell: UITableViewCell {
     @IBAction func btnReply(_ sender: Any) { }
     
     @IBAction func btnMore(_ sender: Any) { }
+    
+    func initUserImage() {
+        imgUserImg.image = #imageLiteral(resourceName: "defaultProfile")
+        imgUserImg.setRounded(radius: nil)
+    }
     
 }

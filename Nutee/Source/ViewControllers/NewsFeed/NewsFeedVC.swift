@@ -28,6 +28,7 @@ class NewsFeedVC: UIViewController {
         newsTV.delegate = self
         newsTV.dataSource = self
 
+        initColor()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -57,6 +58,13 @@ extension NewsFeedVC : UITableViewDelegate { }
 
 extension NewsFeedVC : UITableViewDataSource {
     
+    func initColor() {
+        self.navigationController?.navigationBar.barTintColor = UIColor.nuteeGreen
+        self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
+        self.tabBarController?.tabBar.barTintColor = UIColor.nuteeGreen
+        self.tabBarController?.tabBar.tintColor = UIColor.white
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 10
     }
@@ -67,10 +75,8 @@ extension NewsFeedVC : UITableViewDataSource {
         //Custom셀인 'NewsFeedCell' 형식으로 변환
         let cell = tableView.dequeueReusableCell(withIdentifier: "newsFeedCell", for: indexPath) as! NewsFeedCell
         
-        if indexPath.row % 2 == 0 {
-            cell.backgroundColor = .blue
-        } else {
-            cell.backgroundColor = .red
+        if indexPath.row % 2 == 1 {
+            cell.backgroundColor = .gray
         }
         //데이터 소스에 저장된 값을 커스텀 한 NewsFeedCell의 아울렛 변수들에게 전달
 //        cell.lblUserId.text = row[indexPath.row].userId
@@ -83,8 +89,13 @@ extension NewsFeedVC : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         NSLog("선택된 뉴스피드는 \(indexPath.row) 번쨰 뉴스피드입니다")
+        
+        let showDetailStoryboard = UIStoryboard(name: "detailNewsFeed", bundle: nil)
+        let showDetailNewsFeedVC = showDetailStoryboard.instantiateViewController(withIdentifier: "detailNewsFeedVC") as! detailNewsFeedVC
+//        self.present(showDetailNewsFeedVC, animated: true, completion: nil)
+        self.navigationController?.pushViewController(showDetailNewsFeedVC, animated: true)
     }
     
 }
 
-// MARK:
+// MARK: -
