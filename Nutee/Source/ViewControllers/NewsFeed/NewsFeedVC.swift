@@ -59,8 +59,6 @@ extension NewsFeedVC : UITableViewDelegate { }
 extension NewsFeedVC : UITableViewDataSource {
     
     func initColor() {
-        self.navigationController?.navigationBar.barTintColor = UIColor.nuteeGreen
-        self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
         self.tabBarController?.tabBar.barTintColor = UIColor.nuteeGreen
         self.tabBarController?.tabBar.tintColor = UIColor.white
     }
@@ -76,7 +74,7 @@ extension NewsFeedVC : UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "newsFeedCell", for: indexPath) as! NewsFeedCell
         
         if indexPath.row % 2 == 1 {
-            cell.backgroundColor = .gray
+            cell.backgroundColor = .lightGray
         }
         //데이터 소스에 저장된 값을 커스텀 한 NewsFeedCell의 아울렛 변수들에게 전달
 //        cell.lblUserId.text = row[indexPath.row].userId
@@ -90,8 +88,8 @@ extension NewsFeedVC : UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         NSLog("선택된 뉴스피드는 \(indexPath.row) 번쨰 뉴스피드입니다")
         
-        let showDetailStoryboard = UIStoryboard(name: "detailNewsFeed", bundle: nil)
-        let showDetailNewsFeedVC = showDetailStoryboard.instantiateViewController(withIdentifier: "detailNewsFeedVC") as! detailNewsFeedVC
+        let showDetailStoryboard = UIStoryboard(name: "DetailNewsFeed", bundle: nil)
+        let showDetailNewsFeedVC = showDetailStoryboard.instantiateViewController(withIdentifier: "DetailNewsFeedVC") as! DetailNewsFeedVC
 //        self.present(showDetailNewsFeedVC, animated: true, completion: nil)
         self.navigationController?.pushViewController(showDetailNewsFeedVC, animated: true)
     }
