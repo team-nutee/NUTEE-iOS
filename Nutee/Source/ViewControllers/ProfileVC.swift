@@ -27,6 +27,11 @@ class ProfileVC: UIViewController {
     
     
     override func viewDidLoad() {
+        imgViewUserImage.image = UIImage(named: "nutee_zigi")
+        lblUserId.text = "zigi"
+        lblPostNum.text = "123"
+        lblFollowingNum.text = "100"
+        lblFollowerNum.text = "123"
         setInit()
     }
     
@@ -34,12 +39,7 @@ class ProfileVC: UIViewController {
 
     // 초기 설정
     func setInit() {
-        imgViewUserImage.image = UIImage(named: "nutee_zigi")
         imgViewUserImage.setRounded(radius: nil)
-        lblUserId.text = "zigi"
-        lblPostNum.text = "123"
-        lblFollowingNum.text = "100"
-        lblFollowerNum.text = "123"
     }
     
     func setDefault() {
