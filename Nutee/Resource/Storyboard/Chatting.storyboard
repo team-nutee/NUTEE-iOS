@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="m7B-xl-sYb">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="m7B-xl-sYb">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--채팅-->
         <scene sceneID="0M2-fI-8hB">
             <objects>
                 <viewController id="1HR-Ak-bzd" sceneMemberID="viewController">
@@ -17,11 +17,11 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="4xe-TP-M1T"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="paperplane" catalog="system" id="c04-Lf-9Pr"/>
+                    <navigationItem key="navigationItem" title="채팅" id="8hD-J6-2ck"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xAg-fW-byk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="755.07246376811599" y="1.3392857142857142"/>
+            <point key="canvasLocation" x="1665.217391304348" y="1.3392857142857142"/>
         </scene>
         <!--ChattingVC-->
         <scene sceneID="g33-ff-DMU">
@@ -46,10 +46,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bmG-BD-0H6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1534.7826086956522" y="0.6696428571428571"/>
+            <point key="canvasLocation" x="2444.9275362318845" y="0.6696428571428571"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="paperplane" catalog="system" width="64" height="60"/>
-    </resources>
 </document>
