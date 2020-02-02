@@ -19,6 +19,7 @@ class LoginVC: UIViewController {
     @IBOutlet weak var findPwBtn: UIButton!
     @IBOutlet weak var idTextField: UITextField!
     @IBOutlet weak var pwTextField: UITextField!
+    @IBOutlet weak var quitBtn: UIButton!
     
     // MARK: - Variables and Properties
     
@@ -29,25 +30,45 @@ class LoginVC: UIViewController {
         super.viewDidLoad()
      
         setInit()
+        
+        quitBtn.addTarget(self, action: #selector(quit), for: .touchUpInside)
+        
     }
+    
     
     // MARK: -Helpers
 
     // 초기 설정
     func setInit() {
+        
         idView.layer.addBorder([.bottom], color: UIColor.nuteeGreen, width: 1)
         pwView.layer.addBorder([.bottom], color: UIColor.nuteeGreen, width: 1)
         
-        signInBtn.tintColor = UIColor.black
-        signUpBtn.tintColor = UIColor.black
-        findIdBtn.tintColor = UIColor.black
-        findPwBtn.tintColor = UIColor.black
+        signInBtn.tintColor = .white
+        signInBtn.backgroundColor = .nuteeGreen
+        signInBtn.setRounded(radius: 10)
+        signUpBtn.tintColor = .white
+        signUpBtn.backgroundColor = .nuteeGreen
+        signUpBtn.setRounded(radius: 10)
+        findIdBtn.tintColor = .white
+        findIdBtn.backgroundColor = .nuteeGreen
+        findIdBtn.setRounded(radius: 10)
+        findPwBtn.tintColor = .white
+        findPwBtn.backgroundColor = .nuteeGreen
+        findPwBtn.setRounded(radius: 10)
+
     }
     
     func setDefault() {
-
+        
     }
     
+    @objc func quit() {
+        dismiss(animated: true, completion: nil)
+    }
+    
+}
 
+extension LoginVC {
     
 }

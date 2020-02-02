@@ -30,7 +30,6 @@ import UIKit
     }
 
     
-    
     func setRounded(radius : CGFloat?){
         
         // UIView 의 모서리가 둥근 정도를 설정

@@ -1,5 +1,5 @@
 //
-//  MyChatTVC.swift
+//  YourChatTVC.swift
 //  Nutee
 //
 //  Created by Junhyeon on 2020/01/27.
@@ -8,22 +8,23 @@
 
 import UIKit
 
-class MyChatTVC: UITableViewCell {
+class YourChatTVC: UITableViewCell {
 
-    @IBOutlet weak var checkView: UIView!
-    @IBOutlet weak var myChatLabel: UILabel!
+    @IBOutlet weak var youChatView: UIView!
+    @IBOutlet weak var youCheckView: UIView!
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-        checkView.setRounded(radius: nil)
-        checkView.backgroundColor = UIColor.nuteeGreen
-        checkView.isHidden = true
+        // Initialization code
+        youChatView.setRounded(radius: 5)
+        youCheckView.setRounded(radius: nil)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
+        // Configure the view for the selected state
     }
     
 }

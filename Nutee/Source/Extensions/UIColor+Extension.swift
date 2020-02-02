@@ -52,8 +52,16 @@ extension UIColor {
       return UIColor(white: 209.0 / 255.0, alpha: 1.0)
     }
 
+//    @nonobjc class var nuteeGreen: UIColor {
+//        return UIColor(red: 19.0 / 255.0, green: 194.0 / 255.0, blue: 118.0 / 255.0 , alpha: 1.0)
+//    }
+//    @nonobjc class var nuteeGreen: UIColor {
+//        return UIColor(red: 129.0 / 255.0, green: 228.0 / 255.0, blue: 189.0 / 255.0 , alpha: 1.0)
+//    }
+    
     @nonobjc class var nuteeGreen: UIColor {
-        return UIColor(red: 19.0 / 255.0, green: 194.0 / 255.0, blue: 118.0 / 255.0 , alpha: 1.0)
+        return UIColor(red: 0 / 255.0, green: 135.0 / 255.0, blue: 58.0 / 255.0 , alpha: 0.8)
     }
+
     
 }

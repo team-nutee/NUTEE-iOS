@@ -10,30 +10,23 @@ import UIKit
 
 class NoticeBoardVC: UIViewController {
     
-    //공지사항 목록 서버(홈페이지 공지사항 크롤링)에서 가져오기
-    // <--- 코드 구현구간
-    var dataset = [
-        ("2020학년도 1학기 수강신청 안내", "2020-01-13"), 
-        ("2020학년도 1학기 교내/교외 장학금 신청 안내", "2019-12-16")
-    ]
+    // MARK: - UI components
+    @IBOutlet weak var noticeTV: UITableView!
     
-    //공지사항 목록 구성을 위한 목록 데이터 구성
-    // <--- 코드 구현구간
-    lazy var noticeList: [NoticeBoardVO] = {
-        var dataNoticeList = [NoticeBoardVO]()
-        
-        for (title, writeDate) in self.dataset {
-            let ntcOb = NoticeBoardVO()
-            ntcOb.title = title
-            ntcOb.writeDate = writeDate
-            dataNoticeList.append(ntcOb)
-        }
-        return dataNoticeList
-    }()
     
+    // MARK: - Variables and Properties
+    
+    
+    // MARK: - dummy data
+    
+    
+    // MARK: - Life Cycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        noticeTV.delegate = self
+        noticeTV.dataSource = self
     }
     
 }
@@ -43,12 +36,13 @@ extension NoticeBoardVC : UITableViewDelegate { }
 extension NoticeBoardVC : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.noticeList.count
+        return 10
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let row = self.noticeList[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: "noticeCell")!
+//        let row = self.noticeList[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "NoticeBoardTVC", for: indexPath) as! NoticeBoardTVC
+        
         
         /*let title = cell.viewWithTag(101) as? UILabel
         let wirteDate = cell.viewWithTag(102) as? UILabel
@@ -57,8 +51,8 @@ extension NoticeBoardVC : UITableViewDataSource {
         //writeDate?.text = row.description
         */
         
-        cell.textLabel?.text = row.title
-        cell.detailTextLabel?.text = row.writeDate
+//        cell.noticeDateLabel?.text = title
+//        cell.noticeTitleLabel?.text = date
         
         return cell
     }

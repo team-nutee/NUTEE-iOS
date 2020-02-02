@@ -10,6 +10,7 @@ import UIKit
 
 extension UIViewController {
     
+    
     // 2칸인 alert title - up, message - down
     func simpleAlert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
@@ -36,5 +37,7 @@ extension UIViewController {
         
         self.present(alert, animated: true, completion: nil)
     }
+    
+    
 
 }

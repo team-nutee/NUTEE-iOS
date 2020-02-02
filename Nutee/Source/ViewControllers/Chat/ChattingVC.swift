@@ -33,7 +33,6 @@ class ChattingVC: UIViewController {
         chatTV.register(UINib(nibName: "MyChatTVC", bundle: nil), forCellReuseIdentifier: "MyChatTVC")
         self.chatTV.separatorStyle = .none
         chatTV.rowHeight = UITableView.automaticDimension
-        
     }
     
     func setTV() {
