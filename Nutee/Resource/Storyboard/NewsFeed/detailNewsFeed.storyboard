@@ -10,7 +10,7 @@
         <!--Detail News FeedVC-->
         <scene sceneID="pkK-Rd-85o">
             <objects>
-                <viewController storyboardIdentifier="detailNewsFeedVC" id="ASR-jg-Os4" customClass="detailNewsFeedVC" customModule="Nutee" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DetailNewsFeed" id="ASR-jg-Os4" customClass="DetailNewsFeedVC" customModule="Nutee" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="yDw-0X-CxH">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -88,8 +88,8 @@ extension NewsFeedVC : UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         NSLog("선택된 뉴스피드는 \(indexPath.row) 번쨰 뉴스피드입니다")
         
-        let showDetailStoryboard = UIStoryboard(name: "DetailNewsFeed", bundle: nil)
-        let showDetailNewsFeedVC = showDetailStoryboard.instantiateViewController(withIdentifier: "DetailNewsFeedVC") as! DetailNewsFeedVC
+        let detailNewsFeedSB = UIStoryboard(name: "DetailNewsFeed", bundle: nil)
+        let showDetailNewsFeedVC = detailNewsFeedSB.instantiateViewController(withIdentifier: "DetailNewsFeed") as! DetailNewsFeedVC
 //        self.present(showDetailNewsFeedVC, animated: true, completion: nil)
         self.navigationController?.pushViewController(showDetailNewsFeedVC, animated: true)
     }
