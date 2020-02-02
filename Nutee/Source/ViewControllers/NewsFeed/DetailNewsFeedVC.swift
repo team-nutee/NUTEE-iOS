@@ -28,9 +28,13 @@ class DetailNewsFeedVC: UIViewController {
     override func viewDidLoad() {
         loadSelectedNewsFeed()
     }
-
     
     //MARK: - data
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "여기는 해더 뷰 제목"
+    }
+    
     func loadSelectedNewsFeed() {
         let cell = NewsFeedCell()
         self.imgUserImg = cell.imgUserImg
