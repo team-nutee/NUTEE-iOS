@@ -29,11 +29,14 @@ class NewsFeedVC: UIViewController {
         newsTV.dataSource = self
 
         initColor()
+        
+        // Register the custom header view which Nib 'PostingTableHeaderSection'
+        let nib = UINib(nibName: "PostingTableHeaderSection", bundle: nil)
+        self.newsTV.register(nib, forHeaderFooterViewReuseIdentifier: "PostingTableHeaderSection")
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-//        self.tabBarController?.tabBar.isHidden = false
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(false)
 //        checkLogin()
     }
     
@@ -42,11 +45,11 @@ class NewsFeedVC: UIViewController {
     // 로그인이 되어있는지 체크
     func checkLogin() {
         if UserDefaults.standard.data(forKey: "Cookies") == nil {
+            
             let storyboard = UIStoryboard(name: "Login", bundle: nil)
             let vc = storyboard.instantiateViewController(identifier: "LoginVC") as! LoginVC
             vc.modalPresentationStyle = .overCurrentContext
             vc.modalTransitionStyle = .crossDissolve
-//            self.tabBarController?.tabBar.isHidden = true
             
             self.present(vc, animated: true, completion: nil)
         }
@@ -57,12 +60,33 @@ class NewsFeedVC: UIViewController {
 // MARK: - UITableView
 extension NewsFeedVC : UITableViewDelegate { }
 
+extension NewsFeedVC : UITextViewDelegate {
+    
+    
+    
+}
+
 extension NewsFeedVC : UITableViewDataSource {
     
     func initColor() {
-//        self.tabBarController?.tabBar.barTintColor = UIColor.nuteeGreen
-        self.tabBarController?.tabBar.tintColor = UIColor.nuteeGreen
-//        self.tabBarController?.tabBar.unselectedItemTintColor = UIColor.white
+        self.tabBarController?.tabBar.barTintColor = UIColor.nuteeGreen
+        self.tabBarController?.tabBar.tintColor = UIColor.white
+    }
+    
+    /*func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "여기는 해더 뷰 제목"
+    }*/
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    
+        // Dequeue with the reuse identifier
+        let cell = tableView.dequeueReusableHeaderFooterView(withIdentifier: "PostingTableHeaderSection")
+
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 160
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -75,9 +99,9 @@ extension NewsFeedVC : UITableViewDataSource {
         //Custom셀인 'NewsFeedCell' 형식으로 변환
         let cell = tableView.dequeueReusableCell(withIdentifier: "newsFeedCell", for: indexPath) as! NewsFeedCell
         
-//        if indexPath.row % 2 == 1 {
-//            cell.backgroundColor = .lightGray
-//        }
+        if indexPath.row % 2 == 1 {
+            cell.backgroundColor = .lightGray
+        }
         //데이터 소스에 저장된 값을 커스텀 한 NewsFeedCell의 아울렛 변수들에게 전달
 //        cell.lblUserId.text = row[indexPath.row].userId
 //        cell.lblContents.text = row[indexPath.row].contents

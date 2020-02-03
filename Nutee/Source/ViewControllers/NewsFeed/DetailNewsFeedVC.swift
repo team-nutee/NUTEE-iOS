@@ -12,11 +12,8 @@ class DetailNewsFeedVC: UIViewController {
     
     //MARK: - UI components
     
-    @IBOutlet var imgUserImg: UIImageView!
-    @IBOutlet var lblUserId: UILabel!
-    @IBOutlet var lblPostTime: UILabel!
-    @IBOutlet var lblContents: UILabel!
-    @IBOutlet var imgPostImg: UIImageView!
+    @IBOutlet var newsTV: UITableView!
+    
     
     //MARK: - Variables and Properties
     
@@ -26,20 +23,59 @@ class DetailNewsFeedVC: UIViewController {
     
     
     override func viewDidLoad() {
-        loadSelectedNewsFeed()
+        super.viewDidLoad()
+        
+        newsTV.delegate = self
+        newsTV.dataSource = self
+        
+//        loadSelectedNewsFeed()
+        
+        // Register the custom header view which Nib 'NewsFeedTableHeaderSection'
+        let nib = UINib(nibName: "NewsFeedTableHeaderSection", bundle: nil)
+        self.newsTV.register(nib, forHeaderFooterViewReuseIdentifier: "NewsFeedTableHeaderSection")
     }
+
+    override func viewDidAppear(_ animated: Bool) {
+            super.viewDidAppear(false)
+        }
+    
+}
     
     //MARK: - data
+extension DetailNewsFeedVC : UITableViewDelegate { }
+
+extension DetailNewsFeedVC : UITableViewDataSource {
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "여기는 해더 뷰 제목"
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    
+        // Dequeue with the reuse identifier
+        let cell = tableView.dequeueReusableHeaderFooterView(withIdentifier: "NewsFeedTableHeaderSection")
+
+        return cell
     }
     
-    func loadSelectedNewsFeed() {
-        let cell = NewsFeedCell()
-        self.imgUserImg = cell.imgUserImg
-        self.lblUserId.text = cell.lblUserId?.text
-        self.lblPostTime.text = cell.lblPostTime?.text
-        self.lblContents.text = cell.lblContents?.text
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 480
     }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        //Custom셀인 'ReplyCell' 형식으로 변환
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ReplyCell", for: indexPath) as! ReplyCell
+        
+        if indexPath.row % 2 == 1 {
+            cell.backgroundColor = .lightGray
+        }
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        NSLog("선택된 댓글은 \(indexPath.row) 번쨰 댓글입니다")
+    }
+
 }
