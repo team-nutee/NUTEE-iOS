@@ -47,7 +47,4 @@ class ProfileVC: UIViewController {
     }
     
 
-
-
-    
 }

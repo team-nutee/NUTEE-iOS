@@ -14,7 +14,9 @@ class InitVC : UIViewController {
     
     // MARK: - Variables and Properties
     
-
+    // MARK: - Variables and Properties
+    
+    
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
@@ -28,6 +30,7 @@ class InitVC : UIViewController {
 
     // 초기 설정
     func setInit() {
+
     }
     
     func setDefault() {
