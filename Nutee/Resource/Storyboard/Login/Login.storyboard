@@ -75,11 +75,6 @@
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <state key="normal" title="비밀번호 찾기"/>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oRT-4v-wCN">
-                                <rect key="frame" x="362" y="48" width="18" height="22"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="xmark" catalog="system"/>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -104,6 +99,8 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="nSB-gz-6EH"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="" id="VF0-Di-7U1"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="findIdBtn" destination="Nvs-Lb-0MU" id="B2T-cO-39D"/>
                         <outlet property="findPwBtn" destination="es2-mt-2Vs" id="OsB-C3-9Vx"/>
@@ -111,7 +108,6 @@
                         <outlet property="idView" destination="FOT-NU-TUf" id="uEv-3o-1FI"/>
                         <outlet property="pwTextField" destination="OFS-Ac-HML" id="R8V-hI-IiV"/>
                         <outlet property="pwView" destination="EDp-Le-mfp" id="281-Nm-Vc3"/>
-                        <outlet property="quitBtn" destination="oRT-4v-wCN" id="7Zx-LX-4CY"/>
                         <outlet property="signInBtn" destination="W6u-TN-p4k" id="aQu-a0-pPB"/>
                         <outlet property="signUpBtn" destination="gRc-1i-Prm" id="i2q-ao-f3G"/>
                     </connections>
@@ -121,7 +117,4 @@
             <point key="canvasLocation" x="302.89855072463769" y="-736.60714285714278"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="xmark" catalog="system" width="64" height="56"/>
-    </resources>
 </document>

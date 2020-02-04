@@ -6,10 +6,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Tab Bar Controller-->
+        <!--TBC-->
         <scene sceneID="8bd-m2-WQS">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="WTg-rr-kTx" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TBC" automaticallyAdjustsScrollViewInsets="NO" id="WTg-rr-kTx" customClass="TBC" customModule="Nutee" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="eO4-Zq-HdL">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
@@ -38,10 +38,10 @@
             </objects>
             <point key="canvasLocation" x="752" y="112"/>
         </scene>
-        <!--Chatting-->
+        <!--Cafeteria-->
         <scene sceneID="8XM-9E-T46">
             <objects>
-                <viewControllerPlaceholder storyboardName="Chatting" id="WMW-iw-H4D" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="Cafeteria" id="WMW-iw-H4D" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="gtB-XI-CS5"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3oR-zh-Cdp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

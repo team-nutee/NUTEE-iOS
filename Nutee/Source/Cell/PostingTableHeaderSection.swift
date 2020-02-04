@@ -19,7 +19,7 @@ class PostingTableHeaderSection: UITableViewHeaderFooterView {
 extension PostingTableHeaderSection : UITextFieldDelegate {
  
     //when editing start
-    func textViewDidBeginEditing(_ textView: UITextView) {
+    private func textViewDidBeginEditing(_ textView: UITextView) {
         
     }
     

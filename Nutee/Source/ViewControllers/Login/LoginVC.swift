@@ -13,13 +13,14 @@ class LoginVC: UIViewController {
     // MARK: - UI components
     @IBOutlet weak var idView: UIView!
     @IBOutlet weak var pwView: UIView!
+    
     @IBOutlet weak var signInBtn: UIButton!
     @IBOutlet weak var signUpBtn: UIButton!
     @IBOutlet weak var findIdBtn: UIButton!
     @IBOutlet weak var findPwBtn: UIButton!
+    
     @IBOutlet weak var idTextField: UITextField!
     @IBOutlet weak var pwTextField: UITextField!
-    @IBOutlet weak var quitBtn: UIButton!
     
     // MARK: - Variables and Properties
     
@@ -31,7 +32,7 @@ class LoginVC: UIViewController {
      
         setInit()
         
-        quitBtn.addTarget(self, action: #selector(quit), for: .touchUpInside)
+        signInBtn.addTarget(self, action: #selector(signIn), for: .touchUpInside)
         
     }
     
@@ -41,20 +42,22 @@ class LoginVC: UIViewController {
     // 초기 설정
     func setInit() {
         
-        idView.layer.addBorder([.bottom], color: UIColor.nuteeGreen, width: 1)
-        pwView.layer.addBorder([.bottom], color: UIColor.nuteeGreen, width: 1)
+        idView.layer.addBorder([.bottom], color: UIColor.pantoneGreen2020, width: 1)
+        pwView.layer.addBorder([.bottom], color: UIColor.pantoneGreen2020, width: 1)
+        
+        self.tabBarController?.tabBar.isHidden = true
         
         signInBtn.tintColor = .white
-        signInBtn.backgroundColor = .nuteeGreen
+        signInBtn.backgroundColor = .pantoneGreen2020
         signInBtn.setRounded(radius: 10)
         signUpBtn.tintColor = .white
-        signUpBtn.backgroundColor = .nuteeGreen
+        signUpBtn.backgroundColor = .pantoneGreen2020
         signUpBtn.setRounded(radius: 10)
         findIdBtn.tintColor = .white
-        findIdBtn.backgroundColor = .nuteeGreen
+        findIdBtn.backgroundColor = .pantoneGreen2020
         findIdBtn.setRounded(radius: 10)
         findPwBtn.tintColor = .white
-        findPwBtn.backgroundColor = .nuteeGreen
+        findPwBtn.backgroundColor = .pantoneGreen2020
         findPwBtn.setRounded(radius: 10)
 
     }
@@ -63,10 +66,17 @@ class LoginVC: UIViewController {
         
     }
     
-    @objc func quit() {
-        dismiss(animated: true, completion: nil)
+    @objc func signIn() {
+        
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        let vc = sb.instantiateViewController(withIdentifier: "TBC") as! TBC
+        vc.modalPresentationStyle = .fullScreen
+        
+        self.dismiss(animated: false, completion: nil)
+        
+        self.present(vc, animated: true)
     }
-    
+        
 }
 
 extension LoginVC {
