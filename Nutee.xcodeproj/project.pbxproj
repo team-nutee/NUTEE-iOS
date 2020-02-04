@@ -407,8 +407,8 @@
 		D519843B23E32402001AB351 /* NewsFeed */ = {
 			isa = PBXGroup;
 			children = (
-				D5DAA89323E7F0C70052E17B /* PostingTableHeaderSection.xib */,
 				D519843C23E32418001AB351 /* NewsFeed.storyboard */,
+				D5DAA89323E7F0C70052E17B /* PostingTableHeaderSection.xib */,
 				D5DAA89223E7F0C60052E17B /* NewsFeedTableHeaderSection.xib */,
 				D519843D23E32418001AB351 /* DetailNewsFeed.storyboard */,
 			);
