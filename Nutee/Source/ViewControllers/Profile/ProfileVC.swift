@@ -14,7 +14,7 @@ class ProfileVC: UIViewController {
     @IBOutlet var imgViewUserImage: UIImageView!
     @IBOutlet var lblUserId: UILabel!
     @IBOutlet weak var profileLineView: UIView!
-    @IBOutlet weak var myArticleTV: UITableView!
+    @IBOutlet weak var profileTV: UITableView!
     
     // MARK: - Variables and Properties
     
@@ -25,9 +25,19 @@ class ProfileVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        myArticleTV.delegate = self
-        myArticleTV.dataSource = self
+        profileTV.delegate = self
+        profileTV.dataSource = self
+        profileTV.register(UITableView.self, forCellReuseIdentifier: "MyArticleTVC")
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+         // 네비바 border 삭제
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+
+    }
+
     
     // MARK: -Helpers
     

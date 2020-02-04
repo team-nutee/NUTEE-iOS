@@ -34,7 +34,11 @@ class NewsFeedVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-       
+        
+        // 네비바 border 삭제
+       self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+       self.navigationController?.navigationBar.shadowImage = UIImage()
+
     }
     
     // MARK: -Helper
