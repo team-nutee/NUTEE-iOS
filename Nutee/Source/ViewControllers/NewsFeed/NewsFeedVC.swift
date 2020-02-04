@@ -57,14 +57,10 @@ class NewsFeedVC: UIViewController {
     
 }
 
+extension NewsFeedVC : UITextViewDelegate { }
+
 // MARK: - UITableView
 extension NewsFeedVC : UITableViewDelegate { }
-
-extension NewsFeedVC : UITextViewDelegate {
-    
-    
-    
-}
 
 extension NewsFeedVC : UITableViewDataSource {
     
