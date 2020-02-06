@@ -41,7 +41,7 @@ class PostVC: UIViewController {
         
         closeBtn.addTarget(self, action: #selector(closePosting), for: .touchUpInside)
         imagePickerBtn.addTarget(self, action: #selector(showImagePickerController), for: .touchUpInside)
-                
+        
         setPostBtn()
     }
     
@@ -49,21 +49,22 @@ class PostVC: UIViewController {
         super.viewWillAppear(true)
         
         addKeyboardNotification()
-        //        self.postingTextView.becomeFirstResponder()
+        self.postingTextView.becomeFirstResponder()
         
         self.postingTextView.placeholder = "내용을 입력해주세요"
         postBtn.isEnabled = false
         
-        self.tabBarController?.tabBar.isHidden = true
+//        hideTabbar()
         
         textViewDidChange(postingTextView)
+        setDefault()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
         
         // 화면 나갈때 탭바 감추기 해제
-        self.tabBarController?.tabBar.isHidden = false
+//        showTabbar()
     }
     
     
@@ -76,18 +77,23 @@ class PostVC: UIViewController {
         postBtn.tintColor = .veryLightPink
         
         imagePickerBtn.tintColor = .nuteeGreen
-        imagePickerView.layer.addBorder([.top, .bottom], color: .veryLightPink, width: 1)
-        
+        imagePickerView.layer.addBorder([.top], color: .nuteeGreen, width: 1)
+        imagePickerView.alpha = 0.6
     }
     
+    func setDefault() {
+        self.postingTextView.text = ""
+        self.pickedIMG = []
+        self.imageCV.reloadData()
+    }
+
     @objc func closePosting() {
-        
         tabBarController!.selectedIndex = 0
     }
     
     @objc func setPostBtn() {
         NotificationCenter.default.addObserver(forName: UITextView.textDidChangeNotification, object: postingTextView, queue: OperationQueue.main) { (notification) in
-            if self.postingTextView.text != ""{
+            if self.postingTextView.text != "" || self.pickedIMG != []{
                 self.postBtn.isEnabled = true
                 self.postBtn.tintColor = .nuteeGreen
             } else {
@@ -96,7 +102,17 @@ class PostVC: UIViewController {
             }
         }
     }
-
+    
+    func hideTabbar() {
+        self.tabBarController?.tabBar.isHidden = true
+        self.tabBarController?.tabBar.isTranslucent = true
+    }
+    
+    func showTabbar() {
+        self.tabBarController?.tabBar.isHidden = false
+        self.tabBarController?.tabBar.isTranslucent = false
+    }
+    
 }
 
 
@@ -116,7 +132,7 @@ extension PostVC {
             let keyboardHeight = keyboardFrame.height
             let tabbarHeight = self.tabBarController?.tabBar.frame.size.height ?? 0
             
-            pickerViewBottomConstraint.constant = keyboardHeight - tabbarHeight
+            pickerViewBottomConstraint.constant = -(keyboardHeight - tabbarHeight)
             scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardHeight - tabbarHeight, right: 0)
             
             self.view.setNeedsLayout()
@@ -140,45 +156,15 @@ extension PostVC {
         }
     }
     
-    //    func textViewDidChange(_ textView: UITextView) { //Handle the text changes here
-    //
-    //    }
-    
-}
+     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
+          self.view.endEditing(true)
+    }
 
-class TextView: UITextView {
-    
-    convenience init() {
-        self.init(frame: CGRect.zero, textContainer: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(textDidChangeNotification), name: UITextView.textDidChangeNotification , object: nil)
-    }
-    
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
-    
-    @objc func textDidChangeNotification(_ notif: Notification) {
-        guard self == notif.object as? UITextView else {
-            return
-        }
-        textDidChange()
-    }
-    
-    func textDidChange() {
-        // the text in the textview just changed, below goes the code for whatever you need to do given this event
-        print("start")
-        // or you can just set the textDidChangeHandler closure to execute every time the text changes, useful if you want to keep logic out of the class
-        textDidChangeHandler?()
-    }
-    
-    var textDidChangeHandler: (()->Void)?
-    
 }
 
 // MARK: - UITextViewDelegate
 
 extension PostVC: UITextViewDelegate {
-    
     
     // TextView의 동적인 크기 변화를 위한 function
     func textViewDidChange(_ textView: UITextView) {
@@ -189,16 +175,7 @@ extension PostVC: UITextViewDelegate {
                 constraint.constant = estimatedSize.height
             }
         }
-        if textView.text != "" {
-            postBtn.tintColor = .nuteeGreen
-            postBtn.isEnabled = false
-        }
-        print(textView.text)
     }
-    
-    func textViewDidBeginEditing(_ textView: UITextView) {
-    }
-    
     
 }
 
