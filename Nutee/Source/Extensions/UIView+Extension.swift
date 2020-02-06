@@ -28,6 +28,10 @@ import UIKit
         bottomAnchor.constraint(equalTo: superView.bottomAnchor).isActive = true
         rightAnchor.constraint(equalTo: superView.rightAnchor).isActive = true
     }
+    
+    func setAnchor(top: NSLayoutConstraint){
+        
+    }
 
     
     func setRounded(radius : CGFloat?){
@@ -93,6 +97,8 @@ import UIKit
         }
     }
 
+    
+    
     
     
 }
