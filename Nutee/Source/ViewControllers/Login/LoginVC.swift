@@ -79,6 +79,7 @@ class LoginVC: UIViewController {
         
 }
 
-extension LoginVC {
+extension LoginVC : UITextFieldDelegate {
+    
     
 }
