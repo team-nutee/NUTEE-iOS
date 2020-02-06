@@ -84,24 +84,36 @@
                                 <viewLayoutGuide key="contentLayoutGuide" id="vw0-4x-kfg"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="t6j-Wg-tSl"/>
                             </scrollView>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RRu-VZ-Uxb">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RRu-VZ-Uxb">
                                 <rect key="frame" x="0.0" y="44" width="414" height="72"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6a0-5U-sKg">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6a0-5U-sKg">
                                         <rect key="frame" x="8" y="0.0" width="72" height="72"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="72" id="7pZ-4d-BU1"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                         <state key="normal" title="닫기"/>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LOC-Lf-eDr">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LOC-Lf-eDr">
                                         <rect key="frame" x="334" y="0.0" width="72" height="72"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="72" id="V1n-ar-c9d"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                         <state key="normal" title="게시"/>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="72" id="1yN-ml-R8e"/>
+                                    <constraint firstItem="LOC-Lf-eDr" firstAttribute="height" secondItem="RRu-VZ-Uxb" secondAttribute="height" id="7tN-86-fcV"/>
+                                    <constraint firstItem="6a0-5U-sKg" firstAttribute="leading" secondItem="RRu-VZ-Uxb" secondAttribute="leading" constant="8" id="Np0-gN-bOy"/>
+                                    <constraint firstItem="LOC-Lf-eDr" firstAttribute="top" secondItem="RRu-VZ-Uxb" secondAttribute="top" id="aPW-xU-Jhx"/>
+                                    <constraint firstItem="6a0-5U-sKg" firstAttribute="height" secondItem="RRu-VZ-Uxb" secondAttribute="height" id="cEz-aE-kK4"/>
+                                    <constraint firstAttribute="trailing" secondItem="LOC-Lf-eDr" secondAttribute="trailing" constant="8" id="xRu-Np-HJ3"/>
+                                    <constraint firstItem="6a0-5U-sKg" firstAttribute="top" secondItem="RRu-VZ-Uxb" secondAttribute="top" id="zDi-Qt-7Bv"/>
+                                </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZKg-Yt-BDb">
                                 <rect key="frame" x="0.0" y="751" width="414" height="62"/>
@@ -127,11 +139,14 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="RRu-VZ-Uxb" firstAttribute="top" secondItem="mr2-fk-bim" secondAttribute="top" id="4cN-Zf-K1J"/>
                             <constraint firstItem="ZKg-Yt-BDb" firstAttribute="width" secondItem="feB-Mc-xQm" secondAttribute="width" id="9T6-7c-YNv"/>
                             <constraint firstItem="ZKg-Yt-BDb" firstAttribute="bottom" secondItem="mr2-fk-bim" secondAttribute="bottom" id="QRK-EK-t1V"/>
+                            <constraint firstItem="RRu-VZ-Uxb" firstAttribute="leading" secondItem="mr2-fk-bim" secondAttribute="leading" id="U8i-9S-3mG"/>
                             <constraint firstItem="PTy-zj-GzA" firstAttribute="leading" secondItem="mr2-fk-bim" secondAttribute="leading" id="UIH-Lv-MRZ"/>
                             <constraint firstItem="ZKg-Yt-BDb" firstAttribute="leading" secondItem="mr2-fk-bim" secondAttribute="leading" id="h9F-Vg-UMm"/>
                             <constraint firstItem="PTy-zj-GzA" firstAttribute="top" secondItem="mr2-fk-bim" secondAttribute="top" constant="68" id="i0H-2I-jlC"/>
+                            <constraint firstItem="RRu-VZ-Uxb" firstAttribute="width" secondItem="feB-Mc-xQm" secondAttribute="width" id="i2N-bm-QPu"/>
                             <constraint firstItem="PTy-zj-GzA" firstAttribute="trailing" secondItem="mr2-fk-bim" secondAttribute="trailing" id="pNc-nO-Yr1"/>
                             <constraint firstItem="PTy-zj-GzA" firstAttribute="width" secondItem="feB-Mc-xQm" secondAttribute="width" id="qvi-e8-ZvG"/>
                             <constraint firstItem="mr2-fk-bim" firstAttribute="bottom" secondItem="PTy-zj-GzA" secondAttribute="bottom" constant="70" id="r4x-9t-TAm"/>

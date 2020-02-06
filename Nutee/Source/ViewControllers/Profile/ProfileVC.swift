@@ -103,7 +103,7 @@ extension ProfileVC : UITableViewDataSource {
         profileImage.setRounded(radius: 50)
         profileImage.translatesAutoresizingMaskIntoConstraints = false
         profileImage.topAnchor.constraint(equalTo: headerView.topAnchor, constant: 10).isActive = true
-        profileImage.leftAnchor.constraint(equalTo: headerView.leftAnchor, constant: 10).isActive = true
+        profileImage.leftAnchor.constraint(equalTo: headerView.leftAnchor, constant: 15).isActive = true
         profileImage.heightAnchor.constraint(equalToConstant: 100).isActive = true
         profileImage.widthAnchor.constraint(equalToConstant: 100).isActive = true
         
@@ -125,7 +125,7 @@ extension ProfileVC : UITableViewDataSource {
         myNickLabel.topAnchor.constraint(equalTo: profileImage.topAnchor, constant: 10).isActive = true
         myNickLabel.leftAnchor.constraint(equalTo: profileImage.rightAnchor, constant: 10).isActive = true
         myNickLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
-        myNickLabel.widthAnchor.constraint(equalToConstant: view.frame.size.width - 145).isActive = true
+        myNickLabel.widthAnchor.constraint(equalToConstant: view.frame.size.width - 120).isActive = true
         
         myArticle1Button.setTitle("10", for: .normal)
         myArticle1Button.setTitleColor(.black, for: .normal)
@@ -135,17 +135,17 @@ extension ProfileVC : UITableViewDataSource {
         myArticle1Button.topAnchor.constraint(equalTo: profileImage.topAnchor, constant: 50).isActive = true
         myArticle1Button.leftAnchor.constraint(equalTo: profileImage.rightAnchor, constant: 10).isActive = true
         myArticle1Button.heightAnchor.constraint(equalToConstant: 20).isActive = true
-        myArticle1Button.widthAnchor.constraint(equalToConstant: 70).isActive = true
+        myArticle1Button.widthAnchor.constraint(equalToConstant: (view.frame.size.width - 120)/3).isActive = true
 
         myArticle2Button.setTitle("게시글", for: .normal)
         myArticle2Button.setTitleColor(.black, for: .normal)
         myArticle2Button.setTitleColor(.blue, for: .highlighted)
-        myArticle2Button.titleLabel?.font = .systemFont(ofSize: 15)
+        myArticle2Button.titleLabel?.font = .boldSystemFont(ofSize: 17)
         myArticle2Button.translatesAutoresizingMaskIntoConstraints = false
         myArticle2Button.topAnchor.constraint(equalTo: myArticle1Button.bottomAnchor).isActive = true
         myArticle2Button.leftAnchor.constraint(equalTo: profileImage.rightAnchor, constant: 10).isActive = true
         myArticle2Button.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        myArticle2Button.widthAnchor.constraint(equalToConstant: 70).isActive = true
+        myArticle2Button.widthAnchor.constraint(equalToConstant: (view.frame.size.width - 120)/3).isActive = true
 
         myFollwer1Button.setTitle("30", for: .normal)
         myFollwer1Button.setTitleColor(.black, for: .normal)
@@ -153,19 +153,19 @@ extension ProfileVC : UITableViewDataSource {
         myFollwer1Button.titleLabel?.font = .systemFont(ofSize: 15)
         myFollwer1Button.translatesAutoresizingMaskIntoConstraints = false
         myFollwer1Button.topAnchor.constraint(equalTo: profileImage.topAnchor, constant: 50).isActive = true
-        myFollwer1Button.leftAnchor.constraint(equalTo: myArticle1Button.rightAnchor, constant: 10).isActive = true
+        myFollwer1Button.leftAnchor.constraint(equalTo: myArticle1Button.rightAnchor).isActive = true
         myFollwer1Button.heightAnchor.constraint(equalToConstant: 20).isActive = true
-        myFollwer1Button.widthAnchor.constraint(equalToConstant: 70).isActive = true
+        myFollwer1Button.widthAnchor.constraint(equalToConstant: (view.frame.size.width - 120)/3).isActive = true
 
         myFollwer2Button.setTitle("팔로워", for: .normal)
         myFollwer2Button.setTitleColor(.black, for: .normal)
         myFollwer2Button.setTitleColor(.blue, for: .highlighted)
-        myFollwer2Button.titleLabel?.font = .systemFont(ofSize: 15)
+        myFollwer2Button.titleLabel?.font = .boldSystemFont(ofSize: 17)
         myFollwer2Button.translatesAutoresizingMaskIntoConstraints = false
         myFollwer2Button.topAnchor.constraint(equalTo: myFollwer1Button.bottomAnchor).isActive = true
-        myFollwer2Button.leftAnchor.constraint(equalTo: myArticle1Button.rightAnchor, constant: 10).isActive = true
+        myFollwer2Button.leftAnchor.constraint(equalTo: myArticle1Button.rightAnchor).isActive = true
         myFollwer2Button.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        myFollwer2Button.widthAnchor.constraint(equalToConstant: 70).isActive = true
+        myFollwer2Button.widthAnchor.constraint(equalToConstant: (view.frame.size.width - 120)/3).isActive = true
 
         myFollowing1Button.setTitle("40", for: .normal)
         myFollowing1Button.setTitleColor(.black, for: .normal)
@@ -173,19 +173,19 @@ extension ProfileVC : UITableViewDataSource {
         myFollowing1Button.titleLabel?.font = .systemFont(ofSize: 15)
         myFollowing1Button.translatesAutoresizingMaskIntoConstraints = false
         myFollowing1Button.topAnchor.constraint(equalTo: profileImage.topAnchor, constant: 50).isActive = true
-        myFollowing1Button.leftAnchor.constraint(equalTo: myFollwer2Button.rightAnchor, constant: 10).isActive = true
+        myFollowing1Button.leftAnchor.constraint(equalTo: myFollwer2Button.rightAnchor).isActive = true
         myFollowing1Button.heightAnchor.constraint(equalToConstant: 20).isActive = true
-        myFollowing1Button.widthAnchor.constraint(equalToConstant: 70).isActive = true
+        myFollowing1Button.widthAnchor.constraint(equalToConstant: (view.frame.size.width - 120)/3).isActive = true
 
         myFollowing2Button.setTitle("팔로잉", for: .normal)
         myFollowing2Button.setTitleColor(.black, for: .normal)
         myFollowing2Button.setTitleColor(.blue, for: .highlighted)
-        myFollowing2Button.titleLabel?.font = .systemFont(ofSize: 15)
+        myFollowing2Button.titleLabel?.font = .boldSystemFont(ofSize: 17)
         myFollowing2Button.translatesAutoresizingMaskIntoConstraints = false
         myFollowing2Button.topAnchor.constraint(equalTo: myFollowing1Button.bottomAnchor).isActive = true
-        myFollowing2Button.leftAnchor.constraint(equalTo: myFollwer2Button.rightAnchor, constant: 10).isActive = true
+        myFollowing2Button.leftAnchor.constraint(equalTo: myFollwer2Button.rightAnchor).isActive = true
         myFollowing2Button.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        myFollowing2Button.widthAnchor.constraint(equalToConstant: 70).isActive = true
+        myFollowing2Button.widthAnchor.constraint(equalToConstant: (view.frame.size.width - 120)/3).isActive = true
 
         
 
