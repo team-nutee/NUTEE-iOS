@@ -17,6 +17,24 @@ class DetailNewsFeedVC: UIViewController {
     
     //MARK: - Variables and Properties
     
+    @IBAction func btnMore(_ sender: Any) {
+        let moreAlert = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertController.Style.actionSheet)
+        let editAction = UIAlertAction(title: "수정", style: .default){
+            (action: UIAlertAction) in
+            // Code to edit
+        }
+        let deleteAction = UIAlertAction(title: "삭제", style: .destructive) {
+            (action: UIAlertAction) in
+            // Code to delete
+        }
+        let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+
+        moreAlert.addAction(editAction)
+        moreAlert.addAction(deleteAction)
+        moreAlert.addAction(cancelAction)
+        self.present(moreAlert, animated: true, completion: nil)
+    }
+    
     //MARK: - Dummy data
     
     //MARK: - Life Cycle

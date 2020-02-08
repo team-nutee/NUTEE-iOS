@@ -43,6 +43,7 @@
 		5E37CAB023E9900B00C0E2A8 /* Cafeteria.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E37CAAF23E9900B00C0E2A8 /* Cafeteria.storyboard */; };
 		5E37CAB323E9903500C0E2A8 /* CafeteriaVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E37CAB223E9903500C0E2A8 /* CafeteriaVC.swift */; };
 		7ED848354A2878E251E05E71 /* Pods_Nutee.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5915003F64084812BCF9F67 /* Pods_Nutee.framework */; };
+		D519138B23EEE7D80021F8E7 /* PostImgCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D519138A23EEE7D80021F8E7 /* PostImgCVCell.swift */; };
 		D519843E23E32418001AB351 /* NewsFeed.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D519843C23E32418001AB351 /* NewsFeed.storyboard */; };
 		D519843F23E32418001AB351 /* DetailNewsFeed.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D519843D23E32418001AB351 /* DetailNewsFeed.storyboard */; };
 		D519844523E325EE001AB351 /* DetailNewsFeedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D519844423E325EE001AB351 /* DetailNewsFeedVC.swift */; };
@@ -60,9 +61,7 @@
 		D59718B823CEA9DA00117906 /* Chatting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D59718B323CEA9DA00117906 /* Chatting.storyboard */; };
 		D5DAA88F23E7EF2E0052E17B /* ReplyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5DAA88C23E7EF2E0052E17B /* ReplyCell.swift */; };
 		D5DAA89023E7EF2E0052E17B /* NewsFeedTableHeaderSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5DAA88D23E7EF2E0052E17B /* NewsFeedTableHeaderSection.swift */; };
-		D5DAA89123E7EF2E0052E17B /* PostingTableHeaderSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5DAA88E23E7EF2E0052E17B /* PostingTableHeaderSection.swift */; };
 		D5DAA89423E7F0C70052E17B /* NewsFeedTableHeaderSection.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5DAA89223E7F0C60052E17B /* NewsFeedTableHeaderSection.xib */; };
-		D5DAA89523E7F0C70052E17B /* PostingTableHeaderSection.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5DAA89323E7F0C70052E17B /* PostingTableHeaderSection.xib */; };
 		D5EBD78423CFE69F00C2B7F5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D5EBD78323CFE69F00C2B7F5 /* Main.storyboard */; };
 		D5EBD78623D0269400C2B7F5 /* NewsFeedVO.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5EBD78523D0269400C2B7F5 /* NewsFeedVO.swift */; };
 /* End PBXBuildFile section */
@@ -106,6 +105,7 @@
 		5E37CAAC23E9869800C0E2A8 /* MyArticleTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyArticleTVC.swift; sourceTree = "<group>"; };
 		5E37CAAF23E9900B00C0E2A8 /* Cafeteria.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Cafeteria.storyboard; sourceTree = "<group>"; };
 		5E37CAB223E9903500C0E2A8 /* CafeteriaVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeteriaVC.swift; sourceTree = "<group>"; };
+		D519138A23EEE7D80021F8E7 /* PostImgCVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostImgCVCell.swift; sourceTree = "<group>"; };
 		D519843C23E32418001AB351 /* NewsFeed.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = NewsFeed.storyboard; sourceTree = "<group>"; };
 		D519843D23E32418001AB351 /* DetailNewsFeed.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DetailNewsFeed.storyboard; sourceTree = "<group>"; };
 		D519844423E325EE001AB351 /* DetailNewsFeedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailNewsFeedVC.swift; sourceTree = "<group>"; };
@@ -123,9 +123,7 @@
 		D59718B323CEA9DA00117906 /* Chatting.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Chatting.storyboard; sourceTree = "<group>"; };
 		D5DAA88C23E7EF2E0052E17B /* ReplyCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReplyCell.swift; sourceTree = "<group>"; };
 		D5DAA88D23E7EF2E0052E17B /* NewsFeedTableHeaderSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsFeedTableHeaderSection.swift; sourceTree = "<group>"; };
-		D5DAA88E23E7EF2E0052E17B /* PostingTableHeaderSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostingTableHeaderSection.swift; sourceTree = "<group>"; };
 		D5DAA89223E7F0C60052E17B /* NewsFeedTableHeaderSection.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsFeedTableHeaderSection.xib; sourceTree = "<group>"; };
-		D5DAA89323E7F0C70052E17B /* PostingTableHeaderSection.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostingTableHeaderSection.xib; sourceTree = "<group>"; };
 		D5EBD78323CFE69F00C2B7F5 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		D5EBD78523D0269400C2B7F5 /* NewsFeedVO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeedVO.swift; sourceTree = "<group>"; };
 		E5915003F64084812BCF9F67 /* Pods_Nutee.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Nutee.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -408,7 +406,6 @@
 			isa = PBXGroup;
 			children = (
 				D519843C23E32418001AB351 /* NewsFeed.storyboard */,
-				D5DAA89323E7F0C70052E17B /* PostingTableHeaderSection.xib */,
 				D5DAA89223E7F0C60052E17B /* NewsFeedTableHeaderSection.xib */,
 				D519843D23E32418001AB351 /* DetailNewsFeed.storyboard */,
 			);
@@ -419,6 +416,7 @@
 			isa = PBXGroup;
 			children = (
 				D59718A323CEA98300117906 /* NewsFeedVC.swift */,
+				D519138A23EEE7D80021F8E7 /* PostImgCVCell.swift */,
 				D519844423E325EE001AB351 /* DetailNewsFeedVC.swift */,
 			);
 			path = NewsFeed;
@@ -438,7 +436,6 @@
 			children = (
 				D59718A123CEA96700117906 /* NewsFeedCell.swift */,
 				D5DAA88D23E7EF2E0052E17B /* NewsFeedTableHeaderSection.swift */,
-				D5DAA88E23E7EF2E0052E17B /* PostingTableHeaderSection.swift */,
 				D5DAA88C23E7EF2E0052E17B /* ReplyCell.swift */,
 			);
 			path = Cell;
@@ -516,7 +513,6 @@
 				5E37CAB023E9900B00C0E2A8 /* Cafeteria.storyboard in Resources */,
 				5E21444623C2F8560053CFB9 /* Assets.xcassets in Resources */,
 				5E0E6A6423E7349600FBC15F /* YourChatTVC.xib in Resources */,
-				D5DAA89523E7F0C70052E17B /* PostingTableHeaderSection.xib in Resources */,
 				5E05AD7E23DEA5FB00E36AD4 /* MyChatTVC.xib in Resources */,
 				5E37CAA623E97DC800C0E2A8 /* SingUp.storyboard in Resources */,
 				D59718B823CEA9DA00117906 /* Chatting.storyboard in Resources */,
@@ -579,7 +575,6 @@
 				5E37CAA023E97D1D00C0E2A8 /* SingUpVC.swift in Sources */,
 				D5DAA88F23E7EF2E0052E17B /* ReplyCell.swift in Sources */,
 				5E05AD7423DB0F0200E36AD4 /* UIButton+Extension.swift in Sources */,
-				D5DAA89123E7EF2E0052E17B /* PostingTableHeaderSection.swift in Sources */,
 				5E05AD7623DB0F1E00E36AD4 /* UIImageView+Extension.swift in Sources */,
 				D59718AB23CEA98400117906 /* LoginVC.swift in Sources */,
 				5E37CA9E23E97B0600C0E2A8 /* TBC.swift in Sources */,
@@ -592,6 +587,7 @@
 				5E21446223C2F93B0053CFB9 /* InitVC.swift in Sources */,
 				5E37CAAD23E9869800C0E2A8 /* MyArticleTVC.swift in Sources */,
 				D5EBD78623D0269400C2B7F5 /* NewsFeedVO.swift in Sources */,
+				D519138B23EEE7D80021F8E7 /* PostImgCVCell.swift in Sources */,
 				5E05AD6E23DB0EB800E36AD4 /* UIViewController+Extension.swift in Sources */,
 				5E0E6A7223E73ECE00FBC15F /* PostVC.swift in Sources */,
 				5E05AD7D23DEA5FB00E36AD4 /* MyChatTVC.swift in Sources */,
@@ -750,7 +746,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 78A867AHKF;
+				DEVELOPMENT_TEAM = 7BRQNART99;
 				INFOPLIST_FILE = "$(SRCROOT)/Nutee/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -769,7 +765,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 78A867AHKF;
+				DEVELOPMENT_TEAM = 7BRQNART99;
 				INFOPLIST_FILE = "$(SRCROOT)/Nutee/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
