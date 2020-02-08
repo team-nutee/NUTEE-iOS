@@ -16,6 +16,27 @@ class NewsFeedVC: UIViewController {
     
     // MARK: - Variables and Properties
 
+    @IBAction func btnComment(sender: Any) {
+        showDetailNewsFeed()
+    }
+    
+    @IBAction func btnMore(sender: AnyObject) {
+        let moreAlert = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertController.Style.actionSheet)
+        let editAction = UIAlertAction(title: "수정", style: .default){
+            (action: UIAlertAction) in
+            // Code to edit
+        }
+        let deleteAction = UIAlertAction(title: "삭제", style: .destructive) {
+            (action: UIAlertAction) in
+            // Code to delete
+        }
+        let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+
+        moreAlert.addAction(editAction)
+        moreAlert.addAction(deleteAction)
+        moreAlert.addAction(cancelAction)
+        self.present(moreAlert, animated: true, completion: nil)
+    }
     
     // MARK: - Dummy data
     
@@ -28,32 +49,19 @@ class NewsFeedVC: UIViewController {
         newsTV.delegate = self
         newsTV.dataSource = self
 
-        initSetting()
         initColor()
+        
+        // Register the custom header view which Nib 'PostingTableHeaderSection'
+        let nib = UINib(nibName: "PostingTableHeaderSection", bundle: nil)
+        self.newsTV.register(nib, forHeaderFooterViewReuseIdentifier: "PostingTableHeaderSection")
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        
-        // 네비바 border 삭제
-       self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-       self.navigationController?.navigationBar.shadowImage = UIImage()
-
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(false)
+//        checkLogin()
     }
     
     // MARK: -Helper
-    
-    func initSetting() {
-        
-        self.tabBarController?.tabBar.tintColor = UIColor.pantoneGreen2019
-        
-        self.tabBarController!.tabBar.layer.borderWidth = 0.50
-        self.tabBarController!.tabBar.layer.borderColor = UIColor.clear.cgColor
-        self.tabBarController?.tabBar.clipsToBounds = true
-//        self.tabBarController?.tabBar.backgroundColor = .white
-        self.tabBarController?.tabBar.isTranslucent = false
-
-    }
     
     // 로그인이 되어있는지 체크
     func checkLogin() {
@@ -61,14 +69,22 @@ class NewsFeedVC: UIViewController {
             
             let storyboard = UIStoryboard(name: "Login", bundle: nil)
             let vc = storyboard.instantiateViewController(identifier: "LoginVC") as! LoginVC
-            
             vc.modalPresentationStyle = .overCurrentContext
             vc.modalTransitionStyle = .crossDissolve
             
-//            self.tabBarController?.tabBar.isHidden = true
-            
             self.present(vc, animated: true, completion: nil)
         }
+    }
+    
+    func initColor() {
+        self.tabBarController?.tabBar.barTintColor = UIColor.nuteeGreen
+        self.tabBarController?.tabBar.tintColor = UIColor.white
+    }
+    
+    func showDetailNewsFeed() {
+        let detailNewsFeedSB = UIStoryboard(name: "DetailNewsFeed", bundle: nil)
+        let showDetailNewsFeedVC = detailNewsFeedSB.instantiateViewController(withIdentifier: "DetailNewsFeed") as! DetailNewsFeedVC
+        self.navigationController?.pushViewController(showDetailNewsFeedVC, animated: true)
     }
     
 }
@@ -78,9 +94,8 @@ extension NewsFeedVC : UITableViewDelegate { }
 
 extension NewsFeedVC : UITableViewDataSource {
     
-    func initColor() {
-//        self.tabBarController?.tabBar.barTintColor = UIColor.nuteeGreen
-//        self.tabBarController?.tabBar.unselectedItemTintColor = UIColor.white
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 480
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -88,27 +103,16 @@ extension NewsFeedVC : UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //Custom셀인 'NewsFeedCell' 형식으로 변환
-        let cell = tableView.dequeueReusableCell(withIdentifier: "newsFeedCell", for: indexPath) as! NewsFeedCell
         
-//        if indexPath.row % 2 == 1 {
-//            cell.backgroundColor = .lightGray
-//        }
-        //데이터 소스에 저장된 값을 커스텀 한 NewsFeedCell의 아울렛 변수들에게 전달
-//        cell.lblUserId.text = row[indexPath.row].userId
-//        cell.lblContents.text = row[indexPath.row].contents
-//        cell.imgUserImg.image = UIImage(named: row[indexPath.row].userImg!)
-//        cell.lblPostTime.text = row[indexPath.row].postTime
-        
+        //Custom셀인 'NewsFeedCell' 형식으로 생성
+        let cell = tableView.dequeueReusableCell(withIdentifier: "NewsFeedCell", for: indexPath) as! NewsFeedCell
+ 
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         NSLog("선택된 뉴스피드는 \(indexPath.row) 번쨰 뉴스피드입니다")
-        
-        let detailNewsFeedSB = UIStoryboard(name: "DetailNewsFeed", bundle: nil)
-        let showDetailNewsFeedVC = detailNewsFeedSB.instantiateViewController(withIdentifier: "DetailNewsFeed") as! DetailNewsFeedVC
-        self.navigationController?.pushViewController(showDetailNewsFeedVC, animated: true)
+        showDetailNewsFeed()
     }
-    
+
 }

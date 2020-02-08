@@ -43,33 +43,43 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="so6-Sa-QPl">
-                    <rect key="frame" x="61" y="438" width="32" height="33"/>
+                    <rect key="frame" x="40" y="438" width="80" height="40"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
                     <state key="normal" image="arrow.2.squarepath" catalog="system"/>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qgb-mh-QkS">
-                    <rect key="frame" x="321" y="442" width="32" height="25"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                    <state key="normal" image="ellipsis" catalog="system"/>
+                    <connections>
+                        <action selector="btnRepost:" destination="iN0-l3-epB" eventType="touchUpInside" id="k2i-UB-c1C"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XJ6-Gt-l6K">
-                    <rect key="frame" x="236" y="444" width="23" height="22"/>
+                    <rect key="frame" x="213" y="438" width="80" height="40"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <state key="normal" image="ellipses.bubble.fill" catalog="system"/>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JwB-ia-cdy">
-                    <rect key="frame" x="146" y="440" width="29" height="30"/>
+                    <rect key="frame" x="125" y="438" width="80" height="40"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="19"/>
                     <state key="normal" image="suit.heart" catalog="system"/>
+                    <connections>
+                        <action selector="btnLike:" destination="iN0-l3-epB" eventType="touchUpInside" id="OBM-gI-jvZ"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qgb-mh-QkS">
+                    <rect key="frame" x="315" y="438" width="40" height="40"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                    <state key="normal" image="ellipsis" catalog="system"/>
                 </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
+                <outlet property="btnComment" destination="XJ6-Gt-l6K" id="ngt-Rl-L9w"/>
+                <outlet property="btnLike" destination="JwB-ia-cdy" id="zyH-be-xU2"/>
+                <outlet property="btnMore" destination="Qgb-mh-QkS" id="BLv-Ph-vQ6"/>
+                <outlet property="btnRepost" destination="so6-Sa-QPl" id="q3u-Q3-dKq"/>
                 <outlet property="imgvwPostImg" destination="Ubh-4o-5cg" id="Yzc-Ea-79y"/>
                 <outlet property="imgvwUserImg" destination="tVf-Kz-8LT" id="0z4-jy-Sba"/>
                 <outlet property="lblContents" destination="rmm-6S-obS" id="umn-yb-xi9"/>
