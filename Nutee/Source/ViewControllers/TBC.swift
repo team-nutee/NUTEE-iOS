@@ -10,40 +10,43 @@ import UIKit
 
 class TBC: UITabBarController {
     
-    //    let addBtn = UIButton.init(type: .custom)
-    //    let menuButton = UIButton(frame: CGRect.zero)
+    let addBtn = UIButton.init(type: .custom)
+    let menuButton = UIButton(frame: CGRect.zero)
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.delegate = self
+//        tabBarController(self.tabBarController, shouldSelect: PostVC)
         //        setupMiddleButton()
         //        menuButton.addTarget(self, action: #selector(toPost), for: .touchUpInside)
     }
     
-    //    func setupMiddleButton() {
-    //        let numberOfItems = CGFloat(tabBar.items!.count)
-    //        let tabBarItemSize = CGSize(width: tabBar.frame.width / numberOfItems, height: tabBar.frame.height)
-    //        menuButton.frame = CGRect(x: 0, y: 0, width: tabBarItemSize.width, height: tabBar.frame.size.height)
-    //        var menuButtonFrame = menuButton.frame
-    //        menuButtonFrame.origin.y = self.view.bounds.height - menuButtonFrame.height - self.view.safeAreaInsets.bottom
-    //        menuButtonFrame.origin.x = self.view.bounds.width/2 - menuButtonFrame.size.width/2
-    //        menuButton.frame = menuButtonFrame
-    ////        menuButton.backgroundColor = UICo
-    //        self.view.addSubview(menuButton)
-    //        self.view.layoutIfNeeded()
-    //    }
-    //
-    //    override func viewDidLayoutSubviews() {
-    //        super.viewDidLayoutSubviews()
-    //        menuButton.frame.origin.y = self.view.bounds.height - menuButton.frame.height - self.view.safeAreaInsets.bottom
-    //    }
+    func setupMiddleButton() {
+        let numberOfItems = CGFloat(tabBar.items!.count)
+        let tabBarItemSize = CGSize(width: tabBar.frame.width / numberOfItems, height: tabBar.frame.height)
+        menuButton.frame = CGRect(x: 0, y: 0, width: tabBarItemSize.width, height: tabBar.frame.size.height)
+        var menuButtonFrame = menuButton.frame
+        menuButtonFrame.origin.y = self.view.bounds.height - menuButtonFrame.height - self.view.safeAreaInsets.bottom
+        menuButtonFrame.origin.x = self.view.bounds.width/2 - menuButtonFrame.size.width/2
+        menuButton.frame = menuButtonFrame
+        //        menuButton.backgroundColor = UICo
+        self.view.addSubview(menuButton)
+        self.view.layoutIfNeeded()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        menuButton.frame.origin.y = self.view.bounds.height - menuButton.frame.height - self.view.safeAreaInsets.bottom
+    }
     
     
     @objc func toPost() {
-        //        let vc = self.storyboard?.instantiateViewController(withIdentifier: "PostVC") as! PostVC
-        //        vc.modalPresentationStyle = .fullScreen
-        //
-        //        self.present(vc, animated: true, completion: nil)
-        self.selectedIndex = 2
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "PostVC") as! PostVC
+        self.definesPresentationContext = true
+        vc.modalPresentationStyle = .overCurrentContext
+        
+        self.present(vc, animated: true, completion: nil)
+        //        self.selectedIndex = 2
     }
     //        addBtn.setTitle("add", for: .normal)
     //        addBtn.frame = CGRect(x: 100, y: 0, width: 44, height: 44)
@@ -59,21 +62,23 @@ class TBC: UITabBarController {
     //        addBtn.layer.cornerRadius = 20
     //    }
     
-}
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
 
-extension TBC : UITabBarControllerDelegate {
-    
-    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-        if item.tag == 2{
-            print("3")
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "PostVC") as! PostVC
-            vc.modalPresentationStyle = .fullScreen
-            
-            self.present(vc, animated: true, completion: nil)
-        } else {
-            
+        // here, you should edit "0" to be matched with your selected item
+        // for instance, if there is 5 items and the desired item is in the middle, the compared value should be "2"
+        if tabBarController.selectedIndex == 2 {
+
+            // simply, you will need to get the desired view controller and persent it:
+            let desiredStoryboard = UIStoryboard(name: "Post", bundle: nil)
+            let desiredViewController = desiredStoryboard.instantiateViewController(withIdentifier: "PostVC")
+            desiredViewController.modalPresentationStyle = .currentContext
+            present(desiredViewController, animated: true, completion: nil)
+
         }
     }
+
 }
+
+extension TBC : UITabBarControllerDelegate { }
 
 

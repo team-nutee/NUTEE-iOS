@@ -12,14 +12,12 @@ class ToPostVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-    
 //        toPost()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        
-//        toPost()
+        tabBarController?.selectedIndex = 0
     }
     
     func toPost() {
