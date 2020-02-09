@@ -58,6 +58,8 @@
 		D519843E23E32418001AB351 /* NewsFeed.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D519843C23E32418001AB351 /* NewsFeed.storyboard */; };
 		D519843F23E32418001AB351 /* DetailNewsFeed.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D519843D23E32418001AB351 /* DetailNewsFeed.storyboard */; };
 		D519844523E325EE001AB351 /* DetailNewsFeedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D519844423E325EE001AB351 /* DetailNewsFeedVC.swift */; };
+		D580664B23F0044D00180236 /* PostImgCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D580664A23F0044D00180236 /* PostImgCVCell.swift */; };
+		D580664D23F0045500180236 /* FullScreenImgCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D580664C23F0045500180236 /* FullScreenImgCVCell.swift */; };
 		D597189E23CEA79100117906 /* NoticeBoardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D597189D23CEA79100117906 /* NoticeBoardVC.swift */; };
 		D59718A023CEA87B00117906 /* NoticeBoardVO.swift in Sources */ = {isa = PBXBuildFile; fileRef = D597189F23CEA87B00117906 /* NoticeBoardVO.swift */; };
 		D59718A223CEA96700117906 /* NewsFeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59718A123CEA96700117906 /* NewsFeedCell.swift */; };
@@ -131,6 +133,8 @@
 		D519843C23E32418001AB351 /* NewsFeed.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = NewsFeed.storyboard; sourceTree = "<group>"; };
 		D519843D23E32418001AB351 /* DetailNewsFeed.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DetailNewsFeed.storyboard; sourceTree = "<group>"; };
 		D519844423E325EE001AB351 /* DetailNewsFeedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailNewsFeedVC.swift; sourceTree = "<group>"; };
+		D580664A23F0044D00180236 /* PostImgCVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostImgCVCell.swift; sourceTree = "<group>"; };
+		D580664C23F0045500180236 /* FullScreenImgCVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullScreenImgCVCell.swift; sourceTree = "<group>"; };
 		D597189D23CEA79100117906 /* NoticeBoardVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoticeBoardVC.swift; sourceTree = "<group>"; };
 		D597189F23CEA87B00117906 /* NoticeBoardVO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoticeBoardVO.swift; sourceTree = "<group>"; };
 		D59718A123CEA96700117906 /* NewsFeedCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsFeedCell.swift; sourceTree = "<group>"; };
@@ -458,6 +462,8 @@
 			isa = PBXGroup;
 			children = (
 				D59718A323CEA98300117906 /* NewsFeedVC.swift */,
+				D580664A23F0044D00180236 /* PostImgCVCell.swift */,
+				D580664C23F0045500180236 /* FullScreenImgCVCell.swift */,
 				D519844423E325EE001AB351 /* DetailNewsFeedVC.swift */,
 			);
 			path = NewsFeed;
@@ -619,6 +625,7 @@
 				5E79C0C723EC6AFF00BD2FB3 /* ImageVC.swift in Sources */,
 				5E3560E623EC11F1002B8C87 /* FollowingVC.swift in Sources */,
 				5E37CAA023E97D1D00C0E2A8 /* SingUpVC.swift in Sources */,
+				D580664B23F0044D00180236 /* PostImgCVCell.swift in Sources */,
 				5E95CD6A23EF36230090C39B /* ToPostVC.swift in Sources */,
 				D5DAA88F23E7EF2E0052E17B /* ReplyCell.swift in Sources */,
 				5E05AD7423DB0F0200E36AD4 /* UIButton+Extension.swift in Sources */,
@@ -629,6 +636,7 @@
 				5E37CA9E23E97B0600C0E2A8 /* TBC.swift in Sources */,
 				5E21445E23C2F8FC0053CFB9 /* Util.swift in Sources */,
 				5E05AD6C23DB0E8C00E36AD4 /* CALayer+Extension.swift in Sources */,
+				D580664D23F0045500180236 /* FullScreenImgCVCell.swift in Sources */,
 				5E0E6A6323E7349600FBC15F /* YourChatTVC.swift in Sources */,
 				D5DAA89023E7EF2E0052E17B /* NewsFeedTableHeaderSection.swift in Sources */,
 				5E0E6A6023E7345F00FBC15F /* Date+Extension.swift in Sources */,
@@ -798,7 +806,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 78A867AHKF;
+				DEVELOPMENT_TEAM = 7BRQNART99;
 				INFOPLIST_FILE = "$(SRCROOT)/Nutee/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -817,7 +825,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 78A867AHKF;
+				DEVELOPMENT_TEAM = 7BRQNART99;
 				INFOPLIST_FILE = "$(SRCROOT)/Nutee/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

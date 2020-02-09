@@ -16,7 +16,6 @@ class NewsFeedCell: UITableViewCell {
     @IBOutlet var lblUserId: UILabel!
     @IBOutlet var lblPostTime: UILabel!
     @IBOutlet var cvPostImg: UICollectionView!
-    @IBOutlet var imgvwPostImg: UIImageView!
     @IBOutlet var lblContents: UILabel!
     @IBOutlet var btnRepost: UIButton!
     @IBOutlet var btnLike: UIButton!
@@ -24,6 +23,8 @@ class NewsFeedCell: UITableViewCell {
     
 
     //MARK: - Variables and Properties
+    
+    let dataPeng = ["sample_peng01.jepg", "sample_peng02.jepg", "sample_peng03.png", "sample_peng04.png", "sample_peng05.png"]
     
     var numLike = 0
     var numRepost = 0
@@ -44,6 +45,10 @@ class NewsFeedCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        cvPostImg.delegate = self
+        cvPostImg.dataSource = self
+        cvPostImg.reloadData()
         
         initPosting()
     }
@@ -110,6 +115,7 @@ class NewsFeedCell: UITableViewCell {
         lblContents.text = "Hi~"
 //        imgvwPostImg.image = #imageLiteral(resourceName: "nutee_zigi")
         
+        //버튼모양 초기 설정
         setButtonAttributed(btn: btnLike, num: numLike, color: .gray, state: .normal)
         setButtonAttributed(btn: btnRepost, num: numRepost, color: .gray, state: .normal)
         setButtonPlain(btn: btnComment, num: numComment, color: .gray, state: .normal)
@@ -126,4 +132,66 @@ class NewsFeedCell: UITableViewCell {
         btn.setAttributedTitle(NSAttributedString(string: " " + String(num), attributes: stateAttributes), for: state)
         btn.tintColor = color
     }
+}
+
+// MARK: - Collection View
+//Posting된 이미지를 표시해 주는 CollectionView에 대한 기능구현
+
+extension NewsFeedCell: UICollectionViewDelegate { }
+
+extension NewsFeedCell: UICollectionViewDataSource {
+
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return dataPeng.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PostImgCollectionCell", for: indexPath) as! PostImgCVCell
+        cell.imgvwPost.image = UIImage(named: dataPeng[indexPath.row])
+        
+        return cell
+    }
+
+    /*
+    //이미지에 tab 제스쳐 기능 설정
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath) as! FullScreenImgCVCell
+        self.imageTapped(image: cell.problemImage.image!)
+    }
+    
+    //이미지 클릭 시 전환 코드구현 구간
+    func imageTapped(image:UIImage){
+        let newImageView = UIImageView(image: image)
+        newImageView.frame = UIScreen.main.bounds
+        newImageView.backgroundColor = .black
+        newImageView.contentMode = .scaleAspectFit
+        newImageView.isUserInteractionEnabled = true
+        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissFullscreenImage))
+        newImageView.addGestureRecognizer(tap)
+        self.view.addSubview(newImageView)
+        self.navigationController?.isNavigationBarHidden = true
+        self.tabBarController?.tabBar.isHidden = true
+    }
+
+    //이미지 전체화면 종료
+    func dismissFullscreenImage(_ sender: UITapGestureRecognizer) {
+        self.navigationController?.isNavigationBarHidden = false
+        self.tabBarController?.tabBar.isHidden = false
+        sender.view?.removeFromSuperview()
+    }
+ */
+ 
+}
+
+//CollectionView의 Cell에 대한 크기를 조정시켜 주는 Delegate
+extension NewsFeedCell: UICollectionViewDelegateFlowLayout {
+
+    // SIZE FOR COLLECTION VIEW CELL
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize{
+        let padding: CGFloat =  10
+        let collectionViewSize = collectionView.frame.size.width - padding
+        return CGSize(width: collectionViewSize / 2, height: collectionView.frame.height)
+//        return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
+    }
+
 }

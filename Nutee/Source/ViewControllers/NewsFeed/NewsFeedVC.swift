@@ -20,6 +20,7 @@ class NewsFeedVC: UIViewController {
         showDetailNewsFeed()
     }
     
+    //수정, 삭제 알림창 기능
     @IBAction func btnMore(sender: AnyObject) {
         let moreAlert = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertController.Style.actionSheet)
         let editAction = UIAlertAction(title: "수정", style: .default){
@@ -40,7 +41,6 @@ class NewsFeedVC: UIViewController {
     
     // MARK: - Dummy data
     
-    
     // MARK: - Life Cycle
 
     override func viewDidLoad() {
@@ -48,12 +48,8 @@ class NewsFeedVC: UIViewController {
         
         newsTV.delegate = self
         newsTV.dataSource = self
-
-        initColor()
         
-        // Register the custom header view which Nib 'PostingTableHeaderSection'
-        let nib = UINib(nibName: "PostingTableHeaderSection", bundle: nil)
-        self.newsTV.register(nib, forHeaderFooterViewReuseIdentifier: "PostingTableHeaderSection")
+        initColor()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -96,6 +92,11 @@ extension NewsFeedVC : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 480
+//        return UITableView.automaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -103,7 +104,6 @@ extension NewsFeedVC : UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         //Custom셀인 'NewsFeedCell' 형식으로 생성
         let cell = tableView.dequeueReusableCell(withIdentifier: "NewsFeedCell", for: indexPath) as! NewsFeedCell
  
