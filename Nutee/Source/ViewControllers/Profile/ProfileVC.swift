@@ -50,7 +50,7 @@ class ProfileVC: UIViewController {
         myArticleTV.delegate = self
         myArticleTV.dataSource = self
         self.myArticleTV.register(ArticleTVC.self, forCellReuseIdentifier: "ArticleTVC")
-        
+//        self.myArticleTV.register(ArticleTVC.self, forHeaderFooterViewReuseIdentifier: "")
 //        self.navigationItem.leftBarButtonItem = self.leftBarButton
         self.navigationItem.rightBarButtonItem = self.rightBarButton
 
