@@ -12,8 +12,14 @@ class ToPostVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        toPost()
+    
+//        toPost()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+//        toPost()
     }
     
     func toPost() {

@@ -39,7 +39,7 @@ class PostVC: UIViewController {
         imageCV.delegate = self
         imageCV.dataSource = self
         
-//        closeBtn.addTarget(self, action: #selector(closePosting), for: .touchUpInside)
+        closeBtn.addTarget(self, action: #selector(closePosting), for: .touchUpInside)
         imagePickerBtn.addTarget(self, action: #selector(showImagePickerController), for: .touchUpInside)
         
         activePostBtn()
@@ -84,10 +84,10 @@ class PostVC: UIViewController {
         self.imageCV.reloadData()
     }
     
-//    @objc func closePosting() {
-//        self.dismiss(animated: true, completion: nil)
+    @objc func closePosting() {
+        self.dismiss(animated: true, completion: nil)
 //        tabBarController!.selectedIndex = 0
-//    }
+    }
     
     @objc func activePostBtn() {
         NotificationCenter.default.addObserver(forName: UITextView.textDidChangeNotification, object: postingTextView , queue: OperationQueue.main) { (notification) in
@@ -98,11 +98,11 @@ class PostVC: UIViewController {
             }
         }
     }
-    
-    @IBAction func unwindToOrigin(_ unwindSegue: UIStoryboardSegue){
-        performSegue(withIdentifier: "ToPostVC", sender: self)
-        self.dismiss(animated: true, completion: nil)
-    }
+//
+//    @IBAction func unwindToOrigin(_ unwindSegue: UIStoryboardSegue){
+//        performSegue(withIdentifier: "ToPostVC", sender: self)
+//        self.dismiss(animated: true, completion: nil)
+//    }
     
     func hideTabbar() {
         self.tabBarController?.tabBar.isHidden = true
