@@ -22,6 +22,14 @@ class CafeteriaVC: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(changeName), name: .forChangeName, object: nil)
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+
+    }
+    
+    
     @objc func change(){
         NotificationCenter.default.post(name: .forChangeName, object: nil)
     }
