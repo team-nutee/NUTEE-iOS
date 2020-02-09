@@ -33,7 +33,8 @@ class LoginVC: UIViewController {
         setInit()
         
         signInBtn.addTarget(self, action: #selector(signIn), for: .touchUpInside)
-        
+        signUpBtn.addTarget(self, action: #selector(signUp), for: .touchUpInside)
+
     }
     
     
@@ -42,13 +43,18 @@ class LoginVC: UIViewController {
     // 초기 설정
     func setInit() {
         
-        idView.layer.addBorder([.bottom], color: UIColor.pantoneGreen2020, width: 1)
-        pwView.layer.addBorder([.bottom], color: UIColor.pantoneGreen2020, width: 1)
+        signInBtn.backgroundColor = .veryLightPink
+        signInBtn.isEnabled = false
+        
+        idTextField.tintColor = .nuteeGreen
+        pwTextField.tintColor = .nuteeGreen
+        idTextField.layer.addBorder([.bottom], color: .pantoneGreen2020, width: 1)
+        pwTextField.layer.addBorder([.bottom], color: .pantoneGreen2020, width: 1)
         
         self.tabBarController?.tabBar.isHidden = true
         
         signInBtn.tintColor = .white
-        signInBtn.backgroundColor = .pantoneGreen2020
+//        signInBtn.backgroundColor = .pantoneGreen2020
         signInBtn.setRounded(radius: 10)
         signUpBtn.tintColor = .white
         signUpBtn.backgroundColor = .pantoneGreen2020
@@ -59,6 +65,10 @@ class LoginVC: UIViewController {
         findPwBtn.tintColor = .white
         findPwBtn.backgroundColor = .pantoneGreen2020
         findPwBtn.setRounded(radius: 10)
+
+        idTextField.addTarget(self, action: #selector(LoginVC.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
+        pwTextField.addTarget(self, action: #selector(LoginVC.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
+
 
     }
     
@@ -77,9 +87,28 @@ class LoginVC: UIViewController {
         self.present(vc, animated: true)
     }
         
+    
+    @objc func signUp() {
+        
+        let sb = UIStoryboard(name: "SignUp", bundle: nil)
+        let vc = sb.instantiateViewController(withIdentifier: "SignUpVC") as! SignUpVC
+        vc.modalPresentationStyle = .fullScreen
+        
+        self.dismiss(animated: false, completion: nil)
+        
+        self.present(vc, animated: true)
+    }
+
 }
 
 extension LoginVC : UITextFieldDelegate {
     
-    
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        if idTextField.text?.validateSkhuEmail() ?? false && pwTextField.text?.validatePassword() ?? false {                    signInBtn.backgroundColor = .pantoneGreen2020
+            signInBtn.isEnabled = true
+        } else {
+            signInBtn.backgroundColor = .veryLightPink
+            signInBtn.isEnabled = false
+        }
+    }
 }

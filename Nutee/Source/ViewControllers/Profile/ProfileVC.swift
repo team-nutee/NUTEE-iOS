@@ -38,8 +38,7 @@ class ProfileVC: UIViewController {
 
     // MARK: - Variables and Properties
     
-    let eee : [String] = ["1","2","3","4","5","6","7","8","9","10"]
-
+    var test: [String] = ["123","123","","","","","","","","","",""]
     
     // MARK: - Life Cycle
     
@@ -50,19 +49,8 @@ class ProfileVC: UIViewController {
         myArticleTV.delegate = self
         myArticleTV.dataSource = self
         self.myArticleTV.register(ArticleTVC.self, forCellReuseIdentifier: "ArticleTVC")
-//        self.myArticleTV.register(ArticleTVC.self, forHeaderFooterViewReuseIdentifier: "")
-//        self.navigationItem.leftBarButtonItem = self.leftBarButton
-        self.navigationItem.rightBarButtonItem = self.rightBarButton
-
-        setProfile.addTarget(self, action: #selector(settingProfile), for: .touchUpInside)
-        myNickLabel.addTarget(self, action: #selector(settingProfile), for: .touchUpInside)
-        myFollowing1Btn.addTarget(self, action: #selector(viewFollowing), for: .touchUpInside)
-        myFollowing2Btn.addTarget(self, action: #selector(viewFollowing), for: .touchUpInside)
-        myFollower1Btn.addTarget(self, action: #selector(viewFollower), for: .touchUpInside)
-        myFollower2Btn.addTarget(self, action: #selector(viewFollower), for: .touchUpInside)
-        myArticle1Btn.addTarget(self, action: #selector(viewArticle), for: .touchUpInside)
-        myArticle2Btn.addTarget(self, action: #selector(viewArticle), for: .touchUpInside)
-
+        
+        setBtn()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -83,6 +71,21 @@ class ProfileVC: UIViewController {
     
     func setDefault() {
         
+    }
+    
+    func setBtn(){
+        //        self.navigationItem.leftBarButtonItem = self.leftBarButton
+        self.navigationItem.rightBarButtonItem = self.rightBarButton
+        
+        setProfile.addTarget(self, action: #selector(settingProfile), for: .touchUpInside)
+        myNickLabel.addTarget(self, action: #selector(settingProfile), for: .touchUpInside)
+        myFollowing1Btn.addTarget(self, action: #selector(viewFollowing), for: .touchUpInside)
+        myFollowing2Btn.addTarget(self, action: #selector(viewFollowing), for: .touchUpInside)
+        myFollower1Btn.addTarget(self, action: #selector(viewFollower), for: .touchUpInside)
+        myFollower2Btn.addTarget(self, action: #selector(viewFollower), for: .touchUpInside)
+        myArticle1Btn.addTarget(self, action: #selector(viewArticle), for: .touchUpInside)
+        myArticle2Btn.addTarget(self, action: #selector(viewArticle), for: .touchUpInside)
+
     }
     
     @objc func settingProfile() {
@@ -124,7 +127,12 @@ extension ProfileVC : UITableViewDelegate { }
 extension ProfileVC : UITableViewDataSource {
         
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 30
+        if test.count == 0{
+            tableView.setEmptyView(title: "게시글이 없습니다", message: "새로운 게시물을 올려보세요!!")
+        } else {
+            tableView.restore()
+        }
+        return test.count + 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -155,6 +163,16 @@ extension ProfileVC : UITableViewDataSource {
         } else {
             return 70
         }
+        
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        let cell = tableView.dequeueReusableCell(withIdentifier: "ArticleTVC", for: indexPath) as! ArticleTVC
+        
+        let sb = UIStoryboard(name: "DetailNewsFeed", bundle: nil)
+        let vc = sb.instantiateViewController(withIdentifier: "DetailNewsFeed")
+        
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     // MARK : headerView

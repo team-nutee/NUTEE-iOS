@@ -12,15 +12,20 @@ class TBC: UITabBarController {
     
     let addBtn = UIButton.init(type: .custom)
     let menuButton = UIButton(frame: CGRect.zero)
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         self.delegate = self
-//        tabBarController(self.tabBarController, shouldSelect: PostVC)
+        //        tabBarController(self.tabBarController, shouldSelect: PostVC)
         //        setupMiddleButton()
         //        menuButton.addTarget(self, action: #selector(toPost), for: .touchUpInside)
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        //           menuButton.frame.origin.y = self.view.bounds.height - menuButton.frame.height - self.view.safeAreaInsets.bottom
+    }
+        
     func setupMiddleButton() {
         let numberOfItems = CGFloat(tabBar.items!.count)
         let tabBarItemSize = CGSize(width: tabBar.frame.width / numberOfItems, height: tabBar.frame.height)
@@ -32,11 +37,6 @@ class TBC: UITabBarController {
         //        menuButton.backgroundColor = UICo
         self.view.addSubview(menuButton)
         self.view.layoutIfNeeded()
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        menuButton.frame.origin.y = self.view.bounds.height - menuButton.frame.height - self.view.safeAreaInsets.bottom
     }
     
     
@@ -63,20 +63,20 @@ class TBC: UITabBarController {
     //    }
     
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
-
+        
         // here, you should edit "0" to be matched with your selected item
         // for instance, if there is 5 items and the desired item is in the middle, the compared value should be "2"
         if tabBarController.selectedIndex == 2 {
-
+            
             // simply, you will need to get the desired view controller and persent it:
             let desiredStoryboard = UIStoryboard(name: "Post", bundle: nil)
             let desiredViewController = desiredStoryboard.instantiateViewController(withIdentifier: "PostVC")
             desiredViewController.modalPresentationStyle = .currentContext
             present(desiredViewController, animated: true, completion: nil)
-
+            
         }
     }
-
+    
 }
 
 extension TBC : UITabBarControllerDelegate { }

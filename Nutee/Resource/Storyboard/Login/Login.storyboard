@@ -16,13 +16,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FOT-NU-TUf">
-                                <rect key="frame" x="24" y="113" width="366" height="40"/>
+                                <rect key="frame" x="24" y="208.5" width="366" height="40"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="ID" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YRZ-AC-WBc">
+                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YRZ-AC-WBc">
                                         <rect key="frame" x="8" y="3" width="350" height="34"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="emailAddress" textContentType="email"/>
                                     </textField>
                                 </subviews>
                                 <constraints>
@@ -30,13 +30,13 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EDp-Le-mfp">
-                                <rect key="frame" x="24" y="175" width="366" height="40"/>
+                                <rect key="frame" x="24" y="270.5" width="366" height="40"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OFS-Ac-HML">
                                         <rect key="frame" x="8" y="3" width="350" height="34"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                                     </textField>
                                 </subviews>
                                 <constraints>
@@ -44,7 +44,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W6u-TN-p4k">
-                                <rect key="frame" x="24" y="248" width="366" height="66"/>
+                                <rect key="frame" x="24" y="343.5" width="366" height="66"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="66" id="w8M-do-LFK"/>
                                 </constraints>
@@ -52,7 +52,7 @@
                                 <state key="normal" title="로그인"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gRc-1i-Prm">
-                                <rect key="frame" x="24" y="324" width="366" height="66"/>
+                                <rect key="frame" x="24" y="419.5" width="366" height="66"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="66" id="Vr4-Ap-ucq"/>
                                 </constraints>
@@ -60,7 +60,7 @@
                                 <state key="normal" title="회원가입"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nvs-Lb-0MU">
-                                <rect key="frame" x="24" y="400" width="178" height="66"/>
+                                <rect key="frame" x="24" y="495.5" width="178" height="66"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="66" id="hbh-FK-vvJ"/>
                                 </constraints>
@@ -68,7 +68,7 @@
                                 <state key="normal" title="아이디 찾기"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="es2-mt-2Vs">
-                                <rect key="frame" x="212" y="400" width="178" height="66"/>
+                                <rect key="frame" x="212" y="495.5" width="178" height="66"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="66" id="hWz-B5-GOB"/>
                                 </constraints>
@@ -84,10 +84,10 @@
                             <constraint firstItem="nSB-gz-6EH" firstAttribute="trailing" secondItem="es2-mt-2Vs" secondAttribute="trailing" constant="24" id="Ka7-dk-4ni"/>
                             <constraint firstItem="Nvs-Lb-0MU" firstAttribute="leading" secondItem="nSB-gz-6EH" secondAttribute="leading" constant="24" id="M6P-aw-bzj"/>
                             <constraint firstItem="Nvs-Lb-0MU" firstAttribute="width" secondItem="es2-mt-2Vs" secondAttribute="width" id="Qcr-e8-0yG"/>
-                            <constraint firstItem="FOT-NU-TUf" firstAttribute="top" secondItem="nSB-gz-6EH" secondAttribute="top" constant="69" id="Sgv-aQ-FUR"/>
                             <constraint firstItem="nSB-gz-6EH" firstAttribute="trailing" secondItem="gRc-1i-Prm" secondAttribute="trailing" constant="24" id="Uub-wQ-lAp"/>
                             <constraint firstItem="EDp-Le-mfp" firstAttribute="leading" secondItem="nSB-gz-6EH" secondAttribute="leading" constant="24" id="dpv-r0-fPJ"/>
                             <constraint firstItem="FOT-NU-TUf" firstAttribute="leading" secondItem="nSB-gz-6EH" secondAttribute="leading" constant="24" id="eef-Nl-tgJ"/>
+                            <constraint firstItem="FOT-NU-TUf" firstAttribute="centerY" secondItem="nSB-gz-6EH" secondAttribute="centerY" constant="-200" id="fmS-OB-mXY"/>
                             <constraint firstItem="nSB-gz-6EH" firstAttribute="trailing" secondItem="W6u-TN-p4k" secondAttribute="trailing" constant="24" id="iBi-IW-NKe"/>
                             <constraint firstItem="W6u-TN-p4k" firstAttribute="top" secondItem="EDp-Le-mfp" secondAttribute="bottom" constant="33" id="mNm-tP-uV3"/>
                             <constraint firstItem="nSB-gz-6EH" firstAttribute="trailing" secondItem="FOT-NU-TUf" secondAttribute="trailing" constant="24" id="nDZ-wh-zBF"/>
