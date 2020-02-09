@@ -11,6 +11,7 @@ import UIKit
 class InitVC : UIViewController {
     
     // MARK: - UI components
+    @IBOutlet weak var copyLabel: UILabel!
     
     // MARK: - Variables and Properties
     
@@ -22,7 +23,7 @@ class InitVC : UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        copyLabel.isHidden = true
         setInit()
     }
     
