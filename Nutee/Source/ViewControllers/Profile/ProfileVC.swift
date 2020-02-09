@@ -11,23 +11,35 @@ import UIKit
 class ProfileVC: UIViewController {
     // MARK: - UI components
     
-    @IBOutlet var imgViewUserImage: UIImageView!
-    @IBOutlet var lblUserId: UILabel!
-    @IBOutlet weak var profileLineView: UIView!
     @IBOutlet weak var myArticleTV: UITableView!
-    
-    // MARK: - Variables and Properties
     
     let headerView = UIView()
     let profileImage = UIImageView()
     let setProfile = UIButton()
     let myNickLabel = UIButton()
-    let myArticle1Button = UIButton()
-    let myArticle2Button = UIButton()
-    let myFollwer1Button = UIButton()
-    let myFollwer2Button = UIButton()
-    let myFollowing1Button = UIButton()
-    let myFollowing2Button = UIButton()
+    let myArticle1Btn = UIButton()
+    let myArticle2Btn = UIButton()
+    let myFollower1Btn = UIButton()
+    let myFollower2Btn = UIButton()
+    let myFollowing1Btn = UIButton()
+    let myFollowing2Btn = UIButton()
+    
+    let cellTextLabel = UILabel()
+    
+//    lazy var leftBarButton : UIBarButtonItem = {
+//        let button = UIBarButtonItem(title: "로그아웃", style: .plain, target: self, action: #selector(logoutButton))
+//        return button
+//    }()
+    
+    lazy var rightBarButton : UIBarButtonItem = {
+        let button = UIBarButtonItem(title: "설정", style: .plain, target: self, action: #selector(toSetting))
+        return button
+    }()
+
+    // MARK: - Variables and Properties
+    
+    let eee : [String] = ["1","2","3","4","5","6","7","8","9","10"]
+
     
     // MARK: - Life Cycle
     
@@ -37,23 +49,35 @@ class ProfileVC: UIViewController {
         
         myArticleTV.delegate = self
         myArticleTV.dataSource = self
-        myArticleTV.register(MyArticleTVC.self, forCellReuseIdentifier: "MyArticleTVC")
+        self.myArticleTV.register(ArticleTVC.self, forCellReuseIdentifier: "ArticleTVC")
+        
+//        self.navigationItem.leftBarButtonItem = self.leftBarButton
+        self.navigationItem.rightBarButtonItem = self.rightBarButton
+
+        setProfile.addTarget(self, action: #selector(settingProfile), for: .touchUpInside)
+        myNickLabel.addTarget(self, action: #selector(settingProfile), for: .touchUpInside)
+        myFollowing1Btn.addTarget(self, action: #selector(viewFollowing), for: .touchUpInside)
+        myFollowing2Btn.addTarget(self, action: #selector(viewFollowing), for: .touchUpInside)
+        myFollower1Btn.addTarget(self, action: #selector(viewFollower), for: .touchUpInside)
+        myFollower2Btn.addTarget(self, action: #selector(viewFollower), for: .touchUpInside)
+        myArticle1Btn.addTarget(self, action: #selector(viewArticle), for: .touchUpInside)
+        myArticle2Btn.addTarget(self, action: #selector(viewArticle), for: .touchUpInside)
+
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+         // 네비바 border 삭제
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+
+    }
+
     
     // MARK: -Helpers
     
     // 초기 설정
     func setInit() {
-        imgViewUserImage.image = UIImage(named: "nutee_zigi")
-        lblUserId.text = "zigi"
-        
-        //        myArticleTV.layer.addBorder([.top], color: .veryLightPink, width: 1)
-        imgViewUserImage.setRounded(radius: nil)
-        
-//        let headerView = UIView(frame: CGRect.zero)
-        
-//        self.myArticleTV.sectionHeaderHeight = 200
-//        self.view.addSubview(headerView)
         
     }
     
@@ -61,39 +85,90 @@ class ProfileVC: UIViewController {
         
     }
     
+    @objc func settingProfile() {
+        let setProfileVC = self.storyboard?.instantiateViewController(withIdentifier: "SetProfileVC") as! SetProfileVC
+        setProfileVC.modalPresentationStyle = .fullScreen
+        
+        self.present(setProfileVC, animated: true, completion: nil)
+    }
+    
+    @objc func viewFollower() {
+        let followerVC = self.storyboard?.instantiateViewController(withIdentifier: "FollowerVC") as! FollowerVC
+        self.navigationController?.pushViewController(followerVC, animated: true)
+        
+    }
+    
+    @objc func viewFollowing() {
+        let followingVC = self.storyboard?.instantiateViewController(withIdentifier: "FollowingVC") as! FollowingVC
+        self.navigationController?.pushViewController(followingVC, animated: true)
+        
+    }
+    
+    @objc func viewArticle() {
+        let indexPath = NSIndexPath(row: 1, section: 0)
+        myArticleTV.scrollToRow(at: indexPath as IndexPath, at: .top, animated: true)
+    }
+    
+    @IBAction func toSetting(){
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "SettingVC") as! SettingVC
+        vc.modalPresentationStyle = .fullScreen
+        
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
 }
 
+// MARK: - UITableView
 extension ProfileVC : UITableViewDelegate { }
 
 extension ProfileVC : UITableViewDataSource {
-    
-    
+        
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return 30
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "MyArticleTVC", for: indexPath) as! MyArticleTVC
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ArticleTVC", for: indexPath) as! ArticleTVC
+        
+        if indexPath.row == 0 {
+//            cell.backgroundColor = .lightGray
+//            cell.alpha = 0.3
+        } else {
+            cell.addSubview(cellTextLabel)
+            cellTextLabel.text = String(indexPath.row) + "번째"
+            cellTextLabel.font = .boldSystemFont(ofSize: 20)
+            cellTextLabel.textAlignment = .center
+            cellTextLabel.translatesAutoresizingMaskIntoConstraints = false
+            cellTextLabel.heightAnchor.constraint(equalToConstant: 70).isActive = true
+            cellTextLabel.widthAnchor.constraint(equalToConstant: 200).isActive = true
 
-//        cell.articelLabel.text = "테스트입니다"
-//        cell.backgroundColor = .v eryLightPink
+        }
         
         return cell
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        if indexPath.row == 0 {
+            return 0.3
+        } else {
+            return 70
+        }
+    }
+    
+    // MARK : headerView
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-//        headerView.backgroundColor = .white
-                
         self.headerView.addSubview(profileImage)
         self.headerView.addSubview(myNickLabel)
         self.headerView.addSubview(setProfile)
-        self.headerView.addSubview(myArticle1Button)
-        self.headerView.addSubview(myArticle2Button)
-        self.headerView.addSubview(myFollwer1Button)
-        self.headerView.addSubview(myFollwer2Button)
-        self.headerView.addSubview(myFollowing1Button)
-        self.headerView.addSubview(myFollowing2Button)
+        self.headerView.addSubview(myArticle1Btn)
+        self.headerView.addSubview(myArticle2Btn)
+        self.headerView.addSubview(myFollower1Btn)
+        self.headerView.addSubview(myFollower2Btn)
+        self.headerView.addSubview(myFollowing1Btn)
+        self.headerView.addSubview(myFollowing2Btn)
         
         let etcname : String = "nickname"
         let name = NSMutableAttributedString(string: etcname)
@@ -115,8 +190,7 @@ extension ProfileVC : UITableViewDataSource {
         setProfile.heightAnchor.constraint(equalToConstant: 20).isActive = true
         setProfile.widthAnchor.constraint(equalToConstant: 20).isActive = true
         setProfile.setRounded(radius: 10)
-
-
+        
         myNickLabel.setAttributedTitle(name, for: .normal)
         myNickLabel.setTitleColor(.black, for: .normal)
         myNickLabel.setTitleColor(.blue, for: .highlighted)
@@ -127,66 +201,60 @@ extension ProfileVC : UITableViewDataSource {
         myNickLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
         myNickLabel.widthAnchor.constraint(equalToConstant: view.frame.size.width - 120).isActive = true
         
-        myArticle1Button.setTitle("10", for: .normal)
-//        myArticle1Button.setTitleColor(.black, for: .normal)
-//        myArticle1Button.setTitleColor(.blue, for: .highlighted)
-        myArticle1Button.titleLabel?.font = .systemFont(ofSize: 15)
-        myArticle1Button.translatesAutoresizingMaskIntoConstraints = false
-        myArticle1Button.topAnchor.constraint(equalTo: profileImage.topAnchor, constant: 50).isActive = true
-        myArticle1Button.leftAnchor.constraint(equalTo: profileImage.rightAnchor, constant: 10).isActive = true
-        myArticle1Button.heightAnchor.constraint(equalToConstant: 20).isActive = true
-        myArticle1Button.widthAnchor.constraint(equalToConstant: (view.frame.size.width - 120)/3).isActive = true
-
-        myArticle2Button.setTitle("게시글", for: .normal)
-//        myArticle2Button.setTitleColor(.black, for: .normal)
-//        myArticle2Button.setTitleColor(.blue, for: .highlighted)
-        myArticle2Button.titleLabel?.font = .boldSystemFont(ofSize: 17)
-        myArticle2Button.translatesAutoresizingMaskIntoConstraints = false
-        myArticle2Button.topAnchor.constraint(equalTo: myArticle1Button.bottomAnchor).isActive = true
-        myArticle2Button.leftAnchor.constraint(equalTo: profileImage.rightAnchor, constant: 10).isActive = true
-        myArticle2Button.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        myArticle2Button.widthAnchor.constraint(equalToConstant: (view.frame.size.width - 120)/3).isActive = true
-
-        myFollwer1Button.setTitle("30", for: .normal)
-//        myFollwer1Button.setTitleColor(.black, for: .normal)
-//        myFollwer1Button.setTitleColor(.blue, for: .highlighted)
-        myFollwer1Button.titleLabel?.font = .systemFont(ofSize: 15)
-        myFollwer1Button.translatesAutoresizingMaskIntoConstraints = false
-        myFollwer1Button.topAnchor.constraint(equalTo: profileImage.topAnchor, constant: 50).isActive = true
-        myFollwer1Button.leftAnchor.constraint(equalTo: myArticle1Button.rightAnchor).isActive = true
-        myFollwer1Button.heightAnchor.constraint(equalToConstant: 20).isActive = true
-        myFollwer1Button.widthAnchor.constraint(equalToConstant: (view.frame.size.width - 120)/3).isActive = true
-
-        myFollwer2Button.setTitle("팔로워", for: .normal)
-//        myFollwer2Button.setTitleColor(.black, for: .normal)
-//        myFollwer2Button.setTitleColor(.blue, for: .highlighted)
-        myFollwer2Button.titleLabel?.font = .boldSystemFont(ofSize: 17)
-        myFollwer2Button.translatesAutoresizingMaskIntoConstraints = false
-        myFollwer2Button.topAnchor.constraint(equalTo: myFollwer1Button.bottomAnchor).isActive = true
-        myFollwer2Button.leftAnchor.constraint(equalTo: myArticle1Button.rightAnchor).isActive = true
-        myFollwer2Button.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        myFollwer2Button.widthAnchor.constraint(equalToConstant: (view.frame.size.width - 120)/3).isActive = true
-
-        myFollowing1Button.setTitle("40", for: .normal)
-//        myFollowing1Button.setTitleColor(.black, for: .normal)
-//        myFollowing1Button.setTitleColor(.blue, for: .highlighted)
-        myFollowing1Button.titleLabel?.font = .systemFont(ofSize: 15)
-        myFollowing1Button.translatesAutoresizingMaskIntoConstraints = false
-        myFollowing1Button.topAnchor.constraint(equalTo: profileImage.topAnchor, constant: 50).isActive = true
-        myFollowing1Button.leftAnchor.constraint(equalTo: myFollwer2Button.rightAnchor).isActive = true
-        myFollowing1Button.heightAnchor.constraint(equalToConstant: 20).isActive = true
-        myFollowing1Button.widthAnchor.constraint(equalToConstant: (view.frame.size.width - 120)/3).isActive = true
-
-        myFollowing2Button.setTitle("팔로잉", for: .normal)
-//        myFollowing2Button.setTitleColor(.black, for: .normal)
-//        myFollowing2Button.setTitleColor(.blue, for: .highlighted)
-        myFollowing2Button.titleLabel?.font = .boldSystemFont(ofSize: 17)
-        myFollowing2Button.translatesAutoresizingMaskIntoConstraints = false
-        myFollowing2Button.topAnchor.constraint(equalTo: myFollowing1Button.bottomAnchor).isActive = true
-        myFollowing2Button.leftAnchor.constraint(equalTo: myFollwer2Button.rightAnchor).isActive = true
-        myFollowing2Button.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        myFollowing2Button.widthAnchor.constraint(equalToConstant: (view.frame.size.width - 120)/3).isActive = true
-
+        let myArticle1 = NSMutableAttributedString(string: "10")
+        myArticle1Btn.setAttributedTitle(myArticle1, for: .normal)
+        myArticle1Btn.titleLabel?.font = .systemFont(ofSize: 15)
+        myArticle1Btn.translatesAutoresizingMaskIntoConstraints = false
+        myArticle1Btn.topAnchor.constraint(equalTo: profileImage.topAnchor, constant: 50).isActive = true
+        myArticle1Btn.leftAnchor.constraint(equalTo: profileImage.rightAnchor, constant: 10).isActive = true
+        myArticle1Btn.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        myArticle1Btn.widthAnchor.constraint(equalToConstant: (view.frame.size.width - 120)/3).isActive = true
+        
+        let myArticle2 = NSMutableAttributedString(string: "게시글")
+        myArticle2Btn.setAttributedTitle(myArticle2, for: .normal)
+        myArticle2Btn.titleLabel?.font = .boldSystemFont(ofSize: 17)
+        myArticle2Btn.translatesAutoresizingMaskIntoConstraints = false
+        myArticle2Btn.topAnchor.constraint(equalTo: myArticle1Btn.bottomAnchor).isActive = true
+        myArticle2Btn.leftAnchor.constraint(equalTo: profileImage.rightAnchor, constant: 10).isActive = true
+        myArticle2Btn.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        myArticle2Btn.widthAnchor.constraint(equalToConstant: (view.frame.size.width - 120)/3).isActive = true
+        
+        let myFollwer1 = NSMutableAttributedString(string: "23")
+        myFollower1Btn.setAttributedTitle(myFollwer1, for: .normal)
+        myFollower1Btn.titleLabel?.font = .systemFont(ofSize: 15)
+        myFollower1Btn.translatesAutoresizingMaskIntoConstraints = false
+        myFollower1Btn.topAnchor.constraint(equalTo: profileImage.topAnchor, constant: 50).isActive = true
+        myFollower1Btn.leftAnchor.constraint(equalTo: myArticle1Btn.rightAnchor).isActive = true
+        myFollower1Btn.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        myFollower1Btn.widthAnchor.constraint(equalToConstant: (view.frame.size.width - 120)/3).isActive = true
+        
+        let myFollwer2 = NSMutableAttributedString(string: "팔로워")
+        myFollower2Btn.setAttributedTitle(myFollwer2, for: .normal)
+        myFollower2Btn.titleLabel?.font = .boldSystemFont(ofSize: 17)
+        myFollower2Btn.translatesAutoresizingMaskIntoConstraints = false
+        myFollower2Btn.topAnchor.constraint(equalTo: myFollower1Btn.bottomAnchor).isActive = true
+        myFollower2Btn.leftAnchor.constraint(equalTo: myArticle1Btn.rightAnchor).isActive = true
+        myFollower2Btn.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        myFollower2Btn.widthAnchor.constraint(equalToConstant: (view.frame.size.width - 120)/3).isActive = true
+        
+        let myFollowing1 = NSMutableAttributedString(string: "71")
+        myFollowing1Btn.setAttributedTitle(myFollowing1, for: .normal)
+        myFollowing1Btn.titleLabel?.font = .systemFont(ofSize: 15)
+        myFollowing1Btn.translatesAutoresizingMaskIntoConstraints = false
+        myFollowing1Btn.topAnchor.constraint(equalTo: profileImage.topAnchor, constant: 50).isActive = true
+        myFollowing1Btn.leftAnchor.constraint(equalTo: myFollower2Btn.rightAnchor).isActive = true
+        myFollowing1Btn.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        myFollowing1Btn.widthAnchor.constraint(equalToConstant: (view.frame.size.width - 120)/3).isActive = true
+        
+        let myFollowing2 = NSMutableAttributedString(string: "팔로잉")
+        myFollowing2Btn.setAttributedTitle(myFollowing2, for: .normal)
+        myFollowing2Btn.titleLabel?.font = .boldSystemFont(ofSize: 17)
+        myFollowing2Btn.translatesAutoresizingMaskIntoConstraints = false
+        myFollowing2Btn.topAnchor.constraint(equalTo: myFollowing1Btn.bottomAnchor).isActive = true
+        myFollowing2Btn.leftAnchor.constraint(equalTo: myFollower2Btn.rightAnchor).isActive = true
+        myFollowing2Btn.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        myFollowing2Btn.widthAnchor.constraint(equalToConstant: (view.frame.size.width - 120)/3).isActive = true
+        
         
         return headerView
     }
