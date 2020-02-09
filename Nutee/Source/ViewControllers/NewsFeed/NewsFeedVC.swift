@@ -54,7 +54,8 @@ class NewsFeedVC: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(false)
-//        checkLogin()
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
     }
     
     // MARK: -Helper
@@ -73,8 +74,8 @@ class NewsFeedVC: UIViewController {
     }
     
     func initColor() {
-        self.tabBarController?.tabBar.barTintColor = UIColor.nuteeGreen
-        self.tabBarController?.tabBar.tintColor = UIColor.white
+//        self.tabBarController?.tabBar.barTintColor = UIColor.nuteeGreen
+        self.tabBarController?.tabBar.tintColor = .nuteeGreen
     }
     
     func showDetailNewsFeed() {
@@ -106,7 +107,7 @@ extension NewsFeedVC : UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //Custom셀인 'NewsFeedCell' 형식으로 생성
         let cell = tableView.dequeueReusableCell(withIdentifier: "NewsFeedCell", for: indexPath) as! NewsFeedCell
- 
+        
         return cell
     }
     

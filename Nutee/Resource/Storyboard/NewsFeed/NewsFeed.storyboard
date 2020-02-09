@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="hHM-dg-ZQU">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="hHM-dg-ZQU">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -46,9 +46,11 @@
                                                     <rect key="frame" x="25" y="18" width="54" height="54"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="R43-qM-ZRA">
-                                                    <rect key="frame" x="124" y="438" width="65.666666666666686" height="40"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="R43-qM-ZRA">
+                                                    <rect key="frame" x="93.666666666666686" y="438" width="94" height="40"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="40" id="smV-Jp-0N5"/>
+                                                    </constraints>
                                                     <color key="tintColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <state key="normal" image="heart" catalog="system">
                                                         <attributedString key="attributedTitle">
@@ -65,9 +67,11 @@
                                                         <action selector="btnLike:" destination="OuS-jG-NfV" eventType="touchUpInside" id="YZZ-8A-M8K"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZSU-gr-Usj">
-                                                    <rect key="frame" x="212" y="438" width="67.333333333333314" height="40"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZSU-gr-Usj">
+                                                    <rect key="frame" x="187.66666666666666" y="438" width="93.666666666666657" height="40"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="40" id="eyg-1a-dAv"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="18"/>
                                                     <color key="tintColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <state key="normal" title="9999" image="ellipses.bubble" catalog="system">
@@ -78,16 +82,6 @@
                                                         <action selector="btnCommentWithSender:" destination="9qq-fA-eNy" eventType="touchUpInside" id="u2B-bm-THQ"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9kA-bn-InV">
-                                                    <rect key="frame" x="300" y="438" width="40" height="40"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                                    <color key="tintColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <state key="normal" image="ellipsis" catalog="system"/>
-                                                    <connections>
-                                                        <action selector="btnMoreWithSender:" destination="9qq-fA-eNy" eventType="touchUpInside" id="8E5-FN-6sN"/>
-                                                    </connections>
-                                                </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Lorem ipsum dolor sit er elit lamet,esse cill" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3yG-Xh-fBx">
                                                     <rect key="frame" x="25" y="91" width="335" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -95,11 +89,13 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="WWl-Za-agc">
+                                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="WWl-Za-agc">
                                                     <rect key="frame" x="25" y="129" width="335" height="213"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="TZE-LP-ExC">
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="213" id="PvU-am-E8b"/>
+                                                    </constraints>
+                                                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="TZE-LP-ExC">
                                                         <size key="itemSize" width="50" height="50"/>
                                                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -107,16 +103,15 @@
                                                     </collectionViewFlowLayout>
                                                     <cells>
                                                         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PostImgCollectionCell" id="zNl-K3-hbf" customClass="PostImgCVCell" customModule="Nutee" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="0.0" width="162" height="212"/>
+                                                            <rect key="frame" x="0.0" y="0.66666666666666663" width="162" height="212"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="MLS-0L-hLH">
                                                                 <rect key="frame" x="0.0" y="0.0" width="162" height="212"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <subviews>
-                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wE4-IK-ZTQ">
+                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wE4-IK-ZTQ">
                                                                         <rect key="frame" x="0.0" y="0.0" width="162" height="212"/>
                                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                        <color key="backgroundColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         <gestureRecognizers/>
                                                                     </imageView>
                                                                 </subviews>
@@ -129,9 +124,11 @@
                                                         </collectionViewCell>
                                                     </cells>
                                                 </collectionView>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qh4-3I-kHl">
-                                                    <rect key="frame" x="36" y="437" width="70" height="40"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qh4-3I-kHl">
+                                                    <rect key="frame" x="0.0" y="437" width="93.666666666666671" height="40"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="40" id="yLg-g3-QjI"/>
+                                                    </constraints>
                                                     <color key="tintColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <state key="normal" image="arrow.2.squarepath" catalog="system">
                                                         <attributedString key="attributedTitle">
@@ -148,7 +145,36 @@
                                                         <action selector="btnRepost:" destination="OuS-jG-NfV" eventType="touchUpInside" id="3RE-h6-OD3"/>
                                                     </connections>
                                                 </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9kA-bn-InV">
+                                                    <rect key="frame" x="289" y="437" width="86" height="40"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="40" id="7sm-p9-oxh"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                                    <color key="tintColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <state key="normal" image="ellipsis" catalog="system"/>
+                                                    <connections>
+                                                        <action selector="btnMoreWithSender:" destination="9qq-fA-eNy" eventType="touchUpInside" id="8E5-FN-6sN"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="WWl-Za-agc" firstAttribute="leading" secondItem="2uN-UJ-Eo0" secondAttribute="leading" constant="25" id="9q9-OW-j4E"/>
+                                                <constraint firstItem="WWl-Za-agc" firstAttribute="width" secondItem="2uN-UJ-Eo0" secondAttribute="width" multiplier="0.893333" id="ADp-Ll-0Sr"/>
+                                                <constraint firstAttribute="bottom" secondItem="R43-qM-ZRA" secondAttribute="bottom" constant="13" id="Dxa-yB-B0R"/>
+                                                <constraint firstItem="qh4-3I-kHl" firstAttribute="leading" secondItem="2uN-UJ-Eo0" secondAttribute="leading" id="WYQ-iN-lEq"/>
+                                                <constraint firstItem="R43-qM-ZRA" firstAttribute="leading" secondItem="qh4-3I-kHl" secondAttribute="trailing" id="Y7u-81-07V"/>
+                                                <constraint firstItem="ZSU-gr-Usj" firstAttribute="leading" secondItem="R43-qM-ZRA" secondAttribute="trailing" id="Z9K-au-P4K"/>
+                                                <constraint firstAttribute="bottom" secondItem="9kA-bn-InV" secondAttribute="bottom" constant="14" id="dxF-bV-9gi"/>
+                                                <constraint firstItem="qh4-3I-kHl" firstAttribute="width" secondItem="2uN-UJ-Eo0" secondAttribute="width" multiplier="0.25" id="mm5-hh-lbM"/>
+                                                <constraint firstAttribute="bottom" secondItem="qh4-3I-kHl" secondAttribute="bottom" constant="14" id="nhB-dY-e9k"/>
+                                                <constraint firstItem="9kA-bn-InV" firstAttribute="width" secondItem="2uN-UJ-Eo0" secondAttribute="width" multiplier="0.25" constant="-7.75" id="qYd-wG-qMi"/>
+                                                <constraint firstItem="R43-qM-ZRA" firstAttribute="width" secondItem="2uN-UJ-Eo0" secondAttribute="width" multiplier="0.25" id="qk0-He-yk3"/>
+                                                <constraint firstAttribute="bottom" secondItem="ZSU-gr-Usj" secondAttribute="bottom" constant="13" id="rfi-LO-0ku"/>
+                                                <constraint firstItem="WWl-Za-agc" firstAttribute="top" secondItem="2uN-UJ-Eo0" secondAttribute="top" constant="129" id="uGZ-nF-qBA"/>
+                                                <constraint firstAttribute="trailing" secondItem="9kA-bn-InV" secondAttribute="trailing" id="vdM-Jy-p0U"/>
+                                                <constraint firstItem="ZSU-gr-Usj" firstAttribute="width" secondItem="2uN-UJ-Eo0" secondAttribute="width" multiplier="0.25" id="xD7-q0-pHe"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="btnComment" destination="ZSU-gr-Usj" id="JLt-MP-IwJ"/>

@@ -28,7 +28,7 @@ class DetailNewsFeedVC: UIViewController {
             // Code to delete
         }
         let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
-
+        
         moreAlert.addAction(editAction)
         moreAlert.addAction(deleteAction)
         moreAlert.addAction(cancelAction)
@@ -46,29 +46,33 @@ class DetailNewsFeedVC: UIViewController {
         newsTV.delegate = self
         newsTV.dataSource = self
         
-//        loadSelectedNewsFeed()
+        //        loadSelectedNewsFeed()
         
         // Register the custom header view which Nib 'NewsFeedTableHeaderSection'
         let nib = UINib(nibName: "NewsFeedTableHeaderSection", bundle: nil)
         self.newsTV.register(nib, forHeaderFooterViewReuseIdentifier: "NewsFeedTableHeaderSection")
     }
-
+    
     override func viewDidAppear(_ animated: Bool) {
-            super.viewDidAppear(false)
-        }
+        super.viewDidAppear(false)
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        
+        
+    }
     
 }
-    
-    //MARK: - data
+
+//MARK: - data
 extension DetailNewsFeedVC : UITableViewDelegate { }
 
 extension DetailNewsFeedVC : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-    
+        
         // Dequeue with the reuse identifier
         let cell = tableView.dequeueReusableHeaderFooterView(withIdentifier: "NewsFeedTableHeaderSection")
-
+        
         return cell
     }
     
@@ -95,5 +99,5 @@ extension DetailNewsFeedVC : UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         NSLog("선택된 댓글은 \(indexPath.row) 번쨰 댓글입니다")
     }
-
+    
 }
