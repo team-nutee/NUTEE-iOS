@@ -39,10 +39,10 @@ class PostVC: UIViewController {
         imageCV.delegate = self
         imageCV.dataSource = self
         
-        closeBtn.addTarget(self, action: #selector(closePosting), for: .touchUpInside)
+//        closeBtn.addTarget(self, action: #selector(closePosting), for: .touchUpInside)
         imagePickerBtn.addTarget(self, action: #selector(showImagePickerController), for: .touchUpInside)
         
-        setPostBtn()
+        activePostBtn()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -54,7 +54,7 @@ class PostVC: UIViewController {
         self.postingTextView.placeholder = "내용을 입력해주세요"
         postBtn.isEnabled = false
         
-//        hideTabbar()
+        //        hideTabbar()
         
         textViewDidChange(postingTextView)
         setDefault()
@@ -63,10 +63,7 @@ class PostVC: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
         
-        // 화면 나갈때 탭바 감추기 해제
-//        showTabbar()
     }
-    
     
     // MARK: - Helper
     
@@ -74,10 +71,10 @@ class PostVC: UIViewController {
         self.postingTextView.tintColor = .nuteeGreen
         
         closeBtn.tintColor = .nuteeGreen
-        postBtn.tintColor = .veryLightPink
+        postBtn.tintColor = .nuteeGreen
         
         imagePickerBtn.tintColor = .nuteeGreen
-        imagePickerView.layer.addBorder([.top], color: .nuteeGreen, width: 1)
+        imagePickerView.layer.addBorder([.top], color: .lightGray, width: 1)
         imagePickerView.alpha = 0.6
     }
     
@@ -86,21 +83,25 @@ class PostVC: UIViewController {
         self.pickedIMG = []
         self.imageCV.reloadData()
     }
-
-    @objc func closePosting() {
-        tabBarController!.selectedIndex = 0
-    }
     
-    @objc func setPostBtn() {
-        NotificationCenter.default.addObserver(forName: UITextView.textDidChangeNotification, object: postingTextView, queue: OperationQueue.main) { (notification) in
+//    @objc func closePosting() {
+//        self.dismiss(animated: true, completion: nil)
+//        tabBarController!.selectedIndex = 0
+//    }
+    
+    @objc func activePostBtn() {
+        NotificationCenter.default.addObserver(forName: UITextView.textDidChangeNotification, object: postingTextView , queue: OperationQueue.main) { (notification) in
             if self.postingTextView.text != "" || self.pickedIMG != []{
                 self.postBtn.isEnabled = true
-                self.postBtn.tintColor = .nuteeGreen
             } else {
                 self.postBtn.isEnabled = false
-                self.postBtn.tintColor = .veryLightPink
             }
         }
+    }
+    
+    @IBAction func unwindToOrigin(_ unwindSegue: UIStoryboardSegue){
+        performSegue(withIdentifier: "ToPostVC", sender: self)
+        self.dismiss(animated: true, completion: nil)
     }
     
     func hideTabbar() {
@@ -130,10 +131,13 @@ extension PostVC {
             let curve = info[UIResponder.keyboardAnimationCurveUserInfoKey] as! UInt
             let keyboardFrame = (info[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
             let keyboardHeight = keyboardFrame.height
-            let tabbarHeight = self.tabBarController?.tabBar.frame.size.height ?? 0
+//            let tabbarHeight = self.tabBarController?.tabBar.frame.size.height ?? 0
+//            let safeBottomHeight = self.view.bottomAnchor
+            let window = UIApplication.shared.keyWindow
+            let bottomPadding = window?.safeAreaInsets.bottom
             
-            pickerViewBottomConstraint.constant = -(keyboardHeight - tabbarHeight)
-            scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardHeight - tabbarHeight, right: 0)
+            pickerViewBottomConstraint.constant = -(keyboardHeight - bottomPadding!)
+            scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardHeight - bottomPadding!, right: 0)
             
             self.view.setNeedsLayout()
             UIView.animate(withDuration: duration, delay: 0, options: .init(rawValue: curve), animations: {
@@ -156,15 +160,24 @@ extension PostVC {
         }
     }
     
-     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
-          self.view.endEditing(true)
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
+        self.view.endEditing(true)
     }
-
+    
 }
 
 // MARK: - UITextViewDelegate
 
 extension PostVC: UITextViewDelegate {
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if self.postingTextView.text != ""{
+            self.postBtn.isEnabled = true
+        } else {
+            self.postBtn.isEnabled = false
+        }
+        return true
+    }
     
     // TextView의 동적인 크기 변화를 위한 function
     func textViewDidChange(_ textView: UITextView) {
