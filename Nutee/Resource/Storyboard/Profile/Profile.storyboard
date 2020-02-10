@@ -89,6 +89,9 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="az6-XJ-1uG"/>
                     </view>
+                    <connections>
+                        <outlet property="logoutBtn" destination="sdK-63-lke" id="Sjt-CK-YZJ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8dW-43-9LF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -193,6 +196,7 @@
                     <navigationItem key="navigationItem" title="프로필 설정" id="apc-W5-RmD"/>
                     <connections>
                         <outlet property="closeBtn" destination="DOO-QT-WC0" id="MIc-YS-vpQ"/>
+                        <outlet property="nameTextField" destination="RDu-XR-bje" id="Qeg-oH-bgy"/>
                         <outlet property="profileIMG" destination="O5p-fs-F21" id="vcT-WW-Emr"/>
                         <outlet property="saveBtn" destination="GWi-7B-Z7S" id="TZp-iB-QAp"/>
                         <outlet property="setIMGBtn" destination="hgq-BB-LU3" id="Vwk-qH-spS"/>

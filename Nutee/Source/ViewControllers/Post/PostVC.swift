@@ -103,17 +103,7 @@ class PostVC: UIViewController {
 //        performSegue(withIdentifier: "ToPostVC", sender: self)
 //        self.dismiss(animated: true, completion: nil)
 //    }
-    
-    func hideTabbar() {
-        self.tabBarController?.tabBar.isHidden = true
-        self.tabBarController?.tabBar.isTranslucent = true
-    }
-    
-    func showTabbar() {
-        self.tabBarController?.tabBar.isHidden = false
-        self.tabBarController?.tabBar.isTranslucent = false
-    }
-    
+        
 }
 
 
