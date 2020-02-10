@@ -76,18 +76,19 @@ class NewsFeedCell: UITableViewCell {
 //            btnLike.isSelected = false
             numLike -= 1
             setButtonAttributed(btn: sender, num: numLike, color: .gray, state: .normal)
-//            sender.setImage(UIImage(named: "heart"), for: .normal)
+//            sender.setImage(UIImage(named: "heart.filled"), for: .selected)
             isClickedLike = false
         } else {
 //            btnLike.isSelected = true
             numLike += 1
             setButtonAttributed(btn: sender, num: numLike, color: .systemPink, state: .selected)
-//            sender.setImage(UIImage(named: "heart-filled"), for: .normal)
+//            sender.setImage(UIImage(named: "heart.fill"), for: .selected)
+
             isClickedLike = true
-        }
+//        }
     }
     
-    @IBAction func btnComment(_ sender: UIButton) {
+//    @IBAction func btnComment(_ sender: UIButton) {
         
         /*
         btnComment.isSelected = !btnComment.isSelected
@@ -103,7 +104,8 @@ class NewsFeedCell: UITableViewCell {
             isClickedComment = true
         }
         */
-    }
+//    }
+}
         
     //MARK: - Helper
     

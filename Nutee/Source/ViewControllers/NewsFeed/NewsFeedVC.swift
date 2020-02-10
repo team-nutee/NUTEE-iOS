@@ -16,29 +16,7 @@ class NewsFeedVC: UIViewController {
     
     // MARK: - Variables and Properties
 
-    @IBAction func btnComment(sender: Any) {
-        showDetailNewsFeed()
-    }
-    
-    //수정, 삭제 알림창 기능
-    @IBAction func btnMore(sender: AnyObject) {
-        let moreAlert = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertController.Style.actionSheet)
-        let editAction = UIAlertAction(title: "수정", style: .default){
-            (action: UIAlertAction) in
-            // Code to edit
-        }
-        let deleteAction = UIAlertAction(title: "삭제", style: .destructive) {
-            (action: UIAlertAction) in
-            // Code to delete
-        }
-        let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
-
-        moreAlert.addAction(editAction)
-        moreAlert.addAction(deleteAction)
-        moreAlert.addAction(cancelAction)
-        self.present(moreAlert, animated: true, completion: nil)
-    }
-    
+    var test : [String] = ["","","",""]
     // MARK: - Dummy data
     
     // MARK: - Life Cycle
@@ -83,7 +61,32 @@ class NewsFeedVC: UIViewController {
         let showDetailNewsFeedVC = detailNewsFeedSB.instantiateViewController(withIdentifier: "DetailNewsFeed") as! DetailNewsFeedVC
         self.navigationController?.pushViewController(showDetailNewsFeedVC, animated: true)
     }
+ 
     
+    @IBAction func btnComment(sender: Any) {
+        showDetailNewsFeed()
+    }
+    
+    
+    //수정, 삭제 알림창 기능
+    @IBAction func btnMore(sender: AnyObject) {
+        let moreAlert = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertController.Style.actionSheet)
+        let editAction = UIAlertAction(title: "수정", style: .default){
+            (action: UIAlertAction) in
+            // Code to edit
+        }
+        let deleteAction = UIAlertAction(title: "삭제", style: .destructive) {
+            (action: UIAlertAction) in
+            // Code to delete
+        }
+        let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+
+        moreAlert.addAction(editAction)
+        moreAlert.addAction(deleteAction)
+        moreAlert.addAction(cancelAction)
+        self.present(moreAlert, animated: true, completion: nil)
+    }
+
 }
 
 // MARK: - UITableView
@@ -101,12 +104,14 @@ extension NewsFeedVC : UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return test.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //Custom셀인 'NewsFeedCell' 형식으로 생성
         let cell = tableView.dequeueReusableCell(withIdentifier: "NewsFeedCell", for: indexPath) as! NewsFeedCell
+        
+        
         
         return cell
     }
