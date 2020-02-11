@@ -51,7 +51,8 @@ class ProfileVC: UIViewController {
         myArticleTV.delegate = self
         myArticleTV.dataSource = self
         self.myArticleTV.register(ArticleTVC.self, forCellReuseIdentifier: "ArticleTVC")
-        
+        myArticleTV.separatorInset.left = 0
+
         setBtn()
     }
     

@@ -29,10 +29,12 @@ class IdVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        preBtn.addTarget(self, action: #selector(forDismiss), for: .touchUpInside)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        
         setInit()
         animation()
     }
@@ -59,8 +61,8 @@ class IdVC: UIViewController {
 //        numTextField.isHidden = true
     }
     
-    @objc func close() {
-        self.dismiss(animated: true, completion: nil)
+    @objc func forDismiss() {
+        self.dismiss(animated: false, completion: nil)
     }
     
     func animation() {

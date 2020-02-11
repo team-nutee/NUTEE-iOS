@@ -21,23 +21,28 @@ class LoginVC: UIViewController {
     @IBOutlet weak var idTextField: UITextField!
     @IBOutlet weak var pwTextField: UITextField!
     @IBOutlet weak var centerYLayoutConstraint: NSLayoutConstraint!
-    @IBOutlet weak var pwIconBtn: UIButton!
-   
+
+    @IBOutlet weak var logoLabel: UILabel!
+    @IBOutlet weak var autoSignUpBtn: UIButton!
+    @IBOutlet weak var autoSignUpBtn2: UIButton!
     // MARK: - Variables and Properties
-    
-    var iconClick = true
+
+    var autoSignUp : Bool = false
     
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("로그인 확인 : ",UserDefaults.standard.value(forKey: "cookie") ?? "로그인 안함")
         checkSignIn()
         
         setInit()
         
         signInBtn.addTarget(self, action: #selector(signIn), for: .touchUpInside)
         signUpBtn.addTarget(self, action: #selector(signUp), for: .touchUpInside)
+        findBtn.addTarget(self, action: #selector(find), for: .touchUpInside)
 //        addKeyboardNotification()
+        animate()
     }
     
     
@@ -48,25 +53,33 @@ class LoginVC: UIViewController {
         
         signInBtn.backgroundColor = .veryLightPink
         signInBtn.isEnabled = false
-        pwIconBtn.tintColor = .nuteeGreen
         idTextField.tintColor = .nuteeGreen
         pwTextField.tintColor = .nuteeGreen
         idTextField.layer.addBorder([.bottom], color: .pantoneGreen2020, width: 1)
         pwTextField.layer.addBorder([.bottom], color: .pantoneGreen2020, width: 1)
         
         self.tabBarController?.tabBar.isHidden = true
-        
+        autoSignUpBtn.tintColor = .nuteeGreen
+        autoSignUpBtn.titleLabel?.textColor = .nuteeGreen
+        autoSignUpBtn.setRounded(radius: nil)
+        autoSignUpBtn.borderWidth = 1
+        autoSignUpBtn.borderColor = .nuteeGreen
+        autoSignUpBtn2.tintColor = .nuteeGreen
+        autoSignUpBtn2.titleLabel?.textColor = .nuteeGreen
 
         signInBtn.tintColor = .white
         signInBtn.setRounded(radius: 10)
         signUpBtn.tintColor = .pantoneGreen2019
-        signUpBtn.setRounded(radius: 10)
         findBtn.tintColor = .pantoneGreen2019
-        findBtn.setRounded(radius: 10)
         
         idTextField.addTarget(self, action: #selector(LoginVC.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
         pwTextField.addTarget(self, action: #selector(LoginVC.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
         
+        autoSignUpBtn.addTarget(self, action: #selector(autoSignUpBt), for: .touchUpInside)
+        autoSignUpBtn2.addTarget(self, action: #selector(autoSignUpBt), for: .touchUpInside)
+        
+        logoLabel.textColor = .nuteeGreen
+        logoLabel.alpha = 0
     }
     
     func setDefault() {
@@ -74,17 +87,21 @@ class LoginVC: UIViewController {
     }
     
     func checkSignIn(){
-        if UserDefaults.standard.value(forKey: "cookie") != nil {
-            let sb = UIStoryboard(name: "Main", bundle: nil)
-            let vc = sb.instantiateViewController(withIdentifier: "TBC") as! TBC
-            vc.modalPresentationStyle = .fullScreen
-            
-            self.dismiss(animated: false, completion: nil)
-            
-            self.present(vc, animated: true)
+        if UserDefaults.standard.string(forKey: "cookie") != nil {
+            print("123ㅈㄷㅈㄷ")
+            toMain()
         } else {
+            print("123ㅈㄷㅈㄷ123123")
             return
         }
+    }
+    
+    func toMain() {
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        let vc = sb.instantiateViewController(withIdentifier: "TBC") as! TBC
+        vc.modalPresentationStyle = .fullScreen
+        
+        self.present(vc, animated: true)
     }
     
     @objc func signIn() {
@@ -93,10 +110,6 @@ class LoginVC: UIViewController {
         vc.modalPresentationStyle = .fullScreen
         
         UserDefaults.standard.setValue(idTextField.text, forKey: "cookie")
-        
-        
-        
-        self.dismiss(animated: false, completion: nil)
         
         self.present(vc, animated: true)
         
@@ -117,17 +130,27 @@ class LoginVC: UIViewController {
         self.present(vc, animated: true)
     }
     
-    @IBAction func iconAction(sender: AnyObject) {
-        if(iconClick == true) {
-            pwTextField.isSecureTextEntry = false
-        } else {
-            pwTextField.isSecureTextEntry = true
-//            pwTextField.clearsOnBeginEditing = false
-        }
-
-        iconClick = !iconClick
+    @objc func find() {
+        
+        let sb = UIStoryboard(name: "Find", bundle: nil)
+        let vc = sb.instantiateViewController(withIdentifier: "FindVC") as! FindVC
+        vc.modalPresentationStyle = .fullScreen
+                
+        self.present(vc, animated: true)
     }
+    
 
+    @objc func autoSignUpBt() {
+        if autoSignUp == false {
+            autoSignUp = true
+            autoSignUpBtn.backgroundColor = .nuteeGreen
+            
+        } else {
+            autoSignUp = false
+            autoSignUpBtn.backgroundColor = nil
+            
+        }
+    }
     
 }
 
@@ -159,3 +182,16 @@ extension LoginVC : UITextFieldDelegate {
 
 }
 
+extension LoginVC {
+    private func animate(){
+        UIView.animate(withDuration: 3,
+                       delay: 0,
+                       usingSpringWithDamping: 0.6,
+                       initialSpringVelocity: 1,
+                       options: [.curveEaseIn],
+                       animations: {
+                        // self를 항상 붙여줘야함 (클로저 안에서)
+                        self.logoLabel.alpha = 1
+        })
+    }
+}

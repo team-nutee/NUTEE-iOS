@@ -20,11 +20,11 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="NoticeBoardTVC" rowHeight="70" id="rLV-X5-AdI" customClass="NoticeBoardTVC" customModule="Nutee" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="NoticeBoardTVC" rowHeight="70" id="rLV-X5-AdI" customClass="NoticeBoardTVC" customModule="Nutee" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rLV-X5-AdI" id="3qz-Lb-ePY">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="70"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="383" height="70"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="제목" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y1E-h5-IvG">
@@ -41,19 +41,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VVF-lq-NZe">
-                                                    <rect key="frame" x="344" y="0.0" width="70" height="70"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="70" id="coF-e4-pjM"/>
-                                                    </constraints>
-                                                    <state key="normal" image="icRightArrowSmall"/>
-                                                </button>
                                             </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="VVF-lq-NZe" secondAttribute="bottom" id="hGw-4W-f9X"/>
-                                                <constraint firstItem="VVF-lq-NZe" firstAttribute="top" secondItem="3qz-Lb-ePY" secondAttribute="top" id="kCj-zb-Sih"/>
-                                                <constraint firstItem="VVF-lq-NZe" firstAttribute="leading" secondItem="3qz-Lb-ePY" secondAttribute="leading" constant="344" id="okC-5N-eX4"/>
-                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="noticeDateLabel" destination="zSA-LH-sB6" id="rgl-X1-XF2"/>
@@ -97,7 +85,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="icRightArrowSmall" width="24" height="24"/>
         <image name="pin" catalog="system" width="58" height="64"/>
     </resources>
 </document>

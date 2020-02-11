@@ -37,7 +37,8 @@ class PassWordVC: UIViewController {
         
         passwordTextField.addTarget(self, action: #selector(PassWordVC.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
         passwordTextField2.addTarget(self, action: #selector(PassWordVC.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
-        
+        preBtn.addTarget(self, action: #selector(forDismiss), for: .touchUpInside)
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -72,7 +73,10 @@ class PassWordVC: UIViewController {
         //        numTextField.isHidden = true
     }
     
-    
+    @objc func forDismiss() {
+        self.dismiss(animated: false, completion: nil)
+    }
+
     
 }
 

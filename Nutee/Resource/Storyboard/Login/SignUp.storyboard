@@ -36,12 +36,12 @@
                                 <rect key="frame" x="340.5" y="256" width="52" height="40"/>
                                 <state key="normal" title="인증하기"/>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="인증을 위해 학교 이메일이 필요해요!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rz6-hJ-dMj">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="인증을 위해 학교 이메일이 필요해요! 😄" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rz6-hJ-dMj">
                                 <rect key="frame" x="20" y="87" width="374" height="51"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="51" id="xpL-bk-EjK"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -169,12 +169,12 @@
                                 <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="다 왔어요!! 비밀번호를 입력해주세요" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DsP-b7-bQ8">
-                                <rect key="frame" x="20" y="85" width="315" height="51"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="다 왔어요!! 😄 비밀번호를 입력해주세요!!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DsP-b7-bQ8">
+                                <rect key="frame" x="20" y="85" width="372.5" height="51"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="51" id="S9R-iY-neD"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -223,7 +223,7 @@
                             <constraint firstItem="lCl-1x-DlO" firstAttribute="leading" secondItem="fY9-7s-AgT" secondAttribute="leading" constant="20" id="3Qm-xw-Q40"/>
                             <constraint firstItem="DsP-b7-bQ8" firstAttribute="leading" secondItem="fY9-7s-AgT" secondAttribute="leading" constant="20" id="7Zu-Kh-5vP"/>
                             <constraint firstItem="lq3-A5-eGn" firstAttribute="leading" secondItem="fY9-7s-AgT" secondAttribute="leading" constant="20" id="8J9-6e-RUP"/>
-                            <constraint firstItem="DsP-b7-bQ8" firstAttribute="width" secondItem="Vjo-V1-EdW" secondAttribute="width" multiplier="0.76087" id="9Yh-5j-G7O"/>
+                            <constraint firstItem="DsP-b7-bQ8" firstAttribute="width" secondItem="Vjo-V1-EdW" secondAttribute="width" multiplier="0.9" id="9Yh-5j-G7O"/>
                             <constraint firstItem="741-oS-YAE" firstAttribute="bottom" secondItem="Hyb-LX-fyM" secondAttribute="bottom" id="Any-tE-AyL"/>
                             <constraint firstItem="Hyb-LX-fyM" firstAttribute="width" secondItem="741-oS-YAE" secondAttribute="width" id="GUJ-az-9jf"/>
                             <constraint firstItem="6oE-3H-52Z" firstAttribute="top" secondItem="dg1-Ei-g5M" secondAttribute="bottom" constant="50" id="Guw-bI-QV8"/>
@@ -282,12 +282,12 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" textContentType="email"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="아이디를 입력해주세요!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fmM-IT-w90">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="아이디를 입력해주세요!!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fmM-IT-w90">
                                 <rect key="frame" x="20" y="87" width="374" height="51"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="51" id="Ofo-xC-g0d"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -385,12 +385,12 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" textContentType="email"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="닉네임을 입력해주세요!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fVE-ff-LyZ">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="닉네임을 입력해주세요!!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fVE-ff-LyZ">
                                 <rect key="frame" x="20" y="87" width="374" height="51"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="51" id="Ls0-Us-rqX"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>

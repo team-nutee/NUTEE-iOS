@@ -36,7 +36,8 @@ class CafeteriaVC: UIViewController {
         
         cafeteriaTV.delegate = self
         cafeteriaTV.dataSource = self
-        
+        cafeteriaTV.separatorInset.left = 0
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
