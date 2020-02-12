@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="7pK-Is-Ph9">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="w28-RG-d1X">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
@@ -7,6 +7,36 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--InitVC-->
+        <scene sceneID="jRQ-U7-b5a">
+            <objects>
+                <viewController storyboardIdentifier="InitVC" id="w28-RG-d1X" customClass="InitVC" customModule="NUTEE" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="9Ng-Df-7LX">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NUTEE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CTr-aj-YxA">
+                                <rect key="frame" x="158.5" y="100" width="97" height="36"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="CTr-aj-YxA" firstAttribute="centerY" secondItem="NYQ-MA-Bm4" secondAttribute="centerY" constant="-335" id="5dh-OC-Yhq"/>
+                            <constraint firstItem="CTr-aj-YxA" firstAttribute="centerX" secondItem="NYQ-MA-Bm4" secondAttribute="centerX" id="alX-UM-hlM"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="NYQ-MA-Bm4"/>
+                    </view>
+                    <connections>
+                        <outlet property="nuteeLabel" destination="CTr-aj-YxA" id="gjC-c7-tTS"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xOa-ce-Kxv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-546" y="-737"/>
+        </scene>
         <!--LoginVC-->
         <scene sceneID="Xn1-b8-PNn">
             <objects>
@@ -103,7 +133,7 @@
                                 <state key="normal" title=" 로그인 유지"/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NUTEE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ihg-p7-k48">
-                                <rect key="frame" x="158.5" y="109" width="97" height="36"/>
+                                <rect key="frame" x="158.5" y="100" width="97" height="36"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -137,7 +167,7 @@
                             <constraint firstItem="qTD-Lf-oKO" firstAttribute="leading" secondItem="OFS-Ac-HML" secondAttribute="leading" id="hcc-Y9-M4Q"/>
                             <constraint firstItem="W6u-TN-p4k" firstAttribute="leading" secondItem="nSB-gz-6EH" secondAttribute="leading" constant="24" id="jIR-1h-XNd"/>
                             <constraint firstItem="W6u-TN-p4k" firstAttribute="leading" secondItem="Nvs-Lb-0MU" secondAttribute="trailing" constant="-366" id="k1m-aj-yZW"/>
-                            <constraint firstItem="Ihg-p7-k48" firstAttribute="top" secondItem="nSB-gz-6EH" secondAttribute="top" constant="65" id="kw4-CF-2Mx"/>
+                            <constraint firstItem="Ihg-p7-k48" firstAttribute="top" secondItem="nSB-gz-6EH" secondAttribute="top" constant="56" id="kw4-CF-2Mx"/>
                             <constraint firstItem="gRc-1i-Prm" firstAttribute="top" secondItem="W6u-TN-p4k" secondAttribute="bottom" constant="142.5" id="nNH-rh-0Vs"/>
                             <constraint firstItem="qJM-87-Ch8" firstAttribute="width" secondItem="nSB-gz-6EH" secondAttribute="width" multiplier="0.193237" id="nah-2H-3db"/>
                             <constraint firstItem="YRZ-AC-WBc" firstAttribute="leading" secondItem="nSB-gz-6EH" secondAttribute="leading" constant="32" id="neH-y9-TS0"/>

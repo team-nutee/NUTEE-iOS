@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="2xd-uk-WoN">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="2xd-uk-WoN">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -10,7 +10,7 @@
         <!--프로필-->
         <scene sceneID="d4h-VV-TVo">
             <objects>
-                <viewController storyboardIdentifier="ProfileVC" id="9kz-gF-o3J" customClass="ProfileVC" customModule="Nutee" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProfileVC" id="9kz-gF-o3J" customClass="ProfileVC" customModule="NUTEE" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wnG-zL-6JD">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -19,10 +19,10 @@
                                 <rect key="frame" x="0.0" y="88" width="375" height="641"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="ArticleTVC" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ArticleTVC" rowHeight="90" id="sIe-NT-4q7" customClass="ArticleTVC" customModule="Nutee" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="ArticleTVC" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ArticleTVC" rowHeight="90" id="sIe-NT-4q7" customClass="ArticleTVC" customModule="NUTEE" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="55.333332061767578" width="375" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="sIe-NT-4q7" id="mwG-pb-dJV" customClass="ArticleTVC" customModule="Nutee" customModuleProvider="target">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="sIe-NT-4q7" id="mwG-pb-dJV" customClass="ArticleTVC" customModule="NUTEE" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="349" height="90"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
@@ -44,8 +44,6 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="articleLabel" destination="JY9-XE-v5s" id="kNn-ZY-qmZ"/>
-                                            <outlet property="articleTimeLable" destination="JBV-tn-9gW" id="a58-6Z-X7F"/>
-                                            <outlet property="artilceLabel" destination="JY9-XE-v5s" id="UG4-9o-vhA"/>
                                             <outlet property="timeLabel" destination="JBV-tn-9gW" id="prc-Cy-fWI"/>
                                         </connections>
                                     </tableViewCell>
@@ -75,7 +73,7 @@
         <!--SettingVC-->
         <scene sceneID="Mcs-yx-ueB">
             <objects>
-                <viewController storyboardIdentifier="SettingVC" id="PqC-K5-Xqe" customClass="SettingVC" customModule="Nutee" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SettingVC" id="PqC-K5-Xqe" customClass="SettingVC" customModule="NUTEE" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gb2-jE-kZm">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -100,7 +98,7 @@
         <!--프로필 설정-->
         <scene sceneID="FOw-i8-8A6">
             <objects>
-                <viewController storyboardIdentifier="SetProfileVC" id="wZ4-jJ-xjD" customClass="SetProfileVC" customModule="Nutee" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SetProfileVC" id="wZ4-jJ-xjD" customClass="SetProfileVC" customModule="NUTEE" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lRP-It-P4F">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -209,7 +207,7 @@
         <!--FollowingVC-->
         <scene sceneID="0xE-Q0-iVu">
             <objects>
-                <viewController storyboardIdentifier="FollowingVC" id="Zq9-6m-ibe" customClass="FollowingVC" customModule="Nutee" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FollowingVC" id="Zq9-6m-ibe" customClass="FollowingVC" customModule="NUTEE" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="nG7-D0-jhn">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -218,7 +216,7 @@
                                 <rect key="frame" x="0.0" y="44" width="375" height="734"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FollowingTVC" rowHeight="70" id="3Ki-XM-WgW" customClass="FollowingTVC" customModule="Nutee" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FollowingTVC" rowHeight="70" id="3Ki-XM-WgW" customClass="FollowingTVC" customModule="NUTEE" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="3Ki-XM-WgW" id="mLK-R8-vaL">
@@ -272,7 +270,7 @@
         <!--FollowerVC-->
         <scene sceneID="UlS-m9-FE7">
             <objects>
-                <viewController storyboardIdentifier="FollowerVC" id="2ay-id-KSE" customClass="FollowerVC" customModule="Nutee" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FollowerVC" id="2ay-id-KSE" customClass="FollowerVC" customModule="NUTEE" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="BsW-Aq-ZVC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -281,7 +279,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="778"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FollowerTVC" rowHeight="70" id="6Tc-yo-WNW" customClass="FollowerTVC" customModule="Nutee" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FollowerTVC" rowHeight="70" id="6Tc-yo-WNW" customClass="FollowerTVC" customModule="NUTEE" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="6Tc-yo-WNW" id="Ggv-pQ-yYj">

@@ -30,7 +30,6 @@
 		5E21445A23C2F8E50053CFB9 /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E21445923C2F8E50053CFB9 /* APIConstants.swift */; };
 		5E21445C23C2F8F60053CFB9 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E21445B23C2F8F60053CFB9 /* Model.swift */; };
 		5E21445E23C2F8FC0053CFB9 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E21445D23C2F8FC0053CFB9 /* Util.swift */; };
-		5E21446223C2F93B0053CFB9 /* InitVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E21446123C2F93B0053CFB9 /* InitVC.swift */; };
 		5E3560E423EC11E3002B8C87 /* FollowerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3560E323EC11E3002B8C87 /* FollowerVC.swift */; };
 		5E3560E623EC11F1002B8C87 /* FollowingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3560E523EC11F1002B8C87 /* FollowingVC.swift */; };
 		5E3560E823EC1634002B8C87 /* SetProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3560E723EC1634002B8C87 /* SetProfileVC.swift */; };
@@ -41,6 +40,7 @@
 		5E37CAAA23E97DDA00C0E2A8 /* Find.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E37CAA923E97DDA00C0E2A8 /* Find.storyboard */; };
 		5E37CAB023E9900B00C0E2A8 /* Cafeteria.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E37CAAF23E9900B00C0E2A8 /* Cafeteria.storyboard */; };
 		5E37CAB323E9903500C0E2A8 /* CafeteriaVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E37CAB223E9903500C0E2A8 /* CafeteriaVC.swift */; };
+		5E54303D23F44170004FF2FB /* InitVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E54303C23F44170004FF2FB /* InitVC.swift */; };
 		5E79C0C223EC5A7000BD2FB3 /* ArticleTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E79C0C123EC5A7000BD2FB3 /* ArticleTVC.swift */; };
 		5E79C0C723EC6AFF00BD2FB3 /* ImageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E79C0C523EC6AFF00BD2FB3 /* ImageVC.swift */; };
 		5E79C0C823EC6AFF00BD2FB3 /* ImageVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E79C0C623EC6AFF00BD2FB3 /* ImageVC.xib */; };
@@ -73,7 +73,6 @@
 		D59718A923CEA98400117906 /* NewsFeedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59718A323CEA98300117906 /* NewsFeedVC.swift */; };
 		D59718AA23CEA98400117906 /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59718A423CEA98300117906 /* ProfileVC.swift */; };
 		D59718AB23CEA98400117906 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59718A523CEA98300117906 /* LoginVC.swift */; };
-		D59718AC23CEA98400117906 /* FeedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59718A623CEA98300117906 /* FeedVC.swift */; };
 		D59718AD23CEA98400117906 /* ChattingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59718A723CEA98300117906 /* ChattingVC.swift */; };
 		D59718B523CEA9DA00117906 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D59718B023CEA9D900117906 /* Login.storyboard */; };
 		D59718B623CEA9DA00117906 /* NoticeBoard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D59718B123CEA9DA00117906 /* NoticeBoard.storyboard */; };
@@ -113,7 +112,6 @@
 		5E21445923C2F8E50053CFB9 /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
 		5E21445B23C2F8F60053CFB9 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		5E21445D23C2F8FC0053CFB9 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
-		5E21446123C2F93B0053CFB9 /* InitVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitVC.swift; sourceTree = "<group>"; };
 		5E3560E323EC11E3002B8C87 /* FollowerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerVC.swift; sourceTree = "<group>"; };
 		5E3560E523EC11F1002B8C87 /* FollowingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingVC.swift; sourceTree = "<group>"; };
 		5E3560E723EC1634002B8C87 /* SetProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetProfileVC.swift; sourceTree = "<group>"; };
@@ -124,6 +122,7 @@
 		5E37CAA923E97DDA00C0E2A8 /* Find.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Find.storyboard; sourceTree = "<group>"; };
 		5E37CAAF23E9900B00C0E2A8 /* Cafeteria.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Cafeteria.storyboard; sourceTree = "<group>"; };
 		5E37CAB223E9903500C0E2A8 /* CafeteriaVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeteriaVC.swift; sourceTree = "<group>"; };
+		5E54303C23F44170004FF2FB /* InitVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitVC.swift; sourceTree = "<group>"; };
 		5E79C0C123EC5A7000BD2FB3 /* ArticleTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleTVC.swift; sourceTree = "<group>"; };
 		5E79C0C523EC6AFF00BD2FB3 /* ImageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageVC.swift; sourceTree = "<group>"; };
 		5E79C0C623EC6AFF00BD2FB3 /* ImageVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageVC.xib; sourceTree = "<group>"; };
@@ -155,7 +154,6 @@
 		D59718A323CEA98300117906 /* NewsFeedVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsFeedVC.swift; sourceTree = "<group>"; };
 		D59718A423CEA98300117906 /* ProfileVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
 		D59718A523CEA98300117906 /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
-		D59718A623CEA98300117906 /* FeedVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedVC.swift; sourceTree = "<group>"; };
 		D59718A723CEA98300117906 /* ChattingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChattingVC.swift; sourceTree = "<group>"; };
 		D59718B023CEA9D900117906 /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		D59718B123CEA9DA00117906 /* NoticeBoard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = NoticeBoard.storyboard; sourceTree = "<group>"; };
@@ -337,9 +335,8 @@
 				5E0E6A6523E734D600FBC15F /* Login */,
 				D519844323E325C2001AB351 /* NewsFeed */,
 				5E05AD7F23DEC1D600E36AD4 /* Chat */,
-				5E21446123C2F93B0053CFB9 /* InitVC.swift */,
-				D59718A623CEA98300117906 /* FeedVC.swift */,
 				5E37CA9D23E97B0600C0E2A8 /* TBC.swift */,
+				5E54303C23F44170004FF2FB /* InitVC.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -676,7 +673,6 @@
 				5E95CD6623EF30280090C39B /* FollowingTVC.swift in Sources */,
 				5E79C0CF23EDE0B900BD2FB3 /* Notification.Name+Extension.swift in Sources */,
 				5E79C0CC23EC6B2A00BD2FB3 /* PopUpVC.swift in Sources */,
-				5E21446223C2F93B0053CFB9 /* InitVC.swift in Sources */,
 				D5EBD78623D0269400C2B7F5 /* NewsFeedVO.swift in Sources */,
 				5E05AD6E23DB0EB800E36AD4 /* UIViewController+Extension.swift in Sources */,
 				5E0E6A7223E73ECE00FBC15F /* PostVC.swift in Sources */,
@@ -695,7 +691,7 @@
 				5E21443F23C2F8500053CFB9 /* SceneDelegate.swift in Sources */,
 				5E0E6A6823E7385400FBC15F /* NoticeBoardTVC.swift in Sources */,
 				5E37CA9C23E9765600C0E2A8 /* PostIMGCVC.swift in Sources */,
-				D59718AC23CEA98400117906 /* FeedVC.swift in Sources */,
+				5E54303D23F44170004FF2FB /* InitVC.swift in Sources */,
 				5EA5C68023F02C9200BFB32B /* String+Extension.swift in Sources */,
 				D59718A223CEA96700117906 /* NewsFeedCell.swift in Sources */,
 				D519844523E325EE001AB351 /* DetailNewsFeedVC.swift in Sources */,

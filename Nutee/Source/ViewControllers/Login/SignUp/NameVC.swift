@@ -29,7 +29,7 @@ class NameVC: UIViewController {
         super.viewDidLoad()
         
         addKeyboardNotification()
-        preBtn.addTarget(self, action: #selector(forDismiss), for: .touchUpInside)
+//        preBtn.addTarget(self, action: #selector(forDismiss), for: .touchUpInside)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -57,9 +57,9 @@ class NameVC: UIViewController {
         //        numTextField.isHidden = true
     }
     
-    @objc func forDismiss() {
-        self.dismiss(animated: false, completion: nil)
-    }
+//    @objc func forDismiss() {
+//        self.dismiss(animated: false, completion: nil)
+//    }
     
     func animation() {
         guard flag else {
@@ -69,7 +69,9 @@ class NameVC: UIViewController {
         }
     }
     
-    
+    @IBAction func goTo2(_ sender: UIButton) {
+        performSegue(withIdentifier: "unwindVC3toVC2", sender: self)
+    }
 }
 
 extension NameVC {

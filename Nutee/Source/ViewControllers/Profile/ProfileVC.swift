@@ -147,14 +147,15 @@ extension ProfileVC : UITableViewDataSource {
 //            cell.backgroundColor = .lightGray
 //            cell.alpha = 0.3
         } else {
-            cell.addSubview(cellTextLabel)
-            cellTextLabel.text = String(indexPath.row) + "번째"
-            cellTextLabel.font = .boldSystemFont(ofSize: 20)
-            cellTextLabel.textAlignment = .center
-            cellTextLabel.translatesAutoresizingMaskIntoConstraints = false
-            cellTextLabel.heightAnchor.constraint(equalToConstant: 70).isActive = true
-            cellTextLabel.widthAnchor.constraint(equalToConstant: 200).isActive = true
+//            cell.addSubview(cellTextLabel)
+//            cellTextLabel.text = String(indexPath.row) + "번째"
+//            cellTextLabel.font = .boldSystemFont(ofSize: 20)
+//            cellTextLabel.textAlignment = .center
+//            cellTextLabel.translatesAutoresizingMaskIntoConstraints = false
+//            cellTextLabel.heightAnchor.constraint(equalToConstant: 70).isActive = true
+//            cellTextLabel.widthAnchor.constraint(equalToConstant: 200).isActive = true
 
+//            cell.articleLabel.text = "123"
         }
         
         return cell
