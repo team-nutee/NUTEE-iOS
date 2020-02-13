@@ -1,41 +1,30 @@
 //
-//  InitVC.swift
+//  ViewController.swift
 //  Nutee
 //
-//  Created by Junhyeon on 2020/01/06.
-//  Copyright © 2020 Junhyeon. All rights reserved.
+//  Created by Junhyeon on 2020/02/12.
+//  Copyright © 2020 S.OWL. All rights reserved.
 //
 
 import UIKit
 
-class InitVC : UIViewController {
-    
-    // MARK: - UI components
-    @IBOutlet weak var copyLabel: UILabel!
-    
-    // MARK: - Variables and Properties
-    
-    // MARK: - Variables and Properties
-    
-    
-    // MARK: - Life Cycle
-    
+class InitVC: UIViewController {
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        copyLabel.isHidden = true
-        setInit()
+
+        // Do any additional setup after loading the view.
     }
     
-    // MARK: -Helpers
 
-    // 초기 설정
-    func setInit() {
+    /*
+    // MARK: - Navigation
 
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destination.
+        // Pass the selected object to the new view controller.
     }
-    
-    func setDefault() {
+    */
 
-    }
-    
 }

@@ -8,12 +8,42 @@
 
 struct APIConstants {
 
-    static let BaseURL = "http://localhost:9425"
+    static let BaseURL = "http://15.164.50.161:9425"
     
-    static let User = BaseURL + "/api/user"
-    static let Post = BaseURL + "/api/post"
-    static let Posts = BaseURL + "/api/posts"
-    static let Hashtag = BaseURL + "/api/hashtag"
-    static let Notice = BaseURL + "/api/notice"
+    static let User = BaseURL + "/api/user"                                     // GET
+    static let PostUser = BaseURL + "/api/user"                                 // Post { userId : id, password : pw, nickname : nick }
     
+    static let PostPost = BaseURL + "/api/post"                                 // POST formData : image filename , content : content
+    static let PostGET = BaseURL + "/api/post/:id"                              // GET 뒤에 아이디 값을 넣어야 함                 // 아이디가 게시물의 id?
+    static let PostDelete = BaseURL + "/api/post/:id"                           // DELETE 뒤에 아이디 값을 넣어줘야함              // "
+    static let Posts = BaseURL + "/api/posts"                                   // GET
+    static let UserPostsGET = BaseURL + "/api/user/:id/posts/"                  // GET
+    
+    static let Hashtag = BaseURL + "/api/hashtag"                               // GET
+    static let Notice = BaseURL + "/api/notice"                                 // GET
+    static let image = BaseURL + "/api/post/images"                             // POST formData : image : binary
+    static let CommentsGet = BaseURL + "/api/post/:id/comments"                 // GET
+    static let PostComments = BaseURL + "/api/post/:id/comments"                // POST requestPayload     {postId : postId ,  content: content}
+
+    static let PostLike = BaseURL + "/api/post/:id/like"                        // POST
+    static let DeleteLike = BaseURL + "/api/post/:id/like"                      // DELETE           {postId : postID}
+
+    static let Retweet = BaseURL + "/api/post/:id/retweet"                      // POST {postId : postId}
+    static let UserId = BaseURL + "/api/user/:id"                               // GET
+    
+    static let Logout = BaseURL + "/api/user/logout"                            // POST
+    static let Login = BaseURL + "/api/user/login"                              // POST { userId : id , password: pw }
+    
+    static let FollowingGET = BaseURL + "/api/user/:id/follwings"               // GET
+    
+    static let FollowDELETE = BaseURL + "/api/user/:id/follow"                  // DELETE  { userId : id }
+    static let FollowPOST = BaseURL + "/api/user/:id/follow"                    // POST    { userId : id }
+    
+    static let FollowerGET = BaseURL + "/api/user/:id/follwers"                 // GET
+    static let FollowerDELETE = BaseURL + "/api/user/:id/followers"             // DELETE  { userId : id }
+    static let FollowerPOST = BaseURL + "/api/user/:id/followers"               // POST    { userId : id }
+
+    static let NickNamePatch = BaseURL + "/api/user/nickname"                   // PATCH
+    
+
 }

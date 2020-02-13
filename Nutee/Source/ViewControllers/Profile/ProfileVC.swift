@@ -39,6 +39,8 @@ class ProfileVC: UIViewController {
     // MARK: - Variables and Properties
     
     var test: [String] = ["123","123","","","","","","","","","",""]
+//    var test: [String] = []
+
     
     // MARK: - Life Cycle
     
@@ -49,7 +51,8 @@ class ProfileVC: UIViewController {
         myArticleTV.delegate = self
         myArticleTV.dataSource = self
         self.myArticleTV.register(ArticleTVC.self, forCellReuseIdentifier: "ArticleTVC")
-        
+        myArticleTV.separatorInset.left = 0
+
         setBtn()
     }
     
@@ -91,20 +94,21 @@ class ProfileVC: UIViewController {
     @objc func settingProfile() {
         let setProfileVC = self.storyboard?.instantiateViewController(withIdentifier: "SetProfileVC") as! SetProfileVC
         setProfileVC.modalPresentationStyle = .fullScreen
+        setProfileVC.name = UserDefaults.standard.value(forKey: "cookie") as! String
         
         self.present(setProfileVC, animated: true, completion: nil)
     }
     
     @objc func viewFollower() {
         let followerVC = self.storyboard?.instantiateViewController(withIdentifier: "FollowerVC") as! FollowerVC
-        self.navigationController?.pushViewController(followerVC, animated: true)
         
+        self.navigationController?.pushViewController(followerVC, animated: true)
     }
     
     @objc func viewFollowing() {
         let followingVC = self.storyboard?.instantiateViewController(withIdentifier: "FollowingVC") as! FollowingVC
-        self.navigationController?.pushViewController(followingVC, animated: true)
         
+        self.navigationController?.pushViewController(followingVC, animated: true)
     }
     
     @objc func viewArticle() {
@@ -128,7 +132,7 @@ extension ProfileVC : UITableViewDataSource {
         
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if test.count == 0{
-            tableView.setEmptyView(title: "게시글이 없습니다", message: "새로운 게시물을 올려보세요!!")
+            tableView.setEmptyView(title: "게시글이 없습니다", message: "새로운 게시물을 올려보세요‼️")
         } else {
             tableView.restore()
         }
@@ -143,14 +147,15 @@ extension ProfileVC : UITableViewDataSource {
 //            cell.backgroundColor = .lightGray
 //            cell.alpha = 0.3
         } else {
-            cell.addSubview(cellTextLabel)
-            cellTextLabel.text = String(indexPath.row) + "번째"
-            cellTextLabel.font = .boldSystemFont(ofSize: 20)
-            cellTextLabel.textAlignment = .center
-            cellTextLabel.translatesAutoresizingMaskIntoConstraints = false
-            cellTextLabel.heightAnchor.constraint(equalToConstant: 70).isActive = true
-            cellTextLabel.widthAnchor.constraint(equalToConstant: 200).isActive = true
+//            cell.addSubview(cellTextLabel)
+//            cellTextLabel.text = String(indexPath.row) + "번째"
+//            cellTextLabel.font = .boldSystemFont(ofSize: 20)
+//            cellTextLabel.textAlignment = .center
+//            cellTextLabel.translatesAutoresizingMaskIntoConstraints = false
+//            cellTextLabel.heightAnchor.constraint(equalToConstant: 70).isActive = true
+//            cellTextLabel.widthAnchor.constraint(equalToConstant: 200).isActive = true
 
+//            cell.articleLabel.text = "123"
         }
         
         return cell
@@ -188,7 +193,8 @@ extension ProfileVC : UITableViewDataSource {
         self.headerView.addSubview(myFollowing1Btn)
         self.headerView.addSubview(myFollowing2Btn)
         
-        let etcname : String = "nickname"
+        let etcname : String = UserDefaults.standard.value(forKey: "cookie") as! String
+        
         let name = NSMutableAttributedString(string: etcname)
         name.addAttribute(NSAttributedString.Key.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: NSMakeRange(0, etcname.count))
         

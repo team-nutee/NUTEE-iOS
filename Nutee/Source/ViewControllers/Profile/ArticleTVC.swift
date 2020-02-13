@@ -18,9 +18,9 @@ class ArticleTVC: UITableViewCell {
         
         articleLabel.text = "123"
         timeLabel.text = "시간"
-        // Initialization code
     }
-
+    
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

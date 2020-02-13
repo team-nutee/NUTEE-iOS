@@ -15,11 +15,12 @@ class SetProfileVC: UIViewController {
     @IBOutlet weak var saveBtn: UIButton!
     @IBOutlet weak var profileIMG: UIImageView!
     @IBOutlet weak var setIMGBtn: UIButton!
+    @IBOutlet weak var nameTextField: UITextField!
     
     // MARK: - Variables and Properties
     let picker = UIImagePickerController()
     var pickedIMG = UIImage()
-    
+    var name : String = ""
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
@@ -43,6 +44,10 @@ class SetProfileVC: UIViewController {
         setIMGBtn.tintColor = .white
         setIMGBtn.backgroundColor = .nuteeGreen
         profileIMG.backgroundColor = .lightGray
+        
+        nameTextField.layer.addBorder([.bottom], color: .nuteeGreen, width: 1)
+        nameTextField.tintColor = .nuteeGreen
+        nameTextField.text = name
         
         setIMGBtn.setRounded(radius: nil)
         profileIMG.setRounded(radius: nil)
