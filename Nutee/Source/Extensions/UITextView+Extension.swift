@@ -76,4 +76,10 @@ extension UITextView : UITextViewDelegate {
         self.delegate = self
     }
 
+    public func postingInit() {
+        isEditable = false
+        isScrollEnabled = false
+        isSelectable = false
+        sizeToFit()
+    }
 }

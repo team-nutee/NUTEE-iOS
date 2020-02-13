@@ -59,10 +59,11 @@
 		5EA5C67C23F023DC00BFB32B /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA5C67B23F023DC00BFB32B /* UITableView+Extension.swift */; };
 		5EA5C67E23F02BA900BFB32B /* CertificationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA5C67D23F02BA900BFB32B /* CertificationVC.swift */; };
 		5EA5C68023F02C9200BFB32B /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA5C67F23F02C9200BFB32B /* String+Extension.swift */; };
-		7ED848354A2878E251E05E71 /* Pods_Nutee.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5915003F64084812BCF9F67 /* Pods_Nutee.framework */; };
 		D519843E23E32418001AB351 /* NewsFeed.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D519843C23E32418001AB351 /* NewsFeed.storyboard */; };
 		D519843F23E32418001AB351 /* DetailNewsFeed.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D519843D23E32418001AB351 /* DetailNewsFeed.storyboard */; };
 		D519844523E325EE001AB351 /* DetailNewsFeedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D519844423E325EE001AB351 /* DetailNewsFeedVC.swift */; };
+		D53FD29423F43C6F00291597 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D53FD29323F43C6F00291597 /* Alamofire.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		D53FD29623F43C8B00291597 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D53FD29523F43C8B00291597 /* Kingfisher.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		D580664B23F0044D00180236 /* PostImgCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D580664A23F0044D00180236 /* PostImgCVCell.swift */; };
 		D580664D23F0045500180236 /* FullScreenImgCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D580664C23F0045500180236 /* FullScreenImgCVCell.swift */; };
 		D597189E23CEA79100117906 /* NoticeBoardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D597189D23CEA79100117906 /* NoticeBoardVC.swift */; };
@@ -80,9 +81,34 @@
 		D5DAA88F23E7EF2E0052E17B /* ReplyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5DAA88C23E7EF2E0052E17B /* ReplyCell.swift */; };
 		D5DAA89023E7EF2E0052E17B /* NewsFeedTableHeaderSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5DAA88D23E7EF2E0052E17B /* NewsFeedTableHeaderSection.swift */; };
 		D5DAA89423E7F0C70052E17B /* NewsFeedTableHeaderSection.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5DAA89223E7F0C60052E17B /* NewsFeedTableHeaderSection.xib */; };
+		D5DAC67423F42BB100226F20 /* Pods_Nutee.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5915003F64084812BCF9F67 /* Pods_Nutee.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		D5DAC67523F42BB100226F20 /* Pods_Nutee.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E5915003F64084812BCF9F67 /* Pods_Nutee.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D5EBD78423CFE69F00C2B7F5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D5EBD78323CFE69F00C2B7F5 /* Main.storyboard */; };
 		D5EBD78623D0269400C2B7F5 /* NewsFeedVO.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5EBD78523D0269400C2B7F5 /* NewsFeedVO.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		D5DAC67623F42BB200226F20 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				D5DAC67523F42BB100226F20 /* Pods_Nutee.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D5DAC67723F42C8500226F20 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		116AAE76128036EFDBA4D11C /* Pods-Nutee.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nutee.debug.xcconfig"; path = "Target Support Files/Pods-Nutee/Pods-Nutee.debug.xcconfig"; sourceTree = "<group>"; };
@@ -143,6 +169,8 @@
 		D519843C23E32418001AB351 /* NewsFeed.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = NewsFeed.storyboard; sourceTree = "<group>"; };
 		D519843D23E32418001AB351 /* DetailNewsFeed.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DetailNewsFeed.storyboard; sourceTree = "<group>"; };
 		D519844423E325EE001AB351 /* DetailNewsFeedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailNewsFeedVC.swift; sourceTree = "<group>"; };
+		D53FD29323F43C6F00291597 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D53FD29523F43C8B00291597 /* Kingfisher.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Kingfisher.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D580664A23F0044D00180236 /* PostImgCVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostImgCVCell.swift; sourceTree = "<group>"; };
 		D580664C23F0045500180236 /* FullScreenImgCVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullScreenImgCVCell.swift; sourceTree = "<group>"; };
 		D597189D23CEA79100117906 /* NoticeBoardVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoticeBoardVC.swift; sourceTree = "<group>"; };
@@ -157,9 +185,11 @@
 		D59718B123CEA9DA00117906 /* NoticeBoard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = NoticeBoard.storyboard; sourceTree = "<group>"; };
 		D59718B223CEA9DA00117906 /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		D59718B323CEA9DA00117906 /* Chatting.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Chatting.storyboard; sourceTree = "<group>"; };
+		D5D394E923F3E63F008BDF26 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5DAA88C23E7EF2E0052E17B /* ReplyCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReplyCell.swift; sourceTree = "<group>"; };
 		D5DAA88D23E7EF2E0052E17B /* NewsFeedTableHeaderSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsFeedTableHeaderSection.swift; sourceTree = "<group>"; };
 		D5DAA89223E7F0C60052E17B /* NewsFeedTableHeaderSection.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsFeedTableHeaderSection.xib; sourceTree = "<group>"; };
+		D5DAC67123F402D700226F20 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5EBD78323CFE69F00C2B7F5 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		D5EBD78523D0269400C2B7F5 /* NewsFeedVO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeedVO.swift; sourceTree = "<group>"; };
 		E5915003F64084812BCF9F67 /* Pods_Nutee.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Nutee.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -171,7 +201,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7ED848354A2878E251E05E71 /* Pods_Nutee.framework in Frameworks */,
+				D53FD29623F43C8B00291597 /* Kingfisher.framework in Frameworks */,
+				D53FD29423F43C6F00291597 /* Alamofire.framework in Frameworks */,
+				D5DAC67423F42BB100226F20 /* Pods_Nutee.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -310,7 +342,6 @@
 				5E21445623C2F8A00053CFB9 /* Utils */,
 				5E21445723C2F8A60053CFB9 /* Model */,
 				D5EBD78723D026A700C2B7F5 /* ValueObject */,
-				D5EBD78823D0270A00C2B7F5 /* Cell */,
 				5E21445323C2F8870053CFB9 /* ViewControllers */,
 			);
 			path = Source;
@@ -458,6 +489,10 @@
 		97168F4A04CA7D3123636409 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D53FD29523F43C8B00291597 /* Kingfisher.framework */,
+				D53FD29323F43C6F00291597 /* Alamofire.framework */,
+				D5DAC67123F402D700226F20 /* Alamofire.framework */,
+				D5D394E923F3E63F008BDF26 /* Alamofire.framework */,
 				E5915003F64084812BCF9F67 /* Pods_Nutee.framework */,
 			);
 			name = Frameworks;
@@ -477,9 +512,12 @@
 			isa = PBXGroup;
 			children = (
 				D59718A323CEA98300117906 /* NewsFeedVC.swift */,
+				D59718A123CEA96700117906 /* NewsFeedCell.swift */,
 				D580664A23F0044D00180236 /* PostImgCVCell.swift */,
 				D580664C23F0045500180236 /* FullScreenImgCVCell.swift */,
 				D519844423E325EE001AB351 /* DetailNewsFeedVC.swift */,
+				D5DAA88D23E7EF2E0052E17B /* NewsFeedTableHeaderSection.swift */,
+				D5DAA88C23E7EF2E0052E17B /* ReplyCell.swift */,
 			);
 			path = NewsFeed;
 			sourceTree = "<group>";
@@ -491,16 +529,6 @@
 				D597189F23CEA87B00117906 /* NoticeBoardVO.swift */,
 			);
 			path = ValueObject;
-			sourceTree = "<group>";
-		};
-		D5EBD78823D0270A00C2B7F5 /* Cell */ = {
-			isa = PBXGroup;
-			children = (
-				D59718A123CEA96700117906 /* NewsFeedCell.swift */,
-				D5DAA88D23E7EF2E0052E17B /* NewsFeedTableHeaderSection.swift */,
-				D5DAA88C23E7EF2E0052E17B /* ReplyCell.swift */,
-			);
-			path = Cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -515,6 +543,8 @@
 				5E21443623C2F8500053CFB9 /* Frameworks */,
 				5E21443723C2F8500053CFB9 /* Resources */,
 				1F1FBDDAB6289CD5F2B97ACA /* [CP] Embed Pods Frameworks */,
+				D5DAC67623F42BB200226F20 /* Embed Frameworks */,
+				D5DAC67723F42C8500226F20 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -618,6 +648,8 @@
 			);
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Nutee/Pods-Nutee-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			inputPaths = (
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
@@ -828,6 +860,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7BRQNART99;
 				INFOPLIST_FILE = "$(SRCROOT)/Nutee/Supporting Files/Info.plist";
+				INSTALL_PATH = "@executable_path/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -847,6 +880,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7BRQNART99;
 				INFOPLIST_FILE = "$(SRCROOT)/Nutee/Supporting Files/Info.plist";
+				INSTALL_PATH = "@executable_path/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
