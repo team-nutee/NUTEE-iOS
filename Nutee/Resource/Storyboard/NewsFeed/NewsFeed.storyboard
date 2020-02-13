@@ -10,7 +10,7 @@
         <!--NUTEE-->
         <scene sceneID="YUI-Jz-2Vd">
             <objects>
-                <viewController storyboardIdentifier="NewsFeed" id="9qq-fA-eNy" customClass="NewsFeedVC" customModule="Nutee" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NewsFeed" id="9qq-fA-eNy" customClass="NewsFeedVC" customModule="NUTEE" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ohd-17-EL6">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -20,7 +20,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="newsTV" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="NewsFeedCell" rowHeight="476" id="OuS-jG-NfV" customClass="NewsFeedCell" customModule="Nutee" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="newsTV" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="NewsFeedCell" rowHeight="476" id="OuS-jG-NfV" customClass="NewsFeedCell" customModule="NUTEE" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="476"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="OuS-jG-NfV" id="2uN-UJ-Eo0">
@@ -85,6 +85,7 @@
                                                         <constraint firstAttribute="bottom" secondItem="SUc-qS-i1j" secondAttribute="bottom" id="7pd-TX-eda"/>
                                                         <constraint firstItem="pis-UE-RTU" firstAttribute="top" secondItem="ShY-Uz-KfR" secondAttribute="top" id="8Fp-wV-Lvd"/>
                                                         <constraint firstItem="pis-UE-RTU" firstAttribute="leading" secondItem="SUc-qS-i1j" secondAttribute="trailing" constant="5" id="BG5-4i-dDc"/>
+                                                        <constraint firstAttribute="height" constant="170" id="Lrx-pW-vSY"/>
                                                         <constraint firstAttribute="trailing" secondItem="pis-UE-RTU" secondAttribute="trailing" id="RPy-hR-OKa"/>
                                                         <constraint firstItem="aWt-16-Ye6" firstAttribute="centerY" secondItem="pis-UE-RTU" secondAttribute="centerY" id="WQr-80-vWG"/>
                                                         <constraint firstItem="SUc-qS-i1j" firstAttribute="top" secondItem="ShY-Uz-KfR" secondAttribute="top" id="py7-D2-Nwy"/>
@@ -256,25 +257,27 @@
                                                 <constraint firstItem="ShY-Uz-KfR" firstAttribute="leading" secondItem="2uN-UJ-Eo0" secondAttribute="leading" constant="15" id="4B4-He-9jF"/>
                                                 <constraint firstAttribute="trailing" secondItem="ShY-Uz-KfR" secondAttribute="trailing" constant="15" id="6zR-wb-TWG"/>
                                                 <constraint firstItem="GAa-jE-uMO" firstAttribute="centerY" secondItem="JHw-vv-fjF" secondAttribute="centerY" id="9rr-wT-Rcz"/>
-                                                <constraint firstItem="KiN-EK-KhK" firstAttribute="top" secondItem="c1h-y9-WEE" secondAttribute="bottom" constant="5" id="BMU-eg-puX"/>
                                                 <constraint firstItem="GAa-jE-uMO" firstAttribute="leading" secondItem="JHw-vv-fjF" secondAttribute="trailing" constant="15" id="ChM-pB-m62"/>
                                                 <constraint firstAttribute="bottom" secondItem="R43-qM-ZRA" secondAttribute="bottom" constant="5" id="Dxa-yB-B0R"/>
+                                                <constraint firstItem="qh4-3I-kHl" firstAttribute="top" secondItem="ShY-Uz-KfR" secondAttribute="bottom" priority="750" constant="5" id="Eik-wt-IeS"/>
                                                 <constraint firstItem="9kA-bn-InV" firstAttribute="leading" secondItem="ZSU-gr-Usj" secondAttribute="trailing" id="Esy-MP-uwb"/>
                                                 <constraint firstAttribute="trailing" secondItem="PkB-5h-TOS" secondAttribute="trailing" constant="15" id="G4U-YW-HMP"/>
                                                 <constraint firstItem="c1h-y9-WEE" firstAttribute="centerX" secondItem="2uN-UJ-Eo0" secondAttribute="centerX" id="GZK-Y3-EqH"/>
-                                                <constraint firstItem="ShY-Uz-KfR" firstAttribute="top" secondItem="KiN-EK-KhK" secondAttribute="top" id="GlD-iH-fqv"/>
                                                 <constraint firstItem="KiN-EK-KhK" firstAttribute="leading" secondItem="2uN-UJ-Eo0" secondAttribute="leadingMargin" id="IAA-Oo-OuR"/>
                                                 <constraint firstItem="c1h-y9-WEE" firstAttribute="top" secondItem="JHw-vv-fjF" secondAttribute="bottom" constant="15" id="Qqc-Sk-DXN"/>
+                                                <constraint firstItem="ShY-Uz-KfR" firstAttribute="top" secondItem="c1h-y9-WEE" secondAttribute="bottom" constant="5" id="QtJ-m3-U6p"/>
                                                 <constraint firstItem="qh4-3I-kHl" firstAttribute="top" secondItem="KiN-EK-KhK" secondAttribute="bottom" constant="5" id="UPk-fB-H4m"/>
                                                 <constraint firstItem="qh4-3I-kHl" firstAttribute="leading" secondItem="2uN-UJ-Eo0" secondAttribute="leading" id="WYQ-iN-lEq"/>
                                                 <constraint firstItem="R43-qM-ZRA" firstAttribute="leading" secondItem="qh4-3I-kHl" secondAttribute="trailing" id="Y7u-81-07V"/>
                                                 <constraint firstItem="ZSU-gr-Usj" firstAttribute="leading" secondItem="R43-qM-ZRA" secondAttribute="trailing" id="Z9K-au-P4K"/>
+                                                <constraint firstItem="KiN-EK-KhK" firstAttribute="top" secondItem="c1h-y9-WEE" secondAttribute="bottom" constant="5" id="ZhN-gh-bKB"/>
                                                 <constraint firstItem="PkB-5h-TOS" firstAttribute="centerY" secondItem="JHw-vv-fjF" secondAttribute="centerY" id="Zt5-lM-0Mm"/>
                                                 <constraint firstItem="JHw-vv-fjF" firstAttribute="top" secondItem="2uN-UJ-Eo0" secondAttribute="topMargin" id="bqM-wa-M7H"/>
                                                 <constraint firstAttribute="bottom" secondItem="9kA-bn-InV" secondAttribute="bottom" constant="5" id="dxF-bV-9gi"/>
                                                 <constraint firstItem="c1h-y9-WEE" firstAttribute="leading" secondItem="2uN-UJ-Eo0" secondAttribute="leading" constant="15" id="fXd-La-rGu"/>
                                                 <constraint firstItem="qh4-3I-kHl" firstAttribute="width" secondItem="2uN-UJ-Eo0" secondAttribute="width" multiplier="0.25" id="mm5-hh-lbM"/>
                                                 <constraint firstAttribute="bottom" secondItem="qh4-3I-kHl" secondAttribute="bottom" constant="5" id="nhB-dY-e9k"/>
+                                                <constraint firstItem="qh4-3I-kHl" firstAttribute="top" secondItem="c1h-y9-WEE" secondAttribute="bottom" priority="250" id="q76-au-o60"/>
                                                 <constraint firstItem="9kA-bn-InV" firstAttribute="width" secondItem="2uN-UJ-Eo0" secondAttribute="width" multiplier="0.25" id="qYd-wG-qMi"/>
                                                 <constraint firstItem="R43-qM-ZRA" firstAttribute="width" secondItem="2uN-UJ-Eo0" secondAttribute="width" multiplier="0.25" id="qk0-He-yk3"/>
                                                 <constraint firstAttribute="bottom" secondItem="ZSU-gr-Usj" secondAttribute="bottom" constant="5" id="rfi-LO-0ku"/>
@@ -285,6 +288,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="ContentsToRepost" destination="q76-au-o60" id="iAs-5V-pfk"/>
                                             <outlet property="btnComment" destination="ZSU-gr-Usj" id="JLt-MP-IwJ"/>
                                             <outlet property="btnLike" destination="R43-qM-ZRA" id="WVU-jN-I2i"/>
                                             <outlet property="btnRepost" destination="qh4-3I-kHl" id="n2Z-OZ-zg5"/>
@@ -297,17 +301,19 @@
                                             <outlet property="txtvwContents" destination="c1h-y9-WEE" id="2XI-Ir-7Hc"/>
                                             <outlet property="vwFour" destination="2lf-L3-xnI" id="abY-7a-4U6"/>
                                             <outlet property="vwSquare" destination="KiN-EK-KhK" id="4wH-De-2RX"/>
+                                            <outlet property="vwSquareToRepost" destination="UPk-fB-H4m" id="Agf-pT-rSk"/>
                                             <outlet property="vwThree" destination="wx1-nk-Ney" id="VPf-XS-reA"/>
                                             <outlet property="vwTwo" destination="ShY-Uz-KfR" id="sKV-R2-33z"/>
+                                            <outlet property="vwTwoToRepost" destination="Eik-wt-IeS" id="Wc7-lK-59D"/>
                                             <outletCollection property="imgvwThree" destination="pv6-ab-jlk" collectionClass="NSMutableArray" id="zgW-Vf-o8a"/>
-                                            <outletCollection property="imgvwThree" destination="q4W-NZ-FY7" collectionClass="NSMutableArray" id="TN1-k1-x0c"/>
-                                            <outletCollection property="imgvwThree" destination="wql-c8-ULe" collectionClass="NSMutableArray" id="ZDx-7a-eDo"/>
                                             <outletCollection property="imgvwFour" destination="EBv-m1-Ocb" collectionClass="NSMutableArray" id="fZo-IB-A1A"/>
                                             <outletCollection property="imgvwFour" destination="c9C-wP-vxq" collectionClass="NSMutableArray" id="8HZ-bg-jum"/>
                                             <outletCollection property="imgvwFour" destination="YW6-qM-maX" collectionClass="NSMutableArray" id="PMv-wG-fRg"/>
                                             <outletCollection property="imgvwFour" destination="jbx-7w-aZ8" collectionClass="NSMutableArray" id="a4j-mZ-Ci8"/>
                                             <outletCollection property="imgvwTwo" destination="SUc-qS-i1j" collectionClass="NSMutableArray" id="xHW-kK-JE9"/>
                                             <outletCollection property="imgvwTwo" destination="pis-UE-RTU" collectionClass="NSMutableArray" id="08I-KN-qO6"/>
+                                            <outletCollection property="imgvwThree" destination="wql-c8-ULe" collectionClass="NSMutableArray" id="40l-9x-GeX"/>
+                                            <outletCollection property="imgvwThree" destination="q4W-NZ-FY7" collectionClass="NSMutableArray" id="c7R-cS-KN4"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
