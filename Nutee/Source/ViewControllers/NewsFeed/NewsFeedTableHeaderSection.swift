@@ -1,74 +1,80 @@
 //
-//  NewsFeedVO.swift
+//  NewsFeedTableHeaderSection.swift
 //  Nutee
 //
-//  Created by Hee Jae Kim on 2020/01/14.
+//  Created by Hee Jae Kim on 2020/02/03.
 //  Copyright © 2020 S.OWL. All rights reserved.
 //
 
 import UIKit
 
-class NewsFeedCell: UITableViewCell {
+class NewsFeedTableHeaderSection: UITableViewHeaderFooterView {
     
-    //MARK: - UI components
+    weak var detailNewsFeedVC: UIViewController?
     
-    @IBOutlet var imgUserImg: UIImageView!
+    // User Information
+    @IBOutlet var imgvwUserImg: UIImageView!
     @IBOutlet var lblUserId: UILabel!
     @IBOutlet var lblPostTime: UILabel!
-    @IBOutlet var cvPostImg: UICollectionView!
-    @IBOutlet var lblContents: UILabel!
+    
+    // Posting
+    @IBOutlet var txtvwConetents: UITextView!
+    
+    // ver. TwoFrame
+    @IBOutlet var vwTwo: UIView!
+    @IBOutlet var imgvwTwo: [UIImageView]!
+    @IBOutlet var lblTwoMoreImg: UILabel!
+
+    //앨범 프레임 three, four 버전을 통합관리 할 view 객체 생성
+    @IBOutlet var vwSquare: UIView!
+    // ver. ThreeFrame
+    @IBOutlet var vwThree: UIView!
+    @IBOutlet var imgvwThree: [UIImageView]!
+    @IBOutlet var lblThreeMoreImg: UILabel!
+    // ver. FourFrame
+    @IBOutlet var vwFour: UIView!
+    @IBOutlet var imgvwFour: [UIImageView]!
+    @IBOutlet var lblFourMoreImg: UILabel!
+    
+    // function buttons
     @IBOutlet var btnRepost: UIButton!
     @IBOutlet var btnLike: UIButton!
     @IBOutlet var btnComment: UIButton!
+    @IBOutlet var btnMore: UIButton!
     
-
     //MARK: - Variables and Properties
     
     let dataPeng = ["sample_peng01.jepg", "sample_peng02.jepg", "sample_peng03.png", "sample_peng04.png", "sample_peng05.png"]
     
     var numLike = 0
-    var numRepost = 0
     var numComment = 0
     
     var isClickedLike: Bool = false
     var isClickedRepost: Bool = false
     var isClickedComment: Bool = false
     
-    // .normal 상태에서의 버튼 AttributedStringTitle의 색깔 지정
-    let normalAttributes = [NSAttributedString.Key.foregroundColor: UIColor.gray]
-    // .selected 상태에서의 Repost버튼 AttributedStringTitle의 색깔 지정
-    let selectedRepostAttributes = [NSAttributedString.Key.foregroundColor: UIColor.nuteeGreen]
-    // .selected 상태에서의 Like버튼 AttributedStringTitle의 색깔 지정
-    let selectedLikeAttributes = [NSAttributedString.Key.foregroundColor: UIColor.systemPink]
-    
     //MARK: - Life Cycle
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        cvPostImg.delegate = self
-        cvPostImg.dataSource = self
-        cvPostImg.reloadData()
-        
         initPosting()
     }
     
-    //MARK: - Clicked Action
-    
+    //MARK: - Helper
+
     @IBAction func btnRepost(_ sender: UIButton) {
         // .selected State를 활성화 하기 위한 코드
         btnRepost.isSelected = !btnRepost.isSelected
         if isClickedRepost {
-            numRepost -= 1
-            setButtonAttributed(btn: sender, num: numRepost, color: .gray, state: .normal)
+            btnRepost.tintColor = .nuteeGreen
             isClickedRepost = false
         } else {
-            numRepost += 1
-            setButtonAttributed(btn: sender, num: numRepost, color: .nuteeGreen, state: .selected)
+            btnRepost.tintColor = .gray
             isClickedRepost = true
         }
     }
-    
+            
     @IBAction func btnLike(_ sender: UIButton) {
         // .selected State를 활성화 하기 위한 코드
         btnLike.isSelected = !btnLike.isSelected
@@ -85,44 +91,104 @@ class NewsFeedCell: UITableViewCell {
 //            sender.setImage(UIImage(named: "heart.fill"), for: .selected)
 
             isClickedLike = true
-//        }
-    }
-    
-//    @IBAction func btnComment(_ sender: UIButton) {
-        
-        /*
-        btnComment.isSelected = !btnComment.isSelected
-        if isClickedComment {
-            numComment -= 1
-            setButtonPlain(btn: sender, num: numComment, color: .gray, state: .normal)
-            isClickedComment = false
-        } else {
-            numComment += 1
-            btnComment.setTitle(" " + String(numComment), for: .selected)
-            btnComment.tintColor = .blue
-            btnComment.setTitleColor(.blue, for: .selected)
-            isClickedComment = true
         }
-        */
-//    }
-}
-        
-    //MARK: - Helper
-    
-    //포스팅 내용 초기설정
-    func initPosting() {
-        imgUserImg.image = #imageLiteral(resourceName: "defaultProfile")
-        imgUserImg.setRounded(radius: nil)
-        
-        lblContents.text = "Hi~"
-//        imgvwPostImg.image = #imageLiteral(resourceName: "nutee_zigi")
-        
-        //버튼모양 초기 설정
-        setButtonAttributed(btn: btnLike, num: numLike, color: .gray, state: .normal)
-        setButtonAttributed(btn: btnRepost, num: numRepost, color: .gray, state: .normal)
-        setButtonPlain(btn: btnComment, num: numComment, color: .gray, state: .normal)
     }
-
+    
+    @IBAction func btnMore(_ sender: Any) {
+        let moreAlert = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertController.Style.actionSheet)
+        let editAction = UIAlertAction(title: "수정", style: .default){
+            (action: UIAlertAction) in
+            // Code to edit
+        }
+        let deleteAction = UIAlertAction(title: "삭제", style: .destructive) {
+            (action: UIAlertAction) in
+            // Code to delete
+        }
+        let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+        
+        moreAlert.addAction(editAction)
+        moreAlert.addAction(deleteAction)
+        moreAlert.addAction(cancelAction)
+//        self.present(moreAlert, animated: true, completion: nil)
+    }
+    
+    func initPosting() {
+        imgvwUserImg.image = #imageLiteral(resourceName: "defaultProfile")
+        imgvwUserImg.setRounded(radius: nil)
+        
+        txtvwConetents.text = "ㅇㄴ머라ㅕ랴ㅐ듀ㅐ듀ㅠㅜLorem ipsum dolor sit er elit lamet, consectetaur cillium 이 글이 보이면 전부가 출력된 것입니다."
+        txtvwConetents.postingInit()
+        
+        vwTwo.isHidden = true
+//        vwSquare.isHidden = true
+        
+        var num = 0
+        switch num {
+        case 0:
+            // ver. TwoFrame
+            vwTwo.isHidden = false
+            for imgvw in imgvwTwo {
+                imgvw.image = UIImage(named: dataPeng[num])
+                if num == 1 {
+                    let leftImg = dataPeng.count - 2
+                    if leftImg > 0 {
+                        imgvw.alpha = 0.5
+                        lblTwoMoreImg.text = String(leftImg) + " +"
+                        lblTwoMoreImg.sizeToFit()
+                    } else {
+                        lblTwoMoreImg.isHidden = true
+                    }
+                }
+                num += 1
+            }
+        /*case 1:
+            // ver. ThreeFrame
+            vwSquare.isHidden = false
+            vwFour.isHidden = true
+            for imgvw in imgvwThree {
+                imgvw.image = UIImage(named: dataPeng02[num])
+                if num == 2 {
+                    imgvw.alpha = 0.5
+                    let leftImg = dataPeng02.count - 3
+                    lblThreeMoreImg.text = String(leftImg) + " +"
+                }
+                num += 1
+            }
+        case 2:
+            // ver. FourFrame
+            vwSquare.isHidden = false
+            vwThree.isHidden = true
+            for imgvw in imgvwFour {
+                imgvw.image = UIImage(named: dataPeng04[num])
+                if num == 3 {
+                    imgvw.alpha = 0.5
+                    let leftImg = dataPeng04.count - 4
+                    lblFourMoreImg.text = String(leftImg) + " +"
+                }
+                num += 1
+            }*/
+        default:
+            // ver. TwoFrame
+            vwTwo.isHidden = true
+            for imgvw in imgvwTwo {
+                imgvw.image = UIImage(named: dataPeng[num])
+                if num == 1 {
+                    let leftImg = dataPeng.count - 2
+                    if leftImg > 0 {
+                        imgvw.alpha = 0.5
+                        lblTwoMoreImg.text = String(leftImg) + " +"
+                    }
+                }
+                num += 1
+            }
+        }
+        
+        btnRepost.tintColor = .gray
+        setButtonAttributed(btn: btnLike, num: numLike, color: .gray, state: .normal)
+        setButtonPlain(btn: btnComment, num: numComment, color: .gray, state: .normal)
+        btnMore.tintColor = .gray
+    }
+    
     func setButtonPlain(btn: UIButton, num: Int, color: UIColor, state: UIControl.State) {
         btn.setTitle(" " + String(num), for: state)
         btnComment.tintColor = color
@@ -139,9 +205,9 @@ class NewsFeedCell: UITableViewCell {
 // MARK: - Collection View
 //Posting된 이미지를 표시해 주는 CollectionView에 대한 기능구현
 
-extension NewsFeedCell: UICollectionViewDelegate { }
+extension NewsFeedTableHeaderSection: UICollectionViewDelegate { }
 
-extension NewsFeedCell: UICollectionViewDataSource {
+extension NewsFeedTableHeaderSection: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return dataPeng.count
@@ -149,7 +215,9 @@ extension NewsFeedCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PostImgCollectionCell", for: indexPath) as! PostImgCVCell
+        
         cell.imgvwPost.image = UIImage(named: dataPeng[indexPath.row])
+        
         
         return cell
     }
@@ -186,7 +254,7 @@ extension NewsFeedCell: UICollectionViewDataSource {
 }
 
 //CollectionView의 Cell에 대한 크기를 조정시켜 주는 Delegate
-extension NewsFeedCell: UICollectionViewDelegateFlowLayout {
+extension NewsFeedTableHeaderSection: UICollectionViewDelegateFlowLayout {
 
     // SIZE FOR COLLECTION VIEW CELL
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize{
