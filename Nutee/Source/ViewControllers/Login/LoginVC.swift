@@ -26,6 +26,10 @@ class LoginVC: UIViewController {
     @IBOutlet weak var logoLabel: UILabel!
     @IBOutlet weak var autoSignUpBtn: UIButton!
     @IBOutlet weak var autoSignUpBtn2: UIButton!
+    
+    @IBOutlet weak var idErrorLabel: UILabel!
+    @IBOutlet weak var pwErrorLabel: UILabel!
+    
     // MARK: - Variables and Properties
     
     var signin : SignIn?
@@ -69,6 +73,8 @@ class LoginVC: UIViewController {
         autoSignUpBtn.borderColor = .nuteeGreen
         autoSignUpBtn2.tintColor = .nuteeGreen
         autoSignUpBtn2.titleLabel?.textColor = .nuteeGreen
+        pwErrorLabel.alpha = 0
+        idErrorLabel.alpha = 0
         
         signInBtn.tintColor = .white
         signInBtn.setRounded(radius: 10)
@@ -111,22 +117,15 @@ class LoginVC: UIViewController {
     }
     
     @objc func signIn() {
-        //        let sb = UIStoryboard(name: "Main", bundle: nil)
-        //        let vc = sb.instantiateViewController(withIdentifier: "TBC") as! TBC
-        //        vc.modalPresentationStyle = .fullScreen
-        //
-        //        UserDefaults.standard.setValue(idTextField.text, forKey: "cookie")
-        //
-        //        self.present(vc, animated: true)
         if autoSignUp == true {
             UserDefaults.standard.setValue(idTextField.text, forKey: "userId")
             UserDefaults.standard.setValue(pwTextField.text, forKey: "pw")
         }
         print("id : ", (UserDefaults.standard.value(forKey: "userId")) ?? "")
         print("pw : ", (UserDefaults.standard.value(forKey: "pw")) ?? "")
-
+        
         signInService(idTextField.text!, pwTextField.text!)
-                
+        
         signInBtn.backgroundColor = .veryLightPink
         signInBtn.isEnabled = false
         idTextField.text = ""
@@ -208,6 +207,36 @@ extension LoginVC {
                         self.logoLabel.alpha = 1
         })
     }
+    
+    private func errorAnimate(){
+        UIView.animate(withDuration: 0.2,
+                       delay: 0,
+                       usingSpringWithDamping: 0.1,
+                       initialSpringVelocity: 0.1,
+                       options: [.curveEaseIn],
+                       animations: {
+                        // self를 항상 붙여줘야함 (클로저 안에서)
+//                        self.idTextField.transform = CGAffineTransform.init(translationX: -2, y: 0)
+//                        self.pwTextField.transform = CGAffineTransform.init(translationX: -2, y: 0)
+                        self.idErrorLabel.transform = CGAffineTransform.init(translationX: -5, y: 0)
+                        self.pwErrorLabel.transform = CGAffineTransform.init(translationX: -5, y: 0)
+                        self.idErrorLabel.alpha = 1
+                        self.pwErrorLabel.alpha = 1
+        })
+        UIView.animate(withDuration: 0.2,
+                       delay: 0.2,
+                       usingSpringWithDamping: 0.1,
+                       initialSpringVelocity: 0.1,
+                       options: [.curveEaseIn],
+                       animations: {
+                        // self를 항상 붙여줘야함 (클로저 안에서)
+//                        self.idTextField.transform = CGAffineTransform.init(translationX: 2, y: 0)
+//                        self.pwTextField.transform = CGAffineTransform.init(translationX: 2, y: 0)
+                        self.idErrorLabel.transform = CGAffineTransform.init(translationX: 5, y: 0)
+                        self.pwErrorLabel.transform = CGAffineTransform.init(translationX: 5, y: 0)
+        })
+        
+    }
 }
 
 // MARK: - server service
@@ -222,26 +251,52 @@ extension LoginVC {
             // NetworkResult 의 요소들
             case .success(let res):
                 let response = res as! SignIn
-                self.signin = response
                 
-                print("userdefault, cookie", UserDefaults.standard.value(forKey: "Cookie"))
                 let sb = UIStoryboard(name: "Main", bundle: nil)
                 let vc = sb.instantiateViewController(withIdentifier: "TBC") as! TBC
                 vc.modalPresentationStyle = .fullScreen
                 
                 self.present(vc, animated: true)
-
+                
             //                self.successAdd = true
             case .requestErr(_):
+                self.idTextField.layer.addBorder([.bottom], color: .red, width: 1)
+                self.pwTextField.layer.addBorder([.bottom], color: .red, width: 1)
+                self.idErrorLabel.text = "아이디 혹은 비밀번호가 다릅니다"
+                self.pwErrorLabel.text = "아이디 혹은 비밀번호가 다릅니다"
+                self.idErrorLabel.sizeToFit()
+                self.pwErrorLabel.sizeToFit()
+                self.errorAnimate()
                 print("request error")
             //                self.successAdd = false
             case .pathErr:
+                self.idTextField.layer.addBorder([.bottom], color: .red, width: 1)
+                self.pwTextField.layer.addBorder([.bottom], color: .red, width: 1)
+                self.idErrorLabel.text = "아이디 혹은 비밀번호가 다릅니다"
+                self.pwErrorLabel.text = "아이디 혹은 비밀번호가 다릅니다"
+                self.idErrorLabel.sizeToFit()
+                self.pwErrorLabel.sizeToFit()
+                self.errorAnimate()
                 print(".pathErr")
             //                self.successAdd = false
             case .serverErr:
+                self.idTextField.layer.addBorder([.bottom], color: .red, width: 1)
+                self.pwTextField.layer.addBorder([.bottom], color: .red, width: 1)
+                self.idErrorLabel.text = "아이디 혹은 비밀번호가 다릅니다"
+                self.pwErrorLabel.text = "아이디 혹은 비밀번호가 다릅니다"
+                self.idErrorLabel.sizeToFit()
+                self.pwErrorLabel.sizeToFit()
+                self.errorAnimate()
                 print(".serverErr")
             //                self.successAdd = false
             case .networkFail :
+                self.idTextField.layer.addBorder([.bottom], color: .red, width: 1)
+                self.pwTextField.layer.addBorder([.bottom], color: .red, width: 1)
+                self.idErrorLabel.text = "아이디 혹은 비밀번호가 다릅니다"
+                self.pwErrorLabel.text = "아이디 혹은 비밀번호가 다릅니다"
+                self.idErrorLabel.sizeToFit()
+                self.pwErrorLabel.sizeToFit()
+                self.errorAnimate()
                 print("failure")
                 //                self.successAdd = false
             }

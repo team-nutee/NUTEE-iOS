@@ -122,8 +122,8 @@ struct UserService {
                             } catch {
                                 completion(.pathErr)
                             }
-                        case 409:
-                            print("실패 409")
+                        case 401:
+                            print("실패 401")
                             completion(.pathErr)
                         case 500:
                             print("실패 500")
