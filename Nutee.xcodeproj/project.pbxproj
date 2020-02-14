@@ -51,8 +51,6 @@
 		5E95CD6623EF30280090C39B /* FollowingTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E95CD6523EF30280090C39B /* FollowingTVC.swift */; };
 		5E95CD6823EF35280090C39B /* SettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E95CD6723EF35280090C39B /* SettingVC.swift */; };
 		5E95CD6A23EF36230090C39B /* ToPostVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E95CD6923EF36230090C39B /* ToPostVC.swift */; };
-		5EA5C67823F01E2E00BFB32B /* ProfileTVHV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA5C67723F01E2E00BFB32B /* ProfileTVHV.swift */; };
-		5EA5C67A23F01E5A00BFB32B /* Profile.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5EA5C67923F01E5A00BFB32B /* Profile.xib */; };
 		5EA5C67C23F023DC00BFB32B /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA5C67B23F023DC00BFB32B /* UITableView+Extension.swift */; };
 		5EA5C68023F02C9200BFB32B /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA5C67F23F02C9200BFB32B /* String+Extension.swift */; };
 		5EA5C68423F146E200BFB32B /* EmailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA5C68323F146E200BFB32B /* EmailVC.swift */; };
@@ -166,8 +164,6 @@
 		5E95CD6523EF30280090C39B /* FollowingTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingTVC.swift; sourceTree = "<group>"; };
 		5E95CD6723EF35280090C39B /* SettingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingVC.swift; sourceTree = "<group>"; };
 		5E95CD6923EF36230090C39B /* ToPostVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToPostVC.swift; sourceTree = "<group>"; };
-		5EA5C67723F01E2E00BFB32B /* ProfileTVHV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTVHV.swift; sourceTree = "<group>"; };
-		5EA5C67923F01E5A00BFB32B /* Profile.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Profile.xib; sourceTree = "<group>"; };
 		5EA5C67B23F023DC00BFB32B /* UITableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
 		5EA5C67F23F02C9200BFB32B /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		5EA5C68323F146E200BFB32B /* EmailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVC.swift; sourceTree = "<group>"; };
@@ -462,8 +458,6 @@
 				5E95CD6323EF30180090C39B /* FollowerTVC.swift */,
 				5E95CD6523EF30280090C39B /* FollowingTVC.swift */,
 				5E95CD6723EF35280090C39B /* SettingVC.swift */,
-				5EA5C67723F01E2E00BFB32B /* ProfileTVHV.swift */,
-				5EA5C67923F01E5A00BFB32B /* Profile.xib */,
 				5EC6B36323F5C67B00F490DA /* ProflieTableViewCell.swift */,
 				5EC6B36423F5C67B00F490DA /* ProflieTableViewCell.xib */,
 			);
@@ -642,7 +636,6 @@
 				5E37CAA623E97DC800C0E2A8 /* SignUp.storyboard in Resources */,
 				5E79C0C823EC6AFF00BD2FB3 /* ImageVC.xib in Resources */,
 				D59718B823CEA9DA00117906 /* Chatting.storyboard in Resources */,
-				5EA5C67A23F01E5A00BFB32B /* Profile.xib in Resources */,
 				D59718B623CEA9DA00117906 /* NoticeBoard.storyboard in Resources */,
 				5E37CAAA23E97DDA00C0E2A8 /* Find.storyboard in Resources */,
 			);
@@ -699,7 +692,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5EA5C67823F01E2E00BFB32B /* ProfileTVHV.swift in Sources */,
 				5E21445C23C2F8F60053CFB9 /* Model.swift in Sources */,
 				5E95CD6823EF35280090C39B /* SettingVC.swift in Sources */,
 				5EA5C68823F1472200BFB32B /* NameVC.swift in Sources */,

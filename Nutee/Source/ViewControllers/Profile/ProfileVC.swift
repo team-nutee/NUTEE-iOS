@@ -131,12 +131,13 @@ extension ProfileVC : UITableViewDelegate { }
 extension ProfileVC : UITableViewDataSource {
         
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if userInfo?.posts.count == 0{
-            tableView.setEmptyView(title: "게시글이 없습니다", message: "새로운 게시물을 올려보세요‼️")
-        } else {
-            tableView.restore()
-        }
-        return (userInfo?.posts.count ?? 1) + 1
+//        if userInfo?.posts.count == 0{
+//            tableView.setEmptyView(title: "게시글이 없습니다", message: "새로운 게시물을 올려보세요‼️")
+//        } else {
+//            tableView.restore()
+//        }
+//        return (userInfo?.posts.count ?? 1) + 1
+        return 10
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -144,9 +145,11 @@ extension ProfileVC : UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ProflieTableViewCell", for: indexPath) as! ProflieTableViewCell
         
         if indexPath.row == 0 {
-
+            cell.backgroundColor = .lightGray
         } else {
-//            cell.articleTextView.text = userInfo.posts
+            textViewDidChange(cell.articleTextView)
+            cell.articleTextView.text = "123\n\n\n123\n\n123123\n\n\n\n123123"
+            cell.articleTextView.sizeToFit()
         }
         
         return cell
@@ -162,6 +165,10 @@ extension ProfileVC : UITableViewDataSource {
         
     }
     
+//    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return 150
+//    }
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //        let cell = tableView.dequeueReusableCell(withIdentifier: "ArticleTVC", for: indexPath) as! ArticleTVC
         
@@ -277,6 +284,21 @@ extension ProfileVC : UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 170
     }
+}
+
+extension ProfileVC: UITextViewDelegate {
+    
+    // TextView의 동적인 크기 변화를 위한 function
+    func textViewDidChange(_ textView: UITextView) {
+        let size = CGSize(width: view.frame.width, height: .infinity)
+        let estimatedSize = textView.sizeThatFits(size)
+        textView.constraints.forEach { (constraint) in
+            if constraint.firstAttribute == .height {
+                constraint.constant = estimatedSize.height
+            }
+        }
+    }
+    
 }
 
 
