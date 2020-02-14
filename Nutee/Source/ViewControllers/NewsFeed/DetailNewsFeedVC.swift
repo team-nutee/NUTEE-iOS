@@ -16,6 +16,7 @@ class DetailNewsFeedVC: UIViewController {
     
     //MARK: - Variables and Properties
     
+    var indexPath = 0
     //MARK: - Dummy data
     
     //MARK: - Life Cycle
@@ -38,8 +39,7 @@ class DetailNewsFeedVC: UIViewController {
         super.viewDidAppear(false)
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
-        
-        
+
     }
     
 }
@@ -54,13 +54,19 @@ extension DetailNewsFeedVC : UITableViewDataSource {
         // Dequeue with the reuse identifier
         let cell = tableView.dequeueReusableHeaderFooterView(withIdentifier: "NewsFeedTableHeaderSection")
 //        cell.detailNew = self
+//        cell.indexPath = self.indexPath
         
         return cell
     }
     
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 480
-    }
+//    func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
+//        return UITableView.automaticDimension
+//    }
+    
+//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+////        return 700
+//        return UITableView.automaticDimension
+//    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 10

@@ -19,14 +19,17 @@ class NewsFeedTableHeaderSection: UITableViewHeaderFooterView {
     
     // Posting
     @IBOutlet var txtvwConetents: UITextView!
+    @IBOutlet var ContentsToRepost: NSLayoutConstraint!
     
     // ver. TwoFrame
     @IBOutlet var vwTwo: UIView!
     @IBOutlet var imgvwTwo: [UIImageView]!
     @IBOutlet var lblTwoMoreImg: UILabel!
+    @IBOutlet var vwTwoToRepost: NSLayoutConstraint!
 
     //앨범 프레임 three, four 버전을 통합관리 할 view 객체 생성
     @IBOutlet var vwSquare: UIView!
+    @IBOutlet var vwSquareToRepost: NSLayoutConstraint!
     // ver. ThreeFrame
     @IBOutlet var vwThree: UIView!
     @IBOutlet var imgvwThree: [UIImageView]!
@@ -44,7 +47,11 @@ class NewsFeedTableHeaderSection: UITableViewHeaderFooterView {
     
     //MARK: - Variables and Properties
     
-    let dataPeng = ["sample_peng01.jepg", "sample_peng02.jepg", "sample_peng03.png", "sample_peng04.png", "sample_peng05.png"]
+    var indexPath = 1
+    let dataPeng02 = [ "sample_peng01.jepg", "sample_peng02.jepg" ]
+    let dataPeng03 = [ "sample_peng01.jepg", "sample_peng02.jepg", "sample_peng03.png" ]
+    let dataPeng04 = [ "sample_peng01.jepg", "sample_peng02.jepg", "sample_peng03.png", "sample_peng04.png" ]
+    let dataPeng05 = [ "sample_peng01.jepg", "sample_peng02.jepg", "sample_peng03.png", "sample_peng04.png", "sample_peng05.png" ]
     
     var numLike = 0
     var numComment = 0
@@ -116,41 +123,73 @@ class NewsFeedTableHeaderSection: UITableViewHeaderFooterView {
         imgvwUserImg.image = #imageLiteral(resourceName: "defaultProfile")
         imgvwUserImg.setRounded(radius: nil)
         
-        txtvwConetents.text = "ㅇㄴ머라ㅕ랴ㅐ듀ㅐ듀ㅠㅜLorem ipsum dolor sit er elit lamet, consectetaur cillium 이 글이 보이면 전부가 출력된 것입니다."
-        txtvwConetents.postingInit()
+        lblUserId.text = "Crossroads"
+        lblUserId.sizeToFit()
         
+        txtvwConetents.text = "서울 한강에 나타난 괴생물체에 맞선 한 가족의 사투를 그리고 있다. 당시 최고의 첨단 기술력으로 구현한 한국 괴수영화의 시작, 사회비판과 풍자를 녹여낸 정점의 블랙 코미디다. 이전 문회사 '웨타 디지털(Weta Digita)'과 작업했다. 마감 시한을 맞추기 위해 서두른 후, 영화는풍자를 녹여낸 정점의 블랙 코미디다. 이전 문회사 '웨타 디지털(Weta Digita)'과 작업했다. 마감 시한을 맞추기 위해 서두른 후, 영화는풍자를 녹여낸 정점의 블랙 코미디다. 이전 문회사 '웨타 디지털(Weta Digita)'과 작업했다. 마감 시한을 맞추기 위해 서두른 후, 영화는풍자를 녹여낸 정점의 블랙 코미디다. 이전 문회사 '웨타 디지털(Weta Digita)'과 작업했다. 마감 시한을 맞추기 위해 서두른 후, 영화는 2006년 칸 국제 영화제의문에 초청되었다.이 글이 보이면 전부가 출력된 것입니다."
+        txtvwConetents.postingInit()
+        showImgFrame()
+        
+        //버튼모양 초기 설정
+        btnRepost.tintColor = .gray
+        setButtonAttributed(btn: btnLike, num: numLike, color: .gray, state: .normal)
+        setButtonPlain(btn: btnComment, num: numComment, color: .gray, state: .normal)
+        btnMore.tintColor = .gray
+    }
+
+    // 사진 개수에 따른 이미지 표시 유형 선택
+    func showImgFrame() {
+        //constrain layout 충돌 방지를 위한 이미지 뷰 전체 hidden 설정 <-- 실패
         vwTwo.isHidden = true
-//        vwSquare.isHidden = true
+        vwSquare.isHidden = true
         
         var num = 0
-        switch num {
+        switch indexPath {
         case 0:
             // ver. TwoFrame
             vwTwo.isHidden = false
+            
+            vwTwoToRepost.isActive = true
+            vwSquareToRepost.isActive = false
+            ContentsToRepost.isActive = false
+            
             for imgvw in imgvwTwo {
-                imgvw.image = UIImage(named: dataPeng[num])
+                imgvw.image = UIImage(named: dataPeng03[num])
                 if num == 1 {
-                    let leftImg = dataPeng.count - 2
+                    let leftImg = dataPeng03.count - 2
                     if leftImg > 0 {
-                        imgvw.alpha = 0.5
+                        imgvw.alpha = 0.8
+                        lblTwoMoreImg.isHidden = false
                         lblTwoMoreImg.text = String(leftImg) + " +"
                         lblTwoMoreImg.sizeToFit()
+//                        imageTapped(image: imgvw.image!)
                     } else {
                         lblTwoMoreImg.isHidden = true
                     }
                 }
                 num += 1
             }
-        /*case 1:
+        case 1:
             // ver. ThreeFrame
             vwSquare.isHidden = false
             vwFour.isHidden = true
+            
+            vwTwoToRepost.isActive = false
+            vwSquareToRepost.isActive = true
+            ContentsToRepost.isActive = false
+            
             for imgvw in imgvwThree {
-                imgvw.image = UIImage(named: dataPeng02[num])
+                imgvw.image = UIImage(named: dataPeng05[num])
                 if num == 2 {
-                    imgvw.alpha = 0.5
-                    let leftImg = dataPeng02.count - 3
-                    lblThreeMoreImg.text = String(leftImg) + " +"
+                    let leftImg = dataPeng05.count - 3
+                    if leftImg > 0 {
+                        imgvw.alpha = 0.8
+//                        lblThreeMoreImg.isHidden = false
+                        lblThreeMoreImg.text = String(leftImg) + " +"
+                        lblThreeMoreImg.sizeToFit()
+                    } else {
+                        lblThreeMoreImg.isHidden = true
+                    }
                 }
                 num += 1
             }
@@ -158,36 +197,37 @@ class NewsFeedTableHeaderSection: UITableViewHeaderFooterView {
             // ver. FourFrame
             vwSquare.isHidden = false
             vwThree.isHidden = true
+            
+            vwTwoToRepost.isActive = false
+            vwSquareToRepost.isActive = true
+            ContentsToRepost.isActive = false
+            
             for imgvw in imgvwFour {
                 imgvw.image = UIImage(named: dataPeng04[num])
                 if num == 3 {
-                    imgvw.alpha = 0.5
                     let leftImg = dataPeng04.count - 4
-                    lblFourMoreImg.text = String(leftImg) + " +"
-                }
-                num += 1
-            }*/
-        default:
-            // ver. TwoFrame
-            vwTwo.isHidden = true
-            for imgvw in imgvwTwo {
-                imgvw.image = UIImage(named: dataPeng[num])
-                if num == 1 {
-                    let leftImg = dataPeng.count - 2
                     if leftImg > 0 {
-                        imgvw.alpha = 0.5
-                        lblTwoMoreImg.text = String(leftImg) + " +"
+                        imgvw.alpha = 0.8
+//                        lblTwoMoreImg.isHidden = false
+                        lblFourMoreImg.text = String(leftImg) + " +"
+                        lblFourMoreImg.sizeToFit()
+                    } else {
+                        lblFourMoreImg.isHidden = true
                     }
                 }
                 num += 1
             }
-        }
-        
-        btnRepost.tintColor = .gray
-        setButtonAttributed(btn: btnLike, num: numLike, color: .gray, state: .normal)
-        setButtonPlain(btn: btnComment, num: numComment, color: .gray, state: .normal)
-        btnMore.tintColor = .gray
-    }
+        default:
+            // 보여줄 사진이 없는 경우(글만 표시)
+            lblTwoMoreImg.isHidden = true
+            lblThreeMoreImg.isHidden = true
+            lblFourMoreImg.isHidden = true
+            
+            vwTwoToRepost.isActive = false
+            vwSquareToRepost.isActive = false
+            ContentsToRepost.isActive = true
+        } // case문 종료
+    } // <---ShowImageFrame 설정 끝
     
     func setButtonPlain(btn: UIButton, num: Int, color: UIColor, state: UIControl.State) {
         btn.setTitle(" " + String(num), for: state)
@@ -202,6 +242,7 @@ class NewsFeedTableHeaderSection: UITableViewHeaderFooterView {
     }
 }
 
+/*
 // MARK: - Collection View
 //Posting된 이미지를 표시해 주는 CollectionView에 대한 기능구현
 
@@ -222,7 +263,6 @@ extension NewsFeedTableHeaderSection: UICollectionViewDataSource {
         return cell
     }
 
-    /*
     //이미지에 tab 제스쳐 기능 설정
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath) as! FullScreenImgCVCell
@@ -249,7 +289,7 @@ extension NewsFeedTableHeaderSection: UICollectionViewDataSource {
         self.tabBarController?.tabBar.isHidden = false
         sender.view?.removeFromSuperview()
     }
- */
+
  
 }
 
@@ -265,3 +305,4 @@ extension NewsFeedTableHeaderSection: UICollectionViewDelegateFlowLayout {
     }
 
 }
+*/
