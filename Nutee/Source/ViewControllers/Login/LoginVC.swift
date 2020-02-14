@@ -11,10 +11,7 @@ import Alamofire
 
 class LoginVC: UIViewController {
     
-    // MARK: - UI components
-    @IBOutlet weak var idView: UIView!
-    @IBOutlet weak var pwView: UIView!
-    
+    // MARK: - UI components    
     @IBOutlet weak var signInBtn: UIButton!
     @IBOutlet weak var signUpBtn: UIButton!
     @IBOutlet weak var findBtn: UIButton!
@@ -118,12 +115,14 @@ class LoginVC: UIViewController {
     }
     
     @objc func signIn() {
+        print("id :",idTextField.text!)
+        print("pw :",pwTextField.text!)
         if autoSignUp == true {
             UserDefaults.standard.setValue(idTextField.text, forKey: "userId")
             UserDefaults.standard.setValue(pwTextField.text, forKey: "pw")
         }
-        print("id : ", (UserDefaults.standard.value(forKey: "userId")) ?? "")
-        print("pw : ", (UserDefaults.standard.value(forKey: "pw")) ?? "")
+        print("id userdefault : ", (UserDefaults.standard.value(forKey: "userId")) ?? "")
+        print("pw userdefault : ", (UserDefaults.standard.value(forKey: "pw")) ?? "")
         
         signInService(idTextField.text!, pwTextField.text!)
         
