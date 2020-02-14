@@ -126,15 +126,15 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qTD-Lf-oKO">
-                                <rect key="frame" x="32" y="325" width="30" height="15"/>
+                                <rect key="frame" x="32" y="325" width="15" height="15"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="15" id="IxT-cl-yig"/>
-                                    <constraint firstAttribute="width" constant="30" id="cMP-Hy-F3m"/>
+                                    <constraint firstAttribute="width" constant="15" id="cMP-Hy-F3m"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2jX-DZ-fNk">
-                                <rect key="frame" x="72" y="322.66666666666669" width="73" height="20"/>
+                                <rect key="frame" x="57" y="322.66666666666669" width="73" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="QBr-wP-cdJ"/>
                                 </constraints>

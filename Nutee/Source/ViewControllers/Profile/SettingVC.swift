@@ -33,9 +33,11 @@ extension SettingVC {
             // NetworkResult 의 요소들
             case .success(let res):
                 let response = res as! String
-
+                
                 UserDefaults.standard.removeObject(forKey: "Cookie")
-                print(UserDefaults.standard.value(forKey: "Cookie") ?? "삭제 된 상태입니다")
+                UserDefaults.standard.removeObject(forKey: "userId")
+                UserDefaults.standard.removeObject(forKey: "pw")
+//                print(UserDefaults.standard.value(forKey: "Cookie") ?? "삭제 된 상태입니다")
                 print(response)
                 self.dismiss(animated: true, completion: nil)
             //                self.successAdd = true

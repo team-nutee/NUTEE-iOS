@@ -96,14 +96,15 @@ class LoginVC: UIViewController {
     }
     
     func checkSignIn(){
-        if UserDefaults.standard.string(forKey: "Cookie") != nil {
-            let userid = UserDefaults.standard.value(forKey: "userId")
-            let password = UserDefaults.standard.value(forKey: "pw")
-            
+        let userid = UserDefaults.standard.value(forKey: "userId")
+        let password = UserDefaults.standard.value(forKey: "pw")
+
+        if userid != nil && password != nil {
+                        
             signInService(userid as! String, password as! String)
             
         } else {
-            print("123ㅈㄷㅈㄷ123123")
+            print("자동로그인 안함")
             return
         }
     }
