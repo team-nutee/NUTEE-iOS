@@ -141,6 +141,8 @@ struct UserService {
         }
     }
     
+    // MARK: - logout
+    
     func signOut(completion: @escaping (NetworkResult<Any>) -> Void) {
         
         let URL = APIConstants.Logout
@@ -155,6 +157,44 @@ struct UserService {
             switch response.result {
                 
             case .success:
+                    if let status = response.response?.statusCode {
+                        print(status)
+                        switch status {
+                        case 200:
+                            completion(.success("로그아웃 성공"))
+                        case 409:
+                            print("실패 409")
+                            completion(.pathErr)
+                        case 500:
+                            print("실패 500")
+                            completion(.serverErr)
+                        default:
+                            break
+                        
+                    }
+                }
+                break
+            case .failure(let err):
+                print(err.localizedDescription)
+                completion(.networkFail)
+            }
+        }
+    }
+
+    func getUserInfo(completion: @escaping (NetworkResult<Any>) -> Void) {
+        
+        let URL = APIConstants.User
+        let headers: HTTPHeaders = [
+            "Content-Type": "application/json",
+            "Cookie" : UserDefaults.standard.string(forKey: "Cookie")!
+        ]
+        
+        Alamofire.request(URL, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseData{
+            response in
+            
+            switch response.result {
+                
+            case .success:
                 // parameter 위치
                 if let value = response.result.value {
                     //print("response", )
@@ -163,17 +203,16 @@ struct UserService {
                         print(status)
                         switch status {
                         case 200:
-//                            do{
-//                                let decoder = JSONDecoder()
-//                                print("logout1", value)
-//                                let result = try decoder.decode(.self, from: value)
-//                                print("logout2", value)
-                                completion(.success("123"))
-//                            } catch {
-//                                completion(.pathErr)
-//                            }
-                        case 409:
-                            print("실패 409")
+                            do{
+                                print("start decode")
+                                let decoder = JSONDecoder()
+                                let result = try decoder.decode(SignIn.self, from: value)
+                                completion(.success(result))
+                            } catch {
+                                completion(.pathErr)
+                            }
+                        case 401:
+                            print("실패 401")
                             completion(.pathErr)
                         case 500:
                             print("실패 500")
