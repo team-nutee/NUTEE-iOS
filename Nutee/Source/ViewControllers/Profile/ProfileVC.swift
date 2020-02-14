@@ -38,9 +38,7 @@ class ProfileVC: UIViewController {
 
     // MARK: - Variables and Properties
     
-    var test: [String] = ["123","123","","","","","","","","","",""]
-//    var test: [String] = []
-
+    var userInfo : SignIn?
     
     // MARK: - Life Cycle
     
@@ -48,6 +46,7 @@ class ProfileVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        getUserInfoService()
         myArticleTV.delegate = self
         myArticleTV.dataSource = self
         self.myArticleTV.register(ArticleTVC.self, forCellReuseIdentifier: "ArticleTVC")
@@ -132,12 +131,12 @@ extension ProfileVC : UITableViewDelegate { }
 extension ProfileVC : UITableViewDataSource {
         
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if test.count == 0{
+        if userInfo?.posts.count == 0{
             tableView.setEmptyView(title: "게시글이 없습니다", message: "새로운 게시물을 올려보세요‼️")
         } else {
             tableView.restore()
         }
-        return test.count + 1
+        return (userInfo?.posts.count ?? 1) + 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -145,18 +144,9 @@ extension ProfileVC : UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ProflieTableViewCell", for: indexPath) as! ProflieTableViewCell
         
         if indexPath.row == 0 {
-//            cell.backgroundColor = .lightGray
-//            cell.alpha = 0.3
-        } else {
-//            cell.addSubview(cellTextLabel)
-//            cellTextLabel.text = String(indexPath.row) + "번째"
-//            cellTextLabel.font = .boldSystemFont(ofSize: 20)
-//            cellTextLabel.textAlignment = .center
-//            cellTextLabel.translatesAutoresizingMaskIntoConstraints = false
-//            cellTextLabel.heightAnchor.constraint(equalToConstant: 70).isActive = true
-//            cellTextLabel.widthAnchor.constraint(equalToConstant: 200).isActive = true
 
-//            cell.articleLabel.text = "123"
+        } else {
+//            cell.articleTextView.text = userInfo.posts
         }
         
         return cell
@@ -194,7 +184,7 @@ extension ProfileVC : UITableViewDataSource {
         self.headerView.addSubview(myFollowing1Btn)
         self.headerView.addSubview(myFollowing2Btn)
         
-        let etcname : String = "test"//= UserDefaults.standard.value(forKey: "cookie") as! String
+        let etcname : String = userInfo?.nickname ?? ""
         
         let name = NSMutableAttributedString(string: etcname)
         name.addAttribute(NSAttributedString.Key.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: NSMakeRange(0, etcname.count))
@@ -226,7 +216,7 @@ extension ProfileVC : UITableViewDataSource {
         myNickLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
         myNickLabel.widthAnchor.constraint(equalToConstant: view.frame.size.width - 120).isActive = true
         
-        let myArticle1 = NSMutableAttributedString(string: "10")
+        let myArticle1 = NSMutableAttributedString(string: String(userInfo?.posts.count ?? 0))
         myArticle1Btn.setAttributedTitle(myArticle1, for: .normal)
         myArticle1Btn.titleLabel?.font = .systemFont(ofSize: 15)
         myArticle1Btn.translatesAutoresizingMaskIntoConstraints = false
@@ -244,8 +234,8 @@ extension ProfileVC : UITableViewDataSource {
         myArticle2Btn.heightAnchor.constraint(equalToConstant: 40).isActive = true
         myArticle2Btn.widthAnchor.constraint(equalToConstant: (view.frame.size.width - 120)/3).isActive = true
         
-        let myFollwer1 = NSMutableAttributedString(string: "23")
-        myFollower1Btn.setAttributedTitle(myFollwer1, for: .normal)
+        let myFollower1 = NSMutableAttributedString(string: String(userInfo?.followers.count ?? 0))
+        myFollower1Btn.setAttributedTitle(myFollower1, for: .normal)
         myFollower1Btn.titleLabel?.font = .systemFont(ofSize: 15)
         myFollower1Btn.translatesAutoresizingMaskIntoConstraints = false
         myFollower1Btn.topAnchor.constraint(equalTo: profileImage.topAnchor, constant: 50).isActive = true
@@ -253,8 +243,8 @@ extension ProfileVC : UITableViewDataSource {
         myFollower1Btn.heightAnchor.constraint(equalToConstant: 20).isActive = true
         myFollower1Btn.widthAnchor.constraint(equalToConstant: (view.frame.size.width - 120)/3).isActive = true
         
-        let myFollwer2 = NSMutableAttributedString(string: "팔로워")
-        myFollower2Btn.setAttributedTitle(myFollwer2, for: .normal)
+        let myFollower2 = NSMutableAttributedString(string: "팔로워")
+        myFollower2Btn.setAttributedTitle(myFollower2, for: .normal)
         myFollower2Btn.titleLabel?.font = .boldSystemFont(ofSize: 17)
         myFollower2Btn.translatesAutoresizingMaskIntoConstraints = false
         myFollower2Btn.topAnchor.constraint(equalTo: myFollower1Btn.bottomAnchor).isActive = true
@@ -262,7 +252,7 @@ extension ProfileVC : UITableViewDataSource {
         myFollower2Btn.heightAnchor.constraint(equalToConstant: 40).isActive = true
         myFollower2Btn.widthAnchor.constraint(equalToConstant: (view.frame.size.width - 120)/3).isActive = true
         
-        let myFollowing1 = NSMutableAttributedString(string: "71")
+        let myFollowing1 = NSMutableAttributedString(string: String(userInfo?.followings.count ?? 0))
         myFollowing1Btn.setAttributedTitle(myFollowing1, for: .normal)
         myFollowing1Btn.titleLabel?.font = .systemFont(ofSize: 15)
         myFollowing1Btn.translatesAutoresizingMaskIntoConstraints = false
@@ -290,3 +280,30 @@ extension ProfileVC : UITableViewDataSource {
 }
 
 
+extension ProfileVC {
+    func getUserInfoService() {
+        UserService.shared.getUserInfo() { responsedata in
+            
+            switch responsedata {
+            case .success(let res):
+                let response = res as! SignIn
+                self.userInfo = response
+                
+                self.myArticleTV.reloadData()
+            case .requestErr(_):
+                print("request error")
+            
+            case .pathErr:
+                print(".pathErr")
+            
+            case .serverErr:
+                print(".serverErr")
+            
+            case .networkFail :
+                print("failure")
+                }
+        }
+        
+    }
+
+}
