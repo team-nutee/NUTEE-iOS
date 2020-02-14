@@ -68,18 +68,23 @@ extension DetailNewsFeedVC : UITableViewDataSource {
 //        return UITableView.automaticDimension
 //    }
     
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        let test : [String] = ["","","","",""]
+        
+        return test.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         //Custom셀인 'ReplyCell' 형식으로 변환
         let cell = tableView.dequeueReusableCell(withIdentifier: "ReplyCell", for: indexPath) as! ReplyCell
-        
-        if indexPath.row % 2 == 1 {
-            cell.backgroundColor = .lightGray
-        }
         
         return cell
     }
