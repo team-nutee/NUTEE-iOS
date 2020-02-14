@@ -20,10 +20,40 @@ class SettingVC: UIViewController {
     
     
     @objc func logout(){
-        
-        UserDefaults.standard.removeObject(forKey: "cookie")
-        print(UserDefaults.standard.value(forKey: "cookie") ?? "삭제 된 상태입니다")
-        
-        self.dismiss(animated: true, completion: nil)
+        signOutService()
     }
+}
+
+extension SettingVC {
+    func signOutService() {
+        UserService.shared.signOut() { responsedata in
+            
+            switch responsedata {
+                
+            // NetworkResult 의 요소들
+            case .success(let res):
+                let response = res as! String
+
+                UserDefaults.standard.removeObject(forKey: "Cookie")
+                print(UserDefaults.standard.value(forKey: "Cookie") ?? "삭제 된 상태입니다")
+                print(response)
+                self.dismiss(animated: true, completion: nil)
+            //                self.successAdd = true
+            case .requestErr(_):
+                print("request error")
+            //                self.successAdd = false
+            case .pathErr:
+                print(".pathErr")
+            //                self.successAdd = false
+            case .serverErr:
+                print(".serverErr")
+            //                self.successAdd = false
+            case .networkFail :
+                print("failure")
+                //                self.successAdd = false
+            }
+        }
+        
+    }
+
 }

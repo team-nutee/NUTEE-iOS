@@ -51,6 +51,7 @@ class ProfileVC: UIViewController {
         myArticleTV.delegate = self
         myArticleTV.dataSource = self
         self.myArticleTV.register(ArticleTVC.self, forCellReuseIdentifier: "ArticleTVC")
+        myArticleTV.register(UINib(nibName: "ProflieTableViewCell", bundle: nil), forCellReuseIdentifier: "ProflieTableViewCell")
         myArticleTV.separatorInset.left = 0
 
         setBtn()
@@ -141,7 +142,7 @@ extension ProfileVC : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ArticleTVC", for: indexPath) as! ArticleTVC
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ProflieTableViewCell", for: indexPath) as! ProflieTableViewCell
         
         if indexPath.row == 0 {
 //            cell.backgroundColor = .lightGray
@@ -166,7 +167,7 @@ extension ProfileVC : UITableViewDataSource {
         if indexPath.row == 0 {
             return 0.3
         } else {
-            return 70
+            return 150
         }
         
     }
@@ -193,7 +194,7 @@ extension ProfileVC : UITableViewDataSource {
         self.headerView.addSubview(myFollowing1Btn)
         self.headerView.addSubview(myFollowing2Btn)
         
-        let etcname : String = UserDefaults.standard.value(forKey: "cookie") as! String
+        let etcname : String = "test"//= UserDefaults.standard.value(forKey: "cookie") as! String
         
         let name = NSMutableAttributedString(string: etcname)
         name.addAttribute(NSAttributedString.Key.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: NSMakeRange(0, etcname.count))

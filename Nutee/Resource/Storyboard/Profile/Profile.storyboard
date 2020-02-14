@@ -7,6 +7,29 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--View Controller-->
+        <scene sceneID="A1o-lL-VH6">
+            <objects>
+                <viewController id="CQ7-el-Jll" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="S3D-ZK-Hal">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="CjD-Fo-D3r">
+                                <rect key="frame" x="0.0" y="88" width="375" height="690"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="Y5k-Sz-92e"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="xpg-c1-MOn"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pXb-WZ-LMt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3015.1999999999998" y="-635.46798029556658"/>
+        </scene>
         <!--프로필-->
         <scene sceneID="d4h-VV-TVo">
             <objects>
@@ -328,7 +351,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WTU-KB-7hr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3664.8000000000002" y="-191.37931034482759"/>
+            <point key="canvasLocation" x="4607.1999999999998" y="-191.37931034482759"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="0h6-wx-YQI">
@@ -348,6 +371,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UPX-fI-G7v" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="949.60000000000002" y="116.00985221674877"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="USl-BZ-DHA">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="PZ6-0L-L3y" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="zjp-zF-8CC">
+                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="CQ7-el-Jll" kind="relationship" relationship="rootViewController" id="N3f-az-WFI"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Fuu-p9-3qf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2072.8000000000002" y="-635.46798029556658"/>
         </scene>
     </scenes>
     <resources>
