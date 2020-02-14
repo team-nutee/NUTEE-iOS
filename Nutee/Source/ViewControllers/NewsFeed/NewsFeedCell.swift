@@ -21,14 +21,17 @@ class NewsFeedCell: UITableViewCell {
     
     // Posting
     @IBOutlet var txtvwContents: UITextView!
+    @IBOutlet var ContentsToRepost: NSLayoutConstraint!
     
     // ver. TwoFrame
     @IBOutlet var vwTwo: UIView!
     @IBOutlet var imgvwTwo: [UIImageView]!
     @IBOutlet var lblTwoMoreImg: UILabel!
-
+    @IBOutlet var vwTwoToRepost: NSLayoutConstraint!
+    
     //앨범 프레임 three, four 버전을 통합관리 할 view 객체 생성
     @IBOutlet var vwSquare: UIView!
+    @IBOutlet var vwSquareToRepost: NSLayoutConstraint!
     // ver. ThreeFrame
     @IBOutlet var vwThree: UIView!
     @IBOutlet var imgvwThree: [UIImageView]!
@@ -47,10 +50,10 @@ class NewsFeedCell: UITableViewCell {
     //MARK: - Variables and Properties
     
     var indexPath = 0
-    let dataPeng01 = [ "sample_peng01.jepg", "sample_peng02.jepg" ]
-    let dataPeng02 = [ "sample_peng01.jepg", "sample_peng02.jepg", "sample_peng03.png" ]
-    let dataPeng03 = [ "sample_peng01.jepg", "sample_peng02.jepg", "sample_peng03.png", "sample_peng04.png" ]
-    let dataPeng04 = [ "sample_peng01.jepg", "sample_peng02.jepg", "sample_peng03.png", "sample_peng04.png", "sample_peng05.png" ]
+    let dataPeng02 = [ "sample_peng01.jepg", "sample_peng02.jepg" ]
+    let dataPeng03 = [ "sample_peng01.jepg", "sample_peng02.jepg", "sample_peng03.png" ]
+    let dataPeng04 = [ "sample_peng01.jepg", "sample_peng02.jepg", "sample_peng03.png", "sample_peng04.png" ]
+    let dataPeng05 = [ "sample_peng01.jepg", "sample_peng02.jepg", "sample_peng03.png", "sample_peng04.png", "sample_peng05.png" ]
     
     var numLike = 0
     var numComment = 0
@@ -109,6 +112,7 @@ class NewsFeedCell: UITableViewCell {
     
     @IBAction func btnComment(sender: Any) {
         showDetailNewsFeed()
+        
     }
     
     //수정, 삭제 알림창 기능
@@ -135,13 +139,13 @@ class NewsFeedCell: UITableViewCell {
         imgUserImg.image = #imageLiteral(resourceName: "defaultProfile")
         imgUserImg.setRounded(radius: nil)
         
-        lblUserId.text = "LabyrinthGfriend"
+        lblUserId.text = "testUserIDcheck"
         lblUserId.sizeToFit()
         
         // Posting 내용 초기설정
-        txtvwContents.text = String("Hi~ ㅇ노러로댜ㅐㅜㅏㅇㅇ루딜 읷ㅇ ㄴㅍㅅ팅랑ㄴ른 것ㄷㄴㅇ르4ㄱ래ㅔ아 랑베링 ㅓ안도니ㅡㄴ다, DVD, TV, 무대 위가 집이지        솜털이 떨어질 때 벚꽃도 지겠지        나는 져버릴 꽃이 되긴 싫어 Im the tree난 너의 위성 네 주윌 맴돌지        그렇다고 네가 태양은 아니니        너의 멋대로 중심이 돼        제멋대로 굴면 안 돼        어떻게 한순간의 떨림이       소리 없이 너의 두 눈을 가리니       너의 뜻대로 흘러가네       내게 상처를 주면 안 돼        넌 네 생각만 하지 그래       뭐 그게 참 당")
+        txtvwContents.text = String("Before some words beginning with a pronounced (not silent) h in an unstressed first syllable, such as historic(al), hallucination, hilarious, horrendous, and horrific, some (especially older) British writers prefer to use an over a (an historical event, etc.).[7] An is also prefBritish English, American English typically uses an before herb, since the h in this word is silent for most Americans. The correct usage in respect of the term was the subject of an amendment debated in the UK Parliament.")
         txtvwContents.postingInit()
-//        showImgFrame()
+        showImgFrame()
         
         //버튼모양 초기 설정
         btnRepost.tintColor = .gray
@@ -160,14 +164,21 @@ class NewsFeedCell: UITableViewCell {
         case 0:
             // ver. TwoFrame
             vwTwo.isHidden = false
+            
+            vwTwoToRepost.isActive = true
+            vwSquareToRepost.isActive = false
+            ContentsToRepost.isActive = false
+            
             for imgvw in imgvwTwo {
-                imgvw.image = UIImage(named: dataPeng01[num])
+                imgvw.image = UIImage(named: dataPeng03[num])
                 if num == 1 {
-                    let leftImg = dataPeng01.count - 2
+                    let leftImg = dataPeng03.count - 2
                     if leftImg > 0 {
-                        imgvw.alpha = 0.5
+                        imgvw.alpha = 0.8
+                        lblTwoMoreImg.isHidden = false
                         lblTwoMoreImg.text = String(leftImg) + " +"
                         lblTwoMoreImg.sizeToFit()
+//                        imageTapped(image: imgvw.image!)
                     } else {
                         lblTwoMoreImg.isHidden = true
                     }
@@ -178,13 +189,23 @@ class NewsFeedCell: UITableViewCell {
             // ver. ThreeFrame
             vwSquare.isHidden = false
             vwFour.isHidden = true
+            
+            vwTwoToRepost.isActive = false
+            vwSquareToRepost.isActive = true
+            ContentsToRepost.isActive = false
+            
             for imgvw in imgvwThree {
-                imgvw.image = UIImage(named: dataPeng02[num])
+                imgvw.image = UIImage(named: dataPeng05[num])
                 if num == 2 {
-                    imgvw.alpha = 0.5
-                    let leftImg = dataPeng02.count - 3
-                    lblThreeMoreImg.text = String(leftImg) + " +"
-                    lblThreeMoreImg.sizeToFit()
+                    let leftImg = dataPeng05.count - 3
+                    if leftImg > 0 {
+                        imgvw.alpha = 0.8
+//                        lblThreeMoreImg.isHidden = false
+                        lblThreeMoreImg.text = String(leftImg) + " +"
+                        lblThreeMoreImg.sizeToFit()
+                    } else {
+                        lblThreeMoreImg.isHidden = true
+                    }
                 }
                 num += 1
             }
@@ -192,37 +213,64 @@ class NewsFeedCell: UITableViewCell {
             // ver. FourFrame
             vwSquare.isHidden = false
             vwThree.isHidden = true
+            
+            vwTwoToRepost.isActive = false
+            vwSquareToRepost.isActive = true
+            ContentsToRepost.isActive = false
+            
             for imgvw in imgvwFour {
                 imgvw.image = UIImage(named: dataPeng04[num])
                 if num == 3 {
-                    imgvw.alpha = 0.5
                     let leftImg = dataPeng04.count - 4
-                    lblFourMoreImg.text = String(leftImg) + " +"
-                    lblFourMoreImg.sizeToFit()
-                }
-                num += 1
-            }
-        default:
-            // ver. TwoFrame
-            vwTwo.isHidden = true
-            for imgvw in imgvwTwo {
-                imgvw.image = UIImage(named: dataPeng01[num])
-                if num == 1 {
-                    let leftImg = dataPeng01.count - 2
                     if leftImg > 0 {
-                        imgvw.alpha = 0.5
-                        lblTwoMoreImg.text = String(leftImg) + " +"
-                        lblTwoMoreImg.sizeToFit()
+                        imgvw.alpha = 0.8
+//                        lblTwoMoreImg.isHidden = false
+                        lblFourMoreImg.text = String(leftImg) + " +"
+                        lblFourMoreImg.sizeToFit()
+                    } else {
+                        lblFourMoreImg.isHidden = true
                     }
                 }
                 num += 1
             }
-        }
+        default:
+            // 보여줄 사진이 없는 경우(글만 표시)
+            lblTwoMoreImg.isHidden = true
+            lblThreeMoreImg.isHidden = true
+            lblFourMoreImg.isHidden = true
+            
+            vwTwoToRepost.isActive = false
+            vwSquareToRepost.isActive = false
+            ContentsToRepost.isActive = true
+        } // case문 종료
+    } // <---ShowImageFrame 설정 끝
+
+    //이미지 클릭 시 전환 코드구현 구간
+    func imageTapped(image:UIImage){
+        let newImageView = UIImageView(image: image)
+        newImageView.frame = UIScreen.main.bounds
+        newImageView.backgroundColor = .black
+        newImageView.contentMode = .scaleAspectFit
+        newImageView.isUserInteractionEnabled = true
+        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissFullscreenImage))
+        newImageView.addGestureRecognizer(tap)
+        newsFeedVC?.view.addSubview(newImageView)
+        newsFeedVC?.navigationController?.isNavigationBarHidden = true
+        newsFeedVC?.tabBarController?.tabBar.isHidden = true
     }
 
+    //이미지 전체화면 종료
+    @objc func dismissFullscreenImage(_ sender: UITapGestureRecognizer) {
+        newsFeedVC?.navigationController?.isNavigationBarHidden = false
+        newsFeedVC?.tabBarController?.tabBar.isHidden = false
+        sender.view?.removeFromSuperview()
+    }
+    
     func showDetailNewsFeed() {
         let detailNewsFeedSB = UIStoryboard(name: "DetailNewsFeed", bundle: nil)
         let showDetailNewsFeedVC = detailNewsFeedSB.instantiateViewController(withIdentifier: "DetailNewsFeed") as! DetailNewsFeedVC
+        //DetailNewsFeedVC로 NewsFeedVC의 선택된 cell의 indexPath값 전달
+        showDetailNewsFeedVC.indexPath = self.indexPath
         newsFeedVC?.navigationController?.pushViewController(showDetailNewsFeedVC, animated: true)
     }
 

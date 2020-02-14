@@ -64,10 +64,12 @@ extension NewsFeedVC : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 //        return 480
+//        NSLog(UITableView.automaticDimension.description + "<---MainVC height")
         return UITableView.automaticDimension
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+//        NSLog(UITableView.automaticDimension.description + "<---MainVC height")
         return UITableView.automaticDimension
     }
     
