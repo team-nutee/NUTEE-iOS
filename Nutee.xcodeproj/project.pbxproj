@@ -61,7 +61,6 @@
 		5EA5C68A23F1475000BFB32B /* PassWordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA5C68923F1475000BFB32B /* PassWordVC.swift */; };
 		5EB7415323F18AEE006AE529 /* CafeteriaTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB7415223F18AEE006AE529 /* CafeteriaTVC.swift */; };
 		5EB7415523F18FE5006AE529 /* Food.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB7415423F18FE5006AE529 /* Food.swift */; };
-<<<<<<< HEAD
 		5EC6B35A23F5919200F490DA /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC6B35923F5919200F490DA /* UserService.swift */; };
 		5EC6B35C23F591A800F490DA /* SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC6B35B23F591A800F490DA /* SignUp.swift */; };
 		5EC6B35E23F597D900F490DA /* SignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC6B35D23F597D900F490DA /* SignIn.swift */; };
@@ -69,8 +68,6 @@
 		5EC6B36223F5C05100F490DA /* NoticeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC6B36123F5C05000F490DA /* NoticeService.swift */; };
 		5EC6B36523F5C67B00F490DA /* ProflieTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC6B36323F5C67B00F490DA /* ProflieTableViewCell.swift */; };
 		5EC6B36623F5C67B00F490DA /* ProflieTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5EC6B36423F5C67B00F490DA /* ProflieTableViewCell.xib */; };
-=======
->>>>>>> feature/NewsFeed
 		D519843E23E32418001AB351 /* NewsFeed.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D519843C23E32418001AB351 /* NewsFeed.storyboard */; };
 		D519843F23E32418001AB351 /* DetailNewsFeed.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D519843D23E32418001AB351 /* DetailNewsFeed.storyboard */; };
 		D519844523E325EE001AB351 /* DetailNewsFeedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D519844423E325EE001AB351 /* DetailNewsFeedVC.swift */; };
