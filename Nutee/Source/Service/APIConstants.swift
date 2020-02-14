@@ -11,7 +11,7 @@ struct APIConstants {
     static let BaseURL = "http://15.164.50.161:9425"
     
     static let User = BaseURL + "/api/user"                                     // GET
-    static let PostUser = BaseURL + "/api/user"                                 // Post { userId : id, password : pw, nickname : nick }
+    static let UserPost = BaseURL + "/api/user"                                 // Post { userId : id, password : pw, nickname : nick }
     
     static let PostPost = BaseURL + "/api/post"                                 // POST formData : image filename , content : content
     static let PostGET = BaseURL + "/api/post/:id"                              // GET 뒤에 아이디 값을 넣어야 함                 // 아이디가 게시물의 id?
@@ -23,10 +23,10 @@ struct APIConstants {
     static let Notice = BaseURL + "/api/notice"                                 // GET
     static let image = BaseURL + "/api/post/images"                             // POST formData : image : binary
     static let CommentsGet = BaseURL + "/api/post/:id/comments"                 // GET
-    static let PostComments = BaseURL + "/api/post/:id/comments"                // POST requestPayload     {postId : postId ,  content: content}
+    static let CommentsPost = BaseURL + "/api/post/:id/comments"                // POST requestPayload     {postId : postId ,  content: content}
 
-    static let PostLike = BaseURL + "/api/post/:id/like"                        // POST
-    static let DeleteLike = BaseURL + "/api/post/:id/like"                      // DELETE           {postId : postID}
+    static let LikePost = BaseURL + "/api/post/:id/like"                        // POST
+    static let LikeDelete = BaseURL + "/api/post/:id/like"                      // DELETE           {postId : postID}
 
     static let Retweet = BaseURL + "/api/post/:id/retweet"                      // POST {postId : postId}
     static let UserId = BaseURL + "/api/user/:id"                               // GET
@@ -45,5 +45,4 @@ struct APIConstants {
 
     static let NickNamePatch = BaseURL + "/api/user/nickname"                   // PATCH
     
-
 }
