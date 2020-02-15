@@ -78,12 +78,6 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <state key="normal" title="다음"/>
-                                <connections>
-                                    <segue destination="WTW-cv-2F2" kind="presentation" animates="NO" modalPresentationStyle="fullScreen" id="VNb-g5-ngp">
-                                        <segue key="commit" inheritsFrom="parent" id="btx-o0-2xh"/>
-                                        <segue key="preview" inheritsFrom="commit" id="YPh-kt-S99"/>
-                                    </segue>
-                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -197,6 +191,9 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <state key="normal" title="이전"/>
+                                <connections>
+                                    <segue destination="LTp-hC-xpG" kind="unwind" unwindAction="unwindSegue:" id="FU4-cm-zfa"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hyb-LX-fyM">
                                 <rect key="frame" x="207" y="812" width="207" height="50"/>
@@ -263,6 +260,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NRP-DI-haw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="LTp-hC-xpG" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2669.5652173913045" y="797.54464285714278"/>
         </scene>
@@ -307,6 +305,9 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <state key="normal" title="이전"/>
+                                <connections>
+                                    <segue destination="c1I-xj-I2T" kind="unwind" unwindAction="unwindSegue:" id="iQq-ab-AXZ"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dU7-W7-qDl">
                                 <rect key="frame" x="207" y="812" width="207" height="50"/>
@@ -315,9 +316,6 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <state key="normal" title="다음"/>
-                                <connections>
-                                    <segue destination="j9m-uh-Dke" kind="presentation" animates="NO" modalPresentationStyle="fullScreen" id="pMf-BR-8qT"/>
-                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="coZ-vW-ra0">
                                 <rect key="frame" x="20" y="44" width="50" height="50"/>
@@ -363,7 +361,6 @@
                         <outlet property="nextBtn" destination="dU7-W7-qDl" id="SLa-eA-bQC"/>
                         <outlet property="preBtn" destination="ejx-YR-LBj" id="K3y-20-puu"/>
                         <outlet property="progressView" destination="05y-XB-bF0" id="EAm-En-DHd"/>
-                        <segue destination="c1I-xj-I2T" kind="unwind" identifier="unwindVC3toVC2" unwindAction="unwindVC3toVC2WithSegue:" id="eM8-I3-AM6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vrF-NX-2Zw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -414,6 +411,7 @@
                                 <state key="normal" title="이전"/>
                                 <connections>
                                     <action selector="goTo2:" destination="j9m-uh-Dke" eventType="touchUpInside" id="iWk-iw-dxb"/>
+                                    <segue destination="ZA5-7e-GIs" kind="unwind" unwindAction="unwindSegue:" id="ezZ-8f-W5N"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZvX-xr-GVN">
@@ -423,9 +421,6 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <state key="normal" title="다음"/>
-                                <connections>
-                                    <segue destination="ZEW-mu-yYj" kind="presentation" animates="NO" modalPresentationStyle="fullScreen" id="WWb-fO-297"/>
-                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -461,11 +456,9 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Xd-Ji-hDf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="ZA5-7e-GIs" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1871" y="798"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="VNb-g5-ngp"/>
-    </inferredMetricsTieBreakers>
 </document>

@@ -20,17 +20,16 @@ class FollowingTVC: UITableViewCell {
         
         followingImgView.setRounded(radius: nil)
         followingImgView.backgroundColor = .veryLightPink
-//        followingLabel.sizeToFit()
         followingDeleteBtn.setTitle("삭제", for: .normal)
         followingDeleteBtn.setTitleColor(.nuteeGreen, for: .normal)
         
-        // Initialization code
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
+        
     }
 
 }

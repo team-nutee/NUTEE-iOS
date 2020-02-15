@@ -74,7 +74,7 @@ class PostVC: UIViewController {
         postBtn.tintColor = .nuteeGreen
         
         imagePickerBtn.tintColor = .nuteeGreen
-        imagePickerView.layer.addBorder([.top], color: .lightGray, width: 1)
+        imagePickerView.addBorder(.bottom, color: .nuteeGreen, thickness: 1)
         imagePickerView.alpha = 0.6
     }
     
@@ -86,7 +86,7 @@ class PostVC: UIViewController {
     
     @objc func closePosting() {
         self.dismiss(animated: true, completion: nil)
-//        tabBarController!.selectedIndex = 0
+        //        tabBarController!.selectedIndex = 0
     }
     
     @objc func activePostBtn() {
@@ -98,12 +98,12 @@ class PostVC: UIViewController {
             }
         }
     }
-//
-//    @IBAction func unwindToOrigin(_ unwindSegue: UIStoryboardSegue){
-//        performSegue(withIdentifier: "ToPostVC", sender: self)
-//        self.dismiss(animated: true, completion: nil)
-//    }
-        
+    //
+    //    @IBAction func unwindToOrigin(_ unwindSegue: UIStoryboardSegue){
+    //        performSegue(withIdentifier: "ToPostVC", sender: self)
+    //        self.dismiss(animated: true, completion: nil)
+    //    }
+    
 }
 
 
@@ -121,10 +121,16 @@ extension PostVC {
             let curve = info[UIResponder.keyboardAnimationCurveUserInfoKey] as! UInt
             let keyboardFrame = (info[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
             let keyboardHeight = keyboardFrame.height
-//            let tabbarHeight = self.tabBarController?.tabBar.frame.size.height ?? 0
-//            let safeBottomHeight = self.view.bottomAnchor
-            let window = UIApplication.shared.keyWindow
-            let bottomPadding = window?.safeAreaInsets.bottom
+            //            let tabbarHeight = self.tabBarController?.tabBar.frame.size.height ?? 0
+            //            let safeBottomHeight = self.view.bottomAnchor
+            let keyWindow = UIApplication.shared.connectedScenes
+                .filter({$0.activationState == .foregroundActive})
+                .map({$0 as? UIWindowScene})
+                .compactMap({$0})
+                .first?.windows
+                .filter({$0.isKeyWindow}).first
+            //            let window = UIApplication.shared.keyWindow
+            let bottomPadding = keyWindow?.safeAreaInsets.bottom
             
             pickerViewBottomConstraint.constant = -(keyboardHeight - bottomPadding!)
             scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardHeight - bottomPadding!, right: 0)

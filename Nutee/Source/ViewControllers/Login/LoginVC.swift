@@ -59,8 +59,8 @@ class LoginVC: UIViewController {
         signInBtn.isEnabled = false
         idTextField.tintColor = .nuteeGreen
         pwTextField.tintColor = .nuteeGreen
-        idTextField.layer.addBorder([.bottom], color: .pantoneGreen2020, width: 1)
-        pwTextField.layer.addBorder([.bottom], color: .pantoneGreen2020, width: 1)
+        idTextField.addBorder(.bottom, color: .pantoneGreen2020, thickness: 1)
+        pwTextField.addBorder(.bottom, color: .pantoneGreen2020, thickness: 1)
         
         self.tabBarController?.tabBar.isHidden = true
         autoSignUpBtn.tintColor = .nuteeGreen
@@ -170,7 +170,8 @@ class LoginVC: UIViewController {
 extension LoginVC : UITextFieldDelegate {
     
     @objc func textFieldDidChange(_ textField: UITextField) {
-        if idTextField.text != "" && pwTextField.text?.validatePassword() ?? false {                    signInBtn.backgroundColor = .pantoneGreen2020
+        if idTextField.text != "" && pwTextField.text?.validatePassword() ?? false {
+            signInBtn.backgroundColor = .pantoneGreen2020
             signInBtn.isEnabled = true
         } else {
             signInBtn.backgroundColor = .veryLightPink
@@ -260,8 +261,8 @@ extension LoginVC {
                 
             //                self.successAdd = true
             case .requestErr(_):
-                self.idTextField.layer.addBorder([.bottom], color: .red, width: 1)
-                self.pwTextField.layer.addBorder([.bottom], color: .red, width: 1)
+                self.idTextField.addBorder(.bottom, color: .red, thickness: 1)
+                self.pwTextField.addBorder(.bottom, color: .red, thickness: 1)
                 self.idErrorLabel.text = "아이디 혹은 비밀번호가 다릅니다"
                 self.pwErrorLabel.text = "아이디 혹은 비밀번호가 다릅니다"
                 self.idErrorLabel.sizeToFit()
@@ -270,8 +271,8 @@ extension LoginVC {
                 print("request error")
             //                self.successAdd = false
             case .pathErr:
-                self.idTextField.layer.addBorder([.bottom], color: .red, width: 1)
-                self.pwTextField.layer.addBorder([.bottom], color: .red, width: 1)
+                self.idTextField.addBorder(.bottom, color: .red, thickness: 1)
+                self.pwTextField.addBorder(.bottom, color: .red, thickness: 1)
                 self.idErrorLabel.text = "아이디 혹은 비밀번호가 다릅니다"
                 self.pwErrorLabel.text = "아이디 혹은 비밀번호가 다릅니다"
                 self.idErrorLabel.sizeToFit()
@@ -280,8 +281,8 @@ extension LoginVC {
                 print(".pathErr")
             //                self.successAdd = false
             case .serverErr:
-                self.idTextField.layer.addBorder([.bottom], color: .red, width: 1)
-                self.pwTextField.layer.addBorder([.bottom], color: .red, width: 1)
+                self.idTextField.addBorder(.bottom, color: .red, thickness: 1)
+                self.pwTextField.addBorder(.bottom, color: .red, thickness: 1)
                 self.idErrorLabel.text = "아이디 혹은 비밀번호가 다릅니다"
                 self.pwErrorLabel.text = "아이디 혹은 비밀번호가 다릅니다"
                 self.idErrorLabel.sizeToFit()
@@ -290,8 +291,8 @@ extension LoginVC {
                 print(".serverErr")
             //                self.successAdd = false
             case .networkFail :
-                self.idTextField.layer.addBorder([.bottom], color: .red, width: 1)
-                self.pwTextField.layer.addBorder([.bottom], color: .red, width: 1)
+                self.idTextField.addBorder(.bottom, color: .red, thickness: 1)
+                self.pwTextField.addBorder(.bottom, color: .red, thickness: 1)
                 self.idErrorLabel.text = "아이디 혹은 비밀번호가 다릅니다"
                 self.pwErrorLabel.text = "아이디 혹은 비밀번호가 다릅니다"
                 self.idErrorLabel.sizeToFit()

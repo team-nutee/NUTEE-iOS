@@ -21,7 +21,8 @@ class NameVC: UIViewController {
     
     // MARK: - Variables and Properties
     var animationDuration: TimeInterval = 2
-    var flag: Bool = false
+    var flag : Bool = false
+    var id : String = ""
     
     // MARK: - Life Cycle
     
@@ -29,13 +30,14 @@ class NameVC: UIViewController {
         super.viewDidLoad()
         
         addKeyboardNotification()
-//        preBtn.addTarget(self, action: #selector(forDismiss), for: .touchUpInside)
+        nextBtn.addTarget(self, action: #selector(toNext), for: .touchUpInside)
+        print("id : ",id)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         setInit()
-        animation()
+        animate()
     }
     
     // MARK: - Helper
@@ -53,26 +55,26 @@ class NameVC: UIViewController {
         preBtn.tintColor = .nuteeGreen
         nextBtn.tintColor = .nuteeGreen
         nameTextField.tintColor = .nuteeGreen
-        nameTextField.layer.addBorder([.bottom], color: .nuteeGreen, width: 1)
-        //        numTextField.isHidden = true
+        nameTextField.addBorder(.bottom, color: .nuteeGreen, thickness: 1)
     }
     
-//    @objc func forDismiss() {
-//        self.dismiss(animated: false, completion: nil)
-//    }
-    
-    func animation() {
-        guard flag else {
-            animate()
-            flag = true
-            return
-        }
+    @objc func toNext(){
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "PassWordVC") as! PassWordVC
+        vc.modalPresentationStyle = .fullScreen
+        vc.id = self.id
+        vc.name = nameTextField.text!
+        
+        self.present(vc, animated: false)
     }
-    
-    @IBAction func goTo2(_ sender: UIButton) {
-        performSegue(withIdentifier: "unwindVC3toVC2", sender: self)
+
+}
+
+extension NameVC {
+  @IBAction func unwindSegue(_ segue: UIStoryboardSegue) {
+  
     }
 }
+
 
 extension NameVC {
     func addKeyboardNotification() {
@@ -86,8 +88,14 @@ extension NameVC {
             let curve = info[UIResponder.keyboardAnimationCurveUserInfoKey] as! UInt
             let keyboardFrame = (info[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
             let keyboardHeight = keyboardFrame.height
-            let window = UIApplication.shared.keyWindow
-            let bottomPadding = window?.safeAreaInsets.bottom
+            let keyWindow = UIApplication.shared.connectedScenes
+                .filter({$0.activationState == .foregroundActive})
+                .map({$0 as? UIWindowScene})
+                .compactMap({$0})
+                .first?.windows
+                .filter({$0.isKeyWindow}).first
+            //            let window = UIApplication.shared.keyWindow
+            let bottomPadding = keyWindow?.safeAreaInsets.bottom
             
             buttonYLayoutConstraint.constant = (keyboardHeight - bottomPadding!)
             
@@ -110,7 +118,7 @@ extension NameVC {
             })
         }
     }
-        
+    
 }
 
 extension NameVC : UITextFieldDelegate {
@@ -153,7 +161,7 @@ extension NameVC {
                         self.progressView.setProgress(0.5, animated: true)
                         
         })
-                
+        
         UIView.animate(withDuration: animationDuration,
                        delay: animationDuration * 1.5,
                        usingSpringWithDamping: 0.85,
@@ -165,7 +173,7 @@ extension NameVC {
                         self.nameTextField.transform = CGAffineTransform.init(translationX: -50, y: 0)
                         
         })
-         
+        
     }
-
+    
 }

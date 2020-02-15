@@ -48,10 +48,10 @@ class FindVC: UIViewController {
         idCertificateBtn.isEnabled = false
         pwCertificateBtn.isEnabled = false
 
-        idTextField.layer.addBorder([.bottom], color: .nuteeGreen, width: 1)
+        idTextField.addBorder(.bottom, color: .nuteeGreen, thickness: 1)
         idTextField.tintColor = .nuteeGreen
         idTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
-        pwTextField.layer.addBorder([.bottom], color: .nuteeGreen, width: 1)
+        pwTextField.addBorder(.bottom, color: .nuteeGreen, thickness: 1)
         pwTextField.tintColor = .nuteeGreen
         pwTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
 

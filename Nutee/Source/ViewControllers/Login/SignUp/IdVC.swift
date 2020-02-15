@@ -19,24 +19,25 @@ class IdVC: UIViewController {
     @IBOutlet weak var closeBtn: UIButton!
     @IBOutlet weak var bottomYLayoutConstraint: NSLayoutConstraint!
     
-
+    
     // MARK: - Variables and Properties
     var animationDuration: TimeInterval = 2
     var flag: Bool = false
-
+    
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        preBtn.addTarget(self, action: #selector(forDismiss), for: .touchUpInside)
+        addKeyboardNotification()
+        nextBtn.addTarget(self, action: #selector(toNext), for: .touchUpInside)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
         setInit()
-        animation()
+        animate()
     }
     
     
@@ -47,7 +48,7 @@ class IdVC: UIViewController {
         
         progressView.tintColor = .nuteeGreen
         progressView.progress = 0
-
+        
         closeBtn.tintColor = .nuteeGreen
         
         guideLabel.alpha = 0
@@ -57,26 +58,25 @@ class IdVC: UIViewController {
         preBtn.tintColor = .nuteeGreen
         nextBtn.tintColor = .nuteeGreen
         idTextField.tintColor = .nuteeGreen
-        idTextField.layer.addBorder([.bottom], color: .nuteeGreen, width: 1)
-//        numTextField.isHidden = true
+        idTextField.addBorder(.bottom, color: .nuteeGreen, thickness: 1)
     }
     
-    @objc func forDismiss() {
-        self.dismiss(animated: false, completion: nil)
+    @objc func toNext(){
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "NameVC") as! NameVC
+        vc.modalPresentationStyle = .fullScreen
+        vc.id = idTextField.text!
+        
+        self.present(vc, animated: false)
     }
-    
-    func animation() {
-        guard flag else {
-            animate()
-            flag = true
-            return
-        }
-    }
-    
-    @IBAction func unwinzdVC3toVC2 (segue : UIStoryboardSegue) {}
-
     
 }
+
+extension IdVC {
+  @IBAction func unwindSegue(_ segue: UIStoryboardSegue) {
+  
+    }
+}
+
 
 extension IdVC {
     func addKeyboardNotification() {
@@ -90,8 +90,14 @@ extension IdVC {
             let curve = info[UIResponder.keyboardAnimationCurveUserInfoKey] as! UInt
             let keyboardFrame = (info[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
             let keyboardHeight = keyboardFrame.height
-            let window = UIApplication.shared.keyWindow
-            let bottomPadding = window?.safeAreaInsets.bottom
+            let keyWindow = UIApplication.shared.connectedScenes
+                .filter({$0.activationState == .foregroundActive})
+                .map({$0 as? UIWindowScene})
+                .compactMap({$0})
+                .first?.windows
+                .filter({$0.isKeyWindow}).first
+            //            let window = UIApplication.shared.keyWindow
+            let bottomPadding = keyWindow?.safeAreaInsets.bottom
             
             bottomYLayoutConstraint.constant = (keyboardHeight - bottomPadding!)
             
@@ -114,7 +120,7 @@ extension IdVC {
             })
         }
     }
-        
+    
 }
 
 extension IdVC : UITextFieldDelegate {
@@ -167,7 +173,7 @@ extension IdVC {
                         // self를 항상 붙여줘야함 (클로저 안에서)
                         self.closeBtn.alpha = 0
                         self.closeBtn.transform = CGAffineTransform.init(translationX: -30, y: 0)
-
+                        
         })
         
         UIView.animate(withDuration: animationDuration,
@@ -179,9 +185,9 @@ extension IdVC {
                         // self를 항상 붙여줘야함 (클로저 안에서)
                         self.idTextField.alpha = 1
                         self.idTextField.transform = CGAffineTransform.init(translationX: -50, y: 0)
-
+                        
         })
         
     }
-
+    
 }

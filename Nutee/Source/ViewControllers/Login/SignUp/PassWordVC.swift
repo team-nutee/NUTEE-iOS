@@ -27,6 +27,8 @@ class PassWordVC: UIViewController {
     // MARK: - Variables and Properties
     var animationDuration: TimeInterval = 2
     var flag: Bool = false
+    var id : String = ""
+    var name : String = ""
     
     // MARK: - Life Cycle
     
@@ -37,8 +39,10 @@ class PassWordVC: UIViewController {
         
         passwordTextField.addTarget(self, action: #selector(PassWordVC.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
         passwordTextField2.addTarget(self, action: #selector(PassWordVC.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
-        preBtn.addTarget(self, action: #selector(forDismiss), for: .touchUpInside)
-
+        
+        nextBtn.addTarget(self, action: #selector(toNext), for: .touchUpInside)
+        print("id : ", id)
+        print("name : ", name)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -67,19 +71,27 @@ class PassWordVC: UIViewController {
         preBtn.tintColor = .nuteeGreen
         nextBtn.tintColor = .nuteeGreen
         passwordTextField.tintColor = .nuteeGreen
-        passwordTextField.layer.addBorder([.bottom], color: .nuteeGreen, width: 1)
+        passwordTextField.addBorder(.bottom, color: .nuteeGreen, thickness: 1)
         passwordTextField2.tintColor = .nuteeGreen
-        passwordTextField2.layer.addBorder([.bottom], color: .nuteeGreen, width: 1)
-        //        numTextField.isHidden = true
+        
+        passwordTextField2.addBorder(.bottom, color: .nuteeGreen, thickness: 1)
+        
     }
     
-    @objc func forDismiss() {
-        self.dismiss(animated: false, completion: nil)
+    @objc func toNext(){
+        signUpService(id, passwordTextField.text!, name)
+        
     }
-
 
     
 }
+
+extension PassWordVC {
+  @IBAction func unwindSegue(_ segue: UIStoryboardSegue) {
+  
+    }
+}
+
 
 // MARK: - KeyBoard
 
@@ -95,8 +107,14 @@ extension PassWordVC {
             let curve = info[UIResponder.keyboardAnimationCurveUserInfoKey] as! UInt
             let keyboardFrame = (info[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
             let keyboardHeight = keyboardFrame.height
-            let window = UIApplication.shared.keyWindow
-            let bottomPadding = window?.safeAreaInsets.bottom
+            let keyWindow = UIApplication.shared.connectedScenes
+                .filter({$0.activationState == .foregroundActive})
+                .map({$0 as? UIWindowScene})
+                .compactMap({$0})
+                .first?.windows
+                .filter({$0.isKeyWindow}).first
+            //            let window = UIApplication.shared.keyWindow
+            let bottomPadding = keyWindow?.safeAreaInsets.bottom
             
             buttonYLayoutConstraint.constant = (keyboardHeight - bottomPadding!)
             
@@ -132,10 +150,10 @@ extension PassWordVC : UITextFieldDelegate {
         if passwordTextField.text?.validatePassword() == false  {
             alertAnimation()
             alertLabel.text = "8자 이상의 영어 대문자, 소문자, 숫자가 포함된 비밀번호를 입력해주세요."
-            passwordTextField.layer.addBorder([.bottom], color: .red, width: 1)
+            passwordTextField.addBorder(.bottom, color: .red, thickness: 1)
         } else if passwordTextField.text?.validatePassword() == true{
             //            alertLabel.text = "8자 이상의 영어 대문자, 소문자, 숫자가 포함된 비밀번호를 입력해주세요."
-            passwordTextField.layer.addBorder([.bottom], color: .nuteeGreen, width: 1)
+            passwordTextField.addBorder(.bottom, color: .nuteeGreen, thickness: 1)
             reversAlertAnimation()
         }
         
@@ -143,11 +161,11 @@ extension PassWordVC : UITextFieldDelegate {
             alertLabel.text = "비밀번호를 확인해주세요"
             alertAnimation2()
             alertAnimation()
-            passwordTextField2.layer.addBorder([.bottom], color: .red, width: 1)
-            passwordTextField.layer.addBorder([.bottom], color: .red, width: 1)
+            passwordTextField2.addBorder(.bottom, color: .red, thickness: 1)
+            passwordTextField.addBorder(.bottom, color: .red, thickness: 1)
         } else if passwordTextField2.text != "" {
-            passwordTextField.layer.addBorder([.bottom], color: .nuteeGreen, width: 1)
-            passwordTextField2.layer.addBorder([.bottom], color: .nuteeGreen, width: 1)
+            passwordTextField.addBorder(.bottom, color: .nuteeGreen, thickness: 1)
+            passwordTextField2.addBorder(.bottom, color: .nuteeGreen, thickness: 1)
             reversAlertAnimation()
             reversAlertAnimation2()
         }
@@ -265,4 +283,66 @@ extension PassWordVC {
         })
     }
     
+}
+
+extension PassWordVC {
+    func signUpService(_ userId: String, _ password: String,_ nickname : String) {
+        UserService.shared.signUp(userId, password, nickname) { responsedata in
+            
+            switch responsedata {
+                
+            // NetworkResult 의 요소들
+            case .success(let res):
+                let response = res as! SignUp
+                
+                print("회원가입 완료")
+                print(response)
+
+                
+            //                self.successAdd = true
+            case .requestErr(_):
+                self.alertAnimation()
+                self.passwordTextField.addBorder(.bottom, color: .red, thickness: 1)
+                self.passwordTextField2.addBorder(.bottom, color: .red, thickness: 1)
+                self.passwordTextField.text = "에러로 인해 회원가입이 진행되지 않았습니다."
+                self.passwordTextField2.text = "에러로 인해 회원가입이 진행되지 않았습니다."
+                self.passwordTextField.sizeToFit()
+                self.passwordTextField2.sizeToFit()
+                print("request error")
+            //                self.successAdd = false
+            case .pathErr:
+                self.alertAnimation()
+                self.passwordTextField.addBorder(.bottom, color: .red, thickness: 1)
+                self.passwordTextField2.addBorder(.bottom, color: .red, thickness: 1)
+                self.passwordTextField.text = "에러로 인해 회원가입이 진행되지 않았습니다."
+                self.passwordTextField2.text = "에러로 인해 회원가입이 진행되지 않았습니다."
+                self.passwordTextField.sizeToFit()
+                self.passwordTextField2.sizeToFit()
+                print(".pathErr")
+            //                self.successAdd = false
+            case .serverErr:
+                self.alertAnimation()
+                self.passwordTextField.addBorder(.bottom, color: .red, thickness: 1)
+                self.passwordTextField2.addBorder(.bottom, color: .red, thickness: 1)
+                self.passwordTextField.text = "에러로 인해 회원가입이 진행되지 않았습니다."
+                self.passwordTextField2.text = "에러로 인해 회원가입이 진행되지 않았습니다."
+                self.passwordTextField.sizeToFit()
+                self.passwordTextField2.sizeToFit()
+                print(".serverErr")
+            //                self.successAdd = false
+            case .networkFail :
+                self.alertAnimation()
+                self.passwordTextField.addBorder(.bottom, color: .red, thickness: 1)
+                self.passwordTextField2.addBorder(.bottom, color: .red, thickness: 1)
+                self.passwordTextField.text = "에러로 인해 회원가입이 진행되지 않았습니다."
+                self.passwordTextField2.text = "에러로 인해 회원가입이 진행되지 않았습니다."
+                self.passwordTextField.sizeToFit()
+                self.passwordTextField2.sizeToFit()
+                print("failure")
+                //                self.successAdd = false
+            }
+        }
+        
+    }
+
 }

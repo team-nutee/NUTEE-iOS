@@ -45,7 +45,7 @@ class SetProfileVC: UIViewController {
         setIMGBtn.backgroundColor = .nuteeGreen
         profileIMG.backgroundColor = .lightGray
         
-        nameTextField.layer.addBorder([.bottom], color: .nuteeGreen, width: 1)
+        nameTextField.addBorder(.bottom, color: .nuteeGreen, thickness: 1)
         nameTextField.tintColor = .nuteeGreen
         nameTextField.text = name
         

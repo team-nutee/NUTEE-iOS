@@ -35,13 +35,11 @@ class EmailVC: UIViewController {
         super.viewDidLoad()
         
         closeBtn.addTarget(self, action: #selector(close), for: .touchUpInside)
-        
+        nextBtn.addTarget(self, action: #selector(toNext), for: .touchUpInside)
         emailTextField.addTarget(self, action: #selector(EmailVC.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
-        
         emailTextField.addTarget(self, action: #selector(EmailVC.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
 
         certificationBtn.addTarget(self, action: #selector(certification), for: .touchUpInside)
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -73,16 +71,24 @@ class EmailVC: UIViewController {
         nextBtn.tintColor = .nuteeGreen
         
         emailTextField.tintColor = .nuteeGreen
-        emailTextField.layer.addBorder([.bottom], color: .nuteeGreen, width: 1)
+        emailTextField.addBorder(.bottom, color: .nuteeGreen, thickness: 1)
         
         numTextField.tintColor = .nuteeGreen
-        numTextField.layer.addBorder([.bottom], color: .nuteeGreen, width: 1)
+        numTextField.addBorder(.bottom, color: .nuteeGreen, thickness: 1)
         numTextField.alpha = 0
     }
     
     @objc func close() {
         self.dismiss(animated: true, completion: nil)
     }
+    
+    @objc func toNext(){
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "IdVC") as! IdVC
+        vc.modalPresentationStyle = .fullScreen
+        
+        self.present(vc, animated: false)
+    }
+
     
     @objc func certification(){
         certificationAnimate()
@@ -102,8 +108,14 @@ extension EmailVC {
             let curve = info[UIResponder.keyboardAnimationCurveUserInfoKey] as! UInt
             let keyboardFrame = (info[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
             let keyboardHeight = keyboardFrame.height
-            let window = UIApplication.shared.keyWindow
-            let bottomPadding = window?.safeAreaInsets.bottom
+            let keyWindow = UIApplication.shared.connectedScenes
+            .filter({$0.activationState == .foregroundActive})
+            .map({$0 as? UIWindowScene})
+            .compactMap({$0})
+            .first?.windows
+            .filter({$0.isKeyWindow}).first
+//            let window = UIApplication.shared.keyWindow
+            let bottomPadding = keyWindow?.safeAreaInsets.bottom
             
             bottomYLayoutConstraint.constant = (keyboardHeight - bottomPadding!)
             
