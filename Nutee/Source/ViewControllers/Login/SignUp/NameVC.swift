@@ -30,6 +30,7 @@ class NameVC: UIViewController {
         super.viewDidLoad()
         
         addKeyboardNotification()
+        nameTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         nextBtn.addTarget(self, action: #selector(toNext), for: .touchUpInside)
         print("id : ",id)
     }
@@ -45,7 +46,7 @@ class NameVC: UIViewController {
     func setInit() {
         
         progressView.tintColor = .nuteeGreen
-        progressView.progress = 0.25
+        progressView.progress = 0.5
         
         
         guideLabel.alpha = 0
@@ -53,7 +54,7 @@ class NameVC: UIViewController {
         nameTextField.alpha = 0
         guideLabel2.alpha = 0
         preBtn.tintColor = .nuteeGreen
-        nextBtn.tintColor = .nuteeGreen
+        nextBtn.isEnabled = false
         nameTextField.tintColor = .nuteeGreen
         nameTextField.addBorder(.bottom, color: .nuteeGreen, thickness: 1)
     }
@@ -123,6 +124,17 @@ extension NameVC {
 
 extension NameVC : UITextFieldDelegate {
     
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        if nameTextField.text != "" {
+            nextBtn.isEnabled = true
+            nextBtn.tintColor = .nuteeGreen
+        } else {
+            nextBtn.isEnabled = false
+            nextBtn.tintColor = nil
+        }
+    }
+
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
         self.view.endEditing(true)
     }
@@ -158,7 +170,7 @@ extension NameVC {
                        options: [.curveEaseIn],
                        animations: {
                         // self를 항상 붙여줘야함 (클로저 안에서)
-                        self.progressView.setProgress(0.5, animated: true)
+                        self.progressView.setProgress(0.75, animated: true)
                         
         })
         

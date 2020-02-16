@@ -59,8 +59,8 @@ class LoginVC: UIViewController {
         signInBtn.isEnabled = false
         idTextField.tintColor = .nuteeGreen
         pwTextField.tintColor = .nuteeGreen
-        idTextField.addBorder(.bottom, color: .pantoneGreen2020, thickness: 1)
-        pwTextField.addBorder(.bottom, color: .pantoneGreen2020, thickness: 1)
+        idTextField.addBorder(.bottom, color: .nuteeGreen, thickness: 1)
+        pwTextField.addBorder(.bottom, color: .nuteeGreen, thickness: 1)
         
         self.tabBarController?.tabBar.isHidden = true
         autoSignUpBtn.tintColor = .nuteeGreen
@@ -75,8 +75,8 @@ class LoginVC: UIViewController {
         
         signInBtn.tintColor = .white
         signInBtn.setRounded(radius: 10)
-        signUpBtn.tintColor = .pantoneGreen2019
-        findBtn.tintColor = .pantoneGreen2019
+        signUpBtn.tintColor = .nuteeGreen
+        findBtn.tintColor = .nuteeGreen
         
         idTextField.addTarget(self, action: #selector(LoginVC.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
         pwTextField.addTarget(self, action: #selector(LoginVC.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
@@ -97,11 +97,8 @@ class LoginVC: UIViewController {
         let password = UserDefaults.standard.value(forKey: "pw")
 
         if userid != nil && password != nil {
-                        
             signInService(userid as! String, password as! String)
-            
         } else {
-            print("자동로그인 안함")
             return
         }
     }
@@ -171,7 +168,7 @@ extension LoginVC : UITextFieldDelegate {
     
     @objc func textFieldDidChange(_ textField: UITextField) {
         if idTextField.text != "" && pwTextField.text?.validatePassword() ?? false {
-            signInBtn.backgroundColor = .pantoneGreen2020
+            signInBtn.backgroundColor = .nuteeGreen
             signInBtn.isEnabled = true
         } else {
             signInBtn.backgroundColor = .veryLightPink

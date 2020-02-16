@@ -48,6 +48,7 @@ class PassWordVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         setInit()
+        
         animate()
     }
     
@@ -58,7 +59,7 @@ class PassWordVC: UIViewController {
     func setInit() {
         
         progressView.tintColor = .nuteeGreen
-        progressView.progress = 0.5
+        progressView.progress = 0.75
         
         alertLabel.alpha = 0
         alertLabel2.alpha = 0
@@ -69,27 +70,29 @@ class PassWordVC: UIViewController {
         passwordTextField.alpha = 0
         passwordTextField2.alpha = 0
         preBtn.tintColor = .nuteeGreen
-        nextBtn.tintColor = .nuteeGreen
+        nextBtn.isEnabled = false
         passwordTextField.tintColor = .nuteeGreen
-        passwordTextField.addBorder(.bottom, color: .nuteeGreen, thickness: 1)
         passwordTextField2.tintColor = .nuteeGreen
-        
+        passwordTextField.addBorder(.bottom, color: .nuteeGreen, thickness: 1)
         passwordTextField2.addBorder(.bottom, color: .nuteeGreen, thickness: 1)
         
     }
     
     @objc func toNext(){
         signUpService(id, passwordTextField.text!, name)
-        
     }
-
     
 }
 
 extension PassWordVC {
-  @IBAction func unwindSegue(_ segue: UIStoryboardSegue) {
-  
+    @IBAction func unwindSegue(_ segue: UIStoryboardSegue) {
+        
     }
+    
+    @IBAction func unwindToMainSegue(_ segue: UIStoryboardSegue) {
+        performSegue(withIdentifier: "EmailVC", sender: self)
+    }
+    
 }
 
 
@@ -151,10 +154,14 @@ extension PassWordVC : UITextFieldDelegate {
             alertAnimation()
             alertLabel.text = "8자 이상의 영어 대문자, 소문자, 숫자가 포함된 비밀번호를 입력해주세요."
             passwordTextField.addBorder(.bottom, color: .red, thickness: 1)
+            nextBtn.tintColor = nil
+            nextBtn.isEnabled = false
         } else if passwordTextField.text?.validatePassword() == true{
             //            alertLabel.text = "8자 이상의 영어 대문자, 소문자, 숫자가 포함된 비밀번호를 입력해주세요."
             passwordTextField.addBorder(.bottom, color: .nuteeGreen, thickness: 1)
             reversAlertAnimation()
+            nextBtn.tintColor = nil
+            nextBtn.isEnabled = false
         }
         
         if passwordTextField2.text != passwordTextField.text && passwordTextField2.text != "" {
@@ -163,11 +170,15 @@ extension PassWordVC : UITextFieldDelegate {
             alertAnimation()
             passwordTextField2.addBorder(.bottom, color: .red, thickness: 1)
             passwordTextField.addBorder(.bottom, color: .red, thickness: 1)
+            nextBtn.tintColor = nil
+            nextBtn.isEnabled = false
         } else if passwordTextField2.text != "" {
             passwordTextField.addBorder(.bottom, color: .nuteeGreen, thickness: 1)
             passwordTextField2.addBorder(.bottom, color: .nuteeGreen, thickness: 1)
             reversAlertAnimation()
             reversAlertAnimation2()
+            nextBtn.tintColor = .nuteeGreen
+            nextBtn.isEnabled = true
         }
     }
     
@@ -184,7 +195,6 @@ extension PassWordVC {
                        initialSpringVelocity: 1,
                        options: [.curveEaseIn],
                        animations: {
-                        // self를 항상 붙여줘야함 (클로저 안에서)
                         self.guideLabel.alpha = 1
                         self.guideLabel.transform = CGAffineTransform.init(translationX: 0, y: 50)
         })
@@ -195,7 +205,6 @@ extension PassWordVC {
                        initialSpringVelocity: 1,
                        options: [.curveEaseIn],
                        animations: {
-                        // self를 항상 붙여줘야함 (클로저 안에서)
                         self.guideLabel2.alpha = 1
                         self.guideLabel2.transform = CGAffineTransform.init(translationX: 0, y: 50)
                         self.guideLabel3.alpha = 1
@@ -209,8 +218,7 @@ extension PassWordVC {
                        initialSpringVelocity: 1,
                        options: [.curveEaseIn],
                        animations: {
-                        // self를 항상 붙여줘야함 (클로저 안에서)
-                        self.progressView.setProgress(0.75, animated: true)
+                        self.progressView.setProgress(1, animated: true)
                         
         })
         
@@ -220,7 +228,6 @@ extension PassWordVC {
                        initialSpringVelocity: 1,
                        options: [.curveEaseIn],
                        animations: {
-                        // self를 항상 붙여줘야함 (클로저 안에서)
                         self.passwordTextField.alpha = 1
                         self.passwordTextField.transform = CGAffineTransform.init(translationX: -50, y: 0)
                         self.passwordTextField2.alpha = 1
@@ -297,9 +304,11 @@ extension PassWordVC {
                 
                 print("회원가입 완료")
                 print(response)
-
+//                self.unwindToMainSegue(<#T##segue: UIStoryboardSegue##UIStoryboardSegue#>)
+                self.dismiss(animated: false, completion: {
+                    self.simpleAlert(title: "회원가입 완료", message: "확인")
+                })
                 
-            //                self.successAdd = true
             case .requestErr(_):
                 self.alertAnimation()
                 self.passwordTextField.addBorder(.bottom, color: .red, thickness: 1)
@@ -344,5 +353,5 @@ extension PassWordVC {
         }
         
     }
-
+    
 }

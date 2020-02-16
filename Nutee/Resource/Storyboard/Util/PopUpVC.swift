@@ -10,10 +10,18 @@ import UIKit
 
 class PopUpVC: UIViewController {
 
+    @IBOutlet weak var nextBtn: UIButton!
+    @IBOutlet weak var contentTextView: UITextView!
+    
+    var content : String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        
+        nextBtn.tintColor = .nuteeGreen
+        contentTextView.text = content
+        contentTextView.centerVertically()
     }
 
 

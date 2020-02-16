@@ -30,12 +30,13 @@ class IdVC: UIViewController {
         super.viewDidLoad()
         
         addKeyboardNotification()
+        idTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         nextBtn.addTarget(self, action: #selector(toNext), for: .touchUpInside)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        
         setInit()
         animate()
     }
@@ -47,7 +48,7 @@ class IdVC: UIViewController {
     func setInit() {
         
         progressView.tintColor = .nuteeGreen
-        progressView.progress = 0
+        progressView.progress = 0.25
         
         closeBtn.tintColor = .nuteeGreen
         
@@ -56,7 +57,7 @@ class IdVC: UIViewController {
         idTextField.alpha = 0
         guideLabel2.alpha = 0
         preBtn.tintColor = .nuteeGreen
-        nextBtn.tintColor = .nuteeGreen
+        nextBtn.isEnabled = false
         idTextField.tintColor = .nuteeGreen
         idTextField.addBorder(.bottom, color: .nuteeGreen, thickness: 1)
     }
@@ -125,6 +126,16 @@ extension IdVC {
 
 extension IdVC : UITextFieldDelegate {
     
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        if idTextField.text != "" {
+            nextBtn.isEnabled = true
+            nextBtn.tintColor = .nuteeGreen
+        } else {
+            nextBtn.isEnabled = false
+            nextBtn.tintColor = nil
+        }
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
         self.view.endEditing(true)
     }
@@ -160,7 +171,7 @@ extension IdVC {
                        options: [.curveEaseIn],
                        animations: {
                         // self를 항상 붙여줘야함 (클로저 안에서)
-                        self.progressView.setProgress(0.25, animated: true)
+                        self.progressView.setProgress(0.5, animated: true)
                         
         })
         

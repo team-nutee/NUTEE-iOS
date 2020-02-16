@@ -97,6 +97,13 @@ class EmailVC: UIViewController {
 }
 
 extension EmailVC {
+  @IBAction func unwindSegue(_ segue: UIStoryboardSegue) {
+  
+    }
+}
+
+
+extension EmailVC {
     func addKeyboardNotification() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -183,6 +190,18 @@ extension EmailVC {
                         self.guideLabel2.transform = CGAffineTransform.init(translationX: 0, y: 50)
         })
         
+        UIView.animate(withDuration: animationDuration,
+                       delay: 0,
+                       usingSpringWithDamping: 0.85,
+                       initialSpringVelocity: 1,
+                       options: [.curveEaseIn],
+                       animations: {
+                        // self를 항상 붙여줘야함 (클로저 안에서)
+                        self.progressView.setProgress(0.25, animated: true)
+                        
+        })
+
+        
     }
     
     private func certificationAnimate(){
@@ -197,6 +216,7 @@ extension EmailVC {
                         self.numTextField.transform = CGAffineTransform.init(translationX: -50, y: 0)
 
         })
+
         
         UIView.animate(withDuration: animationDuration,
                        delay: 0,

@@ -104,21 +104,16 @@ struct UserService {
                         switch status {
                         case 200:
                             do{
-                                print("start decode")
                                 let headerFields = response.response?.allHeaderFields as? [String: String]
-                                print("haederField", headerFields)
                                 var cookie : String? = headerFields!["Set-Cookie"]
-                                print("before : ", cookie!)
                                 var cookies : [String]? = []
                                 cookies = cookie?.components(separatedBy: ";")
                                 cookie = cookies?[0]
-                                print("after : ", cookie!)
                                 UserDefaults.standard.set(cookie, forKey: "Cookie")
                                 
                                 let decoder = JSONDecoder()
                                 let result = try decoder.decode(SignIn.self, from: value)
                                 completion(.success(result))
-                                print("result : ",result)
                             } catch {
                                 completion(.pathErr)
                             }
