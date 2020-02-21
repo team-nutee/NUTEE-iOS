@@ -79,6 +79,10 @@ class NewsFeedCell: UITableViewCell {
     
     //MARK: - Helper
     
+    @IBAction func showDetailProfile(_ sender: Any) {
+        showDetailNewsFeed()
+    }
+    
     @IBAction func btnRepost(_ sender: UIButton) {
         // .selected State를 활성화 하기 위한 코드
         btnRepost.isSelected = !btnRepost.isSelected
