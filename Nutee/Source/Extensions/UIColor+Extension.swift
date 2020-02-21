@@ -68,5 +68,11 @@ extension UIColor {
         return UIColor(red: 239 / 255.0, green: 251.0 / 255.0, blue: 245.0 / 255.0 , alpha: 1.0)
     }
 
+    @nonobjc class var commentWindowLight: UIColor {
+        return UIColor(red: 230 / 255.0, green: 234.0 / 255.0, blue: 240.0 / 255.0 , alpha: 1.0)
+    }
     
+    @nonobjc class var commentWindowDark: UIColor {
+        return UIColor(red: 20 / 255.0, green: 22.0 / 255.0, blue: 23.0 / 255.0 , alpha: 1.0)
+    }
 }
