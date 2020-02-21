@@ -9,7 +9,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="NewsFeedTableHeaderSection" customModule="NUTEE" customModuleProvider="target">
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="HeaderNewsFeedView" customModule="NUTEE" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -227,7 +227,6 @@
                             </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="Qgb-mh-QkS" secondAttribute="trailing" id="0wq-yN-Y5e"/>
                         <constraint firstAttribute="trailing" secondItem="lrq-gV-o6j" secondAttribute="trailing" constant="15" id="3u9-5p-uIw"/>
@@ -262,9 +261,9 @@
                         <constraint firstItem="so6-Sa-QPl" firstAttribute="top" secondItem="iCo-tJ-Oqa" secondAttribute="bottom" constant="5" id="ymH-pL-hlm"/>
                         <constraint firstItem="Qgb-mh-QkS" firstAttribute="width" secondItem="mSC-tm-zlW" secondAttribute="width" multiplier="0.25" id="zwK-Bw-tuv"/>
                     </constraints>
+                    <viewLayoutGuide key="safeArea" id="5Uh-IJ-sPN"/>
                 </view>
             </subviews>
-            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
             <constraints>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="mSC-tm-zlW" secondAttribute="trailing" id="4G8-Do-VOU"/>
                 <constraint firstItem="mSC-tm-zlW" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="4cq-1W-1qF"/>

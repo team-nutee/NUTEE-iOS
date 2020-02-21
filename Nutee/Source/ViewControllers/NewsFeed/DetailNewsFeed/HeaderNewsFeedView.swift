@@ -8,9 +8,9 @@
 
 import UIKit
 
-class NewsFeedTableHeaderSection: UITableViewHeaderFooterView {
+class HeaderNewsFeedView: UITableViewHeaderFooterView {
     
-    weak var detailNewsFeedVC: UIViewController?
+    //MARK: - UI components
     
     // User Information
     @IBOutlet var imgvwUserImg: UIImageView!
@@ -46,6 +46,8 @@ class NewsFeedTableHeaderSection: UITableViewHeaderFooterView {
     @IBOutlet var btnMore: UIButton!
     
     //MARK: - Variables and Properties
+    
+    weak var detailNewsFeedVC: UIViewController?
     
     var indexPath = 1
     let dataPeng02 = [ "sample_peng01.jepg", "sample_peng02.jepg" ]

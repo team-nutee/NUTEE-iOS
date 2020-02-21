@@ -40,6 +40,6 @@ class ReplyCell: UITableViewCell{
         lblCommentTime.text = "2 min"
         
         txtvwCommentContents.sizeToFit()
-        txtvwCommentContents.text = "Peng-Ha! Education Boardcasting System."
+        txtvwCommentContents.text = "Peng-Ha! Educational Boardcasting System."
     }
 }
