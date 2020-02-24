@@ -73,6 +73,7 @@
                                 </label>
                             </subviews>
                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            <gestureRecognizers/>
                             <constraints>
                                 <constraint firstItem="NTf-ju-WRN" firstAttribute="leading" secondItem="MbR-k3-nhu" secondAttribute="leading" id="7nl-5h-iCv"/>
                                 <constraint firstAttribute="height" constant="170" id="VS3-VD-054"/>
@@ -89,6 +90,10 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iCo-tJ-Oqa">
                             <rect key="frame" x="15" y="519" width="345" height="170"/>
                             <subviews>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4pF-XX-ZSl">
+                                    <rect key="frame" x="0.0" y="0.0" width="345" height="170"/>
+                                    <gestureRecognizers/>
+                                </imageView>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cvn-Hc-7VO">
                                     <rect key="frame" x="0.0" y="0.0" width="345" height="170"/>
                                     <subviews>
@@ -175,12 +180,16 @@
                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             <constraints>
                                 <constraint firstAttribute="bottom" secondItem="c2a-Qw-ERq" secondAttribute="bottom" id="N6z-ER-39U"/>
+                                <constraint firstItem="4pF-XX-ZSl" firstAttribute="leading" secondItem="iCo-tJ-Oqa" secondAttribute="leading" id="WvU-LS-nkv"/>
+                                <constraint firstAttribute="bottom" secondItem="4pF-XX-ZSl" secondAttribute="bottom" id="Xq0-tf-qSa"/>
                                 <constraint firstAttribute="trailing" secondItem="cvn-Hc-7VO" secondAttribute="trailing" id="eI6-Ja-rtQ"/>
                                 <constraint firstItem="cvn-Hc-7VO" firstAttribute="leading" secondItem="iCo-tJ-Oqa" secondAttribute="leading" id="lCj-H0-vmL"/>
                                 <constraint firstAttribute="bottom" secondItem="cvn-Hc-7VO" secondAttribute="bottom" id="lrO-r4-eOv"/>
                                 <constraint firstAttribute="height" constant="300" id="nFC-L7-fZd"/>
                                 <constraint firstItem="cvn-Hc-7VO" firstAttribute="top" secondItem="iCo-tJ-Oqa" secondAttribute="top" id="oS2-Bv-Qr8"/>
                                 <constraint firstAttribute="trailing" secondItem="c2a-Qw-ERq" secondAttribute="trailing" id="rWu-QE-Xlo"/>
+                                <constraint firstAttribute="trailing" secondItem="4pF-XX-ZSl" secondAttribute="trailing" id="udB-1V-HAp"/>
+                                <constraint firstItem="4pF-XX-ZSl" firstAttribute="top" secondItem="iCo-tJ-Oqa" secondAttribute="top" id="w1h-wh-ljl"/>
                                 <constraint firstItem="c2a-Qw-ERq" firstAttribute="top" secondItem="iCo-tJ-Oqa" secondAttribute="top" id="wrh-dk-euj"/>
                                 <constraint firstItem="c2a-Qw-ERq" firstAttribute="leading" secondItem="iCo-tJ-Oqa" secondAttribute="leading" id="xjC-TH-fpu"/>
                             </constraints>
@@ -264,6 +273,7 @@
                     <viewLayoutGuide key="safeArea" id="5Uh-IJ-sPN"/>
                 </view>
             </subviews>
+            <gestureRecognizers/>
             <constraints>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="mSC-tm-zlW" secondAttribute="trailing" id="4G8-Do-VOU"/>
                 <constraint firstItem="mSC-tm-zlW" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="4cq-1W-1qF"/>
@@ -278,6 +288,7 @@
                 <outlet property="btnLike" destination="JwB-ia-cdy" id="zyH-be-xU2"/>
                 <outlet property="btnMore" destination="Qgb-mh-QkS" id="BLv-Ph-vQ6"/>
                 <outlet property="btnRepost" destination="so6-Sa-QPl" id="q3u-Q3-dKq"/>
+                <outlet property="imgvwOne" destination="4pF-XX-ZSl" id="ZlA-PV-PVk"/>
                 <outlet property="imgvwUserImg" destination="tVf-Kz-8LT" id="0z4-jy-Sba"/>
                 <outlet property="lblFourMoreImg" destination="QV4-Rr-l8J" id="ahc-tU-iUW"/>
                 <outlet property="lblPostTime" destination="lrq-gV-o6j" id="new-OC-hIa"/>

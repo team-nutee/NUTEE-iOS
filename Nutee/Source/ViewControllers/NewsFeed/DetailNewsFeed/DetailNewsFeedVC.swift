@@ -147,7 +147,7 @@ extension DetailNewsFeedVC : UITableViewDataSource {
     
 }
 
-// MARK: - KeyBoard
+// MARK: - Reply KeyBoard PopUp
 
 extension DetailNewsFeedVC {
  
@@ -166,11 +166,11 @@ extension DetailNewsFeedVC {
             //            let safeBottomHeight = self.view.bottomAnchor
             let window = UIApplication.shared.keyWindow
             //                let bottomPadding = window?.safeAreaInsets.bottom
-            
-            
-            
-            CommentWindowToBottom.constant -= (keyboardHeight - tabbarHeight)
-            //                CommentWindowToBottom.constant = -300
+        
+            if CommentWindowToBottom.constant == 0 {
+                CommentWindowToBottom.constant -= (keyboardHeight - tabbarHeight)
+            }
+//            CommentWindowToBottom.constant = -300
             newsTV.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
             
             self.view.setNeedsLayout()

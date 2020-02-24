@@ -98,6 +98,10 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KiN-EK-KhK">
                                                     <rect key="frame" x="15" y="126" width="345" height="300"/>
                                                     <subviews>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="iCw-fw-IqV">
+                                                            <rect key="frame" x="0.0" y="0.0" width="345" height="300"/>
+                                                            <gestureRecognizers/>
+                                                        </imageView>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wx1-nk-Ney">
                                                             <rect key="frame" x="0.0" y="0.0" width="345" height="300"/>
                                                             <subviews>
@@ -185,11 +189,15 @@
                                                     <constraints>
                                                         <constraint firstItem="wx1-nk-Ney" firstAttribute="top" secondItem="KiN-EK-KhK" secondAttribute="top" id="3kx-9f-anx"/>
                                                         <constraint firstAttribute="height" constant="300" id="4a8-cc-g2S"/>
+                                                        <constraint firstAttribute="trailing" secondItem="iCw-fw-IqV" secondAttribute="trailing" id="A6r-wG-H0n"/>
                                                         <constraint firstAttribute="bottom" secondItem="2lf-L3-xnI" secondAttribute="bottom" id="Bsu-cO-dNT"/>
                                                         <constraint firstAttribute="trailing" secondItem="wx1-nk-Ney" secondAttribute="trailing" id="MCl-7z-06P"/>
+                                                        <constraint firstItem="iCw-fw-IqV" firstAttribute="leading" secondItem="KiN-EK-KhK" secondAttribute="leading" id="Mof-dg-USX"/>
                                                         <constraint firstAttribute="trailing" secondItem="2lf-L3-xnI" secondAttribute="trailing" id="YyU-LN-C0H"/>
                                                         <constraint firstAttribute="bottom" secondItem="wx1-nk-Ney" secondAttribute="bottom" id="bK3-qP-UA3"/>
+                                                        <constraint firstAttribute="bottom" secondItem="iCw-fw-IqV" secondAttribute="bottom" id="hSO-sN-v6z"/>
                                                         <constraint firstItem="wx1-nk-Ney" firstAttribute="leading" secondItem="KiN-EK-KhK" secondAttribute="leading" id="ook-a6-8ZU"/>
+                                                        <constraint firstItem="iCw-fw-IqV" firstAttribute="top" secondItem="KiN-EK-KhK" secondAttribute="top" id="uaM-HE-DuD"/>
                                                         <constraint firstItem="2lf-L3-xnI" firstAttribute="top" secondItem="KiN-EK-KhK" secondAttribute="top" id="vbL-AE-k2U"/>
                                                         <constraint firstItem="2lf-L3-xnI" firstAttribute="leading" secondItem="KiN-EK-KhK" secondAttribute="leading" id="y3w-Y6-bjf"/>
                                                     </constraints>
@@ -295,6 +303,7 @@
                                             <outlet property="btnLike" destination="R43-qM-ZRA" id="WVU-jN-I2i"/>
                                             <outlet property="btnRepost" destination="qh4-3I-kHl" id="n2Z-OZ-zg5"/>
                                             <outlet property="imgUserImg" destination="JHw-vv-fjF" id="uHj-rO-ftB"/>
+                                            <outlet property="imgvwOne" destination="iCw-fw-IqV" id="8eF-ps-1cS"/>
                                             <outlet property="lblFourMoreImg" destination="Gzh-W4-SEP" id="DDH-1t-LHg"/>
                                             <outlet property="lblPostTime" destination="PkB-5h-TOS" id="5wX-Zh-K1H"/>
                                             <outlet property="lblThreeMoreImg" destination="rHc-1L-3Rr" id="1gz-CX-R3j"/>
@@ -332,7 +341,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3W0-ku-QW4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="FZO-uH-poi"/>
             </objects>
             <point key="canvasLocation" x="5058.3999999999996" y="-324.38423645320199"/>
         </scene>
