@@ -74,7 +74,7 @@ extension NewsFeedVC : UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let test : [String] = ["","","",""]
+        let test : [String] = ["","","","",""]
         
         return test.count
     }

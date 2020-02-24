@@ -51,6 +51,8 @@
 		5E95CD6623EF30280090C39B /* FollowingTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E95CD6523EF30280090C39B /* FollowingTVC.swift */; };
 		5E95CD6823EF35280090C39B /* SettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E95CD6723EF35280090C39B /* SettingVC.swift */; };
 		5E95CD6A23EF36230090C39B /* ToPostVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E95CD6923EF36230090C39B /* ToPostVC.swift */; };
+		5EA5C67823F01E2E00BFB32B /* ProfileTVHV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA5C67723F01E2E00BFB32B /* ProfileTVHV.swift */; };
+		5EA5C67A23F01E5A00BFB32B /* Profile.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5EA5C67923F01E5A00BFB32B /* Profile.xib */; };
 		5EA5C67C23F023DC00BFB32B /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA5C67B23F023DC00BFB32B /* UITableView+Extension.swift */; };
 		5EA5C68023F02C9200BFB32B /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA5C67F23F02C9200BFB32B /* String+Extension.swift */; };
 		5EA5C68423F146E200BFB32B /* EmailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA5C68323F146E200BFB32B /* EmailVC.swift */; };
@@ -59,20 +61,11 @@
 		5EA5C68A23F1475000BFB32B /* PassWordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA5C68923F1475000BFB32B /* PassWordVC.swift */; };
 		5EB7415323F18AEE006AE529 /* CafeteriaTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB7415223F18AEE006AE529 /* CafeteriaTVC.swift */; };
 		5EB7415523F18FE5006AE529 /* Food.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB7415423F18FE5006AE529 /* Food.swift */; };
-		5EC6B35A23F5919200F490DA /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC6B35923F5919200F490DA /* UserService.swift */; };
-		5EC6B35C23F591A800F490DA /* SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC6B35B23F591A800F490DA /* SignUp.swift */; };
-		5EC6B35E23F597D900F490DA /* SignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC6B35D23F597D900F490DA /* SignIn.swift */; };
-		5EC6B36023F5C04000F490DA /* Notice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC6B35F23F5C04000F490DA /* Notice.swift */; };
-		5EC6B36223F5C05100F490DA /* NoticeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC6B36123F5C05000F490DA /* NoticeService.swift */; };
-		5EC6B36523F5C67B00F490DA /* ProflieTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC6B36323F5C67B00F490DA /* ProflieTableViewCell.swift */; };
-		5EC6B36623F5C67B00F490DA /* ProflieTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5EC6B36423F5C67B00F490DA /* ProflieTableViewCell.xib */; };
 		D519843E23E32418001AB351 /* NewsFeed.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D519843C23E32418001AB351 /* NewsFeed.storyboard */; };
 		D519843F23E32418001AB351 /* DetailNewsFeed.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D519843D23E32418001AB351 /* DetailNewsFeed.storyboard */; };
 		D519844523E325EE001AB351 /* DetailNewsFeedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D519844423E325EE001AB351 /* DetailNewsFeedVC.swift */; };
 		D53FD29423F43C6F00291597 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D53FD29323F43C6F00291597 /* Alamofire.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		D53FD29623F43C8B00291597 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D53FD29523F43C8B00291597 /* Kingfisher.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		D580664B23F0044D00180236 /* PostImgCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D580664A23F0044D00180236 /* PostImgCVCell.swift */; };
-		D580664D23F0045500180236 /* FullScreenImgCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D580664C23F0045500180236 /* FullScreenImgCVCell.swift */; };
 		D597189E23CEA79100117906 /* NoticeBoardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D597189D23CEA79100117906 /* NoticeBoardVC.swift */; };
 		D59718A023CEA87B00117906 /* NoticeBoardVO.swift in Sources */ = {isa = PBXBuildFile; fileRef = D597189F23CEA87B00117906 /* NoticeBoardVO.swift */; };
 		D59718A223CEA96700117906 /* NewsFeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59718A123CEA96700117906 /* NewsFeedCell.swift */; };
@@ -85,8 +78,8 @@
 		D59718B723CEA9DA00117906 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D59718B223CEA9DA00117906 /* Profile.storyboard */; };
 		D59718B823CEA9DA00117906 /* Chatting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D59718B323CEA9DA00117906 /* Chatting.storyboard */; };
 		D5DAA88F23E7EF2E0052E17B /* ReplyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5DAA88C23E7EF2E0052E17B /* ReplyCell.swift */; };
-		D5DAA89023E7EF2E0052E17B /* NewsFeedTableHeaderSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5DAA88D23E7EF2E0052E17B /* NewsFeedTableHeaderSection.swift */; };
-		D5DAA89423E7F0C70052E17B /* NewsFeedTableHeaderSection.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5DAA89223E7F0C60052E17B /* NewsFeedTableHeaderSection.xib */; };
+		D5DAA89023E7EF2E0052E17B /* HeaderNewsFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5DAA88D23E7EF2E0052E17B /* HeaderNewsFeedView.swift */; };
+		D5DAA89423E7F0C70052E17B /* HeaderNewsFeedView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5DAA89223E7F0C60052E17B /* HeaderNewsFeedView.xib */; };
 		D5DAC67423F42BB100226F20 /* Pods_Nutee.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5915003F64084812BCF9F67 /* Pods_Nutee.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		D5DAC67523F42BB100226F20 /* Pods_Nutee.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E5915003F64084812BCF9F67 /* Pods_Nutee.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D5EBD78423CFE69F00C2B7F5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D5EBD78323CFE69F00C2B7F5 /* Main.storyboard */; };
@@ -164,6 +157,8 @@
 		5E95CD6523EF30280090C39B /* FollowingTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingTVC.swift; sourceTree = "<group>"; };
 		5E95CD6723EF35280090C39B /* SettingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingVC.swift; sourceTree = "<group>"; };
 		5E95CD6923EF36230090C39B /* ToPostVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToPostVC.swift; sourceTree = "<group>"; };
+		5EA5C67723F01E2E00BFB32B /* ProfileTVHV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTVHV.swift; sourceTree = "<group>"; };
+		5EA5C67923F01E5A00BFB32B /* Profile.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Profile.xib; sourceTree = "<group>"; };
 		5EA5C67B23F023DC00BFB32B /* UITableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
 		5EA5C67F23F02C9200BFB32B /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		5EA5C68323F146E200BFB32B /* EmailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVC.swift; sourceTree = "<group>"; };
@@ -172,20 +167,13 @@
 		5EA5C68923F1475000BFB32B /* PassWordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassWordVC.swift; sourceTree = "<group>"; };
 		5EB7415223F18AEE006AE529 /* CafeteriaTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeteriaTVC.swift; sourceTree = "<group>"; };
 		5EB7415423F18FE5006AE529 /* Food.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Food.swift; sourceTree = "<group>"; };
-		5EC6B35923F5919200F490DA /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
-		5EC6B35B23F591A800F490DA /* SignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp.swift; sourceTree = "<group>"; };
-		5EC6B35D23F597D900F490DA /* SignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignIn.swift; sourceTree = "<group>"; };
-		5EC6B35F23F5C04000F490DA /* Notice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notice.swift; sourceTree = "<group>"; };
-		5EC6B36123F5C05000F490DA /* NoticeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeService.swift; sourceTree = "<group>"; };
-		5EC6B36323F5C67B00F490DA /* ProflieTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProflieTableViewCell.swift; sourceTree = "<group>"; };
-		5EC6B36423F5C67B00F490DA /* ProflieTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProflieTableViewCell.xib; sourceTree = "<group>"; };
 		D519843C23E32418001AB351 /* NewsFeed.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = NewsFeed.storyboard; sourceTree = "<group>"; };
 		D519843D23E32418001AB351 /* DetailNewsFeed.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DetailNewsFeed.storyboard; sourceTree = "<group>"; };
 		D519844423E325EE001AB351 /* DetailNewsFeedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailNewsFeedVC.swift; sourceTree = "<group>"; };
+		D52C2CAE24011BF2002B3D3F /* SKPhotoBrowser.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SKPhotoBrowser.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D52C2CB124011C39002B3D3F /* SKPhotoBrowser.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SKPhotoBrowser.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D53FD29323F43C6F00291597 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D53FD29523F43C8B00291597 /* Kingfisher.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Kingfisher.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D580664A23F0044D00180236 /* PostImgCVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostImgCVCell.swift; sourceTree = "<group>"; };
-		D580664C23F0045500180236 /* FullScreenImgCVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullScreenImgCVCell.swift; sourceTree = "<group>"; };
 		D597189D23CEA79100117906 /* NoticeBoardVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoticeBoardVC.swift; sourceTree = "<group>"; };
 		D597189F23CEA87B00117906 /* NoticeBoardVO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoticeBoardVO.swift; sourceTree = "<group>"; };
 		D59718A123CEA96700117906 /* NewsFeedCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsFeedCell.swift; sourceTree = "<group>"; };
@@ -199,8 +187,8 @@
 		D59718B323CEA9DA00117906 /* Chatting.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Chatting.storyboard; sourceTree = "<group>"; };
 		D5D394E923F3E63F008BDF26 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5DAA88C23E7EF2E0052E17B /* ReplyCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReplyCell.swift; sourceTree = "<group>"; };
-		D5DAA88D23E7EF2E0052E17B /* NewsFeedTableHeaderSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsFeedTableHeaderSection.swift; sourceTree = "<group>"; };
-		D5DAA89223E7F0C60052E17B /* NewsFeedTableHeaderSection.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsFeedTableHeaderSection.xib; sourceTree = "<group>"; };
+		D5DAA88D23E7EF2E0052E17B /* HeaderNewsFeedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderNewsFeedView.swift; sourceTree = "<group>"; };
+		D5DAA89223E7F0C60052E17B /* HeaderNewsFeedView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HeaderNewsFeedView.xib; sourceTree = "<group>"; };
 		D5DAC67123F402D700226F20 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5EBD78323CFE69F00C2B7F5 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		D5EBD78523D0269400C2B7F5 /* NewsFeedVO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeedVO.swift; sourceTree = "<group>"; };
@@ -413,9 +401,6 @@
 			children = (
 				5E21445B23C2F8F60053CFB9 /* Model.swift */,
 				5EB7415423F18FE5006AE529 /* Food.swift */,
-				5EC6B35B23F591A800F490DA /* SignUp.swift */,
-				5EC6B35D23F597D900F490DA /* SignIn.swift */,
-				5EC6B35F23F5C04000F490DA /* Notice.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -425,8 +410,6 @@
 			children = (
 				5E21445923C2F8E50053CFB9 /* APIConstants.swift */,
 				5E05AD7923DB1AC500E36AD4 /* NetworkResult.swift */,
-				5EC6B35923F5919200F490DA /* UserService.swift */,
-				5EC6B36123F5C05000F490DA /* NoticeService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -458,8 +441,8 @@
 				5E95CD6323EF30180090C39B /* FollowerTVC.swift */,
 				5E95CD6523EF30280090C39B /* FollowingTVC.swift */,
 				5E95CD6723EF35280090C39B /* SettingVC.swift */,
-				5EC6B36323F5C67B00F490DA /* ProflieTableViewCell.swift */,
-				5EC6B36423F5C67B00F490DA /* ProflieTableViewCell.xib */,
+				5EA5C67723F01E2E00BFB32B /* ProfileTVHV.swift */,
+				5EA5C67923F01E5A00BFB32B /* Profile.xib */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -515,6 +498,8 @@
 		97168F4A04CA7D3123636409 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D52C2CB124011C39002B3D3F /* SKPhotoBrowser.framework */,
+				D52C2CAE24011BF2002B3D3F /* SKPhotoBrowser.framework */,
 				D53FD29523F43C8B00291597 /* Kingfisher.framework */,
 				D53FD29323F43C6F00291597 /* Alamofire.framework */,
 				D5DAC67123F402D700226F20 /* Alamofire.framework */,
@@ -528,8 +513,7 @@
 			isa = PBXGroup;
 			children = (
 				D519843C23E32418001AB351 /* NewsFeed.storyboard */,
-				D5DAA89223E7F0C60052E17B /* NewsFeedTableHeaderSection.xib */,
-				D519843D23E32418001AB351 /* DetailNewsFeed.storyboard */,
+				D5C7795423FCECE000AC26A7 /* DetailNewsFeed */,
 			);
 			path = NewsFeed;
 			sourceTree = "<group>";
@@ -539,13 +523,28 @@
 			children = (
 				D59718A323CEA98300117906 /* NewsFeedVC.swift */,
 				D59718A123CEA96700117906 /* NewsFeedCell.swift */,
-				D580664A23F0044D00180236 /* PostImgCVCell.swift */,
-				D580664C23F0045500180236 /* FullScreenImgCVCell.swift */,
-				D519844423E325EE001AB351 /* DetailNewsFeedVC.swift */,
-				D5DAA88D23E7EF2E0052E17B /* NewsFeedTableHeaderSection.swift */,
-				D5DAA88C23E7EF2E0052E17B /* ReplyCell.swift */,
+				D591156D23FD06E1004E6A75 /* DetailNewsFeed */,
 			);
 			path = NewsFeed;
+			sourceTree = "<group>";
+		};
+		D591156D23FD06E1004E6A75 /* DetailNewsFeed */ = {
+			isa = PBXGroup;
+			children = (
+				D5DAA88D23E7EF2E0052E17B /* HeaderNewsFeedView.swift */,
+				D519844423E325EE001AB351 /* DetailNewsFeedVC.swift */,
+				D5DAA88C23E7EF2E0052E17B /* ReplyCell.swift */,
+			);
+			path = DetailNewsFeed;
+			sourceTree = "<group>";
+		};
+		D5C7795423FCECE000AC26A7 /* DetailNewsFeed */ = {
+			isa = PBXGroup;
+			children = (
+				D5DAA89223E7F0C60052E17B /* HeaderNewsFeedView.xib */,
+				D519843D23E32418001AB351 /* DetailNewsFeed.storyboard */,
+			);
+			path = DetailNewsFeed;
 			sourceTree = "<group>";
 		};
 		D5EBD78723D026A700C2B7F5 /* ValueObject */ = {
@@ -619,7 +618,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D5DAA89423E7F0C70052E17B /* NewsFeedTableHeaderSection.xib in Resources */,
+				D5DAA89423E7F0C70052E17B /* HeaderNewsFeedView.xib in Resources */,
 				D519843E23E32418001AB351 /* NewsFeed.storyboard in Resources */,
 				5E21444923C2F8560053CFB9 /* LaunchScreen.storyboard in Resources */,
 				D519843F23E32418001AB351 /* DetailNewsFeed.storyboard in Resources */,
@@ -632,10 +631,10 @@
 				5E21444623C2F8560053CFB9 /* Assets.xcassets in Resources */,
 				5E0E6A6423E7349600FBC15F /* YourChatTVC.xib in Resources */,
 				5E05AD7E23DEA5FB00E36AD4 /* MyChatTVC.xib in Resources */,
-				5EC6B36623F5C67B00F490DA /* ProflieTableViewCell.xib in Resources */,
 				5E37CAA623E97DC800C0E2A8 /* SignUp.storyboard in Resources */,
 				5E79C0C823EC6AFF00BD2FB3 /* ImageVC.xib in Resources */,
 				D59718B823CEA9DA00117906 /* Chatting.storyboard in Resources */,
+				5EA5C67A23F01E5A00BFB32B /* Profile.xib in Resources */,
 				D59718B623CEA9DA00117906 /* NoticeBoard.storyboard in Resources */,
 				5E37CAAA23E97DDA00C0E2A8 /* Find.storyboard in Resources */,
 			);
@@ -674,8 +673,6 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Nutee/Pods-Nutee-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			inputPaths = (
-			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Nutee/Pods-Nutee-frameworks-${CONFIGURATION}-output-files.xcfilelist",
@@ -692,13 +689,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5EA5C67823F01E2E00BFB32B /* ProfileTVHV.swift in Sources */,
 				5E21445C23C2F8F60053CFB9 /* Model.swift in Sources */,
 				5E95CD6823EF35280090C39B /* SettingVC.swift in Sources */,
 				5EA5C68823F1472200BFB32B /* NameVC.swift in Sources */,
 				D59718A923CEA98400117906 /* NewsFeedVC.swift in Sources */,
 				5E79C0C723EC6AFF00BD2FB3 /* ImageVC.swift in Sources */,
 				5E3560E623EC11F1002B8C87 /* FollowingVC.swift in Sources */,
-				D580664B23F0044D00180236 /* PostImgCVCell.swift in Sources */,
 				5E95CD6A23EF36230090C39B /* ToPostVC.swift in Sources */,
 				D5DAA88F23E7EF2E0052E17B /* ReplyCell.swift in Sources */,
 				5E05AD7423DB0F0200E36AD4 /* UIButton+Extension.swift in Sources */,
@@ -712,20 +709,16 @@
 				5E21445E23C2F8FC0053CFB9 /* Util.swift in Sources */,
 				5E05AD6C23DB0E8C00E36AD4 /* CALayer+Extension.swift in Sources */,
 				5EA5C68A23F1475000BFB32B /* PassWordVC.swift in Sources */,
-				5EC6B35C23F591A800F490DA /* SignUp.swift in Sources */,
-				D580664D23F0045500180236 /* FullScreenImgCVCell.swift in Sources */,
 				5E0E6A6323E7349600FBC15F /* YourChatTVC.swift in Sources */,
-				D5DAA89023E7EF2E0052E17B /* NewsFeedTableHeaderSection.swift in Sources */,
+				D5DAA89023E7EF2E0052E17B /* HeaderNewsFeedView.swift in Sources */,
 				5E0E6A6023E7345F00FBC15F /* Date+Extension.swift in Sources */,
 				5E95CD6623EF30280090C39B /* FollowingTVC.swift in Sources */,
 				5E79C0CF23EDE0B900BD2FB3 /* Notification.Name+Extension.swift in Sources */,
 				5E79C0CC23EC6B2A00BD2FB3 /* PopUpVC.swift in Sources */,
-				5EC6B36523F5C67B00F490DA /* ProflieTableViewCell.swift in Sources */,
 				D5EBD78623D0269400C2B7F5 /* NewsFeedVO.swift in Sources */,
 				5E05AD6E23DB0EB800E36AD4 /* UIViewController+Extension.swift in Sources */,
 				5E0E6A7223E73ECE00FBC15F /* PostVC.swift in Sources */,
 				5EB7415323F18AEE006AE529 /* CafeteriaTVC.swift in Sources */,
-				5EC6B35A23F5919200F490DA /* UserService.swift in Sources */,
 				5E05AD7D23DEA5FB00E36AD4 /* MyChatTVC.swift in Sources */,
 				D59718AD23CEA98400117906 /* ChattingVC.swift in Sources */,
 				D59718A023CEA87B00117906 /* NoticeBoardVO.swift in Sources */,
@@ -734,10 +727,8 @@
 				5E37CAA423E97D3700C0E2A8 /* FindVC.swift in Sources */,
 				5E37CAB323E9903500C0E2A8 /* CafeteriaVC.swift in Sources */,
 				5E05AD7A23DB1AC500E36AD4 /* NetworkResult.swift in Sources */,
-				5EC6B35E23F597D900F490DA /* SignIn.swift in Sources */,
 				5E05AD7223DB0EEA00E36AD4 /* UITextView+Extension.swift in Sources */,
 				D597189E23CEA79100117906 /* NoticeBoardVC.swift in Sources */,
-				5EC6B36023F5C04000F490DA /* Notice.swift in Sources */,
 				5E05AD7823DB104600E36AD4 /* UIView+Extension.swift in Sources */,
 				5E21443F23C2F8500053CFB9 /* SceneDelegate.swift in Sources */,
 				5E0E6A6823E7385400FBC15F /* NoticeBoardTVC.swift in Sources */,
@@ -750,7 +741,6 @@
 				5E21445A23C2F8E50053CFB9 /* APIConstants.swift in Sources */,
 				5EA5C68423F146E200BFB32B /* EmailVC.swift in Sources */,
 				5E79C0C223EC5A7000BD2FB3 /* ArticleTVC.swift in Sources */,
-				5EC6B36223F5C05100F490DA /* NoticeService.swift in Sources */,
 				5E05AD7023DB0ECE00E36AD4 /* UIColor+Extension.swift in Sources */,
 				5EA5C67C23F023DC00BFB32B /* UITableView+Extension.swift in Sources */,
 			);
@@ -820,7 +810,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -874,7 +864,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -890,7 +880,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 78A867AHKF;
+				DEVELOPMENT_TEAM = 7BRQNART99;
 				INFOPLIST_FILE = "$(SRCROOT)/Nutee/Supporting Files/Info.plist";
 				INSTALL_PATH = "@executable_path/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -910,7 +900,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 78A867AHKF;
+				DEVELOPMENT_TEAM = 7BRQNART99;
 				INFOPLIST_FILE = "$(SRCROOT)/Nutee/Supporting Files/Info.plist";
 				INSTALL_PATH = "@executable_path/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (

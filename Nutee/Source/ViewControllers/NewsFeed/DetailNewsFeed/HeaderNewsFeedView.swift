@@ -8,9 +8,9 @@
 
 import UIKit
 
-class NewsFeedTableHeaderSection: UITableViewHeaderFooterView {
+class HeaderNewsFeedView: UITableViewHeaderFooterView {
     
-    weak var detailNewsFeedVC: UIViewController?
+    //MARK: - UI components
     
     // User Information
     @IBOutlet var imgvwUserImg: UIImageView!
@@ -30,6 +30,8 @@ class NewsFeedTableHeaderSection: UITableViewHeaderFooterView {
     //앨범 프레임 three, four 버전을 통합관리 할 view 객체 생성
     @IBOutlet var vwSquare: UIView!
     @IBOutlet var vwSquareToRepost: NSLayoutConstraint!
+    // ver. OneImage(without frame)
+    @IBOutlet var imgvwOne: UIImageView!
     // ver. ThreeFrame
     @IBOutlet var vwThree: UIView!
     @IBOutlet var imgvwThree: [UIImageView]!
@@ -47,7 +49,10 @@ class NewsFeedTableHeaderSection: UITableViewHeaderFooterView {
     
     //MARK: - Variables and Properties
     
-    var indexPath = 1
+    weak var detailNewsFeedVC: UIViewController?
+    
+    var indexPath = 4
+    let dataPeng01 = [ "sample_peng01.jepg" ]
     let dataPeng02 = [ "sample_peng01.jepg", "sample_peng02.jepg" ]
     let dataPeng03 = [ "sample_peng01.jepg", "sample_peng02.jepg", "sample_peng03.png" ]
     let dataPeng04 = [ "sample_peng01.jepg", "sample_peng02.jepg", "sample_peng03.png", "sample_peng04.png" ]
@@ -112,11 +117,32 @@ class NewsFeedTableHeaderSection: UITableViewHeaderFooterView {
             // Code to delete
         }
         let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
-        
+
         moreAlert.addAction(editAction)
         moreAlert.addAction(deleteAction)
         moreAlert.addAction(cancelAction)
-//        self.present(moreAlert, animated: true, completion: nil)
+        self.window?.rootViewController?.present(moreAlert, animated: true, completion: nil)
+    }
+    
+    //이미지 클릭 시 전환 코드구현 구간
+    func imageTapped(image:UIImage){
+        let newImageView = UIImageView(image: image)
+        newImageView.frame = UIScreen.main.bounds
+        newImageView.backgroundColor = .black
+        newImageView.contentMode = .scaleAspectFit
+        newImageView.isUserInteractionEnabled = true
+        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissFullscreenImage))
+        newImageView.addGestureRecognizer(tap)
+        self.window?.rootViewController?.view.addSubview(newImageView)
+        self.window?.rootViewController?.navigationController?.isNavigationBarHidden = true
+        self.window?.rootViewController?.tabBarController?.tabBar.isHidden = true
+    }
+
+    //이미지 전체화면 종료
+    @objc func dismissFullscreenImage(_ sender: UITapGestureRecognizer) {
+        self.window?.rootViewController?.navigationController?.isNavigationBarHidden = false
+        self.window?.rootViewController?.tabBarController?.tabBar.isHidden = false
+        sender.view?.removeFromSuperview()
     }
     
     func initPosting() {
@@ -138,97 +164,114 @@ class NewsFeedTableHeaderSection: UITableViewHeaderFooterView {
     }
 
     // 사진 개수에 따른 이미지 표시 유형 선택
-    func showImgFrame() {
-        //constrain layout 충돌 방지를 위한 이미지 뷰 전체 hidden 설정 <-- 실패
-        vwTwo.isHidden = true
-        vwSquare.isHidden = true
-        
-        var num = 0
-        switch indexPath {
-        case 0:
-            // ver. TwoFrame
-            vwTwo.isHidden = false
+        func showImgFrame() {
+            //constrain layout 충돌 방지를 위한 이미지 뷰 전체 hidden 설정
+            vwTwo.isHidden = true
+            vwSquare.isHidden = true
             
-            vwTwoToRepost.isActive = true
-            vwSquareToRepost.isActive = false
-            ContentsToRepost.isActive = false
-            
-            for imgvw in imgvwTwo {
-                imgvw.image = UIImage(named: dataPeng03[num])
-                if num == 1 {
-                    let leftImg = dataPeng03.count - 2
-                    if leftImg > 0 {
-                        imgvw.alpha = 0.8
-                        lblTwoMoreImg.isHidden = false
-                        lblTwoMoreImg.text = String(leftImg) + " +"
-                        lblTwoMoreImg.sizeToFit()
-//                        imageTapped(image: imgvw.image!)
-                    } else {
-                        lblTwoMoreImg.isHidden = true
+            var num = 0
+            switch indexPath {
+            case 0:
+                // ver. TwoFrame
+                vwTwo.isHidden = false
+                
+                vwTwoToRepost.isActive = true
+                vwSquareToRepost.isActive = false
+                ContentsToRepost.isActive = false
+                
+                for imgvw in imgvwTwo {
+                    imgvw.image = UIImage(named: dataPeng03[num])
+                    if num == 1 {
+                        let leftImg = dataPeng03.count - 2
+                        if leftImg > 0 {
+                            imgvw.alpha = 0.8
+                            lblTwoMoreImg.isHidden = false
+                            lblTwoMoreImg.text = String(leftImg) + " +"
+                            lblTwoMoreImg.sizeToFit()
+    //                        imageTapped(image: imgvw.image!)
+                        } else {
+                            lblTwoMoreImg.isHidden = true
+                        }
                     }
+                    num += 1
                 }
-                num += 1
-            }
-        case 1:
-            // ver. ThreeFrame
-            vwSquare.isHidden = false
-            vwFour.isHidden = true
-            
-            vwTwoToRepost.isActive = false
-            vwSquareToRepost.isActive = true
-            ContentsToRepost.isActive = false
-            
-            for imgvw in imgvwThree {
-                imgvw.image = UIImage(named: dataPeng05[num])
-                if num == 2 {
-                    let leftImg = dataPeng05.count - 3
-                    if leftImg > 0 {
-                        imgvw.alpha = 0.8
-//                        lblThreeMoreImg.isHidden = false
-                        lblThreeMoreImg.text = String(leftImg) + " +"
-                        lblThreeMoreImg.sizeToFit()
-                    } else {
-                        lblThreeMoreImg.isHidden = true
+            case 1:
+                // ver. ThreeFrame
+                vwSquare.isHidden = false
+                
+                imgvwOne.isHidden = true
+                vwFour.isHidden = true
+                
+                vwTwoToRepost.isActive = false
+                vwSquareToRepost.isActive = true
+                ContentsToRepost.isActive = false
+                
+                for imgvw in imgvwThree {
+                    imgvw.image = UIImage(named: dataPeng05[num])
+                    if num == 2 {
+                        let leftImg = dataPeng05.count - 3
+                        if leftImg > 0 {
+                            imgvw.alpha = 0.8
+    //                        lblThreeMoreImg.isHidden = false
+                            lblThreeMoreImg.text = String(leftImg) + " +"
+                            lblThreeMoreImg.sizeToFit()
+                        } else {
+                            lblThreeMoreImg.isHidden = true
+                        }
                     }
+                    num += 1
                 }
-                num += 1
-            }
-        case 2:
-            // ver. FourFrame
-            vwSquare.isHidden = false
-            vwThree.isHidden = true
-            
-            vwTwoToRepost.isActive = false
-            vwSquareToRepost.isActive = true
-            ContentsToRepost.isActive = false
-            
-            for imgvw in imgvwFour {
-                imgvw.image = UIImage(named: dataPeng04[num])
-                if num == 3 {
-                    let leftImg = dataPeng04.count - 4
-                    if leftImg > 0 {
-                        imgvw.alpha = 0.8
-//                        lblTwoMoreImg.isHidden = false
-                        lblFourMoreImg.text = String(leftImg) + " +"
-                        lblFourMoreImg.sizeToFit()
-                    } else {
-                        lblFourMoreImg.isHidden = true
+            case 2:
+                // ver. FourFrame
+                vwSquare.isHidden = false
+                
+                imgvwOne.isHidden = true
+                vwThree.isHidden = true
+                
+                vwTwoToRepost.isActive = false
+                vwSquareToRepost.isActive = true
+                ContentsToRepost.isActive = false
+                
+                for imgvw in imgvwFour {
+                    imgvw.image = UIImage(named: dataPeng04[num])
+                    if num == 3 {
+                        let leftImg = dataPeng04.count - 4
+                        if leftImg > 0 {
+                            imgvw.alpha = 0.8
+    //                        lblTwoMoreImg.isHidden = false
+                            lblFourMoreImg.text = String(leftImg) + " +"
+                            lblFourMoreImg.sizeToFit()
+                        } else {
+                            lblFourMoreImg.isHidden = true
+                        }
                     }
+                    num += 1
                 }
-                num += 1
-            }
-        default:
-            // 보여줄 사진이 없는 경우(글만 표시)
-            lblTwoMoreImg.isHidden = true
-            lblThreeMoreImg.isHidden = true
-            lblFourMoreImg.isHidden = true
-            
-            vwTwoToRepost.isActive = false
-            vwSquareToRepost.isActive = false
-            ContentsToRepost.isActive = true
-        } // case문 종료
-    } // <---ShowImageFrame 설정 끝
-    
+            case 4:
+                // ver. only OneImage
+                vwSquare.isHidden = false
+                
+                imgvwOne.isHidden = false
+                vwThree.isHidden = true
+                vwFour.isHidden = true
+                
+                vwTwoToRepost.isActive = false
+                vwSquareToRepost.isActive = true
+                ContentsToRepost.isActive = false
+                
+                imgvwOne.image = UIImage(named: dataPeng01[num])
+            default:
+                // 보여줄 사진이 없는 경우(글만 표시)
+                lblTwoMoreImg.isHidden = true
+                lblThreeMoreImg.isHidden = true
+                lblFourMoreImg.isHidden = true
+                
+                vwTwoToRepost.isActive = false
+                vwSquareToRepost.isActive = false
+                ContentsToRepost.isActive = true
+            } // case문 종료
+        } // <---ShowImageFrame 설정 끝
+
     func setButtonPlain(btn: UIButton, num: Int, color: UIColor, state: UIControl.State) {
         btn.setTitle(" " + String(num), for: state)
         btnComment.tintColor = color
@@ -243,32 +286,6 @@ class NewsFeedTableHeaderSection: UITableViewHeaderFooterView {
 }
 
 /*
-// MARK: - Collection View
-//Posting된 이미지를 표시해 주는 CollectionView에 대한 기능구현
-
-extension NewsFeedTableHeaderSection: UICollectionViewDelegate { }
-
-extension NewsFeedTableHeaderSection: UICollectionViewDataSource {
-
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dataPeng.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PostImgCollectionCell", for: indexPath) as! PostImgCVCell
-        
-        cell.imgvwPost.image = UIImage(named: dataPeng[indexPath.row])
-        
-        
-        return cell
-    }
-
-    //이미지에 tab 제스쳐 기능 설정
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath) as! FullScreenImgCVCell
-        self.imageTapped(image: cell.problemImage.image!)
-    }
-    
     //이미지 클릭 시 전환 코드구현 구간
     func imageTapped(image:UIImage){
         let newImageView = UIImageView(image: image)
@@ -278,31 +295,15 @@ extension NewsFeedTableHeaderSection: UICollectionViewDataSource {
         newImageView.isUserInteractionEnabled = true
         let tap = UITapGestureRecognizer(target: self, action: #selector(dismissFullscreenImage))
         newImageView.addGestureRecognizer(tap)
-        self.view.addSubview(newImageView)
-        self.navigationController?.isNavigationBarHidden = true
-        self.tabBarController?.tabBar.isHidden = true
+        self.window?.rootViewController?.view.addSubview(newImageView)
+        self.window?.rootViewController?.navigationController?.isNavigationBarHidden = true
+        self.window?.rootViewController?.tabBarController?.tabBar.isHidden = true
     }
 
     //이미지 전체화면 종료
-    func dismissFullscreenImage(_ sender: UITapGestureRecognizer) {
-        self.navigationController?.isNavigationBarHidden = false
-        self.tabBarController?.tabBar.isHidden = false
+    @objc func dismissFullscreenImage(_ sender: UITapGestureRecognizer) {
+        self.window?.rootViewController?.navigationController?.isNavigationBarHidden = false
+        self.window?.rootViewController?.tabBarController?.tabBar.isHidden = false
         sender.view?.removeFromSuperview()
     }
-
- 
-}
-
-//CollectionView의 Cell에 대한 크기를 조정시켜 주는 Delegate
-extension NewsFeedTableHeaderSection: UICollectionViewDelegateFlowLayout {
-
-    // SIZE FOR COLLECTION VIEW CELL
-    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize{
-        let padding: CGFloat =  10
-        let collectionViewSize = collectionView.frame.size.width - padding
-        return CGSize(width: collectionViewSize / 2, height: collectionView.frame.height)
-//        return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
-    }
-
-}
 */

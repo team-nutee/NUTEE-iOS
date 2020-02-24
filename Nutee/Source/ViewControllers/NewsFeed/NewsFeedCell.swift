@@ -32,6 +32,8 @@ class NewsFeedCell: UITableViewCell {
     //앨범 프레임 three, four 버전을 통합관리 할 view 객체 생성
     @IBOutlet var vwSquare: UIView!
     @IBOutlet var vwSquareToRepost: NSLayoutConstraint!
+    // ver. OneImage(without frame)
+    @IBOutlet var imgvwOne: UIImageView!
     // ver. ThreeFrame
     @IBOutlet var vwThree: UIView!
     @IBOutlet var imgvwThree: [UIImageView]!
@@ -50,6 +52,7 @@ class NewsFeedCell: UITableViewCell {
     //MARK: - Variables and Properties
     
     var indexPath = 0
+    let dataPeng01 = [ "sample_peng01.jepg" ]
     let dataPeng02 = [ "sample_peng01.jepg", "sample_peng02.jepg" ]
     let dataPeng03 = [ "sample_peng01.jepg", "sample_peng02.jepg", "sample_peng03.png" ]
     let dataPeng04 = [ "sample_peng01.jepg", "sample_peng02.jepg", "sample_peng03.png", "sample_peng04.png" ]
@@ -78,6 +81,10 @@ class NewsFeedCell: UITableViewCell {
     }
     
     //MARK: - Helper
+    
+    @IBAction func showDetailProfile(_ sender: Any) {
+        showDetailNewsFeed()
+    }
     
     @IBAction func btnRepost(_ sender: UIButton) {
         // .selected State를 활성화 하기 위한 코드
@@ -155,7 +162,7 @@ class NewsFeedCell: UITableViewCell {
     
     // 사진 개수에 따른 이미지 표시 유형 선택
     func showImgFrame() {
-        //constrain layout 충돌 방지를 위한 이미지 뷰 전체 hidden 설정 <-- 실패
+        //constrain layout 충돌 방지를 위한 이미지 뷰 전체 hidden 설정
         vwTwo.isHidden = true
         vwSquare.isHidden = true
         
@@ -188,6 +195,8 @@ class NewsFeedCell: UITableViewCell {
         case 1:
             // ver. ThreeFrame
             vwSquare.isHidden = false
+            
+            imgvwOne.isHidden = true
             vwFour.isHidden = true
             
             vwTwoToRepost.isActive = false
@@ -212,6 +221,8 @@ class NewsFeedCell: UITableViewCell {
         case 2:
             // ver. FourFrame
             vwSquare.isHidden = false
+            
+            imgvwOne.isHidden = true
             vwThree.isHidden = true
             
             vwTwoToRepost.isActive = false
@@ -233,6 +244,19 @@ class NewsFeedCell: UITableViewCell {
                 }
                 num += 1
             }
+        case 4:
+            // ver. only OneImage
+            vwSquare.isHidden = false
+            
+            imgvwOne.isHidden = false
+            vwThree.isHidden = true
+            vwFour.isHidden = true
+            
+            vwTwoToRepost.isActive = false
+            vwSquareToRepost.isActive = true
+            ContentsToRepost.isActive = false
+            
+            imgvwOne.image = UIImage(named: dataPeng01[num])
         default:
             // 보여줄 사진이 없는 경우(글만 표시)
             lblTwoMoreImg.isHidden = true
@@ -288,24 +312,6 @@ class NewsFeedCell: UITableViewCell {
 }
 
 /*
-// MARK: - Collection View
-//Posting된 이미지를 표시해 주는 CollectionView에 대한 기능구현
-
-extension NewsFeedCell: UICollectionViewDelegate { }
-
-extension NewsFeedCell: UICollectionViewDataSource {
-
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dataPeng.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PostImgCollectionCell", for: indexPath) as! PostImgCVCell
-        cell.imgvwPost.image = UIImage(named: dataPeng[indexPath.row])
-        
-        return cell
-    }
-    
     //이미지에 tab 제스쳐 기능 설정
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 //        let cell = collectionView.cellForItem(at: indexPath) as! FullScreenImgCVCell
@@ -327,27 +333,4 @@ extension NewsFeedCell: UICollectionViewDataSource {
         newsFeedVC?.navigationController?.isNavigationBarHidden = true
         newsFeedVC?.tabBarController?.tabBar.isHidden = true
     }
-
-    //이미지 전체화면 종료
-    @objc func dismissFullscreenImage(_ sender: UITapGestureRecognizer) {
-        newsFeedVC?.navigationController?.isNavigationBarHidden = false
-        newsFeedVC?.tabBarController?.tabBar.isHidden = false
-        sender.view?.removeFromSuperview()
-    }
- 
- 
-}
-
-//CollectionView의 Cell에 대한 크기를 조정시켜 주는 Delegate
-extension NewsFeedCell: UICollectionViewDelegateFlowLayout {
-
-    // SIZE FOR COLLECTION VIEW CELL
-    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize{
-        let padding: CGFloat =  10
-        let collectionViewSize = collectionView.frame.size.width - padding
-        return CGSize(width: collectionViewSize / 2, height: collectionView.frame.height)
-//        return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
-    }
-
-}
-*/
+}*/
