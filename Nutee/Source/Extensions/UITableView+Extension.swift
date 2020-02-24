@@ -34,6 +34,7 @@ extension UITableView {
         messageLabel.numberOfLines = 0
         messageLabel.textAlignment = .center
         // The only tricky part is here:
+        
         self.backgroundView = emptyView
         self.separatorStyle = .none
     }

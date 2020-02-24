@@ -50,6 +50,7 @@ class ProfileVC: UIViewController {
         myArticleTV.delegate = self
         myArticleTV.dataSource = self
         self.myArticleTV.register(ArticleTVC.self, forCellReuseIdentifier: "ArticleTVC")
+        
         myArticleTV.register(UINib(nibName: "ProflieTableViewCell", bundle: nil), forCellReuseIdentifier: "ProflieTableViewCell")
         myArticleTV.separatorInset.left = 0
 
@@ -112,8 +113,9 @@ class ProfileVC: UIViewController {
     }
     
     @objc func viewArticle() {
-        let indexPath = NSIndexPath(row: 1, section: 0)
+        let indexPath = IndexPath(row: 1, section: 0)
         myArticleTV.scrollToRow(at: indexPath as IndexPath, at: .top, animated: true)
+    
     }
     
     @IBAction func toSetting(){
@@ -132,12 +134,12 @@ extension ProfileVC : UITableViewDataSource {
         
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 //        if userInfo?.posts.count == 0{
-//            tableView.setEmptyView(title: "게시글이 없습니다", message: "새로운 게시물을 올려보세요‼️")
+            tableView.setEmptyView(title: "게시글이 없습니다", message: "새로운 게시물을 올려보세요‼️")
 //        } else {
 //            tableView.restore()
 //        }
-//        return (userInfo?.posts.count ?? 1) + 1
-        return 10
+        return (userInfo?.posts.count ?? 1) + 1
+//        return 20
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

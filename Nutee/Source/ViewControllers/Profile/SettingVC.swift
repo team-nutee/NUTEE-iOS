@@ -11,17 +11,37 @@ import UIKit
 class SettingVC: UIViewController {
 
     @IBOutlet weak var logoutBtn: UIButton!
+    @IBOutlet weak var certificationBtn: UIButton!
+    @IBOutlet weak var pwChangeBtn: UIButton!
+    @IBOutlet weak var pwGuideLabel: UILabel!
+    @IBOutlet weak var pwGuideLabel2: UILabel!
+    @IBOutlet weak var pwCertificationTextField: UITextField!
+    @IBOutlet weak var pwChangeTextField: UITextField!
+    @IBOutlet weak var pwChangeTextField2: UITextField!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        setInit()
         logoutBtn.addTarget(self, action: #selector(logout), for: .touchUpInside)
     }
     
     
+    func setInit() {
+        logoutBtn.tintColor = .nuteeGreen
+        certificationBtn.tintColor = .nuteeGreen
+        pwChangeBtn.tintColor = .nuteeGreen
+        
+        pwCertificationTextField.addBorder(.bottom, color: .nuteeGreen, thickness: 1)
+        pwChangeTextField.addBorder(.bottom, color: .nuteeGreen, thickness: 1)
+        pwChangeTextField2.addBorder(.bottom, color: .nuteeGreen, thickness: 1)
+        
+    }
+    
     @objc func logout(){
         signOutService()
     }
+    
 }
 
 extension SettingVC {
