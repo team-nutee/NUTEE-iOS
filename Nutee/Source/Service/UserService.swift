@@ -105,7 +105,9 @@ struct UserService {
                         case 200:
                             do{
                                 let headerFields = response.response?.allHeaderFields as? [String: String]
+                                print("headerField : ", headerFields)
                                 var cookie : String? = headerFields!["Set-Cookie"]
+                                print("cookie : ", cookie)
                                 var cookies : [String]? = []
                                 cookies = cookie?.components(separatedBy: ";")
                                 cookie = cookies?[0]

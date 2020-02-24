@@ -24,6 +24,8 @@ class ProfileVC: UIViewController {
     let myFollowing1Btn = UIButton()
     let myFollowing2Btn = UIButton()
     
+    let followBtn = UIButton()
+    
     let cellTextLabel = UILabel()
     
 //    lazy var leftBarButton : UIBarButtonItem = {
@@ -39,6 +41,7 @@ class ProfileVC: UIViewController {
     // MARK: - Variables and Properties
     
     var userInfo : SignIn?
+    var isFollow : Bool = false
     
     // MARK: - Life Cycle
     
@@ -89,6 +92,7 @@ class ProfileVC: UIViewController {
         myFollower2Btn.addTarget(self, action: #selector(viewFollower), for: .touchUpInside)
         myArticle1Btn.addTarget(self, action: #selector(viewArticle), for: .touchUpInside)
         myArticle2Btn.addTarget(self, action: #selector(viewArticle), for: .touchUpInside)
+        followBtn.addTarget(self, action: #selector(followAction), for: .touchUpInside)
 
     }
     
@@ -116,6 +120,18 @@ class ProfileVC: UIViewController {
         let indexPath = IndexPath(row: 1, section: 0)
         myArticleTV.scrollToRow(at: indexPath as IndexPath, at: .top, animated: true)
     
+    }
+    
+    @objc func followAction() {
+        if isFollow == false {
+            let followBtnText = NSMutableAttributedString(string: "언팔로우")
+            followBtn.setAttributedTitle(followBtnText, for: .normal)
+            isFollow = !isFollow
+        } else {
+            let followBtnText = NSMutableAttributedString(string: "팔로우하기")
+            followBtn.setAttributedTitle(followBtnText, for: .normal)
+            isFollow = !isFollow
+        }
     }
     
     @IBAction func toSetting(){
@@ -192,6 +208,7 @@ extension ProfileVC : UITableViewDataSource {
         self.headerView.addSubview(myFollower2Btn)
         self.headerView.addSubview(myFollowing1Btn)
         self.headerView.addSubview(myFollowing2Btn)
+        self.headerView.addSubview(followBtn)
         
         let etcname : String = userInfo?.nickname ?? ""
         
@@ -279,6 +296,15 @@ extension ProfileVC : UITableViewDataSource {
         myFollowing2Btn.heightAnchor.constraint(equalToConstant: 40).isActive = true
         myFollowing2Btn.widthAnchor.constraint(equalToConstant: (view.frame.size.width - 120)/3).isActive = true
         
+        let followBtnText = NSMutableAttributedString(string: "팔로우하기")
+        followBtn.setAttributedTitle(followBtnText, for: .normal)
+        followBtn.titleLabel?.font = .boldSystemFont(ofSize: 15)
+        followBtn.translatesAutoresizingMaskIntoConstraints = false
+        followBtn.topAnchor.constraint(equalTo: myFollowing2Btn.bottomAnchor).isActive = true
+        followBtn.leftAnchor.constraint(equalTo: profileImage.rightAnchor).isActive = true
+        followBtn.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        followBtn.widthAnchor.constraint(equalToConstant: (view.frame.size.width - 120)).isActive = true
+
         
         return headerView
     }
