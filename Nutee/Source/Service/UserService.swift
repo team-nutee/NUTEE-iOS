@@ -112,6 +112,7 @@ struct UserService {
                                 cookies = cookie?.components(separatedBy: ";")
                                 cookie = cookies?[0]
                                 UserDefaults.standard.set(cookie, forKey: "Cookie")
+                                print(UserDefaults.standard.string(forKey: "Cookie"))
                                 
                                 let decoder = JSONDecoder()
                                 let result = try decoder.decode(SignIn.self, from: value)

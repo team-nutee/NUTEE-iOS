@@ -21,11 +21,13 @@ class DetailNewsFeedVC: UIViewController {
     @IBOutlet var CommentWindowToBottom: NSLayoutConstraint!
     
     //MARK: - Variables and Properties
-    
+    var content : DetailContent?
+
     var indexPath = 0
     
     //MARK: - Dummy data
     
+    var userInfo : SignIn?
     var test : [String] = ["","","","",""]
     
     //MARK: - Life Cycle
@@ -198,4 +200,29 @@ extension DetailNewsFeedVC {
         self.txtvwComment.endEditing(true)
     }
     
+}
+
+extension DetailNewsFeedVC {
+    func getUserInfoService() {
+        ContentService.shared.getPost("5") { responsedata in
+
+            switch responsedata {
+            case .success(let res):
+                self.content = res as! DetailContent
+            case .requestErr(_):
+                print("request error")
+
+            case .pathErr:
+                print(".pathErr")
+
+            case .serverErr:
+                print(".serverErr")
+
+            case .networkFail :
+                print("failure")
+                }
+        }
+
+    }
+
 }
