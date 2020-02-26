@@ -49,9 +49,11 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
     
     //MARK: - Variables and Properties
     
+    var content : DetailContent?
+    
     weak var detailNewsFeedVC: UIViewController?
     
-    var indexPath = 4
+    var indexPath = 3
     let dataPeng01 = [ "sample_peng01.jepg" ]
     let dataPeng02 = [ "sample_peng01.jepg", "sample_peng02.jepg" ]
     let dataPeng03 = [ "sample_peng01.jepg", "sample_peng02.jepg", "sample_peng03.png" ]
@@ -70,7 +72,8 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        initPosting()
+//        initPosting()
+        getUserInfoService()
     }
     
     //MARK: - Helper
@@ -148,14 +151,14 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
     func initPosting() {
         imgvwUserImg.image = #imageLiteral(resourceName: "defaultProfile")
         imgvwUserImg.setRounded(radius: nil)
-        
+
         lblUserId.text = "Crossroads"
         lblUserId.sizeToFit()
         
         txtvwConetents.text = "서울 한강에 나타난 괴생물체에 맞선 한 가족의 사투를 그리고 있다. 당시 최고의 첨단 기술력으로 구현한 한국 괴수영화의 시작, 사회비판과 풍자를 녹여낸 정점의 블랙 코미디다. 이전 문회사 '웨타 디지털(Weta Digita)'과 작업했다. 마감 시한을 맞추기 위해 서두른 후, 영화는풍자를 녹여낸 정점의 블랙 코미디다. 이전 문회사 '웨타 디지털(Weta Digita)'과 작업했다. 마감 시한을 맞추기 위해 서두른 후, 영화는풍자를 녹여낸 정점의 블랙 코미디다. 이전 문회사 '웨타 디지털(Weta Digita)'과 작업했다. 마감 시한을 맞추기 위해 서두른 후, 영화는풍자를 녹여낸 정점의 블랙 코미디다. 이전 문회사 '웨타 디지털(Weta Digita)'과 작업했다. 마감 시한을 맞추기 위해 서두른 후, 영화는 2006년 칸 국제 영화제의문에 초청되었다.이 글이 보이면 전부가 출력된 것입니다."
         txtvwConetents.postingInit()
         showImgFrame()
-        
+
         //버튼모양 초기 설정
         btnRepost.tintColor = .gray
         setButtonAttributed(btn: btnLike, num: numLike, color: .gray, state: .normal)
@@ -164,113 +167,113 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
     }
 
     // 사진 개수에 따른 이미지 표시 유형 선택
-        func showImgFrame() {
-            //constrain layout 충돌 방지를 위한 이미지 뷰 전체 hidden 설정
-            vwTwo.isHidden = true
-            vwSquare.isHidden = true
+    func showImgFrame() {
+        //constrain layout 충돌 방지를 위한 이미지 뷰 전체 hidden 설정
+        vwTwo.isHidden = true
+        vwSquare.isHidden = true
+        
+        var num = 0
+        switch indexPath {
+        case 0:
+            // ver. TwoFrame
+            vwTwo.isHidden = false
             
-            var num = 0
-            switch indexPath {
-            case 0:
-                // ver. TwoFrame
-                vwTwo.isHidden = false
-                
-                vwTwoToRepost.isActive = true
-                vwSquareToRepost.isActive = false
-                ContentsToRepost.isActive = false
-                
-                for imgvw in imgvwTwo {
-                    imgvw.image = UIImage(named: dataPeng03[num])
-                    if num == 1 {
-                        let leftImg = dataPeng03.count - 2
-                        if leftImg > 0 {
-                            imgvw.alpha = 0.8
-                            lblTwoMoreImg.isHidden = false
-                            lblTwoMoreImg.text = String(leftImg) + " +"
-                            lblTwoMoreImg.sizeToFit()
-    //                        imageTapped(image: imgvw.image!)
-                        } else {
-                            lblTwoMoreImg.isHidden = true
-                        }
+            vwTwoToRepost.isActive = true
+            vwSquareToRepost.isActive = false
+            ContentsToRepost.isActive = false
+            
+            for imgvw in imgvwTwo {
+                imgvw.image = UIImage(named: dataPeng03[num])
+                if num == 1 {
+                    let leftImg = dataPeng03.count - 2
+                    if leftImg > 0 {
+                        imgvw.alpha = 0.8
+                        lblTwoMoreImg.isHidden = false
+                        lblTwoMoreImg.text = String(leftImg) + " +"
+                        lblTwoMoreImg.sizeToFit()
+//                        imageTapped(image: imgvw.image!)
+                    } else {
+                        lblTwoMoreImg.isHidden = true
                     }
-                    num += 1
                 }
-            case 1:
-                // ver. ThreeFrame
-                vwSquare.isHidden = false
-                
-                imgvwOne.isHidden = true
-                vwFour.isHidden = true
-                
-                vwTwoToRepost.isActive = false
-                vwSquareToRepost.isActive = true
-                ContentsToRepost.isActive = false
-                
-                for imgvw in imgvwThree {
-                    imgvw.image = UIImage(named: dataPeng05[num])
-                    if num == 2 {
-                        let leftImg = dataPeng05.count - 3
-                        if leftImg > 0 {
-                            imgvw.alpha = 0.8
-    //                        lblThreeMoreImg.isHidden = false
-                            lblThreeMoreImg.text = String(leftImg) + " +"
-                            lblThreeMoreImg.sizeToFit()
-                        } else {
-                            lblThreeMoreImg.isHidden = true
-                        }
+                num += 1
+            }
+        case 1:
+            // ver. ThreeFrame
+            vwSquare.isHidden = false
+            
+            imgvwOne.isHidden = true
+            vwFour.isHidden = true
+            
+            vwTwoToRepost.isActive = false
+            vwSquareToRepost.isActive = true
+            ContentsToRepost.isActive = false
+            
+            for imgvw in imgvwThree {
+                imgvw.image = UIImage(named: dataPeng05[num])
+                if num == 2 {
+                    let leftImg = dataPeng05.count - 3
+                    if leftImg > 0 {
+                        imgvw.alpha = 0.8
+//                        lblThreeMoreImg.isHidden = false
+                        lblThreeMoreImg.text = String(leftImg) + " +"
+                        lblThreeMoreImg.sizeToFit()
+                    } else {
+                        lblThreeMoreImg.isHidden = true
                     }
-                    num += 1
                 }
-            case 2:
-                // ver. FourFrame
-                vwSquare.isHidden = false
-                
-                imgvwOne.isHidden = true
-                vwThree.isHidden = true
-                
-                vwTwoToRepost.isActive = false
-                vwSquareToRepost.isActive = true
-                ContentsToRepost.isActive = false
-                
-                for imgvw in imgvwFour {
-                    imgvw.image = UIImage(named: dataPeng04[num])
-                    if num == 3 {
-                        let leftImg = dataPeng04.count - 4
-                        if leftImg > 0 {
-                            imgvw.alpha = 0.8
-    //                        lblTwoMoreImg.isHidden = false
-                            lblFourMoreImg.text = String(leftImg) + " +"
-                            lblFourMoreImg.sizeToFit()
-                        } else {
-                            lblFourMoreImg.isHidden = true
-                        }
+                num += 1
+            }
+        case 2:
+            // ver. FourFrame
+            vwSquare.isHidden = false
+            
+            imgvwOne.isHidden = true
+            vwThree.isHidden = true
+            
+            vwTwoToRepost.isActive = false
+            vwSquareToRepost.isActive = true
+            ContentsToRepost.isActive = false
+            
+            for imgvw in imgvwFour {
+                imgvw.image = UIImage(named: dataPeng04[num])
+                if num == 3 {
+                    let leftImg = dataPeng04.count - 4
+                    if leftImg > 0 {
+                        imgvw.alpha = 0.8
+//                        lblTwoMoreImg.isHidden = false
+                        lblFourMoreImg.text = String(leftImg) + " +"
+                        lblFourMoreImg.sizeToFit()
+                    } else {
+                        lblFourMoreImg.isHidden = true
                     }
-                    num += 1
                 }
-            case 4:
-                // ver. only OneImage
-                vwSquare.isHidden = false
-                
-                imgvwOne.isHidden = false
-                vwThree.isHidden = true
-                vwFour.isHidden = true
-                
-                vwTwoToRepost.isActive = false
-                vwSquareToRepost.isActive = true
-                ContentsToRepost.isActive = false
-                
-                imgvwOne.image = UIImage(named: dataPeng01[num])
-            default:
-                // 보여줄 사진이 없는 경우(글만 표시)
-                lblTwoMoreImg.isHidden = true
-                lblThreeMoreImg.isHidden = true
-                lblFourMoreImg.isHidden = true
-                
-                vwTwoToRepost.isActive = false
-                vwSquareToRepost.isActive = false
-                ContentsToRepost.isActive = true
-            } // case문 종료
-        } // <---ShowImageFrame 설정 끝
+                num += 1
+            }
+        case 4:
+            // ver. only OneImage
+            vwSquare.isHidden = false
+            
+            imgvwOne.isHidden = false
+            vwThree.isHidden = true
+            vwFour.isHidden = true
+            
+            vwTwoToRepost.isActive = false
+            vwSquareToRepost.isActive = true
+            ContentsToRepost.isActive = false
+            
+            imgvwOne.image = UIImage(named: dataPeng01[num])
+        default:
+            // 보여줄 사진이 없는 경우(글만 표시)
+            lblTwoMoreImg.isHidden = true
+            lblThreeMoreImg.isHidden = true
+            lblFourMoreImg.isHidden = true
+            
+            vwTwoToRepost.isActive = false
+            vwSquareToRepost.isActive = false
+            ContentsToRepost.isActive = true
+        } // case문 종료
+    } // <---ShowImageFrame 설정 끝
 
     func setButtonPlain(btn: UIButton, num: Int, color: UIColor, state: UIControl.State) {
         btn.setTitle(" " + String(num), for: state)
@@ -284,6 +287,54 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
         btn.tintColor = color
     }
 }
+
+extension HeaderNewsFeedView {
+    func getUserInfoService() {
+        ContentService.shared.getPost("5") { responsedata in
+
+            switch responsedata {
+            case .success(let res):
+                print("res: ",res)
+                self.content = res as! DetailContent
+                print("content: ", self.content)
+
+                // intiPosting() 내용
+                
+                self.imgvwUserImg.image = #imageLiteral(resourceName: "defaultProfile")
+                self.imgvwUserImg.setRounded(radius: nil)
+                
+                self.lblUserId.sizeToFit()
+                self.lblUserId.text = self.content?.user.nickname
+                
+                self.txtvwConetents.text = self.content?.content
+                self.txtvwConetents.postingInit()
+                self.showImgFrame()
+                
+                //버튼모양 초기 설정
+                self.btnRepost.tintColor = .gray
+                self.setButtonAttributed(btn: self.btnLike, num: self.numLike, color: .gray, state: .normal)
+                self.setButtonPlain(btn: self.btnComment, num: self.numComment, color: .gray, state: .normal)
+                self.btnMore.tintColor = .gray
+                
+                
+            case .requestErr(_):
+                print("request error")
+
+            case .pathErr:
+                print(".pathErr")
+
+            case .serverErr:
+                print(".serverErr")
+
+            case .networkFail :
+                print("failure")
+                }
+        }
+
+    }
+
+}
+
 
 /*
     //이미지 클릭 시 전환 코드구현 구간
