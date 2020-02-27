@@ -27,6 +27,8 @@ class NewsFeedVC: UIViewController {
         newsTV.dataSource = self
         newsTV.separatorInset.left = 0
         
+//        self.tabBarController?.delegate = self
+        
         initColor()
     }
     
@@ -94,6 +96,28 @@ extension NewsFeedVC : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         NSLog("선택된 뉴스피드는 \(indexPath.row) 번쨰 뉴스피드입니다")
+        
+        let detailNewsFeedSB = UIStoryboard(name: "DetailNewsFeed", bundle: nil)
+                let showDetailNewsFeedVC = detailNewsFeedSB.instantiateViewController(withIdentifier: "DetailNewsFeed") as! DetailNewsFeedVC
+                 self.navigationController?.pushViewController(showDetailNewsFeedVC, animated: true)
     }
 
 }
+
+// MARK: - TabBarController
+//extension NewsFeedVC : UITabBarControllerDelegate {
+//
+//    // 탭바를 누를 경우 최상위 내용으로 TableView의 Cell 자동 스크롤(맨 위로 가기)
+//    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+//        let tabBarIndex = tabBarController.selectedIndex
+//
+//        print("You tapped tabBarItem index : ", tabBarIndex)
+//
+//        if tabBarIndex == 0 {
+////            self.newsTV.setContentOffset(CGPoint.zero, animated: true)
+//            let indexPath = IndexPath(row: 0, section: 0)
+//            newsTV.scrollToRow(at: indexPath as IndexPath, at: .top, animated: true)
+//        }
+//    }
+//
+//}

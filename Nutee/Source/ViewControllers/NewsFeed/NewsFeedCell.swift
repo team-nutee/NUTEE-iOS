@@ -83,7 +83,7 @@ class NewsFeedCell: UITableViewCell {
     //MARK: - Helper
     
     @IBAction func showDetailProfile(_ sender: Any) {
-        showDetailNewsFeed()
+        showProfile()
     }
     
     @IBAction func btnRepost(_ sender: UIButton) {
@@ -119,7 +119,6 @@ class NewsFeedCell: UITableViewCell {
     
     @IBAction func btnComment(sender: Any) {
         showDetailNewsFeed()
-        
     }
     
     //수정, 삭제 알림창 기능
@@ -295,9 +294,20 @@ class NewsFeedCell: UITableViewCell {
         let showDetailNewsFeedVC = detailNewsFeedSB.instantiateViewController(withIdentifier: "DetailNewsFeed") as! DetailNewsFeedVC
         //DetailNewsFeedVC로 NewsFeedVC의 선택된 cell의 indexPath값 전달
         showDetailNewsFeedVC.indexPath = self.indexPath
+
         newsFeedVC?.navigationController?.pushViewController(showDetailNewsFeedVC, animated: true)
     }
 
+    func showProfile() {
+            let profileSB = UIStoryboard(name: "ProfileVC", bundle: nil)
+            let showProfileVC = profileSB.instantiateViewController(withIdentifier: "ProfileVC") as! ProfileVC
+            
+    //        let indexPath = IndexPath(row: 1, section: 0)
+    //        showDetailNewsFeedVC.replyTV.scrollToRow(at: indexPath as IndexPath, at: .top, animated: true)
+            
+            newsFeedVC?.navigationController?.pushViewController(showProfileVC, animated: true)
+    }
+    
     func setButtonPlain(btn: UIButton, num: Int, color: UIColor, state: UIControl.State) {
         btn.setTitle(" " + String(num), for: state)
         btnComment.tintColor = color

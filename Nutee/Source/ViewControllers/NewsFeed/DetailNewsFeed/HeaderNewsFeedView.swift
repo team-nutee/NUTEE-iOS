@@ -78,6 +78,10 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
     
     //MARK: - Helper
 
+    @IBAction func showDetailProfile(_ sender: Any) {
+        showProfile()
+    }
+    
     @IBAction func btnRepost(_ sender: UIButton) {
         // .selected State를 활성화 하기 위한 코드
         btnRepost.isSelected = !btnRepost.isSelected
@@ -275,6 +279,16 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
         } // case문 종료
     } // <---ShowImageFrame 설정 끝
 
+    func showProfile() {
+            let profileSB = UIStoryboard(name: "ProfileVC", bundle: nil)
+            let showProfileVC = profileSB.instantiateViewController(withIdentifier: "ProfileVC") as! ProfileVC
+            
+    //        let indexPath = IndexPath(row: 1, section: 0)
+    //        showDetailNewsFeedVC.replyTV.scrollToRow(at: indexPath as IndexPath, at: .top, animated: true)
+            
+            self.window?.rootViewController?.navigationController?.pushViewController(showProfileVC, animated: true)
+    }
+    
     func setButtonPlain(btn: UIButton, num: Int, color: UIColor, state: UIControl.State) {
         btn.setTitle(" " + String(num), for: state)
         btnComment.tintColor = color

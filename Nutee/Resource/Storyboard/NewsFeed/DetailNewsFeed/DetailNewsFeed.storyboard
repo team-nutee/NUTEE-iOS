@@ -142,7 +142,7 @@
                     <connections>
                         <outlet property="CommentWindowToBottom" destination="TNU-nG-o4g" id="F8W-b4-3C2"/>
                         <outlet property="btnSubmit" destination="Jnc-pI-VMN" id="fnD-lZ-yp6"/>
-                        <outlet property="newsTV" destination="1MS-nu-hQ5" id="Jyl-F2-wbE"/>
+                        <outlet property="replyTV" destination="1MS-nu-hQ5" id="CiM-hb-21h"/>
                         <outlet property="txtvwComment" destination="pdD-0u-Mb2" id="eVI-Dy-1kc"/>
                         <outlet property="vwCommentWindow" destination="2Q7-NF-uqq" id="aJo-RQ-sVN"/>
                     </connections>

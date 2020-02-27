@@ -12,7 +12,7 @@ class DetailNewsFeedVC: UIViewController {
     
     //MARK: - UI components
     
-    @IBOutlet var newsTV: UITableView!
+    @IBOutlet var replyTV: UITableView!
     
     // 댓글창 표시
     @IBOutlet var vwCommentWindow: UIView!
@@ -28,21 +28,21 @@ class DetailNewsFeedVC: UIViewController {
     //MARK: - Dummy data
     
     var userInfo : SignIn?
-    var test : [String] = ["","","","",""]
+    var test : [String] = ["","","",""]
     
     //MARK: - Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        newsTV.delegate = self
-        newsTV.dataSource = self
+        replyTV.delegate = self
+        replyTV.dataSource = self
         
 //        loadSelectedNewsFeed()
         
         // Register the custom header view
         let nibHead = UINib(nibName: "HeaderNewsFeedView", bundle: nil)
-        self.newsTV.register(nibHead, forHeaderFooterViewReuseIdentifier: "HeaderNewsFeedView")
+        self.replyTV.register(nibHead, forHeaderFooterViewReuseIdentifier: "HeaderNewsFeedView")
         
         initCommentWindow()
     }
@@ -168,12 +168,12 @@ extension DetailNewsFeedVC {
             //            let safeBottomHeight = self.view.bottomAnchor
             let window = UIApplication.shared.keyWindow
             //                let bottomPadding = window?.safeAreaInsets.bottom
-        
+            
             if CommentWindowToBottom.constant == 0 {
                 CommentWindowToBottom.constant -= (keyboardHeight - tabbarHeight)
             }
 //            CommentWindowToBottom.constant = -300
-            newsTV.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+//            replyTV.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
             
             self.view.setNeedsLayout()
             UIView.animate(withDuration: duration, delay: 0, options: .init(rawValue: curve), animations: {
@@ -188,7 +188,7 @@ extension DetailNewsFeedVC {
             let curve = info[UIResponder.keyboardAnimationCurveUserInfoKey] as! UInt
             
             CommentWindowToBottom.constant = 0
-            newsTV.contentInset = .zero
+            replyTV.contentInset = .zero
             self.view.setNeedsLayout()
             UIView.animate(withDuration: duration, delay: 0, options: .init(rawValue: curve), animations: {
                 self.view.layoutIfNeeded()

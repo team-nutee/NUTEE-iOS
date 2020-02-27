@@ -35,8 +35,9 @@
                                                         <constraint firstAttribute="width" constant="50" id="lXd-0i-CCG"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="user ID" textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GAa-jE-uMO">
+                                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="user ID" textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GAa-jE-uMO">
                                                     <rect key="frame" x="80" y="23.666666666666671" width="67" height="25"/>
+                                                    <gestureRecognizers/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="25" id="yIJ-XE-ob4"/>
                                                     </constraints>
@@ -297,6 +298,7 @@
                                                 <constraint firstItem="JHw-vv-fjF" firstAttribute="leading" secondItem="2uN-UJ-Eo0" secondAttribute="leadingMargin" id="yja-iY-VM1"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <gestureRecognizers/>
                                         <connections>
                                             <outlet property="ContentsToRepost" destination="q76-au-o60" id="iAs-5V-pfk"/>
                                             <outlet property="btnComment" destination="ZSU-gr-Usj" id="JLt-MP-IwJ"/>
@@ -341,6 +343,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3W0-ku-QW4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="xec-FH-fLD"/>
             </objects>
             <point key="canvasLocation" x="5058.3999999999996" y="-324.38423645320199"/>
         </scene>

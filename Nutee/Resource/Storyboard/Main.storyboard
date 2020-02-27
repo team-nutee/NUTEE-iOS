@@ -9,7 +9,7 @@
         <!--TBC-->
         <scene sceneID="8bd-m2-WQS">
             <objects>
-                <tabBarController storyboardIdentifier="TBC" automaticallyAdjustsScrollViewInsets="NO" id="WTg-rr-kTx" customClass="TBC" customModule="Nutee" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TBC" automaticallyAdjustsScrollViewInsets="NO" id="WTg-rr-kTx" customClass="TBC" customModule="NUTEE" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="eO4-Zq-HdL">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>

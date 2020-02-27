@@ -24,8 +24,9 @@
                                 <constraint firstAttribute="width" secondItem="tVf-Kz-8LT" secondAttribute="height" multiplier="1:1" id="zez-cf-5QW"/>
                             </constraints>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="user ID" textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GSa-h3-OCl">
+                        <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="user ID" textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GSa-h3-OCl">
                             <rect key="frame" x="80" y="27.666666666666671" width="66.666666666666686" height="25"/>
+                            <gestureRecognizers/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="25" id="zAL-pg-LSr"/>
                             </constraints>
@@ -43,7 +44,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="U8K-HW-SfQ">
-                            <rect key="frame" x="15" y="70" width="345" height="314"/>
+                            <rect key="frame" x="15" y="70" width="345" height="444"/>
                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                             <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -51,22 +52,22 @@
                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                         </textView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MbR-k3-nhu">
-                            <rect key="frame" x="15" y="389" width="345" height="300"/>
+                            <rect key="frame" x="15" y="519" width="345" height="170"/>
                             <subviews>
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NTf-ju-WRN">
-                                    <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="170" height="170"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="NTf-ju-WRN" secondAttribute="height" multiplier="1:1" id="bR4-Yl-Ot6"/>
                                     </constraints>
                                 </imageView>
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ij3-Uc-SiT">
-                                    <rect key="frame" x="305" y="0.0" width="300" height="300"/>
+                                    <rect key="frame" x="175" y="0.0" width="170" height="170"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="Ij3-Uc-SiT" secondAttribute="height" multiplier="1:1" id="lCQ-fb-pe1"/>
                                     </constraints>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00+" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zGB-cQ-9Qd">
-                                    <rect key="frame" x="433" y="137" width="44.333333333333314" height="26.333333333333343"/>
+                                    <rect key="frame" x="238.00000000000003" y="72" width="44.333333333333343" height="26.333333333333329"/>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
@@ -88,23 +89,23 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iCo-tJ-Oqa">
-                            <rect key="frame" x="15" y="389" width="345" height="300"/>
+                            <rect key="frame" x="15" y="519" width="345" height="170"/>
                             <subviews>
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4pF-XX-ZSl">
-                                    <rect key="frame" x="0.0" y="0.0" width="345" height="300"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="345" height="170"/>
                                     <gestureRecognizers/>
                                 </imageView>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cvn-Hc-7VO">
-                                    <rect key="frame" x="0.0" y="0.0" width="345" height="300"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="345" height="170"/>
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9un-Ry-ZtN">
-                                            <rect key="frame" x="0.0" y="0.0" width="136" height="300"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="136" height="170"/>
                                         </imageView>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dcq-bl-RaI">
-                                            <rect key="frame" x="141" y="0.0" width="204" height="177"/>
+                                            <rect key="frame" x="141" y="0.0" width="204" height="99"/>
                                         </imageView>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1Z2-CH-ndc">
-                                            <rect key="frame" x="141" y="182" width="204" height="118"/>
+                                            <rect key="frame" x="141" y="104" width="204" height="66"/>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="00+" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vIR-M2-dal">
                                             <rect key="frame" x="204.33333333333334" y="206" width="40.333333333333343" height="24"/>
@@ -132,23 +133,23 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c2a-Qw-ERq">
-                                    <rect key="frame" x="0.0" y="0.0" width="345" height="300"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="345" height="170"/>
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="W5l-Pu-Yfe">
-                                            <rect key="frame" x="0.0" y="0.0" width="153.66666666666666" height="147.66666666666666"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="153.66666666666666" height="82.666666666666671"/>
                                         </imageView>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="liq-rG-u0z">
-                                            <rect key="frame" x="158.66666666666663" y="0.0" width="186.33333333333337" height="147.66666666666666"/>
+                                            <rect key="frame" x="158.66666666666663" y="0.0" width="186.33333333333337" height="82.666666666666671"/>
                                         </imageView>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nMg-cE-Avh">
-                                            <rect key="frame" x="0.0" y="152.66666666666663" width="194.33333333333334" height="147.33333333333337"/>
+                                            <rect key="frame" x="0.0" y="87.666666666666629" width="194.33333333333334" height="82.333333333333314"/>
                                         </imageView>
                                         <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ugl-co-jJY">
-                                            <rect key="frame" x="199.33333333333337" y="152.66666666666663" width="145.66666666666663" height="147.33333333333337"/>
+                                            <rect key="frame" x="199.33333333333337" y="87.666666666666629" width="145.66666666666663" height="82.333333333333314"/>
                                             <gestureRecognizers/>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00+" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QV4-Rr-l8J">
-                                            <rect key="frame" x="251.66666666666669" y="214.33333333333337" width="41" height="24"/>
+                                            <rect key="frame" x="251.66666666666669" y="116.66666666666663" width="41" height="24"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
