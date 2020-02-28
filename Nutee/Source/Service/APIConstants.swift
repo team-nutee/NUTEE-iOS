@@ -34,12 +34,12 @@ struct APIConstants {
     static let Logout = BaseURL + "/api/user/logout"                            // POST
     static let Login = BaseURL + "/api/user/login"                              // POST { userId : id , password: pw }
     
-    static let FollowingGET = BaseURL + "/api/user/:id/follwings"               // GET
+    static let FollowingGET = BaseURL + "/api/user/:id/followings"              // GET
     
     static let FollowDELETE = BaseURL + "/api/user/:id/follow"                  // DELETE  { userId : id }
     static let FollowPOST = BaseURL + "/api/user/:id/follow"                    // POST    { userId : id }
     
-    static let FollowerGET = BaseURL + "/api/user/:id/follwers"                 // GET
+    static let FollowerGET = BaseURL + "/api/user/:id/followers?offset=0&limit=3" // GET <-- limit는 가져올 followers의 개수
     static let FollowerDELETE = BaseURL + "/api/user/:id/followers"             // DELETE  { userId : id }
     static let FollowerPOST = BaseURL + "/api/user/:id/followers"               // POST    { userId : id }
 

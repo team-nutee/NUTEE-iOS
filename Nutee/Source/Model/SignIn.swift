@@ -13,7 +13,7 @@ struct SignIn: Codable {
     let id: Int
     let nickname, userID: String
     let posts: [Post]
-    let followings, followers: [Follow]
+    let followings, followers: [FollowSign]
 
     enum CodingKeys: String, CodingKey {
         case id, nickname
@@ -24,21 +24,19 @@ struct SignIn: Codable {
     }
     
     init(from decoder: Decoder) throws {
-        
         let values = try decoder.container(keyedBy: CodingKeys.self)
         id = (try? values.decode(Int.self, forKey: .id)) ?? 0
         nickname = (try? values.decode(String.self, forKey: .nickname)) ?? ""
         userID = (try? values.decode(String.self, forKey: .userID)) ?? ""
         posts = (try? values.decode([Post].self, forKey: .posts)) ?? []
-        followings = (try? values.decode([Follow].self, forKey: .followings)) ?? []
-        followers = (try? values.decode([Follow].self, forKey: .followers)) ?? []
-        
+        followings = (try? values.decode([FollowSign].self, forKey: .followings)) ?? []
+        followers = (try? values.decode([FollowSign].self, forKey: .followers)) ?? []
     }
 
 }
 
 // MARK: - Follow
-struct Follow: Codable {
+struct FollowSign: Codable {
     let id: Int
     let follow: FollowClass
 

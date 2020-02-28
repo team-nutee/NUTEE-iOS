@@ -107,6 +107,9 @@ class ProfileVC: UIViewController {
     @objc func viewFollower() {
         let followerVC = self.storyboard?.instantiateViewController(withIdentifier: "FollowerVC") as! FollowerVC
         
+        // ProfileVC가 서버에서 받은 팔로워 개수를 FollowerVC로 전달
+        followerVC.followersNums = userInfo?.followers.count ?? 0
+        
         self.navigationController?.pushViewController(followerVC, animated: true)
     }
     
@@ -338,6 +341,7 @@ extension ProfileVC {
             case .success(let res):
                 let response = res as! SignIn
                 self.userInfo = response
+                print("userInfo server connect successful")
                 
                 self.myArticleTV.reloadData()
             case .requestErr(_):

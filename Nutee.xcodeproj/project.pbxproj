@@ -88,6 +88,8 @@
 		D5DAC67423F42BB100226F20 /* Pods_Nutee.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5915003F64084812BCF9F67 /* Pods_Nutee.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		D5DAC67523F42BB100226F20 /* Pods_Nutee.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E5915003F64084812BCF9F67 /* Pods_Nutee.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D5EBD78423CFE69F00C2B7F5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D5EBD78323CFE69F00C2B7F5 /* Main.storyboard */; };
+		D5F651CF2407B46500263A34 /* FollowersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F651CE2407B46500263A34 /* FollowersService.swift */; };
+		D5F651D12407DF4C00263A34 /* FollowersList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F651D02407DF4C00263A34 /* FollowersList.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -200,6 +202,8 @@
 		D5DAA89223E7F0C60052E17B /* HeaderNewsFeedView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HeaderNewsFeedView.xib; sourceTree = "<group>"; };
 		D5DAC67123F402D700226F20 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5EBD78323CFE69F00C2B7F5 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		D5F651CE2407B46500263A34 /* FollowersService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowersService.swift; sourceTree = "<group>"; };
+		D5F651D02407DF4C00263A34 /* FollowersList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowersList.swift; sourceTree = "<group>"; };
 		E5915003F64084812BCF9F67 /* Pods_Nutee.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Nutee.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBCC5FADFAEF6F7815A56200 /* Pods-Nutee.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nutee.release.xcconfig"; path = "Target Support Files/Pods-Nutee/Pods-Nutee.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -411,6 +415,7 @@
 				5E2BDCB224038F0300CE99A7 /* SignUp.swift */,
 				5E21445B23C2F8F60053CFB9 /* Model.swift */,
 				D53F61F72403C3F200C8EE38 /* DetailContent.swift */,
+				D5F651D02407DF4C00263A34 /* FollowersList.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -423,6 +428,7 @@
 				5E2BDCB724038F7300CE99A7 /* NoticeService.swift */,
 				5E2BDCB824038F7300CE99A7 /* UserService.swift */,
 				D53F61F92403C5E200C8EE38 /* ContentService.swift */,
+				D5F651CE2407B46500263A34 /* FollowersService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -696,6 +702,7 @@
 				5E21445C23C2F8F60053CFB9 /* Model.swift in Sources */,
 				5E95CD6823EF35280090C39B /* SettingVC.swift in Sources */,
 				5EA5C68823F1472200BFB32B /* NameVC.swift in Sources */,
+				D5F651D12407DF4C00263A34 /* FollowersList.swift in Sources */,
 				D59718A923CEA98400117906 /* NewsFeedVC.swift in Sources */,
 				5E79C0C723EC6AFF00BD2FB3 /* ImageVC.swift in Sources */,
 				5E3560E623EC11F1002B8C87 /* FollowingVC.swift in Sources */,
@@ -723,6 +730,7 @@
 				5E79C0CF23EDE0B900BD2FB3 /* Notification.Name+Extension.swift in Sources */,
 				5E79C0CC23EC6B2A00BD2FB3 /* PopUpVC.swift in Sources */,
 				5E05AD6E23DB0EB800E36AD4 /* UIViewController+Extension.swift in Sources */,
+				D5F651CF2407B46500263A34 /* FollowersService.swift in Sources */,
 				5E0E6A7223E73ECE00FBC15F /* PostVC.swift in Sources */,
 				5EB7415323F18AEE006AE529 /* CafeteriaTVC.swift in Sources */,
 				5E05AD7D23DEA5FB00E36AD4 /* MyChatTVC.swift in Sources */,

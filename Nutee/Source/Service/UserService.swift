@@ -47,7 +47,7 @@ struct UserService {
                         switch status {
                         case 200:
                             do{
-                                print("start decode")
+                                print("start decode SignUp")
                                 let decoder = JSONDecoder()
                                 let result = try decoder.decode(SignUp.self, from: value)
                                 completion(.success(result))
@@ -195,14 +195,14 @@ struct UserService {
             case .success:
                 // parameter 위치
                 if let value = response.result.value {
-                    //print("response", )
+                    print(value)
                     //response의 respones안에 있는 statusCode를 추출
                     if let status = response.response?.statusCode {
-                        print(status)
+                        print("getUserInfo method:", status)
                         switch status {
                         case 200:
                             do{
-                                print("start decode")
+                                print("start decode getUserInfo")
                                 let decoder = JSONDecoder()
                                 let result = try decoder.decode(SignIn.self, from: value)
                                 completion(.success(result))
