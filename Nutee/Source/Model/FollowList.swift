@@ -9,7 +9,7 @@
 import Foundation
 
 // MARK: - FollowersList
-struct FollowersListElement: Codable {
+struct FollowListElement: Codable {
     let id: Int
     let nickname: String
     let follow: FollowFollowers
@@ -40,4 +40,4 @@ struct FollowFollowers: Codable {
     }
 }
 
-typealias FollowersList = [FollowersListElement]
+typealias FollowersList = [FollowListElement]

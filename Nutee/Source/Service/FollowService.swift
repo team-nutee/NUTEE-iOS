@@ -40,7 +40,7 @@ struct FollowersService {
                             do{
                                 print("start decode getFollowersList")
                                 let decoder = JSONDecoder()
-                                let result = try decoder.decode(FollowersList.self, from: value)
+                                let result = try decoder.decode(FollowList.self, from: value)
                                 completion(.success(result))
                             } catch {
                                 completion(.pathErr)
