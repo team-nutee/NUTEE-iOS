@@ -8,11 +8,11 @@
 
 import Foundation
 
-// MARK: - FollowersList
+// MARK: - FollowList for followers and followings
 struct FollowListElement: Codable {
     let id: Int
     let nickname: String
-    let follow: FollowFollowers
+    let follow: Follow
 
     enum CodingKeys: String, CodingKey {
         case id, nickname
@@ -23,13 +23,13 @@ struct FollowListElement: Codable {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         id = (try? values.decode(Int.self, forKey: .id)) ?? 0
         nickname = (try? values.decode(String.self, forKey: .nickname)) ?? ""
-        follow = (try? values.decode(FollowFollowers.self, forKey: .follow)) ??
-            FollowFollowers.init(createdAt: "", updatedAt: "", followingID: 0, followerID: 0)
+        follow = (try? values.decode(Follow.self, forKey: .follow)) ??
+            Follow.init(createdAt: "", updatedAt: "", followingID: 0, followerID: 0)
     }
 }
 
 // MARK: - Follow
-struct FollowFollowers: Codable {
+struct Follow: Codable {
     let createdAt, updatedAt: String
     let followingID, followerID: Int
 
@@ -40,4 +40,4 @@ struct FollowFollowers: Codable {
     }
 }
 
-typealias FollowersList = [FollowListElement]
+typealias FollowList = [FollowListElement]
