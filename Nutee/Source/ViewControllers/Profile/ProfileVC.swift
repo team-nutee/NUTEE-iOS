@@ -55,9 +55,10 @@ class ProfileVC: UIViewController {
         self.myArticleTV.register(ArticleTVC.self, forCellReuseIdentifier: "ArticleTVC")
         
         print("viewDidLoad 실행1")
-        getUserInfoService()
-//        getUserPostService(userId: userInfo!.id)
-        getUserPostService(userId: 6)
+        // getUserInfoService의 서버 데이터 수신이 완료된 후 getUserPostService 실행
+        getUserInfoService(completionHandler: {(returnedData)-> Void in
+            self.getUserPostService(userId: self.userInfo!.id)
+        })
         print("viewDidLoad 실행2")
         
         myArticleTV.register(UINib(nibName: "ProflieTableViewCell", bundle: nil), forCellReuseIdentifier: "ProflieTableViewCell")
@@ -170,7 +171,7 @@ extension ProfileVC : UITableViewDataSource {
         var userPostsNum = userPosts?.count ?? 0
         userPostsNum += 1
         
-        if userPostsNum == 0 {
+        if userPostsNum == 1 {
             tableView.setEmptyView(title: "게시글이 없습니다", message: "새로운 게시물을 올려보세요‼️")
         } else {
             tableView.setEmptyView(title: "", message: "")
@@ -195,6 +196,7 @@ extension ProfileVC : UITableViewDataSource {
             cell.timeLabel.text = userPost?.createdAt
             print(userPost?.content ?? "그런 글 없는데요")
             cell.articleTextView.sizeToFit()
+            tableView.separatorStyle = .singleLine
         }
         
         return cell
@@ -214,7 +216,7 @@ extension ProfileVC : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 0 {
-            return 0.3
+            return 0.5
         } else {
             return UITableView.automaticDimension
         }
@@ -374,7 +376,7 @@ extension ProfileVC: UITextViewDelegate {
 //MARK: - UserInfo와 UserPost 서버 연결을 위한 Service 실행 구간
 
 extension ProfileVC {
-    func getUserInfoService() {
+    func getUserInfoService(completionHandler: @escaping (_ returnedData: SignIn) -> Void ) {
         UserService.shared.getUserInfo() { responsedata in
             
             switch responsedata {
@@ -382,6 +384,7 @@ extension ProfileVC {
                 let response = res as! SignIn
                 self.userInfo = response
                 print("userInfo server connect successful")
+                completionHandler(self.userInfo!)
                 
                 self.myArticleTV.reloadData()
             case .requestErr(_):
