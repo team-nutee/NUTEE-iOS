@@ -16,7 +16,7 @@ struct APIConstants {
     static let PostPost = BaseURL + "/api/post"                                 // POST formData : image filename , content : content
     static let PostGET = BaseURL + "/api/post/:id"                              // GET 뒤에 아이디 값을 넣어야 함                 // 아이디가 게시물의 id?
     static let PostDelete = BaseURL + "/api/post/:id"                           // DELETE 뒤에 아이디 값을 넣어줘야함              // "
-    static let Posts = BaseURL + "/api/posts"                                   // GET
+    static let Posts = BaseURL + "/api/posts?offset=0&limit=10"                 // GET <-- limit는 가져올 posts의 개수(10)
     static let UserPostsGET = BaseURL + "/api/user/:id/posts/"                  // GET
     
     static let Hashtag = BaseURL + "/api/hashtag"                               // GET
@@ -39,7 +39,7 @@ struct APIConstants {
     static let FollowDELETE = BaseURL + "/api/user/:id/follow"                  // DELETE  { userId : id }
     static let FollowPOST = BaseURL + "/api/user/:id/follow"                    // POST    { userId : id }
     
-    static let FollowerGET = BaseURL + "/api/user/:id/followers?offset=0&limit=3" // GET <-- limit는 가져올 followers의 개수
+    static let FollowerGET = BaseURL + "/api/user/:id/followers?offset=0&limit=10" // GET <-- limit는 가져올 followers의 개수(10)
     static let FollowerDELETE = BaseURL + "/api/user/:id/followers"             // DELETE  { userId : id }
     static let FollowerPOST = BaseURL + "/api/user/:id/followers"               // POST    { userId : id }
 

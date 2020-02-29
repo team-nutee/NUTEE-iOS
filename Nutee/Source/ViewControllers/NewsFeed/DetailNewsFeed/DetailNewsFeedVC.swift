@@ -21,7 +21,8 @@ class DetailNewsFeedVC: UIViewController {
     @IBOutlet var CommentWindowToBottom: NSLayoutConstraint!
     
     //MARK: - Variables and Properties
-    var content : DetailContent?
+    
+    var content : PostContent?
 
     var indexPath = 0
     
@@ -202,13 +203,15 @@ extension DetailNewsFeedVC {
     
 }
 
+//MARK: - UserInfo 서버 연결을 위한 Service 실행 구간
+
 extension DetailNewsFeedVC {
-    func getUserInfoService() {
-        ContentService.shared.getPost("5") { responsedata in
+    func getPostContentInfoService() {
+        ContentService.shared.getPost(5) { responsedata in
 
             switch responsedata {
             case .success(let res):
-                self.content = res as! DetailContent
+                self.content = res as! PostContent
             case .requestErr(_):
                 print("request error")
 

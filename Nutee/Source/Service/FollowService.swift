@@ -70,7 +70,7 @@ struct FollowService {
         
         func getFollowingsList(_ userId: String, completion: @escaping (NetworkResult<Any>) -> Void){
 
-            let URL = APIConstants.BaseURL + "/api/user/" + userId + "/followings?offset=0&limit=3"
+            let URL = APIConstants.BaseURL + "/api/user/" + userId + "/followings?offset=0&limit=10"
             // 'limit'는 가져올 followings의 개수
             let header: HTTPHeaders = [
     //            "Content-Type" : "application/json",

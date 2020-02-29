@@ -9,7 +9,7 @@
 import Foundation
 
 // MARK: - DetailContent
-struct DetailContent: Codable {
+struct PostContent: Codable {
     let id: Int
     let content, createdAt, updatedAt: String
     let userID, retweetID: Int
@@ -24,9 +24,7 @@ struct DetailContent: Codable {
         case images = "Images"
     }
     
-    
     init(from decoder: Decoder) throws {
-        
         let values = try decoder.container(keyedBy: CodingKeys.self)
         id = (try? values.decode(Int.self, forKey: .id)) ?? 0
         content = (try? values.decode(String.self, forKey: .content)) ?? ""
@@ -36,10 +34,7 @@ struct DetailContent: Codable {
         retweetID = (try? values.decode(Int.self, forKey: .retweetID)) ?? 0
         user = (try? values.decode(User.self, forKey: .user)) ?? User.init(id: 0, nickname: "")
         images = (try? values.decode([String].self, forKey: .images)) ?? [""]
-        
     }
-
-    
 }
 
 // MARK: - User

@@ -40,24 +40,30 @@ class ProfileVC: UIViewController {
 
     // MARK: - Variables and Properties
     
-    var userInfo : SignIn?
-    var isFollow : Bool = false
+    var userInfo: SignIn?
+    var userPost: PostContent?
+    
+    var isFollow: Bool = false
     
     // MARK: - Life Cycle
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        getUserInfoService()
         myArticleTV.delegate = self
         myArticleTV.dataSource = self
         self.myArticleTV.register(ArticleTVC.self, forCellReuseIdentifier: "ArticleTVC")
         
+        print("viewDidLoad 실행1")
+        getUserInfoService()
+        print("viewDidLoad 실행2")
+        
         myArticleTV.register(UINib(nibName: "ProflieTableViewCell", bundle: nil), forCellReuseIdentifier: "ProflieTableViewCell")
         myArticleTV.separatorInset.left = 0
-
+        
         setBtn()
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -65,7 +71,13 @@ class ProfileVC: UIViewController {
          // 네비바 border 삭제
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
-
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        
+        self.myArticleTV.reloadData()
+        print("viewDidAppear 실행")
     }
 
     
@@ -147,48 +159,70 @@ class ProfileVC: UIViewController {
 }
 
 // MARK: - UITableView
+
 extension ProfileVC : UITableViewDelegate { }
 
 extension ProfileVC : UITableViewDataSource {
         
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        if userInfo?.posts.count == 0{
+        
+        print("numberRowSection 실행")
+        
+        let userPostNums = userInfo?.posts.count ?? 0
+        
+        if userPostNums == 0 {
             tableView.setEmptyView(title: "게시글이 없습니다", message: "새로운 게시물을 올려보세요‼️")
-//        } else {
-//            tableView.restore()
-//        }
-        return (userInfo?.posts.count ?? 1) + 1
-//        return 20
+        } else {
+            tableView.setEmptyView(title: "", message: "")
+        }
+        
+        return userPostNums
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        print("celForRowAt 실행")
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "ProflieTableViewCell", for: indexPath) as! ProflieTableViewCell
         
+         // AtricleTVC에 값 전달
+//        cell.indexPath = indexPath.row ??
+//        cell.userInfo = self.userInfo
+        let postId = userInfo?.posts[indexPath.row].id ?? 0
+        print("----------------------------->indexPath값은 ", indexPath.row)
+        getUserPostService(postId: postId)
+
         if indexPath.row == 0 {
             cell.backgroundColor = .lightGray
-        } else {
-            textViewDidChange(cell.articleTextView)
-            cell.articleTextView.text = "123\n\n\n123\n\n123123\n\n\n\n123123"
-            cell.articleTextView.sizeToFit()
         }
+        textViewDidChange(cell.articleTextView)
+        cell.profileNameLabel.text = userPost?.user.nickname
+        cell.articleTextView.text = userPost?.content
+        print(userPost?.content ?? "그런 글 없는데요")
+        cell.articleTextView.sizeToFit()
         
         return cell
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
-        if indexPath.row == 0 {
-            return 0.3
-        } else {
-            return 150
-        }
-        
-    }
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        if indexPath.row == 0 {
+//            return 0.3
+//        } else {
+//            return 150
+//        }
+//    }
     
 //    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
 //        return 150
 //    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+        
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //        let cell = tableView.dequeueReusableCell(withIdentifier: "ArticleTVC", for: indexPath) as! ArticleTVC
@@ -332,6 +366,7 @@ extension ProfileVC: UITextViewDelegate {
     
 }
 
+//MARK: - UserInfo 서버 연결을 위한 Service 실행 구간
 
 extension ProfileVC {
     func getUserInfoService() {
@@ -358,6 +393,30 @@ extension ProfileVC {
                 }
         }
         
+    }
+    
+    func getUserPostService(postId: Int) {
+        ContentService.shared.getPost(postId) { responsedata in
+
+            switch responsedata {
+            case .success(let res):
+                let response = res as! PostContent
+                self.userPost = response
+                print("userPost server connect successful")
+            case .requestErr(_):
+                print("request error")
+
+            case .pathErr:
+                print(".pathErr")
+
+            case .serverErr:
+                print(".serverErr")
+
+            case .networkFail :
+                print("failure")
+                }
+        }
+
     }
 
 }

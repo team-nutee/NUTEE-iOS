@@ -49,7 +49,7 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
     
     //MARK: - Variables and Properties
     
-    var content : DetailContent?
+    var content : PostContent?
     
     weak var detailNewsFeedVC: UIViewController?
     
@@ -304,12 +304,12 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
 
 extension HeaderNewsFeedView {
     func getUserInfoService() {
-        ContentService.shared.getPost("5") { responsedata in
+        ContentService.shared.getPost(5) { responsedata in
 
             switch responsedata {
             case .success(let res):
                 print("res: ",res)
-                self.content = res as! DetailContent
+                self.content = res as! PostContent
                 print("content: ", self.content)
 
                 // intiPosting() 내용

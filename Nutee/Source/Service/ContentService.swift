@@ -14,15 +14,13 @@ struct ContentService {
     
     static let shared = ContentService()
     
-    //MARK: - 게시글 하나 받아오기
+    //MARK: - Post(게시글) 하나 받아오기
     
-    func getPost(_ postId: String, completion: @escaping (NetworkResult<Any>) -> Void){
-//        static let PostGET = BaseURL + "/api/post/:id"                              // GET 뒤에 아이디 값을 넣어야 함                 // 아이디가 게시물의 id?
-
-        let URL = APIConstants.BaseURL + "/api/post/" + postId
+    func getPost(_ postId: Int, completion: @escaping (NetworkResult<Any>) -> Void){
+     let URL = APIConstants.BaseURL + "/api/post/" + String(postId)
         let header: HTTPHeaders = [
-            "Content-Type" : "application/json",
-            "Cookie" : UserDefaults.standard.string(forKey: "Cookie") as! String
+//            "Content-Type" : "application/json",
+            "Cookie" : UserDefaults.standard.string(forKey: "Cookie")!
         ]
         
         Alamofire.request(URL, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: header).responseData{ response in
@@ -33,12 +31,14 @@ struct ContentService {
                 if let value = response.result.value {
                     
                     if let status = response.response?.statusCode{
+                        print("getPost method:", status)
+                        print(URL)
                         switch status {
                         case 200:
                                 do{
-                                    print("start decode")
+                                    print("start decode getPost")
                                     let decoder = JSONDecoder()
-                                    let result = try decoder.decode(DetailContent.self, from: value)
+                                    let result = try decoder.decode(PostContent.self, from: value)
                                     completion(.success(result))
                                 } catch {
                                     completion(.pathErr)

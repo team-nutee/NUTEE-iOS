@@ -68,6 +68,8 @@ extension FollowerVC : UITableViewDataSource {
     
 }
 
+//MARK: - FollowersList 서버 연결을 위한 Service 실행 구간
+
 extension FollowerVC {
     func getFollowersListService() {
         FollowService.shared.getFollowersList("6") { responsedata in
