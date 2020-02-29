@@ -13,7 +13,7 @@ struct PostContent: Codable {
     let id: Int
     let content, createdAt, updatedAt: String
     let userID, retweetID: Int
-    let user: User
+    let user: PostUser
     let images: [String]
 
     enum CodingKeys: String, CodingKey {
@@ -32,13 +32,13 @@ struct PostContent: Codable {
         updatedAt = (try? values.decode(String.self, forKey: .updatedAt)) ?? ""
         userID = (try? values.decode(Int.self, forKey: .userID)) ?? 0
         retweetID = (try? values.decode(Int.self, forKey: .retweetID)) ?? 0
-        user = (try? values.decode(User.self, forKey: .user)) ?? User.init(id: 0, nickname: "")
+        user = (try? values.decode(PostUser.self, forKey: .user)) ?? PostUser.init(id: 0, nickname: "")
         images = (try? values.decode([String].self, forKey: .images)) ?? [""]
     }
 }
 
 // MARK: - User
-struct User: Codable {
+struct PostUser: Codable {
     let id: Int
     let nickname: String
 }

@@ -18,11 +18,7 @@ class ProflieTableViewCell: UITableViewCell {
     @IBOutlet weak var likeBtn: UIButton!
     @IBOutlet weak var replyBtn: UIButton!
     @IBOutlet weak var moreBtn: UIButton!
-    
-    var userInfo: SignIn?
-    var userPost: PostContent?
-    var indexPath = 0
-    
+   
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -43,39 +39,4 @@ class ProflieTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-//    let postId = userInfo?.posts[self.indexPath].id ?? 0
-//    print("----------------------------->indexPath값은 ", self.indexPath)
-//    getUserPostService(postId: postId)
-//
-//    if indexPath == 0 {
-//        cell.backgroundColor = .lightGray
-//    }
-//    textViewDidChange(cell.articleTextView)
-//    cell.profileNameLabel.text = userPost?.user.nickname
-//    cell.articleTextView.text = userPost?.content
-//    cell.articleTextView.sizeToFit()
-//
-//
-//    func getUserPostService(postId: Int) {
-//        ContentService.shared.getPost(postId) { responsedata in
-//
-//            switch responsedata {
-//            case .success(let res):
-//                self.userPost = res as! PostContent
-//                print("userPost server connect successful")
-//            case .requestErr(_):
-//                print("request error")
-//
-//            case .pathErr:
-//                print(".pathErr")
-//
-//            case .serverErr:
-//                print(".serverErr")
-//
-//            case .networkFail :
-//                print("failure")
-//                }
-//        }
-//
-//    }
 }
