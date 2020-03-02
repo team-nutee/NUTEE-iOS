@@ -1,5 +1,5 @@
 //
-//  DetailContent.swift
+//  PostContent.swift
 //  Nutee
 //
 //  Created by Hee Jae Kim on 2020/02/24.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-// MARK: - DetailContent
+// MARK: - PostContent
 struct PostContent: Codable {
     let id: Int
     let content, createdAt, updatedAt: String
@@ -33,7 +33,7 @@ struct PostContent: Codable {
         userID = (try? values.decode(Int.self, forKey: .userID)) ?? 0
         retweetID = (try? values.decode(Int.self, forKey: .retweetID)) ?? 0
         user = (try? values.decode(PostUser.self, forKey: .user)) ?? PostUser.init(id: 0, nickname: "")
-        images = (try? values.decode([String].self, forKey: .images)) ?? [""]
+        images = (try? values.decode([String].self, forKey: .images)) ?? []
     }
 }
 

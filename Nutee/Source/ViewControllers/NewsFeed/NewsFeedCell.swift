@@ -12,10 +12,13 @@ class NewsFeedCell: UITableViewCell {
     
     //MARK: - UI components
     
-    weak var newsFeedVC: UIViewController?
+    // Repost Info Section
+    @IBOutlet var lblRepostInfo: UILabel!
+    @IBOutlet var TopToRepostImg: NSLayoutConstraint!
     
     // User Information
     @IBOutlet var imgUserImg: UIImageView!
+    @IBOutlet var TopToUserImg: NSLayoutConstraint!
     @IBOutlet var lblUserId: UILabel!
     @IBOutlet var lblPostTime: UILabel!
     
@@ -47,23 +50,27 @@ class NewsFeedCell: UITableViewCell {
     @IBOutlet var btnRepost: UIButton!
     @IBOutlet var btnLike: UIButton!
     @IBOutlet var btnComment: UIButton!
+    @IBOutlet var btnMore: UIButton!
     
 
     //MARK: - Variables and Properties
     
-    var indexPath = 0
+    weak var newsFeedVC: UIViewController?
+    var newsPost: NewsPostsContentElement?
+    
+    var imgCnt: Int?
     let dataPeng01 = [ "sample_peng01.jepg" ]
     let dataPeng02 = [ "sample_peng01.jepg", "sample_peng02.jepg" ]
     let dataPeng03 = [ "sample_peng01.jepg", "sample_peng02.jepg", "sample_peng03.png" ]
     let dataPeng04 = [ "sample_peng01.jepg", "sample_peng02.jepg", "sample_peng03.png", "sample_peng04.png" ]
     let dataPeng05 = [ "sample_peng01.jepg", "sample_peng02.jepg", "sample_peng03.png", "sample_peng04.png", "sample_peng05.png" ]
+
+    var numLike: Int?
+    var numComment: Int?
     
-    var numLike = 0
-    var numComment = 0
-    
-    var isClickedLike: Bool = false
-    var isClickedRepost: Bool = false
-    var isClickedComment: Bool = false
+    var isClickedLike: Bool?
+    var isClickedRepost: Bool?
+    var isClickedComment: Bool?
     
     // .normal 상태에서의 버튼 AttributedStringTitle의 색깔 지정
     let normalAttributes = [NSAttributedString.Key.foregroundColor: UIColor.gray]
@@ -76,8 +83,14 @@ class NewsFeedCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
         
-        initPosting()
+        btnRepost.isEnabled = true
+        btnLike.isEnabled = true
+        btnMore.isEnabled = true
     }
     
     //MARK: - Helper
@@ -89,7 +102,7 @@ class NewsFeedCell: UITableViewCell {
     @IBAction func btnRepost(_ sender: UIButton) {
         // .selected State를 활성화 하기 위한 코드
         btnRepost.isSelected = !btnRepost.isSelected
-        if isClickedRepost {
+        if isClickedRepost! {
             btnRepost.tintColor = .nuteeGreen
             isClickedRepost = false
         } else {
@@ -100,20 +113,11 @@ class NewsFeedCell: UITableViewCell {
         
     @IBAction func btnLike(_ sender: UIButton) {
         // .selected State를 활성화 하기 위한 코드
-        btnLike.isSelected = !btnLike.isSelected
-        if isClickedLike {
-//            btnLike.isSelected = false
-            numLike -= 1
-            setButtonAttributed(btn: sender, num: numLike, color: .gray, state: .normal)
-//            sender.setImage(UIImage(named: "heart.filled"), for: .selected)
-            isClickedLike = false
+//        btnLike.isSelected = !btnLike.isSelected
+        if isClickedLike! {
+            setNormalLikeBtn()
         } else {
-//            btnLike.isSelected = true
-            numLike += 1
-            setButtonAttributed(btn: sender, num: numLike, color: .systemPink, state: .selected)
-//            sender.setImage(UIImage(named: "heart.fill"), for: .selected)
-
-            isClickedLike = true
+            setSelectedLikeBtn()
         }
     }
     
@@ -145,18 +149,106 @@ class NewsFeedCell: UITableViewCell {
         imgUserImg.image = #imageLiteral(resourceName: "defaultProfile")
         imgUserImg.setRounded(radius: nil)
         
-        lblUserId.text = "testUserIDcheck"
-        lblUserId.sizeToFit()
-        
-        // Posting 내용 초기설정
-        txtvwContents.text = String("Before some words beginning with a pronounced (not silent) h in an unstressed first syllable, such as historic(al), hallucination, hilarious, horrendous, and horrific, some (especially older) British writers prefer to use an over a (an historical event, etc.).[7] An is also prefBritish English, American English typically uses an before herb, since the h in this word is silent for most Americans. The correct usage in respect of the term was the subject of an amendment debated in the UK Parliament.")
-        txtvwContents.postingInit()
-        showImgFrame()
-        
-        //버튼모양 초기 설정
-        btnRepost.tintColor = .gray
-        setButtonAttributed(btn: btnLike, num: numLike, color: .gray, state: .normal)
-        setButtonPlain(btn: btnComment, num: numComment, color: .gray, state: .normal)
+        if newsPost?.retweetID == nil {
+            // <-----공유한 글이 아닐 경우-----> //
+            TopToUserImg.isActive = true
+            TopToRepostImg.isActive = false
+            lblRepostInfo.isHidden = true
+            
+            // User 정보 설정
+            lblUserId.text = newsPost?.user.nickname
+            lblUserId.sizeToFit()
+            lblPostTime.text = newsPost?.createdAt
+            
+            // Posting 내용 설정
+            txtvwContents.text = newsPost?.content
+            txtvwContents.postingInit()
+            
+            imgCnt = newsPost?.images.count
+            showImgFrame()
+            
+            // Repost 버튼
+            isClickedRepost = false
+            btnRepost.tintColor = .gray
+            // Like 버튼
+            if (newsPost?.likers.contains(newsPost!.userID) ?? false) {
+                // 로그인 한 사용자가 좋아요를 누른 상태일 경우
+                btnLike.isSelected = true
+                numLike = newsPost?.likers.count ?? 0
+                btnLike.setTitle(" " + String(numLike!), for: .selected)
+                btnLike.tintColor = .systemPink
+                isClickedLike = true
+            } else {
+                // 로그인 한 사용자가 좋아요를 누르지 않은 상태일 경우
+                btnLike.isSelected = false
+                numLike = newsPost?.likers.count ?? 0
+                btnLike.setTitle(" " + String(numLike!), for: .normal)
+                btnLike.tintColor = .gray
+                isClickedLike = false
+            }
+            // Comment 버튼
+            numComment = newsPost?.comments.count ?? 0
+            setButtonPlain(btn: btnComment, num: numComment!, color: .gray, state: .normal)
+        } else {
+            // <-----공유한 글 일 경우-----> //
+            TopToUserImg.isActive = false
+            TopToRepostImg.isActive = true
+            lblRepostInfo.isHidden = false
+            lblRepostInfo.text = (newsPost?.user.nickname)! + "님이 공유했습니다"
+            
+            print("공유한 글 섹션, 가져온 newsPost 정보 --->", newsPost)
+            print("공유한 글 섹션, 리트윗 정보 -->", newsPost?.retweet)
+            
+            // User 정보 설정
+            lblUserId.text = newsPost?.retweet!.user.nickname
+            lblUserId.sizeToFit()
+            lblPostTime.text = newsPost?.retweet!.createdAt
+            
+            // Posting 내용 설정
+            txtvwContents.text = newsPost?.retweet!.content
+            txtvwContents.postingInit()
+            
+            imgCnt = newsPost?.retweet!.images.count
+            showImgFrame()
+            
+            // Repost 버튼
+            isClickedRepost = false
+            btnRepost.isSelected = false
+            btnRepost.tintColor = .gray
+            btnRepost.isEnabled = false
+            // Like 버튼
+            isClickedLike = false
+            numLike = nil
+            btnLike.setTitle(String(""), for: .normal)
+            btnLike.isEnabled = false
+            // Comment 버튼
+            numComment = 0
+            setButtonPlain(btn: btnComment, num: numComment!, color: .gray, state: .normal)
+            // More 버튼
+            btnMore.isEnabled = false
+        }
+    }
+    
+    func setNormalLikeBtn() {
+        btnLike.isSelected = false
+        numLike! -= 1
+        btnLike.setTitle(" " + String(numLike!), for: .normal)
+        btnLike.tintColor = .gray
+        isClickedLike = false
+    }
+    
+    func setSelectedLikeBtn() {
+        btnLike.isSelected = true
+        numLike! += 1
+        btnLike.setTitle(" " + String(numLike!), for: .selected)
+        btnLike.tintColor = .systemPink
+        isClickedLike = true
+    }
+    
+    func setButtonPlain(btn: UIButton, num: Int, color: UIColor, state: UIControl.State) {
+        btn.setTitle(" " + String(num), for: state)
+        btn.setTitleColor(color, for: state)
+        btn.tintColor = color
     }
     
     // 사진 개수에 따른 이미지 표시 유형 선택
@@ -166,8 +258,21 @@ class NewsFeedCell: UITableViewCell {
         vwSquare.isHidden = true
         
         var num = 0
-        switch indexPath {
-        case 0:
+        switch imgCnt {
+        case 1:
+            // ver. only OneImage
+            vwSquare.isHidden = false
+            
+            imgvwOne.isHidden = false
+            vwThree.isHidden = true
+            vwFour.isHidden = true
+            
+            vwTwoToRepost.isActive = false
+            vwSquareToRepost.isActive = true
+            ContentsToRepost.isActive = false
+            
+            imgvwOne.image = UIImage(named: dataPeng01[num])
+        case 2:
             // ver. TwoFrame
             vwTwo.isHidden = false
             
@@ -191,7 +296,7 @@ class NewsFeedCell: UITableViewCell {
                 }
                 num += 1
             }
-        case 1:
+        case 3:
             // ver. ThreeFrame
             vwSquare.isHidden = false
             
@@ -217,7 +322,7 @@ class NewsFeedCell: UITableViewCell {
                 }
                 num += 1
             }
-        case 2:
+        case 4:
             // ver. FourFrame
             vwSquare.isHidden = false
             
@@ -243,19 +348,6 @@ class NewsFeedCell: UITableViewCell {
                 }
                 num += 1
             }
-        case 4:
-            // ver. only OneImage
-            vwSquare.isHidden = false
-            
-            imgvwOne.isHidden = false
-            vwThree.isHidden = true
-            vwFour.isHidden = true
-            
-            vwTwoToRepost.isActive = false
-            vwSquareToRepost.isActive = true
-            ContentsToRepost.isActive = false
-            
-            imgvwOne.image = UIImage(named: dataPeng01[num])
         default:
             // 보여줄 사진이 없는 경우(글만 표시)
             lblTwoMoreImg.isHidden = true
@@ -292,8 +384,6 @@ class NewsFeedCell: UITableViewCell {
     func showDetailNewsFeed() {
         let detailNewsFeedSB = UIStoryboard(name: "DetailNewsFeed", bundle: nil)
         let showDetailNewsFeedVC = detailNewsFeedSB.instantiateViewController(withIdentifier: "DetailNewsFeed") as! DetailNewsFeedVC
-        //DetailNewsFeedVC로 NewsFeedVC의 선택된 cell의 indexPath값 전달
-        showDetailNewsFeedVC.indexPath = self.indexPath
 
         newsFeedVC?.navigationController?.pushViewController(showDetailNewsFeedVC, animated: true)
     }
@@ -306,12 +396,6 @@ class NewsFeedCell: UITableViewCell {
     //        showDetailNewsFeedVC.replyTV.scrollToRow(at: indexPath as IndexPath, at: .top, animated: true)
             
             newsFeedVC?.navigationController?.pushViewController(showProfileVC, animated: true)
-    }
-    
-    func setButtonPlain(btn: UIButton, num: Int, color: UIColor, state: UIControl.State) {
-        btn.setTitle(" " + String(num), for: state)
-        btnComment.tintColor = color
-        btnComment.setTitleColor(color, for: state)
     }
     
     func setButtonAttributed(btn: UIButton, num: Int, color: UIColor, state: UIControl.State) {

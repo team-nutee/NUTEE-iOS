@@ -16,6 +16,9 @@ class NewsFeedVC: UIViewController {
     
     // MARK: - Variables and Properties
     
+    var newsPosts: NewsPostsContent?
+    var newsPost: NewsPostsContentElement?
+    
     // MARK: - Dummy data
     
     // MARK: - Life Cycle
@@ -28,6 +31,8 @@ class NewsFeedVC: UIViewController {
         newsTV.separatorInset.left = 0
         
 //        self.tabBarController?.delegate = self
+        
+        getNewsPostsService(postCnt: 10)
         
         initColor()
     }
@@ -76,20 +81,24 @@ extension NewsFeedVC : UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let test : [String] = ["","","","",""]
-        
-        return test.count
+        return newsPosts?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //Custom셀인 'NewsFeedCell' 형식으로 생성
         let cell = tableView.dequeueReusableCell(withIdentifier: "NewsFeedCell", for: indexPath) as! NewsFeedCell
+        
+        newsPost = newsPosts?[indexPath.row]
+            print("바로 받아온 공유글 리트윗 값", newsPosts?[indexPath.row])
+        // 생성된 Cell클래스로 NewsPost 정보 넘겨주기
+        cell.newsPost = self.newsPost
+        cell.initPosting()
+        
+        // VC 컨트롤 권한을 Cell클래스로 넘겨주기
         cell.newsFeedVC = self
         
-        cell.indexPath = indexPath.row
-        cell.showImgFrame()
-        
         NSLog("선택된 cell은 \(indexPath.row) 번쨰 indexPath입니다")
+        print("")
         
         return cell
     }
@@ -121,3 +130,30 @@ extension NewsFeedVC : UITableViewDataSource {
 //    }
 //
 //}
+
+extension NewsFeedVC {
+    func getNewsPostsService(postCnt: Int) {
+        ContentService.shared.getNewsPosts(postCnt) { responsedata in
+            
+            switch responsedata {
+            case .success(let res):
+                let response = res as! NewsPostsContent
+                self.newsPosts = response
+                print("newsPosts server connect successful")
+                
+                self.newsTV.reloadData()
+            case .requestErr(_):
+                print("request error")
+            
+            case .pathErr:
+                print(".pathErr")
+            
+            case .serverErr:
+                print(".serverErr")
+            
+            case .networkFail :
+                print("failure")
+                }
+        }
+    }
+}

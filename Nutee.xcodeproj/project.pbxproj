@@ -68,6 +68,7 @@
 		D519843E23E32418001AB351 /* NewsFeed.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D519843C23E32418001AB351 /* NewsFeed.storyboard */; };
 		D519843F23E32418001AB351 /* DetailNewsFeed.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D519843D23E32418001AB351 /* DetailNewsFeed.storyboard */; };
 		D519844523E325EE001AB351 /* DetailNewsFeedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D519844423E325EE001AB351 /* DetailNewsFeedVC.swift */; };
+		D53CB44F240B995400DDA17A /* NewsPostsContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53CB44E240B995400DDA17A /* NewsPostsContent.swift */; };
 		D53F61F82403C3F200C8EE38 /* PostContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53F61F72403C3F200C8EE38 /* PostContent.swift */; };
 		D53F61FA2403C5E200C8EE38 /* ContentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53F61F92403C5E200C8EE38 /* ContentService.swift */; };
 		D53FD29423F43C6F00291597 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D53FD29323F43C6F00291597 /* Alamofire.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -183,6 +184,7 @@
 		D519844423E325EE001AB351 /* DetailNewsFeedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailNewsFeedVC.swift; sourceTree = "<group>"; };
 		D52C2CAE24011BF2002B3D3F /* SKPhotoBrowser.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SKPhotoBrowser.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D52C2CB124011C39002B3D3F /* SKPhotoBrowser.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SKPhotoBrowser.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D53CB44E240B995400DDA17A /* NewsPostsContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsPostsContent.swift; sourceTree = "<group>"; };
 		D53F61F72403C3F200C8EE38 /* PostContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostContent.swift; sourceTree = "<group>"; };
 		D53F61F92403C5E200C8EE38 /* ContentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentService.swift; sourceTree = "<group>"; };
 		D53FD29323F43C6F00291597 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -417,6 +419,7 @@
 				5E2BDCB224038F0300CE99A7 /* SignUp.swift */,
 				5E21445B23C2F8F60053CFB9 /* Model.swift */,
 				D53F61F72403C3F200C8EE38 /* PostContent.swift */,
+				D53CB44E240B995400DDA17A /* NewsPostsContent.swift */,
 				D5F651D02407DF4C00263A34 /* FollowList.swift */,
 				D55E94EE240A92F6009F738C /* UserPostContent.swift */,
 			);
@@ -711,6 +714,7 @@
 				5E3560E623EC11F1002B8C87 /* FollowingVC.swift in Sources */,
 				5E2BDCBA24038F7300CE99A7 /* UserService.swift in Sources */,
 				5E95CD6A23EF36230090C39B /* ToPostVC.swift in Sources */,
+				D53CB44F240B995400DDA17A /* NewsPostsContent.swift in Sources */,
 				D5DAA88F23E7EF2E0052E17B /* ReplyCell.swift in Sources */,
 				5E05AD7423DB0F0200E36AD4 /* UIButton+Extension.swift in Sources */,
 				5EA5C68623F1470B00BFB32B /* IdVC.swift in Sources */,

@@ -54,12 +54,10 @@ class ProfileVC: UIViewController {
         myArticleTV.dataSource = self
         self.myArticleTV.register(ArticleTVC.self, forCellReuseIdentifier: "ArticleTVC")
         
-        print("viewDidLoad 실행1")
         // getUserInfoService의 서버 데이터 수신이 완료된 후 getUserPostService 실행
         getUserInfoService(completionHandler: {(returnedData)-> Void in
             self.getUserPostService(userId: self.userInfo!.id)
         })
-        print("viewDidLoad 실행2")
         
         myArticleTV.register(UINib(nibName: "ProflieTableViewCell", bundle: nil), forCellReuseIdentifier: "ProflieTableViewCell")
         myArticleTV.separatorInset.left = 0
@@ -76,8 +74,6 @@ class ProfileVC: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        
-        print("viewDidAppear 실행")
     }
 
     
@@ -134,7 +130,6 @@ class ProfileVC: UIViewController {
     @objc func viewArticle() {
         let indexPath = IndexPath(row: 1, section: 0)
         myArticleTV.scrollToRow(at: indexPath as IndexPath, at: .top, animated: true)
-    
     }
     
     @objc func followAction() {
