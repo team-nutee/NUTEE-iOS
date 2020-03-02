@@ -41,6 +41,7 @@ class PostVC: UIViewController {
         
         closeBtn.addTarget(self, action: #selector(closePosting), for: .touchUpInside)
         imagePickerBtn.addTarget(self, action: #selector(showImagePickerController), for: .touchUpInside)
+        postBtn.addTarget(self, action: #selector(posting), for: .touchUpInside)
         
         activePostBtn()
     }
@@ -86,7 +87,11 @@ class PostVC: UIViewController {
     
     @objc func closePosting() {
         self.dismiss(animated: true, completion: nil)
-        //        tabBarController!.selectedIndex = 0
+    }
+    
+    @objc func posting(){
+        print(pickedIMG)
+        postContent(images: pickedIMG, postContent: postingTextView.text)
     }
     
     @objc func activePostBtn() {
@@ -98,12 +103,7 @@ class PostVC: UIViewController {
             }
         }
     }
-    //
-    //    @IBAction func unwindToOrigin(_ unwindSegue: UIStoryboardSegue){
-    //        performSegue(withIdentifier: "ToPostVC", sender: self)
-    //        self.dismiss(animated: true, completion: nil)
-    //    }
-    
+
 }
 
 
@@ -121,15 +121,12 @@ extension PostVC {
             let curve = info[UIResponder.keyboardAnimationCurveUserInfoKey] as! UInt
             let keyboardFrame = (info[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
             let keyboardHeight = keyboardFrame.height
-            //            let tabbarHeight = self.tabBarController?.tabBar.frame.size.height ?? 0
-            //            let safeBottomHeight = self.view.bottomAnchor
             let keyWindow = UIApplication.shared.connectedScenes
                 .filter({$0.activationState == .foregroundActive})
                 .map({$0 as? UIWindowScene})
                 .compactMap({$0})
                 .first?.windows
                 .filter({$0.isKeyWindow}).first
-            //            let window = UIApplication.shared.keyWindow
             let bottomPadding = keyWindow?.safeAreaInsets.bottom
             
             pickerViewBottomConstraint.constant = -(keyboardHeight - bottomPadding!)
@@ -230,4 +227,35 @@ extension PostVC : UINavigationControllerDelegate, UIImagePickerControllerDelega
         
         dismiss(animated: true, completion:  nil)
     }
+}
+
+extension PostVC {
+    func postContent(images: [UIImage], postContent: String){
+        ContentService.shared.uploadPost(pictures: images, postContent: postContent){
+                [weak self]
+                data in
+
+                guard let `self` = self else { return }
+                
+                switch data {
+                case .success:
+                    self.dismiss(animated: true, completion: nil)
+                
+                case .requestErr:
+                    self.simpleAlert(title: "실패", message: "")
+                    
+                case .pathErr:
+                    print(".pathErr")
+                    
+                case .serverErr:
+                    print(".serverErr")
+                    
+                case .networkFail:
+                    print(".networkFail")
+                    
+            }
+        }
+        
+    }
+
 }
