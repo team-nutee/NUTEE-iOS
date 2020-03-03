@@ -53,12 +53,7 @@ class ProfileVC: UIViewController {
         myArticleTV.delegate = self
         myArticleTV.dataSource = self
         self.myArticleTV.register(ArticleTVC.self, forCellReuseIdentifier: "ArticleTVC")
-        
-        // getUserInfoService의 서버 데이터 수신이 완료된 후 getUserPostService 실행
-        getUserInfoService(completionHandler: {(returnedData)-> Void in
-            self.getUserPostService(userId: self.userInfo!.id)
-        })
-        
+                
         myArticleTV.register(UINib(nibName: "ProflieTableViewCell", bundle: nil), forCellReuseIdentifier: "ProflieTableViewCell")
         myArticleTV.separatorInset.left = 0
         
@@ -70,6 +65,10 @@ class ProfileVC: UIViewController {
          // 네비바 border 삭제
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
+        
+        getUserInfoService(completionHandler: {(returnedData)-> Void in
+            self.getUserPostService(userId: self.userInfo!.id)
+        })
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -184,8 +183,11 @@ extension ProfileVC : UITableViewDataSource {
         if indexPath.row == 0 {
             cell.backgroundColor = .lightGray
         } else {
+            
+            cell.backgroundColor = nil
             textViewDidChange(cell.articleTextView)
             let userPost = userPosts?[indexPath.row-1]
+            
             cell.profileNameLabel.text = userPost?.user.nickname
             cell.articleTextView.text = userPost?.content
             
@@ -252,6 +254,12 @@ extension ProfileVC : UITableViewDataSource {
         
         let name = NSMutableAttributedString(string: etcname)
         name.addAttribute(NSAttributedString.Key.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: NSMakeRange(0, etcname.count))
+        
+        if UserDefaults.standard.string(forKey: "userId") != etcname {
+            followBtn.isHidden = true
+        } else {
+            followBtn.isHidden = true
+        }
         
         profileImage.backgroundColor = .lightGray
         profileImage.setRounded(radius: 50)

@@ -57,6 +57,7 @@ class NewsFeedCell: UITableViewCell {
     
     weak var newsFeedVC: UIViewController?
     var newsPost: NewsPostsContentElement?
+    var contentId : Int = 0
     
     var imgCnt: Int?
     let dataPeng01 = [ "sample_peng01.jepg" ]
@@ -166,7 +167,7 @@ class NewsFeedCell: UITableViewCell {
             txtvwContents.text = newsPost?.content
             txtvwContents.postingInit()
             
-            print(txtvwContents.text, "<---- ", newsPost?.createdAt)
+//            print(txtvwContents.text, "<---- ", newsPost?.createdAt)
             
             imgCnt = newsPost?.images.count
             showImgFrame()
@@ -211,7 +212,7 @@ class NewsFeedCell: UITableViewCell {
             txtvwContents.text = newsPost?.retweet!.content
             txtvwContents.postingInit()
             
-            print(txtvwContents.text, "<---- ", newsPost?.retweet?.createdAt)
+//            print(txtvwContents.text, "<---- ", newsPost?.retweet?.createdAt)
             
             imgCnt = newsPost?.retweet!.images.count
             showImgFrame()

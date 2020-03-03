@@ -247,8 +247,7 @@ extension LoginVC {
             switch responsedata {
                 
             // NetworkResult 의 요소들
-            case .success(let res):
-                let response = res as! SignIn
+            case .success(_):
                 
                 let sb = UIStoryboard(name: "Main", bundle: nil)
                 let vc = sb.instantiateViewController(withIdentifier: "TBC") as! TBC

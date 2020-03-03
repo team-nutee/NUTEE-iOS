@@ -304,13 +304,13 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
 
 extension HeaderNewsFeedView {
     func getUserInfoService() {
-        ContentService.shared.getPost(5) { responsedata in
+        ContentService.shared.getPost(10) { responsedata in
 
             switch responsedata {
             case .success(let res):
                 print("res: ",res)
-                self.content = res as! PostContent
-                print("content: ", self.content)
+                self.content = res as? PostContent
+                
 
                 // intiPosting() 내용
                 
