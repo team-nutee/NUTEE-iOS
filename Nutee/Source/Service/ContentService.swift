@@ -161,4 +161,38 @@ struct ContentService {
             
         }
     
+    func uploadPost(pictures: [UIImage], postContent: String, completion: @escaping(NetworkResult<Any>)->Void) {
+        
+        let headers: HTTPHeaders = [
+            "Content-Type": "multipart/form-data",
+            "Cookie" : UserDefaults.standard.string(forKey: "Cookie")!
+        ]
+        
+        Alamofire.upload(multipartFormData: { (multipartFormData) in
+//            for image in pictures {
+//                if let imageData = image.jpegData(compressionQuality: 0.2) {
+//                    multipartFormData.append(imageData, withName: "image", fileName: "image.jpg", mimeType: "image/jpg")
+//
+//                }
+//            }
+            multipartFormData.append(postContent.data(using: .utf8) ?? Data(), withName: "content")
+
+        }, to: APIConstants.PostPost, method: .post, headers: headers) { (encodingResult) in
+                        
+            switch encodingResult {
+                
+            case .success(let upload, _, _):
+                upload.responseJSON { (response) in
+                    print("service 성공")
+                    let json = response.result.value
+                    print(json ?? "")
+                }
+                completion(.success(upload))
+            case .failure(let encodingError):
+                print(encodingError.localizedDescription + "[[[[")
+            }
+        }
+    }
+
+    
 }
