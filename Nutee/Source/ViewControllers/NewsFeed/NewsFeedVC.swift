@@ -32,7 +32,7 @@ class NewsFeedVC: UIViewController {
         
 //        self.tabBarController?.delegate = self
         
-        getNewsPostsService(postCnt: 30)
+        getNewsPostsService(postCnt: 10)
         
         initColor()
     }
@@ -70,13 +70,12 @@ extension NewsFeedVC : UITableViewDelegate { }
 extension NewsFeedVC : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return 480
-//        NSLog(UITableView.automaticDimension.description + "<---MainVC height")
+
         return UITableView.automaticDimension
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-//        NSLog(UITableView.automaticDimension.description + "<---MainVC height")
+
         return UITableView.automaticDimension
     }
     
@@ -85,9 +84,16 @@ extension NewsFeedVC : UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //Custom셀인 'NewsFeedCell' 형식으로 생성
+        // Custom셀인 'NewsFeedCell' 형식으로 생성
         let cell = tableView.dequeueReusableCell(withIdentifier: "NewsFeedCell", for: indexPath) as! NewsFeedCell
-        
+
+        // 셀 선택시 백그라운드 변경 안되게 하기 위한 코드
+        let bgColorView = UIView()
+        bgColorView.backgroundColor = nil
+        cell.selectedBackgroundView = bgColorView
+        cell.addBorder((.bottom), color: .lightGray, thickness: 0.1)
+//        cell.addBorder((.top), color: .lightGray, thickness: 1)
+
         newsPost = newsPosts?[indexPath.row]
         // 생성된 Cell클래스로 NewsPost 정보 넘겨주기
         cell.newsPost = self.newsPost
@@ -97,16 +103,20 @@ extension NewsFeedVC : UITableViewDataSource {
         cell.newsFeedVC = self
         
         NSLog("선택된 cell은 \(indexPath.row) 번쨰 indexPath입니다")
+//        print("testetsts : ", cell.newsPost?.id as! Int)
         print("")
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        NSLog("선택된 뉴스피드는 \(indexPath.row) 번쨰 뉴스피드입니다")
-        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "NewsFeedCell", for: indexPath) as! NewsFeedCell
+   
         let detailNewsFeedSB = UIStoryboard(name: "DetailNewsFeed", bundle: nil)
-                let showDetailNewsFeedVC = detailNewsFeedSB.instantiateViewController(withIdentifier: "DetailNewsFeed") as! DetailNewsFeedVC
-                 self.navigationController?.pushViewController(showDetailNewsFeedVC, animated: true)
+        let showDetailNewsFeedVC = detailNewsFeedSB.instantiateViewController(withIdentifier: "DetailNewsFeed") as! DetailNewsFeedVC
+//        print("testetsts : ", cell.newsPost?.id as! Int)
+        showDetailNewsFeedVC.contentId = cell.contentId
+        
+        self.navigationController?.pushViewController(showDetailNewsFeedVC, animated: true)
     }
 
 }

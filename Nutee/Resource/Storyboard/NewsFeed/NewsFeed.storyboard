@@ -54,7 +54,7 @@
                                                     <color key="textColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Lorem ipsum dolor sit er elit lamet,esse cill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="c1h-y9-WEE">
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Lorem ipsum dolor sit er elit lamet,esse cill" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c1h-y9-WEE">
                                                     <rect key="frame" x="15" y="93" width="345" height="28"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                     <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -355,7 +355,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="RlG-Z8-t1e"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="archivebox" catalog="system" id="4Rx-g3-iv1"/>
+                    <tabBarItem key="tabBarItem" title="" image="home alt 1" id="4Rx-g3-iv1"/>
                     <navigationItem key="navigationItem" title="NUTEE" id="Ngr-zy-buh"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -387,11 +387,11 @@
         </scene>
     </scenes>
     <resources>
-        <image name="archivebox" catalog="system" width="64" height="52"/>
         <image name="arrow.2.squarepath" catalog="system" width="64" height="44"/>
         <image name="ellipses.bubble" catalog="system" width="64" height="54"/>
         <image name="ellipsis" catalog="system" width="64" height="18"/>
         <image name="heart" catalog="system" width="64" height="54"/>
         <image name="heart.fill" catalog="system" width="64" height="54"/>
+        <image name="home alt 1" width="24" height="24"/>
     </resources>
 </document>

@@ -49,10 +49,6 @@
 		5E37CAB323E9903500C0E2A8 /* CafeteriaVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E37CAB223E9903500C0E2A8 /* CafeteriaVC.swift */; };
 		5E54303D23F44170004FF2FB /* InitVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E54303C23F44170004FF2FB /* InitVC.swift */; };
 		5E79C0C223EC5A7000BD2FB3 /* ArticleTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E79C0C123EC5A7000BD2FB3 /* ArticleTVC.swift */; };
-		5E79C0C723EC6AFF00BD2FB3 /* ImageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E79C0C523EC6AFF00BD2FB3 /* ImageVC.swift */; };
-		5E79C0C823EC6AFF00BD2FB3 /* ImageVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E79C0C623EC6AFF00BD2FB3 /* ImageVC.xib */; };
-		5E79C0CC23EC6B2A00BD2FB3 /* PopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E79C0CA23EC6B2A00BD2FB3 /* PopUpVC.swift */; };
-		5E79C0CD23EC6B2A00BD2FB3 /* PopUpVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E79C0CB23EC6B2A00BD2FB3 /* PopUpVC.xib */; };
 		5E79C0CF23EDE0B900BD2FB3 /* Notification.Name+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E79C0CE23EDE0B900BD2FB3 /* Notification.Name+Extension.swift */; };
 		5E95CD6423EF30180090C39B /* FollowerTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E95CD6323EF30180090C39B /* FollowerTVC.swift */; };
 		5E95CD6623EF30280090C39B /* FollowingTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E95CD6523EF30280090C39B /* FollowingTVC.swift */; };
@@ -163,10 +159,6 @@
 		5E37CAB223E9903500C0E2A8 /* CafeteriaVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeteriaVC.swift; sourceTree = "<group>"; };
 		5E54303C23F44170004FF2FB /* InitVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitVC.swift; sourceTree = "<group>"; };
 		5E79C0C123EC5A7000BD2FB3 /* ArticleTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleTVC.swift; sourceTree = "<group>"; };
-		5E79C0C523EC6AFF00BD2FB3 /* ImageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageVC.swift; sourceTree = "<group>"; };
-		5E79C0C623EC6AFF00BD2FB3 /* ImageVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageVC.xib; sourceTree = "<group>"; };
-		5E79C0CA23EC6B2A00BD2FB3 /* PopUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpVC.swift; sourceTree = "<group>"; };
-		5E79C0CB23EC6B2A00BD2FB3 /* PopUpVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PopUpVC.xib; sourceTree = "<group>"; };
 		5E79C0CE23EDE0B900BD2FB3 /* Notification.Name+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification.Name+Extension.swift"; sourceTree = "<group>"; };
 		5E95CD6323EF30180090C39B /* FollowerTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerTVC.swift; sourceTree = "<group>"; };
 		5E95CD6523EF30280090C39B /* FollowingTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingTVC.swift; sourceTree = "<group>"; };
@@ -492,10 +484,6 @@
 		5E79C0C323EC6AB400BD2FB3 /* Util */ = {
 			isa = PBXGroup;
 			children = (
-				5E79C0C523EC6AFF00BD2FB3 /* ImageVC.swift */,
-				5E79C0C623EC6AFF00BD2FB3 /* ImageVC.xib */,
-				5E79C0CA23EC6B2A00BD2FB3 /* PopUpVC.swift */,
-				5E79C0CB23EC6B2A00BD2FB3 /* PopUpVC.xib */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -638,7 +626,6 @@
 				D519843E23E32418001AB351 /* NewsFeed.storyboard in Resources */,
 				5E21444923C2F8560053CFB9 /* LaunchScreen.storyboard in Resources */,
 				D519843F23E32418001AB351 /* DetailNewsFeed.storyboard in Resources */,
-				5E79C0CD23EC6B2A00BD2FB3 /* PopUpVC.xib in Resources */,
 				D5EBD78423CFE69F00C2B7F5 /* Main.storyboard in Resources */,
 				5E0E6A6F23E73CC800FBC15F /* Post.storyboard in Resources */,
 				D59718B723CEA9DA00117906 /* Profile.storyboard in Resources */,
@@ -649,7 +636,6 @@
 				5E05AD7E23DEA5FB00E36AD4 /* MyChatTVC.xib in Resources */,
 				5E2BDCC02403903700CE99A7 /* ProflieTableViewCell.xib in Resources */,
 				5E37CAA623E97DC800C0E2A8 /* SignUp.storyboard in Resources */,
-				5E79C0C823EC6AFF00BD2FB3 /* ImageVC.xib in Resources */,
 				D59718B823CEA9DA00117906 /* Chatting.storyboard in Resources */,
 				D59718B623CEA9DA00117906 /* NoticeBoard.storyboard in Resources */,
 				5E37CAAA23E97DDA00C0E2A8 /* Find.storyboard in Resources */,
@@ -710,7 +696,6 @@
 				5EA5C68823F1472200BFB32B /* NameVC.swift in Sources */,
 				D5F651D12407DF4C00263A34 /* FollowList.swift in Sources */,
 				D59718A923CEA98400117906 /* NewsFeedVC.swift in Sources */,
-				5E79C0C723EC6AFF00BD2FB3 /* ImageVC.swift in Sources */,
 				5E3560E623EC11F1002B8C87 /* FollowingVC.swift in Sources */,
 				5E2BDCBA24038F7300CE99A7 /* UserService.swift in Sources */,
 				5E95CD6A23EF36230090C39B /* ToPostVC.swift in Sources */,
@@ -735,7 +720,6 @@
 				5E0E6A6023E7345F00FBC15F /* Date+Extension.swift in Sources */,
 				5E95CD6623EF30280090C39B /* FollowingTVC.swift in Sources */,
 				5E79C0CF23EDE0B900BD2FB3 /* Notification.Name+Extension.swift in Sources */,
-				5E79C0CC23EC6B2A00BD2FB3 /* PopUpVC.swift in Sources */,
 				5E05AD6E23DB0EB800E36AD4 /* UIViewController+Extension.swift in Sources */,
 				D5F651CF2407B46500263A34 /* FollowService.swift in Sources */,
 				5E0E6A7223E73ECE00FBC15F /* PostVC.swift in Sources */,

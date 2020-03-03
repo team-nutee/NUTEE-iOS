@@ -22,6 +22,7 @@ class DetailNewsFeedVC: UIViewController {
     
     //MARK: - Variables and Properties
     
+    var contentId : Int = 0
     var content : PostContent?
 
     var indexPath = 0
@@ -98,6 +99,8 @@ class DetailNewsFeedVC: UIViewController {
         case .dark:
             txtvwComment.backgroundColor = UIColor.commentWindowDark
             txtvwComment.borderColor = UIColor.commentWindowDark
+        @unknown default:
+            fatalError()
         }
     }
 
@@ -167,8 +170,15 @@ extension DetailNewsFeedVC {
             let keyboardHeight = keyboardFrame.height
             let tabbarHeight = self.tabBarController?.tabBar.frame.size.height ?? 0
             //            let safeBottomHeight = self.view.bottomAnchor
-            let window = UIApplication.shared.keyWindow
-            //                let bottomPadding = window?.safeAreaInsets.bottom
+            _ = UIApplication.shared.connectedScenes
+                .filter({$0.activationState == .foregroundActive})
+                .map({$0 as? UIWindowScene})
+                .compactMap({$0})
+                .first?.windows
+                .filter({$0.isKeyWindow}).first
+
+//            let window = UIApplication.shared.keyWindow
+//            let bottomPadding = window?.safeAreaInsets.bottom
             
             if CommentWindowToBottom.constant == 0 {
                 CommentWindowToBottom.constant -= (keyboardHeight - tabbarHeight)
@@ -207,11 +217,12 @@ extension DetailNewsFeedVC {
 
 extension DetailNewsFeedVC {
     func getPostContentInfoService() {
-        ContentService.shared.getPost(5) { responsedata in
+        ContentService.shared.getPost(contentId) { responsedata in
 
             switch responsedata {
             case .success(let res):
-                self.content = res as! PostContent
+                self.content = res as? PostContent
+                
             case .requestErr(_):
                 print("request error")
 
