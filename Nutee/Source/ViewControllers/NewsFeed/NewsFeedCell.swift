@@ -135,12 +135,20 @@ class NewsFeedCell: UITableViewCell {
         }
         let deleteAction = UIAlertAction(title: "삭제", style: .destructive) {
             (action: UIAlertAction) in
-            // Code to delete
+            let deleteAlert = UIAlertController(title: nil, message: "삭제하시겠습니까?", preferredStyle: UIAlertController.Style.alert)
+            let cancelAction = UIAlertAction(title: "취소", style: .default, handler: nil)
+            let okAction = UIAlertAction(title: "확인", style: .default) {
+                (action: UIAlertAction) in
+                // Code to delete
+            }
+            deleteAlert.addAction(cancelAction)
+            deleteAlert.addAction(okAction)
+            self.newsFeedVC?.present(deleteAlert, animated: true, completion: nil)
         }
         let userReportAction = UIAlertAction(title: "신고하기🚨", style: .destructive) {
             (action: UIAlertAction) in
             // Code to 신고 기능
-            let badReportAlert = UIAlertController(title: "신고하기🚨", message: "\(String(self.txtvwContents.text))\("\n")\("\n")이 게시글을 신고하시겠습니까?", preferredStyle: UIAlertController.Style.alert)
+            let reportAlert = UIAlertController(title: "신고하기🚨", message: "\(String(self.txtvwContents.text))\("\n")\("\n")이 게시글을 신고하시겠습니까?", preferredStyle: UIAlertController.Style.alert)
             let cancelAction
                 = UIAlertAction(title: "취소", style: .cancel, handler: nil)
             let reportAction = UIAlertAction(title: "신고", style: .destructive) {
@@ -148,16 +156,16 @@ class NewsFeedCell: UITableViewCell {
                 // <---- 신고 기능 구현
                 
                 //신고 여부 알림
-                let successfulAlert = UIAlertController(title: "신고완료", message: "신고가 완료되었습니다", preferredStyle: UIAlertController.Style.alert)
-                let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                let successfulAlert = UIAlertController(title: nil, message: "신고가 완료되었습니다", preferredStyle: UIAlertController.Style.alert)
+                let okAction = UIAlertAction(title: "확인", style: .default, handler: nil)
                 successfulAlert.addAction(okAction)
                 
                 self.newsFeedVC?.present(successfulAlert, animated: true, completion: nil)
             }
-            badReportAlert.addAction(cancelAction)
-            badReportAlert.addAction(reportAction)
+            reportAlert.addAction(cancelAction)
+            reportAlert.addAction(reportAction)
             
-            self.newsFeedVC?.present(badReportAlert, animated: true, completion: nil)
+            self.newsFeedVC?.present(reportAlert, animated: true, completion: nil)
         }
         let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
 
