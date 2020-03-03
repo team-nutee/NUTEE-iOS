@@ -188,7 +188,11 @@ extension ProfileVC : UITableViewDataSource {
             let userPost = userPosts?[indexPath.row-1]
             cell.profileNameLabel.text = userPost?.user.nickname
             cell.articleTextView.text = userPost?.content
-            cell.timeLabel.text = userPost?.createdAt
+            
+            let originUserPostTime = userPost?.createdAt
+            let userPostTimeDateFormat = originUserPostTime!.getDateFormat(time: originUserPostTime!)
+            cell.timeLabel.text = userPostTimeDateFormat!.timeAgoSince(userPostTimeDateFormat!)
+            
             print(userPost?.content ?? "그런 글 없는데요")
             cell.articleTextView.sizeToFit()
             tableView.separatorStyle = .singleLine

@@ -42,7 +42,6 @@ struct NewsPostsContentElement: Codable {
         user = (try? values.decode(User.self, forKey: .user)) ?? User.init(id: 0, nickname: "")
         images = (try? values.decode([String].self, forKey: .images)) ?? []
         likers = (try? values.decode([Int].self, forKey: .likers)) ?? []
-//        retweet = (try? values.decode(Retweet.self, forKey: .retweet)) ?? Retweet.init(id: 0, content: "", createdAt: "", updatedAt: "", userID: 0, retweetID: 0, user: User.init(id: 0, nickname: ""), images: [])
         retweet = (try? values.decode(Retweet.self, forKey: .retweet)) ?? nil
         comments = (try? values.decode([Comment].self, forKey: .comments)) ?? [Comment.init(id: 0, content: "", createdAt: "", updatedAt: "", userID: 0, postID: 0, user: User.init(id: 0, nickname: ""))]
     }

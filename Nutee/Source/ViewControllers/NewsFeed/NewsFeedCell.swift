@@ -158,11 +158,15 @@ class NewsFeedCell: UITableViewCell {
             // User 정보 설정
             lblUserId.text = newsPost?.user.nickname
             lblUserId.sizeToFit()
-            lblPostTime.text = newsPost?.createdAt
-            
+            let originPostTime = newsPost?.createdAt
+            let postTimeDateFormat = originPostTime!.getDateFormat(time: originPostTime!)
+            lblPostTime.text = postTimeDateFormat!.timeAgoSince(postTimeDateFormat!)
+
             // Posting 내용 설정
             txtvwContents.text = newsPost?.content
             txtvwContents.postingInit()
+            
+            print(txtvwContents.text, "<---- ", newsPost?.createdAt)
             
             imgCnt = newsPost?.images.count
             showImgFrame()
@@ -194,19 +198,20 @@ class NewsFeedCell: UITableViewCell {
             TopToUserImg.isActive = false
             TopToRepostImg.isActive = true
             lblRepostInfo.isHidden = false
-            lblRepostInfo.text = (newsPost?.user.nickname)! + "님이 공유했습니다"
-            
-            print("공유한 글 섹션, 가져온 newsPost 정보 --->", newsPost)
-            print("공유한 글 섹션, 리트윗 정보 -->", newsPost?.retweet)
+            lblRepostInfo.text = (newsPost?.user.nickname)! + " 님이 공유했습니다"
             
             // User 정보 설정
             lblUserId.text = newsPost?.retweet!.user.nickname
             lblUserId.sizeToFit()
-            lblPostTime.text = newsPost?.retweet!.createdAt
+            let originPostTime = newsPost?.retweet?.createdAt
+            let postTimeDateFormat = originPostTime!.getDateFormat(time: originPostTime!)
+            lblPostTime.text = postTimeDateFormat!.timeAgoSince(postTimeDateFormat!)
             
             // Posting 내용 설정
             txtvwContents.text = newsPost?.retweet!.content
             txtvwContents.postingInit()
+            
+            print(txtvwContents.text, "<---- ", newsPost?.retweet?.createdAt)
             
             imgCnt = newsPost?.retweet!.images.count
             showImgFrame()

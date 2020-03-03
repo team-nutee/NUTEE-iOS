@@ -32,7 +32,7 @@ class NewsFeedVC: UIViewController {
         
 //        self.tabBarController?.delegate = self
         
-        getNewsPostsService(postCnt: 10)
+        getNewsPostsService(postCnt: 30)
         
         initColor()
     }
@@ -89,7 +89,6 @@ extension NewsFeedVC : UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "NewsFeedCell", for: indexPath) as! NewsFeedCell
         
         newsPost = newsPosts?[indexPath.row]
-            print("바로 받아온 공유글 리트윗 값", newsPosts?[indexPath.row])
         // 생성된 Cell클래스로 NewsPost 정보 넘겨주기
         cell.newsPost = self.newsPost
         cell.initPosting()
@@ -99,7 +98,6 @@ extension NewsFeedVC : UITableViewDataSource {
         
         NSLog("선택된 cell은 \(indexPath.row) 번쨰 indexPath입니다")
         print("")
-        
         return cell
     }
     
