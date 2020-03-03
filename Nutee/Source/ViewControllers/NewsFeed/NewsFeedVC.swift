@@ -29,6 +29,7 @@ class NewsFeedVC: UIViewController {
         newsTV.delegate = self
         newsTV.dataSource = self
         newsTV.separatorInset.left = 0
+        newsTV.separatorStyle = .none
         
 //        self.tabBarController?.delegate = self
         
@@ -87,6 +88,7 @@ extension NewsFeedVC : UITableViewDataSource {
         // Custom셀인 'NewsFeedCell' 형식으로 생성
         let cell = tableView.dequeueReusableCell(withIdentifier: "NewsFeedCell", for: indexPath) as! NewsFeedCell
 
+        
         // 셀 선택시 백그라운드 변경 안되게 하기 위한 코드
         let bgColorView = UIView()
         bgColorView.backgroundColor = nil

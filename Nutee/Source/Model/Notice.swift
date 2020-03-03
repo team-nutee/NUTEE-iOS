@@ -10,6 +10,6 @@ import Foundation
 
 // MARK: - Notice
 struct Notice: Codable {
-    let content: [String]
-    let hrefs: [String]
+    let content: [[String]]
+    let hrefs: [[String]]
 }
