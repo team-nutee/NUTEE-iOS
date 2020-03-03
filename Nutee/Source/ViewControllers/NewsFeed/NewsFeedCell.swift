@@ -137,11 +137,34 @@ class NewsFeedCell: UITableViewCell {
             (action: UIAlertAction) in
             // Code to delete
         }
+        let userReportAction = UIAlertAction(title: "신고하기🚨", style: .destructive) {
+            (action: UIAlertAction) in
+            // Code to 신고 기능
+            let badReportAlert = UIAlertController(title: "신고하기🚨", message: "\(String(self.txtvwContents.text))\("\n")\("\n")이 게시글을 신고하시겠습니까?", preferredStyle: UIAlertController.Style.alert)
+            let cancelAction
+                = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+            let reportAction = UIAlertAction(title: "신고", style: .destructive) {
+                (action: UIAlertAction) in
+                // <---- 신고 기능 구현
+                
+                //신고 여부 알림
+                let successfulAlert = UIAlertController(title: "신고완료", message: "신고가 완료되었습니다", preferredStyle: UIAlertController.Style.alert)
+                let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                successfulAlert.addAction(okAction)
+                
+                self.newsFeedVC?.present(successfulAlert, animated: true, completion: nil)
+            }
+            badReportAlert.addAction(cancelAction)
+            badReportAlert.addAction(reportAction)
+            
+            self.newsFeedVC?.present(badReportAlert, animated: true, completion: nil)
+        }
         let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
 
         moreAlert.addAction(editAction)
         moreAlert.addAction(deleteAction)
         moreAlert.addAction(cancelAction)
+        moreAlert.addAction(userReportAction)
         newsFeedVC?.present(moreAlert, animated: true, completion: nil)
     }
     
