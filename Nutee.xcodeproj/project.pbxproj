@@ -29,7 +29,7 @@
 		5E21444923C2F8560053CFB9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E21444723C2F8560053CFB9 /* LaunchScreen.storyboard */; };
 		5E21445A23C2F8E50053CFB9 /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E21445923C2F8E50053CFB9 /* APIConstants.swift */; };
 		5E21445C23C2F8F60053CFB9 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E21445B23C2F8F60053CFB9 /* Model.swift */; };
-		5E21445E23C2F8FC0053CFB9 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E21445D23C2F8FC0053CFB9 /* Util.swift */; };
+		5E21445E23C2F8FC0053CFB9 /* LoadingHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E21445D23C2F8FC0053CFB9 /* LoadingHUD.swift */; };
 		5E2BDCB424038F0300CE99A7 /* SignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2BDCB124038F0200CE99A7 /* SignIn.swift */; };
 		5E2BDCB524038F0300CE99A7 /* SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2BDCB224038F0300CE99A7 /* SignUp.swift */; };
 		5E2BDCB924038F7300CE99A7 /* NoticeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2BDCB724038F7300CE99A7 /* NoticeService.swift */; };
@@ -48,6 +48,7 @@
 		5E37CAB023E9900B00C0E2A8 /* Cafeteria.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E37CAAF23E9900B00C0E2A8 /* Cafeteria.storyboard */; };
 		5E37CAB323E9903500C0E2A8 /* CafeteriaVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E37CAB223E9903500C0E2A8 /* CafeteriaVC.swift */; };
 		5E54303D23F44170004FF2FB /* InitVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E54303C23F44170004FF2FB /* InitVC.swift */; };
+		5E6EA953240EC17F00D836B1 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6EA952240EC17F00D836B1 /* Image.swift */; };
 		5E79C0C223EC5A7000BD2FB3 /* ArticleTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E79C0C123EC5A7000BD2FB3 /* ArticleTVC.swift */; };
 		5E79C0CF23EDE0B900BD2FB3 /* Notification.Name+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E79C0CE23EDE0B900BD2FB3 /* Notification.Name+Extension.swift */; };
 		5E95CD6423EF30180090C39B /* FollowerTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E95CD6323EF30180090C39B /* FollowerTVC.swift */; };
@@ -139,7 +140,7 @@
 		5E21444A23C2F8560053CFB9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5E21445923C2F8E50053CFB9 /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
 		5E21445B23C2F8F60053CFB9 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
-		5E21445D23C2F8FC0053CFB9 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
+		5E21445D23C2F8FC0053CFB9 /* LoadingHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingHUD.swift; sourceTree = "<group>"; };
 		5E2BDCB124038F0200CE99A7 /* SignIn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignIn.swift; sourceTree = "<group>"; };
 		5E2BDCB224038F0300CE99A7 /* SignUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUp.swift; sourceTree = "<group>"; };
 		5E2BDCB724038F7300CE99A7 /* NoticeService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoticeService.swift; sourceTree = "<group>"; };
@@ -158,6 +159,7 @@
 		5E37CAAF23E9900B00C0E2A8 /* Cafeteria.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Cafeteria.storyboard; sourceTree = "<group>"; };
 		5E37CAB223E9903500C0E2A8 /* CafeteriaVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeteriaVC.swift; sourceTree = "<group>"; };
 		5E54303C23F44170004FF2FB /* InitVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitVC.swift; sourceTree = "<group>"; };
+		5E6EA952240EC17F00D836B1 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		5E79C0C123EC5A7000BD2FB3 /* ArticleTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleTVC.swift; sourceTree = "<group>"; };
 		5E79C0CE23EDE0B900BD2FB3 /* Notification.Name+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification.Name+Extension.swift"; sourceTree = "<group>"; };
 		5E95CD6323EF30180090C39B /* FollowerTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerTVC.swift; sourceTree = "<group>"; };
@@ -398,7 +400,7 @@
 		5E21445623C2F8A00053CFB9 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				5E21445D23C2F8FC0053CFB9 /* Util.swift */,
+				5E21445D23C2F8FC0053CFB9 /* LoadingHUD.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -414,6 +416,7 @@
 				D53CB44E240B995400DDA17A /* NewsPostsContent.swift */,
 				D5F651D02407DF4C00263A34 /* FollowList.swift */,
 				D55E94EE240A92F6009F738C /* UserPostContent.swift */,
+				5E6EA952240EC17F00D836B1 /* Image.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -709,13 +712,14 @@
 				D59718AB23CEA98400117906 /* LoginVC.swift in Sources */,
 				5E37CA9E23E97B0600C0E2A8 /* TBC.swift in Sources */,
 				5E2BDCBC2403901400CE99A7 /* Notice.swift in Sources */,
-				5E21445E23C2F8FC0053CFB9 /* Util.swift in Sources */,
+				5E21445E23C2F8FC0053CFB9 /* LoadingHUD.swift in Sources */,
 				5E2BDCBF2403903700CE99A7 /* ProflieTableViewCell.swift in Sources */,
 				5E05AD6C23DB0E8C00E36AD4 /* CALayer+Extension.swift in Sources */,
 				5EA5C68A23F1475000BFB32B /* PassWordVC.swift in Sources */,
 				D53F61F82403C3F200C8EE38 /* PostContent.swift in Sources */,
 				5E0E6A6323E7349600FBC15F /* YourChatTVC.swift in Sources */,
 				5E2BDCB524038F0300CE99A7 /* SignUp.swift in Sources */,
+				5E6EA953240EC17F00D836B1 /* Image.swift in Sources */,
 				D5DAA89023E7EF2E0052E17B /* HeaderNewsFeedView.swift in Sources */,
 				5E0E6A6023E7345F00FBC15F /* Date+Extension.swift in Sources */,
 				5E95CD6623EF30280090C39B /* FollowingTVC.swift in Sources */,

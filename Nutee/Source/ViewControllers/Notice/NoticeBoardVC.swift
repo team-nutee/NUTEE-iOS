@@ -14,7 +14,8 @@ class NoticeBoardVC: TabmanViewController {
     
     // MARK: - UI components
     @IBOutlet weak var noticeTV: UITableView!
-    
+    let bar = TMBar.ButtonBar()
+
     
     // MARK: - Variables and Properties
     private var viewControllers = [UIViewController(), UIViewController(), UIViewController(), UIViewController(), UIViewController(), UIViewController()]
@@ -23,7 +24,7 @@ class NoticeBoardVC: TabmanViewController {
     var link : [[String]] = Array(repeating: Array(repeating: "", count: 0), count: 0)
     var content1 : [String] = []
     var link1 : [String] = []
-    let title1 : [String] = ["일반","2번","3번","4번","5번","6번"]
+    let title1 : [String] = ["학사공지","수업공지","학점교류","장학공지","일반공지","행사공지"]
 
     // MARK: - dummy data
     
@@ -32,12 +33,12 @@ class NoticeBoardVC: TabmanViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setNotice()
-
+        
         self.dataSource = self
-        let bar = TMBar.ButtonBar()
         bar.layout.transitionStyle = .snap
         addBar(bar, dataSource: self, at: .top)
-
+        setting()
+        
         noticeTV.delegate = self
         noticeTV.dataSource = self
         noticeTV.separatorInset.left = 0
@@ -51,6 +52,18 @@ class NoticeBoardVC: TabmanViewController {
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         
+    }
+    
+    func setting(){
+        
+        bar.backgroundView.style = .clear
+        bar.layout.contentInset = UIEdgeInsets(top: 0.0, left: 10.0, bottom: 0.0, right: 10.0)
+        bar.layout.contentMode = .intrinsic
+        bar.indicator.tintColor = .nuteeGreen
+        bar.buttons.customize { (button) in
+            button.borderColor = .orange
+            button.selectedTintColor = .nuteeGreen
+        }
     }
     
 }

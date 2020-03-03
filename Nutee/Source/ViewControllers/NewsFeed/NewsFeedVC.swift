@@ -32,14 +32,13 @@ class NewsFeedVC: UIViewController {
         newsTV.separatorStyle = .none
         
 //        self.tabBarController?.delegate = self
-        
-        getNewsPostsService(postCnt: 10)
-        
+                
         initColor()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(false)
+        getNewsPostsService(postCnt: 10)
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
     }

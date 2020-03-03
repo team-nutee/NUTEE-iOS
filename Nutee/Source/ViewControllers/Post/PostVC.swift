@@ -91,7 +91,8 @@ class PostVC: UIViewController {
     
     @objc func posting(){
         print(pickedIMG)
-        postContent(images: pickedIMG, postContent: postingTextView.text)
+        postImage(images: pickedIMG)
+//        postContent(images: pickedIMG, postContent: postingTextView.text)
     }
     
     @objc func activePostBtn() {
@@ -230,7 +231,7 @@ extension PostVC : UINavigationControllerDelegate, UIImagePickerControllerDelega
 }
 
 extension PostVC {
-    func postContent(images: [UIImage], postContent: String){
+    func postContent(images: URL, postContent: String){
         ContentService.shared.uploadPost(pictures: images, postContent: postContent){
                 [weak self]
                 data in
@@ -238,9 +239,37 @@ extension PostVC {
                 guard let `self` = self else { return }
                 
                 switch data {
-                case .success:
-                    self.dismiss(animated: true, completion: nil)
+                case .success(let res):
+//                    self.dismiss(animated: true, completion: nil)
+                    print(res)
+                case .requestErr:
+                    self.simpleAlert(title: "실패", message: "")
+                    
+                case .pathErr:
+                    print(".pathErr")
+                    
+                case .serverErr:
+                    print(".serverErr")
+                    
+                case .networkFail:
+                    print(".networkFail")
+                    
+            }
+        }
+        
+    }
+    
+    func postImage(images: [UIImage]){
+        ContentService.shared.uploadImage(pictures: images){
+                [weak self]
+                data in
+
+                guard let `self` = self else { return }
                 
+                switch data {
+                case .success(let res):
+                    print("뷰컨 영역",res)
+//                    self.postContent(images: res as! URL, postContent: self.postingTextView.text)
                 case .requestErr:
                     self.simpleAlert(title: "실패", message: "")
                     
