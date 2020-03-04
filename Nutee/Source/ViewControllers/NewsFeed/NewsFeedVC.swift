@@ -14,8 +14,11 @@ class NewsFeedVC: UIViewController {
         
     @IBOutlet var newsTV: UITableView!
     
+    var refreshControl = UIRefreshControl()
+    
     // MARK: - Variables and Properties
     
+    var newsPostsArr: NewsPostsContent?
     var newsPosts: NewsPostsContent?
     var newsPost: NewsPostsContentElement?
     
@@ -32,15 +35,28 @@ class NewsFeedVC: UIViewController {
         newsTV.separatorStyle = .none
         
 //        self.tabBarController?.delegate = self
-                
+
         initColor()
+        
+//        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+//        refreshControl.addTarget(self, action: #selector(refresh(_:)), for: UIControl.Event.valueChanged)
+//        newsTV.addSubview(refreshControl) // not required when using UITableViewController
+        
+        LoadingHUD.show()
+        getNewsPostsService(postCnt: 10, lastId: 0, completionHandler: {(returnedData)-> Void in
+            self.newsPostsArr = self.newsPosts
+            
+            self.viewDidAppear(true)
+        })
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(false)
-        getNewsPostsService(postCnt: 10)
+        
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
+        
+        self.newsTV.reloadData()
     }
     
     // MARK: -Helper
@@ -57,9 +73,33 @@ class NewsFeedVC: UIViewController {
             self.present(vc, animated: true, completion: nil)
         }
     }
-    
+
     func initColor() {
         self.tabBarController?.tabBar.tintColor = .nuteeGreen
+    }
+    
+//    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+//        // UITableView only moves in one direction, y axis
+//        let currentOffset = scrollView.contentOffset.y
+//        let maximumOffset = scrollView.contentSize.height - scrollView.frame.size.height
+//
+//        // Change 10.0 to adjust the distance from bottom
+//        if maximumOffset - currentOffset <= 10.0 {
+//            // 뷰 마지막 부분을 스크롤 하였을 때 작동 코드
+//        }
+//    }
+    
+    func loadMorePost(lastId: Int) {
+        if newsPosts?.count != 0 {
+            getNewsPostsService(postCnt: 10, lastId: lastId, completionHandler: {(returnedData)-> Void in
+                self.newsPostsArr?.append(contentsOf: self.newsPosts!)
+                print("보여준 게시물 배열의 개수", self.newsPostsArr?.count)
+                self.newsTV.reloadData()
+                self.newsTV.tableFooterView = nil
+            })
+        } else {
+            print("더 이상 불러올 게시글이 없습니다.")
+        }
     }
     
 }
@@ -80,22 +120,24 @@ extension NewsFeedVC : UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return newsPosts?.count ?? 0
+        print("numberRowInSection", newsPostsArr?.count)
+        return newsPostsArr?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        print("cellRowAt")
         // Custom셀인 'NewsFeedCell' 형식으로 생성
         let cell = tableView.dequeueReusableCell(withIdentifier: "NewsFeedCell", for: indexPath) as! NewsFeedCell
-
         
         // 셀 선택시 백그라운드 변경 안되게 하기 위한 코드
         let bgColorView = UIView()
         bgColorView.backgroundColor = nil
         cell.selectedBackgroundView = bgColorView
-        cell.addBorder((.bottom), color: .lightGray, thickness: 0.1)
+        cell.addBorder((.bottom), color: .lightGray, thickness: 0.3)
 //        cell.addBorder((.top), color: .lightGray, thickness: 1)
 
-        newsPost = newsPosts?[indexPath.row]
+        print("after let cell")
+        newsPost = newsPostsArr?[indexPath.row]
         // 생성된 Cell클래스로 NewsPost 정보 넘겨주기
         cell.newsPost = self.newsPost
         cell.initPosting()
@@ -106,6 +148,7 @@ extension NewsFeedVC : UITableViewDataSource {
         NSLog("선택된 cell은 \(indexPath.row) 번쨰 indexPath입니다")
 //        print("testetsts : ", cell.newsPost?.id as! Int)
         print("")
+        
         return cell
     }
     
@@ -119,13 +162,48 @@ extension NewsFeedVC : UITableViewDataSource {
         
         self.navigationController?.pushViewController(showDetailNewsFeedVC, animated: true)
     }
+    
+    // 마지막 셀일 때 로딩 그림과 함께 새로운 cell 정보 로딩
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        // 로딩된 cell 중 마지막 셀 찾기
+        let lastSectionIndex = tableView.numberOfSections - 1
+        let lastRowIndex = tableView.numberOfRows(inSection: lastSectionIndex) - 1
+        if indexPath.section ==  lastSectionIndex && indexPath.row == lastRowIndex {
+            
+            let spinner = UIActivityIndicatorView()
+            
+            newsTV.tableFooterView = spinner
+            newsTV.tableFooterView?.isHidden = false
+            
+            if newsPosts?.count != 0 {
+                // 불러올 포스팅이 있을 경우
+                spinner.startAnimating()
+                spinner.frame = CGRect(x: CGFloat(0), y: CGFloat(0), width: newsTV.bounds.width, height: CGFloat(44))
+                spinner.hidesWhenStopped = true
+                newsTV.tableFooterView = spinner
+                newsTV.tableFooterView?.isHidden = false
 
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    //MARK: Loading more data
+                    self.loadMorePost(lastId: self.newsPost!.id)
+                }
+            } else {
+                // 사용자 NewsFeed의 마지막 포스팅일 경우
+                self.newsTV.tableFooterView?.isHidden = true
+                spinner.stopAnimating()
+                newsTV.tableFooterView = nil
+            }
+
+           
+        }
+    }
+    
 }
 
 // MARK: - TabBarController
 //extension NewsFeedVC : UITabBarControllerDelegate {
 //
-//    // 탭바를 누를 경우 최상위 내용으로 TableView의 Cell 자동 스크롤(맨 위로 가기)
+//    // 탭바를 누를 경우 최상위 지점으로 TableView의 Cell 자동 스크롤(맨 위로 가기)
 //    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
 //        let tabBarIndex = tabBarController.selectedIndex
 //
@@ -141,8 +219,8 @@ extension NewsFeedVC : UITableViewDataSource {
 //}
 
 extension NewsFeedVC {
-    func getNewsPostsService(postCnt: Int) {
-        ContentService.shared.getNewsPosts(postCnt) { responsedata in
+    func getNewsPostsService(postCnt: Int, lastId: Int, completionHandler: @escaping (_ returnedData: NewsPostsContent) -> Void ) {
+        ContentService.shared.getNewsPosts(postCnt, lastId: lastId) { responsedata in
             
             switch responsedata {
             case .success(let res):
@@ -150,7 +228,9 @@ extension NewsFeedVC {
                 self.newsPosts = response
                 print("newsPosts server connect successful")
                 
-                self.newsTV.reloadData()
+                LoadingHUD.hide()
+                completionHandler(self.newsPosts!)
+                
             case .requestErr(_):
                 print("request error")
             
