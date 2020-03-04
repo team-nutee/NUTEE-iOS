@@ -14,7 +14,7 @@ class NewsFeedVC: UIViewController {
         
     @IBOutlet var newsTV: UITableView!
     
-    var refreshControl = UIRefreshControl()
+    var refreshControl: UIRefreshControl!
     
     // MARK: - Variables and Properties
     
@@ -37,13 +37,10 @@ class NewsFeedVC: UIViewController {
 //        self.tabBarController?.delegate = self
 
         initColor()
-        
-//        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
-//        refreshControl.addTarget(self, action: #selector(refresh(_:)), for: UIControl.Event.valueChanged)
-//        newsTV.addSubview(refreshControl) // not required when using UITableViewController
+        setRefresh()
         
         LoadingHUD.show()
-        getNewsPostsService(postCnt: 10, lastId: 0, completionHandler: {(returnedData)-> Void in
+        getNewsPostsService(postCnt: 10, lastId: 10, completionHandler: {(returnedData)-> Void in
             self.newsPostsArr = self.newsPosts
             
             self.viewDidAppear(true)
@@ -78,6 +75,36 @@ class NewsFeedVC: UIViewController {
         self.tabBarController?.tabBar.tintColor = .nuteeGreen
     }
     
+    func setRefresh() {
+        refreshControl = UIRefreshControl()
+        newsTV.addSubview(refreshControl)
+        refreshControl.addTarget(self, action: #selector(updatePosts), for: UIControl.Event.valueChanged)
+    }
+    
+    @objc func updatePosts() {
+        getNewsPostsService(postCnt: 10, lastId: 0, completionHandler: {(returnedData)-> Void in
+            self.newsPostsArr = self.newsPosts
+            self.newsTV.reloadData()
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                self.refreshControl.endRefreshing()
+            }
+        })
+        
+    }
+    
+    func loadMorePosts(lastId: Int) {
+        if newsPosts?.count != 0 {
+            getNewsPostsService(postCnt: 10, lastId: lastId, completionHandler: {(returnedData)-> Void in
+                self.newsPostsArr?.append(contentsOf: self.newsPosts!)
+                self.newsTV.reloadData()
+                self.newsTV.tableFooterView = nil
+            })
+        } else {
+            print("더 이상 불러올 게시글이 없습니다.")
+        }
+    }
+    
 //    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
 //        // UITableView only moves in one direction, y axis
 //        let currentOffset = scrollView.contentOffset.y
@@ -86,21 +113,16 @@ class NewsFeedVC: UIViewController {
 //        // Change 10.0 to adjust the distance from bottom
 //        if maximumOffset - currentOffset <= 10.0 {
 //            // 뷰 마지막 부분을 스크롤 하였을 때 작동 코드
+//            let spinner = UIActivityIndicatorView()
+//
+//            newsTV.tableFooterView = spinner
+//            newsTV.tableFooterView?.isHidden = false
+//            spinner.hidesWhenStopped = true
+//
+//            spinner.stopAnimating()
+//            newsTV.tableFooterView = nil
 //        }
 //    }
-    
-    func loadMorePost(lastId: Int) {
-        if newsPosts?.count != 0 {
-            getNewsPostsService(postCnt: 10, lastId: lastId, completionHandler: {(returnedData)-> Void in
-                self.newsPostsArr?.append(contentsOf: self.newsPosts!)
-                print("보여준 게시물 배열의 개수", self.newsPostsArr?.count)
-                self.newsTV.reloadData()
-                self.newsTV.tableFooterView = nil
-            })
-        } else {
-            print("더 이상 불러올 게시글이 없습니다.")
-        }
-    }
     
 }
 
@@ -120,12 +142,12 @@ extension NewsFeedVC : UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("numberRowInSection", newsPostsArr?.count)
-        return newsPostsArr?.count ?? 0
+        let postItems = newsPostsArr?.count ?? 0
+        
+        return postItems
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print("cellRowAt")
         // Custom셀인 'NewsFeedCell' 형식으로 생성
         let cell = tableView.dequeueReusableCell(withIdentifier: "NewsFeedCell", for: indexPath) as! NewsFeedCell
         
@@ -136,7 +158,6 @@ extension NewsFeedVC : UITableViewDataSource {
         cell.addBorder((.bottom), color: .lightGray, thickness: 0.3)
 //        cell.addBorder((.top), color: .lightGray, thickness: 1)
 
-        print("after let cell")
         newsPost = newsPostsArr?[indexPath.row]
         // 생성된 Cell클래스로 NewsPost 정보 넘겨주기
         cell.newsPost = self.newsPost
@@ -147,7 +168,6 @@ extension NewsFeedVC : UITableViewDataSource {
         
         NSLog("선택된 cell은 \(indexPath.row) 번쨰 indexPath입니다")
 //        print("testetsts : ", cell.newsPost?.id as! Int)
-        print("")
         
         return cell
     }
@@ -163,7 +183,7 @@ extension NewsFeedVC : UITableViewDataSource {
         self.navigationController?.pushViewController(showDetailNewsFeedVC, animated: true)
     }
     
-    // 마지막 셀일 때 로딩 그림과 함께 새로운 cell 정보 로딩
+    // 마지막 셀일 때 loadingIndicator와 함께 새로운 cell 정보 로딩
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         // 로딩된 cell 중 마지막 셀 찾기
         let lastSectionIndex = tableView.numberOfSections - 1
@@ -184,14 +204,14 @@ extension NewsFeedVC : UITableViewDataSource {
                 newsTV.tableFooterView?.isHidden = false
 
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                    //MARK: Loading more data
-                    self.loadMorePost(lastId: self.newsPost!.id)
+                    // Loading more data
+                    self.loadMorePosts(lastId: self.newsPost!.id)
                 }
             } else {
                 // 사용자 NewsFeed의 마지막 포스팅일 경우
                 self.newsTV.tableFooterView?.isHidden = true
                 spinner.stopAnimating()
-                newsTV.tableFooterView = nil
+//                newsTV.tableFooterView = nil
             }
 
            
