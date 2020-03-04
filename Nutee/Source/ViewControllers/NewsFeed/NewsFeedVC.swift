@@ -40,7 +40,7 @@ class NewsFeedVC: UIViewController {
         setRefresh()
         
         LoadingHUD.show()
-        getNewsPostsService(postCnt: 10, lastId: 10, completionHandler: {(returnedData)-> Void in
+        getNewsPostsService(postCnt: 10, lastId: 0, completionHandler: {(returnedData)-> Void in
             self.newsPostsArr = self.newsPosts
             
             self.viewDidAppear(true)
