@@ -17,8 +17,8 @@ struct ContentService {
     //MARK: - 게시글(Post) 받아오기
     
     // NewsFeed에 있는 게시글들(posts) 가져오기
-    func getNewsPosts(_ postCnt: Int, completion: @escaping (NetworkResult<Any>) -> Void){
-         let URL = APIConstants.Posts + "?offset=0&limit=" + "\(postCnt)"
+    func getNewsPosts(_ postCnt: Int, lastId: Int, completion: @escaping (NetworkResult<Any>) -> Void){
+         let URL = APIConstants.Posts + "?lastId=" + "\(lastId)" + "&limit=" + "\(postCnt)"
             let header: HTTPHeaders = [
                 "Cookie" : UserDefaults.standard.string(forKey: "Cookie")!
             ]
