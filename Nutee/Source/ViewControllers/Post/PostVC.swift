@@ -240,11 +240,11 @@ extension PostVC {
                 
                 switch data {
                 case .success(let res):
-//                    self.dismiss(animated: true, completion: nil)
+                    
                     print(res)
                 case .requestErr:
-                    self.simpleAlert(title: "실패", message: "")
-                    
+                    LoadingHUD.hide()
+                    print("requestErr")
                 case .pathErr:
                     print(".pathErr")
                     
@@ -269,7 +269,7 @@ extension PostVC {
                 switch data {
                 case .success(let res):
                     print("뷰컨 영역",res)
-//                    self.postContent(images: res as! URL, postContent: self.postingTextView.text)
+                    self.postContent(images: res as! URL, postContent: self.postingTextView.text)
                 case .requestErr:
                     self.simpleAlert(title: "실패", message: "")
                     

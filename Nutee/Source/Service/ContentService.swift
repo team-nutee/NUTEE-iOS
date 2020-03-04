@@ -169,6 +169,7 @@ struct ContentService {
         ]
         
         Alamofire.upload(multipartFormData: { (multipartFormData) in
+//            multipartFormData.append(pictures, withName: "image")
             multipartFormData.append(pictures, withName: "image")
             multipartFormData.append(postContent.data(using: .utf8) ?? Data(), withName: "content")
 

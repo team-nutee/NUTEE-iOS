@@ -95,7 +95,7 @@ class LoginVC: UIViewController {
     func checkSignIn(){
         let userid = UserDefaults.standard.value(forKey: "userId")
         let password = UserDefaults.standard.value(forKey: "pw")
-
+        
         if userid != nil && password != nil {
             signInService(userid as! String, password as! String)
         } else {
@@ -215,8 +215,8 @@ extension LoginVC {
                        options: [.curveEaseIn],
                        animations: {
                         // self를 항상 붙여줘야함 (클로저 안에서)
-//                        self.idTextField.transform = CGAffineTransform.init(translationX: -2, y: 0)
-//                        self.pwTextField.transform = CGAffineTransform.init(translationX: -2, y: 0)
+                        //                        self.idTextField.transform = CGAffineTransform.init(translationX: -2, y: 0)
+                        //                        self.pwTextField.transform = CGAffineTransform.init(translationX: -2, y: 0)
                         self.idErrorLabel.transform = CGAffineTransform.init(translationX: -5, y: 0)
                         self.pwErrorLabel.transform = CGAffineTransform.init(translationX: -5, y: 0)
                         self.idErrorLabel.alpha = 1
@@ -229,8 +229,8 @@ extension LoginVC {
                        options: [.curveEaseIn],
                        animations: {
                         // self를 항상 붙여줘야함 (클로저 안에서)
-//                        self.idTextField.transform = CGAffineTransform.init(translationX: 2, y: 0)
-//                        self.pwTextField.transform = CGAffineTransform.init(translationX: 2, y: 0)
+                        //                        self.idTextField.transform = CGAffineTransform.init(translationX: 2, y: 0)
+                        //                        self.pwTextField.transform = CGAffineTransform.init(translationX: 2, y: 0)
                         self.idErrorLabel.transform = CGAffineTransform.init(translationX: 5, y: 0)
                         self.pwErrorLabel.transform = CGAffineTransform.init(translationX: 5, y: 0)
         })
@@ -241,6 +241,15 @@ extension LoginVC {
 // MARK: - server service
 
 extension LoginVC {
+    func error(){
+        self.idTextField.addBorder(.bottom, color: .red, thickness: 1)
+        self.pwTextField.addBorder(.bottom, color: .red, thickness: 1)
+        self.idErrorLabel.text = "아이디 혹은 비밀번호가 다릅니다"
+        self.pwErrorLabel.text = "아이디 혹은 비밀번호가 다릅니다"
+        self.idErrorLabel.sizeToFit()
+        self.pwErrorLabel.sizeToFit()
+        self.errorAnimate()
+    }
     
     func signInService(_ userId: String, _ password: String) {
         UserService.shared.signIn(userId, password) { responsedata in
@@ -258,43 +267,24 @@ extension LoginVC {
                 
             //                self.successAdd = true
             case .requestErr(_):
-                self.idTextField.addBorder(.bottom, color: .red, thickness: 1)
-                self.pwTextField.addBorder(.bottom, color: .red, thickness: 1)
-                self.idErrorLabel.text = "아이디 혹은 비밀번호가 다릅니다"
-                self.pwErrorLabel.text = "아이디 혹은 비밀번호가 다릅니다"
-                self.idErrorLabel.sizeToFit()
-                self.pwErrorLabel.sizeToFit()
-                self.errorAnimate()
+                LoadingHUD.hide()
+                self.error()
                 print("request error")
             //                self.successAdd = false
             case .pathErr:
-                self.idTextField.addBorder(.bottom, color: .red, thickness: 1)
-                self.pwTextField.addBorder(.bottom, color: .red, thickness: 1)
-                self.idErrorLabel.text = "아이디 혹은 비밀번호가 다릅니다"
-                self.pwErrorLabel.text = "아이디 혹은 비밀번호가 다릅니다"
-                self.idErrorLabel.sizeToFit()
-                self.pwErrorLabel.sizeToFit()
-                self.errorAnimate()
+                LoadingHUD.hide()
+                self.error()
                 print(".pathErr")
+                
             //                self.successAdd = false
             case .serverErr:
-                self.idTextField.addBorder(.bottom, color: .red, thickness: 1)
-                self.pwTextField.addBorder(.bottom, color: .red, thickness: 1)
-                self.idErrorLabel.text = "아이디 혹은 비밀번호가 다릅니다"
-                self.pwErrorLabel.text = "아이디 혹은 비밀번호가 다릅니다"
-                self.idErrorLabel.sizeToFit()
-                self.pwErrorLabel.sizeToFit()
-                self.errorAnimate()
+                LoadingHUD.hide()
+                self.error()
                 print(".serverErr")
             //                self.successAdd = false
             case .networkFail :
-                self.idTextField.addBorder(.bottom, color: .red, thickness: 1)
-                self.pwTextField.addBorder(.bottom, color: .red, thickness: 1)
-                self.idErrorLabel.text = "아이디 혹은 비밀번호가 다릅니다"
-                self.pwErrorLabel.text = "아이디 혹은 비밀번호가 다릅니다"
-                self.idErrorLabel.sizeToFit()
-                self.pwErrorLabel.sizeToFit()
-                self.errorAnimate()
+                LoadingHUD.hide()
+                self.error()
                 print("failure")
                 //                self.successAdd = false
             }

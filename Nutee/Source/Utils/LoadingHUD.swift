@@ -31,7 +31,7 @@ class LoadingHUD: NSObject {
         let backgroundView = UIView(frame: CGRect.init(x: 0, y: 0, width: 100, height: 100))
         
         let popupView = UIImageView()//= UIImageView(frame: CGRect.init(x: 0, y: 0, width: 200, height: 500))
-//        popupView.contentClippingRect
+        popupView.contentClippingRect
         popupView.animationImages = LoadingHUD.getAnimationImageArray()
         popupView.animationDuration = 0.8
         popupView.animationRepeatCount = 0
@@ -65,16 +65,16 @@ class LoadingHUD: NSObject {
 
     public class func getAnimationImageArray() -> [UIImage] {
         var animationArray: [UIImage] = []
-        animationArray.append(UIImage(named: "nuteeLoading1")!)
-        animationArray.append(UIImage(named: "nuteeLoading2")!)
-        animationArray.append(UIImage(named: "nuteeLoading3")!)
-        animationArray.append(UIImage(named: "nuteeLoading4")!)
-        animationArray.append(UIImage(named: "nuteeLoading5")!)
-        animationArray.append(UIImage(named: "nuteeLoading6")!)
-        animationArray.append(UIImage(named: "nuteeLoading7")!)
-        animationArray.append(UIImage(named: "nuteeLoading8")!)
-        animationArray.append(UIImage(named: "nuteeLoading9")!)
-        animationArray.append(UIImage(named: "nuteeLoading10")!)
+        animationArray.append(UIImage(named: "nuteeLoading_00")!)
+        animationArray.append(UIImage(named: "nuteeLoading_01")!)
+        animationArray.append(UIImage(named: "nuteeLoading_02")!)
+        animationArray.append(UIImage(named: "nuteeLoading_03")!)
+        animationArray.append(UIImage(named: "nuteeLoading_04")!)
+        animationArray.append(UIImage(named: "nuteeLoading_05")!)
+        animationArray.append(UIImage(named: "nuteeLoading_06")!)
+        animationArray.append(UIImage(named: "nuteeLoading_07")!)
+        animationArray.append(UIImage(named: "nuteeLoading_08")!)
+        animationArray.append(UIImage(named: "nuteeLoading_09")!)
         return animationArray
     }
 }
