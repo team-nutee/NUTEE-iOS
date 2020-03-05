@@ -12,18 +12,19 @@ class NewsFeedCell: UITableViewCell {
     
     //MARK: - UI components
     
+    @IBOutlet var contentsCell: UIView!
     // Repost Info Section
     @IBOutlet var lblRepostInfo: UILabel!
     @IBOutlet var TopToRepostImg: NSLayoutConstraint!
     
     // User Information
-    @IBOutlet var imgUserImg: UIImageView!
+    @IBOutlet var imgvwUserImg: UIImageView!
     @IBOutlet var TopToUserImg: NSLayoutConstraint!
     @IBOutlet var lblUserId: UILabel!
     @IBOutlet var lblPostTime: UILabel!
     
     // Posting
-    @IBOutlet var txtvwContents: UITextView!
+    @IBOutlet var txtvwContent: UITextView!
     @IBOutlet var ContentsToRepost: NSLayoutConstraint!
     
     // ver. TwoFrame
@@ -52,11 +53,12 @@ class NewsFeedCell: UITableViewCell {
     @IBOutlet var btnComment: UIButton!
     @IBOutlet var btnMore: UIButton!
     
-
     //MARK: - Variables and Properties
     
     weak var newsFeedVC: UIViewController?
+    
     var newsPost: NewsPostsContentElement?
+    
     var contentId : Int = 0
     
     var imgCnt: Int?
@@ -148,7 +150,7 @@ class NewsFeedCell: UITableViewCell {
         let userReportAction = UIAlertAction(title: "신고하기🚨", style: .destructive) {
             (action: UIAlertAction) in
             // Code to 신고 기능
-            let reportAlert = UIAlertController(title: "신고하기🚨", message: "\(String(self.txtvwContents.text))\("\n")\("\n")이 게시글을 신고하시겠습니까?", preferredStyle: UIAlertController.Style.alert)
+            let reportAlert = UIAlertController(title: "이 게시글을 신고하시겠습니까?", message: "\(String(self.txtvwContent.text))", preferredStyle: UIAlertController.Style.alert)
             let cancelAction
                 = UIAlertAction(title: "취소", style: .cancel, handler: nil)
             let reportAction = UIAlertAction(title: "신고", style: .destructive) {
@@ -178,8 +180,8 @@ class NewsFeedCell: UITableViewCell {
     
     //포스팅 내용 초기설정
     func initPosting() {
-        imgUserImg.image = #imageLiteral(resourceName: "defaultProfile")
-        imgUserImg.setRounded(radius: nil)
+        imgvwUserImg.image = #imageLiteral(resourceName: "defaultProfile")
+        imgvwUserImg.setRounded(radius: nil)
         
         if newsPost?.retweetID == nil {
             // <-----공유한 글이 아닐 경우-----> //
@@ -195,8 +197,8 @@ class NewsFeedCell: UITableViewCell {
             lblPostTime.text = postTimeDateFormat!.timeAgoSince(postTimeDateFormat!)
 
             // Posting 내용 설정
-            txtvwContents.text = newsPost?.content
-            txtvwContents.postingInit()
+            txtvwContent.text = newsPost?.content
+            txtvwContent.postingInit()
             
 //            print(txtvwContents.text, "<---- ", newsPost?.createdAt)
             
@@ -240,8 +242,8 @@ class NewsFeedCell: UITableViewCell {
             lblPostTime.text = postTimeDateFormat!.timeAgoSince(postTimeDateFormat!)
             
             // Posting 내용 설정
-            txtvwContents.text = newsPost?.retweet!.content
-            txtvwContents.postingInit()
+            txtvwContent.text = newsPost?.retweet!.content
+            txtvwContent.postingInit()
             
 //            print(txtvwContents.text, "<---- ", newsPost?.retweet?.createdAt)
             
@@ -397,31 +399,35 @@ class NewsFeedCell: UITableViewCell {
         } // case문 종료
     } // <---ShowImageFrame 설정 끝
 
-    //이미지 클릭 시 전환 코드구현 구간
-    func imageTapped(image:UIImage){
-        let newImageView = UIImageView(image: image)
-        newImageView.frame = UIScreen.main.bounds
-        newImageView.backgroundColor = .black
-        newImageView.contentMode = .scaleAspectFit
-        newImageView.isUserInteractionEnabled = true
-        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissFullscreenImage))
-        newImageView.addGestureRecognizer(tap)
-        newsFeedVC?.view.addSubview(newImageView)
-        newsFeedVC?.navigationController?.isNavigationBarHidden = true
-        newsFeedVC?.tabBarController?.tabBar.isHidden = true
-    }
-
-    //이미지 전체화면 종료
-    @objc func dismissFullscreenImage(_ sender: UITapGestureRecognizer) {
-        newsFeedVC?.navigationController?.isNavigationBarHidden = false
-        newsFeedVC?.tabBarController?.tabBar.isHidden = false
-        sender.view?.removeFromSuperview()
-    }
+//    //이미지 클릭 시 전환 코드구현 구간
+//    func imageTapped(image:UIImage){
+//        let newImageView = UIImageView(image: image)
+//        newImageView.frame = UIScreen.main.bounds
+//        newImageView.backgroundColor = .black
+//        newImageView.contentMode = .scaleAspectFit
+//        newImageView.isUserInteractionEnabled = true
+//        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissFullscreenImage))
+//        newImageView.addGestureRecognizer(tap)
+//        newsFeedVC?.view.addSubview(newImageView)
+//        newsFeedVC?.navigationController?.isNavigationBarHidden = true
+//        newsFeedVC?.tabBarController?.tabBar.isHidden = true
+//    }
+//
+//    //이미지 전체화면 종료
+//    @objc func dismissFullscreenImage(_ sender: UITapGestureRecognizer) {
+//        newsFeedVC?.navigationController?.isNavigationBarHidden = false
+//        newsFeedVC?.tabBarController?.tabBar.isHidden = false
+//        sender.view?.removeFromSuperview()
+//    }
     
     func showDetailNewsFeed() {
+        // DetailNewsFeed 창으로 전환
         let detailNewsFeedSB = UIStoryboard(name: "DetailNewsFeed", bundle: nil)
         let showDetailNewsFeedVC = detailNewsFeedSB.instantiateViewController(withIdentifier: "DetailNewsFeed") as! DetailNewsFeedVC
-
+        
+        // 현재 게시물 정보를 DetailNewsFeedVC로 넘겨줌
+        showDetailNewsFeedVC.detailNewsPost = self.newsPost
+        
         newsFeedVC?.navigationController?.pushViewController(showDetailNewsFeedVC, animated: true)
     }
 
@@ -434,7 +440,7 @@ class NewsFeedCell: UITableViewCell {
             
             newsFeedVC?.navigationController?.pushViewController(showProfileVC, animated: true)
     }
-    
+
     func setButtonAttributed(btn: UIButton, num: Int, color: UIColor, state: UIControl.State) {
         let stateAttributes = [NSAttributedString.Key.foregroundColor: color]
         btn.setAttributedTitle(NSAttributedString(string: " " + String(num), attributes: stateAttributes), for: state)

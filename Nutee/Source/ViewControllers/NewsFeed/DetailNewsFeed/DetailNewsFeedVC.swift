@@ -14,6 +14,8 @@ class DetailNewsFeedVC: UIViewController {
     
     @IBOutlet var replyTV: UITableView!
     
+    @IBOutlet var statusNoReply: UIView!
+    
     // 댓글창 표시
     @IBOutlet var vwCommentWindow: UIView!
     @IBOutlet var txtvwComment: UITextView!
@@ -22,15 +24,10 @@ class DetailNewsFeedVC: UIViewController {
     
     //MARK: - Variables and Properties
     
-    var contentId : Int = 0
-    var content : PostContent?
-
-    var indexPath = 0
+    var content: PostContent?
+    var detailNewsPost: NewsPostsContentElement?
     
     //MARK: - Dummy data
-    
-    var userInfo : SignIn?
-    var test : [String] = ["","","",""]
     
     //MARK: - Life Cycle
     
@@ -112,32 +109,82 @@ extension DetailNewsFeedVC : UITableViewDelegate { }
 
 extension DetailNewsFeedVC : UITableViewDataSource {
     
-    //HeaderView settings
+    // HeaderView settings
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         // Dequeue with the reuse identifier
-        let cell = tableView.dequeueReusableHeaderFooterView(withIdentifier: "HeaderNewsFeedView")
-//        cell.detailNew = self
-//        cell.indexPath = self.indexPath
+        let headerNewsFeed = tableView.dequeueReusableHeaderFooterView(withIdentifier: "HeaderNewsFeedView") as! HeaderNewsFeedView
         
-        return cell
+        // HeaderView로 NewsFeedVC에서 받아온 게시글 정보룰 넘김
+        headerNewsFeed.detailNewsPost = self.detailNewsPost
+        headerNewsFeed.initPosting()
+        
+        // VC 컨트롤 권한을 HeaderView로 넘겨주기
+        headerNewsFeed.detailNewsFeedVC = self
+        
+        return headerNewsFeed
     }
     
-    //TableView cell settings
+    // TableView cell settings
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
+        if detailNewsPost?.comments.count == 0 {
+            if indexPath.row == 0 {
+                return 0.5
+            } else {
+                return 220
+            }
+        } else {
+            return UITableView.automaticDimension
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
+        if detailNewsPost?.comments.count == 0 {
+            if indexPath.row == 0 {
+                return 0.5
+            } else {
+                return 220
+            }
+        } else {
+            return UITableView.automaticDimension
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return test.count
+        var replyCnt = detailNewsPost?.comments.count ?? 0
+        
+        if replyCnt == 0 {
+            replyCnt += 2
+        }
+        
+        return replyCnt
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //Custom셀인 'ReplyCell' 형식으로 변환
         let cell = tableView.dequeueReusableCell(withIdentifier: "ReplyCell", for: indexPath) as! ReplyCell
+        
+        if detailNewsPost?.comments.count == 0 {
+            if indexPath.row == 0 {
+                cell.backgroundColor = .lightGray
+            }  else {
+                cell.addSubview(statusNoReply)
+                statusNoReply.isHidden = false
+                cell.contentsCell.isHidden = true
+                tableView.separatorStyle = .none
+            }
+        } else {
+            
+            // 불러올 댓글이 있는 경우 cell 초기화 진행
+            cell.contentsCell.isHidden = false
+            // emptyStatusView(tag: 404) cell에서 제거하기
+            if let viewWithTag = self.view.viewWithTag(404) {
+                viewWithTag.removeFromSuperview()
+            }
+            
+            // 생성된 Cell클래스로 comment 정보 넘겨주기
+            cell.comment = detailNewsPost?.comments[indexPath.row]
+            cell.initComments()
+        }
         
         return cell
     }
@@ -211,32 +258,4 @@ extension DetailNewsFeedVC {
         self.txtvwComment.endEditing(true)
     }
     
-}
-
-//MARK: - UserInfo 서버 연결을 위한 Service 실행 구간
-
-extension DetailNewsFeedVC {
-    func getPostContentInfoService() {
-        ContentService.shared.getPost(contentId) { responsedata in
-
-            switch responsedata {
-            case .success(let res):
-                self.content = res as? PostContent
-                
-            case .requestErr(_):
-                print("request error")
-
-            case .pathErr:
-                print(".pathErr")
-
-            case .serverErr:
-                print(".serverErr")
-
-            case .networkFail :
-                print("failure")
-                }
-        }
-
-    }
-
 }
