@@ -12,6 +12,8 @@ class ReplyCell: UITableViewCell{
     
     //MARK: - UI components
     
+    @IBOutlet var contentsCell: UIView!
+    
     // 댓글 표시
     @IBOutlet var imgCommentUser: UIImageView!
     @IBOutlet var lblCommentUserId: UILabel!
@@ -22,12 +24,14 @@ class ReplyCell: UITableViewCell{
     
     weak var newsTV: UITableView?
     
+    var comment: Comment?
+    
     //MARK: - Life Cycle
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        initComments()
+//        initComments()
     }
     
     //MARK: - Helper
@@ -36,12 +40,14 @@ class ReplyCell: UITableViewCell{
         imgCommentUser.image = #imageLiteral(resourceName: "nutee_zigi")
         imgCommentUser.setRounded(radius: imgCommentUser.frame.height/2)
         
-        lblCommentUserId.text = "CommentUser"
+        lblCommentUserId.text = comment?.user.nickname
         lblCommentUserId.sizeToFit()
-        lblCommentTime.text = "2 min"
+        let originPostTime = comment?.createdAt
+        let postTimeDateFormat = originPostTime!.getDateFormat(time: originPostTime!)
+        lblCommentTime.text = postTimeDateFormat!.timeAgoSince(postTimeDateFormat!)
         
         txtvwCommentContents.sizeToFit()
-        txtvwCommentContents.text = "Peng-Ha! Educational Boardcasting System. First you need to set equal width and height for getting Circular ImageView.Below I set width and height as 100,100.If you want to set equal width and height according to your required size,set here."
+        txtvwCommentContents.text = comment?.content
     }
     
 }

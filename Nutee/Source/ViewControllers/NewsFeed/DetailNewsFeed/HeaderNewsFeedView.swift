@@ -12,13 +12,19 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
     
     //MARK: - UI components
     
+    // Repost Info Section
+    @IBOutlet var repostPic: UIButton!
+    @IBOutlet var lblRepostInfo: UILabel!
+    @IBOutlet var TopToRepostImg: NSLayoutConstraint!
+    
     // User Information
     @IBOutlet var imgvwUserImg: UIImageView!
+    @IBOutlet var TopToUserImg: NSLayoutConstraint!
     @IBOutlet var lblUserId: UILabel!
     @IBOutlet var lblPostTime: UILabel!
     
     // Posting
-    @IBOutlet var txtvwConetents: UITextView!
+    @IBOutlet var txtvwContent: UITextView!
     @IBOutlet var ContentsToRepost: NSLayoutConstraint!
     
     // ver. TwoFrame
@@ -49,31 +55,44 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
     
     //MARK: - Variables and Properties
     
-    var content : PostContent?
-    
     weak var detailNewsFeedVC: UIViewController?
     
-    var indexPath = 3
+    var content: PostContent?
+    var detailNewsPost: NewsPostsContentElement?
+    
+    var imgCnt: Int?
     let dataPeng01 = [ "sample_peng01.jepg" ]
     let dataPeng02 = [ "sample_peng01.jepg", "sample_peng02.jepg" ]
     let dataPeng03 = [ "sample_peng01.jepg", "sample_peng02.jepg", "sample_peng03.png" ]
     let dataPeng04 = [ "sample_peng01.jepg", "sample_peng02.jepg", "sample_peng03.png", "sample_peng04.png" ]
     let dataPeng05 = [ "sample_peng01.jepg", "sample_peng02.jepg", "sample_peng03.png", "sample_peng04.png", "sample_peng05.png" ]
     
-    var numLike = 0
-    var numComment = 0
+    var numLike: Int?
+    var numComment: Int?
     
-    var isClickedLike: Bool = false
-    var isClickedRepost: Bool = false
-    var isClickedComment: Bool = false
+    var isClickedLike: Bool?
+    var isClickedRepost: Bool?
+    var isClickedComment: Bool?
+    
+    // .normal 상태에서의 버튼 AttributedStringTitle의 색깔 지정
+    let normalAttributes = [NSAttributedString.Key.foregroundColor: UIColor.gray]
+    // .selected 상태에서의 Repost버튼 AttributedStringTitle의 색깔 지정
+    let selectedRepostAttributes = [NSAttributedString.Key.foregroundColor: UIColor.nuteeGreen]
+    // .selected 상태에서의 Like버튼 AttributedStringTitle의 색깔 지정
+    let selectedLikeAttributes = [NSAttributedString.Key.foregroundColor: UIColor.systemPink]
     
     //MARK: - Life Cycle
     
     override func awakeFromNib() {
         super.awakeFromNib()
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
         
-//        initPosting()
-        getUserInfoService()
+        btnRepost.isEnabled = true
+        btnLike.isEnabled = true
+        btnMore.isEnabled = true
     }
     
     //MARK: - Helper
@@ -85,7 +104,7 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
     @IBAction func btnRepost(_ sender: UIButton) {
         // .selected State를 활성화 하기 위한 코드
         btnRepost.isSelected = !btnRepost.isSelected
-        if isClickedRepost {
+        if isClickedRepost! {
             btnRepost.tintColor = .nuteeGreen
             isClickedRepost = false
         } else {
@@ -96,20 +115,11 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
             
     @IBAction func btnLike(_ sender: UIButton) {
         // .selected State를 활성화 하기 위한 코드
-        btnLike.isSelected = !btnLike.isSelected
-        if isClickedLike {
-//            btnLike.isSelected = false
-            numLike -= 1
-            setButtonAttributed(btn: sender, num: numLike, color: .gray, state: .normal)
-//            sender.setImage(UIImage(named: "heart.filled"), for: .selected)
-            isClickedLike = false
+//        btnLike.isSelected = !btnLike.isSelected
+        if isClickedLike! {
+            setNormalLikeBtn()
         } else {
-//            btnLike.isSelected = true
-            numLike += 1
-            setButtonAttributed(btn: sender, num: numLike, color: .systemPink, state: .selected)
-//            sender.setImage(UIImage(named: "heart.fill"), for: .selected)
-
-            isClickedLike = true
+            setSelectedLikeBtn()
         }
     }
     
@@ -121,55 +131,183 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
         }
         let deleteAction = UIAlertAction(title: "삭제", style: .destructive) {
             (action: UIAlertAction) in
-            // Code to delete
+            let deleteAlert = UIAlertController(title: nil, message: "삭제하시겠습니까?", preferredStyle: UIAlertController.Style.alert)
+            let cancelAction = UIAlertAction(title: "취소", style: .default, handler: nil)
+            let okAction = UIAlertAction(title: "확인", style: .default) {
+                (action: UIAlertAction) in
+                // Code to delete
+            }
+            deleteAlert.addAction(cancelAction)
+            deleteAlert.addAction(okAction)
+            self.detailNewsFeedVC?.present(deleteAlert, animated: true, completion: nil)
+        }
+        let userReportAction = UIAlertAction(title: "신고하기🚨", style: .destructive) {
+            (action: UIAlertAction) in
+            // Code to 신고 기능
+            let reportAlert = UIAlertController(title: "이 게시글을 신고하시겠습니까?", message: "\(String(self.txtvwContent.text))", preferredStyle: UIAlertController.Style.alert)
+            let cancelAction
+                = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+            let reportAction = UIAlertAction(title: "신고", style: .destructive) {
+                (action: UIAlertAction) in
+                // <---- 신고 기능 구현
+                
+                //신고 여부 알림
+                let successfulAlert = UIAlertController(title: nil, message: "신고가 완료되었습니다", preferredStyle: UIAlertController.Style.alert)
+                let okAction = UIAlertAction(title: "확인", style: .default, handler: nil)
+                successfulAlert.addAction(okAction)
+                
+                self.detailNewsFeedVC?.present(successfulAlert, animated: true, completion: nil)
+            }
+            reportAlert.addAction(cancelAction)
+            reportAlert.addAction(reportAction)
+            
+            self.detailNewsFeedVC?.present(reportAlert, animated: true, completion: nil)
         }
         let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
 
         moreAlert.addAction(editAction)
         moreAlert.addAction(deleteAction)
         moreAlert.addAction(cancelAction)
-        self.window?.rootViewController?.present(moreAlert, animated: true, completion: nil)
+        moreAlert.addAction(userReportAction)
+        detailNewsFeedVC?.present(moreAlert, animated: true, completion: nil)
     }
     
-    //이미지 클릭 시 전환 코드구현 구간
-    func imageTapped(image:UIImage){
-        let newImageView = UIImageView(image: image)
-        newImageView.frame = UIScreen.main.bounds
-        newImageView.backgroundColor = .black
-        newImageView.contentMode = .scaleAspectFit
-        newImageView.isUserInteractionEnabled = true
-        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissFullscreenImage))
-        newImageView.addGestureRecognizer(tap)
-        self.window?.rootViewController?.view.addSubview(newImageView)
-        self.window?.rootViewController?.navigationController?.isNavigationBarHidden = true
-        self.window?.rootViewController?.tabBarController?.tabBar.isHidden = true
-    }
-
-    //이미지 전체화면 종료
-    @objc func dismissFullscreenImage(_ sender: UITapGestureRecognizer) {
-        self.window?.rootViewController?.navigationController?.isNavigationBarHidden = false
-        self.window?.rootViewController?.tabBarController?.tabBar.isHidden = false
-        sender.view?.removeFromSuperview()
-    }
+//    //이미지 클릭 시 전환 코드구현 구간
+//    func imageTapped(image:UIImage){
+//        let newImageView = UIImageView(image: image)
+//        newImageView.frame = UIScreen.main.bounds
+//        newImageView.backgroundColor = .black
+//        newImageView.contentMode = .scaleAspectFit
+//        newImageView.isUserInteractionEnabled = true
+//        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissFullscreenImage))
+//        newImageView.addGestureRecognizer(tap)
+//        self.window?.rootViewController?.view.addSubview(newImageView)
+//        self.window?.rootViewController?.navigationController?.isNavigationBarHidden = true
+//        self.window?.rootViewController?.tabBarController?.tabBar.isHidden = true
+//    }
+//
+//    //이미지 전체화면 종료
+//    @objc func dismissFullscreenImage(_ sender: UITapGestureRecognizer) {
+//        self.window?.rootViewController?.navigationController?.isNavigationBarHidden = false
+//        self.window?.rootViewController?.tabBarController?.tabBar.isHidden = false
+//        sender.view?.removeFromSuperview()
+//    }
     
     func initPosting() {
         imgvwUserImg.image = #imageLiteral(resourceName: "defaultProfile")
         imgvwUserImg.setRounded(radius: nil)
-
-        lblUserId.text = "Crossroads"
-        lblUserId.sizeToFit()
         
-        txtvwConetents.text = "서울 한강에 나타난 괴생물체에 맞선 한 가족의 사투를 그리고 있다. 당시 최고의 첨단 기술력으로 구현한 한국 괴수영화의 시작, 사회비판과 풍자를 녹여낸 정점의 블랙 코미디다. 이전 문회사 '웨타 디지털(Weta Digita)'과 작업했다. 마감 시한을 맞추기 위해 서두른 후, 영화는풍자를 녹여낸 정점의 블랙 코미디다. 이전 문회사 '웨타 디지털(Weta Digita)'과 작업했다. 마감 시한을 맞추기 위해 서두른 후, 영화는풍자를 녹여낸 정점의 블랙 코미디다. 이전 문회사 '웨타 디지털(Weta Digita)'과 작업했다. 마감 시한을 맞추기 위해 서두른 후, 영화는풍자를 녹여낸 정점의 블랙 코미디다. 이전 문회사 '웨타 디지털(Weta Digita)'과 작업했다. 마감 시한을 맞추기 위해 서두른 후, 영화는 2006년 칸 국제 영화제의문에 초청되었다.이 글이 보이면 전부가 출력된 것입니다."
-        txtvwConetents.postingInit()
-        showImgFrame()
-
-        //버튼모양 초기 설정
-        btnRepost.tintColor = .gray
-        setButtonAttributed(btn: btnLike, num: numLike, color: .gray, state: .normal)
-        setButtonPlain(btn: btnComment, num: numComment, color: .gray, state: .normal)
-        btnMore.tintColor = .gray
+        if detailNewsPost?.retweetID == nil {
+            // <-----공유한 글이 아닐 경우-----> //
+            TopToUserImg.isActive = true
+            TopToRepostImg.isActive = false
+            repostPic.isHidden = true
+            lblRepostInfo.isHidden = true
+            
+            // User 정보 설정
+            lblUserId.text = detailNewsPost?.user.nickname
+            lblUserId.sizeToFit()
+            let originPostTime = detailNewsPost?.createdAt
+            let postTimeDateFormat = originPostTime!.getDateFormat(time: originPostTime!)
+            lblPostTime.text = postTimeDateFormat!.timeAgoSince(postTimeDateFormat!)
+            
+            // Posting 내용 설정
+            txtvwContent.text = detailNewsPost?.content
+            txtvwContent.postingInit()
+            
+            //            print(txtvwContents.text, "<---- ", newsPost?.createdAt)
+            
+            imgCnt = detailNewsPost?.images.count
+            showImgFrame()
+            
+            // Repost 버튼
+            isClickedRepost = false
+            btnRepost.tintColor = .gray
+            // Like 버튼
+            if (detailNewsPost?.likers.contains(detailNewsPost!.userID) ?? false) {
+                // 로그인 한 사용자가 좋아요를 누른 상태일 경우
+                btnLike.isSelected = true
+                numLike = detailNewsPost?.likers.count ?? 0
+                btnLike.setTitle(" " + String(numLike!), for: .selected)
+                btnLike.tintColor = .systemPink
+                isClickedLike = true
+            } else {
+                // 로그인 한 사용자가 좋아요를 누르지 않은 상태일 경우
+                print("여기를 통과하는지 확인")
+                btnLike.isSelected = false
+                numLike = detailNewsPost?.likers.count ?? 0
+                btnLike.setTitle(" " + String(numLike!), for: .normal)
+                btnLike.tintColor = .gray
+                isClickedLike = false
+            }
+            // Comment 버튼
+            numComment = detailNewsPost?.comments.count ?? 0
+            setButtonPlain(btn: btnComment, num: numComment!, color: .gray, state: .normal)
+        } else {
+            // <-----공유한 글 일 경우-----> //
+            TopToUserImg.isActive = false
+            TopToRepostImg.isActive = true
+            repostPic.isHidden = false
+            lblRepostInfo.isHidden = false
+            lblRepostInfo.text = (detailNewsPost?.user.nickname)! + " 님이 공유했습니다"
+            
+            // User 정보 설정
+            lblUserId.text = detailNewsPost?.retweet!.user.nickname
+            lblUserId.sizeToFit()
+            let originPostTime = detailNewsPost?.retweet?.createdAt
+            let postTimeDateFormat = originPostTime!.getDateFormat(time: originPostTime!)
+            lblPostTime.text = postTimeDateFormat!.timeAgoSince(postTimeDateFormat!)
+            
+            // Posting 내용 설정
+            txtvwContent.text = detailNewsPost?.retweet!.content
+            txtvwContent.postingInit()
+            
+            //            print(txtvwContents.text, "<---- ", newsPost?.retweet?.createdAt)
+            
+            imgCnt = detailNewsPost?.retweet!.images.count
+            showImgFrame()
+            
+            // Repost 버튼
+            isClickedRepost = false
+            btnRepost.isSelected = false
+            btnRepost.tintColor = .gray
+            btnRepost.isEnabled = false
+            // Like 버튼
+            isClickedLike = false
+            numLike = nil
+            btnLike.setTitle(String(""), for: .normal)
+            btnLike.isEnabled = false
+            // Comment 버튼
+            numComment = 0
+            setButtonPlain(btn: btnComment, num: numComment!, color: .gray, state: .normal)
+            // More 버튼
+            btnMore.isEnabled = false
+        }
+        print("좋아요 숫자 ====> ",numLike)
     }
 
+    func setNormalLikeBtn() {
+        btnLike.isSelected = false
+        numLike! -= 1
+        btnLike.setTitle(" " + String(numLike!), for: .normal)
+        btnLike.tintColor = .gray
+        isClickedLike = false
+    }
+    
+    func setSelectedLikeBtn() {
+        btnLike.isSelected = true
+        numLike! += 1
+        btnLike.setTitle(" " + String(numLike!), for: .selected)
+        btnLike.tintColor = .systemPink
+        isClickedLike = true
+    }
+    
+    func setButtonPlain(btn: UIButton, num: Int, color: UIColor, state: UIControl.State) {
+        btn.setTitle(" " + String(num), for: state)
+        btn.setTitleColor(color, for: state)
+        btn.tintColor = color
+    }
+    
     // 사진 개수에 따른 이미지 표시 유형 선택
     func showImgFrame() {
         //constrain layout 충돌 방지를 위한 이미지 뷰 전체 hidden 설정
@@ -177,8 +315,21 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
         vwSquare.isHidden = true
         
         var num = 0
-        switch indexPath {
-        case 0:
+        switch imgCnt {
+        case 1:
+            // ver. only OneImage
+            vwSquare.isHidden = false
+            
+            imgvwOne.isHidden = false
+            vwThree.isHidden = true
+            vwFour.isHidden = true
+            
+            vwTwoToRepost.isActive = false
+            vwSquareToRepost.isActive = true
+            ContentsToRepost.isActive = false
+            
+            imgvwOne.image = UIImage(named: dataPeng01[num])
+        case 2:
             // ver. TwoFrame
             vwTwo.isHidden = false
             
@@ -195,14 +346,14 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
                         lblTwoMoreImg.isHidden = false
                         lblTwoMoreImg.text = String(leftImg) + " +"
                         lblTwoMoreImg.sizeToFit()
-//                        imageTapped(image: imgvw.image!)
+                        //                        imageTapped(image: imgvw.image!)
                     } else {
                         lblTwoMoreImg.isHidden = true
                     }
                 }
                 num += 1
             }
-        case 1:
+        case 3:
             // ver. ThreeFrame
             vwSquare.isHidden = false
             
@@ -219,7 +370,7 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
                     let leftImg = dataPeng05.count - 3
                     if leftImg > 0 {
                         imgvw.alpha = 0.8
-//                        lblThreeMoreImg.isHidden = false
+                        //                        lblThreeMoreImg.isHidden = false
                         lblThreeMoreImg.text = String(leftImg) + " +"
                         lblThreeMoreImg.sizeToFit()
                     } else {
@@ -228,7 +379,7 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
                 }
                 num += 1
             }
-        case 2:
+        case 4:
             // ver. FourFrame
             vwSquare.isHidden = false
             
@@ -245,7 +396,7 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
                     let leftImg = dataPeng04.count - 4
                     if leftImg > 0 {
                         imgvw.alpha = 0.8
-//                        lblTwoMoreImg.isHidden = false
+                        //                        lblTwoMoreImg.isHidden = false
                         lblFourMoreImg.text = String(leftImg) + " +"
                         lblFourMoreImg.sizeToFit()
                     } else {
@@ -254,19 +405,6 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
                 }
                 num += 1
             }
-        case 4:
-            // ver. only OneImage
-            vwSquare.isHidden = false
-            
-            imgvwOne.isHidden = false
-            vwThree.isHidden = true
-            vwFour.isHidden = true
-            
-            vwTwoToRepost.isActive = false
-            vwSquareToRepost.isActive = true
-            ContentsToRepost.isActive = false
-            
-            imgvwOne.image = UIImage(named: dataPeng01[num])
         default:
             // 보여줄 사진이 없는 경우(글만 표시)
             lblTwoMoreImg.isHidden = true
@@ -280,19 +418,13 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
     } // <---ShowImageFrame 설정 끝
 
     func showProfile() {
-            let profileSB = UIStoryboard(name: "ProfileVC", bundle: nil)
-            let showProfileVC = profileSB.instantiateViewController(withIdentifier: "ProfileVC") as! ProfileVC
-            
-    //        let indexPath = IndexPath(row: 1, section: 0)
-    //        showDetailNewsFeedVC.replyTV.scrollToRow(at: indexPath as IndexPath, at: .top, animated: true)
-            
-            self.window?.rootViewController?.navigationController?.pushViewController(showProfileVC, animated: true)
-    }
-    
-    func setButtonPlain(btn: UIButton, num: Int, color: UIColor, state: UIControl.State) {
-        btn.setTitle(" " + String(num), for: state)
-        btnComment.tintColor = color
-        btnComment.setTitleColor(color, for: state)
+        let profileSB = UIStoryboard(name: "ProfileVC", bundle: nil)
+        let showProfileVC = profileSB.instantiateViewController(withIdentifier: "ProfileVC") as! ProfileVC
+        
+        //        let indexPath = IndexPath(row: 1, section: 0)
+        //        showDetailNewsFeedVC.replyTV.scrollToRow(at: indexPath as IndexPath, at: .top, animated: true)
+        
+        detailNewsFeedVC?.navigationController?.pushViewController(showProfileVC, animated: true)
     }
     
     func setButtonAttributed(btn: UIButton, num: Int, color: UIColor, state: UIControl.State) {
@@ -301,54 +433,6 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
         btn.tintColor = color
     }
 }
-
-extension HeaderNewsFeedView {
-    func getUserInfoService() {
-        ContentService.shared.getPost(10) { responsedata in
-
-            switch responsedata {
-            case .success(let res):
-                print("res: ",res)
-                self.content = res as? PostContent
-                
-
-                // intiPosting() 내용
-                
-                self.imgvwUserImg.image = #imageLiteral(resourceName: "defaultProfile")
-                self.imgvwUserImg.setRounded(radius: nil)
-                
-                self.lblUserId.sizeToFit()
-                self.lblUserId.text = self.content?.user.nickname
-                
-                self.txtvwConetents.text = self.content?.content
-                self.txtvwConetents.postingInit()
-                self.showImgFrame()
-                
-                //버튼모양 초기 설정
-                self.btnRepost.tintColor = .gray
-                self.setButtonAttributed(btn: self.btnLike, num: self.numLike, color: .gray, state: .normal)
-                self.setButtonPlain(btn: self.btnComment, num: self.numComment, color: .gray, state: .normal)
-                self.btnMore.tintColor = .gray
-                
-                
-            case .requestErr(_):
-                print("request error")
-
-            case .pathErr:
-                print(".pathErr")
-
-            case .serverErr:
-                print(".serverErr")
-
-            case .networkFail :
-                print("failure")
-                }
-        }
-
-    }
-
-}
-
 
 /*
     //이미지 클릭 시 전환 코드구현 구간
