@@ -169,6 +169,8 @@ extension DetailNewsFeedVC : UITableViewDataSource {
         //Custom셀인 'ReplyCell' 형식으로 변환
         let cell = tableView.dequeueReusableCell(withIdentifier: "ReplyCell", for: indexPath) as! ReplyCell
         
+        cell.selectionStyle = .none
+        
         if detailNewsPost?.comments.count == 0 {
             if indexPath.row == 0 {
                 cell.backgroundColor = .lightGray

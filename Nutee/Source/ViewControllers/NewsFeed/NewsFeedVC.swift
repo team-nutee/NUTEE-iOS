@@ -105,7 +105,7 @@ class NewsFeedVC: UIViewController {
             print("더 이상 불러올 게시글이 없습니다.")
         }
     }
-    
+
 //    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
 //        // UITableView only moves in one direction, y axis
 //        let currentOffset = scrollView.contentOffset.y
@@ -191,6 +191,8 @@ extension NewsFeedVC : UITableViewDataSource {
             
             // VC 컨트롤 권한을 Cell클래스로 넘겨주기
             cell.newsFeedVC = self
+            
+            cell.setClickActions()
         }
         
         NSLog("선택된 cell은 \(indexPath.row) 번쨰 indexPath입니다")

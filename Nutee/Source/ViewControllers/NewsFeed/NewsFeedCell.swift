@@ -266,7 +266,15 @@ class NewsFeedCell: UITableViewCell {
             // More 버튼
             btnMore.isEnabled = false
         }
+        
+//        let postUserProfile = UIButton()
+//        lblUserId.addSubview(postUserProfile)
+//        postUserProfile.addTarget(self, action: #selector(goPostUserPorfile), for: .touchUpInside)
     }
+    
+//    @objc func goPostUserPorfile() {
+//        print("과연 작동이 될까요~~")
+//    }
     
     func setNormalLikeBtn() {
         btnLike.isSelected = false
@@ -420,6 +428,42 @@ class NewsFeedCell: UITableViewCell {
 //        sender.view?.removeFromSuperview()
 //    }
     
+    func setClickActions() {
+        imgvwUserImg.tag = 1
+        let tapGestureRecognizer1 = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
+        tapGestureRecognizer1.numberOfTapsRequired = 1
+        imgvwUserImg.isUserInteractionEnabled = true
+        imgvwUserImg.addGestureRecognizer(tapGestureRecognizer1)
+        
+        lblUserId.tag = 2
+        let tapGestureRecognizer2 = UITapGestureRecognizer(target: self, action: #selector(lblTapped(tapGestureRecognizer:)))
+        tapGestureRecognizer2.numberOfTapsRequired = 2
+        lblUserId.isUserInteractionEnabled = true
+        lblUserId.addGestureRecognizer(tapGestureRecognizer2)
+    }
+    
+    @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
+        let imgView = tapGestureRecognizer.view as! UIImageView
+        print("your taped image view tag is : \(imgView.tag)")
+        
+        //Give your image View tag
+        if (imgView.tag == 1) {
+            let vc = UIStoryboard.init(name: "Profile", bundle: Bundle.main).instantiateViewController(withIdentifier: "ProfileVC") as? ProfileVC
+            newsFeedVC?.navigationController?.pushViewController(vc!, animated: true)
+        }
+    }
+    
+    @objc func lblTapped(tapGestureRecognizer: UITapGestureRecognizer) {
+        let lbl = tapGestureRecognizer.view as! UIImageView
+        print("your taped label view tag is : \(lbl.tag)")
+        
+        //Give your label tag
+        if (lbl.tag == 2) {
+            let vc = UIStoryboard.init(name: "Profile", bundle: Bundle.main).instantiateViewController(withIdentifier: "ProfileVC") as? ProfileVC
+            newsFeedVC?.navigationController?.pushViewController(vc!, animated: true)
+        }
+    }
+    
     func showDetailNewsFeed() {
         // DetailNewsFeed 창으로 전환
         let detailNewsFeedSB = UIStoryboard(name: "DetailNewsFeed", bundle: nil)
@@ -446,6 +490,7 @@ class NewsFeedCell: UITableViewCell {
         btn.setAttributedTitle(NSAttributedString(string: " " + String(num), attributes: stateAttributes), for: state)
         btn.tintColor = color
     }
+    
 }
 
 /*
