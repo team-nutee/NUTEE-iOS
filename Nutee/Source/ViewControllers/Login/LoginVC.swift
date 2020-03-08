@@ -113,6 +113,7 @@ class LoginVC: UIViewController {
     
     @objc func signIn() {
         LoadingHUD.show()
+        
         print("id :",idTextField.text!)
         print("pw :",pwTextField.text!)
         if autoSignUp == true {
@@ -242,6 +243,7 @@ extension LoginVC {
 
 extension LoginVC {
     func error(){
+        
         self.idTextField.addBorder(.bottom, color: .red, thickness: 1)
         self.pwTextField.addBorder(.bottom, color: .red, thickness: 1)
         self.idErrorLabel.text = "아이디 혹은 비밀번호가 다릅니다"

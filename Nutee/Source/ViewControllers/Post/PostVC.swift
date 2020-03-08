@@ -97,7 +97,7 @@ class PostVC: UIViewController {
         if pickedIMG != [] {
             postImage(images: pickedIMG)
         } else {
-            postContent(images: "", postContent: postingTextView.text)
+            postContent(images: [], postContent: postingTextView.text)
         }
     }
     
@@ -246,7 +246,7 @@ extension PostVC : UINavigationControllerDelegate, UIImagePickerControllerDelega
 }
 
 extension PostVC {
-    func postContent(images: String, postContent: String){
+    func postContent(images: [NSString], postContent: String){
         ContentService.shared.uploadPost(pictures: images, postContent: postContent){
                 [weak self]
                 data in
@@ -269,6 +269,7 @@ extension PostVC {
                 case .networkFail:
                     print(".networkFail")
                     
+                    
             }
         }
         
@@ -284,11 +285,12 @@ extension PostVC {
                 switch data {
                 case .success(let res):
                     // 데이터 타입 변경
-                    let datastring = NSString(data: res as! Data, encoding: String.Encoding.utf8.rawValue)
+                    debugPrint("234 :",res)
+                    dump(res, name: "234")
                     
-                    dump(datastring)
+                    dump(res as! [NSString], name: "123")
                     // 포스팅 서버 연결
-                    self.postContent(images: datastring! as String, postContent: self.postingTextView.text)
+                    self.postContent(images: res as! [NSString], postContent: self.postingTextView.text)
                     
                 case .requestErr:
                     self.simpleAlert(title: "실패", message: "")
