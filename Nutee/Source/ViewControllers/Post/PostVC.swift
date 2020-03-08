@@ -75,7 +75,7 @@ class PostVC: UIViewController {
         postBtn.tintColor = .nuteeGreen
         
         imagePickerBtn.tintColor = .nuteeGreen
-        imagePickerView.addBorder(.bottom, color: .nuteeGreen, thickness: 1)
+        imagePickerView.addBorder(.top, color: .nuteeGreen, thickness: 1)
         imagePickerView.alpha = 0.6
     }
     
