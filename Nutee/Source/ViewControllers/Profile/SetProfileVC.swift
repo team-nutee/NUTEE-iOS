@@ -32,7 +32,7 @@ class SetProfileVC: UIViewController {
         let test = #file
         print("test: ",test)
         print("file : \(#file)\n, function : \(#function)\n, line : \(#line)\n, column : \(#column)\n, dsohanlde : \(#dsohandle)")
-        logger(picker)
+//        logger(picker)
         closeBtn.addTarget(self, action: #selector(close), for: .touchUpInside)
         setInit()
     }

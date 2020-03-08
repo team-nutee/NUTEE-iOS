@@ -283,7 +283,7 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
             // More 버튼
             btnMore.isEnabled = false
         }
-        print("좋아요 숫자 ====> ",numLike)
+//        print("좋아요 숫자 ====> ",numLike)
     }
 
     func setNormalLikeBtn() {

@@ -161,7 +161,8 @@ struct ContentService {
             
         }
     
-    func uploadPost(pictures: URL, postContent: String, completion: @escaping(NetworkResult<Any>)->Void) {
+    // Posting
+    func uploadPost(pictures: String, postContent: String, completion: @escaping(NetworkResult<Any>)->Void) {
         
         let headers: HTTPHeaders = [
             "Content-Type": "multipart/form-data",
@@ -170,7 +171,9 @@ struct ContentService {
         
         Alamofire.upload(multipartFormData: { (multipartFormData) in
 //            multipartFormData.append(pictures, withName: "image")
-            multipartFormData.append(pictures, withName: "image")
+            if let picturesURL = URL(string: pictures){
+                multipartFormData.append(picturesURL, withName: "image")
+            }
             multipartFormData.append(postContent.data(using: .utf8) ?? Data(), withName: "content")
 
         }, to: APIConstants.PostPost, method: .post, headers: headers) { (encodingResult) in
@@ -180,7 +183,7 @@ struct ContentService {
             case .success(let upload, _, _):
                 upload.responseJSON { (response) in
                     print("service 성공")
-                    let json = response.result.value
+                    _ = response.result.value
                     completion(.success(response.data))
                 }
             case .failure(let encodingError):

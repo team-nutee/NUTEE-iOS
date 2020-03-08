@@ -36,12 +36,15 @@ class NewsFeedCell: UITableViewCell {
     //앨범 프레임 three, four 버전을 통합관리 할 view 객체 생성
     @IBOutlet var vwSquare: UIView!
     @IBOutlet var vwSquareToRepost: NSLayoutConstraint!
+    
     // ver. OneImage(without frame)
     @IBOutlet var imgvwOne: UIImageView!
+    
     // ver. ThreeFrame
     @IBOutlet var vwThree: UIView!
     @IBOutlet var imgvwThree: [UIImageView]!
     @IBOutlet var lblThreeMoreImg: UILabel!
+    
     // ver. FourFrame
     @IBOutlet var vwFour: UIView!
     @IBOutlet var imgvwFour: [UIImageView]!
@@ -86,6 +89,7 @@ class NewsFeedCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
     }
     
     override func prepareForReuse() {
@@ -318,7 +322,8 @@ class NewsFeedCell: UITableViewCell {
             vwSquareToRepost.isActive = true
             ContentsToRepost.isActive = false
             
-            imgvwOne.image = UIImage(named: dataPeng01[num])
+            imgvwOne.imageFromUrl(newsPost?.images[num], defaultImgPath: "")
+//            imgvwOne.image = UIImage(named: dataPeng01[num])
         case 2:
             // ver. TwoFrame
             vwTwo.isHidden = false
@@ -328,7 +333,8 @@ class NewsFeedCell: UITableViewCell {
             ContentsToRepost.isActive = false
             
             for imgvw in imgvwTwo {
-                imgvw.image = UIImage(named: dataPeng03[num])
+                imgvw.imageFromUrl(newsPost?.images[num], defaultImgPath: "")
+//                imgvw.image = UIImage(named: dataPeng03[num])
                 if num == 1 {
                     let leftImg = dataPeng03.count - 2
                     if leftImg > 0 {
@@ -355,7 +361,8 @@ class NewsFeedCell: UITableViewCell {
             ContentsToRepost.isActive = false
             
             for imgvw in imgvwThree {
-                imgvw.image = UIImage(named: dataPeng05[num])
+                imgvw.imageFromUrl(newsPost?.images[num], defaultImgPath: "")
+//                imgvw.image = UIImage(named: dataPeng05[num])
                 if num == 2 {
                     let leftImg = dataPeng05.count - 3
                     if leftImg > 0 {
@@ -381,7 +388,8 @@ class NewsFeedCell: UITableViewCell {
             ContentsToRepost.isActive = false
             
             for imgvw in imgvwFour {
-                imgvw.image = UIImage(named: dataPeng04[num])
+//                imgvw.image = UIImage(named: dataPeng04[num])
+                imgvw.imageFromUrl(newsPost?.images[num], defaultImgPath: "")
                 if num == 3 {
                     let leftImg = dataPeng04.count - 4
                     if leftImg > 0 {

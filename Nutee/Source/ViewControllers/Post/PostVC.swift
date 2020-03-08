@@ -90,8 +90,13 @@ class PostVC: UIViewController {
     }
     
     @objc func posting(){
-        print(pickedIMG)
-        postImage(images: pickedIMG)
+        LoadingHUD.show()
+        
+        if pickedIMG != [] {
+            postImage(images: pickedIMG)
+        } else {
+            postContent(images: "", postContent: postingTextView.text)
+        }
 //        postContent(images: pickedIMG, postContent: postingTextView.text)
     }
     
@@ -204,6 +209,15 @@ extension PostVC : UICollectionViewDataSource {
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PostIMGCVC", for: indexPath) as! PostIMGCVC
+
+        cell.postIMG.image = nil
+        pickedIMG.remove(at: indexPath.row)
+        
+        self.imageCV.reloadData()
+    }
+    
 }
 
 // MARK: - ImagePickerDelegate
@@ -231,7 +245,7 @@ extension PostVC : UINavigationControllerDelegate, UIImagePickerControllerDelega
 }
 
 extension PostVC {
-    func postContent(images: URL, postContent: String){
+    func postContent(images: String, postContent: String){
         ContentService.shared.uploadPost(pictures: images, postContent: postContent){
                 [weak self]
                 data in
@@ -240,8 +254,8 @@ extension PostVC {
                 
                 switch data {
                 case .success(let res):
-                    
-                    print(res)
+                    LoadingHUD.hide()
+                    self.dismiss(animated: true, completion: nil)
                 case .requestErr:
                     LoadingHUD.hide()
                     print("requestErr")
@@ -268,8 +282,12 @@ extension PostVC {
                 
                 switch data {
                 case .success(let res):
-                    print("뷰컨 영역",res)
-                    self.postContent(images: res as! URL, postContent: self.postingTextView.text)
+                    // 데이터 타입 변경
+                    let datastring = NSString(data: res as! Data, encoding: String.Encoding.utf8.rawValue)
+                    
+                    // 포스팅 서버 연결
+                    self.postContent(images: datastring as! String, postContent: self.postingTextView.text)
+                    
                 case .requestErr:
                     self.simpleAlert(title: "실패", message: "")
                     
