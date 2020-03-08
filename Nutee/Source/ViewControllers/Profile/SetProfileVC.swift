@@ -29,11 +29,8 @@ class SetProfileVC: UIViewController {
         picker.delegate = self
         
         setIMGBtn.addTarget(self, action: #selector(showImagePickerController), for: .touchUpInside)
-        let test = #file
-        print("test: ",test)
-        print("file : \(#file)\n, function : \(#function)\n, line : \(#line)\n, column : \(#column)\n, dsohanlde : \(#dsohandle)")
-//        logger(picker)
         closeBtn.addTarget(self, action: #selector(close), for: .touchUpInside)
+        
         setInit()
     }
     
@@ -41,10 +38,7 @@ class SetProfileVC: UIViewController {
     
     // 초기 설정
     func setInit() {
-        dump(name)
-        dump(pickedIMG)
-        debugPrint(name)
-        print("file : \(#file)\n, function : \(#function)\n, line : \(#line), column : \(#column)\n, dsohanlde : \(#dsohandle)")
+
         closeBtn.tintColor = .nuteeGreen
         closeBtn.titleLabel?.font = .boldSystemFont(ofSize: 15)
         saveBtn.tintColor = .nuteeGreen
@@ -52,7 +46,7 @@ class SetProfileVC: UIViewController {
         setIMGBtn.tintColor = .white
         setIMGBtn.backgroundColor = .nuteeGreen
         profileIMG.imageFromUrl("http://15.164.50.161:9425/settings/nutee_profile.png", defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
-        
+
         nameTextField.addBorder(.bottom, color: .nuteeGreen, thickness: 1)
         nameTextField.tintColor = .nuteeGreen
         nameTextField.text = name

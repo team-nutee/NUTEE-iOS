@@ -18,12 +18,10 @@ class NoticeBoardVC: TabmanViewController {
 
     
     // MARK: - Variables and Properties
-    private var viewControllers = [UIViewController(), UIViewController(), UIViewController(), UIViewController(), UIViewController(), UIViewController()]
+    private var viewControllers = [BachelorVC(), ClassVC(),ExchangeVC(),ScholarshipVC(),GeneralVC(),EventVC()]
     
     var content : [[String]] = Array(repeating: Array(repeating: "", count: 0), count: 0)
     var link : [[String]] = Array(repeating: Array(repeating: "", count: 0), count: 0)
-    var content1 : [String] = []
-    var link1 : [String] = []
     let title1 : [String] = ["학사공지","수업공지","학점교류","장학공지","일반공지","행사공지"]
 
     // MARK: - dummy data
@@ -32,18 +30,12 @@ class NoticeBoardVC: TabmanViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setNotice()
+//        setNotice()
         
         self.dataSource = self
         bar.layout.transitionStyle = .snap
         addBar(bar, dataSource: self, at: .top)
         setting()
-        
-        noticeTV.delegate = self
-        noticeTV.dataSource = self
-        noticeTV.separatorInset.left = 0
-        
-        noticeTV.reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -55,7 +47,6 @@ class NoticeBoardVC: TabmanViewController {
     }
     
     func setting(){
-        
         bar.backgroundView.style = .clear
         bar.layout.contentInset = UIEdgeInsets(top: 0.0, left: 10.0, bottom: 0.0, right: 10.0)
         bar.layout.contentMode = .intrinsic
@@ -66,36 +57,7 @@ class NoticeBoardVC: TabmanViewController {
         }
     }
     
-}
-
-extension NoticeBoardVC : UITableViewDelegate { }
-
-extension NoticeBoardVC : UITableViewDataSource {
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return content1.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "NoticeBoardTVC", for: indexPath) as! NoticeBoardTVC
-        
-        cell.noticeTitleLabel?.text = content1[indexPath.row]
-        cell.noticeTitleLabel.sizeToFit()
-        cell.noticeDateLabel.text = ""
-        //        cell.noticeTitleLabel?.text = date
-        
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        _ = tableView.dequeueReusableCell(withIdentifier: "NoticeBoardTVC", for: indexPath) as! NoticeBoardTVC
-        
-        if let url = URL(string: link1[indexPath.row]) {
-            UIApplication.shared.open(url)
-        }
-
-        
-    }
     
 }
 
@@ -118,42 +80,40 @@ extension NoticeBoardVC : PageboyViewControllerDataSource, TMBarDataSource {
     }
 }
 
-extension NoticeBoardVC {
-    func setNotice(){
-        NoticeService.shared.getNotice(){
-            [weak self]
-            data in
-            
-            guard let `self` = self else { return }
-            
-            switch data {
-                
-            // 매개변수에 어떤 값을 가져올 것인지
-            case .success(let res):
-                print("공지사항 조회 성공")
-                
-                let response = res as! Notice
-                
-                self.content = response.content
-                self.link = response.hrefs
-                self.content1 = self.content[0]
-                self.link1 = self.link[0]
-                self.noticeTV.reloadData()
-                
-            case .requestErr(let message):
-                self.simpleAlert(title: "공지사항 조회 실패", message: "\(message)")
-                
-            case .pathErr:
-                print(".pathErr")
-                
-            case .serverErr:
-                print(".serverErr")
-                
-            case .networkFail:
-                self.simpleAlert(title: "카테고리 조회 실패", message: "네트워크 상태를 확인해주세요.")
-            }
+//extension NoticeBoardVC {
+//    func setNotice(){
+//        NoticeService.shared.getNotice(){
+//            [weak self]
+//            data in
+//
+//            guard let `self` = self else { return }
+//
+//            switch data {
+//
+//            // 매개변수에 어떤 값을 가져올 것인지
+//            case .success(let res):
+//                let response = res as! Notice
+//
+//                self.content = response.content
+//                self.link = response.hrefs
+//
+////                self.send(self.content, self.link)
+//
+//            case .requestErr(let message):
+//                self.simpleAlert(title: "공지사항 조회 실패", message: "\(message)")
+//
+//            case .pathErr:
+//                print(".pathErr")
+//
+//            case .serverErr:
+//                print(".serverErr")
+//
+//            case .networkFail:
+//                self.simpleAlert(title: "카테고리 조회 실패", message: "네트워크 상태를 확인해주세요.")
+//            }
+//
+//        }
+//    }
+//
+//}
 
-        }
-    }
-
-}

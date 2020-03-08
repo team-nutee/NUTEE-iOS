@@ -63,12 +63,12 @@ extension FollowingVC : UITableViewDelegate { }
 
 extension FollowingVC : UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("numberRowSection 실행")
+//        print("numberRowSection 실행")
         return followingsList?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print("celForRowAt 실행")
+//        print("celForRowAt 실행")
         let cell = tableView.dequeueReusableCell(withIdentifier: "FollowingTVC", for: indexPath) as! FollowingTVC
         
         let following = followingsList?[indexPath.row]

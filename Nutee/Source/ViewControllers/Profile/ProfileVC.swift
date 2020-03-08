@@ -58,6 +58,7 @@ class ProfileVC: UIViewController {
         myArticleTV.separatorInset.left = 0
         
         setBtn()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -160,8 +161,6 @@ extension ProfileVC : UITableViewDataSource {
         
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        print("numberRowSection 실행")
-        
         var userPostsNum = userPosts?.count ?? 0
         userPostsNum += 1
         
@@ -175,9 +174,7 @@ extension ProfileVC : UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        print("celForRowAt 실행")
-        
+                
         let cell = tableView.dequeueReusableCell(withIdentifier: "ProflieTableViewCell", for: indexPath) as! ProflieTableViewCell
         
         if indexPath.row == 0 {
@@ -195,25 +192,12 @@ extension ProfileVC : UITableViewDataSource {
             let userPostTimeDateFormat = originUserPostTime!.getDateFormat(time: originUserPostTime!)
             cell.timeLabel.text = userPostTimeDateFormat!.timeAgoSince(userPostTimeDateFormat!)
             
-            print(userPost?.content ?? "그런 글 없는데요")
             cell.articleTextView.sizeToFit()
             tableView.separatorStyle = .singleLine
         }
         
         return cell
     }
-    
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        if indexPath.row == 0 {
-//            return 0.3
-//        } else {
-//            return 150
-//        }
-//    }
-    
-//    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return 150
-//    }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 0 {
@@ -228,7 +212,7 @@ extension ProfileVC : UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "ArticleTVC", for: indexPath) as! ArticleTVC
+        _ = tableView.dequeueReusableCell(withIdentifier: "ArticleTVC", for: indexPath) as! ArticleTVC
         
         let sb = UIStoryboard(name: "DetailNewsFeed", bundle: nil)
         let vc = sb.instantiateViewController(withIdentifier: "DetailNewsFeed")
@@ -261,8 +245,9 @@ extension ProfileVC : UITableViewDataSource {
             followBtn.isHidden = true
         }
         
-        profileImage.backgroundColor = .lightGray
-        profileImage.imageFromUrl("http://15.164.50.161:9425/settings/nutee_profile.png", defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+
+        profileImage.contentMode = .scaleAspectFit
+        profileImage.imageFromUrl("", defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
         profileImage.setRounded(radius: 50)
         profileImage.translatesAutoresizingMaskIntoConstraints = false
         profileImage.topAnchor.constraint(equalTo: headerView.topAnchor, constant: 10).isActive = true
@@ -389,9 +374,10 @@ extension ProfileVC {
             
             switch responsedata {
             case .success(let res):
+                
                 let response = res as! SignIn
                 self.userInfo = response
-                print("userInfo server connect successful")
+                
                 completionHandler(self.userInfo!)
                 
                 self.myArticleTV.reloadData()
@@ -418,7 +404,7 @@ extension ProfileVC {
             case .success(let res):
                 let response = res as! UserPostContent
                 self.userPosts = response
-                print("userPost server connect successful")
+                
                 
                 self.myArticleTV.reloadData()
             case .requestErr(_):

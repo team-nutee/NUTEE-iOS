@@ -44,7 +44,6 @@ class LoginVC: UIViewController {
         signInBtn.addTarget(self, action: #selector(signIn), for: .touchUpInside)
         signUpBtn.addTarget(self, action: #selector(signUp), for: .touchUpInside)
         findBtn.addTarget(self, action: #selector(find), for: .touchUpInside)
-        //        addKeyboardNotification()
         
         animate()
     }

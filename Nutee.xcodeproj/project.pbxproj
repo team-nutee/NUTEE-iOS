@@ -50,6 +50,18 @@
 		5E54303D23F44170004FF2FB /* InitVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E54303C23F44170004FF2FB /* InitVC.swift */; };
 		5E79C0C223EC5A7000BD2FB3 /* ArticleTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E79C0C123EC5A7000BD2FB3 /* ArticleTVC.swift */; };
 		5E79C0CF23EDE0B900BD2FB3 /* Notification.Name+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E79C0CE23EDE0B900BD2FB3 /* Notification.Name+Extension.swift */; };
+		5E93A7232415720E00C9C811 /* BachelorVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E93A7222415720E00C9C811 /* BachelorVC.swift */; };
+		5E93A7252415721F00C9C811 /* ClassVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E93A7242415721F00C9C811 /* ClassVC.swift */; };
+		5E93A7272415723200C9C811 /* ExchangeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E93A7262415723200C9C811 /* ExchangeVC.swift */; };
+		5E93A7292415724200C9C811 /* ScholarshipVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E93A7282415724200C9C811 /* ScholarshipVC.swift */; };
+		5E93A72B2415725C00C9C811 /* GeneralVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E93A72A2415725C00C9C811 /* GeneralVC.swift */; };
+		5E93A72D2415727900C9C811 /* EventVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E93A72C2415727900C9C811 /* EventVC.swift */; };
+		5E93A72F2415774400C9C811 /* BachelorTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E93A72E2415774400C9C811 /* BachelorTVC.swift */; };
+		5E93A7312415775300C9C811 /* ClassTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E93A7302415775300C9C811 /* ClassTVC.swift */; };
+		5E93A7332415775F00C9C811 /* ExchangeTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E93A7322415775F00C9C811 /* ExchangeTVC.swift */; };
+		5E93A7352415776C00C9C811 /* ScholarTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E93A7342415776C00C9C811 /* ScholarTVC.swift */; };
+		5E93A7372415777A00C9C811 /* GeneralTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E93A7362415777A00C9C811 /* GeneralTVC.swift */; };
+		5E93A7392415778C00C9C811 /* EventTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E93A7382415778C00C9C811 /* EventTVC.swift */; };
 		5E95CD6423EF30180090C39B /* FollowerTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E95CD6323EF30180090C39B /* FollowerTVC.swift */; };
 		5E95CD6623EF30280090C39B /* FollowingTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E95CD6523EF30280090C39B /* FollowingTVC.swift */; };
 		5E95CD6823EF35280090C39B /* SettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E95CD6723EF35280090C39B /* SettingVC.swift */; };
@@ -160,6 +172,18 @@
 		5E54303C23F44170004FF2FB /* InitVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitVC.swift; sourceTree = "<group>"; };
 		5E79C0C123EC5A7000BD2FB3 /* ArticleTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleTVC.swift; sourceTree = "<group>"; };
 		5E79C0CE23EDE0B900BD2FB3 /* Notification.Name+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification.Name+Extension.swift"; sourceTree = "<group>"; };
+		5E93A7222415720E00C9C811 /* BachelorVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BachelorVC.swift; sourceTree = "<group>"; };
+		5E93A7242415721F00C9C811 /* ClassVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassVC.swift; sourceTree = "<group>"; };
+		5E93A7262415723200C9C811 /* ExchangeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeVC.swift; sourceTree = "<group>"; };
+		5E93A7282415724200C9C811 /* ScholarshipVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScholarshipVC.swift; sourceTree = "<group>"; };
+		5E93A72A2415725C00C9C811 /* GeneralVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralVC.swift; sourceTree = "<group>"; };
+		5E93A72C2415727900C9C811 /* EventVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventVC.swift; sourceTree = "<group>"; };
+		5E93A72E2415774400C9C811 /* BachelorTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BachelorTVC.swift; sourceTree = "<group>"; };
+		5E93A7302415775300C9C811 /* ClassTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassTVC.swift; sourceTree = "<group>"; };
+		5E93A7322415775F00C9C811 /* ExchangeTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeTVC.swift; sourceTree = "<group>"; };
+		5E93A7342415776C00C9C811 /* ScholarTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScholarTVC.swift; sourceTree = "<group>"; };
+		5E93A7362415777A00C9C811 /* GeneralTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralTVC.swift; sourceTree = "<group>"; };
+		5E93A7382415778C00C9C811 /* EventTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTVC.swift; sourceTree = "<group>"; };
 		5E95CD6323EF30180090C39B /* FollowerTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerTVC.swift; sourceTree = "<group>"; };
 		5E95CD6523EF30280090C39B /* FollowingTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingTVC.swift; sourceTree = "<group>"; };
 		5E95CD6723EF35280090C39B /* SettingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingVC.swift; sourceTree = "<group>"; };
@@ -243,6 +267,7 @@
 		5E0E6A6623E7381300FBC15F /* Notice */ = {
 			isa = PBXGroup;
 			children = (
+				5E93A721241571F500C9C811 /* NoticeView */,
 				D597189D23CEA79100117906 /* NoticeBoardVC.swift */,
 				5E0E6A6723E7385400FBC15F /* NoticeBoardTVC.swift */,
 			);
@@ -488,6 +513,25 @@
 			path = Util;
 			sourceTree = "<group>";
 		};
+		5E93A721241571F500C9C811 /* NoticeView */ = {
+			isa = PBXGroup;
+			children = (
+				5E93A7222415720E00C9C811 /* BachelorVC.swift */,
+				5E93A72E2415774400C9C811 /* BachelorTVC.swift */,
+				5E93A7242415721F00C9C811 /* ClassVC.swift */,
+				5E93A7302415775300C9C811 /* ClassTVC.swift */,
+				5E93A7262415723200C9C811 /* ExchangeVC.swift */,
+				5E93A7322415775F00C9C811 /* ExchangeTVC.swift */,
+				5E93A7282415724200C9C811 /* ScholarshipVC.swift */,
+				5E93A7342415776C00C9C811 /* ScholarTVC.swift */,
+				5E93A72A2415725C00C9C811 /* GeneralVC.swift */,
+				5E93A7362415777A00C9C811 /* GeneralTVC.swift */,
+				5E93A72C2415727900C9C811 /* EventVC.swift */,
+				5E93A7382415778C00C9C811 /* EventTVC.swift */,
+			);
+			path = NoticeView;
+			sourceTree = "<group>";
+		};
 		5EA5C68123F146BE00BFB32B /* SignUp */ = {
 			isa = PBXGroup;
 			children = (
@@ -693,20 +737,27 @@
 			files = (
 				5E21445C23C2F8F60053CFB9 /* Model.swift in Sources */,
 				5E95CD6823EF35280090C39B /* SettingVC.swift in Sources */,
+				5E93A7332415775F00C9C811 /* ExchangeTVC.swift in Sources */,
+				5E93A72B2415725C00C9C811 /* GeneralVC.swift in Sources */,
 				5EA5C68823F1472200BFB32B /* NameVC.swift in Sources */,
 				D5F651D12407DF4C00263A34 /* FollowList.swift in Sources */,
 				D59718A923CEA98400117906 /* NewsFeedVC.swift in Sources */,
 				5E3560E623EC11F1002B8C87 /* FollowingVC.swift in Sources */,
+				5E93A72F2415774400C9C811 /* BachelorTVC.swift in Sources */,
 				5E2BDCBA24038F7300CE99A7 /* UserService.swift in Sources */,
+				5E93A7252415721F00C9C811 /* ClassVC.swift in Sources */,
 				5E95CD6A23EF36230090C39B /* ToPostVC.swift in Sources */,
 				D53CB44F240B995400DDA17A /* NewsPostsContent.swift in Sources */,
 				D5DAA88F23E7EF2E0052E17B /* ReplyCell.swift in Sources */,
 				5E05AD7423DB0F0200E36AD4 /* UIButton+Extension.swift in Sources */,
 				5EA5C68623F1470B00BFB32B /* IdVC.swift in Sources */,
+				5E93A7392415778C00C9C811 /* EventTVC.swift in Sources */,
 				5E95CD6423EF30180090C39B /* FollowerTVC.swift in Sources */,
 				5E3560E423EC11E3002B8C87 /* FollowerVC.swift in Sources */,
+				5E93A7352415776C00C9C811 /* ScholarTVC.swift in Sources */,
 				5E05AD7623DB0F1E00E36AD4 /* UIImageView+Extension.swift in Sources */,
 				D59718AB23CEA98400117906 /* LoginVC.swift in Sources */,
+				5E93A7232415720E00C9C811 /* BachelorVC.swift in Sources */,
 				5E37CA9E23E97B0600C0E2A8 /* TBC.swift in Sources */,
 				5E2BDCBC2403901400CE99A7 /* Notice.swift in Sources */,
 				5E21445E23C2F8FC0053CFB9 /* LoadingHUD.swift in Sources */,
@@ -724,6 +775,7 @@
 				D5F651CF2407B46500263A34 /* FollowService.swift in Sources */,
 				5E0E6A7223E73ECE00FBC15F /* PostVC.swift in Sources */,
 				5EB7415323F18AEE006AE529 /* CafeteriaTVC.swift in Sources */,
+				5E93A7272415723200C9C811 /* ExchangeVC.swift in Sources */,
 				5E05AD7D23DEA5FB00E36AD4 /* MyChatTVC.swift in Sources */,
 				D59718AD23CEA98400117906 /* ChattingVC.swift in Sources */,
 				5E21443D23C2F8500053CFB9 /* AppDelegate.swift in Sources */,
@@ -735,12 +787,16 @@
 				D597189E23CEA79100117906 /* NoticeBoardVC.swift in Sources */,
 				5E05AD7823DB104600E36AD4 /* UIView+Extension.swift in Sources */,
 				5E21443F23C2F8500053CFB9 /* SceneDelegate.swift in Sources */,
+				5E93A7372415777A00C9C811 /* GeneralTVC.swift in Sources */,
 				D55E94EF240A92F6009F738C /* UserPostContent.swift in Sources */,
+				5E93A72D2415727900C9C811 /* EventVC.swift in Sources */,
 				D53F61FA2403C5E200C8EE38 /* ContentService.swift in Sources */,
 				5E0E6A6823E7385400FBC15F /* NoticeBoardTVC.swift in Sources */,
 				5E37CA9C23E9765600C0E2A8 /* PostIMGCVC.swift in Sources */,
 				5E54303D23F44170004FF2FB /* InitVC.swift in Sources */,
 				5EA5C68023F02C9200BFB32B /* String+Extension.swift in Sources */,
+				5E93A7312415775300C9C811 /* ClassTVC.swift in Sources */,
+				5E93A7292415724200C9C811 /* ScholarshipVC.swift in Sources */,
 				D59718A223CEA96700117906 /* NewsFeedCell.swift in Sources */,
 				5E2BDCB424038F0300CE99A7 /* SignIn.swift in Sources */,
 				D519844523E325EE001AB351 /* DetailNewsFeedVC.swift in Sources */,
