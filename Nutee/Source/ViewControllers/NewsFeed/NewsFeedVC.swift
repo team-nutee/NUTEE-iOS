@@ -39,6 +39,7 @@ class NewsFeedVC: UIViewController {
         
 //        self.tabBarController?.delegate = self
         self.view.addSubview(loadCompleteBtn)
+//        loadCompleteBtn.alpha = 0
         initColor()
         setRefresh()
         setLoadBtn()
@@ -68,14 +69,14 @@ class NewsFeedVC: UIViewController {
         let btnLabel = NSMutableAttributedString(string: "새 글 업데이트")
 
         loadCompleteBtn.setAttributedTitle(btnLabel, for: .normal)
-        
-        loadCompleteBtn.borderColor = .black
+        loadCompleteBtn.titleLabel?.font = .boldSystemFont(ofSize: 13)
         loadCompleteBtn.makeRounded(cornerRadius: 5)
+        loadCompleteBtn.backgroundColor = .greenLighter
         loadCompleteBtn.translatesAutoresizingMaskIntoConstraints = false
-        loadCompleteBtn.topAnchor.constraint(equalTo: self.newsTV.topAnchor).isActive = true
+        loadCompleteBtn.topAnchor.constraint(equalTo: self.newsTV.topAnchor, constant: 20).isActive = true
         loadCompleteBtn.centerXAnchor.constraint(equalTo: self.newsTV.centerXAnchor).isActive = true
         loadCompleteBtn.heightAnchor.constraint(equalToConstant: 30).isActive = true
-        loadCompleteBtn.widthAnchor.constraint(equalToConstant: 40).isActive = true
+        loadCompleteBtn.widthAnchor.constraint(equalToConstant: 100).isActive = true
     }
     
     @objc func loadingBtn(){
