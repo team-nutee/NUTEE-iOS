@@ -187,7 +187,7 @@ struct ContentService {
                     print("service 성공")
                     let json = response.result.value
                     dump(json)
-                    completion(.success(response.data))
+                    completion(.success(response.data as Any))
                 }
             case .failure(let encodingError):
                 print(encodingError.localizedDescription)
@@ -214,8 +214,8 @@ struct ContentService {
                 
             case .success(let upload, _, _):
                 upload.responseJSON { (response) in
-                    //                    let json = JSON
-                    completion(.success(response.result.value))
+                    
+                    completion(.success(response.result.value as Any))
                 }
             case .failure(let encodingError):
                 print(encodingError.localizedDescription)

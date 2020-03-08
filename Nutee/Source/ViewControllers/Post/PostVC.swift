@@ -254,7 +254,8 @@ extension PostVC {
                 guard let `self` = self else { return }
                 
                 switch data {
-                case .success(let res):
+                case .success(_ ):
+                    
                     LoadingHUD.hide()
                     self.dismiss(animated: true, completion: nil)
                 case .requestErr:

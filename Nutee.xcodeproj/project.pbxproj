@@ -20,7 +20,6 @@
 		5E0E6A6023E7345F00FBC15F /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0E6A5F23E7345F00FBC15F /* Date+Extension.swift */; };
 		5E0E6A6323E7349600FBC15F /* YourChatTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0E6A6123E7349600FBC15F /* YourChatTVC.swift */; };
 		5E0E6A6423E7349600FBC15F /* YourChatTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E0E6A6223E7349600FBC15F /* YourChatTVC.xib */; };
-		5E0E6A6823E7385400FBC15F /* NoticeBoardTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0E6A6723E7385400FBC15F /* NoticeBoardTVC.swift */; };
 		5E0E6A6F23E73CC800FBC15F /* Post.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E0E6A6E23E73CC800FBC15F /* Post.storyboard */; };
 		5E0E6A7223E73ECE00FBC15F /* PostVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0E6A7123E73ECE00FBC15F /* PostVC.swift */; };
 		5E21443D23C2F8500053CFB9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E21443C23C2F8500053CFB9 /* AppDelegate.swift */; };
@@ -140,7 +139,6 @@
 		5E0E6A5F23E7345F00FBC15F /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		5E0E6A6123E7349600FBC15F /* YourChatTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YourChatTVC.swift; sourceTree = "<group>"; };
 		5E0E6A6223E7349600FBC15F /* YourChatTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YourChatTVC.xib; sourceTree = "<group>"; };
-		5E0E6A6723E7385400FBC15F /* NoticeBoardTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeBoardTVC.swift; sourceTree = "<group>"; };
 		5E0E6A6E23E73CC800FBC15F /* Post.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Post.storyboard; sourceTree = "<group>"; };
 		5E0E6A7123E73ECE00FBC15F /* PostVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostVC.swift; sourceTree = "<group>"; };
 		5E21443923C2F8500053CFB9 /* NUTEE.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NUTEE.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -269,7 +267,6 @@
 			children = (
 				5E93A721241571F500C9C811 /* NoticeView */,
 				D597189D23CEA79100117906 /* NoticeBoardVC.swift */,
-				5E0E6A6723E7385400FBC15F /* NoticeBoardTVC.swift */,
 			);
 			path = Notice;
 			sourceTree = "<group>";
@@ -791,7 +788,6 @@
 				D55E94EF240A92F6009F738C /* UserPostContent.swift in Sources */,
 				5E93A72D2415727900C9C811 /* EventVC.swift in Sources */,
 				D53F61FA2403C5E200C8EE38 /* ContentService.swift in Sources */,
-				5E0E6A6823E7385400FBC15F /* NoticeBoardTVC.swift in Sources */,
 				5E37CA9C23E9765600C0E2A8 /* PostIMGCVC.swift in Sources */,
 				5E54303D23F44170004FF2FB /* InitVC.swift in Sources */,
 				5EA5C68023F02C9200BFB32B /* String+Extension.swift in Sources */,

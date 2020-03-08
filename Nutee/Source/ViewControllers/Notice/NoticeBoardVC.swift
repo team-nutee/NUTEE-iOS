@@ -13,12 +13,11 @@ import Pageboy
 class NoticeBoardVC: TabmanViewController {
     
     // MARK: - UI components
-    @IBOutlet weak var noticeTV: UITableView!
     let bar = TMBar.ButtonBar()
 
     
     // MARK: - Variables and Properties
-    private var viewControllers = [BachelorVC(), ClassVC(),ExchangeVC(),ScholarshipVC(),GeneralVC(),EventVC()]
+    private var viewControllers = [BachelorVC(), ClassVC(), ExchangeVC(), ScholarshipVC(), GeneralVC(), EventVC()]
     
     var content : [[String]] = Array(repeating: Array(repeating: "", count: 0), count: 0)
     var link : [[String]] = Array(repeating: Array(repeating: "", count: 0), count: 0)
@@ -30,10 +29,10 @@ class NoticeBoardVC: TabmanViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        setNotice()
         
         self.dataSource = self
         bar.layout.transitionStyle = .snap
+        
         addBar(bar, dataSource: self, at: .top)
         setting()
     }
@@ -48,7 +47,7 @@ class NoticeBoardVC: TabmanViewController {
     
     func setting(){
         bar.backgroundView.style = .clear
-        bar.layout.contentInset = UIEdgeInsets(top: 0.0, left: 10.0, bottom: 0.0, right: 10.0)
+        bar.layout.contentInset = UIEdgeInsets(top: 0.0, left: 10, bottom: 0.0, right: 10.0)
         bar.layout.contentMode = .intrinsic
         bar.indicator.tintColor = .nuteeGreen
         bar.buttons.customize { (button) in
@@ -62,6 +61,7 @@ class NoticeBoardVC: TabmanViewController {
 }
 
 extension NoticeBoardVC : PageboyViewControllerDataSource, TMBarDataSource {
+    
     func numberOfViewControllers(in pageboyViewController: PageboyViewController) -> Int {
         return viewControllers.count
     }
@@ -79,41 +79,4 @@ extension NoticeBoardVC : PageboyViewControllerDataSource, TMBarDataSource {
         return TMBarItem(title: title2)
     }
 }
-
-//extension NoticeBoardVC {
-//    func setNotice(){
-//        NoticeService.shared.getNotice(){
-//            [weak self]
-//            data in
-//
-//            guard let `self` = self else { return }
-//
-//            switch data {
-//
-//            // 매개변수에 어떤 값을 가져올 것인지
-//            case .success(let res):
-//                let response = res as! Notice
-//
-//                self.content = response.content
-//                self.link = response.hrefs
-//
-////                self.send(self.content, self.link)
-//
-//            case .requestErr(let message):
-//                self.simpleAlert(title: "공지사항 조회 실패", message: "\(message)")
-//
-//            case .pathErr:
-//                print(".pathErr")
-//
-//            case .serverErr:
-//                print(".serverErr")
-//
-//            case .networkFail:
-//                self.simpleAlert(title: "카테고리 조회 실패", message: "네트워크 상태를 확인해주세요.")
-//            }
-//
-//        }
-//    }
-//
-//}
 
