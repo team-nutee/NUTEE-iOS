@@ -23,6 +23,8 @@ class NewsFeedVC: UIViewController {
     var newsPosts: NewsPostsContent?
     var newsPost: NewsPostsContentElement?
     
+    var loadCompleteBtn = UIButton()
+    
     // MARK: - Dummy data
     
     // MARK: - Life Cycle
@@ -36,10 +38,12 @@ class NewsFeedVC: UIViewController {
         newsTV.separatorStyle = .none
         
 //        self.tabBarController?.delegate = self
-
+        self.view.addSubview(loadCompleteBtn)
         initColor()
         setRefresh()
+        setLoadBtn()
         
+        self.loadCompleteBtn.addTarget(self, action: #selector(loadingBtn), for: .touchUpInside)
         LoadingHUD.show()
         getNewsPostsService(postCnt: 10, lastId: 0, completionHandler: {(returnedData)-> Void in
             self.newsPostsArr = self.newsPosts
@@ -58,6 +62,25 @@ class NewsFeedVC: UIViewController {
     }
     
     // MARK: -Helper
+    
+    func setLoadBtn(){
+        
+        let btnLabel = NSMutableAttributedString(string: "새 글 업데이트")
+
+        loadCompleteBtn.setAttributedTitle(btnLabel, for: .normal)
+        
+        loadCompleteBtn.borderColor = .black
+        loadCompleteBtn.makeRounded(cornerRadius: 5)
+        loadCompleteBtn.translatesAutoresizingMaskIntoConstraints = false
+        loadCompleteBtn.topAnchor.constraint(equalTo: self.newsTV.topAnchor).isActive = true
+        loadCompleteBtn.centerXAnchor.constraint(equalTo: self.newsTV.centerXAnchor).isActive = true
+        loadCompleteBtn.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        loadCompleteBtn.widthAnchor.constraint(equalToConstant: 40).isActive = true
+    }
+    
+    @objc func loadingBtn(){
+        print("버튼 클릭")
+    }
     
     // 로그인이 되어있는지 체크
     func checkLogin() {
@@ -195,7 +218,7 @@ extension NewsFeedVC : UITableViewDataSource {
             cell.setClickActions()
         }
         
-        NSLog("선택된 cell은 \(indexPath.row) 번쨰 indexPath입니다")
+//        NSLog("선택된 cell은 \(indexPath.row) 번쨰 indexPath입니다")
         
         return cell
     }

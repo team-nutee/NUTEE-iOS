@@ -168,7 +168,7 @@ class LoginVC: UIViewController {
 extension LoginVC : UITextFieldDelegate {
     
     @objc func textFieldDidChange(_ textField: UITextField) {
-        if idTextField.text != "" && pwTextField.text?.validatePassword() ?? false {
+        if idTextField.text != "" && pwTextField.text != "" {
             signInBtn.backgroundColor = .nuteeGreen
             signInBtn.isEnabled = true
         } else {

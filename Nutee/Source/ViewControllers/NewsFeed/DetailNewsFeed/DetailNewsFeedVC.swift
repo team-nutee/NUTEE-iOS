@@ -198,7 +198,7 @@ extension DetailNewsFeedVC : UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        NSLog("선택된 댓글은 \(indexPath.row) 번쨰 댓글입니다")
+//        NSLog("선택된 댓글은 \(indexPath.row) 번쨰 댓글입니다")
     }
     
     // tableView의 마지막 cell 밑의 여백 발생 문제(footerView의 기본 높이 값) 제거 코드

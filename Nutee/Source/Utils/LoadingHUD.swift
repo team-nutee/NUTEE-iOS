@@ -31,7 +31,7 @@ class LoadingHUD: NSObject {
         let popupView = UIImageView()//= UIImageView(frame: CGRect.init(x: 0, y: 0, width: 200, height: 500))
         popupView.contentMode = .topRight
         popupView.animationImages = LoadingHUD.getAnimationImageArray()
-        popupView.animationDuration = 1
+        popupView.animationDuration = 3
         popupView.animationRepeatCount = 0
         
         

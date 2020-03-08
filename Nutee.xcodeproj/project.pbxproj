@@ -48,7 +48,6 @@
 		5E37CAB023E9900B00C0E2A8 /* Cafeteria.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E37CAAF23E9900B00C0E2A8 /* Cafeteria.storyboard */; };
 		5E37CAB323E9903500C0E2A8 /* CafeteriaVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E37CAB223E9903500C0E2A8 /* CafeteriaVC.swift */; };
 		5E54303D23F44170004FF2FB /* InitVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E54303C23F44170004FF2FB /* InitVC.swift */; };
-		5E6EA953240EC17F00D836B1 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6EA952240EC17F00D836B1 /* Image.swift */; };
 		5E79C0C223EC5A7000BD2FB3 /* ArticleTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E79C0C123EC5A7000BD2FB3 /* ArticleTVC.swift */; };
 		5E79C0CF23EDE0B900BD2FB3 /* Notification.Name+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E79C0CE23EDE0B900BD2FB3 /* Notification.Name+Extension.swift */; };
 		5E95CD6423EF30180090C39B /* FollowerTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E95CD6323EF30180090C39B /* FollowerTVC.swift */; };
@@ -159,7 +158,6 @@
 		5E37CAAF23E9900B00C0E2A8 /* Cafeteria.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Cafeteria.storyboard; sourceTree = "<group>"; };
 		5E37CAB223E9903500C0E2A8 /* CafeteriaVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeteriaVC.swift; sourceTree = "<group>"; };
 		5E54303C23F44170004FF2FB /* InitVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitVC.swift; sourceTree = "<group>"; };
-		5E6EA952240EC17F00D836B1 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		5E79C0C123EC5A7000BD2FB3 /* ArticleTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleTVC.swift; sourceTree = "<group>"; };
 		5E79C0CE23EDE0B900BD2FB3 /* Notification.Name+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification.Name+Extension.swift"; sourceTree = "<group>"; };
 		5E95CD6323EF30180090C39B /* FollowerTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerTVC.swift; sourceTree = "<group>"; };
@@ -416,7 +414,6 @@
 				D53CB44E240B995400DDA17A /* NewsPostsContent.swift */,
 				D5F651D02407DF4C00263A34 /* FollowList.swift */,
 				D55E94EE240A92F6009F738C /* UserPostContent.swift */,
-				5E6EA952240EC17F00D836B1 /* Image.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -719,7 +716,6 @@
 				D53F61F82403C3F200C8EE38 /* PostContent.swift in Sources */,
 				5E0E6A6323E7349600FBC15F /* YourChatTVC.swift in Sources */,
 				5E2BDCB524038F0300CE99A7 /* SignUp.swift in Sources */,
-				5E6EA953240EC17F00D836B1 /* Image.swift in Sources */,
 				D5DAA89023E7EF2E0052E17B /* HeaderNewsFeedView.swift in Sources */,
 				5E0E6A6023E7345F00FBC15F /* Date+Extension.swift in Sources */,
 				5E95CD6623EF30280090C39B /* FollowingTVC.swift in Sources */,

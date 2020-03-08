@@ -90,14 +90,15 @@ class PostVC: UIViewController {
     }
     
     @objc func posting(){
+        
         LoadingHUD.show()
         
+        // 사진이 있을때는 사진 올리고 게시물 업로드를 위한 분기처리
         if pickedIMG != [] {
             postImage(images: pickedIMG)
         } else {
             postContent(images: "", postContent: postingTextView.text)
         }
-//        postContent(images: pickedIMG, postContent: postingTextView.text)
     }
     
     @objc func activePostBtn() {
@@ -135,7 +136,7 @@ extension PostVC {
                 .filter({$0.isKeyWindow}).first
             let bottomPadding = keyWindow?.safeAreaInsets.bottom
             
-            pickerViewBottomConstraint.constant = -(keyboardHeight - bottomPadding!)
+            pickerViewBottomConstraint.constant = -( keyboardHeight - bottomPadding!)
             scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardHeight - bottomPadding!, right: 0)
             
             self.view.setNeedsLayout()
@@ -285,8 +286,9 @@ extension PostVC {
                     // 데이터 타입 변경
                     let datastring = NSString(data: res as! Data, encoding: String.Encoding.utf8.rawValue)
                     
+                    dump(datastring)
                     // 포스팅 서버 연결
-                    self.postContent(images: datastring as! String, postContent: self.postingTextView.text)
+                    self.postContent(images: datastring! as String, postContent: self.postingTextView.text)
                     
                 case .requestErr:
                     self.simpleAlert(title: "실패", message: "")
