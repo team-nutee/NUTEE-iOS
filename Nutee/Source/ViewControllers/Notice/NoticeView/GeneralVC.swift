@@ -58,7 +58,7 @@ extension GeneralVC : UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        _ = tableView.dequeueReusableCell(withIdentifier: "BachelorTVC", for: indexPath) as UITableViewCell
+        _ = tableView.dequeueReusableCell(withIdentifier: "GeneralTVC", for: indexPath) as UITableViewCell
         
         if let url = URL(string: link[indexPath.row]) {
             UIApplication.shared.open(url)
