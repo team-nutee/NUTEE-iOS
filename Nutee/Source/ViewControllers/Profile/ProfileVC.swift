@@ -262,6 +262,7 @@ extension ProfileVC : UITableViewDataSource {
         }
         
         profileImage.backgroundColor = .lightGray
+        profileImage.imageFromUrl("http://15.164.50.161:9425/settings/nutee_profile.png", defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
         profileImage.setRounded(radius: 50)
         profileImage.translatesAutoresizingMaskIntoConstraints = false
         profileImage.topAnchor.constraint(equalTo: headerView.topAnchor, constant: 10).isActive = true

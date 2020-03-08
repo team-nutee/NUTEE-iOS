@@ -14,10 +14,10 @@ class FollowerTVC: UITableViewCell {
     @IBOutlet weak var followerLabel: UILabel!
     @IBOutlet weak var followerDeleteBtn: UIButton!
 
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+
         followerImgView.setRounded(radius: nil)
         followerImgView.backgroundColor = .veryLightPink
 //        followerLabel.sizeToFit()

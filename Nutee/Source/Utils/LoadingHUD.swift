@@ -33,7 +33,7 @@ class LoadingHUD: NSObject {
         let popupView = UIImageView()//= UIImageView(frame: CGRect.init(x: 0, y: 0, width: 200, height: 500))
         popupView.contentClippingRect
         popupView.animationImages = LoadingHUD.getAnimationImageArray()
-        popupView.animationDuration = 0.8
+        popupView.animationDuration = 0.7
         popupView.animationRepeatCount = 0
         
         let loadingLabel = UILabel(frame: CGRect.init(x: 0, y: 0, width: 100, height: 100))
@@ -75,6 +75,19 @@ class LoadingHUD: NSObject {
         animationArray.append(UIImage(named: "nuteeLoading_07")!)
         animationArray.append(UIImage(named: "nuteeLoading_08")!)
         animationArray.append(UIImage(named: "nuteeLoading_09")!)
+        animationArray.append(UIImage(named: "nuteeLoading_09")!)
+        animationArray.append(UIImage(named: "nuteeLoading_09")!)
+        animationArray.append(UIImage(named: "nuteeLoading_09")!)
+        animationArray.append(UIImage(named: "nuteeLoading_08")!)
+        animationArray.append(UIImage(named: "nuteeLoading_07")!)
+        animationArray.append(UIImage(named: "nuteeLoading_06")!)
+        animationArray.append(UIImage(named: "nuteeLoading_05")!)
+        animationArray.append(UIImage(named: "nuteeLoading_04")!)
+        animationArray.append(UIImage(named: "nuteeLoading_03")!)
+        animationArray.append(UIImage(named: "nuteeLoading_02")!)
+        animationArray.append(UIImage(named: "nuteeLoading_01")!)
+        animationArray.append(UIImage(named: "nuteeLoading_00")!)
+
         return animationArray
     }
 }
