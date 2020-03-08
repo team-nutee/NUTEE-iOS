@@ -21,6 +21,7 @@ class DetailNewsFeedVC: UIViewController {
     @IBOutlet var txtvwComment: UITextView!
     @IBOutlet var btnSubmit: UIButton!
     @IBOutlet var CommentWindowToBottom: NSLayoutConstraint!
+    @IBOutlet var CommentToTrailing: NSLayoutConstraint!
     
     //MARK: - Variables and Properties
     
@@ -38,6 +39,8 @@ class DetailNewsFeedVC: UIViewController {
         replyTV.dataSource = self
         
 //        loadSelectedNewsFeed()
+        
+        txtvwComment.delegate = self
         
         // Register the custom header view
         let nibHead = UINib(nibName: "HeaderNewsFeedView", bundle: nil)
@@ -80,7 +83,10 @@ class DetailNewsFeedVC: UIViewController {
         vwCommentWindow.layer.shadowRadius = 5.0
         vwCommentWindow.layer.shadowColor = UIColor.gray.cgColor
         
-        txtvwComment.placeholder = " 댓글을 입력하세요"
+//        txtvwComment.placeholder = " 댓글을 입력하세요"
+        if (txtvwComment.text == "") {
+            textViewDidEndEditing(txtvwComment)
+        }
     }
 
     // 해당 이용자의 light or dark 모드를 감지하는 함수
@@ -100,7 +106,7 @@ class DetailNewsFeedVC: UIViewController {
             fatalError()
         }
     }
-
+  
 }
 
 //MARK: - Build TableView
@@ -162,6 +168,8 @@ extension DetailNewsFeedVC : UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //Custom셀인 'ReplyCell' 형식으로 변환
         let cell = tableView.dequeueReusableCell(withIdentifier: "ReplyCell", for: indexPath) as! ReplyCell
+        
+        cell.selectionStyle = .none
         
         if detailNewsPost?.comments.count == 0 {
             if indexPath.row == 0 {
@@ -256,6 +264,79 @@ extension DetailNewsFeedVC {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
         self.txtvwComment.endEditing(true)
+    }
+    
+}
+
+// MARK: - Detect commentWindow text changed
+extension DetailNewsFeedVC: UITextViewDelegate {
+    
+    public func textViewDidChange(_ textView: UITextView) {
+        // 입력된 빈칸과 줄바꿈 개수 구하기
+        var str = txtvwComment.text.replacingOccurrences(of: " ", with: "")
+        str = str.replacingOccurrences(of: "\n", with: "")
+        // 빈칸이나 줄바꿈으로만 입력된 경우 버튼 비활성화
+        if str.count != 0 {
+            // 전송 버튼 보이기
+            UIView.animate(withDuration: 0.2) {
+                self.btnSubmit.alpha = 1.0
+            }
+            self.CommentToTrailing.constant = 40
+            UIView.animate(withDuration: 0.1, delay: 0.0, options: .curveEaseOut, animations: {
+                self.view.layoutIfNeeded()
+            }, completion: nil)
+        } else {
+            // 전송 버튼 가리기
+            UIView.animate(withDuration: 0.1) {
+                self.btnSubmit.alpha = 0
+            }
+            self.CommentToTrailing.constant = 5
+            UIView.animate(withDuration: 0.1, delay: 0.0, options: .curveEaseInOut, animations: {
+                self.view.layoutIfNeeded()
+            }, completion: nil)
+        }
+
+        // 댓글 입력창의 높이가 100 이상 넘을 시 스크롤 가능 활성화
+        if txtvwComment.contentSize.height >= 100 {
+            txtvwComment.isScrollEnabled = true
+        } else {
+            txtvwComment.frame.size.height = txtvwComment.contentSize.height
+            txtvwComment.isScrollEnabled = false
+        }
+        
+        // 입력된 줄바꿈 개수 구하기
+        let originalStr = txtvwComment.text.count
+        let removeEnterStr = txtvwComment.text.replacingOccurrences(of: "\n", with: "").count
+        // 엔터가 4개 이하 일시 댓글창 높이 자동조절 설정
+        let enterNum = originalStr - removeEnterStr
+        if enterNum <= 4 {
+            self.txtvwComment.translatesAutoresizingMaskIntoConstraints = false
+        } else {
+            self.txtvwComment.translatesAutoresizingMaskIntoConstraints = true
+        }
+    }
+
+    
+    
+    
+    
+    
+    
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if (textView.text == "") {
+            textView.text = " 댓글을 입력하세요"
+            textView.textColor = UIColor.lightGray
+        }
+        textView.resignFirstResponder()
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView){
+        if (txtvwComment.text == " 댓글을 입력하세요"){
+            textView.text = ""
+            textView.textColor = UIColor.black
+        }
+        textView.becomeFirstResponder()
     }
     
 }

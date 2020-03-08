@@ -27,7 +27,7 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="댓글이 없습니다" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="55k-yj-EPl">
-                                        <rect key="frame" x="22.666666666666629" y="140" width="108" height="21"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="108" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -43,7 +43,7 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="70" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="1MS-nu-hQ5">
-                                <rect key="frame" x="0.0" y="45" width="375" height="690"/>
+                                <rect key="frame" x="0.0" y="44" width="375" height="691"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ReplyCell" rowHeight="70" id="yAo-b1-Y4a" customClass="ReplyCell" customModule="NUTEE" customModuleProvider="target">
@@ -109,7 +109,10 @@
                                 <rect key="frame" x="0.0" y="735" width="375" height="43"/>
                                 <subviews>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="pdD-0u-Mb2">
-                                        <rect key="frame" x="5" y="5" width="330" height="33"/>
+                                        <rect key="frame" x="5" y="5" width="365" height="33"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="100" id="LXT-HS-xTS"/>
+                                        </constraints>
                                         <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -122,7 +125,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </textView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jnc-pI-VMN">
+                                    <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jnc-pI-VMN">
                                         <rect key="frame" x="335" y="1" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="OAR-tj-ONU"/>
@@ -145,7 +148,7 @@
                                     <constraint firstAttribute="bottom" secondItem="pdD-0u-Mb2" secondAttribute="bottom" constant="5" id="2hJ-Mh-7h8"/>
                                     <constraint firstItem="pdD-0u-Mb2" firstAttribute="leading" secondItem="2Q7-NF-uqq" secondAttribute="leading" constant="5" id="9gs-G9-cTz"/>
                                     <constraint firstItem="pdD-0u-Mb2" firstAttribute="top" secondItem="2Q7-NF-uqq" secondAttribute="top" constant="5" id="Afj-CC-dFx"/>
-                                    <constraint firstItem="Jnc-pI-VMN" firstAttribute="leading" secondItem="pdD-0u-Mb2" secondAttribute="trailing" id="dCP-VM-r5j"/>
+                                    <constraint firstAttribute="trailing" secondItem="pdD-0u-Mb2" secondAttribute="trailing" constant="5" id="CXZ-tr-OrD"/>
                                     <constraint firstAttribute="trailing" secondItem="Jnc-pI-VMN" secondAttribute="trailing" id="zJs-FY-A0h"/>
                                 </constraints>
                             </view>
@@ -157,7 +160,7 @@
                             <constraint firstItem="1MS-nu-hQ5" firstAttribute="leading" secondItem="ATh-V2-pco" secondAttribute="leading" id="HA9-BE-VM3"/>
                             <constraint firstItem="1MS-nu-hQ5" firstAttribute="trailing" secondItem="ATh-V2-pco" secondAttribute="trailing" id="OjI-TJ-UJX"/>
                             <constraint firstItem="2Q7-NF-uqq" firstAttribute="bottom" secondItem="ATh-V2-pco" secondAttribute="bottom" id="TNU-nG-o4g"/>
-                            <constraint firstItem="1MS-nu-hQ5" firstAttribute="top" secondItem="ATh-V2-pco" secondAttribute="top" constant="1" id="XmI-Nt-VCu"/>
+                            <constraint firstItem="1MS-nu-hQ5" firstAttribute="top" secondItem="ATh-V2-pco" secondAttribute="top" id="XmI-Nt-VCu"/>
                             <constraint firstItem="2Q7-NF-uqq" firstAttribute="leading" secondItem="ATh-V2-pco" secondAttribute="leading" id="iU8-px-1GM"/>
                             <constraint firstItem="ATh-V2-pco" firstAttribute="trailing" secondItem="2Q7-NF-uqq" secondAttribute="trailing" id="sYM-kZ-V3o"/>
                         </constraints>
@@ -168,6 +171,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="as0-5P-wrP"/>
                     <connections>
+                        <outlet property="CommentToTrailing" destination="CXZ-tr-OrD" id="1vd-l7-JZc"/>
                         <outlet property="CommentWindowToBottom" destination="TNU-nG-o4g" id="F8W-b4-3C2"/>
                         <outlet property="btnSubmit" destination="Jnc-pI-VMN" id="fnD-lZ-yp6"/>
                         <outlet property="replyTV" destination="1MS-nu-hQ5" id="CiM-hb-21h"/>
