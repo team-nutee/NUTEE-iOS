@@ -33,6 +33,7 @@ class BachelorVC: UIViewController {
             make.left.equalTo(0)
         })
         
+        
         setNotice()
         
     }
@@ -52,17 +53,27 @@ extension BachelorVC : UITableViewDataSource {
         let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "BachelorTVC", for: indexPath) as UITableViewCell
         
         cell.textLabel?.text = notice[indexPath.row]
+        
+        let backgroundView = UIView()
+        backgroundView.backgroundColor = .greenLighter
+        cell.selectedBackgroundView = backgroundView
 
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
         return 60
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        _ = tableView.dequeueReusableCell(withIdentifier: "BachelorTVC", for: indexPath) as UITableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "BachelorTVC", for: indexPath) as UITableViewCell
         
+        let backgroundView = UIView()
+        backgroundView.backgroundColor = .greenLighter
+        cell.selectedBackgroundView = backgroundView
+        cell.textLabel?.text = notice[indexPath.row]
+
         if let url = URL(string: link[indexPath.row]) {
             UIApplication.shared.open(url)
         }

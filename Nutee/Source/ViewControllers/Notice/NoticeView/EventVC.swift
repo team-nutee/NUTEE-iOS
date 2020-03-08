@@ -55,14 +55,21 @@ extension EventVC : UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "EventTVC", for: indexPath) as UITableViewCell
         
+        let backgroundView = UIView()
+        backgroundView.backgroundColor = .greenLighter
+        cell.selectedBackgroundView = backgroundView
         cell.textLabel?.text = notice[indexPath.row]
 
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        _ = tableView.dequeueReusableCell(withIdentifier: "EventTVC", for: indexPath) as UITableViewCell
-        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "EventTVC", for: indexPath) as UITableViewCell
+        let backgroundView = UIView()
+        backgroundView.backgroundColor = .greenLighter
+        cell.selectedBackgroundView = backgroundView
+        cell.textLabel?.text = notice[indexPath.row]
+
         if let url = URL(string: link[indexPath.row]) {
             UIApplication.shared.open(url)
         }
