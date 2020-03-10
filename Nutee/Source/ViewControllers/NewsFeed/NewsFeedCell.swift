@@ -307,7 +307,6 @@ class NewsFeedCell: UITableViewCell {
         //constrain layout 충돌 방지를 위한 이미지 뷰 전체 hidden 설정
         vwTwo.isHidden = true
         vwSquare.isHidden = true
-        dump(newsPost?.images, name: "image ")
         
         var num = 0
         let imageCnt = newsPost?.images.count
@@ -323,8 +322,8 @@ class NewsFeedCell: UITableViewCell {
             vwTwoToRepost.isActive = false
             vwSquareToRepost.isActive = true
             ContentsToRepost.isActive = false
-            dump((APIConstants.BaseURL) + "/" + (newsPost?.images[0].src ?? "") , name: "image 1")
-            imgvwOne.imageFromUrl((APIConstants.BaseURL) + "/" + (newsPost?.images[0].src ?? ""), defaultImgPath: "")
+            imgvwOne.imageFromUrl((APIConstants.BaseURL) + "/" + (newsPost?.images[0].src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+
         case 2:
             // ver. TwoFrame
             vwTwo.isHidden = false
@@ -333,8 +332,7 @@ class NewsFeedCell: UITableViewCell {
             vwSquareToRepost.isActive = false
             ContentsToRepost.isActive = false
             for imgvw in imgvwTwo {
-                dump((APIConstants.BaseURL) + "/" + (newsPost?.images[num].src ?? "") , name: "image 2")
-                imgvw.imageFromUrl((APIConstants.BaseURL) + "/" + (newsPost?.images[num].src ?? ""), defaultImgPath: "")
+                imgvw.imageFromUrl((APIConstants.BaseURL) + "/" + (newsPost?.images[num].src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
                 if num == 1 {
                     let leftImg = (newsPost?.images.count ?? 0) - 2
                     if leftImg > 0 {
@@ -361,8 +359,7 @@ class NewsFeedCell: UITableViewCell {
             ContentsToRepost.isActive = false
             
             for imgvw in imgvwThree {
-                dump((APIConstants.BaseURL) + "/" + (newsPost?.images[num].src ?? "") , name: "image 3")
-                imgvw.imageFromUrl((APIConstants.BaseURL) + "/" + (newsPost?.images[num].src ?? ""), defaultImgPath: "")
+                imgvw.imageFromUrl((APIConstants.BaseURL) + "/" + (newsPost?.images[num].src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
 //                imgvw.image = UIImage(named: dataPeng05[num])
                 if num == 2 {
                     let leftImg = (newsPost?.images.count ?? 0) - 3
@@ -389,8 +386,7 @@ class NewsFeedCell: UITableViewCell {
             ContentsToRepost.isActive = false
             
             for imgvw in imgvwFour {
-
-                imgvw.imageFromUrl((APIConstants.BaseURL) + "/" + (newsPost?.images[num].src ?? ""), defaultImgPath: "")
+                imgvw.imageFromUrl((APIConstants.BaseURL) + "/" + (newsPost?.images[num].src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
                 if num == 3 {
                     let leftImg = (newsPost?.images.count ?? 0) - 4
                     if leftImg > 0 {
