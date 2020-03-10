@@ -307,9 +307,11 @@ class NewsFeedCell: UITableViewCell {
         //constrain layout 충돌 방지를 위한 이미지 뷰 전체 hidden 설정
         vwTwo.isHidden = true
         vwSquare.isHidden = true
+        dump(newsPost?.images, name: "image ")
         
         var num = 0
-        switch imgCnt {
+        let imageCnt = newsPost?.images.count
+        switch imageCnt {
         case 1:
             // ver. only OneImage
             vwSquare.isHidden = false
@@ -321,9 +323,8 @@ class NewsFeedCell: UITableViewCell {
             vwTwoToRepost.isActive = false
             vwSquareToRepost.isActive = true
             ContentsToRepost.isActive = false
-            
-            imgvwOne.imageFromUrl(newsPost?.images[num], defaultImgPath: "")
-//            imgvwOne.image = UIImage(named: dataPeng01[num])
+            dump((APIConstants.BaseURL) + "/" + (newsPost?.images[0].src ?? "") , name: "image 1")
+            imgvwOne.imageFromUrl((APIConstants.BaseURL) + "/" + (newsPost?.images[0].src ?? ""), defaultImgPath: "")
         case 2:
             // ver. TwoFrame
             vwTwo.isHidden = false
@@ -331,12 +332,11 @@ class NewsFeedCell: UITableViewCell {
             vwTwoToRepost.isActive = true
             vwSquareToRepost.isActive = false
             ContentsToRepost.isActive = false
-            
             for imgvw in imgvwTwo {
-                imgvw.imageFromUrl(newsPost?.images[num], defaultImgPath: "")
-//                imgvw.image = UIImage(named: dataPeng03[num])
+                dump((APIConstants.BaseURL) + "/" + (newsPost?.images[num].src ?? "") , name: "image 2")
+                imgvw.imageFromUrl((APIConstants.BaseURL) + "/" + (newsPost?.images[num].src ?? ""), defaultImgPath: "")
                 if num == 1 {
-                    let leftImg = dataPeng03.count - 2
+                    let leftImg = (newsPost?.images.count ?? 0) - 2
                     if leftImg > 0 {
                         imgvw.alpha = 0.8
                         lblTwoMoreImg.isHidden = false
@@ -361,10 +361,11 @@ class NewsFeedCell: UITableViewCell {
             ContentsToRepost.isActive = false
             
             for imgvw in imgvwThree {
-                imgvw.imageFromUrl(newsPost?.images[num], defaultImgPath: "")
+                dump((APIConstants.BaseURL) + "/" + (newsPost?.images[num].src ?? "") , name: "image 3")
+                imgvw.imageFromUrl((APIConstants.BaseURL) + "/" + (newsPost?.images[num].src ?? ""), defaultImgPath: "")
 //                imgvw.image = UIImage(named: dataPeng05[num])
                 if num == 2 {
-                    let leftImg = dataPeng05.count - 3
+                    let leftImg = (newsPost?.images.count ?? 0) - 3
                     if leftImg > 0 {
                         imgvw.alpha = 0.8
 //                        lblThreeMoreImg.isHidden = false
@@ -388,10 +389,10 @@ class NewsFeedCell: UITableViewCell {
             ContentsToRepost.isActive = false
             
             for imgvw in imgvwFour {
-//                imgvw.image = UIImage(named: dataPeng04[num])
-                imgvw.imageFromUrl(newsPost?.images[num], defaultImgPath: "")
+
+                imgvw.imageFromUrl((APIConstants.BaseURL) + "/" + (newsPost?.images[num].src ?? ""), defaultImgPath: "")
                 if num == 3 {
-                    let leftImg = dataPeng04.count - 4
+                    let leftImg = (newsPost?.images.count ?? 0) - 4
                     if leftImg > 0 {
                         imgvw.alpha = 0.8
 //                        lblTwoMoreImg.isHidden = false

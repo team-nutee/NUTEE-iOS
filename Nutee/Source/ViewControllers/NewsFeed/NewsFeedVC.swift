@@ -299,7 +299,6 @@ extension NewsFeedVC {
                 let response = res as! NewsPostsContent
                 self.newsPosts = response
                 print("newsPosts server connect successful")
-                
                 LoadingHUD.hide()
                 completionHandler(self.newsPosts!)
                 

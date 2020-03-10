@@ -287,9 +287,6 @@ extension PostVC {
                 case .success(let res):
                     // 데이터 타입 변경
                     debugPrint("234 :",res)
-                    dump(res, name: "234")
-                    
-                    dump(res as! [NSString], name: "123")
                     // 포스팅 서버 연결
                     self.postContent(images: res as! [NSString], postContent: self.postingTextView.text)
                     

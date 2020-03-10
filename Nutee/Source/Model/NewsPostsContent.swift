@@ -15,7 +15,7 @@ struct NewsPostsContentElement: Codable {
     let userID: Int
     let retweetID: Int?
     let user: User
-    let images: [String] // <--- String인지 확인필요
+    let images: [Image]
     let likers: [Int]
     let retweet: Retweet?
     let comments: [Comment]
@@ -40,10 +40,23 @@ struct NewsPostsContentElement: Codable {
         userID = (try? values.decode(Int.self, forKey: .userID)) ?? 0
         retweetID = (try? values.decode(Int.self, forKey: .retweetID)) ?? nil
         user = (try? values.decode(User.self, forKey: .user)) ?? User.init(id: 0, nickname: "")
-        images = (try? values.decode([String].self, forKey: .images)) ?? []
+        images = (try? values.decode([Image].self, forKey: .images)) ?? []
         likers = (try? values.decode([Int].self, forKey: .likers)) ?? []
         retweet = (try? values.decode(Retweet.self, forKey: .retweet)) ?? nil
         comments = (try? values.decode([Comment].self, forKey: .comments)) ?? [Comment.init(id: 0, content: "", createdAt: "", updatedAt: "", userID: 0, postID: 0, user: User.init(id: 0, nickname: ""))]
+    }
+}
+
+struct Image: Codable {
+    let id: Int
+    let src, createdAt, updatedAt: String
+    let postID: Int
+    let userID: Int?
+
+    enum CodingKeys: String, CodingKey {
+        case id, src, createdAt, updatedAt
+        case postID = "PostId"
+        case userID = "UserId"
     }
 }
 

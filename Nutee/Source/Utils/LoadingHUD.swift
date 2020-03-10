@@ -34,7 +34,6 @@ class LoadingHUD: NSObject {
         popupView.animationDuration = 3
         popupView.animationRepeatCount = 0
         
-        
         if let window = UIApplication.shared.connectedScenes
         .filter({$0.activationState == .foregroundActive})
         .map({$0 as? UIWindowScene})
@@ -85,4 +84,6 @@ class LoadingHUD: NSObject {
 
         return animationArray
     }
+
 }
+

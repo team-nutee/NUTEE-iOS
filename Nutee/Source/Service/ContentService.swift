@@ -175,7 +175,6 @@ struct ContentService {
                 
                 multipartFormData.append((image as String).data(using: .utf8) ?? Data() , withName: "image")
             }
-            dump(postContent)
             multipartFormData.append(postContent.data(using: .utf8) ?? Data(), withName: "content")
             
         }, to: APIConstants.PostPost, method: .post, headers: headers) { (encodingResult) in
@@ -186,7 +185,6 @@ struct ContentService {
                 upload.responseJSON { (response) in
                     print("service 성공")
                     let json = response.result.value
-                    dump(json)
                     completion(.success(response.data as Any))
                 }
             case .failure(let encodingError):
