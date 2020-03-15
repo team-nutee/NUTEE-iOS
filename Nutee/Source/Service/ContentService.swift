@@ -183,8 +183,8 @@ struct ContentService {
                 
             case .success(let upload, _, _):
                 upload.responseJSON { (response) in
-                    print("service 성공")
-                    let json = response.result.value
+//                    print("service 성공")
+//                    let json = response.result.value
                     completion(.success(response.data as Any))
                 }
             case .failure(let encodingError):

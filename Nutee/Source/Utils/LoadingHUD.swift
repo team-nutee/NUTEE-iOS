@@ -6,7 +6,6 @@
 //  Copyright © 2020 Junhyeon. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 class LoadingHUD: NSObject {
@@ -15,7 +14,8 @@ class LoadingHUD: NSObject {
     
     private var backgroundView: UIView?
     private var popupView: UIImageView?
-    private var loadingLabel: UILabel?
+    
+    
     class func hide() {
         if let popupView = sharedInstance.popupView,
         let backgroundView = sharedInstance.backgroundView {
@@ -26,13 +26,14 @@ class LoadingHUD: NSObject {
     }
 
     class func show() {
-        let backgroundView = UIView(frame: CGRect.init(x: 0, y: 0, width: 100, height: 100))
+        let backgroundView = UIView()
         
         let popupView = UIImageView()//= UIImageView(frame: CGRect.init(x: 0, y: 0, width: 200, height: 500))
         popupView.contentMode = .topRight
         popupView.animationImages = LoadingHUD.getAnimationImageArray()
-        popupView.animationDuration = 3
+        popupView.animationDuration = 0.7
         popupView.animationRepeatCount = 0
+        
         
         if let window = UIApplication.shared.connectedScenes
         .filter({$0.activationState == .foregroundActive})
@@ -51,7 +52,6 @@ class LoadingHUD: NSObject {
                         
             sharedInstance.backgroundView?.removeFromSuperview()
             sharedInstance.popupView?.removeFromSuperview()
-            sharedInstance.loadingLabel?.removeFromSuperview()
             sharedInstance.backgroundView = backgroundView
             sharedInstance.popupView = popupView
         }
