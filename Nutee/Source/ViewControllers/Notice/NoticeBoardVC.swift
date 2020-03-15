@@ -40,13 +40,16 @@ class NoticeBoardVC: TabmanViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         // 네비바 border 삭제
+        self.navigationController?.navigationBar.backgroundColor = .white
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         
     }
     
     func setting(){
-        bar.backgroundView.style = .clear
+        let view = UIView()
+        view.backgroundColor = .white
+        bar.backgroundView.style = .custom(view: view)
         bar.layout.contentInset = UIEdgeInsets(top: 0.0, left: 10, bottom: 0.0, right: 10.0)
         bar.layout.contentMode = .intrinsic
         bar.indicator.tintColor = .nuteeGreen

@@ -25,7 +25,10 @@ class BachelorVC: UIViewController {
         
         self.bachelorTV.register(UITableViewCell.self, forCellReuseIdentifier: "BachelorTVC")
         
+//        bachelorTV.isScrollEnabled = false
+        
         self.view.addSubview(self.bachelorTV)
+        
         
         self.bachelorTV.snp.makeConstraints({ (make) in
             make.width.equalToSuperview()

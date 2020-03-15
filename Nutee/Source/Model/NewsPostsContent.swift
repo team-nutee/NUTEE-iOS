@@ -95,7 +95,7 @@ struct Retweet: Codable {
 
 // MARK: - User
 struct User: Codable {
-    let id: Int
+    var id: Int
     let nickname: String
 }
 

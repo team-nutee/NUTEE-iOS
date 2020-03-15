@@ -65,11 +65,6 @@ class NewsFeedCell: UITableViewCell {
     var contentId : Int = 0
     
     var imgCnt: Int?
-    let dataPeng01 = [ "sample_peng01.jepg" ]
-    let dataPeng02 = [ "sample_peng01.jepg", "sample_peng02.jepg" ]
-    let dataPeng03 = [ "sample_peng01.jepg", "sample_peng02.jepg", "sample_peng03.png" ]
-    let dataPeng04 = [ "sample_peng01.jepg", "sample_peng02.jepg", "sample_peng03.png", "sample_peng04.png" ]
-    let dataPeng05 = [ "sample_peng01.jepg", "sample_peng02.jepg", "sample_peng03.png", "sample_peng04.png", "sample_peng05.png" ]
 
     var numLike: Int?
     var numComment: Int?

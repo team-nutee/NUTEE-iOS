@@ -328,7 +328,7 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
             vwSquareToRepost.isActive = true
             ContentsToRepost.isActive = false
             
-            imgvwOne.image = UIImage(named: dataPeng01[num])
+            imgvwOne.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.images[0].src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
         case 2:
             // ver. TwoFrame
             vwTwo.isHidden = false
@@ -338,7 +338,7 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
             ContentsToRepost.isActive = false
             
             for imgvw in imgvwTwo {
-                imgvw.image = UIImage(named: dataPeng03[num])
+                imgvw.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.images[num].src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
                 if num == 1 {
                     let leftImg = dataPeng03.count - 2
                     if leftImg > 0 {
@@ -365,7 +365,7 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
             ContentsToRepost.isActive = false
             
             for imgvw in imgvwThree {
-                imgvw.image = UIImage(named: dataPeng05[num])
+                imgvw.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.images[num].src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
                 if num == 2 {
                     let leftImg = dataPeng05.count - 3
                     if leftImg > 0 {
@@ -391,7 +391,7 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
             ContentsToRepost.isActive = false
             
             for imgvw in imgvwFour {
-                imgvw.image = UIImage(named: dataPeng04[num])
+                imgvw.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.images[num].src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
                 if num == 3 {
                     let leftImg = dataPeng04.count - 4
                     if leftImg > 0 {
