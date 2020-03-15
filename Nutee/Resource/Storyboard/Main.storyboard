@@ -20,7 +20,6 @@
                         <segue destination="Shj-9H-BcD" kind="relationship" relationship="viewControllers" id="0B3-Qe-wOE"/>
                         <segue destination="yL7-Eu-Q7N" kind="relationship" relationship="viewControllers" id="z9T-Pj-hcd"/>
                         <segue destination="gMl-o4-I8C" kind="relationship" relationship="viewControllers" id="SsS-vP-OTZ"/>
-                        <segue destination="WMW-iw-H4D" kind="relationship" relationship="viewControllers" id="1aq-ZQ-8d1"/>
                         <segue destination="vPZ-Ej-9Xe" kind="relationship" relationship="viewControllers" id="5dw-eZ-V9M"/>
                     </connections>
                 </tabBarController>
@@ -37,16 +36,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aC3-jG-Uog" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="752" y="100"/>
-        </scene>
-        <!--Cafeteria-->
-        <scene sceneID="8XM-9E-T46">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Cafeteria" id="WMW-iw-H4D" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="gtB-XI-CS5"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="3oR-zh-Cdp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="732" y="293"/>
         </scene>
         <!--Post-->
         <scene sceneID="JFY-XU-Cgu">
