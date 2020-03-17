@@ -16,10 +16,10 @@ extension UIViewController {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
 //        let okAction = UIAlertAction(title: "확인",style: .default)
         let action = UIAlertAction(title: "확인", style: .default) { (action) in
-            let sb = UIStoryboard(name: "Login", bundle: nil)
-            let vc = sb.instantiateViewController(withIdentifier: "LoginVC") as! LoginVC
+//            let sb = UIStoryboard(name: "Login", bundle: nil)
+//            let vc = sb.instantiateViewController(withIdentifier: "LoginVC") as! LoginVC
             
-            self.present(vc, animated: false, completion: nil)
+//            self.present(vc, animated: false, completion: nil)
         }
         alert.addAction(action)
         present(alert, animated: true)
@@ -44,6 +44,4 @@ extension UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
-    
-
 }

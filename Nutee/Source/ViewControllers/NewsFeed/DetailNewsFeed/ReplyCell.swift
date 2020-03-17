@@ -43,8 +43,8 @@ class ReplyCell: UITableViewCell{
         lblCommentUserId.text = comment?.user.nickname
         lblCommentUserId.sizeToFit()
         let originPostTime = comment?.createdAt
-        let postTimeDateFormat = originPostTime!.getDateFormat(time: originPostTime!)
-        lblCommentTime.text = postTimeDateFormat!.timeAgoSince(postTimeDateFormat!)
+        let postTimeDateFormat = originPostTime?.getDateFormat(time: originPostTime!)
+        lblCommentTime.text = postTimeDateFormat?.timeAgoSince(postTimeDateFormat!)
         
         txtvwCommentContents.sizeToFit()
         txtvwCommentContents.text = comment?.content

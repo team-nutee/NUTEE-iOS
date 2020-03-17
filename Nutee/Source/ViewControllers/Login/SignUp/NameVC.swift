@@ -23,7 +23,8 @@ class NameVC: UIViewController {
     var animationDuration: TimeInterval = 2
     var flag : Bool = false
     var id : String = ""
-    
+    var email : String = ""
+
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
@@ -64,7 +65,7 @@ class NameVC: UIViewController {
         vc.modalPresentationStyle = .fullScreen
         vc.id = self.id
         vc.name = nameTextField.text!
-        
+        vc.email = self.email
         self.present(vc, animated: false)
     }
 

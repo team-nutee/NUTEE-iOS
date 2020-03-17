@@ -36,10 +36,13 @@ class EmailVC: UIViewController {
         
         closeBtn.addTarget(self, action: #selector(close), for: .touchUpInside)
         nextBtn.addTarget(self, action: #selector(toNext), for: .touchUpInside)
+        
         emailTextField.addTarget(self, action: #selector(EmailVC.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
         emailTextField.addTarget(self, action: #selector(EmailVC.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
 
         certificationBtn.addTarget(self, action: #selector(certification), for: .touchUpInside)
+        numCertificaionBtn.addTarget(self, action: #selector(certifBtn), for: .touchUpInside)
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -49,6 +52,7 @@ class EmailVC: UIViewController {
         animate()
         
         addKeyboardNotification()
+        nextBtn.isEnabled = false
     }
     
     
@@ -84,15 +88,23 @@ class EmailVC: UIViewController {
     
     @objc func toNext(){
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "IdVC") as! IdVC
+        
+        debugPrint(emailTextField.text ?? "")
+        
         vc.modalPresentationStyle = .fullScreen
+        vc.eamil = emailTextField.text ?? ""
         
         self.present(vc, animated: false)
     }
 
     
     @objc func certification(){
-        certificationAnimate()
+        sendOTP(emailTextField.text!)
     }
+    @objc func certifBtn(){
+        checkOTP(numTextField.text!)
+    }
+
     
 }
 
@@ -121,7 +133,6 @@ extension EmailVC {
             .compactMap({$0})
             .first?.windows
             .filter({$0.isKeyWindow}).first
-//            let window = UIApplication.shared.keyWindow
             let bottomPadding = keyWindow?.safeAreaInsets.bottom
             
             bottomYLayoutConstraint.constant = (keyboardHeight - bottomPadding!)
@@ -164,6 +175,53 @@ extension EmailVC : UITextFieldDelegate {
 //    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
 //        self.view.endEditing(true)
 //    }
+}
+
+extension EmailVC {
+    func sendOTP(_ email : String){
+        UserService.shared.sendOTP(email) { (responsedata) in
+            switch responsedata {
+                
+            case .success(let res):
+                let response = res as! String
+                
+                print(response)
+                self.certificationAnimate()
+                
+            case .requestErr(_):
+                print(".requestErr")
+            case .pathErr:
+                print(".pathErr")
+            case .serverErr:
+                print(".serverErr")
+            case .networkFail:
+                print(".networkFail")
+            }
+        }
+    }
+    
+    func checkOTP(_ otp : String){
+        UserService.shared.checkOTP(otp) { (responsedata) in
+            switch responsedata {
+                
+            case .success(let res):
+                let response = res as! String
+                
+                print(response)
+                self.nextBtn.isEnabled = true
+                
+            case .requestErr(_):
+                print(".requestErr")
+            case .pathErr:
+                print(".pathErr")
+            case .serverErr:
+                print(".serverErr")
+            case .networkFail:
+                print(".networkFail")
+            }
+        }
+    }
+
 }
 
 

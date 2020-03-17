@@ -29,7 +29,7 @@ class PassWordVC: UIViewController {
     var flag: Bool = false
     var id : String = ""
     var name : String = ""
-    
+    var email : String = ""
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
@@ -293,8 +293,18 @@ extension PassWordVC {
 }
 
 extension PassWordVC {
+    func error(){
+        self.passwordTextField.addBorder(.bottom, color: .red, thickness: 1)
+        self.passwordTextField2.addBorder(.bottom, color: .red, thickness: 1)
+        self.passwordTextField.text = "에러로 인해 회원가입이 진행되지 않았습니다."
+        self.passwordTextField2.text = "에러로 인해 회원가입이 진행되지 않았습니다."
+        self.passwordTextField.sizeToFit()
+        self.passwordTextField2.sizeToFit()
+        print("request error")
+    }
+    
     func signUpService(_ userId: String, _ password: String,_ nickname : String) {
-        UserService.shared.signUp(userId, password, nickname) { responsedata in
+        UserService.shared.signUp(userId, password, nickname, email) { responsedata in
             
             switch responsedata {
                 
@@ -304,51 +314,28 @@ extension PassWordVC {
                 
                 print("회원가입 완료")
                 print(response)
-//                self.unwindToMainSegue(<#T##segue: UIStoryboardSegue##UIStoryboardSegue#>)
                 self.dismiss(animated: false, completion: {
                     self.simpleAlert(title: "회원가입 완료", message: "확인")
                 })
                 
             case .requestErr(_):
                 self.alertAnimation()
-                self.passwordTextField.addBorder(.bottom, color: .red, thickness: 1)
-                self.passwordTextField2.addBorder(.bottom, color: .red, thickness: 1)
-                self.passwordTextField.text = "에러로 인해 회원가입이 진행되지 않았습니다."
-                self.passwordTextField2.text = "에러로 인해 회원가입이 진행되지 않았습니다."
-                self.passwordTextField.sizeToFit()
-                self.passwordTextField2.sizeToFit()
-                print("request error")
-            //                self.successAdd = false
+                self.error()
+
             case .pathErr:
                 self.alertAnimation()
-                self.passwordTextField.addBorder(.bottom, color: .red, thickness: 1)
-                self.passwordTextField2.addBorder(.bottom, color: .red, thickness: 1)
-                self.passwordTextField.text = "에러로 인해 회원가입이 진행되지 않았습니다."
-                self.passwordTextField2.text = "에러로 인해 회원가입이 진행되지 않았습니다."
-                self.passwordTextField.sizeToFit()
-                self.passwordTextField2.sizeToFit()
+                self.error()
                 print(".pathErr")
-            //                self.successAdd = false
+         
             case .serverErr:
                 self.alertAnimation()
-                self.passwordTextField.addBorder(.bottom, color: .red, thickness: 1)
-                self.passwordTextField2.addBorder(.bottom, color: .red, thickness: 1)
-                self.passwordTextField.text = "에러로 인해 회원가입이 진행되지 않았습니다."
-                self.passwordTextField2.text = "에러로 인해 회원가입이 진행되지 않았습니다."
-                self.passwordTextField.sizeToFit()
-                self.passwordTextField2.sizeToFit()
+                self.error()
                 print(".serverErr")
-            //                self.successAdd = false
+         
             case .networkFail :
                 self.alertAnimation()
-                self.passwordTextField.addBorder(.bottom, color: .red, thickness: 1)
-                self.passwordTextField2.addBorder(.bottom, color: .red, thickness: 1)
-                self.passwordTextField.text = "에러로 인해 회원가입이 진행되지 않았습니다."
-                self.passwordTextField2.text = "에러로 인해 회원가입이 진행되지 않았습니다."
-                self.passwordTextField.sizeToFit()
-                self.passwordTextField2.sizeToFit()
+                self.error()
                 print("failure")
-                //                self.successAdd = false
             }
         }
         

@@ -23,6 +23,7 @@ class IdVC: UIViewController {
     // MARK: - Variables and Properties
     var animationDuration: TimeInterval = 2
     var flag: Bool = false
+    var eamil : String = ""
     
     // MARK: - Life Cycle
     
