@@ -20,10 +20,11 @@ class NameVC: UIViewController {
     
     
     // MARK: - Variables and Properties
-    var animationDuration: TimeInterval = 2
+    var animationDuration: TimeInterval = 1.4
     var flag : Bool = false
     var id : String = ""
-    
+    var email : String = ""
+
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
@@ -32,7 +33,7 @@ class NameVC: UIViewController {
         addKeyboardNotification()
         nameTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         nextBtn.addTarget(self, action: #selector(toNext), for: .touchUpInside)
-        print("id : ",id)
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -64,7 +65,10 @@ class NameVC: UIViewController {
         vc.modalPresentationStyle = .fullScreen
         vc.id = self.id
         vc.name = nameTextField.text!
-        
+        vc.email = self.email
+        vc.modalPresentationStyle = .fullScreen
+
+//        self.navigationController?.pushViewController(vc, animated: false)
         self.present(vc, animated: false)
     }
 

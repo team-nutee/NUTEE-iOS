@@ -21,8 +21,9 @@ class IdVC: UIViewController {
     
     
     // MARK: - Variables and Properties
-    var animationDuration: TimeInterval = 2
+    var animationDuration: TimeInterval = 1.4
     var flag: Bool = false
+    var email : String = ""
     
     // MARK: - Life Cycle
     
@@ -64,9 +65,11 @@ class IdVC: UIViewController {
     
     @objc func toNext(){
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "NameVC") as! NameVC
-        vc.modalPresentationStyle = .fullScreen
         vc.id = idTextField.text!
-        
+        vc.email = self.email
+        vc.modalPresentationStyle = .fullScreen
+
+//        self.navigationController?.pushViewController(vc, animated: false)
         self.present(vc, animated: false)
     }
     

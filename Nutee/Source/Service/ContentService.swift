@@ -20,7 +20,7 @@ struct ContentService {
     func getNewsPosts(_ postCnt: Int, lastId: Int, completion: @escaping (NetworkResult<Any>) -> Void){
         let URL = APIConstants.Posts + "?lastId=" + "\(lastId)" + "&limit=" + "\(postCnt)"
         let header: HTTPHeaders = [
-            "Cookie" : UserDefaults.standard.string(forKey: "Cookie")!
+            "Cookie" : UserDefaults.standard.string(forKey: "Cookie") ?? ""
         ]
         
         Alamofire.request(URL, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: header).responseData{ response in
@@ -117,7 +117,7 @@ struct ContentService {
     func getUserPosts(_ userId: Int, completion: @escaping (NetworkResult<Any>) -> Void){
         let URL = APIConstants.UserPost + "/\(userId)" + "/posts"
         let header: HTTPHeaders = [
-            "Cookie" : UserDefaults.standard.string(forKey: "Cookie")!
+            "Cookie" : UserDefaults.standard.string(forKey: "Cookie") ?? ""
         ]
         
         Alamofire.request(URL, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: header).responseData{ response in
@@ -166,7 +166,7 @@ struct ContentService {
         
         let headers: HTTPHeaders = [
             "Content-Type": "multipart/form-data",
-            "Cookie" : UserDefaults.standard.string(forKey: "Cookie")!
+            "Cookie" : UserDefaults.standard.string(forKey: "Cookie") ?? ""
         ]
         
         Alamofire.upload(multipartFormData: { (multipartFormData) in

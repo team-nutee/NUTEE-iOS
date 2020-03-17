@@ -46,6 +46,8 @@ class LoginVC: UIViewController {
         findBtn.addTarget(self, action: #selector(find), for: .touchUpInside)
         
         animate()
+        
+        navigationController?.navigationBar.isHidden = true
     }
     
     
@@ -136,9 +138,8 @@ class LoginVC: UIViewController {
         let vc = sb.instantiateViewController(withIdentifier: "EmailVC") as! EmailVC
         vc.modalPresentationStyle = .fullScreen
         
-        self.dismiss(animated: false, completion: nil)
-        
-        self.present(vc, animated: true)
+//        self.navigationController?.pushViewController(vc, animated: false)
+        self.present(vc, animated: false)
     }
     
     @objc func find() {
@@ -259,6 +260,7 @@ extension LoginVC {
                 
             // NetworkResult 의 요소들
             case .success(_):
+                
                 LoadingHUD.hide()
                 let sb = UIStoryboard(name: "Main", bundle: nil)
                 let vc = sb.instantiateViewController(withIdentifier: "TBC") as! TBC

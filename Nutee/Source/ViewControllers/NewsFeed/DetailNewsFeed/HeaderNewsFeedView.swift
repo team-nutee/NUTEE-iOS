@@ -208,8 +208,8 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
             lblUserId.text = detailNewsPost?.user.nickname
             lblUserId.sizeToFit()
             let originPostTime = detailNewsPost?.createdAt
-            let postTimeDateFormat = originPostTime!.getDateFormat(time: originPostTime!)
-            lblPostTime.text = postTimeDateFormat!.timeAgoSince(postTimeDateFormat!)
+            let postTimeDateFormat = originPostTime?.getDateFormat(time: originPostTime!)
+            lblPostTime.text = postTimeDateFormat?.timeAgoSince(postTimeDateFormat!)
             
             // Posting 내용 설정
             txtvwContent.text = detailNewsPost?.content

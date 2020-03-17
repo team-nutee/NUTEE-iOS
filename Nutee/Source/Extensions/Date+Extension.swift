@@ -14,7 +14,7 @@ extension Date {
     func timeAgoSince(_ date: Date) -> String {
        
         let calendar = Calendar.current
-        let now = Date()
+        let now = Date() - (60 * 60 * 9) // 서버시간이 9시간 밀려서 뺌
         let unitFlags: NSCalendar.Unit = [.second, .minute, .hour, .day, .weekOfYear, .month, .year]
         let components = (calendar as NSCalendar).components(unitFlags, from: date, to: now, options: [])
 
