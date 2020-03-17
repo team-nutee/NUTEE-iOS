@@ -9,7 +9,7 @@
 import UIKit
 
 class FindVC: UIViewController {
-
+    
     
     @IBOutlet weak var closeBtn: UIButton!
     @IBOutlet weak var idGuideLabel: UILabel!
@@ -19,9 +19,11 @@ class FindVC: UIViewController {
     
     @IBOutlet weak var pwGuideLabel: UILabel!
     @IBOutlet weak var pwGuideLabel2: UILabel!
+    @IBOutlet weak var pwGuideLabel3: UILabel!
     @IBOutlet weak var pwTextField: UITextField!
+    @IBOutlet weak var pwIDTextField: UITextField!
     @IBOutlet weak var pwCertificateBtn: UIButton!
-
+    
     @IBOutlet weak var idGuideLabelYLayoutConstraint: NSLayoutConstraint!
     @IBOutlet weak var idTextFieldXLayoutConstraint: NSLayoutConstraint!
     
@@ -30,7 +32,9 @@ class FindVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        idCertificateBtn.addTarget(self, action: #selector(findid), for: .touchUpInside)
+        pwCertificateBtn.addTarget(self, action: #selector(findpw), for: .touchUpInside)
         
         initSetting()
         setAlphaZero()
@@ -47,17 +51,20 @@ class FindVC: UIViewController {
         closeBtn.tintColor = .nuteeGreen
         idCertificateBtn.isEnabled = false
         pwCertificateBtn.isEnabled = false
-
+        
         idTextField.addBorder(.bottom, color: .nuteeGreen, thickness: 1)
         idTextField.tintColor = .nuteeGreen
         idTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
+        pwIDTextField.addBorder(.bottom, color: .nuteeGreen, thickness: 1)
+        pwIDTextField.tintColor = .nuteeGreen
+        pwIDTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
         pwTextField.addBorder(.bottom, color: .nuteeGreen, thickness: 1)
         pwTextField.tintColor = .nuteeGreen
         pwTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
-
+        
         idGuideLabelYLayoutConstraint.constant = 15
         idTextFieldXLayoutConstraint.constant = 70
-
+        
     }
     
     func setAlphaZero() {
@@ -68,10 +75,20 @@ class FindVC: UIViewController {
         
         pwGuideLabel.alpha = 0
         pwGuideLabel2.alpha = 0
+        pwGuideLabel3.alpha = 0
         pwTextField.alpha = 0
+        pwIDTextField.alpha = 0
         pwCertificateBtn.alpha = 0
     }
-
+    
+    @objc func findid(){
+        findIDServise(idTextField.text!)
+    }
+    
+    @objc func findpw(){
+        findPWServise(pwIDTextField.text!, pwTextField.text!)
+    }
+    
     @objc func close() {
         self.dismiss(animated: true, completion: nil)
     }
@@ -89,7 +106,7 @@ extension FindVC : UITextFieldDelegate {
             idCertificateBtn.isEnabled = false
         }
         
-        if pwTextField.text?.validateSkhuEmail() ?? false  {
+        if pwTextField.text?.validateSkhuEmail() ?? false && pwIDTextField.text != ""  {
             pwCertificateBtn.isEnabled = true
             pwCertificateBtn.tintColor = .nuteeGreen
         } else {
@@ -98,9 +115,6 @@ extension FindVC : UITextFieldDelegate {
         }
     }
     
-//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
-//        self.view.endEditing(true)
-//    }
 }
 
 extension FindVC {
@@ -145,6 +159,8 @@ extension FindVC {
                         // self를 항상 붙여줘야함 (클로저 안에서)
                         self.pwGuideLabel2.alpha = 1
                         self.pwGuideLabel2.transform = CGAffineTransform.init(translationX: 0, y: 50)
+                        self.pwGuideLabel3.alpha = 1
+                        self.pwGuideLabel3.transform = CGAffineTransform.init(translationX: 0, y: 50)
         })
         
         UIView.animate(withDuration: animationDuration,
@@ -159,7 +175,7 @@ extension FindVC {
                         self.idCertificateBtn.alpha = 1
                         self.idCertificateBtn.transform = CGAffineTransform.init(translationX: -50, y: 0)
         })
-
+        
         UIView.animate(withDuration: animationDuration,
                        delay: animationDuration * 2 * 1.5,
                        usingSpringWithDamping: 0.85,
@@ -169,12 +185,74 @@ extension FindVC {
                         // self를 항상 붙여줘야함 (클로저 안에서)
                         self.pwTextField.alpha = 1
                         self.pwTextField.transform = CGAffineTransform.init(translationX: -50, y: 0)
+                        self.pwIDTextField.alpha = 1
+                        self.pwIDTextField.transform = CGAffineTransform.init(translationX: -50, y: 0)
                         self.pwCertificateBtn.alpha = 1
                         self.pwCertificateBtn.transform = CGAffineTransform.init(translationX: -50, y: 0)
-
+                        
         })
-
-
+        
+        
     }
+    
+}
 
+extension FindVC {
+    func findIDServise(_ email : String) {
+        UserService.shared.findID(email) { (responsedata) in
+            switch responsedata {
+                
+            // NetworkResult 의 요소들
+            case .success(let res):
+                let response = res as! String
+                
+                print(response)
+                
+                self.simpleAlert(title: "", message: "이메일 발송이 완료되었습니다.")
+                
+            case .requestErr(_):
+                print(".requestErr")
+                
+            case .pathErr:
+                print(".pathErr")
+                
+            case .serverErr:
+                print(".serverErr")
+                
+            case .networkFail :
+                print("failure")
+            }
+        }
+        
+    }
+    
+    func findPWServise(_ userId : String,_ email : String) {
+        UserService.shared.findPW(userId, email) { (responsedata) in
+            switch responsedata {
+                
+            // NetworkResult 의 요소들
+            case .success(let res):
+                let response = res as! String
+                
+                print(response)
+                
+                self.simpleAlert(title: "", message: "이메일 발송이 완료되었습니다.")
+                
+            case .requestErr(_):
+                print(".requestErr")
+                
+            case .pathErr:
+                print(".pathErr")
+                
+            case .serverErr:
+                print(".serverErr")
+                
+            case .networkFail :
+                print("failure")
+            }
+        }
+        
+    }
+    
+    
 }

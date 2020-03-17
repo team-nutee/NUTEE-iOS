@@ -314,5 +314,90 @@ struct UserService {
         }
     }
     
+    // MARK: - findID
+    func findID(_ email : String, completion: @escaping (NetworkResult<Any>) -> Void) {
+        
+        let URL = APIConstants.FindId
+        let headers: HTTPHeaders = [
+            "Content-Type": "application/json"
+        ]
+        
+        let body : Parameters = [
+            "schoolEmail" : email
+        ]
+        
+        Alamofire.request(URL, method: .post, parameters: body, encoding: JSONEncoding.default, headers: headers).responseData{
+            response in
+            
+            switch response.result {
+                
+            case .success:
+                if let status = response.response?.statusCode {
+                    print(status)
+                    switch status {
+                    case 200:
+                        completion(.success("입력하신 이메일로 아이디가 발송되었습니다."))
+                    case 401:
+                        print("실패 401")
+                        completion(.pathErr)
+                    case 500:
+                        print("실패 500")
+                        completion(.serverErr)
+                    default:
+                        break
+                    }
+                }
+                
+                break
+            case .failure(let err):
+                print(err.localizedDescription)
+                completion(.networkFail)
+            }
+        }
+    }
+    
+    // MARK: - findPW
+    func findPW(_ userId : String, _ email : String, completion: @escaping (NetworkResult<Any>) -> Void) {
+        
+        let URL = APIConstants.Reissuance
+        let headers: HTTPHeaders = [
+            "Content-Type": "application/json"
+        ]
+        
+        let body : Parameters = [
+            "userId" : userId,
+            "schoolEmail" : email
+        ]
+        
+        Alamofire.request(URL, method: .post, parameters: body, encoding: JSONEncoding.default, headers: headers).responseData{
+            response in
+            
+            switch response.result {
+                
+            case .success:
+                if let status = response.response?.statusCode {
+                    print(status)
+                    switch status {
+                    case 200:
+                        completion(.success("입력하신 이메일로 아이디가 발송되었습니다."))
+                    case 401:
+                        print("실패 401")
+                        completion(.pathErr)
+                    case 500:
+                        print("실패 500")
+                        completion(.serverErr)
+                    default:
+                        break
+                    }
+                }
+                
+                break
+            case .failure(let err):
+                print(err.localizedDescription)
+                completion(.networkFail)
+            }
+        }
+    }
+
     
 }
