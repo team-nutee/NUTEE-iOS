@@ -26,7 +26,7 @@ class FindVC: UIViewController {
     @IBOutlet weak var idTextFieldXLayoutConstraint: NSLayoutConstraint!
     
     
-    var animationDuration = 1.5
+    var animationDuration = 1.3
     
     override func viewDidLoad() {
         super.viewDidLoad()

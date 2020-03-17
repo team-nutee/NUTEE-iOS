@@ -12,10 +12,12 @@ struct APIConstants {
         
     static let User = BaseURL + "/api/user"                                     // GET
     static let UserPost = BaseURL + "/api/user"                                 // POST { userId : asdf123, password : 123123, nickname : 테스트닉네임, schoolEmail : 1234567@office.skhu.ac.kr }
-    static let OTPsend = BaseURL + "/api/user/otpsend"                          // POST { schoolEmail : asdf123@office.skhu.ac.kr}
-    static let OTPcheck = BaseURL + "/api/user/otpcheck"                        // POST { otpcheck : 123456}
+    static let OTPsend = BaseURL + "/api/user/otpsend"                          // POST { "schoolEmail":"1234567@office.skhu.ac.kr"}
+    static let OTPcheck = BaseURL + "/api/user/otpcheck"                        // POST { "otpcheck" : "123456"}
 
-    
+    static let FindId = BaseURL + "/api/user/findid"                            // POST { "schoolEmail":"1234567@office.skhu.ac.kr"}
+    static let Reissuance = BaseURL + "/api/user/reissuance"                    // POST { "userId":"abc", "schoolEmail":"1234567@office.skhu.ac.kr"}
+
     static let PostPost = BaseURL + "/api/post"                                 // POST formData : image filename , content : content
     static let PostGET = BaseURL + "/api/post/:id"                              // GET 뒤에 아이디 값을 넣어야 함                 // 아이디가 게시물의 id?
     static let PostDelete = BaseURL + "/api/post/:id"                           // DELETE 뒤에 아이디 값을 넣어줘야함              // "
