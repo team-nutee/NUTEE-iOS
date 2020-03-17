@@ -39,19 +39,43 @@ class NewsFeedVC: UIViewController {
         
 //        self.tabBarController?.delegate = self
         self.view.addSubview(loadCompleteBtn)
-//        loadCompleteBtn.alpha = 0
+        
         initColor()
         setRefresh()
-        setLoadBtn()
         
+        setLoadBtn()
         self.loadCompleteBtn.addTarget(self, action: #selector(loadingBtn), for: .touchUpInside)
+        
         LoadingHUD.show()
         getNewsPostsService(postCnt: 10, lastId: 0, completionHandler: {(returnedData)-> Void in
             self.newsPostsArr = self.newsPosts
-            
-            self.viewDidAppear(true)
         })
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        getNewsPostsService(postCnt: 1, lastId: 0, completionHandler: {(returnedData)-> Void in
+            if self.newsPostsArr?.count ?? 0 > 0 {
+                var tmpNewsPost: NewsPostsContentElement?
+                // 기존의 최신 게시글 id
+                tmpNewsPost = self.newsPostsArr?[0]
+                let lastestPostId = tmpNewsPost?.id
+                // 업데이트 된 최신 게시글 id
+                tmpNewsPost = self.newsPosts?[0]
+                let updatedLastestPostId = tmpNewsPost?.id
+
+                // 새로 올라온 게시글이 있을 경우
+                if(updatedLastestPostId != lastestPostId){
+                    self.loadCompleteBtn.isHidden = false
+                    UIView.animate(withDuration: 0.3) {
+                        self.loadCompleteBtn.alpha = 1
+                    }
+                }
+//                self.viewDidAppear(true)
+            }
+            
+        })
+    }
+    
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(false)
@@ -77,10 +101,14 @@ class NewsFeedVC: UIViewController {
         loadCompleteBtn.centerXAnchor.constraint(equalTo: self.newsTV.centerXAnchor).isActive = true
         loadCompleteBtn.heightAnchor.constraint(equalToConstant: 30).isActive = true
         loadCompleteBtn.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        
+        loadCompleteBtn.alpha = 0
+        loadCompleteBtn.isHidden = true
     }
     
     @objc func loadingBtn(){
-        print("버튼 클릭")
+        updatePosts()
+        loadCompleteBtn.isHidden = true
     }
     
     // 로그인이 되어있는지 체크
@@ -107,6 +135,7 @@ class NewsFeedVC: UIViewController {
     }
     
     @objc func updatePosts() {
+        LoadingHUD.show()
         getNewsPostsService(postCnt: 10, lastId: 0, completionHandler: {(returnedData)-> Void in
             self.newsPostsArr = self.newsPosts
             self.newsTV.reloadData()
@@ -257,7 +286,7 @@ extension NewsFeedVC : UITableViewDataSource {
                 newsTV.tableFooterView?.isHidden = false
 
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                    self.loadMorePosts(lastId: self.newsPost!.id)
+                    self.loadMorePosts(lastId: self.newsPost?.id ?? 0)
                 }
             } else {
                 // 사용자 NewsFeed의 마지막 포스팅일 경우
@@ -271,24 +300,6 @@ extension NewsFeedVC : UITableViewDataSource {
     }
     
 }
-
-// MARK: - TabBarController
-//extension NewsFeedVC : UITabBarControllerDelegate {
-//
-//    // 탭바를 누를 경우 최상위 지점으로 TableView의 Cell 자동 스크롤(맨 위로 가기)
-//    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
-//        let tabBarIndex = tabBarController.selectedIndex
-//
-//        print("You tapped tabBarItem index : ", tabBarIndex)
-//
-//        if tabBarIndex == 0 {
-////            self.newsTV.setContentOffset(CGPoint.zero, animated: true)
-//            let indexPath = IndexPath(row: 0, section: 0)
-//            newsTV.scrollToRow(at: indexPath as IndexPath, at: .top, animated: true)
-//        }
-//    }
-//
-//}
 
 extension NewsFeedVC {
     func getNewsPostsService(postCnt: Int, lastId: Int, completionHandler: @escaping (_ returnedData: NewsPostsContent) -> Void ) {
