@@ -14,17 +14,25 @@ extension UIViewController {
     // 2칸인 alert title - up, message - down
     func simpleAlert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-//        let okAction = UIAlertAction(title: "확인",style: .default)
+        //        let okAction = UIAlertAction(title: "확인",style: .default)
         let action = UIAlertAction(title: "확인", style: .default) { (action) in
-//            let sb = UIStoryboard(name: "Login", bundle: nil)
-//            let vc = sb.instantiateViewController(withIdentifier: "LoginVC") as! LoginVC
             
-//            self.present(vc, animated: false, completion: nil)
         }
         alert.addAction(action)
         present(alert, animated: true)
     }
-
+    
+    func rootViewAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        //        let okAction = UIAlertAction(title: "확인",style: .default)
+        let action = UIAlertAction(title: "확인", style: .default) { (action) in
+            self.view.window!.rootViewController?.dismiss(animated: true, completion: nil)
+        }
+        alert.addAction(action)
+        present(alert, animated: true)
+    }
+    
+    
     // 누르면 앱이 종료되는 alert
     func exitAlert(title: String, message: String){
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)

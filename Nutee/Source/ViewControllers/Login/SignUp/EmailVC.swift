@@ -26,7 +26,7 @@ class EmailVC: UIViewController {
     
     // MARK: - Variables and Properties
     
-    var animationDuration: TimeInterval = 2
+    var animationDuration: TimeInterval = 1.4
     var flag: Bool = false
     
     // MARK: - Life Cycle
@@ -42,7 +42,7 @@ class EmailVC: UIViewController {
 
         certificationBtn.addTarget(self, action: #selector(certification), for: .touchUpInside)
         numCertificaionBtn.addTarget(self, action: #selector(certifBtn), for: .touchUpInside)
-
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -53,6 +53,7 @@ class EmailVC: UIViewController {
         
         addKeyboardNotification()
         nextBtn.isEnabled = false
+        navigationController?.navigationBar.isHidden = true
     }
     
     
@@ -88,12 +89,10 @@ class EmailVC: UIViewController {
     
     @objc func toNext(){
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "IdVC") as! IdVC
-        
-        debugPrint(emailTextField.text ?? "")
-        
+        vc.email = self.emailTextField.text ?? ""
         vc.modalPresentationStyle = .fullScreen
-        vc.eamil = emailTextField.text ?? ""
         
+//        self.navigationController?.pushViewController(vc, animated: false)
         self.present(vc, animated: false)
     }
 
@@ -109,9 +108,10 @@ class EmailVC: UIViewController {
 }
 
 extension EmailVC {
-  @IBAction func unwindSegue(_ segue: UIStoryboardSegue) {
+    @IBAction func unwindSegue(_ segue: UIStoryboardSegue) {
   
     }
+
 }
 
 

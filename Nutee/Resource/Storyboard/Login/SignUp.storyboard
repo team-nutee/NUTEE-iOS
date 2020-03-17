@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y1O-7I-VjN">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y1O-7I-VjN">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -58,7 +58,7 @@
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="인증번호" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sGy-tD-T8b">
                                 <rect key="frame" x="70" y="324" width="310.5" height="40"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wpn-QL-jAS">
                                 <rect key="frame" x="390.5" y="324" width="52" height="40"/>
@@ -116,6 +116,8 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ooT-no-LNJ"/>
                     </view>
+                    <navigationItem key="navigationItem" id="AYf-AQ-neR"/>
+                    <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="bottomYLayoutConstraint" destination="yHf-1K-Yq3" id="p36-ct-yRP"/>
                         <outlet property="certificationBtn" destination="ZIg-b6-bmt" id="NPo-md-P3H"/>
@@ -132,7 +134,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VGn-vo-p3F" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="260.86956521739131" y="797.54464285714278"/>
+            <point key="canvasLocation" x="1171.0144927536232" y="797.54464285714278"/>
         </scene>
         <!--Pass WordVC-->
         <scene sceneID="J7P-jC-isv">
@@ -264,7 +266,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NRP-DI-haw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="LTp-hC-xpG" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2669.5652173913045" y="797.54464285714278"/>
+            <point key="canvasLocation" x="3579.7101449275365" y="797.54464285714278"/>
         </scene>
         <!--IdVC-->
         <scene sceneID="sTZ-2u-GBU">
@@ -369,7 +371,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vrF-NX-2Zw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="c1I-xj-I2T" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1068" y="798"/>
+            <point key="canvasLocation" x="1976.8115942028987" y="797.54464285714278"/>
         </scene>
         <!--NameVC-->
         <scene sceneID="EXN-uI-pAB">
@@ -461,7 +463,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Xd-Ji-hDf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="ZA5-7e-GIs" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1871" y="798"/>
+            <point key="canvasLocation" x="2779.7101449275365" y="797.54464285714278"/>
         </scene>
     </scenes>
 </document>

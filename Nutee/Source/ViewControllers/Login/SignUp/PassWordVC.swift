@@ -25,7 +25,7 @@ class PassWordVC: UIViewController {
     
     @IBOutlet weak var buttonYLayoutConstraint: NSLayoutConstraint!
     // MARK: - Variables and Properties
-    var animationDuration: TimeInterval = 2
+    var animationDuration: TimeInterval = 1.4
     var flag: Bool = false
     var id : String = ""
     var name : String = ""
@@ -41,8 +41,7 @@ class PassWordVC: UIViewController {
         passwordTextField2.addTarget(self, action: #selector(PassWordVC.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
         
         nextBtn.addTarget(self, action: #selector(toNext), for: .touchUpInside)
-        print("id : ", id)
-        print("name : ", name)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -82,15 +81,15 @@ class PassWordVC: UIViewController {
         signUpService(id, passwordTextField.text!, name)
     }
     
+    @IBAction func dis(_ sender: UIButton){
+        
+    }
+    
 }
 
 extension PassWordVC {
     @IBAction func unwindSegue(_ segue: UIStoryboardSegue) {
         
-    }
-    
-    @IBAction func unwindToMainSegue(_ segue: UIStoryboardSegue) {
-        performSegue(withIdentifier: "EmailVC", sender: self)
     }
     
 }
@@ -314,9 +313,8 @@ extension PassWordVC {
                 
                 print("회원가입 완료")
                 print(response)
-                self.dismiss(animated: false, completion: {
-                    self.simpleAlert(title: "회원가입 완료", message: "확인")
-                })
+                
+                self.rootViewAlert(title: "회원가입이", message: "완료되었습니다.")
                 
             case .requestErr(_):
                 self.alertAnimation()
