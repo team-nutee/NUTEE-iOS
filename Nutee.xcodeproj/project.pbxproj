@@ -22,12 +22,12 @@
 		5E0E6A6423E7349600FBC15F /* YourChatTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E0E6A6223E7349600FBC15F /* YourChatTVC.xib */; };
 		5E0E6A6F23E73CC800FBC15F /* Post.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E0E6A6E23E73CC800FBC15F /* Post.storyboard */; };
 		5E0E6A7223E73ECE00FBC15F /* PostVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0E6A7123E73ECE00FBC15F /* PostVC.swift */; };
+		5E1752F2242124B900013D55 /* Splash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1752F1242124B900013D55 /* Splash.swift */; };
 		5E21443D23C2F8500053CFB9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E21443C23C2F8500053CFB9 /* AppDelegate.swift */; };
 		5E21443F23C2F8500053CFB9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E21443E23C2F8500053CFB9 /* SceneDelegate.swift */; };
 		5E21444623C2F8560053CFB9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5E21444523C2F8560053CFB9 /* Assets.xcassets */; };
 		5E21444923C2F8560053CFB9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E21444723C2F8560053CFB9 /* LaunchScreen.storyboard */; };
 		5E21445A23C2F8E50053CFB9 /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E21445923C2F8E50053CFB9 /* APIConstants.swift */; };
-		5E21445C23C2F8F60053CFB9 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E21445B23C2F8F60053CFB9 /* Model.swift */; };
 		5E21445E23C2F8FC0053CFB9 /* LoadingHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E21445D23C2F8FC0053CFB9 /* LoadingHUD.swift */; };
 		5E2BDCB424038F0300CE99A7 /* SignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2BDCB124038F0200CE99A7 /* SignIn.swift */; };
 		5E2BDCB524038F0300CE99A7 /* SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2BDCB224038F0300CE99A7 /* SignUp.swift */; };
@@ -141,6 +141,7 @@
 		5E0E6A6223E7349600FBC15F /* YourChatTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YourChatTVC.xib; sourceTree = "<group>"; };
 		5E0E6A6E23E73CC800FBC15F /* Post.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Post.storyboard; sourceTree = "<group>"; };
 		5E0E6A7123E73ECE00FBC15F /* PostVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostVC.swift; sourceTree = "<group>"; };
+		5E1752F1242124B900013D55 /* Splash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Splash.swift; sourceTree = "<group>"; };
 		5E21443923C2F8500053CFB9 /* NUTEE.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NUTEE.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E21443C23C2F8500053CFB9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5E21443E23C2F8500053CFB9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -148,7 +149,6 @@
 		5E21444823C2F8560053CFB9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5E21444A23C2F8560053CFB9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5E21445923C2F8E50053CFB9 /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
-		5E21445B23C2F8F60053CFB9 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		5E21445D23C2F8FC0053CFB9 /* LoadingHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingHUD.swift; sourceTree = "<group>"; };
 		5E2BDCB124038F0200CE99A7 /* SignIn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignIn.swift; sourceTree = "<group>"; };
 		5E2BDCB224038F0300CE99A7 /* SignUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUp.swift; sourceTree = "<group>"; };
@@ -421,6 +421,7 @@
 			isa = PBXGroup;
 			children = (
 				5E21445D23C2F8FC0053CFB9 /* LoadingHUD.swift */,
+				5E1752F1242124B900013D55 /* Splash.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -431,7 +432,6 @@
 				5E2BDCBB2403901400CE99A7 /* Notice.swift */,
 				5E2BDCB124038F0200CE99A7 /* SignIn.swift */,
 				5E2BDCB224038F0300CE99A7 /* SignUp.swift */,
-				5E21445B23C2F8F60053CFB9 /* Model.swift */,
 				D53F61F72403C3F200C8EE38 /* PostContent.swift */,
 				D53CB44E240B995400DDA17A /* NewsPostsContent.swift */,
 				D5F651D02407DF4C00263A34 /* FollowList.swift */,
@@ -732,7 +732,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5E21445C23C2F8F60053CFB9 /* Model.swift in Sources */,
 				5E95CD6823EF35280090C39B /* SettingVC.swift in Sources */,
 				5E93A7332415775F00C9C811 /* ExchangeTVC.swift in Sources */,
 				5E93A72B2415725C00C9C811 /* GeneralVC.swift in Sources */,
@@ -801,6 +800,7 @@
 				5E2BDCB924038F7300CE99A7 /* NoticeService.swift in Sources */,
 				5EA5C68423F146E200BFB32B /* EmailVC.swift in Sources */,
 				5E79C0C223EC5A7000BD2FB3 /* ArticleTVC.swift in Sources */,
+				5E1752F2242124B900013D55 /* Splash.swift in Sources */,
 				5E05AD7023DB0ECE00E36AD4 /* UIColor+Extension.swift in Sources */,
 				5EA5C67C23F023DC00BFB32B /* UITableView+Extension.swift in Sources */,
 			);

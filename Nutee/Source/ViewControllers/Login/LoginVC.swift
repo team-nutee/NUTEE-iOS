@@ -5,6 +5,10 @@
 //  Created by Hee Jae Kim on 2020/01/14.
 //  Copyright © 2020 S.OWL. All rights reserved.
 //
+//  userid : 유저 아이디, id : 유저 아이디 (ex:1), pw: 패스워드
+//
+//
+//
 
 import UIKit
 import Alamofire
@@ -36,6 +40,7 @@ class LoginVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+//        Splash.hide()
         print("로그인 확인 : ",UserDefaults.standard.value(forKey: "Cookie") ?? "로그인 안함")
         checkSignIn()
         
@@ -50,12 +55,16 @@ class LoginVC: UIViewController {
         navigationController?.navigationBar.isHidden = true
     }
     
+//    override func viewDidAppear(_ animated: Bool) {
+//        super.viewDidAppear(true)
+//        Splash.show()
+//    }
+//
     
     // MARK: -Helpers
     
     // 초기 설정
     func setInit() {
-        
         signInBtn.backgroundColor = .veryLightPink
         signInBtn.isEnabled = false
         idTextField.tintColor = .nuteeGreen
@@ -100,6 +109,7 @@ class LoginVC: UIViewController {
         if userid != nil && password != nil {
             signInService(userid as! String, password as! String)
         } else {
+            Splash.hide()
             return
         }
     }
@@ -113,6 +123,7 @@ class LoginVC: UIViewController {
     }
     
     @objc func signIn() {
+//        Splash.show()
         LoadingHUD.show()
         
         print("id :",idTextField.text!)
@@ -133,12 +144,10 @@ class LoginVC: UIViewController {
     }
     
     @objc func signUp() {
-        
         let sb = UIStoryboard(name: "SignUp", bundle: nil)
         let vc = sb.instantiateViewController(withIdentifier: "EmailVC") as! EmailVC
         vc.modalPresentationStyle = .fullScreen
         
-//        self.navigationController?.pushViewController(vc, animated: false)
         self.present(vc, animated: false)
     }
     
@@ -192,7 +201,6 @@ extension LoginVC : UITextFieldDelegate {
         return true
     }
     
-    
 }
 
 extension LoginVC {
@@ -215,9 +223,6 @@ extension LoginVC {
                        initialSpringVelocity: 0.1,
                        options: [.curveEaseIn],
                        animations: {
-                        // self를 항상 붙여줘야함 (클로저 안에서)
-                        //                        self.idTextField.transform = CGAffineTransform.init(translationX: -2, y: 0)
-                        //                        self.pwTextField.transform = CGAffineTransform.init(translationX: -2, y: 0)
                         self.idErrorLabel.transform = CGAffineTransform.init(translationX: -5, y: 0)
                         self.pwErrorLabel.transform = CGAffineTransform.init(translationX: -5, y: 0)
                         self.idErrorLabel.alpha = 1
@@ -229,9 +234,6 @@ extension LoginVC {
                        initialSpringVelocity: 0.1,
                        options: [.curveEaseIn],
                        animations: {
-                        // self를 항상 붙여줘야함 (클로저 안에서)
-                        //                        self.idTextField.transform = CGAffineTransform.init(translationX: 2, y: 0)
-                        //                        self.pwTextField.transform = CGAffineTransform.init(translationX: 2, y: 0)
                         self.idErrorLabel.transform = CGAffineTransform.init(translationX: 5, y: 0)
                         self.pwErrorLabel.transform = CGAffineTransform.init(translationX: 5, y: 0)
         })
@@ -260,7 +262,7 @@ extension LoginVC {
                 
             // NetworkResult 의 요소들
             case .success(_):
-                
+                Splash.hide()
                 LoadingHUD.hide()
                 let sb = UIStoryboard(name: "Main", bundle: nil)
                 let vc = sb.instantiateViewController(withIdentifier: "TBC") as! TBC
@@ -268,28 +270,26 @@ extension LoginVC {
                 
                 self.present(vc, animated: true)
                 
-            //                self.successAdd = true
             case .requestErr(_):
                 LoadingHUD.hide()
                 self.error()
                 print("request error")
-            //                self.successAdd = false
+                
             case .pathErr:
                 LoadingHUD.hide()
                 self.error()
                 print(".pathErr")
                 
-            //                self.successAdd = false
             case .serverErr:
                 LoadingHUD.hide()
                 self.error()
                 print(".serverErr")
-            //                self.successAdd = false
+                
             case .networkFail :
                 LoadingHUD.hide()
                 self.error()
                 print("failure")
-                //                self.successAdd = false
+                
             }
         }
         
