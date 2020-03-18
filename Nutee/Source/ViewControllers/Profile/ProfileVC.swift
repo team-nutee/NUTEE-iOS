@@ -187,6 +187,7 @@ extension ProfileVC : UITableViewDataSource {
             
             cell.profileNameLabel.text = userPost?.user.nickname
             cell.articleTextView.text = userPost?.content
+            cell.profileIMG.imageFromUrl(userInfo?.image, defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
             
             let originUserPostTime = userPost?.createdAt
             let userPostTimeDateFormat = originUserPostTime!.getDateFormat(time: originUserPostTime!)

@@ -14,6 +14,7 @@ struct SignIn: Codable {
     let nickname, userID: String
     let posts: [Post]
     let followings, followers: [FollowSign]
+    let image: String
 
     enum CodingKeys: String, CodingKey {
         case id, nickname
@@ -21,6 +22,7 @@ struct SignIn: Codable {
         case posts = "Posts"
         case followings = "Followings"
         case followers = "Followers"
+        case image = "Image"
     }
     
     init(from decoder: Decoder) throws {
@@ -31,6 +33,7 @@ struct SignIn: Codable {
         posts = (try? values.decode([Post].self, forKey: .posts)) ?? []
         followings = (try? values.decode([FollowSign].self, forKey: .followings)) ?? []
         followers = (try? values.decode([FollowSign].self, forKey: .followers)) ?? []
+        image = (try? values.decode(String.self, forKey: .image)) ?? ""
     }
 
 }

@@ -379,7 +379,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="RlG-Z8-t1e"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="home alt 1" id="4Rx-g3-iv1"/>
+                    <tabBarItem key="tabBarItem" title="" image="house" catalog="system" id="4Rx-g3-iv1"/>
                     <navigationItem key="navigationItem" title="NUTEE" id="Ngr-zy-buh"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -417,7 +417,7 @@
         <image name="ellipsis" catalog="system" width="64" height="18"/>
         <image name="heart" catalog="system" width="64" height="54"/>
         <image name="heart.fill" catalog="system" width="64" height="54"/>
-        <image name="home alt 1" width="24" height="24"/>
+        <image name="house" catalog="system" width="64" height="54"/>
         <image name="zigi_sorry" width="460" height="428"/>
     </resources>
 </document>
