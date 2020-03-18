@@ -94,8 +94,10 @@ class NewsFeedVC: UIViewController {
 
         loadCompleteBtn.setAttributedTitle(btnLabel, for: .normal)
         loadCompleteBtn.titleLabel?.font = .boldSystemFont(ofSize: 13)
-        loadCompleteBtn.makeRounded(cornerRadius: 5)
-        loadCompleteBtn.backgroundColor = .greenLighter
+        loadCompleteBtn.makeRounded(cornerRadius: 15)
+        loadCompleteBtn.borderColor = .nuteeGreen
+        loadCompleteBtn.borderWidth = 0.5
+//        loadCompleteBtn.backgroundColor = .greenLighter
         loadCompleteBtn.translatesAutoresizingMaskIntoConstraints = false
         loadCompleteBtn.topAnchor.constraint(equalTo: self.newsTV.topAnchor, constant: 20).isActive = true
         loadCompleteBtn.centerXAnchor.constraint(equalTo: self.newsTV.centerXAnchor).isActive = true

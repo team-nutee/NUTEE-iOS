@@ -51,7 +51,7 @@ extension Date {
         }
         
         if let minute = components.minute, minute >= 1 {
-            return "일 분전"
+            return "1 분전"
         }
         
         if let second = components.second, second >= 3 {
