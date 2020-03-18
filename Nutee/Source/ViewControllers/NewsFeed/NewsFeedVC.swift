@@ -258,9 +258,11 @@ extension NewsFeedVC : UITableViewDataSource {
         let detailNewsFeedSB = UIStoryboard(name: "DetailNewsFeed", bundle: nil)
         let showDetailNewsFeedVC = detailNewsFeedSB.instantiateViewController(withIdentifier: "DetailNewsFeed") as! DetailNewsFeedVC
 
-        // 현재 게시물 정보를 DetailNewsFeedVC로 넘겨줌
-        newsPost = newsPostsArr?[indexPath.row]
-        showDetailNewsFeedVC.detailNewsPost = self.newsPost
+        // 현재 게시물 id를 DetailNewsFeedVC로 넘겨줌
+        showDetailNewsFeedVC.postId = newsPostsArr?[indexPath.row].id
+        showDetailNewsFeedVC.getPostService(postId: showDetailNewsFeedVC.postId!, completionHandler: {(returnedData)-> Void in
+            showDetailNewsFeedVC.replyTV.reloadData()
+        })
         
         self.navigationController?.pushViewController(showDetailNewsFeedVC, animated: true)
     }
@@ -301,6 +303,7 @@ extension NewsFeedVC : UITableViewDataSource {
     
 }
 
+//MARK: - 뉴스피드 내용을 가져오기 위한 서버연결
 extension NewsFeedVC {
     func getNewsPostsService(postCnt: Int, lastId: Int, completionHandler: @escaping (_ returnedData: NewsPostsContent) -> Void ) {
         ContentService.shared.getNewsPosts(postCnt, lastId: lastId) { responsedata in

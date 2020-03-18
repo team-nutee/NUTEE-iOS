@@ -25,8 +25,8 @@ class DetailNewsFeedVC: UIViewController {
     
     //MARK: - Variables and Properties
     
-    var content: PostContent?
-    var detailNewsPost: NewsPostsContentElement?
+    var content: NewsPostsContentElement?
+    var postId: Int?
     
     //MARK: - Dummy data
     
@@ -49,12 +49,18 @@ class DetailNewsFeedVC: UIViewController {
         initCommentWindow()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+//        getPostService(postId: postId!, completionHandler: {(returnedData)-> Void in})
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(false)
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         
         addKeyboardNotification()
+        
+//        replyTV.reloadData()
     }
 
 //MARK: - Helper
@@ -121,7 +127,7 @@ extension DetailNewsFeedVC : UITableViewDataSource {
         let headerNewsFeed = tableView.dequeueReusableHeaderFooterView(withIdentifier: "HeaderNewsFeedView") as! HeaderNewsFeedView
         
         // HeaderView로 NewsFeedVC에서 받아온 게시글 정보룰 넘김
-        headerNewsFeed.detailNewsPost = self.detailNewsPost
+        headerNewsFeed.detailNewsPost = self.content
         headerNewsFeed.initPosting()
         
         // VC 컨트롤 권한을 HeaderView로 넘겨주기
@@ -132,7 +138,7 @@ extension DetailNewsFeedVC : UITableViewDataSource {
     
     // TableView cell settings
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        if detailNewsPost?.comments.count == 0 {
+        if content?.comments.count == 0 {
             if indexPath.row == 0 {
                 return 0.5
             } else {
@@ -144,7 +150,7 @@ extension DetailNewsFeedVC : UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if detailNewsPost?.comments.count == 0 {
+        if content?.comments.count == 0 {
             if indexPath.row == 0 {
                 return 0.5
             } else {
@@ -156,7 +162,7 @@ extension DetailNewsFeedVC : UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        var replyCnt = detailNewsPost?.comments.count ?? 0
+        var replyCnt = content?.comments.count ?? 0
         
         if replyCnt == 0 {
             replyCnt += 2
@@ -171,7 +177,7 @@ extension DetailNewsFeedVC : UITableViewDataSource {
         
         cell.selectionStyle = .none
         
-        if detailNewsPost?.comments.count == 0 {
+        if content?.comments.count == 0 {
             if indexPath.row == 0 {
                 cell.backgroundColor = .lightGray
             }  else {
@@ -190,7 +196,7 @@ extension DetailNewsFeedVC : UITableViewDataSource {
             }
             
             // 생성된 Cell클래스로 comment 정보 넘겨주기
-            cell.comment = detailNewsPost?.comments[indexPath.row]
+            cell.comment = content?.comments[indexPath.row]
             cell.initComments()
         }
         
@@ -317,12 +323,7 @@ extension DetailNewsFeedVC: UITextViewDelegate {
     }
 
     
-    
-    
-    
-    
-    
-    
+    // PlaceHolder 따로 지정해주기(기존 것 사용시 충돌 일어남)
     func textViewDidEndEditing(_ textView: UITextView) {
         if (textView.text == "") {
             textView.text = " 댓글을 입력하세요"
@@ -339,4 +340,33 @@ extension DetailNewsFeedVC: UITextViewDelegate {
         textView.becomeFirstResponder()
     }
     
+}
+
+//MARK: - 게시글 하나를 가져오기 위한 서버연결
+extension DetailNewsFeedVC {
+    func getPostService(postId: Int, completionHandler: @escaping (_ returnedData: NewsPostsContentElement) -> Void ) {
+        ContentService.shared.getPost(postId) { responsedata in
+            
+            switch responsedata {
+            case .success(let res):
+                let response = res as! NewsPostsContentElement
+                self.content = response
+                print("newsPost server connect successful")
+                
+                completionHandler(self.content!)
+                
+            case .requestErr(_):
+                print("request error")
+            
+            case .pathErr:
+                print(".pathErr")
+            
+            case .serverErr:
+                print(".serverErr")
+            
+            case .networkFail :
+                print("failure")
+                }
+        }
+    }
 }

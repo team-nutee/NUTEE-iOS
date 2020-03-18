@@ -57,15 +57,10 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
     
     weak var detailNewsFeedVC: UIViewController?
     
-    var content: PostContent?
+//    var content: NewsPostsContentElement?
     var detailNewsPost: NewsPostsContentElement?
     
     var imgCnt: Int?
-    let dataPeng01 = [ "sample_peng01.jepg" ]
-    let dataPeng02 = [ "sample_peng01.jepg", "sample_peng02.jepg" ]
-    let dataPeng03 = [ "sample_peng01.jepg", "sample_peng02.jepg", "sample_peng03.png" ]
-    let dataPeng04 = [ "sample_peng01.jepg", "sample_peng02.jepg", "sample_peng03.png", "sample_peng04.png" ]
-    let dataPeng05 = [ "sample_peng01.jepg", "sample_peng02.jepg", "sample_peng03.png", "sample_peng04.png", "sample_peng05.png" ]
     
     var numLike: Int?
     var numComment: Int?
@@ -171,27 +166,6 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
         moreAlert.addAction(userReportAction)
         detailNewsFeedVC?.present(moreAlert, animated: true, completion: nil)
     }
-    
-//    //이미지 클릭 시 전환 코드구현 구간
-//    func imageTapped(image:UIImage){
-//        let newImageView = UIImageView(image: image)
-//        newImageView.frame = UIScreen.main.bounds
-//        newImageView.backgroundColor = .black
-//        newImageView.contentMode = .scaleAspectFit
-//        newImageView.isUserInteractionEnabled = true
-//        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissFullscreenImage))
-//        newImageView.addGestureRecognizer(tap)
-//        self.window?.rootViewController?.view.addSubview(newImageView)
-//        self.window?.rootViewController?.navigationController?.isNavigationBarHidden = true
-//        self.window?.rootViewController?.tabBarController?.tabBar.isHidden = true
-//    }
-//
-//    //이미지 전체화면 종료
-//    @objc func dismissFullscreenImage(_ sender: UITapGestureRecognizer) {
-//        self.window?.rootViewController?.navigationController?.isNavigationBarHidden = false
-//        self.window?.rootViewController?.tabBarController?.tabBar.isHidden = false
-//        sender.view?.removeFromSuperview()
-//    }
     
     func initPosting() {
         imgvwUserImg.image = #imageLiteral(resourceName: "defaultProfile")
@@ -315,7 +289,8 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
         vwSquare.isHidden = true
         
         var num = 0
-        switch imgCnt {
+        let imageCnt = detailNewsPost?.images.count
+        switch imageCnt {
         case 1:
             // ver. only OneImage
             vwSquare.isHidden = false
@@ -340,7 +315,7 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
             for imgvw in imgvwTwo {
                 imgvw.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.images[num].src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
                 if num == 1 {
-                    let leftImg = dataPeng03.count - 2
+                    let leftImg = (detailNewsPost?.images.count ?? 0) - 2
                     if leftImg > 0 {
                         imgvw.alpha = 0.8
                         lblTwoMoreImg.isHidden = false
@@ -367,10 +342,10 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
             for imgvw in imgvwThree {
                 imgvw.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.images[num].src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
                 if num == 2 {
-                    let leftImg = dataPeng05.count - 3
+                    let leftImg = (detailNewsPost?.images.count ?? 0) - 3
                     if leftImg > 0 {
                         imgvw.alpha = 0.8
-                        //                        lblThreeMoreImg.isHidden = false
+//                        lblThreeMoreImg.isHidden = false
                         lblThreeMoreImg.text = String(leftImg) + " +"
                         lblThreeMoreImg.sizeToFit()
                     } else {
@@ -393,10 +368,10 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
             for imgvw in imgvwFour {
                 imgvw.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.images[num].src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
                 if num == 3 {
-                    let leftImg = dataPeng04.count - 4
+                    let leftImg = (detailNewsPost?.images.count ?? 0) - 4
                     if leftImg > 0 {
                         imgvw.alpha = 0.8
-                        //                        lblTwoMoreImg.isHidden = false
+//                        lblTwoMoreImg.isHidden = false
                         lblFourMoreImg.text = String(leftImg) + " +"
                         lblFourMoreImg.sizeToFit()
                     } else {
