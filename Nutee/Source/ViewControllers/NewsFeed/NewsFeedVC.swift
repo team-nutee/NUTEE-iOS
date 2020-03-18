@@ -91,7 +91,6 @@ class NewsFeedVC: UIViewController {
     func setLoadBtn(){
         
         let btnLabel = NSMutableAttributedString(string: "새 글 업데이트")
-
         loadCompleteBtn.setAttributedTitle(btnLabel, for: .normal)
         loadCompleteBtn.titleLabel?.font = .boldSystemFont(ofSize: 13)
         loadCompleteBtn.makeRounded(cornerRadius: 15)

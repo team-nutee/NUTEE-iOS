@@ -485,26 +485,29 @@ class NewsFeedCell: UITableViewCell {
     
 }
 
-/*
-    //이미지에 tab 제스쳐 기능 설정
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        let cell = collectionView.cellForItem(at: indexPath) as! FullScreenImgCVCell
-//        self.imageTapped(image: cell.imgvwFullScreen.image!)
-        showDetailNewsFeed()
-//        imageTapped(image: imgUserImg.image!)
+extension NewsFeedCell {
+    func reportPost( content: String, postId : String, completionHandler: @escaping (_ returnedData: NewsPostsContent) -> Void ) {
+        let userid = UserDefaults.standard.string(forKey: "id") ?? ""
+        ContentService.shared.reportPost(userid, content, postId) { (responsedata) in
+            
+            switch responsedata {
+            case .success(let res):
+                
+                LoadingHUD.hide()
+                print(res)
+                
+            case .requestErr(_):
+                print("request error")
+            
+            case .pathErr:
+                print(".pathErr")
+            
+            case .serverErr:
+                print(".serverErr")
+            
+            case .networkFail :
+                print("failure")
+                }
+        }
     }
-    
-    //이미지 클릭 시 전환 코드구현 구간
-    func imageTapped(image:UIImage){
-        let newImageView = UIImageView(image: image)
-        newImageView.frame = UIScreen.main.bounds
-        newImageView.backgroundColor = .black
-        newImageView.contentMode = .scaleAspectFit
-        newImageView.isUserInteractionEnabled = true
-        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissFullscreenImage))
-        newImageView.addGestureRecognizer(tap)
-        newsFeedVC?.view.addSubview(newImageView)
-        newsFeedVC?.navigationController?.isNavigationBarHidden = true
-        newsFeedVC?.tabBarController?.tabBar.isHidden = true
-    }
-}*/
+}

@@ -183,8 +183,7 @@ struct ContentService {
                 
             case .success(let upload, _, _):
                 upload.responseJSON { (response) in
-//                    print("service 성공")
-//                    let json = response.result.value
+
                     completion(.success(response.data as Any))
                 }
             case .failure(let encodingError):
@@ -202,7 +201,7 @@ struct ContentService {
         
         Alamofire.upload(multipartFormData: { (multipartFormData) in
             for image in pictures {
-                if let imageData = image.jpegData(compressionQuality: 0.2) {
+                if let imageData = image.jpegData(compressionQuality: 0.3) {
                     multipartFormData.append(imageData, withName: "image", fileName: "image.jpg", mimeType: "image/jpg")
                 }
             }
@@ -221,4 +220,61 @@ struct ContentService {
         }
     }
     
+    // MARK: - Report
+    
+    func reportPost(_ id: String, _ content: String, _ postId: String, completion: @escaping (NetworkResult<Any>) -> Void) {
+        
+        let URL = APIConstants.ReportPost + "/" + id + "/report"
+        let headers: HTTPHeaders = [
+            "Content-Type": "application/json",
+            "Cookie" : UserDefaults.standard.string(forKey: "Cookie")!
+        ]
+        
+        let body : Parameters = [
+            "content" : content,
+            "PostId" : postId
+        ]
+        
+        
+        Alamofire.request(URL, method: .post, parameters: body, encoding: JSONEncoding.default, headers: headers).responseData{
+            response in
+            
+            switch response.result {
+                
+            case .success:
+                // parameter 위치
+                if let value = response.result.value {
+                    //print("response", )
+                    //response의 respones안에 있는 statusCode를 추출
+                    if let status = response.response?.statusCode {
+                        print(status)
+                        switch status {
+                        case 200:
+                            do{
+                                let decoder = JSONDecoder()
+                                let result = try decoder.decode(String.self, from: value)
+                                
+                                completion(.success(result))
+                            } catch {
+                                completion(.pathErr)
+                            }
+                        case 401:
+                            print("실패 401")
+                            completion(.pathErr)
+                        case 500:
+                            print("실패 500")
+                            completion(.serverErr)
+                        default:
+                            break
+                        }
+                    }
+                }
+                break
+            case .failure(let err):
+                print(err.localizedDescription)
+                completion(.networkFail)
+            }
+        }
+    }
+
 }
