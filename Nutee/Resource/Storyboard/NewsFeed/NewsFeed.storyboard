@@ -339,6 +339,8 @@
                                         </tableViewCellContentView>
                                         <gestureRecognizers/>
                                         <connections>
+                                            <outlet property="ContentToVwSquare" destination="ZhN-gh-bKB" id="FMh-S3-8P5"/>
+                                            <outlet property="ContentToVwTwo" destination="QtJ-m3-U6p" id="k7Z-O1-FwE"/>
                                             <outlet property="ContentsToRepost" destination="q76-au-o60" id="iAs-5V-pfk"/>
                                             <outlet property="TopToRepostImg" destination="H6K-rZ-iPW" id="LQV-0x-r2L"/>
                                             <outlet property="TopToUserImg" destination="Fgt-qE-WAZ" id="zfo-a8-cyB"/>

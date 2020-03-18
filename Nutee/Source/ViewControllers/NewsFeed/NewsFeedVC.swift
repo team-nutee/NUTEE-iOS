@@ -109,6 +109,9 @@ class NewsFeedVC: UIViewController {
     @objc func loadingBtn(){
         updatePosts()
         loadCompleteBtn.isHidden = true
+        
+        let indexPath = IndexPath(row: 0, section: 0)
+        newsTV.scrollToRow(at: indexPath, at: .top, animated: true)
     }
     
     // 로그인이 되어있는지 체크
@@ -159,25 +162,6 @@ class NewsFeedVC: UIViewController {
         }
     }
 
-//    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-//        // UITableView only moves in one direction, y axis
-//        let currentOffset = scrollView.contentOffset.y
-//        let maximumOffset = scrollView.contentSize.height - scrollView.frame.size.height
-//
-//        // Change 10.0 to adjust the distance from bottom
-//        if maximumOffset - currentOffset <= 10.0 {
-//            // 뷰 마지막 부분을 스크롤 하였을 때 작동 코드
-//            let spinner = UIActivityIndicatorView()
-//
-//            newsTV.tableFooterView = spinner
-//            newsTV.tableFooterView?.isHidden = false
-//            spinner.hidesWhenStopped = true
-//
-//            spinner.stopAnimating()
-//            newsTV.tableFooterView = nil
-//        }
-//    }
-    
 }
 
 // MARK: - UITableView

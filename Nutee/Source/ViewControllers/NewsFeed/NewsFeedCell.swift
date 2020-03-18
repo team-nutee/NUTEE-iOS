@@ -31,10 +31,12 @@ class NewsFeedCell: UITableViewCell {
     @IBOutlet var vwTwo: UIView!
     @IBOutlet var imgvwTwo: [UIImageView]!
     @IBOutlet var lblTwoMoreImg: UILabel!
+    @IBOutlet var ContentToVwTwo: NSLayoutConstraint!
     @IBOutlet var vwTwoToRepost: NSLayoutConstraint!
     
     //앨범 프레임 three, four 버전을 통합관리 할 view 객체 생성
     @IBOutlet var vwSquare: UIView!
+    @IBOutlet var ContentToVwSquare: NSLayoutConstraint!
     @IBOutlet var vwSquareToRepost: NSLayoutConstraint!
     
     // ver. OneImage(without frame)
@@ -188,8 +190,6 @@ class NewsFeedCell: UITableViewCell {
             
             // User 정보 설정
             lblUserId.text = newsPost?.user.nickname
-            print(newsPost?.user.nickname)
-            print(newsPost)
             lblUserId.sizeToFit()
             let originPostTime = newsPost?.createdAt
             let postTimeDateFormat = originPostTime!.getDateFormat(time: originPostTime!)
@@ -314,22 +314,28 @@ class NewsFeedCell: UITableViewCell {
             vwThree.isHidden = true
             vwFour.isHidden = true
             
+            ContentToVwTwo.isActive = false
             vwTwoToRepost.isActive = false
+            ContentToVwSquare.isActive = true
             vwSquareToRepost.isActive = true
             ContentsToRepost.isActive = false
             
             imgvwOne.imageFromUrl((APIConstants.BaseURL) + "/" + (newsPost?.images[0].src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+            print("load image 성공적1")
 
         case 2:
             // ver. TwoFrame
             vwTwo.isHidden = false
             
+            ContentToVwTwo.isActive = true
             vwTwoToRepost.isActive = true
+            ContentToVwSquare.isActive = false
             vwSquareToRepost.isActive = false
             ContentsToRepost.isActive = false
             
             for imgvw in imgvwTwo {
                 imgvw.imageFromUrl((APIConstants.BaseURL) + "/" + (newsPost?.images[num].src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+                print("load image 성공적2")
                 if num == 1 {
                     let leftImg = (newsPost?.images.count ?? 0) - 2
                     if leftImg > 0 {
@@ -337,7 +343,6 @@ class NewsFeedCell: UITableViewCell {
                         lblTwoMoreImg.isHidden = false
                         lblTwoMoreImg.text = String(leftImg) + " +"
                         lblTwoMoreImg.sizeToFit()
-//                        imageTapped(image: imgvw.image!)
                     } else {
                         lblTwoMoreImg.isHidden = true
                     }
@@ -351,13 +356,15 @@ class NewsFeedCell: UITableViewCell {
             imgvwOne.isHidden = true
             vwFour.isHidden = true
             
+            ContentToVwTwo.isActive = false
             vwTwoToRepost.isActive = false
+            ContentToVwSquare.isActive = true
             vwSquareToRepost.isActive = true
             ContentsToRepost.isActive = false
             
             for imgvw in imgvwThree {
                 imgvw.imageFromUrl((APIConstants.BaseURL) + "/" + (newsPost?.images[num].src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
-//                imgvw.image = UIImage(named: dataPeng05[num])
+                print("load image 성공적3")
                 if num == 2 {
                     let leftImg = (newsPost?.images.count ?? 0) - 3
                     if leftImg > 0 {
@@ -378,12 +385,15 @@ class NewsFeedCell: UITableViewCell {
             imgvwOne.isHidden = true
             vwThree.isHidden = true
             
+            ContentToVwTwo.isActive = false
             vwTwoToRepost.isActive = false
+            ContentToVwSquare.isActive = true
             vwSquareToRepost.isActive = true
             ContentsToRepost.isActive = false
             
             for imgvw in imgvwFour {
                 imgvw.imageFromUrl((APIConstants.BaseURL) + "/" + (newsPost?.images[num].src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+                print("load image 성공적4")
                 if num == 3 {
                     let leftImg = (newsPost?.images.count ?? 0) - 4
                     if leftImg > 0 {
@@ -403,11 +413,13 @@ class NewsFeedCell: UITableViewCell {
             lblThreeMoreImg.isHidden = true
             lblFourMoreImg.isHidden = true
             
+            ContentToVwTwo.isActive = false
             vwTwoToRepost.isActive = false
+            ContentToVwSquare.isActive = false
             vwSquareToRepost.isActive = false
             ContentsToRepost.isActive = true
         } // case문 종료
-    } // <---ShowImageFrame 설정 끝
+    } // ShowImageFrame 설정 끝
     
     func setClickActions() {
         imgvwUserImg.tag = 1
