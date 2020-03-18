@@ -87,7 +87,7 @@ struct ContentService {
                             do{
                                 print("start decode getPost")
                                 let decoder = JSONDecoder()
-                                let result = try decoder.decode(PostContent.self, from: value)
+                                let result = try decoder.decode(NewsPostsContentElement.self, from: value)
                                 completion(.success(result))
                             } catch {
                                 completion(.pathErr)

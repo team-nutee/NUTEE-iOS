@@ -62,8 +62,6 @@ class NewsFeedCell: UITableViewCell {
     
     var newsPost: NewsPostsContentElement?
     
-    var contentId : Int = 0
-    
     var imgCnt: Int?
 
     var numLike: Int?
@@ -190,6 +188,8 @@ class NewsFeedCell: UITableViewCell {
             
             // User 정보 설정
             lblUserId.text = newsPost?.user.nickname
+            print(newsPost?.user.nickname)
+            print(newsPost)
             lblUserId.sizeToFit()
             let originPostTime = newsPost?.createdAt
             let postTimeDateFormat = originPostTime!.getDateFormat(time: originPostTime!)
@@ -317,6 +317,7 @@ class NewsFeedCell: UITableViewCell {
             vwTwoToRepost.isActive = false
             vwSquareToRepost.isActive = true
             ContentsToRepost.isActive = false
+            
             imgvwOne.imageFromUrl((APIConstants.BaseURL) + "/" + (newsPost?.images[0].src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
 
         case 2:
@@ -326,6 +327,7 @@ class NewsFeedCell: UITableViewCell {
             vwTwoToRepost.isActive = true
             vwSquareToRepost.isActive = false
             ContentsToRepost.isActive = false
+            
             for imgvw in imgvwTwo {
                 imgvw.imageFromUrl((APIConstants.BaseURL) + "/" + (newsPost?.images[num].src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
                 if num == 1 {
@@ -406,27 +408,6 @@ class NewsFeedCell: UITableViewCell {
             ContentsToRepost.isActive = true
         } // case문 종료
     } // <---ShowImageFrame 설정 끝
-
-//    //이미지 클릭 시 전환 코드구현 구간
-//    func imageTapped(image:UIImage){
-//        let newImageView = UIImageView(image: image)
-//        newImageView.frame = UIScreen.main.bounds
-//        newImageView.backgroundColor = .black
-//        newImageView.contentMode = .scaleAspectFit
-//        newImageView.isUserInteractionEnabled = true
-//        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissFullscreenImage))
-//        newImageView.addGestureRecognizer(tap)
-//        newsFeedVC?.view.addSubview(newImageView)
-//        newsFeedVC?.navigationController?.isNavigationBarHidden = true
-//        newsFeedVC?.tabBarController?.tabBar.isHidden = true
-//    }
-//
-//    //이미지 전체화면 종료
-//    @objc func dismissFullscreenImage(_ sender: UITapGestureRecognizer) {
-//        newsFeedVC?.navigationController?.isNavigationBarHidden = false
-//        newsFeedVC?.tabBarController?.tabBar.isHidden = false
-//        sender.view?.removeFromSuperview()
-//    }
     
     func setClickActions() {
         imgvwUserImg.tag = 1
@@ -469,8 +450,11 @@ class NewsFeedCell: UITableViewCell {
         let detailNewsFeedSB = UIStoryboard(name: "DetailNewsFeed", bundle: nil)
         let showDetailNewsFeedVC = detailNewsFeedSB.instantiateViewController(withIdentifier: "DetailNewsFeed") as! DetailNewsFeedVC
         
-        // 현재 게시물 정보를 DetailNewsFeedVC로 넘겨줌
-        showDetailNewsFeedVC.detailNewsPost = self.newsPost
+        // 현재 게시물 id를 DetailNewsFeedVC로 넘겨줌
+        showDetailNewsFeedVC.postId = self.newsPost?.id
+        showDetailNewsFeedVC.getPostService(postId: showDetailNewsFeedVC.postId!, completionHandler: {(returnedData)-> Void in
+            showDetailNewsFeedVC.replyTV.reloadData()
+        })
         
         newsFeedVC?.navigationController?.pushViewController(showDetailNewsFeedVC, animated: true)
     }
