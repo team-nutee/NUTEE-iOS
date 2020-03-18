@@ -321,7 +321,6 @@ class NewsFeedCell: UITableViewCell {
             ContentsToRepost.isActive = false
             
             imgvwOne.imageFromUrl((APIConstants.BaseURL) + "/" + (newsPost?.images[0].src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
-            print("load image 성공적1")
 
         case 2:
             // ver. TwoFrame
@@ -335,7 +334,6 @@ class NewsFeedCell: UITableViewCell {
             
             for imgvw in imgvwTwo {
                 imgvw.imageFromUrl((APIConstants.BaseURL) + "/" + (newsPost?.images[num].src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
-                print("load image 성공적2")
                 if num == 1 {
                     let leftImg = (newsPost?.images.count ?? 0) - 2
                     if leftImg > 0 {
@@ -364,7 +362,6 @@ class NewsFeedCell: UITableViewCell {
             
             for imgvw in imgvwThree {
                 imgvw.imageFromUrl((APIConstants.BaseURL) + "/" + (newsPost?.images[num].src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
-                print("load image 성공적3")
                 if num == 2 {
                     let leftImg = (newsPost?.images.count ?? 0) - 3
                     if leftImg > 0 {
@@ -393,7 +390,6 @@ class NewsFeedCell: UITableViewCell {
             
             for imgvw in imgvwFour {
                 imgvw.imageFromUrl((APIConstants.BaseURL) + "/" + (newsPost?.images[num].src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
-                print("load image 성공적4")
                 if num == 3 {
                     let leftImg = (newsPost?.images.count ?? 0) - 4
                     if leftImg > 0 {
