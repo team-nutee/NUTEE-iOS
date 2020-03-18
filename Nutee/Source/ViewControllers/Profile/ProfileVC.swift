@@ -107,7 +107,7 @@ class ProfileVC: UIViewController {
     @objc func settingProfile() {
         let setProfileVC = self.storyboard?.instantiateViewController(withIdentifier: "SetProfileVC") as! SetProfileVC
         setProfileVC.modalPresentationStyle = .fullScreen
-        setProfileVC.name = UserDefaults.standard.value(forKey: "userId") as! String
+        setProfileVC.name = userInfo!.nickname
         
         self.present(setProfileVC, animated: true, completion: nil)
     }

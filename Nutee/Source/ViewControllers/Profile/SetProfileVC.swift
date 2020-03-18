@@ -30,6 +30,7 @@ class SetProfileVC: UIViewController {
         
         setIMGBtn.addTarget(self, action: #selector(showImagePickerController), for: .touchUpInside)
         closeBtn.addTarget(self, action: #selector(close), for: .touchUpInside)
+        saveBtn.addTarget(self, action: #selector(saveChangedProfileInfo), for: .touchUpInside)
         
         setInit()
     }
@@ -62,6 +63,17 @@ class SetProfileVC: UIViewController {
     @objc func close() {
         self.dismiss(animated: true, completion: nil)
     }
+    
+    @objc func saveChangedProfileInfo() {
+        if nameTextField.text != "" {
+            changeNicknameService(changedNickname: nameTextField.text!)
+        } else {
+            let emptyAlert = UIAlertController(title: nil, message: "닉네임을 입력하세요!", preferredStyle: UIAlertController.Style.alert)
+            let okayAction = UIAlertAction(title: "확인", style: .default)
+            emptyAlert.addAction(okayAction)
+            self.present(emptyAlert, animated: true, completion: nil)
+        }
+    }
 }
 
 extension SetProfileVC : UINavigationControllerDelegate, UIImagePickerControllerDelegate {
@@ -83,4 +95,35 @@ extension SetProfileVC : UINavigationControllerDelegate, UIImagePickerController
         
         dismiss(animated: true, completion:  nil)
     }
+}
+
+// MARK: - 프로필 이미지 혹은 닉네임 변경을 위한 서버 연결 코드
+extension SetProfileVC {
+    func changeNicknameService(changedNickname: String){
+        UserService.shared.chageNickname(changedNickname) {
+            [weak self]
+            data in
+            
+            guard let `self` = self else { return }
+            
+            switch data {
+            case .success(_ ):
+                
+                LoadingHUD.hide()
+                self.dismiss(animated: true, completion: nil)
+            case .requestErr:
+                LoadingHUD.hide()
+                print("requestErr")
+            case .pathErr:
+                print(".pathErr")
+                
+            case .serverErr:
+                print(".serverErr")
+                
+            case .networkFail:
+                print(".networkFail")
+            }
+        }
+    }
+    
 }
