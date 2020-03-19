@@ -113,8 +113,10 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
         //        btnLike.isSelected = !btnLike.isSelected
         if isClickedLike! {
             setNormalLikeBtn()
+            likeDeleteService(postId: detailNewsPost?.id ?? 0)
         } else {
             setSelectedLikeBtn()
+            likePostService(postId: detailNewsPost?.id ?? 0)
         }
     }
     
@@ -211,7 +213,13 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
             isClickedRepost = false
             btnRepost.tintColor = .gray
             // Like 버튼
-            if (detailNewsPost?.likers.contains(detailNewsPost!.userID) ?? false) {
+            var containLoginUser = false
+            for arrSearch in detailNewsPost?.likers ?? [] {
+                if arrSearch.like.userID == UserDefaults.standard.integer(forKey: "id") {
+                    containLoginUser = true
+                }
+            }
+            if containLoginUser {
                 // 로그인 한 사용자가 좋아요를 누른 상태일 경우
                 btnLike.isSelected = true
                 numLike = detailNewsPost?.likers.count ?? 0
@@ -220,7 +228,6 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
                 isClickedLike = true
             } else {
                 // 로그인 한 사용자가 좋아요를 누르지 않은 상태일 경우
-                print("여기를 통과하는지 확인")
                 btnLike.isSelected = false
                 numLike = detailNewsPost?.likers.count ?? 0
                 btnLike.setTitle(" " + String(numLike!), for: .normal)
@@ -422,29 +429,10 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
     }
 }
 
-/*
- //이미지 클릭 시 전환 코드구현 구간
- func imageTapped(image:UIImage){
- let newImageView = UIImageView(image: image)
- newImageView.frame = UIScreen.main.bounds
- newImageView.backgroundColor = .black
- newImageView.contentMode = .scaleAspectFit
- newImageView.isUserInteractionEnabled = true
- let tap = UITapGestureRecognizer(target: self, action: #selector(dismissFullscreenImage))
- newImageView.addGestureRecognizer(tap)
- self.window?.rootViewController?.view.addSubview(newImageView)
- self.window?.rootViewController?.navigationController?.isNavigationBarHidden = true
- self.window?.rootViewController?.tabBarController?.tabBar.isHidden = true
- }
- 
- //이미지 전체화면 종료
- @objc func dismissFullscreenImage(_ sender: UITapGestureRecognizer) {
- self.window?.rootViewController?.navigationController?.isNavigationBarHidden = false
- self.window?.rootViewController?.tabBarController?.tabBar.isHidden = false
- sender.view?.removeFromSuperview()
- }
- */
+// MARK: - 서버 연결 코드 구간
+
 extension HeaderNewsFeedView {
+    
     func reportPost( content: String) {
         let userid = UserDefaults.standard.string(forKey: "id") ?? ""
         ContentService.shared.reportPost(userid, content) { (responsedata) in
@@ -474,6 +462,50 @@ extension HeaderNewsFeedView {
             case .networkFail :
                 print("failure")
             }
+        }
+    }
+    
+    func likePostService(postId: Int) {
+        ContentService.shared.likePost(postId) { (responsedata) in
+            
+            switch responsedata {
+            case .success(let res):
+                
+                print("likePost succussful", res)
+            case .requestErr(_):
+                print("request error")
+            
+            case .pathErr:
+                print(".pathErr")
+            
+            case .serverErr:
+                print(".serverErr")
+            
+            case .networkFail :
+                print("failure")
+                }
+        }
+    }
+    
+    func likeDeleteService(postId: Int) {
+        ContentService.shared.likeDelete(postId) { (responsedata) in
+            
+            switch responsedata {
+            case .success(let res):
+                
+                print("likePost succussful", res)
+            case .requestErr(_):
+                print("request error")
+            
+            case .pathErr:
+                print(".pathErr")
+            
+            case .serverErr:
+                print(".serverErr")
+            
+            case .networkFail :
+                print("failure")
+                }
         }
     }
 }

@@ -16,7 +16,7 @@ struct NewsPostsContentElement: Codable {
     let retweetID: Int?
     let user: User
     let images: [Image]
-    let likers: [Int]
+    let likers: [Liker]
     let retweet: Retweet?
     let comments: [Comment]
 
@@ -41,7 +41,7 @@ struct NewsPostsContentElement: Codable {
         retweetID = (try? values.decode(Int.self, forKey: .retweetID)) ?? nil
         user = (try? values.decode(User.self, forKey: .user)) ?? User.init(id: 0, nickname: "", image: nil)
         images = (try? values.decode([Image].self, forKey: .images)) ?? []
-        likers = (try? values.decode([Int].self, forKey: .likers)) ?? []
+        likers = (try? values.decode([Liker].self, forKey: .likers)) ?? [Liker.init(id: 0, like: Like.init(createdAt: "", updatedAt: "", postID: 0, userID: 0))]
         retweet = (try? values.decode(Retweet.self, forKey: .retweet)) ?? nil
         comments = (try? values.decode([Comment].self, forKey: .comments)) ?? [Comment.init(id: 0, content: "", createdAt: "", updatedAt: "", userID: 0, postID: 0, user: User.init(id: 0, nickname: "", image: nil))]
     }
@@ -90,6 +90,29 @@ struct Retweet: Codable {
         case retweetID = "RetweetId"
         case user = "User"
         case images = "Images"
+    }
+}
+
+// MARK: - Liker
+struct Liker: Codable {
+    let id: Int
+    let like: Like
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case like = "Like"
+    }
+}
+
+// MARK: - Like
+struct Like: Codable {
+    let createdAt, updatedAt: String
+    let postID, userID: Int
+
+    enum CodingKeys: String, CodingKey {
+        case createdAt, updatedAt
+        case postID = "PostId"
+        case userID = "UserId"
     }
 }
 

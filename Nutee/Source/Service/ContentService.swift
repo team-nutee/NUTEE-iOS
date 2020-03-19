@@ -268,4 +268,86 @@ struct ContentService {
         }
     }
     
+    // MARK: - like
+    
+    func likePost(_ postId: Int, completion: @escaping (NetworkResult<Any>) -> Void) {
+        
+        let URL = APIConstants.LikePost + "/\(postId)/like"
+        let headers: HTTPHeaders = [
+            "Cookie" : UserDefaults.standard.string(forKey: "Cookie")!
+        ]
+        
+        Alamofire.request(URL, method: .post, encoding: JSONEncoding.default, headers: headers).responseData{
+            response in
+            
+            switch response.result {
+                
+            case .success:
+                
+                if let status = response.response?.statusCode {
+                    print("likePost method:", status)
+                    
+                    switch status {
+                    case 200:
+                        completion(.success("likePost에 성공했습니다."))
+                    case 401:
+                        print("실패 401")
+                        completion(.pathErr)
+                    case 500:
+                        print("실패 500")
+                        completion(.serverErr)
+                    default:
+                        break
+                    }
+                }
+                
+                break
+                
+            case .failure(let err):
+                print(err.localizedDescription)
+                completion(.networkFail)
+            }
+        }
+    }
+    
+    func likeDelete(_ postId: Int, completion: @escaping (NetworkResult<Any>) -> Void) {
+        
+        let URL = APIConstants.LikeDelete + "/\(postId)/like"
+        let headers: HTTPHeaders = [
+            "Cookie" : UserDefaults.standard.string(forKey: "Cookie")!
+        ]
+        
+        Alamofire.request(URL, method: .delete, encoding: JSONEncoding.default, headers: headers).responseData{
+            response in
+            
+            switch response.result {
+                
+            case .success:
+                
+                if let status = response.response?.statusCode {
+                    print("likeDelete method:", status)
+                    
+                    switch status {
+                    case 200:
+                        completion(.success("likeDelete에 성공했습니다."))
+                    case 401:
+                        print("실패 401")
+                        completion(.pathErr)
+                    case 500:
+                        print("실패 500")
+                        completion(.serverErr)
+                    default:
+                        break
+                    }
+                }
+                
+                break
+                
+            case .failure(let err):
+                print(err.localizedDescription)
+                completion(.networkFail)
+            }
+        }
+    }
+        
 }

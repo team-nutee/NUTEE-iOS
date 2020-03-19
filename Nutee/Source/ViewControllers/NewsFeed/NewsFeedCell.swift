@@ -118,8 +118,10 @@ class NewsFeedCell: UITableViewCell {
 //        btnLike.isSelected = !btnLike.isSelected
         if isClickedLike! {
             setNormalLikeBtn()
+            likeDeleteService(postId: newsPost?.id ?? 0)
         } else {
             setSelectedLikeBtn()
+            likePostService(postId: newsPost?.id ?? 0)
         }
     }
     
@@ -187,7 +189,7 @@ class NewsFeedCell: UITableViewCell {
     
     //포스팅 내용 초기설정
     func initPosting() {
-        
+        // 사용자 프로필 이미지 설정
         if newsPost?.user.image?.src == nil || newsPost?.user.image?.src == ""{
         imgvwUserImg.imageFromUrl("http://15.164.50.161:9425/settings/nutee_profile.png", defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
         } else {
@@ -214,8 +216,6 @@ class NewsFeedCell: UITableViewCell {
             txtvwContent.text = newsPost?.content
             txtvwContent.postingInit()
             
-//            print(txtvwContents.text, "<---- ", newsPost?.createdAt)
-            
             imgCnt = newsPost?.images.count
             showImgFrame()
             
@@ -223,7 +223,13 @@ class NewsFeedCell: UITableViewCell {
             isClickedRepost = false
             btnRepost.tintColor = .gray
             // Like 버튼
-            if (newsPost?.likers.contains(newsPost!.userID) ?? false) {
+            var containLoginUser = false
+            for arrSearch in newsPost?.likers ?? [] {
+                if arrSearch.like.userID == UserDefaults.standard.integer(forKey: "id") {
+                    containLoginUser = true
+                }
+            }
+            if containLoginUser {
                 // 로그인 한 사용자가 좋아요를 누른 상태일 경우
                 btnLike.isSelected = true
                 numLike = newsPost?.likers.count ?? 0
@@ -258,8 +264,6 @@ class NewsFeedCell: UITableViewCell {
             // Posting 내용 설정
             txtvwContent.text = newsPost?.retweet!.content
             txtvwContent.postingInit()
-            
-//            print(txtvwContents.text, "<---- ", newsPost?.retweet?.createdAt)
             
             imgCnt = newsPost?.retweet!.images.count
             showImgFrame()
@@ -500,6 +504,8 @@ class NewsFeedCell: UITableViewCell {
     
 }
 
+// MARK: - 서버 연결 코드 구간
+
 extension NewsFeedCell {
     func reportPost( content: String) {
         let userid = UserDefaults.standard.string(forKey: "id") ?? ""
@@ -532,4 +538,49 @@ extension NewsFeedCell {
                 }
         }
     }
+    
+    func likePostService(postId: Int) {
+        ContentService.shared.likePost(postId) { (responsedata) in
+            
+            switch responsedata {
+            case .success(let res):
+                
+                print("likePost succussful", res)
+            case .requestErr(_):
+                print("request error")
+            
+            case .pathErr:
+                print(".pathErr")
+            
+            case .serverErr:
+                print(".serverErr")
+            
+            case .networkFail :
+                print("failure")
+                }
+        }
+    }
+    
+    func likeDeleteService(postId: Int) {
+        ContentService.shared.likeDelete(postId) { (responsedata) in
+            
+            switch responsedata {
+            case .success(let res):
+                
+                print("likePost succussful", res)
+            case .requestErr(_):
+                print("request error")
+            
+            case .pathErr:
+                print(".pathErr")
+            
+            case .serverErr:
+                print(".serverErr")
+            
+            case .networkFail :
+                print("failure")
+                }
+        }
+    }
+
 }
