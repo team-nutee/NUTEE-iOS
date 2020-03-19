@@ -170,10 +170,17 @@ class NewsFeedCell: UITableViewCell {
         }
         let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
 
-        moreAlert.addAction(editAction)
-        moreAlert.addAction(deleteAction)
-        moreAlert.addAction(cancelAction)
-        moreAlert.addAction(userReportAction)
+        let userid = Int(UserDefaults.standard.string(forKey: "id") ?? "")
+        
+        if (userid == newsPost?.userID) {
+            moreAlert.addAction(editAction)
+            moreAlert.addAction(deleteAction)
+            moreAlert.addAction(cancelAction)
+        } else {
+            moreAlert.addAction(userReportAction)
+            moreAlert.addAction(cancelAction)
+        }
+        
         newsFeedVC?.present(moreAlert, animated: true, completion: nil)
     }
     

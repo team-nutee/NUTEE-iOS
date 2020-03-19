@@ -135,7 +135,7 @@ extension EmailVC {
             .filter({$0.isKeyWindow}).first
             let bottomPadding = keyWindow?.safeAreaInsets.bottom
             
-            bottomYLayoutConstraint.constant = (keyboardHeight - bottomPadding!)
+            bottomYLayoutConstraint.constant = (keyboardHeight - (bottomPadding ?? 0))
             
             self.view.setNeedsLayout()
             UIView.animate(withDuration: duration, delay: 0, options: .init(rawValue: curve), animations: {

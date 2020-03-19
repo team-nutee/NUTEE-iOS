@@ -102,7 +102,7 @@ extension NameVC {
             //            let window = UIApplication.shared.keyWindow
             let bottomPadding = keyWindow?.safeAreaInsets.bottom
             
-            buttonYLayoutConstraint.constant = (keyboardHeight - bottomPadding!)
+            buttonYLayoutConstraint.constant = (keyboardHeight - (bottomPadding ?? 0))
             
             self.view.setNeedsLayout()
             UIView.animate(withDuration: duration, delay: 0, options: .init(rawValue: curve), animations: {

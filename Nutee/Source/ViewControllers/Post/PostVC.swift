@@ -136,7 +136,7 @@ extension PostVC {
                 .filter({$0.isKeyWindow}).first
             let bottomPadding = keyWindow?.safeAreaInsets.bottom
             
-            pickerViewBottomConstraint.constant = -( keyboardHeight - bottomPadding!)
+            pickerViewBottomConstraint.constant = -( keyboardHeight - (bottomPadding ?? 0))
             scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardHeight - bottomPadding!, right: 0)
             
             self.view.setNeedsLayout()
