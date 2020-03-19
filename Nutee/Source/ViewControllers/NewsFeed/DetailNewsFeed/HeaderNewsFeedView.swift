@@ -32,7 +32,7 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
     @IBOutlet var imgvwTwo: [UIImageView]!
     @IBOutlet var lblTwoMoreImg: UILabel!
     @IBOutlet var vwTwoToRepost: NSLayoutConstraint!
-
+    
     //앨범 프레임 three, four 버전을 통합관리 할 view 객체 생성
     @IBOutlet var vwSquare: UIView!
     @IBOutlet var vwSquareToRepost: NSLayoutConstraint!
@@ -57,7 +57,7 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
     
     weak var detailNewsFeedVC: UIViewController?
     
-//    var content: NewsPostsContentElement?
+    //    var content: NewsPostsContentElement?
     var detailNewsPost: NewsPostsContentElement?
     
     var imgCnt: Int?
@@ -91,7 +91,7 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
     }
     
     //MARK: - Helper
-
+    
     @IBAction func showDetailProfile(_ sender: Any) {
         showProfile()
     }
@@ -107,10 +107,10 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
             isClickedRepost = true
         }
     }
-            
+    
     @IBAction func btnLike(_ sender: UIButton) {
         // .selected State를 활성화 하기 위한 코드
-//        btnLike.isSelected = !btnLike.isSelected
+        //        btnLike.isSelected = !btnLike.isSelected
         if isClickedLike! {
             setNormalLikeBtn()
         } else {
@@ -139,19 +139,21 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
         let userReportAction = UIAlertAction(title: "신고하기🚨", style: .destructive) {
             (action: UIAlertAction) in
             // Code to 신고 기능
-            let reportAlert = UIAlertController(title: "이 게시글을 신고하시겠습니까?", message: "\(String(self.txtvwContent.text))", preferredStyle: UIAlertController.Style.alert)
+            let reportAlert = UIAlertController(title: "이 게시글을 신고하시겠습니까?", message: "", preferredStyle: UIAlertController.Style.alert)
             let cancelAction
                 = UIAlertAction(title: "취소", style: .cancel, handler: nil)
             let reportAction = UIAlertAction(title: "신고", style: .destructive) {
                 (action: UIAlertAction) in
                 // <---- 신고 기능 구현
+                let content = reportAlert.textFields?[0].text ?? "" // 신고 내용
+                //                let postId = self.newsPost?.id ?? 0
+                self.reportPost(content: content)
                 
-                //신고 여부 알림
-                let successfulAlert = UIAlertController(title: nil, message: "신고가 완료되었습니다", preferredStyle: UIAlertController.Style.alert)
-                let okAction = UIAlertAction(title: "확인", style: .default, handler: nil)
-                successfulAlert.addAction(okAction)
                 
-                self.detailNewsFeedVC?.present(successfulAlert, animated: true, completion: nil)
+            }
+            reportAlert.addTextField { (mytext) in
+                mytext.tintColor = .nuteeGreen
+                mytext.placeholder = "신고할 내용을 입력해주세요."
             }
             reportAlert.addAction(cancelAction)
             reportAlert.addAction(reportAction)
@@ -159,11 +161,17 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
             self.detailNewsFeedVC?.present(reportAlert, animated: true, completion: nil)
         }
         let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
-
-        moreAlert.addAction(editAction)
-        moreAlert.addAction(deleteAction)
-        moreAlert.addAction(cancelAction)
-        moreAlert.addAction(userReportAction)
+        
+        let userid = Int(UserDefaults.standard.string(forKey: "id") ?? "")
+        
+        if (userid == detailNewsPost?.userID) {
+            moreAlert.addAction(editAction)
+            moreAlert.addAction(deleteAction)
+            moreAlert.addAction(cancelAction)
+        } else {
+            moreAlert.addAction(userReportAction)
+            moreAlert.addAction(cancelAction)
+        }
         detailNewsFeedVC?.present(moreAlert, animated: true, completion: nil)
     }
     
@@ -257,9 +265,9 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
             // More 버튼
             btnMore.isEnabled = false
         }
-//        print("좋아요 숫자 ====> ",numLike)
+        //        print("좋아요 숫자 ====> ",numLike)
     }
-
+    
     func setNormalLikeBtn() {
         btnLike.isSelected = false
         numLike! -= 1
@@ -345,7 +353,7 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
                     let leftImg = (detailNewsPost?.images.count ?? 0) - 3
                     if leftImg > 0 {
                         imgvw.alpha = 0.8
-//                        lblThreeMoreImg.isHidden = false
+                        //                        lblThreeMoreImg.isHidden = false
                         lblThreeMoreImg.text = String(leftImg) + " +"
                         lblThreeMoreImg.sizeToFit()
                     } else {
@@ -371,7 +379,7 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
                     let leftImg = (detailNewsPost?.images.count ?? 0) - 4
                     if leftImg > 0 {
                         imgvw.alpha = 0.8
-//                        lblTwoMoreImg.isHidden = false
+                        //                        lblTwoMoreImg.isHidden = false
                         lblFourMoreImg.text = String(leftImg) + " +"
                         lblFourMoreImg.sizeToFit()
                     } else {
@@ -391,7 +399,7 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
             ContentsToRepost.isActive = true
         } // case문 종료
     } // <---ShowImageFrame 설정 끝
-
+    
     func showProfile() {
         let profileSB = UIStoryboard(name: "ProfileVC", bundle: nil)
         let showProfileVC = profileSB.instantiateViewController(withIdentifier: "ProfileVC") as! ProfileVC
@@ -410,24 +418,57 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
 }
 
 /*
-    //이미지 클릭 시 전환 코드구현 구간
-    func imageTapped(image:UIImage){
-        let newImageView = UIImageView(image: image)
-        newImageView.frame = UIScreen.main.bounds
-        newImageView.backgroundColor = .black
-        newImageView.contentMode = .scaleAspectFit
-        newImageView.isUserInteractionEnabled = true
-        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissFullscreenImage))
-        newImageView.addGestureRecognizer(tap)
-        self.window?.rootViewController?.view.addSubview(newImageView)
-        self.window?.rootViewController?.navigationController?.isNavigationBarHidden = true
-        self.window?.rootViewController?.tabBarController?.tabBar.isHidden = true
+ //이미지 클릭 시 전환 코드구현 구간
+ func imageTapped(image:UIImage){
+ let newImageView = UIImageView(image: image)
+ newImageView.frame = UIScreen.main.bounds
+ newImageView.backgroundColor = .black
+ newImageView.contentMode = .scaleAspectFit
+ newImageView.isUserInteractionEnabled = true
+ let tap = UITapGestureRecognizer(target: self, action: #selector(dismissFullscreenImage))
+ newImageView.addGestureRecognizer(tap)
+ self.window?.rootViewController?.view.addSubview(newImageView)
+ self.window?.rootViewController?.navigationController?.isNavigationBarHidden = true
+ self.window?.rootViewController?.tabBarController?.tabBar.isHidden = true
+ }
+ 
+ //이미지 전체화면 종료
+ @objc func dismissFullscreenImage(_ sender: UITapGestureRecognizer) {
+ self.window?.rootViewController?.navigationController?.isNavigationBarHidden = false
+ self.window?.rootViewController?.tabBarController?.tabBar.isHidden = false
+ sender.view?.removeFromSuperview()
+ }
+ */
+extension HeaderNewsFeedView {
+    func reportPost( content: String) {
+        let userid = UserDefaults.standard.string(forKey: "id") ?? ""
+        ContentService.shared.reportPost(userid, content) { (responsedata) in
+            
+            switch responsedata {
+            case .success(let res):
+                
+                print(res)
+                
+                let successfulAlert = UIAlertController(title: "신고가 완료되었습니다", message: nil, preferredStyle: UIAlertController.Style.alert)
+                let okAction = UIAlertAction(title: "확인", style: .default, handler: nil)
+                
+                successfulAlert.addAction(okAction)
+                
+                self.detailNewsFeedVC?.present(successfulAlert, animated: true, completion: nil)
+                
+                
+            case .requestErr(_):
+                print("request error")
+                
+            case .pathErr:
+                print(".pathErr")
+                
+            case .serverErr:
+                print(".serverErr")
+                
+            case .networkFail :
+                print("failure")
+            }
+        }
     }
-
-    //이미지 전체화면 종료
-    @objc func dismissFullscreenImage(_ sender: UITapGestureRecognizer) {
-        self.window?.rootViewController?.navigationController?.isNavigationBarHidden = false
-        self.window?.rootViewController?.tabBarController?.tabBar.isHidden = false
-        sender.view?.removeFromSuperview()
-    }
-*/
+}
