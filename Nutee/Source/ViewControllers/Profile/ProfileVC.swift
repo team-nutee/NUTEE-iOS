@@ -108,6 +108,7 @@ class ProfileVC: UIViewController {
         let setProfileVC = self.storyboard?.instantiateViewController(withIdentifier: "SetProfileVC") as! SetProfileVC
         setProfileVC.modalPresentationStyle = .fullScreen
         setProfileVC.name = userInfo!.nickname
+        setProfileVC.profileImgSrc = userInfo?.image.src
         
         self.present(setProfileVC, animated: true, completion: nil)
     }
@@ -187,7 +188,7 @@ extension ProfileVC : UITableViewDataSource {
             
             cell.profileNameLabel.text = userPost?.user.nickname
             cell.articleTextView.text = userPost?.content
-            cell.profileIMG.imageFromUrl(userInfo?.image, defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+            cell.profileIMG.imageFromUrl((APIConstants.BaseURL) + "/" + (userInfo?.image.src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
             
             let originUserPostTime = userPost?.createdAt
             let userPostTimeDateFormat = originUserPostTime!.getDateFormat(time: originUserPostTime!)
@@ -247,8 +248,8 @@ extension ProfileVC : UITableViewDataSource {
         }
         
 
-        profileImage.contentMode = .scaleAspectFit
-        profileImage.imageFromUrl("", defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+//        profileImage.contentMode = .scaleAspectFit
+        profileImage.imageFromUrl((APIConstants.BaseURL) + "/" + (userInfo?.image.src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
         profileImage.setRounded(radius: 50)
         profileImage.translatesAutoresizingMaskIntoConstraints = false
         profileImage.topAnchor.constraint(equalTo: headerView.topAnchor, constant: 10).isActive = true

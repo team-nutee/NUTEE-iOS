@@ -58,5 +58,6 @@ struct APIConstants {
 
     
     static let NickNamePatch = BaseURL + "/api/user/nickname"                   // PATCH
+    static let ProfileImagePost = BaseURL + "/api/user/profile"                 // POST
     
 }

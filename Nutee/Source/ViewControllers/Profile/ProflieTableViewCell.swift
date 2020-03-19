@@ -23,6 +23,7 @@ class ProflieTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         profileIMG.setRounded(radius: nil)
+        profileIMG.contentMode = .scaleAspectFill
 //        profileIMG.backgroundColor = .lightGray
         shareBtn.tintColor = .lightGray
         shareBtn.titleLabel?.textColor = .lightGray

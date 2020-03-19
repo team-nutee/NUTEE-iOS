@@ -11,6 +11,7 @@ import UIKit
 class SetProfileVC: UIViewController {
     
     // MARK: - UI components
+    
     @IBOutlet weak var closeBtn: UIButton!
     @IBOutlet weak var saveBtn: UIButton!
     @IBOutlet weak var profileIMG: UIImageView!
@@ -18,9 +19,12 @@ class SetProfileVC: UIViewController {
     @IBOutlet weak var nameTextField: UITextField!
     
     // MARK: - Variables and Properties
+    
     let picker = UIImagePickerController()
     var pickedIMG = UIImage()
     var name : String = ""
+    var profileImgSrc : String?
+    
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
@@ -46,7 +50,7 @@ class SetProfileVC: UIViewController {
         saveBtn.titleLabel?.font = .boldSystemFont(ofSize: 15)
         setIMGBtn.tintColor = .white
         setIMGBtn.backgroundColor = .nuteeGreen
-        profileIMG.imageFromUrl("http://15.164.50.161:9425/settings/nutee_profile.png", defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+        profileIMG.imageFromUrl((APIConstants.BaseURL) + "/" + (profileImgSrc ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
 
         nameTextField.addBorder(.bottom, color: .nuteeGreen, thickness: 1)
         nameTextField.tintColor = .nuteeGreen
@@ -65,6 +69,7 @@ class SetProfileVC: UIViewController {
     }
     
     @objc func saveChangedProfileInfo() {
+        // 닉네임 변경
         if nameTextField.text != "" {
             changeNicknameService(changedNickname: nameTextField.text!)
         } else {
@@ -73,6 +78,9 @@ class SetProfileVC: UIViewController {
             emptyAlert.addAction(okayAction)
             self.present(emptyAlert, animated: true, completion: nil)
         }
+        
+        // 프로필 이미지 변경
+        changeProfileImageService(image: [pickedIMG])
     }
 }
 
@@ -109,10 +117,8 @@ extension SetProfileVC {
             switch data {
             case .success(_ ):
                 
-                LoadingHUD.hide()
                 self.dismiss(animated: true, completion: nil)
             case .requestErr:
-                LoadingHUD.hide()
                 print("requestErr")
             case .pathErr:
                 print(".pathErr")
@@ -126,4 +132,28 @@ extension SetProfileVC {
         }
     }
     
+    func changeProfileImageService(image: [UIImage]){
+        UserService.shared.changeProfileImage(image) {
+            [weak self]
+            data in
+            
+            guard let `self` = self else { return }
+            
+            switch data {
+            case .success(_ ):
+                
+                self.dismiss(animated: true, completion: nil)
+            case .requestErr:
+                print("requestErr")
+            case .pathErr:
+                print(".pathErr")
+                
+            case .serverErr:
+                print(".serverErr")
+                
+            case .networkFail:
+                print(".networkFail")
+            }
+        }
+    }
 }

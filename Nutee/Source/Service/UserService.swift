@@ -441,4 +441,83 @@ struct UserService {
         }
     }
 
+    // MARK: - 사용자 프로필 이미지 변경
+    
+    func changeProfileImage(_ image : [UIImage], completion: @escaping (NetworkResult<Any>) -> Void){
+        
+        let headers: HTTPHeaders = [
+            "Content-Type": "application/json",
+            "Cookie" : UserDefaults.standard.string(forKey: "Cookie")!
+        ]
+        
+        Alamofire.upload(multipartFormData: { (multipartFormData) in
+            for img in image {
+                if let imageData = img.jpegData(compressionQuality: 0.2) {
+                    multipartFormData.append(imageData, withName: "image", fileName: "image.jpg", mimeType: "image/jpg")
+                }
+            }
+        }, to: APIConstants.ProfileImagePost, method: .post, headers: headers) { (encodingResult) in
+            
+            switch encodingResult {
+                
+            case .success(let upload, _, _):
+                upload.responseJSON { (response) in
+                    
+                    print("changeProfileImage method success")
+                    completion(.success(response.result.value as Any))
+                }
+            case .failure(let encodingError):
+                print("changeProfileImage-> ", encodingError.localizedDescription)
+            }
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+//        let URL = APIConstants.ProfileImagePost
+//        let headers: HTTPHeaders = [
+//            "Content-Type": "application/json",
+//            "Cookie" : UserDefaults.standard.string(forKey: "Cookie")!
+//        ]
+//
+//        let body : Parameters = [
+//            "src" : image
+//        ]
+//
+//        Alamofire.request(URL, method: .post, parameters: body, encoding: JSONEncoding.default, headers: headers).responseData{
+//            response in
+//
+//            switch response.result {
+//
+//            case .success:
+//                if let status = response.response?.statusCode {
+//                    print("changeProfileImage method:", status)
+//                    switch status {
+//                    case 200:
+//                        completion(.success("ProfileImage chnaged"))
+//                    case 401:
+//                        print("실패 401")
+//                        completion(.pathErr)
+//                    case 500:
+//                        print("실패 500")
+//                        completion(.serverErr)
+//                    default:
+//                        break
+//                    }
+//                }
+//                break
+//            case .failure(let err):
+//                print(err.localizedDescription)
+//                completion(.networkFail)
+//            }
+//        }
+    }
+
 }
