@@ -187,8 +187,14 @@ class NewsFeedCell: UITableViewCell {
     
     //포스팅 내용 초기설정
     func initPosting() {
-        imgvwUserImg.image = #imageLiteral(resourceName: "defaultProfile")
+        
+        if newsPost?.user.image?.src == nil || newsPost?.user.image?.src == ""{
+        imgvwUserImg.imageFromUrl("http://15.164.50.161:9425/settings/nutee_profile.png", defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+        } else {
+        imgvwUserImg.imageFromUrl((APIConstants.BaseURL) + "/" + (newsPost?.user.image?.src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+        }
         imgvwUserImg.setRounded(radius: nil)
+        imgvwUserImg.contentMode = .scaleAspectFill
         
         if newsPost?.retweetID == nil {
             // <-----공유한 글이 아닐 경우-----> //
@@ -197,6 +203,7 @@ class NewsFeedCell: UITableViewCell {
             lblRepostInfo.isHidden = true
             
             // User 정보 설정
+//            dump(newsPost, name: "123123")
             lblUserId.text = newsPost?.user.nickname
             lblUserId.sizeToFit()
             let originPostTime = newsPost?.createdAt

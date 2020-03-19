@@ -32,7 +32,7 @@ struct ContentService {
                     
                     if let status = response.response?.statusCode{
                         print("getNewsPosts method:", status)
-                        print(URL)
+                    
                         switch status {
                         case 200:
                             do{

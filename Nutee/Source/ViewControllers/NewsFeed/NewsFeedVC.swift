@@ -102,8 +102,9 @@ class NewsFeedVC: UIViewController {
         loadCompleteBtn.centerXAnchor.constraint(equalTo: self.newsTV.centerXAnchor).isActive = true
         loadCompleteBtn.heightAnchor.constraint(equalToConstant: 30).isActive = true
         loadCompleteBtn.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        loadCompleteBtn.backgroundColor = .white
         
-        loadCompleteBtn.alpha = 0
+        loadCompleteBtn.alpha = 1
         loadCompleteBtn.isHidden = true
     }
     

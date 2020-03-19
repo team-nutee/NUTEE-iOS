@@ -74,6 +74,7 @@ class ProfileVC: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
+        
     }
 
     
@@ -188,8 +189,12 @@ extension ProfileVC : UITableViewDataSource {
             
             cell.profileNameLabel.text = userPost?.user.nickname
             cell.articleTextView.text = userPost?.content
+
+            if userInfo?.image.src == "" {
+            cell.profileIMG.imageFromUrl("http://15.164.50.161:9425/settings/nutee_profile.png", defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+            }else{
             cell.profileIMG.imageFromUrl((APIConstants.BaseURL) + "/" + (userInfo?.image.src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
-            
+            }
             let originUserPostTime = userPost?.createdAt
             let userPostTimeDateFormat = originUserPostTime!.getDateFormat(time: originUserPostTime!)
             cell.timeLabel.text = userPostTimeDateFormat!.timeAgoSince(userPostTimeDateFormat!)
@@ -248,8 +253,13 @@ extension ProfileVC : UITableViewDataSource {
         }
         
 
-//        profileImage.contentMode = .scaleAspectFit
+        if userInfo?.image.src == "" {
+        profileImage.imageFromUrl("http://15.164.50.161:9425/settings/nutee_profile.png", defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+        }else{
         profileImage.imageFromUrl((APIConstants.BaseURL) + "/" + (userInfo?.image.src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+        }
+
+        profileImage.contentMode = .scaleAspectFill
         profileImage.setRounded(radius: 50)
         profileImage.translatesAutoresizingMaskIntoConstraints = false
         profileImage.topAnchor.constraint(equalTo: headerView.topAnchor, constant: 10).isActive = true

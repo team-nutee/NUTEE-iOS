@@ -14,10 +14,16 @@ import UIKit
 extension UIImageView {
     
     public func imageFromUrl(_ urlString: String?, defaultImgPath : String?) {
-//        let defaultImg = UIImage(named: defaultImgPath)
-        if let url = urlString, let defaultURL : String = defaultImgPath {
+
+        let tmpUrl : String?
+        
+        if urlString == nil {
+            tmpUrl = ""
+        } else  {
+            tmpUrl = urlString
+        } 
+        if let url = tmpUrl, let defaultURL : String = defaultImgPath {
             if url.isEmpty {
-//                self.image = defaultImg
                 self.kf.setImage(with: URL(string: defaultURL), options: [.transition(ImageTransition.fade(0.5))])
             } else {
                 self.kf.setImage(with: URL(string: url), options: [.transition(ImageTransition.fade(0.5))])

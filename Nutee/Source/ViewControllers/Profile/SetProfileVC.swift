@@ -50,7 +50,12 @@ class SetProfileVC: UIViewController {
         saveBtn.titleLabel?.font = .boldSystemFont(ofSize: 15)
         setIMGBtn.tintColor = .white
         setIMGBtn.backgroundColor = .nuteeGreen
+        if profileImgSrc == "" {
+        profileIMG.imageFromUrl("http://15.164.50.161:9425/settings/nutee_profile.png", defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+        }else{
         profileIMG.imageFromUrl((APIConstants.BaseURL) + "/" + (profileImgSrc ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+        }
+
 
         nameTextField.addBorder(.bottom, color: .nuteeGreen, thickness: 1)
         nameTextField.tintColor = .nuteeGreen
@@ -118,6 +123,7 @@ extension SetProfileVC {
             case .success(_ ):
                 
                 self.dismiss(animated: true, completion: nil)
+                
             case .requestErr:
                 print("requestErr")
             case .pathErr:

@@ -97,12 +97,17 @@ struct Retweet: Codable {
 struct User: Codable {
     let id: Int
     let nickname: String
-    let image: String?
-    
+    let image: UserImage?
+
     enum CodingKeys: String, CodingKey {
         case id, nickname
         case image = "Image"
     }
 }
+
+struct UserImage: Codable {
+    let src: String
+}
+
 
 typealias NewsPostsContent = [NewsPostsContentElement]

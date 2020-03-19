@@ -176,7 +176,12 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
     }
     
     func initPosting() {
-        imgvwUserImg.image = #imageLiteral(resourceName: "defaultProfile")
+        if detailNewsPost?.user.image?.src == nil || detailNewsPost?.user.image?.src == ""{
+        imgvwUserImg.imageFromUrl("http://15.164.50.161:9425/settings/nutee_profile.png", defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+        } else {
+        imgvwUserImg.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.user.image?.src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+        }
+
         imgvwUserImg.setRounded(radius: nil)
         
         if detailNewsPost?.retweetID == nil {
