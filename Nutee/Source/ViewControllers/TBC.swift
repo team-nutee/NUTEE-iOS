@@ -16,8 +16,9 @@ class TBC: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.delegate = self
+        setupStyle()
         //        tabBarController(self.tabBarController, shouldSelect: PostVC)
-        //        setupMiddleButton()
+//                setupMiddleButton()
         //        menuButton.addTarget(self, action: #selector(toPost), for: .touchUpInside)
     }
     
@@ -25,6 +26,13 @@ class TBC: UITabBarController {
         super.viewDidLayoutSubviews()
         //           menuButton.frame.origin.y = self.view.bounds.height - menuButton.frame.height - self.view.safeAreaInsets.bottom
     }
+    
+    func setupStyle() {
+        UITabBar.clearShadow()
+        self.tabBar.layer.applyShadow(color: .gray, alpha: 0.3, x: 0, y: 0, blur: 12)
+    }
+
+
         
     func setupMiddleButton() {
         let numberOfItems = CGFloat(tabBar.items!.count)
