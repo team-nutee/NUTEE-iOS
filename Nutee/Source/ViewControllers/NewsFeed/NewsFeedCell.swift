@@ -149,19 +149,20 @@ class NewsFeedCell: UITableViewCell {
         let userReportAction = UIAlertAction(title: "신고하기🚨", style: .destructive) {
             (action: UIAlertAction) in
             // Code to 신고 기능
-            let reportAlert = UIAlertController(title: "이 게시글을 신고하시겠습니까?", message: "\(String(self.txtvwContent.text))", preferredStyle: UIAlertController.Style.alert)
+            let reportAlert = UIAlertController(title: "이 게시글을 신고하시겠습니까?", message: "", preferredStyle: UIAlertController.Style.alert)
             let cancelAction
                 = UIAlertAction(title: "취소", style: .cancel, handler: nil)
             let reportAction = UIAlertAction(title: "신고", style: .destructive) {
                 (action: UIAlertAction) in
                 // <---- 신고 기능 구현
-                
+                let content = reportAlert.textFields?[0].text ?? "" // 신고 내용
+//                let postId = self.newsPost?.id ?? 0
+                self.reportPost(content: content)
                 //신고 여부 알림
-                let successfulAlert = UIAlertController(title: nil, message: "신고가 완료되었습니다", preferredStyle: UIAlertController.Style.alert)
-                let okAction = UIAlertAction(title: "확인", style: .default, handler: nil)
-                successfulAlert.addAction(okAction)
-                
-                self.newsFeedVC?.present(successfulAlert, animated: true, completion: nil)
+            }
+            reportAlert.addTextField { (mytext) in
+                mytext.tintColor = .nuteeGreen
+                mytext.placeholder = "신고할 내용을 입력해주세요."
             }
             reportAlert.addAction(cancelAction)
             reportAlert.addAction(reportAction)
@@ -493,15 +494,22 @@ class NewsFeedCell: UITableViewCell {
 }
 
 extension NewsFeedCell {
-    func reportPost( content: String, postId : String, completionHandler: @escaping (_ returnedData: NewsPostsContent) -> Void ) {
+    func reportPost( content: String) {
         let userid = UserDefaults.standard.string(forKey: "id") ?? ""
-        ContentService.shared.reportPost(userid, content, postId) { (responsedata) in
+        ContentService.shared.reportPost(userid, content) { (responsedata) in
             
             switch responsedata {
             case .success(let res):
                 
-                LoadingHUD.hide()
                 print(res)
+                
+                let successfulAlert = UIAlertController(title: "신고가 완료되었습니다", message: nil, preferredStyle: UIAlertController.Style.alert)
+                let okAction = UIAlertAction(title: "확인", style: .default, handler: nil)
+                
+                successfulAlert.addAction(okAction)
+                
+                self.newsFeedVC?.present(successfulAlert, animated: true, completion: nil)
+
                 
             case .requestErr(_):
                 print("request error")
