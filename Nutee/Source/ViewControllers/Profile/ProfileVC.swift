@@ -42,6 +42,8 @@ class ProfileVC: UIViewController {
     
     var userInfo: SignIn?
     var userPosts: UserPostContent?
+    // 기본적으로 로그인한 사용자의 아이디 값으로 설정
+    var userId = UserDefaults.standard.integer(forKey: "id")
     
     var isFollow: Bool = false
     
@@ -67,9 +69,16 @@ class ProfileVC: UIViewController {
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         
-        getUserInfoService(completionHandler: {(returnedData)-> Void in
-            self.getUserPostService(userId: self.userInfo!.id)
-        })
+        // 보여주려는 프로필 정보가 로그인 사용자인지 다른 사람인지 확인
+        if userId == UserDefaults.standard.integer(forKey: "id") {
+            getLoginUserInfoService(completionHandler: {(returnedData)-> Void in
+                self.getUserPostService(userId: self.userInfo!.id)
+            })
+        } else {
+            getUserInfoService(userId: userId, completionHandler: {(returnedData)-> Void in
+                self.getUserPostService(userId: self.userId)
+            })
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -91,10 +100,14 @@ class ProfileVC: UIViewController {
     
     func setBtn(){
         //        self.navigationItem.leftBarButtonItem = self.leftBarButton
-        self.navigationItem.rightBarButtonItem = self.rightBarButton
         
+        // userId 값이 로그인 한 사용자 일때만 활성화
+        if userId == UserDefaults.standard.integer(forKey: "id") {
+            self.navigationItem.rightBarButtonItem = self.rightBarButton
+            
+            myNickLabel.addTarget(self, action: #selector(settingProfile), for: .touchUpInside)
+        }
         setProfile.addTarget(self, action: #selector(settingProfile), for: .touchUpInside)
-        myNickLabel.addTarget(self, action: #selector(settingProfile), for: .touchUpInside)
         myFollowing1Btn.addTarget(self, action: #selector(viewFollowing), for: .touchUpInside)
         myFollowing2Btn.addTarget(self, action: #selector(viewFollowing), for: .touchUpInside)
         myFollower1Btn.addTarget(self, action: #selector(viewFollower), for: .touchUpInside)
@@ -130,8 +143,10 @@ class ProfileVC: UIViewController {
     }
     
     @objc func viewArticle() {
-        let indexPath = IndexPath(row: 1, section: 0)
-        myArticleTV.scrollToRow(at: indexPath as IndexPath, at: .top, animated: true)
+        if (userPosts?.count) == 0 { } else {
+            let indexPath = IndexPath(row: 1, section: 0)
+            myArticleTV.scrollToRow(at: indexPath as IndexPath, at: .top, animated: true)
+        }
     }
     
     @objc func followAction() {
@@ -232,7 +247,10 @@ extension ProfileVC : UITableViewDataSource {
         
         self.headerView.addSubview(profileImage)
         self.headerView.addSubview(myNickLabel)
-        self.headerView.addSubview(setProfile)
+        // userId 값이 로그인 한 사용자 일때만 활성화
+        if userId == UserDefaults.standard.integer(forKey: "id") {
+            self.headerView.addSubview(setProfile)
+        }
         self.headerView.addSubview(myArticle1Btn)
         self.headerView.addSubview(myArticle2Btn)
         self.headerView.addSubview(myFollower1Btn)
@@ -244,8 +262,10 @@ extension ProfileVC : UITableViewDataSource {
         let etcname : String = userInfo?.nickname ?? ""
         
         let name = NSMutableAttributedString(string: etcname)
-        name.addAttribute(NSAttributedString.Key.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: NSMakeRange(0, etcname.count))
-        
+        // userId 값이 로그인 한 사용자 일때만 활성화
+        if userId == UserDefaults.standard.integer(forKey: "id") {
+            name.addAttribute(NSAttributedString.Key.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: NSMakeRange(0, etcname.count))
+        }
         if UserDefaults.standard.string(forKey: "userId") != etcname {
             followBtn.isHidden = true
         } else {
@@ -267,14 +287,17 @@ extension ProfileVC : UITableViewDataSource {
         profileImage.heightAnchor.constraint(equalToConstant: 100).isActive = true
         profileImage.widthAnchor.constraint(equalToConstant: 100).isActive = true
         
-        setProfile.setImage(.add, for: .normal)
-        setProfile.tintColor = .black
-        setProfile.translatesAutoresizingMaskIntoConstraints = false
-        setProfile.topAnchor.constraint(equalTo: profileImage.bottomAnchor, constant: -20).isActive = true
-        setProfile.leftAnchor.constraint(equalTo: profileImage.rightAnchor, constant: -20).isActive = true
-        setProfile.heightAnchor.constraint(equalToConstant: 20).isActive = true
-        setProfile.widthAnchor.constraint(equalToConstant: 20).isActive = true
-        setProfile.setRounded(radius: 10)
+        // userId 값이 로그인 한 사용자 일때만 활성화
+        if userId == UserDefaults.standard.integer(forKey: "id") {
+            setProfile.setImage(.add, for: .normal)
+            setProfile.tintColor = .black
+            setProfile.translatesAutoresizingMaskIntoConstraints = false
+            setProfile.topAnchor.constraint(equalTo: profileImage.bottomAnchor, constant: -20).isActive = true
+            setProfile.leftAnchor.constraint(equalTo: profileImage.rightAnchor, constant: -20).isActive = true
+            setProfile.heightAnchor.constraint(equalToConstant: 20).isActive = true
+            setProfile.widthAnchor.constraint(equalToConstant: 20).isActive = true
+            setProfile.setRounded(radius: 10)
+        }
         
         myNickLabel.setAttributedTitle(name, for: .normal)
         myNickLabel.setTitleColor(.black, for: .normal)
@@ -381,8 +404,36 @@ extension ProfileVC: UITextViewDelegate {
 //MARK: - UserInfo와 UserPost 서버 연결을 위한 Service 실행 구간
 
 extension ProfileVC {
-    func getUserInfoService(completionHandler: @escaping (_ returnedData: SignIn) -> Void ) {
-        UserService.shared.getUserInfo() { responsedata in
+    func getLoginUserInfoService(completionHandler: @escaping (_ returnedData: SignIn) -> Void ) {
+        UserService.shared.getLoginUserInfo() { responsedata in
+            
+            switch responsedata {
+            case .success(let res):
+                
+                let response = res as! SignIn
+                self.userInfo = response
+                
+                completionHandler(self.userInfo!)
+                
+                self.myArticleTV.reloadData()
+            case .requestErr(_):
+                print("request error")
+            
+            case .pathErr:
+                print(".pathErr")
+            
+            case .serverErr:
+                print(".serverErr")
+            
+            case .networkFail :
+                print("failure")
+                }
+        }
+        
+    }
+    
+    func getUserInfoService(userId: Int, completionHandler: @escaping (_ returnedData: SignIn) -> Void ) {
+        UserService.shared.getUserInfo(userId: userId) { responsedata in
             
             switch responsedata {
             case .success(let res):

@@ -181,13 +181,64 @@ struct UserService {
         }
     }
     
-    // MARK: - getUserInfo
-    func getUserInfo(completion: @escaping (NetworkResult<Any>) -> Void) {
+    // MARK: - 사용자의 정보 가져오기
+    
+    // 로그인 한 사용자의 경우
+    func getLoginUserInfo(completion: @escaping (NetworkResult<Any>) -> Void) {
         
         let URL = APIConstants.User
         let headers: HTTPHeaders = [
             "Content-Type": "application/json",
             "Cookie" : UserDefaults.standard.string(forKey: "Cookie")!
+        ]
+        
+        Alamofire.request(URL, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseData{
+            response in
+            
+            switch response.result {
+                
+            case .success:
+                // parameter 위치
+                if let value = response.result.value {
+                    print(value)
+                    //response의 respones안에 있는 statusCode를 추출
+                    if let status = response.response?.statusCode {
+                        print("getLoginUserInfo method:", status)
+                        switch status {
+                        case 200:
+                            do{
+                                print("start decode getLoginUserInfo")
+                                let decoder = JSONDecoder()
+                                let result = try decoder.decode(SignIn.self, from: value)
+                                completion(.success(result))
+                            } catch {
+                                completion(.pathErr)
+                            }
+                        case 401:
+                            print("실패 401")
+                            completion(.pathErr)
+                        case 500:
+                            print("실패 500")
+                            completion(.serverErr)
+                        default:
+                            break
+                        }
+                    }
+                }
+                break
+            case .failure(let err):
+                print(err.localizedDescription)
+                completion(.networkFail)
+            }
+        }
+    }
+    
+    // 다른 사용자의 경우
+    func getUserInfo(userId: Int, completion: @escaping (NetworkResult<Any>) -> Void) {
+        
+        let URL = APIConstants.User + "/\(userId)"
+        let headers: HTTPHeaders = [
+            "Content-Type": "application/json"
         ]
         
         Alamofire.request(URL, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseData{
@@ -470,54 +521,6 @@ struct UserService {
                 print("changeProfileImage-> ", encodingError.localizedDescription)
             }
         }
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-//        let URL = APIConstants.ProfileImagePost
-//        let headers: HTTPHeaders = [
-//            "Content-Type": "application/json",
-//            "Cookie" : UserDefaults.standard.string(forKey: "Cookie")!
-//        ]
-//
-//        let body : Parameters = [
-//            "src" : image
-//        ]
-//
-//        Alamofire.request(URL, method: .post, parameters: body, encoding: JSONEncoding.default, headers: headers).responseData{
-//            response in
-//
-//            switch response.result {
-//
-//            case .success:
-//                if let status = response.response?.statusCode {
-//                    print("changeProfileImage method:", status)
-//                    switch status {
-//                    case 200:
-//                        completion(.success("ProfileImage chnaged"))
-//                    case 401:
-//                        print("실패 401")
-//                        completion(.pathErr)
-//                    case 500:
-//                        print("실패 500")
-//                        completion(.serverErr)
-//                    default:
-//                        break
-//                    }
-//                }
-//                break
-//            case .failure(let err):
-//                print(err.localizedDescription)
-//                completion(.networkFail)
-//            }
-//        }
     }
 
 }
