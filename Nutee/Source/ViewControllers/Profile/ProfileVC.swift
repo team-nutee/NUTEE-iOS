@@ -244,7 +244,7 @@ extension ProfileVC : UITableViewDataSource {
     
     // MARK : headerView
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        
+        self.headerView.backgroundColor = .white
         self.headerView.addSubview(profileImage)
         self.headerView.addSubview(myNickLabel)
         // userId 값이 로그인 한 사용자 일때만 활성화
@@ -266,8 +266,10 @@ extension ProfileVC : UITableViewDataSource {
         if userId == UserDefaults.standard.integer(forKey: "id") {
             name.addAttribute(NSAttributedString.Key.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: NSMakeRange(0, etcname.count))
         }
+        
+        // 팔로우 하기 버튼 활성화
         if UserDefaults.standard.string(forKey: "userId") != etcname {
-            followBtn.isHidden = true
+            followBtn.isHidden = false
         } else {
             followBtn.isHidden = true
         }
