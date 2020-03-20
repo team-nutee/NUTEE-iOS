@@ -191,14 +191,7 @@ class NewsFeedCell: UITableViewCell {
     
     //포스팅 내용 초기설정
     func initPosting() {
-        // 사용자 프로필 이미지 설정
-        if newsPost?.user.image?.src == nil || newsPost?.user.image?.src == ""{
-        imgvwUserImg.imageFromUrl("http://15.164.50.161:9425/settings/nutee_profile.png", defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
-        } else {
-        imgvwUserImg.imageFromUrl((APIConstants.BaseURL) + "/" + (newsPost?.user.image?.src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
-        }
-        imgvwUserImg.setRounded(radius: nil)
-        imgvwUserImg.contentMode = .scaleAspectFill
+        
         
         if newsPost?.retweetID == nil {
             // <-----공유한 글이 아닐 경우-----> //
@@ -206,9 +199,20 @@ class NewsFeedCell: UITableViewCell {
             TopToRepostImg.isActive = false
             lblRepostInfo.isHidden = true
             
-            // User 정보 설정
+            // User 정보 설정 //
+            // 사용자 프로필 이미지 설정
+            imgvwUserImg.setRounded(radius: nil)
+            if newsPost?.user.image?.src == nil || newsPost?.user.image?.src == ""{
+                imgvwUserImg.imageFromUrl("http://15.164.50.161:9425/settings/nutee_profile.png", defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+                imgvwUserImg.contentMode = .scaleAspectFit
+            } else {
+                imgvwUserImg.imageFromUrl((APIConstants.BaseURL) + "/" + (newsPost?.user.image?.src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+                imgvwUserImg.contentMode = .scaleAspectFill
+            }
+            // 사용자 이름 설정
             lblUserId.text = newsPost?.user.nickname
             lblUserId.sizeToFit()
+            // 게시글 게시 시간 설정
             let originPostTime = newsPost?.createdAt
             let postTimeDateFormat = originPostTime?.getDateFormat(time: originPostTime!)
             lblPostTime.text = postTimeDateFormat?.timeAgoSince(postTimeDateFormat!)
@@ -271,9 +275,15 @@ class NewsFeedCell: UITableViewCell {
             lblRepostInfo.isHidden = false
             lblRepostInfo.text = (newsPost?.user.nickname)! + " 님이 공유했습니다"
             
-            // User 정보 설정
+            // User 정보 설정 //
+            // 사용자 프로필 이미지 설정
+            imgvwUserImg.imageFromUrl("http://15.164.50.161:9425/settings/nutee_profile.png", defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png") // <-- 우선 기본 프로필 이미지로 설정
+            imgvwUserImg.setRounded(radius: nil)
+            imgvwUserImg.contentMode = .scaleAspectFit
+            // 사용자 이름 설정
             lblUserId.text = newsPost?.retweet?.user.nickname
             lblUserId.sizeToFit()
+            // 게시글 게시 시간 설정
             let originPostTime = newsPost?.retweet?.createdAt
             let postTimeDateFormat = originPostTime?.getDateFormat(time: originPostTime!)
             lblPostTime.text = postTimeDateFormat?.timeAgoSince(postTimeDateFormat!)
