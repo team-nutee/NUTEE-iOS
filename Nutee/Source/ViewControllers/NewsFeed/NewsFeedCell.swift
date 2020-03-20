@@ -209,8 +209,8 @@ class NewsFeedCell: UITableViewCell {
                 imgvwUserImg.contentMode = .scaleAspectFill
             }
             // 사용자 이름 설정
-//            let nickname = newsPost?.retweet?.user.nickname
-            lblUserId.setTitle("nickname", for: .normal)
+//            let nickname = newsPost?.user.nickname ?? ""
+            lblUserId.setTitle(newsPost?.user.nickname, for: .normal)
             lblUserId.sizeToFit()
             // 게시글 게시 시간 설정
             let originPostTime = newsPost?.createdAt
@@ -281,8 +281,8 @@ class NewsFeedCell: UITableViewCell {
             imgvwUserImg.setRounded(radius: nil)
             imgvwUserImg.contentMode = .scaleAspectFit
             // 사용자 이름 설정
-//            let nickname = newsPost?.retweet?.user.nickname
-//            lblUserId.setTitle(nickname, for: .normal)
+//            let nickname = newsPost?.retweet?.user.nickname ?? ""
+            lblUserId.setTitle(newsPost?.retweet?.user.nickname, for: .normal)
             lblUserId.sizeToFit()
             // 게시글 게시 시간 설정
             let originPostTime = newsPost?.retweet?.createdAt
