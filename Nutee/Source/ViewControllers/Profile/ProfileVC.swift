@@ -130,8 +130,10 @@ class ProfileVC: UIViewController {
     }
     
     @objc func viewArticle() {
+        if (userPosts?.count) == 0 { } else {
         let indexPath = IndexPath(row: 1, section: 0)
         myArticleTV.scrollToRow(at: indexPath as IndexPath, at: .top, animated: true)
+        }
     }
     
     @objc func followAction() {

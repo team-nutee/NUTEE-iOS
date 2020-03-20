@@ -59,7 +59,7 @@ extension SettingVC {
                 UserDefaults.standard.removeObject(forKey: "pw")
 //                print(UserDefaults.standard.value(forKey: "Cookie") ?? "삭제 된 상태입니다")
                 print(response)
-                self.dismiss(animated: true, completion: nil)
+                self.dismiss(animated: true, completion: ProfileVC.viewDidLoad(.init()))
             //                self.successAdd = true
             case .requestErr(_):
                 print("request error")
