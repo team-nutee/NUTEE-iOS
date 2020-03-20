@@ -107,9 +107,11 @@ class NewsFeedCell: UITableViewCell {
         if isClickedRepost! {
             btnRepost.tintColor = .nuteeGreen
             isClickedRepost = false
+            retweetDeleteService(postId: newsPost?.id ?? 0)
         } else {
             btnRepost.tintColor = .gray
             isClickedRepost = true
+            retweetPostService(postId: newsPost?.id ?? 0)
         }
     }
         
@@ -219,11 +221,33 @@ class NewsFeedCell: UITableViewCell {
             imgCnt = newsPost?.images.count
             showImgFrame()
             
-            // Repost 버튼
-            isClickedRepost = false
-            btnRepost.tintColor = .gray
-            // Like 버튼
             var containLoginUser = false
+            // Repost 버튼
+//            isClickedRepost = false
+//            btnRepost.tintColor = .gray
+//            containLoginUser = false
+//            for arrSearch in newsPost?. ?? [] {
+//                if arrSearch.like.userID == UserDefaults.standard.integer(forKey: "id") {
+//                    containLoginUser = true
+//                }
+//            }
+            if containLoginUser {
+                // 로그인 한 사용자가 좋아요를 누른 상태일 경우
+                btnLike.isSelected = true
+                numLike = newsPost?.likers.count ?? 0
+                btnLike.setTitle(" " + String(numLike!), for: .selected)
+                btnLike.tintColor = .systemPink
+                isClickedLike = true
+            } else {
+                // 로그인 한 사용자가 좋아요를 누르지 않은 상태일 경우
+                btnLike.isSelected = false
+                numLike = newsPost?.likers.count ?? 0
+                btnLike.setTitle(" " + String(numLike!), for: .normal)
+                btnLike.tintColor = .gray
+                isClickedLike = false
+            }
+            // Like 버튼
+            containLoginUser = false
             for arrSearch in newsPost?.likers ?? [] {
                 if arrSearch.like.userID == UserDefaults.standard.integer(forKey: "id") {
                     containLoginUser = true
@@ -255,17 +279,17 @@ class NewsFeedCell: UITableViewCell {
             lblRepostInfo.text = (newsPost?.user.nickname)! + " 님이 공유했습니다"
             
             // User 정보 설정
-            lblUserId.text = newsPost?.retweet!.user.nickname
+            lblUserId.text = newsPost?.retweet?.user.nickname
             lblUserId.sizeToFit()
             let originPostTime = newsPost?.retweet?.createdAt
-            let postTimeDateFormat = originPostTime!.getDateFormat(time: originPostTime!)
-            lblPostTime.text = postTimeDateFormat!.timeAgoSince(postTimeDateFormat!)
+            let postTimeDateFormat = originPostTime?.getDateFormat(time: originPostTime!)
+            lblPostTime.text = postTimeDateFormat?.timeAgoSince(postTimeDateFormat!)
             
             // Posting 내용 설정
-            txtvwContent.text = newsPost?.retweet!.content
+            txtvwContent.text = newsPost?.retweet?.content
             txtvwContent.postingInit()
             
-            imgCnt = newsPost?.retweet!.images.count
+            imgCnt = newsPost?.retweet?.images.count
             showImgFrame()
             
             // Repost 버튼
@@ -284,16 +308,9 @@ class NewsFeedCell: UITableViewCell {
             // More 버튼
             btnMore.isEnabled = false
         }
-        
-//        let postUserProfile = UIButton()
-//        lblUserId.addSubview(postUserProfile)
-//        postUserProfile.addTarget(self, action: #selector(goPostUserPorfile), for: .touchUpInside)
     }
     
-//    @objc func goPostUserPorfile() {
-//        print("과연 작동이 될까요~~")
-//    }
-    
+
     func setNormalLikeBtn() {
         btnLike.isSelected = false
         numLike! -= 1
@@ -539,6 +556,8 @@ extension NewsFeedCell {
         }
     }
     
+    // MARK: - like
+    
     func likePostService(postId: Int) {
         ContentService.shared.likePost(postId) { (responsedata) in
             
@@ -568,6 +587,52 @@ extension NewsFeedCell {
             case .success(let res):
                 
                 print("likePost succussful", res)
+            case .requestErr(_):
+                print("request error")
+            
+            case .pathErr:
+                print(".pathErr")
+            
+            case .serverErr:
+                print(".serverErr")
+            
+            case .networkFail :
+                print("failure")
+                }
+        }
+    }
+    
+    // MARK: - Retweet
+    
+    func retweetPostService(postId: Int) {
+        ContentService.shared.retweetPost(postId) { (responsedata) in
+            
+            switch responsedata {
+            case .success(let res):
+                
+                print("retweetPost succussful", res)
+            case .requestErr(_):
+                print("request error")
+            
+            case .pathErr:
+                print(".pathErr")
+            
+            case .serverErr:
+                print(".serverErr")
+            
+            case .networkFail :
+                print("failure")
+                }
+        }
+    }
+    
+    func retweetDeleteService(postId: Int) {
+        ContentService.shared.retweetDelete(postId) { (responsedata) in
+            
+            switch responsedata {
+            case .success(let res):
+                
+                print("retweetPost succussful", res)
             case .requestErr(_):
                 print("request error")
             

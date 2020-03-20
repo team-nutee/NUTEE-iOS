@@ -38,7 +38,7 @@ struct APIConstants {
 
     static let ReportPost = BaseURL + "/api/post"// /:id/report"                    // POST {"content":"신고 사유", "PostId":"123"}
     
-    static let Retweet = BaseURL + "/api/post/:id/retweet"                      // POST {postId : postId}
+    static let Retweet = BaseURL + "/api/post"// /:id/retweet"                      // POST {postId : postId}
     static let UserId = BaseURL + "/api/user/:id"                               // GET
     
     

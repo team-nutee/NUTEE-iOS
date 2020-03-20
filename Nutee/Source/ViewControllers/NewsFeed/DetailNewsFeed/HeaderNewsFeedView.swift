@@ -246,19 +246,19 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
             lblRepostInfo.text = (detailNewsPost?.user.nickname)! + " 님이 공유했습니다"
             
             // User 정보 설정
-            lblUserId.text = detailNewsPost?.retweet!.user.nickname
+            lblUserId.text = detailNewsPost?.retweet?.user.nickname
             lblUserId.sizeToFit()
             let originPostTime = detailNewsPost?.retweet?.createdAt
-            let postTimeDateFormat = originPostTime!.getDateFormat(time: originPostTime!)
-            lblPostTime.text = postTimeDateFormat!.timeAgoSince(postTimeDateFormat!)
+            let postTimeDateFormat = originPostTime?.getDateFormat(time: originPostTime!)
+            lblPostTime.text = postTimeDateFormat?.timeAgoSince(postTimeDateFormat!)
             
             // Posting 내용 설정
-            txtvwContent.text = detailNewsPost?.retweet!.content
+            txtvwContent.text = detailNewsPost?.retweet?.content
             txtvwContent.postingInit()
             
             //            print(txtvwContents.text, "<---- ", newsPost?.retweet?.createdAt)
             
-            imgCnt = detailNewsPost?.retweet!.images.count
+            imgCnt = detailNewsPost?.retweet?.images.count
             showImgFrame()
             
             // Repost 버튼
