@@ -268,7 +268,7 @@ extension ProfileVC : UITableViewDataSource {
         }
         
         // 팔로우 하기 버튼 활성화
-        if UserDefaults.standard.string(forKey: "userId") != etcname {
+        if UserDefaults.standard.integer(forKey: "id") != userId {
             followBtn.isHidden = false
         } else {
             followBtn.isHidden = true
@@ -369,6 +369,9 @@ extension ProfileVC : UITableViewDataSource {
         followBtn.setAttributedTitle(followBtnText, for: .normal)
         followBtn.titleLabel?.font = .boldSystemFont(ofSize: 15)
         followBtn.translatesAutoresizingMaskIntoConstraints = false
+        followBtn.borderColor = .nuteeGreen
+        followBtn.borderWidth = 0.3
+        followBtn.makeRounded(cornerRadius: 11)
         followBtn.topAnchor.constraint(equalTo: myFollowing2Btn.bottomAnchor).isActive = true
         followBtn.leftAnchor.constraint(equalTo: profileImage.rightAnchor).isActive = true
         followBtn.heightAnchor.constraint(equalToConstant: 40).isActive = true
