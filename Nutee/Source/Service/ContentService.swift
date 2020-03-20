@@ -375,6 +375,8 @@ struct ContentService {
                     case 401:
                         print("실패 401")
                         completion(.pathErr)
+                    case 403:
+                        completion(.requestErr("이미 공유했습니다."))
                     case 500:
                         print("실패 500")
                         completion(.serverErr)
@@ -415,6 +417,8 @@ struct ContentService {
                     case 401:
                         print("실패 401")
                         completion(.pathErr)
+                    case 404:
+                        completion(.serverErr)
                     case 500:
                         print("실패 500")
                         completion(.serverErr)

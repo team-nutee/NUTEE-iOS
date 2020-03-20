@@ -105,12 +105,12 @@ class NewsFeedCell: UITableViewCell {
         // .selected State를 활성화 하기 위한 코드
         btnRepost.isSelected = !btnRepost.isSelected
         if isClickedRepost! {
-            btnRepost.tintColor = .nuteeGreen
             isClickedRepost = false
+            btnRepost.tintColor = .gray
             retweetDeleteService(postId: newsPost?.id ?? 0)
         } else {
-            btnRepost.tintColor = .gray
             isClickedRepost = true
+            btnRepost.tintColor = .nuteeGreen
             retweetPostService(postId: newsPost?.id ?? 0)
         }
     }
@@ -207,12 +207,11 @@ class NewsFeedCell: UITableViewCell {
             lblRepostInfo.isHidden = true
             
             // User 정보 설정
-//            dump(newsPost, name: "123123")
             lblUserId.text = newsPost?.user.nickname
             lblUserId.sizeToFit()
             let originPostTime = newsPost?.createdAt
-            let postTimeDateFormat = originPostTime!.getDateFormat(time: originPostTime!)
-            lblPostTime.text = postTimeDateFormat!.timeAgoSince(postTimeDateFormat!)
+            let postTimeDateFormat = originPostTime?.getDateFormat(time: originPostTime!)
+            lblPostTime.text = postTimeDateFormat?.timeAgoSince(postTimeDateFormat!)
 
             // Posting 내용 설정
             txtvwContent.text = newsPost?.content
@@ -223,14 +222,8 @@ class NewsFeedCell: UITableViewCell {
             
             var containLoginUser = false
             // Repost 버튼
-//            isClickedRepost = false
-//            btnRepost.tintColor = .gray
-//            containLoginUser = false
-//            for arrSearch in newsPost?. ?? [] {
-//                if arrSearch.like.userID == UserDefaults.standard.integer(forKey: "id") {
-//                    containLoginUser = true
-//                }
-//            }
+            isClickedRepost = false
+            btnRepost.tintColor = .gray
             if containLoginUser {
                 // 로그인 한 사용자가 좋아요를 누른 상태일 경우
                 btnLike.isSelected = true
@@ -310,7 +303,6 @@ class NewsFeedCell: UITableViewCell {
         }
     }
     
-
     func setNormalLikeBtn() {
         btnLike.isSelected = false
         numLike! -= 1
@@ -540,7 +532,6 @@ extension NewsFeedCell {
                 
                 self.newsFeedVC?.present(successfulAlert, animated: true, completion: nil)
 
-                
             case .requestErr(_):
                 print("request error")
             
@@ -613,6 +604,14 @@ extension NewsFeedCell {
                 print("retweetPost succussful", res)
             case .requestErr(_):
                 print("request error")
+                
+                self.isClickedRepost = true
+                self.btnRepost.tintColor = .nuteeGreen
+                
+                let alreadyAlert = UIAlertController(title: nil, message: "이미 공유한 글입니다😅", preferredStyle: UIAlertController.Style.actionSheet)
+                let okayAction = UIAlertAction(title: "확인", style: .default)
+                alreadyAlert.addAction(okayAction)
+                self.newsFeedVC?.present(alreadyAlert, animated: true, completion: nil)
             
             case .pathErr:
                 print(".pathErr")
@@ -641,7 +640,15 @@ extension NewsFeedCell {
             
             case .serverErr:
                 print(".serverErr")
+                
+                let failAlert = UIAlertController(title: nil, message: "공유글 취소에 실패했습니다😵", preferredStyle: UIAlertController.Style.alert)
+                let okayAction = UIAlertAction(title: "확인", style: .default)
+                failAlert.addAction(okayAction)
+                self.newsFeedVC?.present(failAlert, animated: true, completion: nil)
             
+                self.isClickedRepost = true
+                self.btnRepost.tintColor = .nuteeGreen
+                
             case .networkFail :
                 print("failure")
                 }
