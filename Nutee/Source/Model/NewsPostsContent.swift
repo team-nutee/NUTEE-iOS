@@ -42,7 +42,7 @@ struct NewsPostsContentElement: Codable {
         user = (try? values.decode(User.self, forKey: .user)) ?? User.init(id: 0, nickname: "", image: nil)
         images = (try? values.decode([Image].self, forKey: .images)) ?? []
         likers = (try? values.decode([Liker].self, forKey: .likers)) ?? [Liker.init(id: 0, like: Like.init(createdAt: "", updatedAt: "", postID: 0, userID: 0))]
-        retweet = (try? values.decode(Retweet.self, forKey: .retweet)) ?? nil
+        retweet = (try? values.decode(Retweet.self, forKey: .retweet)) ?? nil //Retweet.init(id: 0, content: "", createdAt: "", updatedAt: "", userID: 0, retweetID: 0, user: RetweetUser.init(id: 0, nickname: ""), images: [Image.init(id: 0, src: "", createdAt: "", updatedAt: "", postID: 0, userID: 0)], comments: [Comment.init(id: 0, content: "", createdAt: "", updatedAt: "", userID: 0, postID: 0, user: User.init(id: 0, nickname: "", image: UserImage.init(src: "")))], likers: [Liker.init(id: 0, like: Like.init(createdAt: "", updatedAt: "", postID: 0, userID: 0))])
         comments = (try? values.decode([Comment].self, forKey: .comments)) ?? [Comment.init(id: 0, content: "", createdAt: "", updatedAt: "", userID: 0, postID: 0, user: User.init(id: 0, nickname: "", image: nil))]
     }
 }
@@ -81,8 +81,10 @@ struct Retweet: Codable {
     let content, createdAt, updatedAt: String
     let userID: Int
     let retweetID: Int?
-    let user: User
-    let images: [String]
+    let user: RetweetUser
+    let images: [Image]
+    let comments: [Comment]
+    let likers: [Liker]
 
     enum CodingKeys: String, CodingKey {
         case id, content, createdAt, updatedAt
@@ -90,6 +92,8 @@ struct Retweet: Codable {
         case retweetID = "RetweetId"
         case user = "User"
         case images = "Images"
+        case comments = "Comments"
+        case likers = "Likers"
     }
 }
 
@@ -125,6 +129,17 @@ struct User: Codable {
     enum CodingKeys: String, CodingKey {
         case id, nickname
         case image = "Image"
+    }
+}
+
+struct RetweetUser: Codable {
+    let id: Int
+    let nickname: String
+//    let image: UserImage?
+
+    enum CodingKeys: String, CodingKey {
+        case id, nickname
+//        case image = "Image"
     }
 }
 

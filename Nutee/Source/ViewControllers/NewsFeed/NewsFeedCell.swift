@@ -296,18 +296,42 @@ class NewsFeedCell: UITableViewCell {
             imgCnt = newsPost?.retweet?.images.count
             showImgFrame()
             
-            // Repost 버튼
-            isClickedRepost = false
-            btnRepost.isSelected = false
-            btnRepost.tintColor = .gray
-            btnRepost.isEnabled = false
             // Like 버튼
-            isClickedLike = false
-            numLike = nil
-            btnLike.setTitle(String(""), for: .normal)
-            btnLike.isEnabled = false
+            var containLoginUser = false
+            for arrSearch in newsPost?.retweet?.likers ?? [] {
+                if arrSearch.like.userID == UserDefaults.standard.integer(forKey: "id") {
+                    containLoginUser = true
+                }
+            }
+            if containLoginUser {
+                // 로그인 한 사용자가 좋아요를 누른 상태일 경우
+                btnLike.isSelected = true
+                numLike = newsPost?.retweet?.likers.count ?? 0
+                btnLike.setTitle(" " + String(numLike!), for: .selected)
+                btnLike.tintColor = .systemPink
+                isClickedLike = true
+            } else {
+                // 로그인 한 사용자가 좋아요를 누르지 않은 상태일 경우
+                btnLike.isSelected = false
+                numLike = newsPost?.retweet?.likers.count ?? 0
+                btnLike.setTitle(" " + String(numLike!), for: .normal)
+                btnLike.tintColor = .gray
+                isClickedLike = false
+            }
+            
+//            // Repost 버튼
+//            isClickedRepost = false
+//            btnRepost.isSelected = false
+//            btnRepost.tintColor = .gray
+//            btnRepost.isEnabled = false
+//            // Like 버튼
+//            isClickedLike = false
+//            numLike = nil
+//            btnLike.setTitle(String(""), for: .normal)
+//            btnLike.isEnabled = false
+            
             // Comment 버튼
-            numComment = 0
+            numComment = newsPost?.retweet?.comments.count ?? 0
             setButtonPlain(btn: btnComment, num: numComment!, color: .gray, state: .normal)
             // More 버튼
             btnMore.isEnabled = false
@@ -490,7 +514,14 @@ class NewsFeedCell: UITableViewCell {
 
     func showProfile() {
         let vc = UIStoryboard.init(name: "Profile", bundle: Bundle.main).instantiateViewController(withIdentifier: "ProfileVC") as? ProfileVC
-        vc?.userId = newsPost?.userID ?? UserDefaults.standard.integer(forKey: "id")
+        
+        // 해당 글이 공유글인지 아닌지 판단
+        if newsPost?.retweet == nil {
+            vc?.userId = newsPost?.user.id ?? UserDefaults.standard.integer(forKey: "id")
+        } else {
+            vc?.userId = newsPost?.retweet?.user.id ?? UserDefaults.standard.integer(forKey: "id")
+        }
+        
         newsFeedVC?.navigationController?.pushViewController(vc!, animated: true)
     }
 
