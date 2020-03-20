@@ -20,7 +20,7 @@ class NewsFeedCell: UITableViewCell {
     // User Information
     @IBOutlet var imgvwUserImg: UIImageView!
     @IBOutlet var TopToUserImg: NSLayoutConstraint!
-    @IBOutlet var lblUserId: UILabel!
+    @IBOutlet var lblUserId: UIButton!
     @IBOutlet var lblPostTime: UILabel!
     
     // Posting
@@ -97,7 +97,7 @@ class NewsFeedCell: UITableViewCell {
     
     //MARK: - Helper
     
-    @IBAction func showDetailProfile(_ sender: Any) {
+    @IBAction func showDetailProfile(_ sender: UIButton) {
         showProfile()
     }
     
@@ -192,7 +192,6 @@ class NewsFeedCell: UITableViewCell {
     //포스팅 내용 초기설정
     func initPosting() {
         
-        
         if newsPost?.retweetID == nil {
             // <-----공유한 글이 아닐 경우-----> //
             TopToUserImg.isActive = true
@@ -210,7 +209,8 @@ class NewsFeedCell: UITableViewCell {
                 imgvwUserImg.contentMode = .scaleAspectFill
             }
             // 사용자 이름 설정
-            lblUserId.text = newsPost?.user.nickname
+//            let nickname = newsPost?.retweet?.user.nickname
+            lblUserId.setTitle("nickname", for: .normal)
             lblUserId.sizeToFit()
             // 게시글 게시 시간 설정
             let originPostTime = newsPost?.createdAt
@@ -281,7 +281,8 @@ class NewsFeedCell: UITableViewCell {
             imgvwUserImg.setRounded(radius: nil)
             imgvwUserImg.contentMode = .scaleAspectFit
             // 사용자 이름 설정
-            lblUserId.text = newsPost?.retweet?.user.nickname
+//            let nickname = newsPost?.retweet?.user.nickname
+//            lblUserId.setTitle(nickname, for: .normal)
             lblUserId.sizeToFit()
             // 게시글 게시 시간 설정
             let originPostTime = newsPost?.retweet?.createdAt
@@ -461,12 +462,6 @@ class NewsFeedCell: UITableViewCell {
         tapGestureRecognizer1.numberOfTapsRequired = 1
         imgvwUserImg.isUserInteractionEnabled = true
         imgvwUserImg.addGestureRecognizer(tapGestureRecognizer1)
-        
-        lblUserId.tag = 2
-        let tapGestureRecognizer2 = UITapGestureRecognizer(target: self, action: #selector(lblTapped(tapGestureRecognizer:)))
-        tapGestureRecognizer2.numberOfTapsRequired = 2
-        lblUserId.isUserInteractionEnabled = true
-        lblUserId.addGestureRecognizer(tapGestureRecognizer2)
     }
     
     @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
@@ -475,19 +470,7 @@ class NewsFeedCell: UITableViewCell {
         
         //Give your image View tag
         if (imgView.tag == 1) {
-            let vc = UIStoryboard.init(name: "Profile", bundle: Bundle.main).instantiateViewController(withIdentifier: "ProfileVC") as? ProfileVC
-            newsFeedVC?.navigationController?.pushViewController(vc!, animated: true)
-        }
-    }
-    
-    @objc func lblTapped(tapGestureRecognizer: UITapGestureRecognizer) {
-        let lbl = tapGestureRecognizer.view as! UIImageView
-        print("your taped label view tag is : \(lbl.tag)")
-        
-        //Give your label tag
-        if (lbl.tag == 2) {
-            let vc = UIStoryboard.init(name: "Profile", bundle: Bundle.main).instantiateViewController(withIdentifier: "ProfileVC") as? ProfileVC
-            newsFeedVC?.navigationController?.pushViewController(vc!, animated: true)
+            showProfile()
         }
     }
     
@@ -506,13 +489,9 @@ class NewsFeedCell: UITableViewCell {
     }
 
     func showProfile() {
-            let profileSB = UIStoryboard(name: "ProfileVC", bundle: nil)
-            let showProfileVC = profileSB.instantiateViewController(withIdentifier: "ProfileVC") as! ProfileVC
-            
-    //        let indexPath = IndexPath(row: 1, section: 0)
-    //        showDetailNewsFeedVC.replyTV.scrollToRow(at: indexPath as IndexPath, at: .top, animated: true)
-            
-            newsFeedVC?.navigationController?.pushViewController(showProfileVC, animated: true)
+        let vc = UIStoryboard.init(name: "Profile", bundle: Bundle.main).instantiateViewController(withIdentifier: "ProfileVC") as? ProfileVC
+        vc?.userId = newsPost?.userID ?? UserDefaults.standard.integer(forKey: "id")
+        newsFeedVC?.navigationController?.pushViewController(vc!, animated: true)
     }
 
     func setButtonAttributed(btn: UIButton, num: Int, color: UIColor, state: UIControl.State) {
