@@ -62,44 +62,50 @@
                                                         <constraint firstAttribute="width" constant="40" id="eUD-Ut-oHD"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SRA-8d-xJ0">
-                                                    <rect key="frame" x="70" y="11" width="38" height="18"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="time" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hEa-f3-4GT">
-                                                    <rect key="frame" x="326.66666666666669" y="11" width="28.333333333333314" height="18"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fkO-Yc-TQ3">
+                                                    <rect key="frame" x="70" y="10" width="36" height="22"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <state key="normal" title="name">
+                                                        <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="showDetailProfile:" destination="yAo-b1-Y4a" eventType="touchUpInside" id="0uh-hG-Ecx"/>
+                                                    </connections>
+                                                </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="time" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hEa-f3-4GT">
+                                                    <rect key="frame" x="334" y="11" width="21" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" bouncesZoom="NO" editable="NO" text="댓글 내용 구간 입니다" textAlignment="justified" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O0E-Kn-gbN">
-                                                    <rect key="frame" x="65" y="29" width="295" height="36"/>
+                                                    <rect key="frame" x="65" y="32" width="295" height="33"/>
+                                                    <color key="tintColor" red="0.074509803920000006" green="0.76078431369999999" blue="0.46274509800000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 </textView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="SRA-8d-xJ0" firstAttribute="top" secondItem="a6w-ke-aV7" secondAttribute="topMargin" id="7B6-Tg-jH5"/>
+                                                <constraint firstItem="fkO-Yc-TQ3" firstAttribute="leading" secondItem="OW2-rG-Pny" secondAttribute="trailing" constant="15" id="4Ja-XZ-VQF"/>
                                                 <constraint firstAttribute="bottom" secondItem="O0E-Kn-gbN" secondAttribute="bottom" constant="5" id="8tN-tc-DRs"/>
                                                 <constraint firstItem="hEa-f3-4GT" firstAttribute="top" secondItem="a6w-ke-aV7" secondAttribute="topMargin" id="DsG-qY-a9m"/>
                                                 <constraint firstItem="O0E-Kn-gbN" firstAttribute="top" secondItem="hEa-f3-4GT" secondAttribute="bottom" id="P3l-Qv-c3L"/>
-                                                <constraint firstItem="O0E-Kn-gbN" firstAttribute="top" secondItem="SRA-8d-xJ0" secondAttribute="bottom" id="Xwo-US-ynt"/>
                                                 <constraint firstAttribute="trailing" secondItem="O0E-Kn-gbN" secondAttribute="trailing" constant="15" id="bLr-sf-AC7"/>
                                                 <constraint firstItem="OW2-rG-Pny" firstAttribute="top" secondItem="a6w-ke-aV7" secondAttribute="top" constant="10" id="c15-gE-Fp1"/>
-                                                <constraint firstItem="SRA-8d-xJ0" firstAttribute="leading" secondItem="OW2-rG-Pny" secondAttribute="trailing" constant="15" id="ciB-6K-mId"/>
+                                                <constraint firstItem="O0E-Kn-gbN" firstAttribute="top" secondItem="fkO-Yc-TQ3" secondAttribute="bottom" id="cBT-Qp-hUG"/>
+                                                <constraint firstItem="fkO-Yc-TQ3" firstAttribute="top" secondItem="a6w-ke-aV7" secondAttribute="top" constant="10" id="ebY-AO-LkD"/>
                                                 <constraint firstItem="O0E-Kn-gbN" firstAttribute="leading" secondItem="OW2-rG-Pny" secondAttribute="trailing" constant="10" id="fZc-A8-GZH"/>
                                                 <constraint firstItem="OW2-rG-Pny" firstAttribute="leading" secondItem="a6w-ke-aV7" secondAttribute="leading" constant="15" id="pG0-DB-yjf"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="hEa-f3-4GT" secondAttribute="trailing" constant="5" id="vk3-tY-ZkA"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="LeadingToCommentUser" destination="pG0-DB-yjf" id="Tq4-h8-436"/>
                                             <outlet property="contentsCell" destination="a6w-ke-aV7" id="eh3-n6-ooD"/>
                                             <outlet property="imgCommentUser" destination="OW2-rG-Pny" id="K96-iG-7cc"/>
                                             <outlet property="lblCommentTime" destination="hEa-f3-4GT" id="NNC-L3-kNA"/>
-                                            <outlet property="lblCommentUserId" destination="SRA-8d-xJ0" id="ax3-0p-bn2"/>
+                                            <outlet property="lblCommentUserId" destination="fkO-Yc-TQ3" id="yaF-gW-Qrt"/>
                                             <outlet property="txtvwCommentContents" destination="O0E-Kn-gbN" id="1wN-eL-LYb"/>
                                         </connections>
                                     </tableViewCell>

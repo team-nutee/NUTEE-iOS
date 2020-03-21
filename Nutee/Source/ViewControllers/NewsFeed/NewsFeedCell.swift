@@ -191,7 +191,6 @@ class NewsFeedCell: UITableViewCell {
     
     //포스팅 내용 초기설정
     func initPosting() {
-        
         if newsPost?.retweetID == nil {
             // <-----공유한 글이 아닐 경우-----> //
             TopToUserImg.isActive = true
@@ -296,18 +295,42 @@ class NewsFeedCell: UITableViewCell {
             imgCnt = newsPost?.retweet?.images.count
             showImgFrame()
             
-            // Repost 버튼
-            isClickedRepost = false
-            btnRepost.isSelected = false
-            btnRepost.tintColor = .gray
-            btnRepost.isEnabled = false
             // Like 버튼
-            isClickedLike = false
-            numLike = nil
-            btnLike.setTitle(String(""), for: .normal)
-            btnLike.isEnabled = false
+            var containLoginUser = false
+            for arrSearch in newsPost?.retweet?.likers ?? [] {
+                if arrSearch.like.userID == UserDefaults.standard.integer(forKey: "id") {
+                    containLoginUser = true
+                }
+            }
+            if containLoginUser {
+                // 로그인 한 사용자가 좋아요를 누른 상태일 경우
+                btnLike.isSelected = true
+                numLike = newsPost?.retweet?.likers.count ?? 0
+                btnLike.setTitle(" " + String(numLike!), for: .selected)
+                btnLike.tintColor = .systemPink
+                isClickedLike = true
+            } else {
+                // 로그인 한 사용자가 좋아요를 누르지 않은 상태일 경우
+                btnLike.isSelected = false
+                numLike = newsPost?.retweet?.likers.count ?? 0
+                btnLike.setTitle(" " + String(numLike!), for: .normal)
+                btnLike.tintColor = .gray
+                isClickedLike = false
+            }
+            
+//            // Repost 버튼
+//            isClickedRepost = false
+//            btnRepost.isSelected = false
+//            btnRepost.tintColor = .gray
+//            btnRepost.isEnabled = false
+//            // Like 버튼
+//            isClickedLike = false
+//            numLike = nil
+//            btnLike.setTitle(String(""), for: .normal)
+//            btnLike.isEnabled = false
+            
             // Comment 버튼
-            numComment = 0
+            numComment = newsPost?.retweet?.comments.count ?? 0
             setButtonPlain(btn: btnComment, num: numComment!, color: .gray, state: .normal)
             // More 버튼
             btnMore.isEnabled = false
@@ -456,6 +479,7 @@ class NewsFeedCell: UITableViewCell {
         } // case문 종료
     } // ShowImageFrame 설정 끝
     
+    // 프로필 이미지에 탭 인식하게 만들기
     func setClickActions() {
         imgvwUserImg.tag = 1
         let tapGestureRecognizer1 = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
@@ -464,6 +488,7 @@ class NewsFeedCell: UITableViewCell {
         imgvwUserImg.addGestureRecognizer(tapGestureRecognizer1)
     }
     
+    // 프로필 이미지 클릭시 실행 함수
     @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
         let imgView = tapGestureRecognizer.view as! UIImageView
         print("your taped image view tag is : \(imgView.tag)")
@@ -490,7 +515,14 @@ class NewsFeedCell: UITableViewCell {
 
     func showProfile() {
         let vc = UIStoryboard.init(name: "Profile", bundle: Bundle.main).instantiateViewController(withIdentifier: "ProfileVC") as? ProfileVC
-        vc?.userId = newsPost?.userID ?? UserDefaults.standard.integer(forKey: "id")
+        
+        // 해당 글이 공유글인지 아닌지 판단
+        if newsPost?.retweet == nil {
+            vc?.userId = newsPost?.user.id ?? UserDefaults.standard.integer(forKey: "id")
+        } else {
+            vc?.userId = newsPost?.retweet?.user.id ?? UserDefaults.standard.integer(forKey: "id")
+        }
+        
         newsFeedVC?.navigationController?.pushViewController(vc!, animated: true)
     }
 
@@ -597,7 +629,7 @@ extension NewsFeedCell {
                 self.isClickedRepost = true
                 self.btnRepost.tintColor = .nuteeGreen
                 
-                let alreadyAlert = UIAlertController(title: nil, message: "이미 공유한 글입니다😅", preferredStyle: UIAlertController.Style.actionSheet)
+                let alreadyAlert = UIAlertController(title: nil, message: "❣️이미 공유한 글입니다❣️", preferredStyle: UIAlertController.Style.actionSheet)
                 let okayAction = UIAlertAction(title: "확인", style: .default)
                 alreadyAlert.addAction(okayAction)
                 self.newsFeedVC?.present(alreadyAlert, animated: true, completion: nil)
@@ -630,7 +662,7 @@ extension NewsFeedCell {
             case .serverErr:
                 print(".serverErr")
                 
-                let failAlert = UIAlertController(title: nil, message: "공유글 취소에 실패했습니다😵", preferredStyle: UIAlertController.Style.alert)
+                let failAlert = UIAlertController(title: nil, message: "이미 공유한 글은\n취소 할 수 없습니다😵", preferredStyle: UIAlertController.Style.alert)
                 let okayAction = UIAlertAction(title: "확인", style: .default)
                 failAlert.addAction(okayAction)
                 self.newsFeedVC?.present(failAlert, animated: true, completion: nil)

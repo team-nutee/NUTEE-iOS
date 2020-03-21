@@ -231,6 +231,7 @@ extension NewsFeedVC : UITableViewDataSource {
             // VC 컨트롤 권한을 Cell클래스로 넘겨주기
             cell.newsFeedVC = self
             
+            // 사용자 프로필 이미지 탭 인식 설정
             cell.setClickActions()
         }
         

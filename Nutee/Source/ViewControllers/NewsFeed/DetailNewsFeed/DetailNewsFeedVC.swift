@@ -50,7 +50,7 @@ class DetailNewsFeedVC: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-//        getPostService(postId: postId!, completionHandler: {(returnedData)-> Void in})
+        // ---> NewsFeedVC에서 getPostService 실행 후 reloadData 실행 <--- //
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -71,6 +71,27 @@ class DetailNewsFeedVC: UIViewController {
     }
     
     @IBAction func btnSubmit(_ sender: Any) {
+        commentPostService(postId: postId ?? 0, comment: txtvwComment.text, completionHandler: {() -> Void in
+            self.txtvwComment.text = ""
+            // 전송 버튼 가리기
+            UIView.animate(withDuration: 0.1) {
+                self.btnSubmit.alpha = 0
+            }
+            self.CommentToTrailing.constant = 5
+            UIView.animate(withDuration: 0.1, delay: 0.0, options: .curveEaseInOut, animations: {
+                self.view.layoutIfNeeded()
+            }, completion: nil)
+            self.txtvwComment.endEditing(true)
+            self.txtvwComment.translatesAutoresizingMaskIntoConstraints = true
+            
+            self.getPostService(postId: self.postId ?? 0, completionHandler: {(returnedData)-> Void in
+                self.replyTV.reloadData()
+                
+                let lastRow = IndexPath(row: (self.content?.comments.count ?? 1) - 1, section: 0)
+                self.replyTV.scrollToRow(at: lastRow, at: .bottom, animated: true)
+            })
+        })
+        
     }
     
     func initCommentWindow() {
@@ -133,6 +154,9 @@ extension DetailNewsFeedVC : UITableViewDataSource {
         // VC 컨트롤 권한을 HeaderView로 넘겨주기
         headerNewsFeed.detailNewsFeedVC = self
         
+        // 사용자 프로필 이미지 탭 인식 설정
+        headerNewsFeed.setClickActions()
+        
         return headerNewsFeed
     }
     
@@ -162,11 +186,19 @@ extension DetailNewsFeedVC : UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // 생성한 댓글 cell 개수 파악
         var replyCnt = content?.comments.count ?? 0
         
         if replyCnt == 0 {
+            // 보여줄 댓글이 없을 때
             replyCnt += 2
-        }
+        } /*else {
+            // 추가로 파악해야 할 대댓글의 개수
+            for i in 0...(replyCnt - 1) {
+                let reReply = content?.comments[i]
+                replyCnt += reReply?.reComment?.count ?? 0
+            }
+        }*/
         
         return replyCnt
     }
@@ -180,17 +212,16 @@ extension DetailNewsFeedVC : UITableViewDataSource {
         if content?.comments.count == 0 {
             if indexPath.row == 0 {
                 cell.backgroundColor = .lightGray
-            }  else {
+            } else {
                 cell.addSubview(statusNoReply)
                 statusNoReply.isHidden = false
                 cell.contentsCell.isHidden = true
                 tableView.separatorStyle = .none
             }
         } else {
-            
             // 불러올 댓글이 있는 경우 cell 초기화 진행
             cell.contentsCell.isHidden = false
-            // emptyStatusView(tag: 404) cell에서 제거하기
+            // emptyStatusView(tag: 404)를 cell에서 제거하기
             if let viewWithTag = self.view.viewWithTag(404) {
                 viewWithTag.removeFromSuperview()
             }
@@ -198,6 +229,21 @@ extension DetailNewsFeedVC : UITableViewDataSource {
             // 생성된 Cell클래스로 comment 정보 넘겨주기
             cell.comment = content?.comments[indexPath.row]
             cell.initComments()
+            
+            // VC 컨트롤 권한을 Cell클래스로 넘겨주기
+            cell.detailNewsFeedVC = self
+            
+            // 댓글 사용자 이미지 탭 인식 설정
+            cell.setClickActions()
+            
+            // 대댓글 관련 replyCell 설정
+//            if cell.comment?.reComment?.count != 0 {
+//                replyTV.beginUpdates()
+//                print("insertRow 함수 실행")
+////                let indextPath = IndexPath(row: indexPath.row, section: 0)
+//                replyTV.insertRows(at: [indexPath], with: .automatic)
+//                replyTV.endUpdates()
+//            }
         }
         
         return cell
@@ -355,6 +401,31 @@ extension DetailNewsFeedVC {
                 
                 completionHandler(self.content!)
                 
+            case .requestErr(_):
+                print("request error")
+            
+            case .pathErr:
+                print(".pathErr")
+            
+            case .serverErr:
+                print(".serverErr")
+            
+            case .networkFail :
+                print("failure")
+                }
+        }
+    }
+    
+    // MARK: - comment
+    
+    func commentPostService(postId: Int, comment: String, completionHandler: @escaping () -> Void ) {
+        ContentService.shared.commentPost(postId, comment: comment) { (responsedata) in
+            
+            switch responsedata {
+            case .success(let res):
+                completionHandler()
+                
+                print("commentPost succussful", res)
             case .requestErr(_):
                 print("request error")
             
