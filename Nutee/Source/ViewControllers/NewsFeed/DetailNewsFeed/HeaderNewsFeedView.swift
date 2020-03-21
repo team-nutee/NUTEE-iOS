@@ -20,7 +20,7 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
     // User Information
     @IBOutlet var imgvwUserImg: UIImageView!
     @IBOutlet var TopToUserImg: NSLayoutConstraint!
-    @IBOutlet var lblUserId: UILabel!
+    @IBOutlet var lblUserId: UIButton!
     @IBOutlet var lblPostTime: UILabel!
     
     // Posting
@@ -57,7 +57,6 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
     
     weak var detailNewsFeedVC: UIViewController?
     
-    //    var content: NewsPostsContentElement?
     var detailNewsPost: NewsPostsContentElement?
     
     var imgCnt: Int?
@@ -92,7 +91,7 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
     
     //MARK: - Helper
     
-    @IBAction func showDetailProfile(_ sender: Any) {
+    @IBAction func showDetailProfile(_ sender: UIButton) {
         showProfile()
     }
     
@@ -100,11 +99,13 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
         // .selected State를 활성화 하기 위한 코드
         btnRepost.isSelected = !btnRepost.isSelected
         if isClickedRepost! {
-            btnRepost.tintColor = .nuteeGreen
             isClickedRepost = false
-        } else {
             btnRepost.tintColor = .gray
+            retweetDeleteService(postId: detailNewsPost?.id ?? 0)
+        } else {
             isClickedRepost = true
+            btnRepost.tintColor = .nuteeGreen
+            retweetPostService(postId: detailNewsPost?.id ?? 0)
         }
     }
     
@@ -178,24 +179,27 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
     }
     
     func initPosting() {
-        if detailNewsPost?.user.image?.src == nil || detailNewsPost?.user.image?.src == ""{
-        imgvwUserImg.imageFromUrl("http://15.164.50.161:9425/settings/nutee_profile.png", defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
-        } else {
-        imgvwUserImg.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.user.image?.src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
-        }
-
-        imgvwUserImg.setRounded(radius: nil)
-        
         if detailNewsPost?.retweetID == nil {
             // <-----공유한 글이 아닐 경우-----> //
             TopToUserImg.isActive = true
             TopToRepostImg.isActive = false
-            repostPic.isHidden = true
             lblRepostInfo.isHidden = true
             
-            // User 정보 설정
-            lblUserId.text = detailNewsPost?.user.nickname
+            // User 정보 설정 //
+            // 사용자 프로필 이미지 설정
+            imgvwUserImg.setRounded(radius: nil)
+            if detailNewsPost?.user.image?.src == nil || detailNewsPost?.user.image?.src == ""{
+                imgvwUserImg.imageFromUrl("http://15.164.50.161:9425/settings/nutee_profile.png", defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+                imgvwUserImg.contentMode = .scaleAspectFit
+            } else {
+                imgvwUserImg.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.user.image?.src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+                imgvwUserImg.contentMode = .scaleAspectFill
+            }
+            // 사용자 이름 설정
+            //            let nickname = newsPost?.user.nickname ?? ""
+            lblUserId.setTitle(detailNewsPost?.user.nickname, for: .normal)
             lblUserId.sizeToFit()
+            // 게시글 게시 시간 설정
             let originPostTime = detailNewsPost?.createdAt
             let postTimeDateFormat = originPostTime?.getDateFormat(time: originPostTime!)
             lblPostTime.text = postTimeDateFormat?.timeAgoSince(postTimeDateFormat!)
@@ -204,16 +208,30 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
             txtvwContent.text = detailNewsPost?.content
             txtvwContent.postingInit()
             
-            //            print(txtvwContents.text, "<---- ", newsPost?.createdAt)
-            
             imgCnt = detailNewsPost?.images.count
             showImgFrame()
             
+            var containLoginUser = false
             // Repost 버튼
             isClickedRepost = false
             btnRepost.tintColor = .gray
+            if containLoginUser {
+                // 로그인 한 사용자가 좋아요를 누른 상태일 경우
+                btnLike.isSelected = true
+                numLike = detailNewsPost?.likers.count ?? 0
+                btnLike.setTitle(" " + String(numLike!), for: .selected)
+                btnLike.tintColor = .systemPink
+                isClickedLike = true
+            } else {
+                // 로그인 한 사용자가 좋아요를 누르지 않은 상태일 경우
+                btnLike.isSelected = false
+                numLike = detailNewsPost?.likers.count ?? 0
+                btnLike.setTitle(" " + String(numLike!), for: .normal)
+                btnLike.tintColor = .gray
+                isClickedLike = false
+            }
             // Like 버튼
-            var containLoginUser = false
+            containLoginUser = false
             for arrSearch in detailNewsPost?.likers ?? [] {
                 if arrSearch.like.userID == UserDefaults.standard.integer(forKey: "id") {
                     containLoginUser = true
@@ -241,13 +259,19 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
             // <-----공유한 글 일 경우-----> //
             TopToUserImg.isActive = false
             TopToRepostImg.isActive = true
-            repostPic.isHidden = false
             lblRepostInfo.isHidden = false
             lblRepostInfo.text = (detailNewsPost?.user.nickname)! + " 님이 공유했습니다"
             
-            // User 정보 설정
-            lblUserId.text = detailNewsPost?.retweet?.user.nickname
+            // User 정보 설정 //
+            // 사용자 프로필 이미지 설정
+            imgvwUserImg.imageFromUrl("http://15.164.50.161:9425/settings/nutee_profile.png", defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png") // <-- 우선 기본 프로필 이미지로 설정
+            imgvwUserImg.setRounded(radius: nil)
+            imgvwUserImg.contentMode = .scaleAspectFit
+            // 사용자 이름 설정
+            //            let nickname = newsPost?.retweet?.user.nickname ?? ""
+            lblUserId.setTitle(detailNewsPost?.retweet?.user.nickname, for: .normal)
             lblUserId.sizeToFit()
+            // 게시글 게시 시간 설정
             let originPostTime = detailNewsPost?.retweet?.createdAt
             let postTimeDateFormat = originPostTime?.getDateFormat(time: originPostTime!)
             lblPostTime.text = postTimeDateFormat?.timeAgoSince(postTimeDateFormat!)
@@ -256,28 +280,49 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
             txtvwContent.text = detailNewsPost?.retweet?.content
             txtvwContent.postingInit()
             
-            //            print(txtvwContents.text, "<---- ", newsPost?.retweet?.createdAt)
-            
             imgCnt = detailNewsPost?.retweet?.images.count
             showImgFrame()
             
-            // Repost 버튼
-            isClickedRepost = false
-            btnRepost.isSelected = false
-            btnRepost.tintColor = .gray
-            btnRepost.isEnabled = false
             // Like 버튼
-            isClickedLike = false
-            numLike = nil
-            btnLike.setTitle(String(""), for: .normal)
-            btnLike.isEnabled = false
+            var containLoginUser = false
+            for arrSearch in detailNewsPost?.retweet?.likers ?? [] {
+                if arrSearch.like.userID == UserDefaults.standard.integer(forKey: "id") {
+                    containLoginUser = true
+                }
+            }
+            if containLoginUser {
+                // 로그인 한 사용자가 좋아요를 누른 상태일 경우
+                btnLike.isSelected = true
+                numLike = detailNewsPost?.retweet?.likers.count ?? 0
+                btnLike.setTitle(" " + String(numLike!), for: .selected)
+                btnLike.tintColor = .systemPink
+                isClickedLike = true
+            } else {
+                // 로그인 한 사용자가 좋아요를 누르지 않은 상태일 경우
+                btnLike.isSelected = false
+                numLike = detailNewsPost?.retweet?.likers.count ?? 0
+                btnLike.setTitle(" " + String(numLike!), for: .normal)
+                btnLike.tintColor = .gray
+                isClickedLike = false
+            }
+            
+            //            // Repost 버튼
+            //            isClickedRepost = false
+            //            btnRepost.isSelected = false
+            //            btnRepost.tintColor = .gray
+            //            btnRepost.isEnabled = false
+            //            // Like 버튼
+            //            isClickedLike = false
+            //            numLike = nil
+            //            btnLike.setTitle(String(""), for: .normal)
+            //            btnLike.isEnabled = false
+            
             // Comment 버튼
-            numComment = 0
+            numComment = detailNewsPost?.retweet?.comments.count ?? 0
             setButtonPlain(btn: btnComment, num: numComment!, color: .gray, state: .normal)
             // More 버튼
             btnMore.isEnabled = false
         }
-        //        print("좋아요 숫자 ====> ",numLike)
     }
     
     func setNormalLikeBtn() {
@@ -412,14 +457,37 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
         } // case문 종료
     } // <---ShowImageFrame 설정 끝
     
+    // 프로필 이미지에 탭 인식하게 만들기
+    func setClickActions() {
+        imgvwUserImg.tag = 1
+        let tapGestureRecognizer1 = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
+        tapGestureRecognizer1.numberOfTapsRequired = 1
+        imgvwUserImg.isUserInteractionEnabled = true
+        imgvwUserImg.addGestureRecognizer(tapGestureRecognizer1)
+    }
+    
+    // 프로필 이미지 클릭시 실행 함수
+    @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
+        let imgView = tapGestureRecognizer.view as! UIImageView
+        print("your taped image view tag is : \(imgView.tag)")
+        
+        //Give your image View tag
+        if (imgView.tag == 1) {
+            showProfile()
+        }
+    }
+    
     func showProfile() {
-        let profileSB = UIStoryboard(name: "ProfileVC", bundle: nil)
-        let showProfileVC = profileSB.instantiateViewController(withIdentifier: "ProfileVC") as! ProfileVC
+        let vc = UIStoryboard.init(name: "Profile", bundle: Bundle.main).instantiateViewController(withIdentifier: "ProfileVC") as? ProfileVC
         
-        //        let indexPath = IndexPath(row: 1, section: 0)
-        //        showDetailNewsFeedVC.replyTV.scrollToRow(at: indexPath as IndexPath, at: .top, animated: true)
+        // 해당 글이 공유글인지 아닌지 판단
+        if detailNewsPost?.retweet == nil {
+            vc?.userId = detailNewsPost?.user.id ?? UserDefaults.standard.integer(forKey: "id")
+        } else {
+            vc?.userId = detailNewsPost?.retweet?.user.id ?? UserDefaults.standard.integer(forKey: "id")
+        }
         
-        detailNewsFeedVC?.navigationController?.pushViewController(showProfileVC, animated: true)
+        detailNewsFeedVC?.navigationController?.pushViewController(vc!, animated: true)
     }
     
     func setButtonAttributed(btn: UIButton, num: Int, color: UIColor, state: UIControl.State) {
@@ -465,6 +533,8 @@ extension HeaderNewsFeedView {
         }
     }
     
+    // MARK: - like
+    
     func likePostService(postId: Int) {
         ContentService.shared.likePost(postId) { (responsedata) in
             
@@ -508,4 +578,68 @@ extension HeaderNewsFeedView {
                 }
         }
     }
+    
+// MARK: - Retweet
+    
+    func retweetPostService(postId: Int) {
+        ContentService.shared.retweetPost(postId) { (responsedata) in
+            
+            switch responsedata {
+            case .success(let res):
+                
+                print("retweetPost succussful", res)
+            case .requestErr(_):
+                print("request error")
+                
+                self.isClickedRepost = true
+                self.btnRepost.tintColor = .nuteeGreen
+                
+                let alreadyAlert = UIAlertController(title: nil, message: "❣️이미 공유한 글입니다❣️", preferredStyle: UIAlertController.Style.actionSheet)
+                let okayAction = UIAlertAction(title: "확인", style: .default)
+                alreadyAlert.addAction(okayAction)
+                self.detailNewsFeedVC?.present(alreadyAlert, animated: true, completion: nil)
+            
+            case .pathErr:
+                print(".pathErr")
+            
+            case .serverErr:
+                print(".serverErr")
+            
+            case .networkFail :
+                print("failure")
+                }
+        }
+    }
+    
+    func retweetDeleteService(postId: Int) {
+        ContentService.shared.retweetDelete(postId) { (responsedata) in
+            
+            switch responsedata {
+            case .success(let res):
+                
+                print("retweetPost succussful", res)
+            case .requestErr(_):
+                print("request error")
+            
+            case .pathErr:
+                print(".pathErr")
+            
+            case .serverErr:
+                print(".serverErr")
+                
+                let failAlert = UIAlertController(title: nil, message: "이미 공유한 글은\n취소 할 수 없습니다😵", preferredStyle: UIAlertController.Style.alert)
+                let okayAction = UIAlertAction(title: "확인", style: .default)
+                failAlert.addAction(okayAction)
+                self.detailNewsFeedVC?.present(failAlert, animated: true, completion: nil)
+            
+                self.isClickedRepost = true
+                self.btnRepost.tintColor = .nuteeGreen
+                
+            case .networkFail :
+                print("failure")
+                }
+        }
+    }
+
 }
+

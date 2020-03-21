@@ -29,7 +29,7 @@ struct APIConstants {
     static let Notice = BaseURL + "/api/notice"                                 // GET
     static let image = BaseURL + "/api/post/images"                             // POST formData : image : binary
     static let CommentsGet = BaseURL + "/api/post/:id/comments"                 // GET
-    static let CommentsPost = BaseURL + "/api/post/:id/comments"                // POST requestPayload     {postId : postId ,  content: content}
+    static let CommentsPost = BaseURL + "/api/post" // /:id/comments"                // POST requestPayload     {postId : postId ,  content: content}
 
     
     static let LikePost = BaseURL + "/api/post"// /:id/like"                        // POST

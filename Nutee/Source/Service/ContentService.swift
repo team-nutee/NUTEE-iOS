@@ -435,5 +435,51 @@ struct ContentService {
             }
         }
     }
+
+    // MARK: - Comments
+    
+    func commentPost(_ postId: Int, comment: String, completion: @escaping (NetworkResult<Any>) -> Void) {
         
+        let URL = APIConstants.CommentsPost + "/\(postId)/comment"
+        let headers: HTTPHeaders = [
+            "Cookie" : UserDefaults.standard.string(forKey: "Cookie")!
+        ]
+        
+        let body : Parameters = [
+            "content" : comment
+        ]
+        
+        Alamofire.request(URL, method: .post, parameters: body, encoding: JSONEncoding.default, headers: headers).responseData{
+            response in
+            
+            switch response.result {
+                
+            case .success:
+                
+                if let status = response.response?.statusCode {
+                    print("commentPost method:", status)
+                    
+                    switch status {
+                    case 200:
+                        completion(.success("commentPost에 성공했습니다."))
+                    case 401:
+                        print("실패 401")
+                        completion(.pathErr)
+                    case 500:
+                        print("실패 500")
+                        completion(.serverErr)
+                    default:
+                        break
+                    }
+                }
+                
+                break
+                
+            case .failure(let err):
+                print(err.localizedDescription)
+                completion(.networkFail)
+            }
+        }
+    }
+    
 }

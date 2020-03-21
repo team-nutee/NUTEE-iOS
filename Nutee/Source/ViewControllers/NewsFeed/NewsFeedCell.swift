@@ -191,7 +191,6 @@ class NewsFeedCell: UITableViewCell {
     
     //포스팅 내용 초기설정
     func initPosting() {
-        
         if newsPost?.retweetID == nil {
             // <-----공유한 글이 아닐 경우-----> //
             TopToUserImg.isActive = true
@@ -480,6 +479,7 @@ class NewsFeedCell: UITableViewCell {
         } // case문 종료
     } // ShowImageFrame 설정 끝
     
+    // 프로필 이미지에 탭 인식하게 만들기
     func setClickActions() {
         imgvwUserImg.tag = 1
         let tapGestureRecognizer1 = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
@@ -488,6 +488,7 @@ class NewsFeedCell: UITableViewCell {
         imgvwUserImg.addGestureRecognizer(tapGestureRecognizer1)
     }
     
+    // 프로필 이미지 클릭시 실행 함수
     @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
         let imgView = tapGestureRecognizer.view as! UIImageView
         print("your taped image view tag is : \(imgView.tag)")
@@ -628,7 +629,7 @@ extension NewsFeedCell {
                 self.isClickedRepost = true
                 self.btnRepost.tintColor = .nuteeGreen
                 
-                let alreadyAlert = UIAlertController(title: nil, message: "이미 공유한 글입니다😅", preferredStyle: UIAlertController.Style.actionSheet)
+                let alreadyAlert = UIAlertController(title: nil, message: "❣️이미 공유한 글입니다❣️", preferredStyle: UIAlertController.Style.actionSheet)
                 let okayAction = UIAlertAction(title: "확인", style: .default)
                 alreadyAlert.addAction(okayAction)
                 self.newsFeedVC?.present(alreadyAlert, animated: true, completion: nil)
@@ -661,7 +662,7 @@ extension NewsFeedCell {
             case .serverErr:
                 print(".serverErr")
                 
-                let failAlert = UIAlertController(title: nil, message: "공유글 취소에 실패했습니다😵", preferredStyle: UIAlertController.Style.alert)
+                let failAlert = UIAlertController(title: nil, message: "이미 공유한 글은\n취소 할 수 없습니다😵", preferredStyle: UIAlertController.Style.alert)
                 let okayAction = UIAlertAction(title: "확인", style: .default)
                 failAlert.addAction(okayAction)
                 self.newsFeedVC?.present(failAlert, animated: true, completion: nil)
