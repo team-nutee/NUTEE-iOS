@@ -43,9 +43,15 @@ class ReplyCell: UITableViewCell{
     }
     
     func initComments() {
-        imgCommentUser.imageFromUrl((APIConstants.BaseURL) + "/" + (comment?.user.image?.src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
-        imgCommentUser.contentMode = .scaleAspectFill
+        // 사용자 프로필 이미지 설정
         imgCommentUser.setRounded(radius: imgCommentUser.frame.height/2)
+        if comment?.user.image?.src == nil || comment?.user.image?.src == ""{
+            imgCommentUser.imageFromUrl("http://15.164.50.161:9425/settings/nutee_profile.png", defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+            imgCommentUser.contentMode = .scaleAspectFit
+        } else {
+            imgCommentUser.imageFromUrl((APIConstants.BaseURL) + "/" + (comment?.user.image?.src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+            imgCommentUser.contentMode = .scaleAspectFill
+        }
         
         lblCommentUserId.setTitle(comment?.user.nickname, for: .normal)
         lblCommentUserId.sizeToFit()

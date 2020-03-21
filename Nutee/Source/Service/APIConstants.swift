@@ -24,40 +24,34 @@ struct APIConstants {
     static let Posts = BaseURL + "/api/posts"                                   // GET +++"?offset=0&limit=10" <-- limit는 가져올 posts의 개수(10)
     static let UserPostsGET = BaseURL + "/api/user/:id/posts/"                  // GET
     
-    
     static let Hashtag = BaseURL + "/api/hashtag"                               // GET
     static let Notice = BaseURL + "/api/notice"                                 // GET
     static let image = BaseURL + "/api/post/images"                             // POST formData : image : binary
+    
     static let CommentsGet = BaseURL + "/api/post/:id/comments"                 // GET
-    static let CommentsPost = BaseURL + "/api/post" // /:id/comments"                // POST requestPayload     {postId : postId ,  content: content}
+    static let CommentsPost = BaseURL + "/api/post" // /:id/comments"           // POST requestPayload     {postId : postId ,  content: content}
+    static let CommentsDelete = BaseURL + "/api/post"// /:postId/comment/:id"   // DELETE
+    
+    static let LikePost = BaseURL + "/api/post"// /:id/like"                    // POST
+    static let LikeDelete = BaseURL + "/api/post"// /:id/like"                  // DELETE           {postId : postID}
 
+    static let ReportPost = BaseURL + "/api/post"// /:id/report"                // POST {"content":"신고 사유", "PostId":"123"}
     
-    static let LikePost = BaseURL + "/api/post"// /:id/like"                        // POST
-    
-    static let LikeDelete = BaseURL + "/api/post"// /:id/like"                      // DELETE           {postId : postID}
-
-    static let ReportPost = BaseURL + "/api/post"// /:id/report"                    // POST {"content":"신고 사유", "PostId":"123"}
-    
-    static let Retweet = BaseURL + "/api/post"// /:id/retweet"                      // POST {postId : postId}
+    static let Retweet = BaseURL + "/api/post"// /:id/retweet"                  // POST {postId : postId}
     static let UserId = BaseURL + "/api/user/:id"                               // GET
-    
     
     static let Logout = BaseURL + "/api/user/logout"                            // POST
     static let Login = BaseURL + "/api/user/login"                              // POST { userId : id , password: pw }
     
-    
     static let FollowingGET = BaseURL + "/api/user/:id/followings"              // GET
-   
     
     static let FollowDELETE = BaseURL + "/api/user/:id/follow"                  // DELETE  { userId : id }
     static let FollowPOST = BaseURL + "/api/user/:id/follow"                    // POST    { userId : id }
-    
     
     static let FollowerGET = BaseURL + "/api/user/:id/followers?offset=0&limit=10" // GET <-- limit는 가져올 followers의 개수(10)
     static let FollowerDELETE = BaseURL + "/api/user/:id/followers"             // DELETE  { userId : id }
     static let FollowerPOST = BaseURL + "/api/user/:id/followers"               // POST    { userId : id }
 
-    
     static let NickNamePatch = BaseURL + "/api/user/nickname"                   // PATCH
     static let ProfileImagePost = BaseURL + "/api/user/profile"                 // POST
     

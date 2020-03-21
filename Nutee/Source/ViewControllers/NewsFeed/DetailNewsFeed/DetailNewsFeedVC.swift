@@ -71,7 +71,7 @@ class DetailNewsFeedVC: UIViewController {
     }
     
     @IBAction func btnSubmit(_ sender: Any) {
-        commentPostService(postId: postId ?? 0, comment: txtvwComment.text, completionHandler: {() -> Void in
+        postCommentService(postId: postId ?? 0, comment: txtvwComment.text, completionHandler: {() -> Void in
             self.txtvwComment.text = ""
             // 전송 버튼 가리기
             UIView.animate(withDuration: 0.1) {
@@ -95,6 +95,8 @@ class DetailNewsFeedVC: UIViewController {
     }
     
     func initCommentWindow() {
+        txtvwComment.tintColor = .nuteeGreen
+        
         // 시스템 Light or Dark 설정에 의한 댓글입력 창 배경색 설정
         if self.traitCollection.userInterfaceStyle == .light {
             txtvwComment.backgroundColor = UIColor.commentWindowLight
@@ -250,12 +252,80 @@ extension DetailNewsFeedVC : UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        NSLog("선택된 댓글은 \(indexPath.row) 번쨰 댓글입니다")
     }
     
     // tableView의 마지막 cell 밑의 여백 발생 문제(footerView의 기본 높이 값) 제거 코드
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return .leastNormalMagnitude
+    }
+    
+    // 댓글을 오른쪽(trailing)에서 왼쪽으로 스와이프(swipe) 하였을 때 보여줄 항목 설정(댓글 수정, 삭제 기능)
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        let comment = content?.comments[indexPath.row]
+        
+        if comment?.user.id == UserDefaults.standard.integer(forKey: "id") {
+            // 자기 댓글을 스와이프 했을때
+            let editAction = UIContextualAction(style: .normal, title:  "수정", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+                
+                // Call edit action
+                
+                // Reset state
+                
+                success(true)
+            })
+
+            let deleteAction = UIContextualAction(style: .destructive, title:  "삭제", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+                let deleteAlert = UIAlertController(title: nil, message: "댓글을 삭제 하시겠습니까?", preferredStyle: UIAlertController.Style.alert)
+                let cancelAction = UIAlertAction(title: "취소", style: .default, handler: nil)
+                let okAction = UIAlertAction(title: "삭제", style: .destructive) {
+                    (action: UIAlertAction) in
+                    // Code to delete
+                    self.deleteCommentService(postId: comment?.postID ?? 0, commentId: comment?.id ?? 0, completionHandler: {()-> Void in
+                        self.getPostService(postId: self.postId ?? 0, completionHandler: {(returnedData)-> Void in
+                            self.replyTV.reloadData()
+                        })
+                    })
+                }
+                deleteAlert.addAction(cancelAction)
+                deleteAlert.addAction(okAction)
+                self.present(deleteAlert, animated: true, completion: nil)
+                
+                success(true)
+            })
+            
+            return UISwipeActionsConfiguration(actions:[deleteAction,editAction])
+        } else {
+            // 다른 사람 댓글을 스와이프 했을때
+            let reportAction = UIContextualAction(style: .destructive, title:  "신고", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+                
+                // Code to 신고 기능
+                let reportAlert = UIAlertController(title: "🚨댓글 신고🚨", message: "", preferredStyle: UIAlertController.Style.alert)
+                let cancelAction
+                    = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+                let reportAction = UIAlertAction(title: "신고", style: .destructive) {
+                    (action: UIAlertAction) in
+                    let reason = reportAlert.textFields?[0].text ?? "" // 신고 내용
+                    self.reportCommentService(reportReason: reason)
+                    //신고 여부 알림 <-- 서버연결 코드에서 구현됨
+                }
+                reportAlert.addTextField { (mytext) in
+                    mytext.tintColor = .nuteeGreen
+                    mytext.placeholder = "신고할 내용을 입력해주세요."
+                }
+                reportAlert.addAction(cancelAction)
+                reportAlert.addAction(reportAction)
+                
+                self.present(reportAlert, animated: true, completion: nil)
+                
+                
+                success(true)
+            })
+            
+            return UISwipeActionsConfiguration(actions:[reportAction])
+        }
+        
+        
     }
     
 }
@@ -388,8 +458,12 @@ extension DetailNewsFeedVC: UITextViewDelegate {
     
 }
 
-//MARK: - 게시글 하나를 가져오기 위한 서버연결
+// MARK: - 서버 연결 코드 구간
+
 extension DetailNewsFeedVC {
+
+    //MARK: - 게시글 한 개 가져오기
+    
     func getPostService(postId: Int, completionHandler: @escaping (_ returnedData: NewsPostsContentElement) -> Void ) {
         ContentService.shared.getPost(postId) { responsedata in
             
@@ -416,9 +490,9 @@ extension DetailNewsFeedVC {
         }
     }
     
-    // MARK: - comment
+    // MARK: - 댓글 작성
     
-    func commentPostService(postId: Int, comment: String, completionHandler: @escaping () -> Void ) {
+    func postCommentService(postId: Int, comment: String, completionHandler: @escaping () -> Void ) {
         ContentService.shared.commentPost(postId, comment: comment) { (responsedata) in
             
             switch responsedata {
@@ -440,4 +514,71 @@ extension DetailNewsFeedVC {
                 }
         }
     }
+    
+    // MARK: - 뎃글 신고 <-- 확인 필요
+    
+    func reportCommentService(reportReason: String) {
+        let userid = UserDefaults.standard.string(forKey: "id") ?? "" // <-- 수정 必
+        ContentService.shared.reportPost(userid, reportReason) { (responsedata) in // <-- 현재 작성된 API는 게시글(post)에 대한 신고기능
+            
+            switch responsedata {
+            case .success(let res):
+                
+                print(res)
+                
+                let successfulAlert = UIAlertController(title: "신고가 완료되었습니다", message: nil, preferredStyle: UIAlertController.Style.alert)
+                let okAction = UIAlertAction(title: "확인", style: .default, handler: nil)
+                
+                successfulAlert.addAction(okAction)
+                
+                self.present(successfulAlert, animated: true, completion: nil)
+
+            case .requestErr(_):
+                print("request error")
+            
+            case .pathErr:
+                print(".pathErr")
+            
+            case .serverErr:
+                print(".serverErr")
+            
+            case .networkFail :
+                print("failure")
+                }
+        }
+    }
+    
+    // MARK: - 댓글 삭제
+    
+    func deleteCommentService(postId: Int, commentId: Int, completionHandler: @escaping () -> Void ) {
+        ContentService.shared.commentDelete(postId, commentId: commentId) { (responsedata) in
+            
+            switch responsedata {
+            case .success(let res):
+                
+                print("commentDelete succussful", res)
+                completionHandler()
+                print(res)
+            case .requestErr(_):
+                let errorAlert = UIAlertController(title: "오류발생😵", message: "오류가 발생하여 댓글을 삭제하지 못했습니다", preferredStyle: UIAlertController.Style.alert)
+                let okAction = UIAlertAction(title: "확인", style: .default, handler: nil)
+                
+                errorAlert.addAction(okAction)
+                
+                self.present(errorAlert, animated: true, completion: nil)
+                
+                print("request error")
+            
+            case .pathErr:
+                print(".pathErr")
+            
+            case .serverErr:
+                print(".serverErr")
+            
+            case .networkFail :
+                print("failure")
+                }
+        }
+    }
+    
 }

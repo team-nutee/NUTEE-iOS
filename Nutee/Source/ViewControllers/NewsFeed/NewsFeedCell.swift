@@ -158,11 +158,9 @@ class NewsFeedCell: UITableViewCell {
                 = UIAlertAction(title: "취소", style: .cancel, handler: nil)
             let reportAction = UIAlertAction(title: "신고", style: .destructive) {
                 (action: UIAlertAction) in
-                // <---- 신고 기능 구현
                 let content = reportAlert.textFields?[0].text ?? "" // 신고 내용
-//                let postId = self.newsPost?.id ?? 0
                 self.reportPost(content: content)
-                //신고 여부 알림
+                //신고 여부 알림 <-- 서버연결 코드에서 구현됨
             }
             reportAlert.addTextField { (mytext) in
                 mytext.tintColor = .nuteeGreen
@@ -332,8 +330,6 @@ class NewsFeedCell: UITableViewCell {
             // Comment 버튼
             numComment = newsPost?.retweet?.comments.count ?? 0
             setButtonPlain(btn: btnComment, num: numComment!, color: .gray, state: .normal)
-            // More 버튼
-            btnMore.isEnabled = false
         }
     }
     

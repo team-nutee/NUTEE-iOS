@@ -181,6 +181,8 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
     func initPosting() {
         if detailNewsPost?.retweetID == nil {
             // <-----공유한 글이 아닐 경우-----> //
+            repostPic.isHidden = true
+            
             TopToUserImg.isActive = true
             TopToRepostImg.isActive = false
             lblRepostInfo.isHidden = true
@@ -257,6 +259,8 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
             setButtonPlain(btn: btnComment, num: numComment!, color: .gray, state: .normal)
         } else {
             // <-----공유한 글 일 경우-----> //
+            repostPic.isHidden = false
+            
             TopToUserImg.isActive = false
             TopToRepostImg.isActive = true
             lblRepostInfo.isHidden = false
@@ -320,8 +324,6 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
             // Comment 버튼
             numComment = detailNewsPost?.retweet?.comments.count ?? 0
             setButtonPlain(btn: btnComment, num: numComment!, color: .gray, state: .normal)
-            // More 버튼
-            btnMore.isEnabled = false
         }
     }
     
