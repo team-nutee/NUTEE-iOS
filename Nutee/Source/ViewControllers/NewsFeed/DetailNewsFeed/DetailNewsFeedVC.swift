@@ -98,13 +98,8 @@ class DetailNewsFeedVC: UIViewController {
         txtvwComment.tintColor = .nuteeGreen
         
         // 시스템 Light or Dark 설정에 의한 댓글입력 창 배경색 설정
-        if self.traitCollection.userInterfaceStyle == .light {
-            txtvwComment.backgroundColor = UIColor.commentWindowLight
-            txtvwComment.borderColor = UIColor.commentWindowLight
-        } else {
-            txtvwComment.backgroundColor = UIColor.commentWindowDark
-            txtvwComment.borderColor = UIColor.commentWindowDark
-        }
+        txtvwComment.backgroundColor = .white
+        txtvwComment.borderColor = .white
 
         // 댓글창 top부분과 table Cell의 경계 구분을 위한 shadow 효과 적용
         vwCommentWindow.layer.shadowOpacity = 0.7
