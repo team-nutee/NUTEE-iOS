@@ -7,6 +7,11 @@
 //
 
 import UIKit
+import YPImagePicker
+import AVFoundation
+import AVKit
+import Photos
+
 
 class PostVC: UIViewController {
     
@@ -21,10 +26,12 @@ class PostVC: UIViewController {
     
     @IBOutlet weak var pickerViewBottomConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var testIMG: UIImageView!
     // MARK: - Variables and Properties
     
     let picker = UIImagePickerController()
     var pickedIMG : [UIImage] = []
+    var selectedItems = [YPMediaItem]()
     
     
     // MARK: - Life Cycle
@@ -40,6 +47,7 @@ class PostVC: UIViewController {
         imageCV.dataSource = self
         
         closeBtn.addTarget(self, action: #selector(closePosting), for: .touchUpInside)
+//        imagePickerBtn.addTarget(self, action: #selector(showPicker), for: .touchUpInside)
         imagePickerBtn.addTarget(self, action: #selector(showImagePickerController), for: .touchUpInside)
         postBtn.addTarget(self, action: #selector(posting), for: .touchUpInside)
         
@@ -110,7 +118,64 @@ class PostVC: UIViewController {
             }
         }
     }
+    
+}
 
+// MARK: - YPImagePicker
+
+extension PostVC {
+    @objc func showPicker() {
+        var config = YPImagePickerConfiguration()
+        
+        config.showsPhotoFilters = false
+        config.shouldSaveNewPicturesToAlbum = true
+        config.startOnScreen = .library
+        config.wordings.libraryTitle = "Gallery"
+        config.maxCameraZoomFactor = 2.0
+        config.library.maxNumberOfItems = 10
+        config.gallery.hidesRemoveButton = false
+        config.bottomMenuItemSelectedTextColour = .nuteeGreen
+        config.bottomMenuItemUnSelectedTextColour = .nuteeGreen
+        config.library.preselectedItems = selectedItems
+        
+        let picker = YPImagePicker(configuration: config)
+        
+        picker.didFinishPicking { [unowned picker] items, cancelled in
+            
+            if cancelled {
+                picker.dismiss(animated: true, completion: nil)
+                return
+            }
+            
+            self.selectedItems = items
+            
+            for item in self.selectedItems {
+                switch item {
+                case .photo(let photo):
+                    self.pickedIMG.append(photo.image)
+                    self.imageCV.reloadData()
+                    self.testIMG.image = photo.image
+
+                    dump(self.testIMG.image, name: "testIMG")
+                    dump(self.pickedIMG, name: "arrayIMG")
+                    
+                    picker.dismiss(animated: true) {
+                        dump(self.testIMG.image, name: "testIMG")
+                        dump(self.pickedIMG, name: "arrayIMG")
+                        
+                        
+                    }
+                default:
+                    print("")
+                }
+                
+            }
+            
+        }
+        
+        present(picker, animated: true, completion: nil)
+    }
+    
 }
 
 
@@ -134,10 +199,10 @@ extension PostVC {
                 .compactMap({$0})
                 .first?.windows
                 .filter({$0.isKeyWindow}).first
-            let bottomPadding = keyWindow?.safeAreaInsets.bottom
+            let bottomPadding = keyWindow?.safeAreaInsets.bottom ?? 0
             
-            pickerViewBottomConstraint.constant = -( keyboardHeight - (bottomPadding ?? 0))
-            scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardHeight - bottomPadding!, right: 0)
+            pickerViewBottomConstraint.constant = -( keyboardHeight - (bottomPadding))
+            scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardHeight - bottomPadding, right: 0)
             
             self.view.setNeedsLayout()
             UIView.animate(withDuration: duration, delay: 0, options: .init(rawValue: curve), animations: {
@@ -204,6 +269,16 @@ extension PostVC : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PostIMGCVC", for: indexPath) as! PostIMGCVC
         
+        for item in self.selectedItems {
+            switch item {
+            case .photo(let photo):
+                self.pickedIMG.append(photo.image)
+            default:
+                print("")
+            }
+            
+        }
+        print("is reload")
         cell.postIMG.image = pickedIMG[indexPath.row]
         cell.postIMG.cornerRadius = 10
         
@@ -212,7 +287,7 @@ extension PostVC : UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PostIMGCVC", for: indexPath) as! PostIMGCVC
-
+        
         cell.postIMG.image = nil
         pickedIMG.remove(at: indexPath.row)
         
@@ -237,8 +312,10 @@ extension PostVC : UINavigationControllerDelegate, UIImagePickerControllerDelega
         
         if let selectImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             self.pickedIMG.append(selectImage)
+            dump(self.pickedIMG, name: "img")
+            dump(self.imageCV, name: "before")
             self.imageCV.reloadData()
-            
+            dump(self.imageCV, name: "after")
         }
         
         dismiss(animated: true, completion:  nil)
@@ -248,29 +325,29 @@ extension PostVC : UINavigationControllerDelegate, UIImagePickerControllerDelega
 extension PostVC {
     func postContent(images: [NSString], postContent: String){
         ContentService.shared.uploadPost(pictures: images, postContent: postContent){
-                [weak self]
-                data in
-
-                guard let `self` = self else { return }
+            [weak self]
+            data in
+            
+            guard let `self` = self else { return }
+            
+            switch data {
+            case .success(_ ):
                 
-                switch data {
-                case .success(_ ):
-                    
-                    LoadingHUD.hide()
-                    self.dismiss(animated: true, completion: nil)
-                case .requestErr:
-                    LoadingHUD.hide()
-                    print("requestErr")
-                case .pathErr:
-                    print(".pathErr")
-                    
-                case .serverErr:
-                    print(".serverErr")
-                    
-                case .networkFail:
-                    print(".networkFail")
-                    
-                    
+                LoadingHUD.hide()
+                self.dismiss(animated: true, completion: nil)
+            case .requestErr:
+                LoadingHUD.hide()
+                print("requestErr")
+            case .pathErr:
+                print(".pathErr")
+                
+            case .serverErr:
+                print(".serverErr")
+                
+            case .networkFail:
+                print(".networkFail")
+                
+                
             }
         }
         
@@ -278,33 +355,33 @@ extension PostVC {
     
     func postImage(images: [UIImage]){
         ContentService.shared.uploadImage(pictures: images){
-                [weak self]
-                data in
-
-                guard let `self` = self else { return }
+            [weak self]
+            data in
+            
+            guard let `self` = self else { return }
+            
+            switch data {
+            case .success(let res):
+                // 데이터 타입 변경
+                debugPrint("234 :",res)
+                // 포스팅 서버 연결
+                self.postContent(images: res as! [NSString], postContent: self.postingTextView.text)
                 
-                switch data {
-                case .success(let res):
-                    // 데이터 타입 변경
-                    debugPrint("234 :",res)
-                    // 포스팅 서버 연결
-                    self.postContent(images: res as! [NSString], postContent: self.postingTextView.text)
-                    
-                case .requestErr:
-                    self.simpleAlert(title: "실패", message: "")
-                    
-                case .pathErr:
-                    print(".pathErr")
-                    
-                case .serverErr:
-                    print(".serverErr")
-                    
-                case .networkFail:
-                    print(".networkFail")
-                    
+            case .requestErr:
+                self.simpleAlert(title: "실패", message: "")
+                
+            case .pathErr:
+                print(".pathErr")
+                
+            case .serverErr:
+                print(".serverErr")
+                
+            case .networkFail:
+                print(".networkFail")
+                
             }
         }
         
     }
-
+    
 }
