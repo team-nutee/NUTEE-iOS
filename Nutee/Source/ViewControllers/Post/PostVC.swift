@@ -26,11 +26,12 @@ class PostVC: UIViewController {
     
     @IBOutlet weak var pickerViewBottomConstraint: NSLayoutConstraint!
     
-    @IBOutlet weak var testIMG: UIImageView!
     // MARK: - Variables and Properties
     
     let picker = UIImagePickerController()
     var pickedIMG : [UIImage] = []
+    var pick : [UIImage] = [#imageLiteral(resourceName: "icRightArrowSmall"),#imageLiteral(resourceName: "icRightArrowSmall"),#imageLiteral(resourceName: "icRightArrowSmall"),#imageLiteral(resourceName: "icRightArrowSmall"),#imageLiteral(resourceName: "icRightArrowSmall"),#imageLiteral(resourceName: "icRightArrowSmall"),#imageLiteral(resourceName: "icRightArrowSmall"),#imageLiteral(resourceName: "icRightArrowSmall"),#imageLiteral(resourceName: "icRightArrowSmall"),#imageLiteral(resourceName: "icRightArrowSmall")]
+
     var selectedItems = [YPMediaItem]()
     
     
@@ -47,8 +48,8 @@ class PostVC: UIViewController {
         imageCV.dataSource = self
         
         closeBtn.addTarget(self, action: #selector(closePosting), for: .touchUpInside)
-//        imagePickerBtn.addTarget(self, action: #selector(showPicker), for: .touchUpInside)
-        imagePickerBtn.addTarget(self, action: #selector(showImagePickerController), for: .touchUpInside)
+        imagePickerBtn.addTarget(self, action: #selector(showPicker), for: .touchUpInside)
+//        imagePickerBtn.addTarget(self, action: #selector(showImagePickerController), for: .touchUpInside)
         postBtn.addTarget(self, action: #selector(posting), for: .touchUpInside)
         
         activePostBtn()
@@ -138,6 +139,20 @@ extension PostVC {
         config.bottomMenuItemUnSelectedTextColour = .nuteeGreen
         config.library.preselectedItems = selectedItems
         
+        config.colors.tintColor = .nuteeGreen
+//        config.colors.assetViewBackgroundColor = .nuteeGreen
+//        config.colors.bottomMenuItemBackgroundColor = .nuteeGreen
+//        config.colors.coverSelectorBorderColor = .nuteeGreen
+//        config.colors.filterBackgroundColor = .nuteeGreen
+//        config.colors.libraryScreenBackgroundColor = .nuteeGreen
+//        config.colors.multipleItemsSelectedCircleColor = .nuteeGreen
+//        config.colors.navigationBarActivityIndicatorColor = .nuteeGreen
+//        config.colors.positionLineColor = .nuteeGreen
+//        config.colors.trimmerHandleColor = .nuteeGreen
+//        config.colors.trimmerMainColor = .nuteeGreen
+//        config.colors.progressBarCompletedColor = .nuteeGreen
+//        config.colors.progressBarTrackColor = .nuteeGreen
+
         let picker = YPImagePicker(configuration: config)
         
         picker.didFinishPicking { [unowned picker] items, cancelled in
@@ -147,29 +162,48 @@ extension PostVC {
                 return
             }
             
-            self.selectedItems = items
             
-            for item in self.selectedItems {
+            var count = 0
+            for item in items {
+                print(count)
                 switch item {
-                case .photo(let photo):
-                    self.pickedIMG.append(photo.image)
-                    self.imageCV.reloadData()
-                    self.testIMG.image = photo.image
-
-                    dump(self.testIMG.image, name: "testIMG")
-                    dump(self.pickedIMG, name: "arrayIMG")
-                    
-                    picker.dismiss(animated: true) {
-                        dump(self.testIMG.image, name: "testIMG")
-                        dump(self.pickedIMG, name: "arrayIMG")
-                        
-                        
-                    }
+                case .photo(let p):
+                    self.pick[count] = p.image
                 default:
                     print("")
                 }
-                
+                count += 1
             }
+                picker.dismiss(animated: true) {
+                    for image in 0 ... count-1 {
+                        self.pickedIMG.append(self.pick[image])
+                        self.imageCV.reloadData()
+                    }
+                }
+
+            
+            
+//            self.selectedItems = items
+            
+//            for item in items {
+//                var count = 0
+//                switch item {
+//                case .photo(let photo):
+//                    self.pick[count] = photo.image
+//
+//                default:
+//                    print("")
+//                }
+//
+//                picker.dismiss(animated: true) {
+//                    dump(self.pickedIMG, name: "arrayIMG")
+//                    dump(self.pick, name: "pick")
+//                    self.imageCV.reloadData()
+//
+//                }
+//
+//
+//            }
             
         }
         
@@ -269,16 +303,16 @@ extension PostVC : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PostIMGCVC", for: indexPath) as! PostIMGCVC
         
-        for item in self.selectedItems {
-            switch item {
-            case .photo(let photo):
-                self.pickedIMG.append(photo.image)
-            default:
-                print("")
-            }
-            
-        }
-        print("is reload")
+//        for item in self.selectedItems {
+//            switch item {
+//            case .photo(let photo):
+//                self.pickedIMG.append(photo.image)
+//            default:
+//                print("")
+//            }
+//
+//        }
+//        print("is reload")
         cell.postIMG.image = pickedIMG[indexPath.row]
         cell.postIMG.cornerRadius = 10
         
