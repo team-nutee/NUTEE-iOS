@@ -7,13 +7,13 @@
 //
 
 import UIKit
+import SnapKit
 
 class NewsFeedVC: UIViewController {
     
     // MARK: - UI components
         
     @IBOutlet var newsTV: UITableView!
-    @IBOutlet var emptyStatusVw: UIView!
     
     var refreshControl: UIRefreshControl!
     
@@ -24,6 +24,7 @@ class NewsFeedVC: UIViewController {
     var newsPost: NewsPostsContentElement?
     
     var loadCompleteBtn = UIButton()
+    var noPostsToShow = UIView()
     
     // MARK: - Dummy data
     
@@ -37,8 +38,8 @@ class NewsFeedVC: UIViewController {
         newsTV.separatorInset.left = 0
         newsTV.separatorStyle = .none
         
-//        self.tabBarController?.delegate = self
         self.view.addSubview(loadCompleteBtn)
+        self.view.addSubview(noPostsToShow)
         
         initColor()
         setRefresh()
@@ -53,7 +54,7 @@ class NewsFeedVC: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        getNewsPostsService(postCnt: 1, lastId: 0, completionHandler: {(returnedData)-> Void in
+        getNewsPostsService(postCnt: 10, lastId: 0, completionHandler: {(returnedData)-> Void in
             if self.newsPostsArr?.count ?? 0 > 0 {
                 var tmpNewsPost: NewsPostsContentElement?
                 // 기존의 최신 게시글 id
@@ -70,9 +71,8 @@ class NewsFeedVC: UIViewController {
                         self.loadCompleteBtn.alpha = 1
                     }
                 }
-//                self.viewDidAppear(true)
             }
-            
+
         })
     }
     
@@ -164,6 +164,45 @@ class NewsFeedVC: UIViewController {
         }
     }
 
+    func setEmptyView(_ cell: NewsFeedCell) {
+        noPostsToShow.backgroundColor = .white
+        let maxWidthContainer: CGFloat = 375
+        let maxHeightContainer: CGFloat = 200
+
+        let zigiSorry = UIImageView()
+        zigiSorry.image = #imageLiteral(resourceName: "zigi_sorry")
+        let maxWidthImage: CGFloat = 460
+        let maxHeightImage: CGFloat = 428
+
+        let msgLabel = UILabel()
+        msgLabel.text = "불러올 게시글이 없습니다?"
+        msgLabel.textColor = .black
+        msgLabel.font = UIFont(name: "HelveticaNeue-Regular", size: 17)
+        msgLabel.textAlignment = .center
+
+        cell.addSubview(noPostsToShow)
+        noPostsToShow.addSubview(zigiSorry)
+        noPostsToShow.addSubview(msgLabel)
+        
+        noPostsToShow.snp.makeConstraints({ (make) in
+            make.width.equalTo(noPostsToShow.snp.height).multipliedBy(maxWidthContainer/maxHeightContainer)
+            make.centerY.equalToSuperview()
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
+        })
+        
+        zigiSorry.snp.makeConstraints({ (make) in
+            make.width.equalTo(zigiSorry.snp.height).multipliedBy(maxWidthImage/maxHeightImage)
+            make.centerX.equalToSuperview()
+            make.top.equalToSuperview()
+            make.bottom.equalTo(-40)
+        })
+        
+        msgLabel.snp.makeConstraints({ (make) in
+            make.centerX.equalTo(zigiSorry)
+            make.bottom.equalToSuperview()
+        })
+    }
 }
 
 // MARK: - UITableView
@@ -206,18 +245,18 @@ extension NewsFeedVC : UITableViewDataSource {
         bgColorView.backgroundColor = nil
         cell.selectedBackgroundView = bgColorView
         cell.addBorder((.bottom), color: .lightGray, thickness: 0.3)
-//        cell.addBorder((.top), color: .lightGray, thickness: 1)
 
         if newsPostsArr?.count == 0 || newsPostsArr?.count == nil {
             // 불러올 게시물이 없을 경우
-            cell.addSubview(emptyStatusVw)
-            emptyStatusVw.isHidden = false
+            setEmptyView(cell)
+            noPostsToShow.isHidden = false
             cell.contentsCell.isHidden = true
-        
         } else {
-            
-            // 불러올 게시물이 있는 경우 cell 초기화 진행
+            // 불러올 게시물이 있는 경우
+            noPostsToShow.isHidden = true
             cell.contentsCell.isHidden = false
+            
+            // cell 초기화 진행
             // emptyStatusView(tag: 404) cell에서 제거하기
             if let viewWithTag = self.view.viewWithTag(404) {
                 viewWithTag.removeFromSuperview()
@@ -234,8 +273,6 @@ extension NewsFeedVC : UITableViewDataSource {
             // 사용자 프로필 이미지 탭 인식 설정
             cell.setClickActions()
         }
-        
-//        NSLog("선택된 cell은 \(indexPath.row) 번쨰 indexPath입니다")
         
         return cell
     }
@@ -291,6 +328,7 @@ extension NewsFeedVC : UITableViewDataSource {
 }
 
 //MARK: - 뉴스피드 내용을 가져오기 위한 서버연결
+
 extension NewsFeedVC {
     func getNewsPostsService(postCnt: Int, lastId: Int, completionHandler: @escaping (_ returnedData: NewsPostsContent) -> Void ) {
         ContentService.shared.getNewsPosts(postCnt, lastId: lastId) { responsedata in

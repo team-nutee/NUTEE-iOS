@@ -14,8 +14,6 @@ class DetailNewsFeedVC: UIViewController {
     
     @IBOutlet var replyTV: UITableView!
     
-    @IBOutlet var statusNoReply: UIView!
-    
     // 댓글창 표시
     @IBOutlet var vwCommentWindow: UIView!
     @IBOutlet var txtvwComment: UITextView!
@@ -27,6 +25,8 @@ class DetailNewsFeedVC: UIViewController {
     
     var content: NewsPostsContentElement?
     var postId: Int?
+    
+    let statusNoReply = UIView()
     
     //MARK: - Dummy data
     
@@ -65,6 +65,47 @@ class DetailNewsFeedVC: UIViewController {
 
 //MARK: - Helper
 
+    func setStatusNoReplyView(_ cell: ReplyCell) {
+        statusNoReply.backgroundColor = .white
+        let maxWidthContainer: CGFloat = 375
+        let maxHeightContainer: CGFloat = 140
+        
+        let zigiNoReply = UIImageView()
+        zigiNoReply.image = #imageLiteral(resourceName: "zigi_no_reply")
+        let maxWidthImage: CGFloat = 455
+        let maxHeightImage: CGFloat = 684
+        
+        let msgLabel = UILabel()
+        msgLabel.text = "댓글이 없습니다"
+        msgLabel.textColor = .black
+        msgLabel.font = UIFont(name: "HelveticaNeue-Regular", size: 15)
+        msgLabel.font = msgLabel.font.withSize(15)
+        msgLabel.textAlignment = .center
+        
+        cell.addSubview(statusNoReply)
+        statusNoReply.addSubview(zigiNoReply)
+        statusNoReply.addSubview(msgLabel)
+        
+        statusNoReply.snp.makeConstraints({ (make) in
+            make.width.equalTo(statusNoReply.snp.height).multipliedBy(maxWidthContainer/maxHeightContainer)
+            make.centerY.equalToSuperview()
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
+        })
+        
+        zigiNoReply.snp.makeConstraints({ (make) in
+            make.width.equalTo(zigiNoReply.snp.height).multipliedBy(maxWidthImage/maxHeightImage)
+            make.centerX.equalToSuperview()
+            make.top.equalToSuperview()
+            make.bottom.equalTo(-30)
+        })
+        
+        msgLabel.snp.makeConstraints({ (make) in
+            make.centerX.equalTo(zigiNoReply)
+            make.bottom.equalToSuperview()
+        })
+    }
+    
     // 댓글창 밖에서 탭 하였을 때 키보드 내리기
     @IBAction func tapOutsideOfCommentWindow(_ sender: Any) {
         self.txtvwComment.endEditing(true)
@@ -210,7 +251,7 @@ extension DetailNewsFeedVC : UITableViewDataSource {
             if indexPath.row == 0 {
                 cell.backgroundColor = .lightGray
             } else {
-                cell.addSubview(statusNoReply)
+                setStatusNoReplyView(cell)
                 statusNoReply.isHidden = false
                 cell.contentsCell.isHidden = true
                 tableView.separatorStyle = .none
@@ -218,6 +259,7 @@ extension DetailNewsFeedVC : UITableViewDataSource {
         } else {
             // 불러올 댓글이 있는 경우 cell 초기화 진행
             cell.contentsCell.isHidden = false
+            statusNoReply.isHidden = true
             // emptyStatusView(tag: 404)를 cell에서 제거하기
             if let viewWithTag = self.view.viewWithTag(404) {
                 viewWithTag.removeFromSuperview()
@@ -457,8 +499,7 @@ extension DetailNewsFeedVC: UITextViewDelegate {
 
 extension DetailNewsFeedVC {
 
-    //MARK: - 게시글 한 개 가져오기
-    
+    // 게시글 한 개 가져오기
     func getPostService(postId: Int, completionHandler: @escaping (_ returnedData: NewsPostsContentElement) -> Void ) {
         ContentService.shared.getPost(postId) { responsedata in
             
@@ -510,8 +551,7 @@ extension DetailNewsFeedVC {
         }
     }
     
-    // MARK: - 뎃글 신고 <-- 확인 필요
-    
+    // 뎃글 신고 <-- 확인 필요
     func reportCommentService(reportReason: String) {
         let userid = UserDefaults.standard.string(forKey: "id") ?? "" // <-- 수정 必
         ContentService.shared.reportPost(userid, reportReason) { (responsedata) in // <-- 현재 작성된 API는 게시글(post)에 대한 신고기능
@@ -543,8 +583,7 @@ extension DetailNewsFeedVC {
         }
     }
     
-    // MARK: - 댓글 삭제
-    
+    // 댓글 삭제
     func deleteCommentService(postId: Int, commentId: Int, completionHandler: @escaping () -> Void ) {
         ContentService.shared.commentDelete(postId, commentId: commentId) { (responsedata) in
             
