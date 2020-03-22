@@ -86,19 +86,15 @@
                                                     </collectionViewCell>
                                                 </cells>
                                             </collectionView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="현재는 한 장씩 여러번 올려야합니다!! 죄송합니다 😭" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mss-Ug-VrO">
-                                                <rect key="frame" x="24" y="201" width="353.5" height="21"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lgh-w7-C6l">
+                                                <rect key="frame" x="24" y="235" width="240" height="128"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            </imageView>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
-                                            <constraint firstItem="mss-Ug-VrO" firstAttribute="top" secondItem="POb-9S-SR8" secondAttribute="bottom" constant="26" id="8nK-Ux-hZP"/>
                                             <constraint firstAttribute="trailing" secondItem="fET-w1-DKH" secondAttribute="trailing" constant="24" id="CDA-ih-ped"/>
                                             <constraint firstItem="POb-9S-SR8" firstAttribute="top" secondItem="fET-w1-DKH" secondAttribute="bottom" constant="18" id="FjH-8P-r2H"/>
-                                            <constraint firstItem="POb-9S-SR8" firstAttribute="leading" secondItem="mss-Ug-VrO" secondAttribute="leading" id="Jd9-iS-R5n"/>
                                             <constraint firstItem="fET-w1-DKH" firstAttribute="leading" secondItem="EeZ-Kg-LiA" secondAttribute="leading" constant="24" id="TvQ-7W-Dwx"/>
                                             <constraint firstAttribute="trailing" secondItem="POb-9S-SR8" secondAttribute="trailing" constant="24" id="e4r-Xt-vOm"/>
                                             <constraint firstItem="fET-w1-DKH" firstAttribute="top" secondItem="EeZ-Kg-LiA" secondAttribute="top" constant="23" id="qxl-UT-Kyb"/>
@@ -200,6 +196,7 @@
                         <outlet property="postBtn" destination="LOC-Lf-eDr" id="2fL-5c-nut"/>
                         <outlet property="postingTextView" destination="fET-w1-DKH" id="Rra-hi-Ju2"/>
                         <outlet property="scrollView" destination="PTy-zj-GzA" id="zgC-AN-42e"/>
+                        <outlet property="testIMG" destination="Lgh-w7-C6l" id="CM7-yn-s2E"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A0x-kW-71m" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
