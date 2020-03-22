@@ -92,7 +92,6 @@ class EmailVC: UIViewController {
         vc.email = self.emailTextField.text ?? ""
         vc.modalPresentationStyle = .fullScreen
         
-//        self.navigationController?.pushViewController(vc, animated: false)
         self.present(vc, animated: false)
     }
 

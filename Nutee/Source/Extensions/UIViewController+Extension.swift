@@ -14,7 +14,7 @@ extension UIViewController {
     // 2칸인 alert title - up, message - down
     func simpleAlert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        //        let okAction = UIAlertAction(title: "확인",style: .default)
+
         let action = UIAlertAction(title: "확인", style: .default) { (action) in
             
         }
@@ -24,7 +24,7 @@ extension UIViewController {
     
     func rootViewAlert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        //        let okAction = UIAlertAction(title: "확인",style: .default)
+        
         let action = UIAlertAction(title: "확인", style: .default) { (action) in
             self.view.window!.rootViewController?.dismiss(animated: true, completion: nil)
         }
