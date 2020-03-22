@@ -86,10 +86,6 @@
                                                     </collectionViewCell>
                                                 </cells>
                                             </collectionView>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lgh-w7-C6l">
-                                                <rect key="frame" x="24" y="235" width="240" height="128"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            </imageView>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
@@ -196,7 +192,6 @@
                         <outlet property="postBtn" destination="LOC-Lf-eDr" id="2fL-5c-nut"/>
                         <outlet property="postingTextView" destination="fET-w1-DKH" id="Rra-hi-Ju2"/>
                         <outlet property="scrollView" destination="PTy-zj-GzA" id="zgC-AN-42e"/>
-                        <outlet property="testIMG" destination="Lgh-w7-C6l" id="CM7-yn-s2E"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A0x-kW-71m" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
