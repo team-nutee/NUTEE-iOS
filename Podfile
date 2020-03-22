@@ -9,6 +9,7 @@ target 'Nutee' do
   pod 'Kingfisher'
   pod 'SnapKit', '~> 5.0.0'
   pod 'Alamofire', '~> 4.8.2'
+  pod 'YPImagePicker'
   # Pods for Nutee
 
 end
