@@ -28,9 +28,8 @@ class PostVC: UIViewController {
     
     // MARK: - Variables and Properties
     
-    let picker = UIImagePickerController()
     var pickedIMG : [UIImage] = []
-    var pick : [UIImage] = [#imageLiteral(resourceName: "icRightArrowSmall"),#imageLiteral(resourceName: "icRightArrowSmall"),#imageLiteral(resourceName: "icRightArrowSmall"),#imageLiteral(resourceName: "icRightArrowSmall"),#imageLiteral(resourceName: "icRightArrowSmall"),#imageLiteral(resourceName: "icRightArrowSmall"),#imageLiteral(resourceName: "icRightArrowSmall"),#imageLiteral(resourceName: "icRightArrowSmall"),#imageLiteral(resourceName: "icRightArrowSmall"),#imageLiteral(resourceName: "icRightArrowSmall")]
+    
     
     var selectedItems = [YPMediaItem]()
     
@@ -42,14 +41,12 @@ class PostVC: UIViewController {
         
         initSetting()
         
-        picker.delegate = self
         postingTextView.delegate = self
         imageCV.delegate = self
         imageCV.dataSource = self
         
         closeBtn.addTarget(self, action: #selector(closePosting), for: .touchUpInside)
         imagePickerBtn.addTarget(self, action: #selector(showPicker), for: .touchUpInside)
-//        imagePickerBtn.addTarget(self, action: #selector(showImagePickerController), for: .touchUpInside)
         postBtn.addTarget(self, action: #selector(posting), for: .touchUpInside)
         
         activePostBtn()
@@ -63,18 +60,10 @@ class PostVC: UIViewController {
         
         self.postingTextView.placeholder = "내용을 입력해주세요"
         postBtn.isEnabled = false
-        
-        //        hideTabbar()
-        
         textViewDidChange(postingTextView)
-//        setDefault()
+
     }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(true)
-        setDefault()
-    }
-    
+        
     // MARK: - Helper
     
     func initSetting() {
@@ -96,6 +85,7 @@ class PostVC: UIViewController {
     }
     
     @objc func closePosting() {
+        setDefault()
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -153,48 +143,23 @@ extension PostVC {
             }
             
             
-            var count = 0
+            
             for item in items {
-                print(count)
+                
                 switch item {
+                    
                 case .photo(let p):
-                    self.pick[count] = p.image
+                    self.pickedIMG.append(p.image)
+                    
                 default:
                     print("")
+                    
                 }
-                count += 1
+                
             }
             picker.dismiss(animated: true) {
-                for image in 0 ... count-1 {
-                    self.pickedIMG.append(self.pick[image])
-                    self.imageCV.reloadData()
-                }
+                self.imageCV.reloadData()
             }
-            
-            
-            
-            //            self.selectedItems = items
-            
-            //            for item in items {
-            //                var count = 0
-            //                switch item {
-            //                case .photo(let photo):
-            //                    self.pick[count] = photo.image
-            //
-            //                default:
-            //                    print("")
-            //                }
-            //
-            //                picker.dismiss(animated: true) {
-            //                    dump(self.pickedIMG, name: "arrayIMG")
-            //                    dump(self.pick, name: "pick")
-            //                    self.imageCV.reloadData()
-            //
-            //                }
-            //
-            //
-            //            }
-            
         }
         
         present(picker, animated: true, completion: nil)
@@ -292,17 +257,6 @@ extension PostVC : UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PostIMGCVC", for: indexPath) as! PostIMGCVC
-        
-        //        for item in self.selectedItems {
-        //            switch item {
-        //            case .photo(let photo):
-        //                self.pickedIMG.append(photo.image)
-        //            default:
-        //                print("")
-        //            }
-        //
-        //        }
-        //        print("is reload")
         cell.postIMG.image = pickedIMG[indexPath.row]
         cell.postIMG.cornerRadius = 10
         
@@ -318,32 +272,6 @@ extension PostVC : UICollectionViewDataSource {
         self.imageCV.reloadData()
     }
     
-}
-
-// MARK: - ImagePickerDelegate
-
-extension PostVC : UINavigationControllerDelegate, UIImagePickerControllerDelegate {
-    
-    @objc func showImagePickerController() {
-        let imagePickerController = UIImagePickerController()
-        imagePickerController.delegate = self
-        imagePickerController.allowsEditing = false
-        imagePickerController.sourceType = .photoLibrary
-        present(imagePickerController, animated: true, completion: nil)
-    }
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        
-        if let selectImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            self.pickedIMG.append(selectImage)
-            dump(self.pickedIMG, name: "img")
-            dump(self.imageCV, name: "before")
-            self.imageCV.reloadData()
-            dump(self.imageCV, name: "after")
-        }
-        
-        dismiss(animated: true, completion:  nil)
-    }
 }
 
 extension PostVC {
