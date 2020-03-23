@@ -136,13 +136,11 @@ extension PostVC {
         let picker = YPImagePicker(configuration: config)
         
         picker.didFinishPicking { [unowned picker] items, cancelled in
-            
+            self.pickedIMG = []
             if cancelled {
                 picker.dismiss(animated: true, completion: nil)
                 return
             }
-            
-            
             
             for item in items {
                 
