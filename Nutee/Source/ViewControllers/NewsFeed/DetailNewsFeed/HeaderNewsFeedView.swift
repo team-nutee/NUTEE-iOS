@@ -268,9 +268,14 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
             
             // User 정보 설정 //
             // 사용자 프로필 이미지 설정
-            imgvwUserImg.imageFromUrl("http://15.164.50.161:9425/settings/nutee_profile.png", defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png") // <-- 우선 기본 프로필 이미지로 설정
             imgvwUserImg.setRounded(radius: nil)
-            imgvwUserImg.contentMode = .scaleAspectFit
+            if detailNewsPost?.retweet?.user.image?.src == nil || detailNewsPost?.retweet?.user.image?.src == ""{
+                imgvwUserImg.imageFromUrl("http://15.164.50.161:9425/settings/nutee_profile.png", defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+                imgvwUserImg.contentMode = .scaleAspectFit
+            } else {
+                imgvwUserImg.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.retweet?.user.image?.src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+                imgvwUserImg.contentMode = .scaleAspectFill
+            }
             // 사용자 이름 설정
             //            let nickname = newsPost?.retweet?.user.nickname ?? ""
             lblUserId.setTitle(detailNewsPost?.retweet?.user.nickname, for: .normal)
@@ -356,8 +361,32 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
         vwSquare.isHidden = true
         
         var num = 0
-        let imageCnt = detailNewsPost?.images.count
+        
+        var isRepost = false
+        if detailNewsPost?.retweet == nil {
+            isRepost = false
+        } else {
+            isRepost = true
+        }
+        var imageCnt = 0
+        if isRepost {
+            imageCnt = detailNewsPost?.retweet?.images.count ?? 0
+        } else {
+            imageCnt = detailNewsPost?.images.count ?? 0
+        }
         switch imageCnt {
+        case 0:
+            // 보여줄 사진이 없는 경우(글만 표시)
+            lblTwoMoreImg.isHidden = true
+            lblThreeMoreImg.isHidden = true
+            lblFourMoreImg.isHidden = true
+            
+//            ContentToVwTwo.isActive = false
+            vwTwoToRepost.isActive = false
+//            ContentToVwSquare.isActive = false
+            vwSquareToRepost.isActive = false
+            ContentsToRepost.isActive = true
+            
         case 1:
             // ver. only OneImage
             vwSquare.isHidden = false
@@ -366,29 +395,42 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
             vwThree.isHidden = true
             vwFour.isHidden = true
             
+//            ContentToVwTwo.isActive = false
             vwTwoToRepost.isActive = false
+//            ContentToVwSquare.isActive = true
             vwSquareToRepost.isActive = true
             ContentsToRepost.isActive = false
             
-            imgvwOne.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.images[0].src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+            if isRepost {
+                imgvwOne.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.retweet?.images[0].src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+            } else {
+                imgvwOne.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.images[0].src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+            }
+
         case 2:
             // ver. TwoFrame
             vwTwo.isHidden = false
             
+//            ContentToVwTwo.isActive = true
             vwTwoToRepost.isActive = true
+//            ContentToVwSquare.isActive = false
             vwSquareToRepost.isActive = false
             ContentsToRepost.isActive = false
             
             for imgvw in imgvwTwo {
-                imgvw.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.images[num].src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+                if isRepost {
+                    imgvw.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.retweet?.images[num].src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+                } else {
+                    imgvw.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.images[num].src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+                }
                 if num == 1 {
-                    let leftImg = (detailNewsPost?.images.count ?? 0) - 2
+                    let leftImg = imageCnt - 2
+                    imgvw.alpha = 1.0
                     if leftImg > 0 {
-                        imgvw.alpha = 0.8
+                        imgvw.alpha = 0.5
                         lblTwoMoreImg.isHidden = false
                         lblTwoMoreImg.text = String(leftImg) + " +"
                         lblTwoMoreImg.sizeToFit()
-                        //                        imageTapped(image: imgvw.image!)
                     } else {
                         lblTwoMoreImg.isHidden = true
                     }
@@ -402,17 +444,24 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
             imgvwOne.isHidden = true
             vwFour.isHidden = true
             
+//            ContentToVwTwo.isActive = false
             vwTwoToRepost.isActive = false
+//            ContentToVwSquare.isActive = true
             vwSquareToRepost.isActive = true
             ContentsToRepost.isActive = false
             
             for imgvw in imgvwThree {
-                imgvw.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.images[num].src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+                if isRepost {
+                    imgvw.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.retweet?.images[num].src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+                } else {
+                    imgvw.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.images[num].src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+                }
                 if num == 2 {
-                    let leftImg = (detailNewsPost?.images.count ?? 0) - 3
+                    let leftImg = imageCnt - 3
+                    imgvw.alpha = 1.0
                     if leftImg > 0 {
-                        imgvw.alpha = 0.8
-                        //                        lblThreeMoreImg.isHidden = false
+                        imgvw.alpha = 0.5
+                        lblThreeMoreImg.isHidden = false
                         lblThreeMoreImg.text = String(leftImg) + " +"
                         lblThreeMoreImg.sizeToFit()
                     } else {
@@ -421,24 +470,33 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
                 }
                 num += 1
             }
-        case 4:
+        default:
             // ver. FourFrame
             vwSquare.isHidden = false
             
             imgvwOne.isHidden = true
             vwThree.isHidden = true
             
+//            ContentToVwTwo.isActive = false
             vwTwoToRepost.isActive = false
+//            ContentToVwSquare.isActive = true
             vwSquareToRepost.isActive = true
             ContentsToRepost.isActive = false
             
             for imgvw in imgvwFour {
-                imgvw.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.images[num].src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+                if num <= 3 {
+                    if isRepost {
+                        imgvw.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.retweet?.images[num].src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+                    } else {
+                        imgvw.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.images[num].src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+                    }
+                }
                 if num == 3 {
-                    let leftImg = (detailNewsPost?.images.count ?? 0) - 4
+                    let leftImg = imageCnt - 4
+                    imgvw.alpha = 1.0
                     if leftImg > 0 {
-                        imgvw.alpha = 0.8
-                        //                        lblTwoMoreImg.isHidden = false
+                        imgvw.alpha = 0.5
+                        lblFourMoreImg.isHidden = false
                         lblFourMoreImg.text = String(leftImg) + " +"
                         lblFourMoreImg.sizeToFit()
                     } else {
@@ -447,17 +505,9 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
                 }
                 num += 1
             }
-        default:
-            // 보여줄 사진이 없는 경우(글만 표시)
-            lblTwoMoreImg.isHidden = true
-            lblThreeMoreImg.isHidden = true
-            lblFourMoreImg.isHidden = true
-            
-            vwTwoToRepost.isActive = false
-            vwSquareToRepost.isActive = false
-            ContentsToRepost.isActive = true
+        
         } // case문 종료
-    } // <---ShowImageFrame 설정 끝
+    } // ShowImageFrame 설정 끝
     
     // 프로필 이미지에 탭 인식하게 만들기
     func setClickActions() {
