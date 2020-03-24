@@ -43,4 +43,87 @@ extension UITableView {
         self.backgroundView = nil
         self.separatorStyle = .singleLine
     }
+    
+    // Main NewsFeed - 불러올 게시글이 없는 경우 표시
+    func setNoPostsToShowView(_ cell: NewsFeedCell, emptyView: UIView) {
+        emptyView.backgroundColor = .white
+        let maxWidthContainer: CGFloat = 375
+        let maxHeightContainer: CGFloat = 200
+
+        let zigiSorry = UIImageView()
+        zigiSorry.image = #imageLiteral(resourceName: "zigi_sorry")
+        let maxWidthImage: CGFloat = 460
+        let maxHeightImage: CGFloat = 428
+
+        let msgLabel = UILabel()
+        msgLabel.text = "불러올 게시글이 없습니다?"
+        msgLabel.textColor = .black
+        msgLabel.font = UIFont(name: "HelveticaNeue-Regular", size: 17)
+        msgLabel.textAlignment = .center
+
+        cell.addSubview(emptyView)
+        emptyView.addSubview(zigiSorry)
+        emptyView.addSubview(msgLabel)
+        
+        emptyView.snp.makeConstraints({ (make) in
+            make.width.equalTo(emptyView.snp.height).multipliedBy(maxWidthContainer/maxHeightContainer)
+            make.centerY.equalToSuperview()
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
+        })
+        
+        zigiSorry.snp.makeConstraints({ (make) in
+            make.width.equalTo(zigiSorry.snp.height).multipliedBy(maxWidthImage/maxHeightImage)
+            make.centerX.equalToSuperview()
+            make.top.equalToSuperview()
+            make.bottom.equalTo(-40)
+        })
+        
+        msgLabel.snp.makeConstraints({ (make) in
+            make.centerX.equalTo(zigiSorry)
+            make.bottom.equalToSuperview()
+        })
+    }
+    
+    // DetailNewsFeed - 보여줄 댓글이 없는 경우 표시
+    func setStatusNoReplyView(_ cell: ReplyCell, emptyView: UIView) {
+        emptyView.backgroundColor = .white
+        let maxWidthContainer: CGFloat = 375
+        let maxHeightContainer: CGFloat = 140
+        
+        let zigiNoReply = UIImageView()
+        zigiNoReply.image = #imageLiteral(resourceName: "zigi_no_reply")
+        let maxWidthImage: CGFloat = 455
+        let maxHeightImage: CGFloat = 684
+        
+        let msgLabel = UILabel()
+        msgLabel.text = "댓글이 없습니다"
+        msgLabel.textColor = .black
+        msgLabel.font = UIFont(name: "HelveticaNeue-Regular", size: 15)
+        msgLabel.font = msgLabel.font.withSize(15)
+        msgLabel.textAlignment = .center
+        
+        cell.addSubview(emptyView)
+        emptyView.addSubview(zigiNoReply)
+        emptyView.addSubview(msgLabel)
+        
+        emptyView.snp.makeConstraints({ (make) in
+            make.width.equalTo(emptyView.snp.height).multipliedBy(maxWidthContainer/maxHeightContainer)
+            make.centerY.equalToSuperview()
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
+        })
+        
+        zigiNoReply.snp.makeConstraints({ (make) in
+            make.width.equalTo(zigiNoReply.snp.height).multipliedBy(maxWidthImage/maxHeightImage)
+            make.centerX.equalToSuperview()
+            make.top.equalToSuperview()
+            make.bottom.equalTo(-30)
+        })
+        
+        msgLabel.snp.makeConstraints({ (make) in
+            make.centerX.equalTo(zigiNoReply)
+            make.bottom.equalToSuperview()
+        })
+    }
 }

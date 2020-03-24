@@ -65,47 +65,6 @@ class DetailNewsFeedVC: UIViewController {
 
 //MARK: - Helper
 
-    func setStatusNoReplyView(_ cell: ReplyCell) {
-        statusNoReply.backgroundColor = .white
-        let maxWidthContainer: CGFloat = 375
-        let maxHeightContainer: CGFloat = 140
-        
-        let zigiNoReply = UIImageView()
-        zigiNoReply.image = #imageLiteral(resourceName: "zigi_no_reply")
-        let maxWidthImage: CGFloat = 455
-        let maxHeightImage: CGFloat = 684
-        
-        let msgLabel = UILabel()
-        msgLabel.text = "댓글이 없습니다"
-        msgLabel.textColor = .black
-        msgLabel.font = UIFont(name: "HelveticaNeue-Regular", size: 15)
-        msgLabel.font = msgLabel.font.withSize(15)
-        msgLabel.textAlignment = .center
-        
-        cell.addSubview(statusNoReply)
-        statusNoReply.addSubview(zigiNoReply)
-        statusNoReply.addSubview(msgLabel)
-        
-        statusNoReply.snp.makeConstraints({ (make) in
-            make.width.equalTo(statusNoReply.snp.height).multipliedBy(maxWidthContainer/maxHeightContainer)
-            make.centerY.equalToSuperview()
-            make.leading.equalToSuperview()
-            make.trailing.equalToSuperview()
-        })
-        
-        zigiNoReply.snp.makeConstraints({ (make) in
-            make.width.equalTo(zigiNoReply.snp.height).multipliedBy(maxWidthImage/maxHeightImage)
-            make.centerX.equalToSuperview()
-            make.top.equalToSuperview()
-            make.bottom.equalTo(-30)
-        })
-        
-        msgLabel.snp.makeConstraints({ (make) in
-            make.centerX.equalTo(zigiNoReply)
-            make.bottom.equalToSuperview()
-        })
-    }
-    
     // 댓글창 밖에서 탭 하였을 때 키보드 내리기
     @IBAction func tapOutsideOfCommentWindow(_ sender: Any) {
         self.txtvwComment.endEditing(true)
@@ -251,7 +210,7 @@ extension DetailNewsFeedVC : UITableViewDataSource {
             if indexPath.row == 0 {
                 cell.backgroundColor = .lightGray
             } else {
-                setStatusNoReplyView(cell)
+                replyTV.setStatusNoReplyView(cell, emptyView: statusNoReply)
                 statusNoReply.isHidden = false
                 cell.contentsCell.isHidden = true
                 tableView.separatorStyle = .none

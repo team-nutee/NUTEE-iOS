@@ -164,45 +164,6 @@ class NewsFeedVC: UIViewController {
         }
     }
 
-    func setEmptyView(_ cell: NewsFeedCell) {
-        noPostsToShow.backgroundColor = .white
-        let maxWidthContainer: CGFloat = 375
-        let maxHeightContainer: CGFloat = 200
-
-        let zigiSorry = UIImageView()
-        zigiSorry.image = #imageLiteral(resourceName: "zigi_sorry")
-        let maxWidthImage: CGFloat = 460
-        let maxHeightImage: CGFloat = 428
-
-        let msgLabel = UILabel()
-        msgLabel.text = "불러올 게시글이 없습니다?"
-        msgLabel.textColor = .black
-        msgLabel.font = UIFont(name: "HelveticaNeue-Regular", size: 17)
-        msgLabel.textAlignment = .center
-
-        cell.addSubview(noPostsToShow)
-        noPostsToShow.addSubview(zigiSorry)
-        noPostsToShow.addSubview(msgLabel)
-        
-        noPostsToShow.snp.makeConstraints({ (make) in
-            make.width.equalTo(noPostsToShow.snp.height).multipliedBy(maxWidthContainer/maxHeightContainer)
-            make.centerY.equalToSuperview()
-            make.leading.equalToSuperview()
-            make.trailing.equalToSuperview()
-        })
-        
-        zigiSorry.snp.makeConstraints({ (make) in
-            make.width.equalTo(zigiSorry.snp.height).multipliedBy(maxWidthImage/maxHeightImage)
-            make.centerX.equalToSuperview()
-            make.top.equalToSuperview()
-            make.bottom.equalTo(-40)
-        })
-        
-        msgLabel.snp.makeConstraints({ (make) in
-            make.centerX.equalTo(zigiSorry)
-            make.bottom.equalToSuperview()
-        })
-    }
 }
 
 // MARK: - UITableView
@@ -248,7 +209,7 @@ extension NewsFeedVC : UITableViewDataSource {
 
         if newsPostsArr?.count == 0 || newsPostsArr?.count == nil {
             // 불러올 게시물이 없을 경우
-            setEmptyView(cell)
+            newsTV.setNoPostsToShowView(cell, emptyView: noPostsToShow)
             noPostsToShow.isHidden = false
             cell.contentsCell.isHidden = true
         } else {
