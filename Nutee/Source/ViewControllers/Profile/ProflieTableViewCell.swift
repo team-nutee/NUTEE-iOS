@@ -10,10 +10,19 @@ import UIKit
 
 class ProflieTableViewCell: UITableViewCell {
 
+    // Repost Info Section
+    @IBOutlet var lblRepostInfo: UILabel!
+    @IBOutlet var TopToRepostImg: NSLayoutConstraint!
+    
+    // User Information
     @IBOutlet weak var profileIMG: UIImageView!
     @IBOutlet weak var profileNameLabel: UILabel!
-    @IBOutlet weak var articleTextView: UITextView!
     @IBOutlet weak var timeLabel: UILabel!
+    
+    // Posting
+    @IBOutlet weak var articleTextView: UITextView!
+    
+    // function buttons2
     @IBOutlet weak var shareBtn: UIButton!
     @IBOutlet weak var likeBtn: UIButton!
     @IBOutlet weak var replyBtn: UIButton!
