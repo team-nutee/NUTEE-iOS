@@ -13,9 +13,12 @@ struct UserPostContentElement: Codable {
     let id: Int
     let content, createdAt, updatedAt: String
     let userID: Int
-    let retweetID: Int
-    let user: UserPostUser
-    let images, likers: [Int]
+    let retweetID: Int?
+    let user: User
+    let images: [Image]
+    let likers: [Liker]
+    let retweet: Retweet?
+    let comments: [Comment]
 
     enum CodingKeys: String, CodingKey {
         case id, content, createdAt, updatedAt
@@ -24,6 +27,8 @@ struct UserPostContentElement: Codable {
         case user = "User"
         case images = "Images"
         case likers = "Likers"
+        case retweet = "Retweet"
+        case comments = "Comments"
     }
     
     init(from decoder: Decoder) throws {
@@ -33,17 +38,13 @@ struct UserPostContentElement: Codable {
         createdAt = (try? values.decode(String.self, forKey: .createdAt)) ?? ""
         updatedAt = (try? values.decode(String.self, forKey: .updatedAt)) ?? ""
         userID = (try? values.decode(Int.self, forKey: .userID)) ?? 0
-        retweetID = (try? values.decode(Int.self, forKey: .retweetID)) ?? 0
-        user = (try? values.decode(UserPostUser.self, forKey: .user)) ?? UserPostUser.init(id: 0, nickname: "")
-        images = (try? values.decode([Int].self, forKey: .images)) ?? []
-        likers = (try? values.decode([Int].self, forKey: .likers)) ?? []
+        retweetID = (try? values.decode(Int.self, forKey: .retweetID)) ?? nil
+        user = (try? values.decode(User.self, forKey: .user)) ?? User.init(id: 0, nickname: "", image: nil)
+        images = (try? values.decode([Image].self, forKey: .images)) ?? []
+        likers = (try? values.decode([Liker].self, forKey: .likers)) ?? [Liker.init(id: 0, like: Like.init(createdAt: "", updatedAt: "", postID: 0, userID: 0))]
+        retweet = (try? values.decode(Retweet.self, forKey: .retweet)) ?? nil
+        comments = (try? values.decode([Comment].self, forKey: .comments)) ?? [Comment.init(id: 0, content: "", createdAt: "", updatedAt: "", userID: 0, postID: 0, user: User.init(id: 0, nickname: "", image: UserImage.init(src: "")), parentID: nil, reComment: [ReComment.init(id: 0, content: "", createdAt: "", updatedAt: "", userID: 0, postID: 0, user: User.init(id: 0, nickname: "", image: UserImage.init(src: "")), parentID: nil)])]
     }
-}
-
-// MARK: - User
-struct UserPostUser: Codable {
-    let id: Int
-    let nickname: String
 }
 
 typealias UserPostContent = [UserPostContentElement]

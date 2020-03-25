@@ -16,8 +16,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="338" height="161"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wzT-dR-L4g" userLabel="repostPic">
-                        <rect key="frame" x="50" y="12" width="21" height="13"/>
+                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wzT-dR-L4g" userLabel="repostPic">
+                        <rect key="frame" x="50" y="12" width="20" height="15"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="21" id="FRl-EO-gR1"/>
                             <constraint firstAttribute="height" constant="13" id="FbC-qC-gTF"/>
@@ -26,6 +26,13 @@
                         <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <state key="normal" image="arrow.2.squarepath" catalog="system"/>
                     </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="님이 공유했습니다" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nAo-0e-kUG">
+                        <rect key="frame" x="81" y="11" width="93.666666666666686" height="15.5"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="afK-L4-hJt">
                         <rect key="frame" x="10" y="30" width="40" height="40"/>
                         <constraints>
@@ -86,13 +93,6 @@
                         </constraints>
                         <state key="normal" image="ellipsis" catalog="system"/>
                     </button>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="님이 공유했습니다" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nAo-0e-kUG">
-                        <rect key="frame" x="81" y="11" width="93.666666666666686" height="15.5"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                        <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="DaT-kk-YlQ" firstAttribute="bottom" secondItem="cfJ-3O-SeX" secondAttribute="bottom" id="0b0-6o-0k3"/>
@@ -129,6 +129,8 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="TopToRepostImg" destination="To0-uM-htF" id="smk-Mr-zbO"/>
+                <outlet property="TopToUserImg" destination="pLK-RU-qzN" id="m7k-i0-FBV"/>
                 <outlet property="articleTextView" destination="c1v-RE-IQ2" id="PQU-xQ-pAS"/>
                 <outlet property="lblRepostInfo" destination="nAo-0e-kUG" id="JM7-mU-PZj"/>
                 <outlet property="likeBtn" destination="DaT-kk-YlQ" id="653-gg-9n6"/>
@@ -136,6 +138,7 @@
                 <outlet property="profileIMG" destination="afK-L4-hJt" id="Egp-9c-tHi"/>
                 <outlet property="profileNameLabel" destination="Le2-E0-FDX" id="XPW-nb-cpR"/>
                 <outlet property="replyBtn" destination="ipz-Lz-Q2Y" id="355-0s-Dbm"/>
+                <outlet property="repostPic" destination="wzT-dR-L4g" id="Br7-AQ-fSW"/>
                 <outlet property="shareBtn" destination="cfJ-3O-SeX" id="bz9-Yp-xVv"/>
                 <outlet property="timeLabel" destination="6Qq-yZ-Ym7" id="46e-41-AwD"/>
             </connections>
