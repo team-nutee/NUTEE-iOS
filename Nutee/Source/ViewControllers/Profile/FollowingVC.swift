@@ -16,6 +16,9 @@ class FollowingVC: UIViewController {
     // MARK: - Variables and Properties
     
     var followingsList: FollowList?
+    var followingsNums = 0 // ProfileVC가 서버에서 받은 팔로잉 개수를 저장할 변수
+    
+    var noFollowings = UIView()
     
     // MARK: - Life Cycle
     
@@ -27,60 +30,86 @@ class FollowingVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        getFollowingsListService()
+        
         followingTV.delegate = self
         followingTV.dataSource = self
+        followingTV.separatorInset.left = 0
+        followingTV.separatorStyle = .none
         
-        print("viewDidLoad 실행1")
-        getFollowingsListService()
-        print("viewDidLoad 실행2")
+        self.view.addSubview(noFollowings)
         
         setInit()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        print("viewWillAppear 실행")
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        print("viewDidAppear 실행")
     }
     
     // MARK: -Helpers
 
     // 초기 설정
-    func setInit() {
-
-    }
+    func setInit() {}
     
-    func setDefault() {
-
-    }
+    func setDefault() {}
 }
 
 extension FollowingVC : UITableViewDelegate { }
 
 extension FollowingVC : UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if followingsList?.count == 0 || followingsList?.count == nil {
+            return followingTV.frame.height - tabBarController!.tabBar.frame.size.height
+        } else {
+            return UITableView.automaticDimension
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        if followingsList?.count == 0 || followingsList?.count == nil {
+            return followingTV.frame.height - tabBarController!.tabBar.frame.size.height
+        } else {
+            return UITableView.automaticDimension
+        }
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        print("numberRowSection 실행")
-        return followingsList?.count ?? 0
+        followingsNums = followingsList?.count ?? 0
+        if followingsNums == 0 {
+            followingsNums = 1
+        }
+        
+        return followingsNums
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        print("celForRowAt 실행")
+
         let cell = tableView.dequeueReusableCell(withIdentifier: "FollowingTVC", for: indexPath) as! FollowingTVC
         
-        let following = followingsList?[indexPath.row]
-        let followingName = following?.nickname ?? "그런 팔로잉 없어요"
-        print(followingName)
-        cell.followingLabel.text = followingName
-        cell.followingLabel.sizeToFit()
+        cell.selectionStyle = .none
+        
+        if followingsList?.count == 0 || followingsList?.count == nil {
+            followingTV.setNoFollowing(cell, emptyView: noFollowings)
+            noFollowings.isHidden = false
+            cell.contentsCell.isHidden = true
+        } else {
+            noFollowings.isHidden = true
+            cell.contentsCell.isHidden = false
+            
+            let following = followingsList?[indexPath.row]
+            let followingName = following?.nickname ?? "FollowingError"
+            cell.followingLabel.text = followingName
+            cell.followingLabel.sizeToFit()
+        }
         
         return cell
     }
-    
-    
+        
 }
 
 //MARK: - Followerings 서버 연결을 위한 Service 실행 구간

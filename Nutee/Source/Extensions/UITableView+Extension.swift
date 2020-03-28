@@ -126,4 +126,90 @@ extension UITableView {
             make.bottom.equalToSuperview()
         })
     }
+    
+    // FollowerVC - 보여줄 팔로워가 없는 경우 표시
+    func setNoFollower(_ cell: FollowerTVC, emptyView: UIView) {
+        emptyView.backgroundColor = .white
+        let maxWidthContainer: CGFloat = 375
+        let maxHeightContainer: CGFloat = 350
+        
+        let zigiNoFollower = UIImageView()
+        zigiNoFollower.image = #imageLiteral(resourceName: "nuteeLoading_09")
+        let maxWidthImage: CGFloat = 512
+        let maxHeightImage: CGFloat = 512
+        
+        let msgLabel = UILabel()
+        msgLabel.text = "...팔로워가 없어요"
+        msgLabel.textColor = .black
+        msgLabel.font = UIFont(name: "HelveticaNeue-Regular", size: 18)
+        msgLabel.font = msgLabel.font.withSize(18)
+        msgLabel.textAlignment = .center
+        
+        cell.addSubview(emptyView)
+        emptyView.addSubview(zigiNoFollower)
+        emptyView.addSubview(msgLabel)
+        
+        emptyView.snp.makeConstraints({ (make) in
+            make.width.equalTo(emptyView.snp.height).multipliedBy(maxWidthContainer/maxHeightContainer)
+            make.centerY.equalToSuperview()
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
+        })
+        
+        zigiNoFollower.snp.makeConstraints({ (make) in
+            make.width.equalTo(zigiNoFollower.snp.height).multipliedBy(maxWidthImage/maxHeightImage)
+            make.centerY.equalToSuperview()
+            make.top.equalToSuperview()
+            make.bottom.equalToSuperview()
+            make.trailing.equalToSuperview()
+        })
+        
+        msgLabel.snp.makeConstraints({ (make) in
+            make.centerY.equalTo(zigiNoFollower)
+            make.trailing.equalTo(zigiNoFollower.snp.leading).offset(170)
+        })
+    }
+    
+    // FollowerVC - 보여줄 팔로잉이 없는 경우 표시
+    func setNoFollowing(_ cell: FollowingTVC, emptyView: UIView) {
+        emptyView.backgroundColor = .white
+        let maxWidthContainer: CGFloat = 375
+        let maxHeightContainer: CGFloat = 350
+        
+        let zigiNoFollowing = UIImageView()
+        zigiNoFollowing.image = #imageLiteral(resourceName: "nuteeLoading_09")
+        let maxWidthImage: CGFloat = 512
+        let maxHeightImage: CGFloat = 512
+        
+        let msgLabel = UILabel()
+        msgLabel.text = "...팔로잉이 없어요"
+        msgLabel.textColor = .black
+        msgLabel.font = UIFont(name: "HelveticaNeue-Regular", size: 18)
+        msgLabel.font = msgLabel.font.withSize(18)
+        msgLabel.textAlignment = .center
+        
+        cell.addSubview(emptyView)
+        emptyView.addSubview(zigiNoFollowing)
+        emptyView.addSubview(msgLabel)
+        
+        emptyView.snp.makeConstraints({ (make) in
+            make.width.equalTo(emptyView.snp.height).multipliedBy(maxWidthContainer/maxHeightContainer)
+            make.centerY.equalToSuperview()
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
+        })
+        
+        zigiNoFollowing.snp.makeConstraints({ (make) in
+            make.width.equalTo(zigiNoFollowing.snp.height).multipliedBy(maxWidthImage/maxHeightImage)
+            make.centerY.equalToSuperview()
+            make.top.equalToSuperview()
+            make.bottom.equalToSuperview()
+            make.trailing.equalToSuperview()
+        })
+        
+        msgLabel.snp.makeConstraints({ (make) in
+            make.centerY.equalTo(zigiNoFollowing)
+            make.trailing.equalTo(zigiNoFollowing.snp.leading).offset(170)
+        })
+    }
 }

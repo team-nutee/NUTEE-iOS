@@ -269,7 +269,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="70" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="046-aF-HK6">
-                                <rect key="frame" x="0.0" y="44" width="375" height="734"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="778"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FollowingTVC" rowHeight="70" id="3Ki-XM-WgW" customClass="FollowingTVC" customModule="NUTEE" customModuleProvider="target">
@@ -298,6 +298,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="contentsCell" destination="mLK-R8-vaL" id="gzM-WE-qXQ"/>
                                             <outlet property="followingDeleteBtn" destination="ndd-jf-oEJ" id="sfD-Yh-cc1"/>
                                             <outlet property="followingImgView" destination="9pb-4A-zIE" id="VZN-sD-YXU"/>
                                             <outlet property="followingLabel" destination="hKi-xa-6VV" id="TBY-mJ-ZA2"/>
@@ -310,7 +311,7 @@
                         <constraints>
                             <constraint firstItem="046-aF-HK6" firstAttribute="trailing" secondItem="OD6-dc-lIt" secondAttribute="trailing" id="4QV-iP-CD0"/>
                             <constraint firstItem="046-aF-HK6" firstAttribute="leading" secondItem="OD6-dc-lIt" secondAttribute="leading" id="Evp-W6-t7d"/>
-                            <constraint firstItem="046-aF-HK6" firstAttribute="top" secondItem="OD6-dc-lIt" secondAttribute="top" id="jX2-wy-14d"/>
+                            <constraint firstItem="046-aF-HK6" firstAttribute="top" secondItem="nG7-D0-jhn" secondAttribute="top" id="jX2-wy-14d"/>
                             <constraint firstItem="046-aF-HK6" firstAttribute="bottom" secondItem="OD6-dc-lIt" secondAttribute="bottom" id="qJo-cd-DdL"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="OD6-dc-lIt"/>
@@ -361,6 +362,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="contentsCell" destination="Ggv-pQ-yYj" id="QCW-4l-aaX"/>
                                             <outlet property="followerDeleteBtn" destination="RH8-QL-nRS" id="t0f-LY-AsG"/>
                                             <outlet property="followerImgView" destination="HhA-dT-kR6" id="BeU-Lv-wTY"/>
                                             <outlet property="followerLabel" destination="1PB-0I-RbS" id="hX9-TB-bun"/>

@@ -10,6 +10,7 @@ import UIKit
 
 class FollowingTVC: UITableViewCell {
 
+    @IBOutlet var contentsCell: UIView!
     @IBOutlet weak var followingImgView: UIImageView!
     @IBOutlet weak var followingLabel: UILabel!
     @IBOutlet weak var followingDeleteBtn: UIButton!
