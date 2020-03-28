@@ -201,12 +201,10 @@ extension NewsFeedVC : UITableViewDataSource {
         // Custom셀인 'NewsFeedCell' 형식으로 생성
         let cell = tableView.dequeueReusableCell(withIdentifier: "NewsFeedCell", for: indexPath) as! NewsFeedCell
         
-        // 셀 선택시 백그라운드 변경 안되게 하기 위한 코드
-        let bgColorView = UIView()
-        bgColorView.backgroundColor = nil
-        cell.selectedBackgroundView = bgColorView
+//        // 셀 선택시 백그라운드 변경 안되게 하기 위한 코드
         cell.addBorder((.bottom), color: .lightGray, thickness: 0.3)
-
+        cell.selectionStyle = .none
+        
         if newsPostsArr?.count == 0 || newsPostsArr?.count == nil {
             // 불러올 게시물이 없을 경우
             newsTV.setNoPostsToShowView(cell, emptyView: noPostsToShow)

@@ -194,28 +194,34 @@ extension ProfileVC : UITableViewDataSource {
                 
         let cell = tableView.dequeueReusableCell(withIdentifier: "ProflieTableViewCell", for: indexPath) as! ProflieTableViewCell
         
+        myArticleTV.separatorStyle = .singleLine
+        cell.selectionStyle = .none
+        
         if indexPath.row == 0 {
             cell.backgroundColor = .lightGray
         } else {
-            
             cell.backgroundColor = nil
             textViewDidChange(cell.articleTextView)
             let userPost = userPosts?[indexPath.row-1]
             
-            cell.profileNameLabel.text = userPost?.user.nickname
-            cell.articleTextView.text = userPost?.content
-
-            if userInfo?.image.src == "" {
-            cell.profileIMG.imageFromUrl("http://15.164.50.161:9425/settings/nutee_profile.png", defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
-            }else{
-            cell.profileIMG.imageFromUrl((APIConstants.BaseURL) + "/" + (userInfo?.image.src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
-            }
-            let originUserPostTime = userPost?.createdAt
-            let userPostTimeDateFormat = originUserPostTime!.getDateFormat(time: originUserPostTime!)
-            cell.timeLabel.text = userPostTimeDateFormat!.timeAgoSince(userPostTimeDateFormat!)
+            // ProfileTableViewCell로 해당 Cell의 게시글 정보 전달
+            cell.loginUserPost = userPost
             
-            cell.articleTextView.sizeToFit()
-            tableView.separatorStyle = .singleLine
+            cell.initLoginUserPost()
+            
+//            cell.profileNameLabel.text = userPost?.user.nickname
+//            cell.articleTextView.text = userPost?.content
+//
+//            if userInfo?.image.src == "" {
+//            cell.profileIMG.imageFromUrl("http://15.164.50.161:9425/settings/nutee_profile.png", defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+//            } else {
+//            cell.profileIMG.imageFromUrl((APIConstants.BaseURL) + "/" + (userInfo?.image.src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+//            }
+//            let originUserPostTime = userPost?.createdAt
+//            let userPostTimeDateFormat = originUserPostTime!.getDateFormat(time: originUserPostTime!)
+//            cell.timeLabel.text = userPostTimeDateFormat!.timeAgoSince(userPostTimeDateFormat!)
+//
+//            cell.articleTextView.postingInit()
         }
         
         return cell
@@ -237,7 +243,12 @@ extension ProfileVC : UITableViewDataSource {
         _ = tableView.dequeueReusableCell(withIdentifier: "ArticleTVC", for: indexPath) as! ArticleTVC
         
         let sb = UIStoryboard(name: "DetailNewsFeed", bundle: nil)
-        let vc = sb.instantiateViewController(withIdentifier: "DetailNewsFeed")
+        let vc = sb.instantiateViewController(withIdentifier: "DetailNewsFeed") as! DetailNewsFeedVC
+        
+        vc.postId = userPosts?[indexPath.row - 1].id
+        vc.getPostService(postId: vc.postId!, completionHandler: {(returnedData) -> Void in
+            vc.replyTV.reloadData()
+        })
         
         self.navigationController?.pushViewController(vc, animated: true)
     }
