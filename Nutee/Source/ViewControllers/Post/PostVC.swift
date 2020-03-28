@@ -39,6 +39,8 @@ class PostVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print(#function)
+        
         initSetting()
         
         postingTextView.delegate = self
@@ -55,6 +57,8 @@ class PostVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
+        print(#function)
+
         addKeyboardNotification()
         self.postingTextView.becomeFirstResponder()
         
@@ -63,7 +67,23 @@ class PostVC: UIViewController {
         textViewDidChange(postingTextView)
 
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
         
+        print(#function)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(true)
+        
+        print(#function)
+    }
+    
+    deinit {
+        print(#function)
+    }
+    
     // MARK: - Helper
     
     func initSetting() {

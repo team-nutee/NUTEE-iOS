@@ -295,6 +295,7 @@ extension NewsFeedVC {
         ContentService.shared.getNewsPosts(postCnt, lastId: lastId) { responsedata in
             
             switch responsedata {
+                
             case .success(let res):
                 let response = res as! NewsPostsContent
                 self.newsPosts = response

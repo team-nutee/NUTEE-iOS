@@ -8,10 +8,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--PopUpVC-->
         <scene sceneID="ADb-by-gRo">
             <objects>
-                <viewController id="HcS-fg-wkr" sceneMemberID="viewController">
+                <viewController title="PopUpVC" id="HcS-fg-wkr" customClass="PopUpVC" customModule="NUTEE" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="yO0-Hp-Mgc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -23,10 +23,10 @@
             </objects>
             <point key="canvasLocation" x="77" y="131"/>
         </scene>
-        <!--View Controller-->
+        <!--PictureVC-->
         <scene sceneID="EPQ-Cf-p5d">
             <objects>
-                <viewController id="N8r-dR-3rw" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PictureVC" title="PictureVC" id="N8r-dR-3rw" customClass="PictureVC" customModule="NUTEE" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" alpha="0.45000000000000001" contentMode="scaleToFill" id="rcv-Hz-C8c">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

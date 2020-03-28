@@ -8,7 +8,7 @@
 
 struct APIConstants {
 
-    static let BaseURL = "http://15.164.50.161:9425"
+    static let BaseURL = "http://13.124.232.115:9425"
         
     static let User = BaseURL + "/api/user"                                     // GET
     static let UserPost = BaseURL + "/api/user"                                 // POST { userId : asdf123, password : 123123, nickname : 테스트닉네임, schoolEmail : 1234567@office.skhu.ac.kr }
