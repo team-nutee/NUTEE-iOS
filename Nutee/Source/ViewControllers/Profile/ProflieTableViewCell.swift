@@ -160,7 +160,7 @@ class ProflieTableViewCell: UITableViewCell {
                 // 게시글 게시 시간 설정
                 let originPostTime = loginUserPost?.retweet?.createdAt
                 let postTimeDateFormat = originPostTime?.getDateFormat(time: originPostTime!)
-                profileNameLabel.text = postTimeDateFormat?.timeAgoSince(postTimeDateFormat!)
+                timeLabel.text = postTimeDateFormat?.timeAgoSince(postTimeDateFormat!)
 
                 // Posting 내용 설정
                 articleTextView.text = loginUserPost?.retweet?.content
