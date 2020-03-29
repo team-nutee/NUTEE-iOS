@@ -16,9 +16,9 @@ struct FollowService {
     
     //MARK: - Follower 목록 받아오기
     
-    func getFollowersList(_ userId: String, completion: @escaping (NetworkResult<Any>) -> Void){
+    func getFollowersList(_ userId: Int, completion: @escaping (NetworkResult<Any>) -> Void){
 
-        let URL = APIConstants.BaseURL + "/api/user/" + userId + "/followers?offset=0&limit=3"
+        let URL = APIConstants.BaseURL + "/api/user/\(userId)/followers?offset=0&limit=10"
         // 'limit'는 가져올 followers의 개수
         let header: HTTPHeaders = [
 //            "Content-Type" : "application/json",
@@ -68,9 +68,9 @@ struct FollowService {
     
     //MARK: - Following 목록 받아오기
         
-        func getFollowingsList(_ userId: String, completion: @escaping (NetworkResult<Any>) -> Void){
+        func getFollowingsList(_ userId: Int, completion: @escaping (NetworkResult<Any>) -> Void){
 
-            let URL = APIConstants.BaseURL + "/api/user/" + userId + "/followings?offset=0&limit=10"
+            let URL = APIConstants.BaseURL + "/api/user/\(userId)/followings?offset=0&limit=10"
             // 'limit'는 가져올 followings의 개수
             let header: HTTPHeaders = [
     //            "Content-Type" : "application/json",

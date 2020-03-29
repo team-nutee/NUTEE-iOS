@@ -130,14 +130,17 @@ class ProfileVC: UIViewController {
     @objc func viewFollower() {
         let followerVC = self.storyboard?.instantiateViewController(withIdentifier: "FollowerVC") as! FollowerVC
         
-        // ProfileVC가 서버에서 받은 팔로워 개수를 FollowerVC로 전달
-        followerVC.followersNums = userInfo?.followers.count ?? 0
+        // ProfileVC에서 표시하고 있는 프로필 사용자의 내부 id값을 FollowerVC로 전달
+        followerVC.userId = userInfo?.id ?? 0
         
         self.navigationController?.pushViewController(followerVC, animated: true)
     }
     
     @objc func viewFollowing() {
         let followingVC = self.storyboard?.instantiateViewController(withIdentifier: "FollowingVC") as! FollowingVC
+        
+        // ProfileVC에서 표시하고 있는 프로필 사용자의 내부 id값을 FollowingVC로 전달
+        followingVC.userId = userInfo?.id ?? 0
         
         self.navigationController?.pushViewController(followingVC, animated: true)
     }

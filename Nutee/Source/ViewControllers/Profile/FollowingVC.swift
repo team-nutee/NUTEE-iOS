@@ -16,6 +16,7 @@ class FollowingVC: UIViewController {
     // MARK: - Variables and Properties
     
     var followingsList: FollowList?
+    var userId = 0
     var followingsNums = 0 // ProfileVC가 서버에서 받은 팔로잉 개수를 저장할 변수
     
     var noFollowings = UIView()
@@ -117,8 +118,7 @@ extension FollowingVC : UITableViewDataSource {
 extension FollowingVC {
     
     func getFollowingsListService() {
-        FollowService.shared.getFollowingsList("6") { responsedata in
-            // "6"은 현재 testtest의 서버 내부 아이디 주소 값. 차후 값 넘겨받아 자동으로 id값을 넘길 수 있게 구현 필요.
+        FollowService.shared.getFollowingsList(userId) { responsedata in
             
             switch responsedata {
             case .success(let res):
