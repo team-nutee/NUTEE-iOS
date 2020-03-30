@@ -45,8 +45,11 @@ class ProfileVC: UIViewController {
     // 기본적으로 로그인한 사용자의 아이디 값으로 설정
     var userId = UserDefaults.standard.integer(forKey: "id")
     
+    var isInit : Bool = false
     var isFollow: Bool = false
-    
+    var isFollowTxt : String = "팔로우하기"
+    var follwerCnt : Int?
+    var myFollower1 : NSMutableAttributedString?
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
@@ -154,13 +157,9 @@ class ProfileVC: UIViewController {
     
     @objc func followAction() {
         if isFollow == false {
-            let followBtnText = NSMutableAttributedString(string: "언팔로우")
-            followBtn.setAttributedTitle(followBtnText, for: .normal)
-            isFollow = !isFollow
+            follow(userId: userId)
         } else {
-            let followBtnText = NSMutableAttributedString(string: "팔로우하기")
-            followBtn.setAttributedTitle(followBtnText, for: .normal)
-            isFollow = !isFollow
+            unfollow(userId: userId)
         }
     }
     
@@ -343,7 +342,10 @@ extension ProfileVC : UITableViewDataSource {
         myArticle2Btn.heightAnchor.constraint(equalToConstant: 40).isActive = true
         myArticle2Btn.widthAnchor.constraint(equalToConstant: (view.frame.size.width - 120)/3).isActive = true
         
-        let myFollower1 = NSMutableAttributedString(string: String(userInfo?.followers.count ?? 0))
+        if !isInit {
+            follwerCnt = userInfo?.followers.count
+        }
+        myFollower1 = NSMutableAttributedString(string: String(follwerCnt ?? 0))
         myFollower1Btn.setAttributedTitle(myFollower1, for: .normal)
         myFollower1Btn.titleLabel?.font = .systemFont(ofSize: 15)
         myFollower1Btn.translatesAutoresizingMaskIntoConstraints = false
@@ -379,7 +381,7 @@ extension ProfileVC : UITableViewDataSource {
         myFollowing2Btn.heightAnchor.constraint(equalToConstant: 40).isActive = true
         myFollowing2Btn.widthAnchor.constraint(equalToConstant: (view.frame.size.width - 120)/3).isActive = true
         
-        let followBtnText = NSMutableAttributedString(string: "팔로우하기")
+        let followBtnText = NSMutableAttributedString(string: isFollowTxt)
         followBtn.setAttributedTitle(followBtnText, for: .normal)
         followBtn.titleLabel?.font = .boldSystemFont(ofSize: 15)
         followBtn.translatesAutoresizingMaskIntoConstraints = false
@@ -487,8 +489,63 @@ extension ProfileVC {
                 let response = res as! UserPostContent
                 self.userPosts = response
                 
+                self.myArticleTV.reloadData()
+            case .requestErr(_):
+                print("request error")
+
+            case .pathErr:
+                print(".pathErr")
+
+            case .serverErr:
+                print(".serverErr")
+
+            case .networkFail :
+                print("failure")
+                }
+        }
+
+    }
+
+    func follow(userId: Int) {
+        FollowService.shared.follow(userId) { responsedata in
+
+            switch responsedata {
+            case .success(_):
+                self.isInit = true
+                self.isFollowTxt = "언팔로우"
+                self.isFollow = !self.isFollow
+                self.follwerCnt = (self.follwerCnt ?? 0) + 1
                 
                 self.myArticleTV.reloadData()
+
+            case .requestErr(_):
+                print("request error")
+
+            case .pathErr:
+                print(".pathErr")
+
+            case .serverErr:
+                print(".serverErr")
+
+            case .networkFail :
+                print("failure")
+                }
+        }
+
+    }
+
+    func unfollow(userId: Int) {
+        FollowService.shared.unfollow(userId) { responsedata in
+
+            switch responsedata {
+            case .success(_):
+                self.isInit = true
+                self.isFollowTxt = "팔로우하기"
+                self.isFollow = !self.isFollow
+                self.follwerCnt = (self.follwerCnt ?? 0) - 1
+                
+                self.myArticleTV.reloadData()
+
             case .requestErr(_):
                 print("request error")
 
