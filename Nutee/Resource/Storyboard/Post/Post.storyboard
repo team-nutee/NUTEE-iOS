@@ -189,7 +189,7 @@
                         <outlet property="imagePickerBtn" destination="oUh-IB-hiA" id="9hs-ja-F4F"/>
                         <outlet property="imagePickerView" destination="ZKg-Yt-BDb" id="DZp-qa-jE9"/>
                         <outlet property="pickerViewBottomConstraint" destination="QRK-EK-t1V" id="fIR-xk-qcg"/>
-                        <outlet property="postBtn" destination="LOC-Lf-eDr" id="2fL-5c-nut"/>
+                        <outlet property="postBtn" destination="LOC-Lf-eDr" id="HTo-ch-t6D"/>
                         <outlet property="postingTextView" destination="fET-w1-DKH" id="Rra-hi-Ju2"/>
                         <outlet property="scrollView" destination="PTy-zj-GzA" id="zgC-AN-42e"/>
                     </connections>
