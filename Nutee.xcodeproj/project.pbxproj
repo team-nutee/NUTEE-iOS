@@ -48,7 +48,6 @@
 		5E37CAB323E9903500C0E2A8 /* CafeteriaVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E37CAB223E9903500C0E2A8 /* CafeteriaVC.swift */; };
 		5E54303D23F44170004FF2FB /* InitVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E54303C23F44170004FF2FB /* InitVC.swift */; };
 		5E79C0C223EC5A7000BD2FB3 /* ArticleTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E79C0C123EC5A7000BD2FB3 /* ArticleTVC.swift */; };
-		5E79C0CF23EDE0B900BD2FB3 /* Notification.Name+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E79C0CE23EDE0B900BD2FB3 /* Notification.Name+Extension.swift */; };
 		5E93A7232415720E00C9C811 /* BachelorVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E93A7222415720E00C9C811 /* BachelorVC.swift */; };
 		5E93A7252415721F00C9C811 /* ClassVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E93A7242415721F00C9C811 /* ClassVC.swift */; };
 		5E93A7272415723200C9C811 /* ExchangeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E93A7262415723200C9C811 /* ExchangeVC.swift */; };
@@ -169,7 +168,6 @@
 		5E37CAB223E9903500C0E2A8 /* CafeteriaVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeteriaVC.swift; sourceTree = "<group>"; };
 		5E54303C23F44170004FF2FB /* InitVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitVC.swift; sourceTree = "<group>"; };
 		5E79C0C123EC5A7000BD2FB3 /* ArticleTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleTVC.swift; sourceTree = "<group>"; };
-		5E79C0CE23EDE0B900BD2FB3 /* Notification.Name+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification.Name+Extension.swift"; sourceTree = "<group>"; };
 		5E93A7222415720E00C9C811 /* BachelorVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BachelorVC.swift; sourceTree = "<group>"; };
 		5E93A7242415721F00C9C811 /* ClassVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassVC.swift; sourceTree = "<group>"; };
 		5E93A7262415723200C9C811 /* ExchangeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeVC.swift; sourceTree = "<group>"; };
@@ -406,7 +404,6 @@
 				5E05AD7523DB0F1E00E36AD4 /* UIImageView+Extension.swift */,
 				5E05AD7723DB104600E36AD4 /* UIView+Extension.swift */,
 				5E0E6A5F23E7345F00FBC15F /* Date+Extension.swift */,
-				5E79C0CE23EDE0B900BD2FB3 /* Notification.Name+Extension.swift */,
 				5EA5C67B23F023DC00BFB32B /* UITableView+Extension.swift */,
 				5EA5C67F23F02C9200BFB32B /* String+Extension.swift */,
 				5ED155862423162B004DCE02 /* UITabar.swift */,
@@ -761,7 +758,6 @@
 				D5DAA89023E7EF2E0052E17B /* HeaderNewsFeedView.swift in Sources */,
 				5E0E6A6023E7345F00FBC15F /* Date+Extension.swift in Sources */,
 				5E95CD6623EF30280090C39B /* FollowingTVC.swift in Sources */,
-				5E79C0CF23EDE0B900BD2FB3 /* Notification.Name+Extension.swift in Sources */,
 				5E05AD6E23DB0EB800E36AD4 /* UIViewController+Extension.swift in Sources */,
 				D5F651CF2407B46500263A34 /* FollowService.swift in Sources */,
 				5E0E6A7223E73ECE00FBC15F /* PostVC.swift in Sources */,

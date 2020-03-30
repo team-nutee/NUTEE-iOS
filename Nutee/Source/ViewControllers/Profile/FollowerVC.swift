@@ -95,6 +95,7 @@ extension FollowerVC : UITableViewDataSource {
             noFollowers.isHidden = false
             cell.contentsCell.isHidden = true
         } else {
+            
             noFollowers.isHidden = true
             cell.contentsCell.isHidden = false
             
@@ -103,6 +104,8 @@ extension FollowerVC : UITableViewDataSource {
             cell.followerLabel.text = followerName
             cell.followerLabel.sizeToFit()
         }
+        
+        
         
         return cell
     }

@@ -20,6 +20,7 @@ struct ContentService {
     func getNewsPosts(_ postCnt: Int, lastId: Int, completion: @escaping (NetworkResult<Any>) -> Void){
         let URL = APIConstants.Posts + "?lastId=" + "\(lastId)" + "&limit=" + "\(postCnt)"
         let header: HTTPHeaders = [
+            "Content-Type" : "application/json",
             "Cookie" : UserDefaults.standard.string(forKey: "Cookie") ?? ""
         ]
         
@@ -68,10 +69,11 @@ struct ContentService {
     func getPost(_ postId: Int, completion: @escaping (NetworkResult<Any>) -> Void){
         let URL = APIConstants.BaseURL + "/api/post/" + String(postId)
         let header: HTTPHeaders = [
-            //            "Content-Type" : "application/json",
+            "Content-Type" : "application/json",
             "Cookie" : UserDefaults.standard.string(forKey: "Cookie")!
         ]
         
+        print(URL)
         Alamofire.request(URL, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: header).responseData{ response in
             
             switch response.result {
@@ -88,6 +90,8 @@ struct ContentService {
                                 print("start decode getPost")
                                 let decoder = JSONDecoder()
                                 let result = try decoder.decode(NewsPostsContentElement.self, from: value)
+                                dump(value, name: "value in getPost")
+                                dump(result, name: "result in getPost")
                                 completion(.success(result))
                             } catch {
                                 completion(.pathErr)

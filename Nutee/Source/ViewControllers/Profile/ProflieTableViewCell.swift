@@ -63,7 +63,7 @@ class ProflieTableViewCell: UITableViewCell {
     
     //포스팅 내용 설정
         func initLoginUserPost() {
-            print(loginUserPost?.retweet)
+
             if loginUserPost?.retweetID == nil {
                 // <-----공유한 글이 아닐 경우-----> //
                 TopToUserImg.isActive = true

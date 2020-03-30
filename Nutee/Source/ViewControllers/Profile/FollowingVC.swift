@@ -67,6 +67,7 @@ extension FollowingVC : UITableViewDataSource {
         if followingsList?.count == 0 || followingsList?.count == nil {
             return followingTV.frame.height - tabBarController!.tabBar.frame.size.height
         } else {
+            
             return UITableView.automaticDimension
         }
     }

@@ -15,7 +15,6 @@ extension UITabBar {
         UITabBar.appearance().backgroundImage = UIImage()
         UITabBar.appearance().backgroundColor = UIColor.white
         UITabBar.appearance().layer.borderWidth = 0.0
-//        UITabBar.appearance().clipsToBounds = true
 
     }
 }

@@ -194,7 +194,8 @@ extension ProfileVC : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
                 
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ProflieTableViewCell", for: indexPath) as! ProflieTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ProflieTableViewCell",
+                                                 for: indexPath) as! ProflieTableViewCell
         
         myArticleTV.separatorStyle = .singleLine
         cell.selectionStyle = .none
