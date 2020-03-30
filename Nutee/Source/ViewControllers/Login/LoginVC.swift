@@ -12,6 +12,7 @@
 
 import UIKit
 import Alamofire
+import SwiftKeychainWrapper
 
 class LoginVC: UIViewController {
     
@@ -40,8 +41,7 @@ class LoginVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        Splash.hide()
-        print("로그인 확인 : ",UserDefaults.standard.value(forKey: "Cookie") ?? "로그인 안함")
+
         checkSignIn()
         
         setInit()
@@ -103,11 +103,11 @@ class LoginVC: UIViewController {
     }
     
     func checkSignIn(){
-        let userid = UserDefaults.standard.value(forKey: "userId")
-        let password = UserDefaults.standard.value(forKey: "pw")
+        let userid = KeychainWrapper.standard.string(forKey: "userId")
+        let password = KeychainWrapper.standard.string(forKey: "pw")
         
         if userid != nil && password != nil {
-            signInService(userid as! String, password as! String)
+            signInService(userid!, password as! String)
         } else {
             Splash.hide()
             return
@@ -123,17 +123,13 @@ class LoginVC: UIViewController {
     }
     
     @objc func signIn() {
-//        Splash.show()
+
         LoadingHUD.show()
         
-        print("id :",idTextField.text!)
-        print("pw :",pwTextField.text!)
         if autoSignUp == true {
-            UserDefaults.standard.setValue(idTextField.text, forKey: "userId")
-            UserDefaults.standard.setValue(pwTextField.text, forKey: "pw")
+            KeychainWrapper.standard.set(idTextField.text ?? "", forKey: "userId")
+            KeychainWrapper.standard.set(pwTextField.text ?? "", forKey: "pw")
         }
-        print("id userdefault : ", (UserDefaults.standard.value(forKey: "userId")) ?? "")
-        print("pw userdefault : ", (UserDefaults.standard.value(forKey: "pw")) ?? "")
         
         signInService(idTextField.text!, pwTextField.text!)
         

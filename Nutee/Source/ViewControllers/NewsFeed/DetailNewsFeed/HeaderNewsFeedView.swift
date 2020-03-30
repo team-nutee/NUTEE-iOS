@@ -8,6 +8,8 @@
 
 import UIKit
 
+import SwiftKeychainWrapper
+
 class HeaderNewsFeedView: UITableViewHeaderFooterView {
     
     //MARK: - UI components
@@ -165,7 +167,7 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
         }
         let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
         
-        let userid = Int(UserDefaults.standard.string(forKey: "id") ?? "")
+        let userid = Int(KeychainWrapper.standard.string(forKey: "id") ?? "")
         
         if (userid == detailNewsPost?.userID) {
             moreAlert.addAction(editAction)
@@ -235,7 +237,7 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
             // Like 버튼
             containLoginUser = false
             for arrSearch in detailNewsPost?.likers ?? [] {
-                if arrSearch.like.userID == UserDefaults.standard.integer(forKey: "id") {
+                if arrSearch.like.userID == KeychainWrapper.standard.integer(forKey: "id") {
                     containLoginUser = true
                 }
             }
@@ -295,7 +297,7 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
             // Like 버튼
             var containLoginUser = false
             for arrSearch in detailNewsPost?.retweet?.likers ?? [] {
-                if arrSearch.like.userID == UserDefaults.standard.integer(forKey: "id") {
+                if arrSearch.like.userID == KeychainWrapper.standard.integer(forKey: "id") {
                     containLoginUser = true
                 }
             }
@@ -534,9 +536,9 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
         
         // 해당 글이 공유글인지 아닌지 판단
         if detailNewsPost?.retweet == nil {
-            vc?.userId = detailNewsPost?.user.id ?? UserDefaults.standard.integer(forKey: "id")
+            vc?.userId = detailNewsPost?.user.id ?? KeychainWrapper.standard.integer(forKey: "id")
         } else {
-            vc?.userId = detailNewsPost?.retweet?.user.id ?? UserDefaults.standard.integer(forKey: "id")
+            vc?.userId = detailNewsPost?.retweet?.user.id ?? KeychainWrapper.standard.integer(forKey: "id")
         }
         
         detailNewsFeedVC?.navigationController?.pushViewController(vc!, animated: true)
@@ -554,7 +556,7 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
 extension HeaderNewsFeedView {
     
     func reportPost( content: String) {
-        let userid = UserDefaults.standard.string(forKey: "id") ?? ""
+        let userid = KeychainWrapper.standard.string(forKey: "id") ?? ""
         ContentService.shared.reportPost(userid, content) { (responsedata) in
             
             switch responsedata {

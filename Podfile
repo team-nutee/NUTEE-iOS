@@ -11,6 +11,7 @@ target 'Nutee' do
   pod 'Alamofire', '~> 4.8.2'
   pod 'YPImagePicker'
   pod 'Then'
+  pod 'SwiftKeychainWrapper'
   # Pods for Nutee
 
 end

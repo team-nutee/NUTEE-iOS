@@ -8,6 +8,10 @@
 
 import UIKit
 
+import Then
+import SwiftKeychainWrapper
+import SnapKit
+
 class ProfileVC: UIViewController {
     // MARK: - UI components
     
@@ -43,7 +47,7 @@ class ProfileVC: UIViewController {
     var userInfo: SignIn?
     var userPosts: UserPostContent?
     // 기본적으로 로그인한 사용자의 아이디 값으로 설정
-    var userId = UserDefaults.standard.integer(forKey: "id")
+    var userId = KeychainWrapper.standard.integer(forKey: "id")
     
     var isInit : Bool = false
     var isFollow: Bool = false
@@ -73,13 +77,13 @@ class ProfileVC: UIViewController {
         self.navigationController?.navigationBar.shadowImage = UIImage()
         
         // 보여주려는 프로필 정보가 로그인 사용자인지 다른 사람인지 확인
-        if userId == UserDefaults.standard.integer(forKey: "id") {
+        if userId == KeychainWrapper.standard.integer(forKey: "id") {
             getLoginUserInfoService(completionHandler: {(returnedData)-> Void in
                 self.getUserPostService(userId: self.userInfo!.id)
             })
         } else {
-            getUserInfoService(userId: userId, completionHandler: {(returnedData)-> Void in
-                self.getUserPostService(userId: self.userId)
+            getUserInfoService(userId: userId ?? 0, completionHandler: {(returnedData)-> Void in
+                self.getUserPostService(userId: self.userId ?? 0)
             })
         }
     }
@@ -105,7 +109,7 @@ class ProfileVC: UIViewController {
         //        self.navigationItem.leftBarButtonItem = self.leftBarButton
         
         // userId 값이 로그인 한 사용자 일때만 활성화
-        if userId == UserDefaults.standard.integer(forKey: "id") {
+        if userId == KeychainWrapper.standard.integer(forKey: "id") {
             self.navigationItem.rightBarButtonItem = self.rightBarButton
             
             myNickLabel.addTarget(self, action: #selector(settingProfile), for: .touchUpInside)
@@ -157,9 +161,9 @@ class ProfileVC: UIViewController {
     
     @objc func followAction() {
         if isFollow == false {
-            follow(userId: userId)
+            follow(userId: userId ?? 0)
         } else {
-            unfollow(userId: userId)
+            unfollow(userId: userId ?? 0)
         }
     }
     
@@ -183,11 +187,11 @@ extension ProfileVC : UITableViewDataSource {
         var userPostsNum = userPosts?.count ?? 0
         userPostsNum += 1
         
-        if userPostsNum == 1 {
-            tableView.setEmptyView(title: "게시글이 없습니다", message: "새로운 게시물을 올려보세요‼️")
-        } else {
-            tableView.setEmptyView(title: "", message: "")
-        }
+//        if userPostsNum == 1 {
+//            tableView.setEmptyView(title: "게시글이 없습니다", message: "새로운 게시물을 올려보세요‼️")
+//        } else {
+//            tableView.setEmptyView(title: "", message: "")
+//        }
         
         return userPostsNum
     }
@@ -262,7 +266,7 @@ extension ProfileVC : UITableViewDataSource {
         self.headerView.addSubview(profileImage)
         self.headerView.addSubview(myNickLabel)
         // userId 값이 로그인 한 사용자 일때만 활성화
-        if userId == UserDefaults.standard.integer(forKey: "id") {
+        if userId == KeychainWrapper.standard.integer(forKey: "id") {
             self.headerView.addSubview(setProfile)
         }
         self.headerView.addSubview(myArticle1Btn)
@@ -277,12 +281,12 @@ extension ProfileVC : UITableViewDataSource {
         
         let name = NSMutableAttributedString(string: etcname)
         // userId 값이 로그인 한 사용자 일때만 활성화
-        if userId == UserDefaults.standard.integer(forKey: "id") {
+        if userId == KeychainWrapper.standard.integer(forKey: "id") {
             name.addAttribute(NSAttributedString.Key.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: NSMakeRange(0, etcname.count))
         }
         
         // 팔로우 하기 버튼 활성화
-        if UserDefaults.standard.integer(forKey: "id") != userId {
+        if KeychainWrapper.standard.integer(forKey: "id") != userId {
             followBtn.isHidden = false
         } else {
             followBtn.isHidden = true
@@ -304,7 +308,7 @@ extension ProfileVC : UITableViewDataSource {
         profileImage.widthAnchor.constraint(equalToConstant: 100).isActive = true
         
         // userId 값이 로그인 한 사용자 일때만 활성화
-        if userId == UserDefaults.standard.integer(forKey: "id") {
+        if userId == KeychainWrapper.standard.integer(forKey: "id") {
             setProfile.setImage(.add, for: .normal)
             setProfile.tintColor = .black
             setProfile.translatesAutoresizingMaskIntoConstraints = false
@@ -536,7 +540,7 @@ extension ProfileVC {
     }
 
     func unfollow(userId: Int) {
-        FollowService.shared.unfollow(userId) { responsedata in
+        FollowService.shared.unFollow(userId) { responsedata in
 
             switch responsedata {
             case .success(_):

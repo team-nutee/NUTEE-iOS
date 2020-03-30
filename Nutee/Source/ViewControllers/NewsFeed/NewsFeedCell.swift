@@ -8,6 +8,8 @@
 
 import UIKit
 
+import SwiftKeychainWrapper
+
 class NewsFeedCell: UITableViewCell {
     
     //MARK: - UI components
@@ -173,7 +175,7 @@ class NewsFeedCell: UITableViewCell {
         }
         let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
 
-        let userid = Int(UserDefaults.standard.string(forKey: "id") ?? "")
+        let userid = Int(KeychainWrapper.standard.string(forKey: "id") ?? "")
         
         if (userid == newsPost?.userID) {
             moreAlert.addAction(editAction)
@@ -243,7 +245,7 @@ class NewsFeedCell: UITableViewCell {
             // Like 버튼
             containLoginUser = false
             for arrSearch in newsPost?.likers ?? [] {
-                if arrSearch.like.userID == UserDefaults.standard.integer(forKey: "id") {
+                if arrSearch.like.userID == KeychainWrapper.standard.integer(forKey: "id") {
                     containLoginUser = true
                 }
             }
@@ -300,7 +302,7 @@ class NewsFeedCell: UITableViewCell {
             // Like 버튼
             var containLoginUser = false
             for arrSearch in newsPost?.retweet?.likers ?? [] {
-                if arrSearch.like.userID == UserDefaults.standard.integer(forKey: "id") {
+                if arrSearch.like.userID == KeychainWrapper.standard.integer(forKey: "id") {
                     containLoginUser = true
                 }
             }
@@ -553,9 +555,9 @@ class NewsFeedCell: UITableViewCell {
         
         // 해당 글이 공유글인지 아닌지 판단
         if newsPost?.retweet == nil {
-            vc?.userId = newsPost?.user.id ?? UserDefaults.standard.integer(forKey: "id")
+            vc?.userId = newsPost?.user.id ?? KeychainWrapper.standard.integer(forKey: "id")
         } else {
-            vc?.userId = newsPost?.retweet?.user.id ?? UserDefaults.standard.integer(forKey: "id")
+            vc?.userId = newsPost?.retweet?.user.id ?? KeychainWrapper.standard.integer(forKey: "id")
         }
         
         newsFeedVC?.navigationController?.pushViewController(vc!, animated: true)
@@ -573,7 +575,7 @@ class NewsFeedCell: UITableViewCell {
 
 extension NewsFeedCell {
     func reportPost( content: String) {
-        let userid = UserDefaults.standard.string(forKey: "id") ?? ""
+        let userid = KeychainWrapper.standard.string(forKey: "id") ?? ""
         ContentService.shared.reportPost(userid, content) { (responsedata) in
             
             switch responsedata {

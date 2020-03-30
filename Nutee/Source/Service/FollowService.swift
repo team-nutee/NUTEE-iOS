@@ -8,6 +8,7 @@
 
 import Foundation
 import Alamofire
+import SwiftKeychainWrapper
 
 struct FollowService {
     private init() {}
@@ -22,7 +23,7 @@ struct FollowService {
         // 'limit'는 가져올 followers의 개수
         let header: HTTPHeaders = [
             "Content-Type" : "application/json",
-            "Cookie" : UserDefaults.standard.string(forKey: "Cookie")!
+            "Cookie" : KeychainWrapper.standard.string(forKey: "Cookie")!
         ]
         
         Alamofire.request(URL,
@@ -79,7 +80,7 @@ struct FollowService {
         // 'limit'는 가져올 followings의 개수
         let header: HTTPHeaders = [
             "Content-Type" : "application/json",
-            "Cookie" : UserDefaults.standard.string(forKey: "Cookie")!
+            "Cookie" : KeychainWrapper.standard.string(forKey: "Cookie")!
         ]
         
         Alamofire.request(URL,
@@ -134,7 +135,7 @@ struct FollowService {
         
         let header: HTTPHeaders = [
             "Content-Type" : "application/json",
-            "Cookie" : UserDefaults.standard.string(forKey: "Cookie")!
+            "Cookie" : KeychainWrapper.standard.string(forKey: "Cookie")!
         ]
         
         Alamofire.request(URL,
@@ -172,13 +173,57 @@ struct FollowService {
         
     }
     
-    func unfollow(_ userId: Int, completion: @escaping (NetworkResult<Any>) -> Void){
+    func unFollow(_ userId: Int, completion: @escaping (NetworkResult<Any>) -> Void){
         
         let URL = APIConstants.BaseURL + "/api/user/\(userId)/follow"
         
         let header: HTTPHeaders = [
             "Content-Type" : "application/json",
-            "Cookie" : UserDefaults.standard.string(forKey: "Cookie")!
+            "Cookie" : KeychainWrapper.standard.string(forKey: "Cookie")!
+        ]
+        
+        Alamofire.request(URL,
+                          method: .delete,
+                          parameters: nil,
+                          encoding: JSONEncoding.default,
+                          headers: header).responseData {
+                            response in
+                            
+                            switch response.result {
+                                
+                            case .success:
+                                if let status = response.response?.statusCode{
+                                    switch status {
+                                    case 200:
+                                        completion(.success(status))
+                                    case 409:
+                                        print("실패 409")
+                                        completion(.pathErr)
+                                    case 500:
+                                        print("실패 500")
+                                        completion(.serverErr)
+                                    default:
+                                        break
+                                    }
+                                    
+                                }
+                            case .failure(let err):
+                                print(err.localizedDescription)
+                                completion(.networkFail)
+                                
+                            }
+                            
+        }
+        
+    }
+    
+    func deleteFollow(_ userId: Int, completion: @escaping (NetworkResult<Any>) -> Void){
+        
+        let URL = APIConstants.BaseURL + "/api/user/\(userId)/follower"
+        
+        let header: HTTPHeaders = [
+            "Content-Type" : "application/json",
+            "Cookie" : KeychainWrapper.standard.string(forKey: "Cookie")!
         ]
         
         Alamofire.request(URL,

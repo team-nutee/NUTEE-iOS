@@ -8,6 +8,7 @@
 
 import Foundation
 import Alamofire
+import SwiftKeychainWrapper
 
 struct ContentService {
     private init() {}
@@ -21,7 +22,7 @@ struct ContentService {
         let URL = APIConstants.Posts + "?lastId=" + "\(lastId)" + "&limit=" + "\(postCnt)"
         let header: HTTPHeaders = [
             "Content-Type" : "application/json",
-            "Cookie" : UserDefaults.standard.string(forKey: "Cookie") ?? ""
+            "Cookie" : KeychainWrapper.standard.string(forKey: "Cookie") ?? ""
         ]
         
         Alamofire.request(URL, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: header).responseData{ response in
@@ -70,7 +71,7 @@ struct ContentService {
         let URL = APIConstants.BaseURL + "/api/post/" + String(postId)
         let header: HTTPHeaders = [
             "Content-Type" : "application/json",
-            "Cookie" : UserDefaults.standard.string(forKey: "Cookie")!
+            "Cookie" : KeychainWrapper.standard.string(forKey: "Cookie")!
         ]
         
         print(URL)
@@ -121,7 +122,8 @@ struct ContentService {
     func getUserPosts(_ userId: Int, completion: @escaping (NetworkResult<Any>) -> Void){
         let URL = APIConstants.UserPost + "/\(userId)" + "/posts"
         let header: HTTPHeaders = [
-            "Cookie" : UserDefaults.standard.string(forKey: "Cookie") ?? ""
+            "Content-Type": "application/json",
+            "Cookie" : KeychainWrapper.standard.string(forKey: "Cookie") ?? ""
         ]
         
         Alamofire.request(URL, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: header).responseData{ response in
@@ -170,7 +172,7 @@ struct ContentService {
         
         let headers: HTTPHeaders = [
             "Content-Type": "multipart/form-data",
-            "Cookie" : UserDefaults.standard.string(forKey: "Cookie") ?? ""
+            "Cookie" : KeychainWrapper.standard.string(forKey: "Cookie") ?? ""
         ]
         
         Alamofire.upload(multipartFormData: { (multipartFormData) in
@@ -200,7 +202,7 @@ struct ContentService {
         
         let headers: HTTPHeaders = [
             "Content-Type": "multipart/form-data",
-            "Cookie" : UserDefaults.standard.string(forKey: "Cookie")!
+            "Cookie" : KeychainWrapper.standard.string(forKey: "Cookie")!
         ]
         
         Alamofire.upload(multipartFormData: { (multipartFormData) in
@@ -231,7 +233,7 @@ struct ContentService {
         let URL = APIConstants.ReportPost + "/" + id + "/report"
         let headers: HTTPHeaders = [
             "Content-Type": "application/json",
-            "Cookie" : UserDefaults.standard.string(forKey: "Cookie")!
+            "Cookie" : KeychainWrapper.standard.string(forKey: "Cookie")!
         ]
         
         let body : Parameters = [
@@ -278,7 +280,8 @@ struct ContentService {
         
         let URL = APIConstants.LikePost + "/\(postId)/like"
         let headers: HTTPHeaders = [
-            "Cookie" : UserDefaults.standard.string(forKey: "Cookie")!
+            "Content-Type": "application/json",
+            "Cookie" : KeychainWrapper.standard.string(forKey: "Cookie")!
         ]
         
         Alamofire.request(URL, method: .post, encoding: JSONEncoding.default, headers: headers).responseData{
@@ -318,7 +321,8 @@ struct ContentService {
         
         let URL = APIConstants.LikeDelete + "/\(postId)/like"
         let headers: HTTPHeaders = [
-            "Cookie" : UserDefaults.standard.string(forKey: "Cookie")!
+            "Content-Type": "application/json",
+            "Cookie" : KeychainWrapper.standard.string(forKey: "Cookie")!
         ]
         
         Alamofire.request(URL, method: .delete, encoding: JSONEncoding.default, headers: headers).responseData{
@@ -360,7 +364,8 @@ struct ContentService {
         
         let URL = APIConstants.Retweet + "/\(postId)/retweet"
         let headers: HTTPHeaders = [
-            "Cookie" : UserDefaults.standard.string(forKey: "Cookie")!
+            "Content-Type": "application/json",
+            "Cookie" : KeychainWrapper.standard.string(forKey: "Cookie")!
         ]
         
         Alamofire.request(URL, method: .post, encoding: JSONEncoding.default, headers: headers).responseData{
@@ -402,7 +407,8 @@ struct ContentService {
         
         let URL = APIConstants.Retweet + "/\(postId)/retweet"
         let headers: HTTPHeaders = [
-            "Cookie" : UserDefaults.standard.string(forKey: "Cookie")!
+            "Content-Type": "application/json",
+            "Cookie" : KeychainWrapper.standard.string(forKey: "Cookie")!
         ]
         
         Alamofire.request(URL, method: .delete, encoding: JSONEncoding.default, headers: headers).responseData{
@@ -446,7 +452,8 @@ struct ContentService {
         
         let URL = APIConstants.CommentsPost + "/\(postId)/comment"
         let headers: HTTPHeaders = [
-            "Cookie" : UserDefaults.standard.string(forKey: "Cookie")!
+            "Content-Type": "application/json",
+            "Cookie" : KeychainWrapper.standard.string(forKey: "Cookie")!
         ]
         
         let body : Parameters = [
@@ -491,7 +498,7 @@ struct ContentService {
         let URL = APIConstants.CommentsDelete + "/\(postId)/comment/\(commentId)"
         let headers: HTTPHeaders = [
             "Content-Type": "application/json",
-            "Cookie" : UserDefaults.standard.string(forKey: "Cookie")!
+            "Cookie" : KeychainWrapper.standard.string(forKey: "Cookie")!
         ]
         
         Alamofire.request(URL, method: .delete, encoding: JSONEncoding.default, headers: headers).responseData{

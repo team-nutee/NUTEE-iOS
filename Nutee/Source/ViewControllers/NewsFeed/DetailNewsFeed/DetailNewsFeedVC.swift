@@ -8,6 +8,9 @@
 
 import UIKit
 
+import SwiftKeychainWrapper
+
+
 class DetailNewsFeedVC: UIViewController {
     
     //MARK: - UI components
@@ -260,7 +263,7 @@ extension DetailNewsFeedVC : UITableViewDataSource {
         
         let comment = content?.comments[indexPath.row]
         
-        if comment?.user.id == UserDefaults.standard.integer(forKey: "id") {
+        if comment?.user.id == KeychainWrapper.standard.integer(forKey: "id") {
             // 자기 댓글을 스와이프 했을때
             let editAction = UIContextualAction(style: .normal, title:  "수정", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
                 
@@ -512,7 +515,7 @@ extension DetailNewsFeedVC {
     
     // 뎃글 신고 <-- 확인 필요
     func reportCommentService(reportReason: String) {
-        let userid = UserDefaults.standard.string(forKey: "id") ?? "" // <-- 수정 必
+        let userid = KeychainWrapper.standard.string(forKey: "id") ?? "" // <-- 수정 必
         ContentService.shared.reportPost(userid, reportReason) { (responsedata) in // <-- 현재 작성된 API는 게시글(post)에 대한 신고기능
             
             switch responsedata {

@@ -8,6 +8,8 @@
 
 import UIKit
 
+import SwiftKeychainWrapper
+
 class ReplyCell: UITableViewCell{
     
     //MARK: - UI components
@@ -85,7 +87,7 @@ class ReplyCell: UITableViewCell{
         let vc = UIStoryboard.init(name: "Profile", bundle: Bundle.main).instantiateViewController(withIdentifier: "ProfileVC") as? ProfileVC
         
         // 선택된 사용자 아이디를 넘거줌
-        vc?.userId = comment?.user.id  ?? UserDefaults.standard.integer(forKey: "id")
+        vc?.userId = comment?.user.id  ?? KeychainWrapper.standard.integer(forKey: "id")
         
         detailNewsFeedVC?.navigationController?.pushViewController(vc!, animated: true)
     }

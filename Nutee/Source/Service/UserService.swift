@@ -8,6 +8,7 @@
 
 import Foundation
 import Alamofire
+import SwiftKeychainWrapper
 
 struct UserService {
     
@@ -112,12 +113,12 @@ struct UserService {
                                 cookies = cookie?.components(separatedBy: ";")
                                 cookie = cookies?[0]
                                 
-                                UserDefaults.standard.set(cookie, forKey: "Cookie")
+                                KeychainWrapper.standard.set(cookie ?? "", forKey: "Cookie")
                                 
                                 let decoder = JSONDecoder()
                                 let result = try decoder.decode(SignIn.self, from: value)
                                 // 로그인시 id 저장
-                                UserDefaults.standard.set(result.id, forKey: "id")
+                                KeychainWrapper.standard.set(result.id, forKey: "id")
                                 completion(.success(result))
                             } catch {
                                 completion(.pathErr)
@@ -148,7 +149,7 @@ struct UserService {
         let URL = APIConstants.Logout
         let headers: HTTPHeaders = [
             "Content-Type": "application/json",
-            "Cookie" : UserDefaults.standard.string(forKey: "Cookie")!
+            "Cookie" : KeychainWrapper.standard.string(forKey: "Cookie")!
         ]
         
         Alamofire.request(URL, method: .post, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseData{
@@ -189,7 +190,7 @@ struct UserService {
         let URL = APIConstants.User
         let headers: HTTPHeaders = [
             "Content-Type": "application/json",
-            "Cookie" : UserDefaults.standard.string(forKey: "Cookie")!
+            "Cookie" : KeychainWrapper.standard.string(forKey: "Cookie")!
         ]
         
         Alamofire.request(URL, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseData{
@@ -456,7 +457,7 @@ struct UserService {
         let URL = APIConstants.NickNamePatch
         let headers: HTTPHeaders = [
             "Content-Type": "application/json",
-            "Cookie" : UserDefaults.standard.string(forKey: "Cookie")!
+            "Cookie" : KeychainWrapper.standard.string(forKey: "Cookie")!
         ]
         
         let body : Parameters = [
@@ -498,7 +499,7 @@ struct UserService {
         
         let headers: HTTPHeaders = [
             "Content-Type": "application/json",
-            "Cookie" : UserDefaults.standard.string(forKey: "Cookie")!
+            "Cookie" : KeychainWrapper.standard.string(forKey: "Cookie")!
         ]
         
         Alamofire.upload(multipartFormData: { (multipartFormData) in

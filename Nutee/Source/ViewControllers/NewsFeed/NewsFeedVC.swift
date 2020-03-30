@@ -7,7 +7,9 @@
 //
 
 import UIKit
+
 import SnapKit
+import SwiftKeychainWrapper
 
 class NewsFeedVC: UIViewController {
     
@@ -118,7 +120,7 @@ class NewsFeedVC: UIViewController {
     
     // 로그인이 되어있는지 체크
     func checkLogin() {
-        if UserDefaults.standard.data(forKey: "Cookies") == nil {
+        if KeychainWrapper.standard.data(forKey: "Cookies") == nil {
             
             let storyboard = UIStoryboard(name: "Login", bundle: nil)
             let vc = storyboard.instantiateViewController(identifier: "LoginVC") as! LoginVC
