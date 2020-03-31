@@ -51,9 +51,9 @@ struct NewsPostsContentElement: Codable {
 }
 
 struct Image: Codable {
-    let id: Int
-    let src, createdAt, updatedAt: String
-    let postID: Int
+    let id: Int?
+    let src, createdAt, updatedAt: String?
+    let postID: Int?
     let userID: Int?
 
     enum CodingKeys: String, CodingKey {
@@ -134,8 +134,8 @@ struct Liker: Codable {
 
 // MARK: - Like
 struct Like: Codable {
-    let createdAt, updatedAt: String
-    let postID, userID: Int
+    let createdAt, updatedAt: String?
+    let postID, userID: Int?
 
     enum CodingKeys: String, CodingKey {
         case createdAt, updatedAt
@@ -146,8 +146,8 @@ struct Like: Codable {
 
 // MARK: - User
 struct User: Codable {
-    let id: Int
-    let nickname: String
+    let id: Int?
+    let nickname: String?
     let image: UserImage?
 
     enum CodingKeys: String, CodingKey {
@@ -157,7 +157,7 @@ struct User: Codable {
 }
 
 struct UserImage: Codable {
-    let src: String
+    let src: String?
 }
 
 

@@ -10,9 +10,9 @@ import Foundation
 
 // MARK: - UserPostContent
 struct UserPostContentElement: Codable {
-    let id: Int
-    let content, createdAt, updatedAt: String
-    let userID: Int
+    let id: Int?
+    let content, createdAt, updatedAt: String?
+    let userID: Int?
     let retweetID: Int?
     let user: User
     let images: [Image]

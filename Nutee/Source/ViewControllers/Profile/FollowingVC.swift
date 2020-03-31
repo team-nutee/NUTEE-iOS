@@ -73,7 +73,6 @@ extension FollowingVC : UITableViewDataSource {
             cell.followingDeleteBtn.isHidden = true
         }
         
-        print("img", followingsList?[indexPath.row].image.src)
         if followingsList?[indexPath.row].image.src == "" {
         cell.followingImgView.imageFromUrl("http://15.164.50.161:9425/settings/nutee_profile.png", defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
         }else{

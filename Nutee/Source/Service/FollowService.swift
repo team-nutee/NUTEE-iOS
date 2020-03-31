@@ -21,6 +21,7 @@ struct FollowService {
         
         let URL = APIConstants.BaseURL + "/api/user/\(userId)/followers?offset=0&limit=10"
         // 'limit'는 가져올 followers의 개수
+        print("url :",URL)
         let header: HTTPHeaders = [
             "Content-Type" : "application/json",
             "Cookie" : KeychainWrapper.standard.string(forKey: "Cookie")!
@@ -41,7 +42,6 @@ struct FollowService {
                                         switch status {
                                         case 200:
                                             do{
-                                                print("start decode getFollowersList")
                                                 let decoder = JSONDecoder()
                                                 let result = try decoder.decode(FollowList.self, from: value)
                                                 completion(.success(result))

@@ -39,6 +39,6 @@ struct PostContent: Codable {
 
 // MARK: - User
 struct PostUser: Codable {
-    let id: Int
-    let nickname: String
+    let id: Int?
+    let nickname: String?
 }

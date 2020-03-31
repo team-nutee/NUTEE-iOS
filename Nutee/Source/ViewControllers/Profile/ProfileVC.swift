@@ -31,12 +31,7 @@ class ProfileVC: UIViewController {
     let followBtn = UIButton()
     
     let cellTextLabel = UILabel()
-    
-//    lazy var leftBarButton : UIBarButtonItem = {
-//        let button = UIBarButtonItem(title: "로그아웃", style: .plain, target: self, action: #selector(logoutButton))
-//        return button
-//    }()
-    
+        
     lazy var rightBarButton : UIBarButtonItem = {
         let button = UIBarButtonItem(title: "설정", style: .plain, target: self, action: #selector(toSetting))
         return button
@@ -51,7 +46,7 @@ class ProfileVC: UIViewController {
     
     var isInit : Bool = false
     var isFollow: Bool = false
-    var isFollowTxt : String = "팔로우하기"
+    var isFollowTxt : String?
     var follwerCnt : Int?
     var myFollower1 : NSMutableAttributedString?
     // MARK: - Life Cycle
@@ -98,11 +93,21 @@ class ProfileVC: UIViewController {
     
     // 초기 설정
     func setInit() {
-        
+        searchFollow()
+
     }
     
     func setDefault() {
         
+    }
+    
+    func searchFollow(){
+        for i in userInfo!.followers {
+            if i.id == KeychainWrapper.standard.integer(forKey: "id"){
+                isFollow = true
+                myArticleTV.reloadData()
+            }
+        }
     }
     
     func setBtn(){
@@ -216,19 +221,6 @@ extension ProfileVC : UITableViewDataSource {
             
             cell.initLoginUserPost()
             
-//            cell.profileNameLabel.text = userPost?.user.nickname
-//            cell.articleTextView.text = userPost?.content
-//
-//            if userInfo?.image.src == "" {
-//            cell.profileIMG.imageFromUrl("http://15.164.50.161:9425/settings/nutee_profile.png", defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
-//            } else {
-//            cell.profileIMG.imageFromUrl((APIConstants.BaseURL) + "/" + (userInfo?.image.src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
-//            }
-//            let originUserPostTime = userPost?.createdAt
-//            let userPostTimeDateFormat = originUserPostTime!.getDateFormat(time: originUserPostTime!)
-//            cell.timeLabel.text = userPostTimeDateFormat!.timeAgoSince(userPostTimeDateFormat!)
-//
-//            cell.articleTextView.postingInit()
         }
         
         return cell
@@ -386,7 +378,13 @@ extension ProfileVC : UITableViewDataSource {
         myFollowing2Btn.heightAnchor.constraint(equalToConstant: 40).isActive = true
         myFollowing2Btn.widthAnchor.constraint(equalToConstant: (view.frame.size.width - 120)/3).isActive = true
         
-        let followBtnText = NSMutableAttributedString(string: isFollowTxt)
+        if !isFollow {
+            isFollowTxt = "팔로우하기"
+        } else {
+            isFollowTxt = "언팔로우"
+        }
+        
+        let followBtnText = NSMutableAttributedString(string: isFollowTxt ?? "팔로우하기")
         followBtn.setAttributedTitle(followBtnText, for: .normal)
         followBtn.titleLabel?.font = .boldSystemFont(ofSize: 15)
         followBtn.translatesAutoresizingMaskIntoConstraints = false
@@ -493,8 +491,9 @@ extension ProfileVC {
             case .success(let res):
                 let response = res as! UserPostContent
                 self.userPosts = response
-                
+                self.searchFollow()
                 self.myArticleTV.reloadData()
+
             case .requestErr(_):
                 print("request error")
 
