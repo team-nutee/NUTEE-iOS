@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftKeychainWrapper
 
 class FollowerTVC: UITableViewCell {
 
@@ -14,7 +15,9 @@ class FollowerTVC: UITableViewCell {
     @IBOutlet weak var followerImgView: UIImageView!
     @IBOutlet weak var followerLabel: UILabel!
     @IBOutlet weak var followerDeleteBtn: UIButton!
-
+    
+    
+    var followerID : Int?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -24,14 +27,39 @@ class FollowerTVC: UITableViewCell {
         
         followerDeleteBtn.setTitle("삭제", for: .normal)
         followerDeleteBtn.setTitleColor(.nuteeGreen, for: .normal)
-
-        // Initialization code
+                
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    @IBAction func deleteBtn(_ sender: UIButton){
+        deleteFollowerService(id: followerID!)
     }
+}
+
+extension FollowerTVC {
+        
+        @objc func deleteFollowerService(id : Int) {
+            FollowService.shared.deleteFollow(id) { responsedata in
+                
+                switch responsedata {
+                    
+                case .success(_):
+                    print("success")
+                    
+                case .requestErr(_):
+                    print("request error")
+                
+                case .pathErr:
+                    print(".pathErr")
+                
+                case .serverErr:
+                    print(".serverErr")
+                
+                case .networkFail :
+                    print("failure")
+                    }
+            }
+            
+        }
+
 
 }

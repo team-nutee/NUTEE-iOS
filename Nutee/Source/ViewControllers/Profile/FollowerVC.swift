@@ -21,8 +21,6 @@ class FollowerVC: UIViewController {
     var userId = 0
     var followersNums = 0 // ProfileVC가 서버에서 받은 팔로워 개수를 저장할 변수
     
-    var noFollowers = UIView()
-    
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
@@ -34,8 +32,6 @@ class FollowerVC: UIViewController {
         followerTV.dataSource = self
         followerTV.separatorInset.left = 0
         followerTV.separatorStyle = .none
-        
-        self.view.addSubview(noFollowers)
         
         setInit()
     }
@@ -87,12 +83,16 @@ extension FollowerVC : UITableViewDataSource {
         
         if followersList?[indexPath.row].image.src == "" {
         cell.followerImgView.imageFromUrl("http://15.164.50.161:9425/settings/nutee_profile.png", defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
-        }else{
+        } else {
         cell.followerImgView.imageFromUrl((APIConstants.BaseURL) + "/" + (followersList?[indexPath.row].image.src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
         }
         
         cell.followerLabel.text = followersList?[indexPath.row].nickname
         cell.followerLabel.sizeToFit()
+        
+        cell.followerID = followersList?[indexPath.row].id
+        
+        cell.followerDeleteBtn.addTarget(self, action: #selector(getFollowersListService), for: .touchUpInside)
         
         return cell
     }
@@ -102,14 +102,13 @@ extension FollowerVC : UITableViewDataSource {
 //MARK: - FollowersList 서버 연결을 위한 Service 실행 구간
 
 extension FollowerVC {
-    func getFollowersListService() {
+    @objc func getFollowersListService() {
         FollowService.shared.getFollowersList(userId) { responsedata in
             
             switch responsedata {
             case .success(let res):
                 let response = res as! FollowList
                 self.followersList = response
-                print("followerList server connect successful")
                 
                 self.followerTV.reloadData()
             case .requestErr(_):
@@ -128,12 +127,13 @@ extension FollowerVC {
         
     }
     
-    func deleteFollowerService() {
-        FollowService.shared.deleteFollow(userId) { responsedata in
+    @objc func deleteFollowerService(_ id : Int) {
+        FollowService.shared.deleteFollow(id) { responsedata in
             
             switch responsedata {
                 
             case .success(_):
+                print("succests")
                 self.getFollowersListService()
                 
             case .requestErr(_):

@@ -21,7 +21,6 @@ struct FollowService {
         
         let URL = APIConstants.BaseURL + "/api/user/\(userId)/followers?offset=0&limit=10"
         // 'limit'는 가져올 followers의 개수
-        print("url :",URL)
         let header: HTTPHeaders = [
             "Content-Type" : "application/json",
             "Cookie" : KeychainWrapper.standard.string(forKey: "Cookie")!
@@ -75,7 +74,6 @@ struct FollowService {
         
         let URL = APIConstants.BaseURL + "/api/user/\(userId)/followings?offset=0&limit=10"
         // 'limit'는 가져올 followings의 개수
-        print("url :",URL)
         let header: HTTPHeaders = [
             "Content-Type" : "application/json",
             "Cookie" : KeychainWrapper.standard.string(forKey: "Cookie")!
@@ -184,7 +182,7 @@ struct FollowService {
                             response in
                             
                             switch response.result {
-                                
+                            
                             case .success:
                                 if let status = response.response?.statusCode{
                                     switch status {
@@ -221,18 +219,20 @@ struct FollowService {
         ]
         
         Alamofire.request(URL,
-                          method: .post,
+                          method: .delete,
                           parameters: nil,
                           encoding: JSONEncoding.default,
                           headers: header).responseData {
                             response in
                             
                             switch response.result {
-                                
+
                             case .success:
                                 if let status = response.response?.statusCode{
+                                    print("status : ", status)
                                     switch status {
                                     case 200:
+                                        print(200)
                                         completion(.success(status))
                                     case 409:
                                         print("실패 409")
