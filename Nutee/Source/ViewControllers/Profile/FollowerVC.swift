@@ -58,32 +58,18 @@ class FollowerVC: UIViewController {
 extension FollowerVC : UITableViewDelegate { }
 
 extension FollowerVC : UITableViewDataSource {
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if followersList?.count == 0 || followersList?.count == nil {
-            return followerTV.frame.height - tabBarController!.tabBar.frame.size.height
-        } else {
-            return UITableView.automaticDimension
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        if followersList?.count == 0 || followersList?.count == nil {
-            return followerTV.frame.height - tabBarController!.tabBar.frame.size.height
-        } else {
-            return UITableView.automaticDimension
-        }
-    }
-    
+        
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         followersNums = followersList?.count ?? 0
         if followersNums == 0 {
-            followersNums = 1
+            tableView.setEmptyView(title: "팔로잉을 하지 않았습니다.", message: "")
+        } else {
+            tableView.restore()
         }
         
         return followersNums
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "FollowerTVC", for: indexPath) as! FollowerTVC

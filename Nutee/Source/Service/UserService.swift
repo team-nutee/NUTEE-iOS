@@ -112,7 +112,7 @@ struct UserService {
                                 var cookies : [String]? = []
                                 cookies = cookie?.components(separatedBy: ";")
                                 cookie = cookies?[0]
-                                
+                                print(cookie)
                                 KeychainWrapper.standard.set(cookie ?? "", forKey: "Cookie")
                                 
                                 let decoder = JSONDecoder()
@@ -409,6 +409,7 @@ struct UserService {
     }
     
     // MARK: - findPW
+    
     func findPW(_ userId : String, _ email : String, completion: @escaping (NetworkResult<Any>) -> Void) {
         
         let URL = APIConstants.Reissuance
@@ -524,4 +525,5 @@ struct UserService {
         }
     }
 
+    
 }

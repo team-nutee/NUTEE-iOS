@@ -190,7 +190,7 @@ extension ProfileVC : UITableViewDataSource {
         if userPostsNum == 1 {
             tableView.setEmptyView(title: "게시글이 없습니다", message: "새로운 게시물을 올려보세요‼️")
         } else {
-            tableView.setEmptyView(title: "", message: "")
+            tableView.restore()
         }
         
         return userPostsNum

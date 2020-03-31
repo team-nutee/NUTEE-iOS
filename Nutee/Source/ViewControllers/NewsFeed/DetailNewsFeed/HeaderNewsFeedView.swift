@@ -271,7 +271,7 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
             // User 정보 설정 //
             // 사용자 프로필 이미지 설정
             imgvwUserImg.setRounded(radius: nil)
-            if detailNewsPost?.retweet?.user.image?.src == nil || detailNewsPost?.retweet?.user.image?.src == ""{
+            if detailNewsPost?.retweet?.user.image?.src == nil || detailNewsPost?.retweet?.user.image?.src == "" {
                 imgvwUserImg.imageFromUrl("http://15.164.50.161:9425/settings/nutee_profile.png", defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
                 imgvwUserImg.contentMode = .scaleAspectFit
             } else {
@@ -279,7 +279,7 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
                 imgvwUserImg.contentMode = .scaleAspectFill
             }
             // 사용자 이름 설정
-            //            let nickname = newsPost?.retweet?.user.nickname ?? ""
+            let nickname = detailNewsPost?.retweet?.user.nickname ?? ""
             lblUserId.setTitle(detailNewsPost?.retweet?.user.nickname, for: .normal)
             lblUserId.sizeToFit()
             // 게시글 게시 시간 설정
@@ -383,9 +383,9 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
             lblThreeMoreImg.isHidden = true
             lblFourMoreImg.isHidden = true
             
-//            ContentToVwTwo.isActive = false
+            //            ContentToVwTwo.isActive = false
             vwTwoToRepost.isActive = false
-//            ContentToVwSquare.isActive = false
+            //            ContentToVwSquare.isActive = false
             vwSquareToRepost.isActive = false
             ContentsToRepost.isActive = true
             
@@ -397,9 +397,9 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
             vwThree.isHidden = true
             vwFour.isHidden = true
             
-//            ContentToVwTwo.isActive = false
+            //            ContentToVwTwo.isActive = false
             vwTwoToRepost.isActive = false
-//            ContentToVwSquare.isActive = true
+            //            ContentToVwSquare.isActive = true
             vwSquareToRepost.isActive = true
             ContentsToRepost.isActive = false
             
@@ -408,14 +408,14 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
             } else {
                 imgvwOne.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.images[0].src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
             }
-
+            
         case 2:
             // ver. TwoFrame
             vwTwo.isHidden = false
             
-//            ContentToVwTwo.isActive = true
+            //            ContentToVwTwo.isActive = true
             vwTwoToRepost.isActive = true
-//            ContentToVwSquare.isActive = false
+            //            ContentToVwSquare.isActive = false
             vwSquareToRepost.isActive = false
             ContentsToRepost.isActive = false
             
@@ -446,9 +446,9 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
             imgvwOne.isHidden = true
             vwFour.isHidden = true
             
-//            ContentToVwTwo.isActive = false
+            //            ContentToVwTwo.isActive = false
             vwTwoToRepost.isActive = false
-//            ContentToVwSquare.isActive = true
+            //            ContentToVwSquare.isActive = true
             vwSquareToRepost.isActive = true
             ContentsToRepost.isActive = false
             
@@ -479,9 +479,9 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
             imgvwOne.isHidden = true
             vwThree.isHidden = true
             
-//            ContentToVwTwo.isActive = false
+            //            ContentToVwTwo.isActive = false
             vwTwoToRepost.isActive = false
-//            ContentToVwSquare.isActive = true
+            //            ContentToVwSquare.isActive = true
             vwSquareToRepost.isActive = true
             ContentsToRepost.isActive = false
             
@@ -507,7 +507,7 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
                 }
                 num += 1
             }
-        
+            
         } // case문 종료
     } // ShowImageFrame 설정 끝
     
@@ -598,16 +598,16 @@ extension HeaderNewsFeedView {
                 print("likePost succussful", res)
             case .requestErr(_):
                 print("request error")
-            
+                
             case .pathErr:
                 print(".pathErr")
-            
+                
             case .serverErr:
                 print(".serverErr")
-            
+                
             case .networkFail :
                 print("failure")
-                }
+            }
         }
     }
     
@@ -620,20 +620,20 @@ extension HeaderNewsFeedView {
                 print("likePost succussful", res)
             case .requestErr(_):
                 print("request error")
-            
+                
             case .pathErr:
                 print(".pathErr")
-            
+                
             case .serverErr:
                 print(".serverErr")
-            
+                
             case .networkFail :
                 print("failure")
-                }
+            }
         }
     }
     
-// MARK: - Retweet
+    // MARK: - Retweet
     
     func retweetPostService(postId: Int) {
         ContentService.shared.retweetPost(postId) { (responsedata) in
@@ -652,16 +652,16 @@ extension HeaderNewsFeedView {
                 let okayAction = UIAlertAction(title: "확인", style: .default)
                 alreadyAlert.addAction(okayAction)
                 self.detailNewsFeedVC?.present(alreadyAlert, animated: true, completion: nil)
-            
+                
             case .pathErr:
                 print(".pathErr")
-            
+                
             case .serverErr:
                 print(".serverErr")
-            
+                
             case .networkFail :
                 print("failure")
-                }
+            }
         }
     }
     
@@ -674,10 +674,10 @@ extension HeaderNewsFeedView {
                 print("retweetPost succussful", res)
             case .requestErr(_):
                 print("request error")
-            
+                
             case .pathErr:
                 print(".pathErr")
-            
+                
             case .serverErr:
                 print(".serverErr")
                 
@@ -685,15 +685,15 @@ extension HeaderNewsFeedView {
                 let okayAction = UIAlertAction(title: "확인", style: .default)
                 failAlert.addAction(okayAction)
                 self.detailNewsFeedVC?.present(failAlert, animated: true, completion: nil)
-            
+                
                 self.isClickedRepost = true
                 self.btnRepost.tintColor = .nuteeGreen
                 
             case .networkFail :
                 print("failure")
-                }
+            }
         }
     }
-
+    
 }
 

@@ -62,28 +62,13 @@ class FollowingVC: UIViewController {
 extension FollowingVC : UITableViewDelegate { }
 
 extension FollowingVC : UITableViewDataSource {
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if followingsList?.count == 0 || followingsList?.count == nil {
-            return followingTV.frame.height - tabBarController!.tabBar.frame.size.height
-        } else {
-            
-            return UITableView.automaticDimension
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        if followingsList?.count == 0 || followingsList?.count == nil {
-            return followingTV.frame.height - tabBarController!.tabBar.frame.size.height
-        } else {
-            return UITableView.automaticDimension
-        }
-    }
-    
+        
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         followingsNums = followingsList?.count ?? 0
         if followingsNums == 0 {
-            followingsNums = 1
+            tableView.setEmptyView(title: "팔로워가 없습니다.", message: "")
+        } else {
+            tableView.restore()
         }
         
         return followingsNums
