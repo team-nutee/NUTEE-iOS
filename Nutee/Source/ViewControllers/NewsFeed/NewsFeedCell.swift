@@ -147,6 +147,7 @@ class NewsFeedCell: UITableViewCell {
             
             editPostingVC.isEditMode = true
             editPostingVC.postingTextView.text = self.newsPost?.content
+            editPostingVC.postId = self.newsPost?.id
             editPostingVC.postBtn.setTitle("수정", for: .normal)
             
             editPostingVC.modalPresentationStyle = .currentContext

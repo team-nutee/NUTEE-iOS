@@ -33,6 +33,7 @@ class PostVC: UIViewController {
     var selectedItems = [YPMediaItem]()
     
     var isEditMode = false
+    var postId: Int?
     
     // MARK: - Life Cycle
     
@@ -125,7 +126,7 @@ class PostVC: UIViewController {
             if pickedIMG != [] {
                 postImage(images: pickedIMG)
             } else {
-                editPostContent(images: [], postContent: postingTextView.text)
+                editPostContent(postId: postId ?? 0, postContent: postingTextView.text)
             }
         }
         
@@ -365,8 +366,8 @@ extension PostVC {
         
     }
     
-    func editPostContent(images: [NSString], postContent: String){
-        ContentService.shared.editPost(pictures: images, postContent: postContent){
+    func editPostContent(postId: Int, postContent: String){
+        ContentService.shared.editPost(postId, postContent){
             [weak self]
             data in
             
