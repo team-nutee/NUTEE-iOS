@@ -20,7 +20,8 @@ class FollowingTVC: UITableViewCell {
         super.awakeFromNib()
         
         followingImgView.setRounded(radius: nil)
-        followingImgView.backgroundColor = .veryLightPink
+        followingImgView.contentMode = .scaleAspectFit
+
         followingDeleteBtn.setTitle("삭제", for: .normal)
         followingDeleteBtn.setTitleColor(.nuteeGreen, for: .normal)
         

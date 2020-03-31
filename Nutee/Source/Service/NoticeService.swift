@@ -36,12 +36,9 @@ struct NoticeService {
                 if let value = response.result.value {
                     //response의 respones안에 있는 statusCode를 추출
                     if let status = response.response?.statusCode {
-                        print(status)
-                        
                         switch status {
                         case 200:
                             do{
-                                print("start decode")
                                 let decoder = JSONDecoder()
                                 let result = try
                                     decoder.decode(Notice.self, from: value)

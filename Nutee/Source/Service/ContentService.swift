@@ -32,13 +32,10 @@ struct ContentService {
             case .success:
                 if let value = response.result.value {
                     
-                    if let status = response.response?.statusCode{
-                        print("getNewsPosts method:", status)
-                    
+                    if let status = response.response?.statusCode{                    
                         switch status {
                         case 200:
                             do{
-                                print("start decode getNewsPosts")
                                 let decoder = JSONDecoder()
                                 let result = try decoder.decode(NewsPostsContent.self, from: value)
                                 completion(.success(result))
@@ -83,16 +80,11 @@ struct ContentService {
                 if let value = response.result.value {
                     
                     if let status = response.response?.statusCode{
-                        print("getPost method:", status)
-                        print(URL)
                         switch status {
                         case 200:
                             do{
-                                print("start decode getPost")
                                 let decoder = JSONDecoder()
                                 let result = try decoder.decode(NewsPostsContentElement.self, from: value)
-                                dump(value, name: "value in getPost")
-                                dump(result, name: "result in getPost")
                                 completion(.success(result))
                             } catch {
                                 completion(.pathErr)
@@ -134,12 +126,9 @@ struct ContentService {
                 if let value = response.result.value {
                     
                     if let status = response.response?.statusCode{
-                        print("getUserPosts method:", status)
-                        print(URL)
                         switch status {
                         case 200:
                             do{
-                                print("start decode getUserPosts")
                                 let decoder = JSONDecoder()
                                 let result = try decoder.decode(UserPostContent.self, from: value)
                                 completion(.success(result))
@@ -249,8 +238,6 @@ struct ContentService {
             case .success:
                 
                 if let status = response.response?.statusCode {
-                    print(status)
-                    
                     switch status {
                     case 200:
                         completion(.success("성공했습니다."))
@@ -292,8 +279,6 @@ struct ContentService {
             case .success:
                 
                 if let status = response.response?.statusCode {
-                    print("likePost method:", status)
-                    
                     switch status {
                     case 200:
                         completion(.success("likePost에 성공했습니다."))
@@ -333,8 +318,6 @@ struct ContentService {
             case .success:
                 
                 if let status = response.response?.statusCode {
-                    print("likeDelete method:", status)
-                    
                     switch status {
                     case 200:
                         completion(.success("likeDelete에 성공했습니다."))
@@ -376,8 +359,6 @@ struct ContentService {
             case .success:
                 
                 if let status = response.response?.statusCode {
-                    print("retweetPost method:", status)
-                    
                     switch status {
                     case 200:
                         completion(.success("retweetPost에 성공했습니다."))
@@ -419,8 +400,6 @@ struct ContentService {
             case .success:
                 
                 if let status = response.response?.statusCode {
-                    print("retweetDelete method:", status)
-                    
                     switch status {
                     case 200:
                         completion(.success("retweetDelete에 성공했습니다."))
@@ -468,8 +447,6 @@ struct ContentService {
             case .success:
                 
                 if let status = response.response?.statusCode {
-                    print("commentPost method:", status)
-                    
                     switch status {
                     case 200:
                         completion(.success("commentPost에 성공했습니다."))
@@ -509,8 +486,6 @@ struct ContentService {
             case .success:
                 
                 if let status = response.response?.statusCode {
-                    print("commentDelete method:", status)
-                    
                     switch status {
                     case 200:
                         completion(.success("commentDelete에 성공했습니다."))

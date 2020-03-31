@@ -20,8 +20,8 @@ class FollowerTVC: UITableViewCell {
         super.awakeFromNib()
 
         followerImgView.setRounded(radius: nil)
-        followerImgView.backgroundColor = .veryLightPink
-//        followerLabel.sizeToFit()
+        followerImgView.contentMode = .scaleAspectFit
+        
         followerDeleteBtn.setTitle("삭제", for: .normal)
         followerDeleteBtn.setTitleColor(.nuteeGreen, for: .normal)
 

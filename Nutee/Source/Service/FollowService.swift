@@ -37,10 +37,7 @@ struct FollowService {
                                 
                             case .success:
                                 if let value = response.result.value {
-                                    print(value)
                                     if let status = response.response?.statusCode{
-                                        print("getFollowersList method:", status)
-                                        print(URL)
                                         switch status {
                                         case 200:
                                             do{
@@ -78,6 +75,7 @@ struct FollowService {
         
         let URL = APIConstants.BaseURL + "/api/user/\(userId)/followings?offset=0&limit=10"
         // 'limit'는 가져올 followings의 개수
+        print("url :",URL)
         let header: HTTPHeaders = [
             "Content-Type" : "application/json",
             "Cookie" : KeychainWrapper.standard.string(forKey: "Cookie")!
@@ -94,14 +92,10 @@ struct FollowService {
                                 
                             case .success:
                                 if let value = response.result.value {
-                                    print(value)
                                     if let status = response.response?.statusCode{
-                                        print("getFollowingsList method:", status)
-                                        print(URL)
                                         switch status {
                                         case 200:
                                             do{
-                                                print("start decode getFollowingsList")
                                                 let decoder = JSONDecoder()
                                                 let result = try decoder.decode(FollowList.self, from: value)
                                                 completion(.success(result))
@@ -227,7 +221,7 @@ struct FollowService {
         ]
         
         Alamofire.request(URL,
-                          method: .delete,
+                          method: .post,
                           parameters: nil,
                           encoding: JSONEncoding.default,
                           headers: header).responseData {

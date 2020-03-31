@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import SwiftKeychainWrapper
 
 class FollowerVC: UIViewController {
     
@@ -76,22 +77,22 @@ extension FollowerVC : UITableViewDataSource {
         
         cell.selectionStyle = .none
         
-        if followersList?.count == 0 || followersList?.count == nil {
-            followerTV.setNoFollower(cell, emptyView: noFollowers)
-            noFollowers.isHidden = false
-            cell.contentsCell.isHidden = true
+        let myID = KeychainWrapper.standard.integer(forKey: "id")
+        
+        if myID == userId {
+            cell.followerDeleteBtn.isHidden = false
         } else {
-            
-            noFollowers.isHidden = true
-            cell.contentsCell.isHidden = false
-            
-            let follower = followersList?[indexPath.row]
-            let followerName = follower?.nickname ?? "FollowerError"
-            cell.followerLabel.text = followerName
-            cell.followerLabel.sizeToFit()
+            cell.followerDeleteBtn.isHidden = true
         }
         
+        if followersList?[indexPath.row].image.src == "" {
+        cell.followerImgView.imageFromUrl("http://15.164.50.161:9425/settings/nutee_profile.png", defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+        }else{
+        cell.followerImgView.imageFromUrl((APIConstants.BaseURL) + "/" + (followersList?[indexPath.row].image.src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+        }
         
+        cell.followerLabel.text = followersList?[indexPath.row].nickname
+        cell.followerLabel.sizeToFit()
         
         return cell
     }
@@ -111,6 +112,30 @@ extension FollowerVC {
                 print("followerList server connect successful")
                 
                 self.followerTV.reloadData()
+            case .requestErr(_):
+                print("request error")
+            
+            case .pathErr:
+                print(".pathErr")
+            
+            case .serverErr:
+                print(".serverErr")
+            
+            case .networkFail :
+                print("failure")
+                }
+        }
+        
+    }
+    
+    func deleteFollowerService() {
+        FollowService.shared.deleteFollow(userId) { responsedata in
+            
+            switch responsedata {
+                
+            case .success(_):
+                self.getFollowersListService()
+                
             case .requestErr(_):
                 print("request error")
             

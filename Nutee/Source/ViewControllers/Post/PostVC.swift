@@ -39,7 +39,6 @@ class PostVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print(#function)
         
         initSetting()
         
@@ -67,23 +66,7 @@ class PostVC: UIViewController {
         textViewDidChange(postingTextView)
 
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
         
-        print(#function)
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(true)
-        
-        print(#function)
-    }
-    
-    deinit {
-        print(#function)
-    }
-    
     // MARK: - Helper
     
     func initSetting() {
@@ -98,7 +81,6 @@ class PostVC: UIViewController {
     }
     
     func setDefault() {
-        print(#function)
         self.postingTextView.text = ""
         self.pickedIMG = []
         self.imageCV.reloadData()
@@ -332,9 +314,6 @@ extension PostVC {
             
             switch data {
             case .success(let res):
-                // 데이터 타입 변경
-                debugPrint("234 :",res)
-                // 포스팅 서버 연결
                 self.postContent(images: res as! [NSString], postContent: self.postingTextView.text)
                 
             case .requestErr:

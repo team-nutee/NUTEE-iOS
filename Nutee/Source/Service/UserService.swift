@@ -41,15 +41,10 @@ struct UserService {
             case .success:
                 // parameter 위치
                 if let value = response.result.value {
-                    //print("response", )
-                    print("value", value)
-                    //response의 respones안에 있는 statusCode를 추출
                     if let status = response.response?.statusCode {
-                        print(status)
                         switch status {
                         case 200:
                             do{
-                                print("start decode SignUp")
                                 let decoder = JSONDecoder()
                                 let result = try decoder.decode(SignUp.self, from: value)
                                 completion(.success(result))
@@ -99,10 +94,7 @@ struct UserService {
             case .success:
                 // parameter 위치
                 if let value = response.result.value {
-                    //print("response", )
-                    //response의 respones안에 있는 statusCode를 추출
                     if let status = response.response?.statusCode {
-                        print(status)
                         switch status {
                         case 200:
                             do{
@@ -112,7 +104,6 @@ struct UserService {
                                 var cookies : [String]? = []
                                 cookies = cookie?.components(separatedBy: ";")
                                 cookie = cookies?[0]
-                                print(cookie)
                                 KeychainWrapper.standard.set(cookie ?? "", forKey: "Cookie")
                                 
                                 let decoder = JSONDecoder()
@@ -201,14 +192,11 @@ struct UserService {
             case .success:
                 // parameter 위치
                 if let value = response.result.value {
-                    print(value)
-                    //response의 respones안에 있는 statusCode를 추출
+
                     if let status = response.response?.statusCode {
-                        print("getLoginUserInfo method:", status)
                         switch status {
                         case 200:
                             do{
-                                print("start decode getLoginUserInfo")
                                 let decoder = JSONDecoder()
                                 let result = try decoder.decode(SignIn.self, from: value)
                                 completion(.success(result))
@@ -250,14 +238,10 @@ struct UserService {
             case .success:
                 // parameter 위치
                 if let value = response.result.value {
-                    print(value)
-                    //response의 respones안에 있는 statusCode를 추출
                     if let status = response.response?.statusCode {
-                        print("getUserInfo method:", status)
                         switch status {
                         case 200:
                             do{
-                                print("start decode getUserInfo")
                                 let decoder = JSONDecoder()
                                 let result = try decoder.decode(SignIn.self, from: value)
                                 completion(.success(result))
@@ -302,7 +286,6 @@ struct UserService {
                 
             case .success:
                 if let status = response.response?.statusCode {
-                    print(status)
                     switch status {
                     case 200:
                         completion(.success("otp send"))
@@ -344,7 +327,6 @@ struct UserService {
                 
             case .success:
                 if let status = response.response?.statusCode {
-                    print(status)
                     switch status {
                     case 200:
                         completion(.success("otp checked"))
@@ -385,7 +367,6 @@ struct UserService {
                 
             case .success:
                 if let status = response.response?.statusCode {
-                    print(status)
                     switch status {
                     case 200:
                         completion(.success("입력하신 이메일로 아이디가 발송되었습니다."))
@@ -429,7 +410,6 @@ struct UserService {
                 
             case .success:
                 if let status = response.response?.statusCode {
-                    print(status)
                     switch status {
                     case 200:
                         completion(.success("입력하신 이메일로 아이디가 발송되었습니다."))
@@ -472,7 +452,6 @@ struct UserService {
                 
             case .success:
                 if let status = response.response?.statusCode {
-                    print("changeNickname method:", status)
                     switch status {
                     case 200:
                         completion(.success("nickname chnaged"))
@@ -515,8 +494,6 @@ struct UserService {
                 
             case .success(let upload, _, _):
                 upload.responseJSON { (response) in
-                    
-                    print("changeProfileImage method success")
                     completion(.success(response.result.value as Any))
                 }
             case .failure(let encodingError):

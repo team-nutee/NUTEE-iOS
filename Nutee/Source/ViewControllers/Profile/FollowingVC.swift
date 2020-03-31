@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftKeychainWrapper
 
 class FollowingVC: UIViewController {
     
@@ -19,13 +20,12 @@ class FollowingVC: UIViewController {
     var userId = 0
     var followingsNums = 0 // ProfileVC가 서버에서 받은 팔로잉 개수를 저장할 변수
     
-    var noFollowings = UIView()
     
     // MARK: - Life Cycle
     
     override func loadView() {
         super.loadView()
-        print("loadView 실행")
+
     }
     
     override func viewDidLoad() {
@@ -37,26 +37,11 @@ class FollowingVC: UIViewController {
         followingTV.dataSource = self
         followingTV.separatorInset.left = 0
         followingTV.separatorStyle = .none
-        
-        self.view.addSubview(noFollowings)
-        
-        setInit()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
+                
     }
     
     // MARK: -Helpers
 
-    // 초기 설정
-    func setInit() {}
-    
-    func setDefault() {}
 }
 
 extension FollowingVC : UITableViewDelegate { }
@@ -80,19 +65,23 @@ extension FollowingVC : UITableViewDataSource {
         
         cell.selectionStyle = .none
         
-        if followingsList?.count == 0 || followingsList?.count == nil {
-            followingTV.setNoFollowing(cell, emptyView: noFollowings)
-            noFollowings.isHidden = false
-            cell.contentsCell.isHidden = true
+        let myID = KeychainWrapper.standard.integer(forKey: "id")
+        
+        if myID == userId {
+            cell.followingDeleteBtn.isHidden = false
         } else {
-            noFollowings.isHidden = true
-            cell.contentsCell.isHidden = false
-            
-            let following = followingsList?[indexPath.row]
-            let followingName = following?.nickname ?? "FollowingError"
-            cell.followingLabel.text = followingName
-            cell.followingLabel.sizeToFit()
+            cell.followingDeleteBtn.isHidden = true
         }
+        
+        print("img", followingsList?[indexPath.row].image.src)
+        if followingsList?[indexPath.row].image.src == "" {
+        cell.followingImgView.imageFromUrl("http://15.164.50.161:9425/settings/nutee_profile.png", defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+        }else{
+        cell.followingImgView.imageFromUrl((APIConstants.BaseURL) + "/" + (followingsList?[indexPath.row].image.src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+        }
+        
+        cell.followingLabel.text = followingsList?[indexPath.row].nickname
+        cell.followingLabel.sizeToFit()
         
         return cell
     }
@@ -110,7 +99,6 @@ extension FollowingVC {
             case .success(let res):
                 let response = res as! FollowList
                 self.followingsList = response
-                print("followingList server connect successful")
                 
                 self.followingTV.reloadData()
             case .requestErr(_):
