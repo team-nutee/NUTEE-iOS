@@ -139,6 +139,21 @@ class NewsFeedCell: UITableViewCell {
         let editAction = UIAlertAction(title: "수정", style: .default){
             (action: UIAlertAction) in
             // Code to edit
+            // Posting 창으로 전환
+//            let editPostingVC = self.newsFeedVC?.storyboard?.instantiateViewController(withIdentifier: "Post") as! PostVC
+            
+            let postSB = UIStoryboard(name: "Post", bundle: nil)
+            let editPostingVC = postSB.instantiateViewController(withIdentifier: "PostVC") as! PostVC
+            
+            editPostingVC.loadViewIfNeeded()
+            
+            editPostingVC.isEditMode = true
+            editPostingVC.postingTextView.text = self.newsPost?.content
+            editPostingVC.postId = self.newsPost?.id
+            editPostingVC.postBtn.setTitle("수정", for: .normal)
+            
+            editPostingVC.modalPresentationStyle = .currentContext
+            self.newsFeedVC?.present(editPostingVC, animated: true, completion: nil)
         }
         let deleteAction = UIAlertAction(title: "삭제", style: .destructive) {
             (action: UIAlertAction) in

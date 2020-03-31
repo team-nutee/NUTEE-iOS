@@ -30,9 +30,10 @@ class PostVC: UIViewController {
     
     var pickedIMG : [UIImage] = []
     
-    
     var selectedItems = [YPMediaItem]()
     
+    var isEditMode = false
+    var postId: Int?
     
     // MARK: - Life Cycle
     
@@ -95,12 +96,23 @@ class PostVC: UIViewController {
         
         LoadingHUD.show()
         
-        // 사진이 있을때는 사진 올리고 게시물 업로드를 위한 분기처리
-        if pickedIMG != [] {
-            postImage(images: pickedIMG)
+        if isEditMode == false {
+            // 사진이 있을때는 사진 올리고 게시물 업로드를 위한 분기처리
+            if pickedIMG != [] {
+                postImage(images: pickedIMG)
+            } else {
+                postContent(images: [], postContent: postingTextView.text)
+            }
         } else {
-            postContent(images: [], postContent: postingTextView.text)
+            // 사진이 있을때는 사진 올리고 게시물 업로드를 위한 분기처리
+            if pickedIMG != [] {
+                postImage(images: pickedIMG)
+            } else {
+                editPostContent(postId: postId ?? 0, postContent: postingTextView.text)
+            }
         }
+        
+        
     }
     
     @objc func activePostBtn() {
@@ -327,6 +339,36 @@ extension PostVC {
                 
             case .networkFail:
                 print(".networkFail")
+                
+            }
+        }
+        
+    }
+    
+    func editPostContent(postId: Int, postContent: String){
+        ContentService.shared.editPost(postId, postContent){
+            [weak self]
+            data in
+            
+            guard let `self` = self else { return }
+            
+            switch data {
+            case .success(_ ):
+                
+                LoadingHUD.hide()
+                self.dismiss(animated: true, completion: nil)
+            case .requestErr:
+                LoadingHUD.hide()
+                print("requestErr")
+            case .pathErr:
+                print(".pathErr")
+                
+            case .serverErr:
+                print(".serverErr")
+                
+            case .networkFail:
+                print(".networkFail")
+                
                 
             }
         }
