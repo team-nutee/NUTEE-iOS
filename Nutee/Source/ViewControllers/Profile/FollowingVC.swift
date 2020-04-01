@@ -74,13 +74,22 @@ extension FollowingVC : UITableViewDataSource {
         }
         
         if followingsList?[indexPath.row].image.src == "" {
-        cell.followingImgView.imageFromUrl("http://15.164.50.161:9425/settings/nutee_profile.png", defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+        cell.followingImgView.imageFromUrl("http://15.164.50.161:9425/settings/nutee_profile.png",
+                            defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
         }else{
-        cell.followingImgView.imageFromUrl((APIConstants.BaseURL) + "/" + (followingsList?[indexPath.row].image.src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+        cell.followingImgView.imageFromUrl((APIConstants.BaseURL)
+            + "/" +
+            (followingsList?[indexPath.row].image.src ?? ""),
+                    defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
         }
         
         cell.followingLabel.text = followingsList?[indexPath.row].nickname
         cell.followingLabel.sizeToFit()
+        
+        cell.followingID = followingsList?[indexPath.row].id
+        
+//        cell.followingDeleteBtn.addTarget(self, action: #selector(getFollowingsListService), for: .touchUpInside)
+
         
         return cell
     }
@@ -91,7 +100,7 @@ extension FollowingVC : UITableViewDataSource {
 
 extension FollowingVC {
     
-    func getFollowingsListService() {
+    @objc func getFollowingsListService() {
         FollowService.shared.getFollowingsList(userId) { responsedata in
             
             switch responsedata {

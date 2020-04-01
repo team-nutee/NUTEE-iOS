@@ -15,23 +15,81 @@ class FollowingTVC: UITableViewCell {
     @IBOutlet weak var followingLabel: UILabel!
     @IBOutlet weak var followingDeleteBtn: UIButton!
     
-    
+    var followingID : Int?
+    var isFollow : Bool = true
+
     override func awakeFromNib() {
         super.awakeFromNib()
         
         followingImgView.setRounded(radius: nil)
         followingImgView.contentMode = .scaleAspectFill
 
-        followingDeleteBtn.setTitle("삭제", for: .normal)
+        followingDeleteBtn.setTitle("팔로잉", for: .normal)
         followingDeleteBtn.setTitleColor(.nuteeGreen, for: .normal)
-        
-        
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
+        followingDeleteBtn.sizeToFit()
         
     }
+    
+    @IBAction func deleteBtn(_ sender: UIButton){
+        if isFollow {
+            unfollow(id: followingID!)
+        } else {
+            follow(id: followingID!)
+        }
+    }
+
+}
+
+extension FollowingTVC {
+        
+        @objc func unfollow(id: Int) {
+            FollowService.shared.unFollow(id) { responsedata in
+
+                switch responsedata {
+                case .success(_):
+                    self.followingDeleteBtn.setTitle("팔로우", for: .normal)
+                    self.isFollow = !self.isFollow
+                    print("success")
+                    
+                case .requestErr(_):
+                    print("request error")
+
+                case .pathErr:
+                    print(".pathErr")
+
+                case .serverErr:
+                    print(".serverErr")
+
+                case .networkFail :
+                    print("failure")
+                    }
+            }
+
+        }
+
+    @objc func follow(id: Int) {
+        FollowService.shared.follow(id) { responsedata in
+
+            switch responsedata {
+            case .success(_):
+                self.followingDeleteBtn.setTitle("팔로잉", for: .normal)
+                self.isFollow = !self.isFollow
+
+            case .requestErr(_):
+                print("request error")
+
+            case .pathErr:
+                print(".pathErr")
+
+            case .serverErr:
+                print(".serverErr")
+
+            case .networkFail :
+                print("failure")
+                }
+        }
+
+    }
+
 
 }
