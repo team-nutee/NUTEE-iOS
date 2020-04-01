@@ -286,11 +286,12 @@ struct UserService {
                 
             case .success:
                 if let status = response.response?.statusCode {
+                    print("status : ",status)
                     switch status {
                     case 200:
                         completion(.success("otp send"))
-                    case 401:
-                        print("실패 401")
+                    case 409:
+                        print("이미 등록 된 이메일입니다")
                         completion(.pathErr)
                     case 500:
                         print("실패 500")
