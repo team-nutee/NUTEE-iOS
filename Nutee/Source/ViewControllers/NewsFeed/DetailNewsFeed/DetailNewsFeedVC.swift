@@ -41,8 +41,6 @@ class DetailNewsFeedVC: UIViewController {
         replyTV.delegate = self
         replyTV.dataSource = self
         
-//        loadSelectedNewsFeed()
-        
         txtvwComment.delegate = self
         
         // Register the custom header view
@@ -62,8 +60,6 @@ class DetailNewsFeedVC: UIViewController {
         self.navigationController?.navigationBar.shadowImage = UIImage()
         
         addKeyboardNotification()
-        
-//        replyTV.reloadData()
     }
 
 //MARK: - Helper
@@ -210,6 +206,7 @@ extension DetailNewsFeedVC : UITableViewDataSource {
         cell.selectionStyle = .none
         
         if content?.comments.count == 0 {
+            replyTV.allowsSelection = false
             if indexPath.row == 0 {
                 cell.backgroundColor = .lightGray
             } else {
@@ -222,10 +219,6 @@ extension DetailNewsFeedVC : UITableViewDataSource {
             // 불러올 댓글이 있는 경우 cell 초기화 진행
             cell.contentsCell.isHidden = false
             statusNoReply.isHidden = true
-            // emptyStatusView(tag: 404)를 cell에서 제거하기
-            if let viewWithTag = self.view.viewWithTag(404) {
-                viewWithTag.removeFromSuperview()
-            }
             
             // 생성된 Cell클래스로 comment 정보 넘겨주기
             cell.comment = content?.comments[indexPath.row]
@@ -251,30 +244,20 @@ extension DetailNewsFeedVC : UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    }
-    
-    // tableView의 마지막 cell 밑의 여백 발생 문제(footerView의 기본 높이 값) 제거 코드
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return .leastNormalMagnitude
-    }
-    
-    // 댓글을 오른쪽(trailing)에서 왼쪽으로 스와이프(swipe) 하였을 때 보여줄 항목 설정(댓글 수정, 삭제 기능)
-    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        
+        print("tapped.")
         let comment = content?.comments[indexPath.row]
         
+        let moreAlert = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertController.Style.actionSheet)
+        let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
         if comment?.user.id == KeychainWrapper.standard.integer(forKey: "id") {
-            // 자기 댓글을 스와이프 했을때
-            let editAction = UIContextualAction(style: .normal, title:  "수정", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
-                
+            let editAction = UIAlertAction(title: "수정", style: .default) {
+                (action: UIAlertAction) in
                 // Call edit action
-                
                 // Reset state
-                
-                success(true)
-            })
-
-            let deleteAction = UIContextualAction(style: .destructive, title:  "삭제", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+            }
+            let deleteAction = UIAlertAction(title: "삭제", style: .destructive) {
+                (action: UIAlertAction) in
+                // Code to 수정/삭제 기능
                 let deleteAlert = UIAlertController(title: nil, message: "댓글을 삭제 하시겠습니까?", preferredStyle: UIAlertController.Style.alert)
                 let cancelAction = UIAlertAction(title: "취소", style: .default, handler: nil)
                 let okAction = UIAlertAction(title: "삭제", style: .destructive) {
@@ -289,15 +272,15 @@ extension DetailNewsFeedVC : UITableViewDataSource {
                 deleteAlert.addAction(cancelAction)
                 deleteAlert.addAction(okAction)
                 self.present(deleteAlert, animated: true, completion: nil)
-                
-                success(true)
-            })
+            }
+            moreAlert.addAction(editAction)
+            moreAlert.addAction(deleteAction)
+            moreAlert.addAction(cancelAction)
             
-            return UISwipeActionsConfiguration(actions:[deleteAction,editAction])
         } else {
-            // 다른 사람 댓글을 스와이프 했을때
-            let reportAction = UIContextualAction(style: .destructive, title:  "신고", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
-                
+            
+            let deleteAction = UIAlertAction(title: "신고하기🚨", style: .destructive) {
+                (action: UIAlertAction) in
                 // Code to 신고 기능
                 let reportAlert = UIAlertController(title: "🚨댓글 신고🚨", message: "", preferredStyle: UIAlertController.Style.alert)
                 let cancelAction
@@ -316,17 +299,18 @@ extension DetailNewsFeedVC : UITableViewDataSource {
                 reportAlert.addAction(reportAction)
                 
                 self.present(reportAlert, animated: true, completion: nil)
-                
-                
-                success(true)
-            })
-            
-            return UISwipeActionsConfiguration(actions:[reportAction])
+            }
+            moreAlert.addAction(deleteAction)
+            moreAlert.addAction(cancelAction)
         }
-        
-        
+        present(moreAlert, animated: true, completion: nil)
     }
     
+    // tableView의 마지막 cell 밑의 여백 발생 문제(footerView의 기본 높이 값) 제거 코드
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return .leastNormalMagnitude
+    }
+
 }
 
 // MARK: - Reply KeyBoard PopUp
