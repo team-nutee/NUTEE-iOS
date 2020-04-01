@@ -67,7 +67,7 @@
 		5EA5C67C23F023DC00BFB32B /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA5C67B23F023DC00BFB32B /* UITableView+Extension.swift */; };
 		5EA5C68023F02C9200BFB32B /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA5C67F23F02C9200BFB32B /* String+Extension.swift */; };
 		5EA5C68423F146E200BFB32B /* EmailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA5C68323F146E200BFB32B /* EmailVC.swift */; };
-		5EA5C68623F1470B00BFB32B /* IdVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA5C68523F1470B00BFB32B /* IdVC.swift */; };
+		5EA5C68623F1470B00BFB32B /* IDVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA5C68523F1470B00BFB32B /* IDVC.swift */; };
 		5EA5C68823F1472200BFB32B /* NameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA5C68723F1472200BFB32B /* NameVC.swift */; };
 		5EA5C68A23F1475000BFB32B /* PassWordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA5C68923F1475000BFB32B /* PassWordVC.swift */; };
 		5EB7415323F18AEE006AE529 /* CafeteriaTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB7415223F18AEE006AE529 /* CafeteriaTVC.swift */; };
@@ -187,7 +187,7 @@
 		5EA5C67B23F023DC00BFB32B /* UITableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
 		5EA5C67F23F02C9200BFB32B /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		5EA5C68323F146E200BFB32B /* EmailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVC.swift; sourceTree = "<group>"; };
-		5EA5C68523F1470B00BFB32B /* IdVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdVC.swift; sourceTree = "<group>"; };
+		5EA5C68523F1470B00BFB32B /* IDVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDVC.swift; sourceTree = "<group>"; };
 		5EA5C68723F1472200BFB32B /* NameVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameVC.swift; sourceTree = "<group>"; };
 		5EA5C68923F1475000BFB32B /* PassWordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassWordVC.swift; sourceTree = "<group>"; };
 		5EB7415223F18AEE006AE529 /* CafeteriaTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeteriaTVC.swift; sourceTree = "<group>"; };
@@ -530,7 +530,7 @@
 			isa = PBXGroup;
 			children = (
 				5EA5C68323F146E200BFB32B /* EmailVC.swift */,
-				5EA5C68523F1470B00BFB32B /* IdVC.swift */,
+				5EA5C68523F1470B00BFB32B /* IDVC.swift */,
 				5EA5C68723F1472200BFB32B /* NameVC.swift */,
 				5EA5C68923F1475000BFB32B /* PassWordVC.swift */,
 			);
@@ -738,7 +738,7 @@
 				D53CB44F240B995400DDA17A /* NewsPostsContent.swift in Sources */,
 				D5DAA88F23E7EF2E0052E17B /* ReplyCell.swift in Sources */,
 				5E05AD7423DB0F0200E36AD4 /* UIButton+Extension.swift in Sources */,
-				5EA5C68623F1470B00BFB32B /* IdVC.swift in Sources */,
+				5EA5C68623F1470B00BFB32B /* IDVC.swift in Sources */,
 				5E93A7392415778C00C9C811 /* EventTVC.swift in Sources */,
 				5E95CD6423EF30180090C39B /* FollowerTVC.swift in Sources */,
 				5E3560E423EC11E3002B8C87 /* FollowerVC.swift in Sources */,
@@ -935,7 +935,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = 78A867AHKF;
 				INFOPLIST_FILE = "$(SRCROOT)/Nutee/Supporting Files/Info.plist";
 				INSTALL_PATH = "@executable_path/Frameworks";
@@ -959,7 +959,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = 78A867AHKF;
 				INFOPLIST_FILE = "$(SRCROOT)/Nutee/Supporting Files/Info.plist";
 				INSTALL_PATH = "@executable_path/Frameworks";

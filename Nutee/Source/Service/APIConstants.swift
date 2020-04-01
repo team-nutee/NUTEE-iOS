@@ -13,13 +13,24 @@ struct APIConstants {
     static let User = BaseURL + "/api/user"
     // GET
     static let UserPost = BaseURL + "/api/user"
-    // POST { userId : asdf123, password : 123123, nickname : 테스트닉네임, schoolEmail : 1234567@office.skhu.ac.kr }
-    static let OTPsend = BaseURL + "/api/user/otpsend"
+    // POST {
+    // userId : asdf123,
+    // password : 123123,
+    // nickname : 테스트닉네임,
+    // schoolEmail : 1234567@office.skhu.ac.kr }
+    
+    static let OTPSend = BaseURL + "/api/user/otpsend"
     // POST { "schoolEmail":"1234567@office.skhu.ac.kr"}
-    static let OTPcheck = BaseURL + "/api/user/otpcheck"
+    static let OTPCheck = BaseURL + "/api/user/otpcheck"
     // POST { "otpcheck" : "123456"}
+    static let IDCheck = BaseURL + "/api/user/idcheck"
+    // POST { "userId":"asdf123" }
+    static let NickCheck = BaseURL + "/api/user/nicknamecheck"
+    // POST { "userId":"asdf123" }
 
-    static let FindId = BaseURL + "/api/user/findid"
+    
+
+    static let FindID = BaseURL + "/api/user/findid"
     // POST { "schoolEmail":"1234567@office.skhu.ac.kr"}
     static let Reissuance = BaseURL + "/api/user/reissuance"
     // POST { "userId":"abc", "schoolEmail":"1234567@office.skhu.ac.kr"}

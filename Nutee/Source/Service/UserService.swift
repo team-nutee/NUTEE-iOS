@@ -192,7 +192,7 @@ struct UserService {
             case .success:
                 // parameter 위치
                 if let value = response.result.value {
-
+                    
                     if let status = response.response?.statusCode {
                         switch status {
                         case 200:
@@ -270,7 +270,7 @@ struct UserService {
     // MARK: - sendOTP
     func sendOTP(_ email : String, completion: @escaping (NetworkResult<Any>) -> Void) {
         
-        let URL = APIConstants.OTPsend
+        let URL = APIConstants.OTPSend
         let headers: HTTPHeaders = [
             "Content-Type": "application/json"
         ]
@@ -311,7 +311,7 @@ struct UserService {
     // MARK: - checkOTP
     
     func checkOTP(_ otpNumber : String, completion: @escaping (NetworkResult<Any>) -> Void){
-        let URL = APIConstants.OTPcheck
+        let URL = APIConstants.OTPCheck
         let headers: HTTPHeaders = [
             "Content-Type": "application/json"
         ]
@@ -351,7 +351,7 @@ struct UserService {
     // MARK: - findID
     func findID(_ email : String, completion: @escaping (NetworkResult<Any>) -> Void) {
         
-        let URL = APIConstants.FindId
+        let URL = APIConstants.FindID
         let headers: HTTPHeaders = [
             "Content-Type": "application/json"
         ]
@@ -431,7 +431,7 @@ struct UserService {
             }
         }
     }
-
+    
     // MARK: - 사용자 닉네임 변경
     
     func chageNickname(_ changedNickname : String, completion: @escaping (NetworkResult<Any>) -> Void){
@@ -472,7 +472,7 @@ struct UserService {
             }
         }
     }
-
+    
     // MARK: - 사용자 프로필 이미지 변경
     
     func changeProfileImage(_ image : [UIImage], completion: @escaping (NetworkResult<Any>) -> Void){
@@ -501,6 +501,91 @@ struct UserService {
             }
         }
     }
-
     
+    func checkID(_ userId: String, completion: @escaping (NetworkResult<Any>) -> Void) {
+        
+        let URL = APIConstants.IDCheck
+        let headers: HTTPHeaders = [
+            "Content-Type": "application/json"
+        ]
+        
+        let body : Parameters = [
+            "userId" : userId
+        ]
+        
+        
+        Alamofire.request(URL, method: .post, parameters: body, encoding: JSONEncoding.default, headers: headers).responseData{
+            response in
+            
+            switch response.result {
+                
+            case .success:
+                // parameter 위치
+                if let status = response.response?.statusCode {
+                    print ("status", status)
+                    switch status {
+                    case 200:
+                        completion(.success(200))
+                    case 409:
+                        print("이미 사용중인 아이디")
+                        completion(.requestErr(409))
+                    case 500:
+                        print("실패 500")
+                        completion(.serverErr)
+                    default:
+                        break
+                    }
+                    
+                }
+                break
+            case .failure(let err):
+                print(err.localizedDescription)
+                completion(.networkFail)
+            }
+        }
+    }
+    
+    func checkNick(_ nick: String, completion: @escaping (NetworkResult<Any>) -> Void) {
+        
+        let URL = APIConstants.NickCheck
+        let headers: HTTPHeaders = [
+            "Content-Type": "application/json"
+        ]
+        
+        let body : Parameters = [
+            "userId" : nick
+        ]
+        
+        
+        Alamofire.request(URL, method: .post, parameters: body, encoding: JSONEncoding.default, headers: headers).responseData{
+            response in
+            
+            switch response.result {
+                
+            case .success:
+                // parameter 위치
+                if let status = response.response?.statusCode {
+                    print ("status", status)
+                    switch status {
+                    case 200:
+                        completion(.success(200))
+                    case 409:
+                        print("이미 사용중인 닉네임")
+                        completion(.requestErr(409))
+                    case 500:
+                        print("실패 500")
+                        completion(.serverErr)
+                    default:
+                        break
+                    }
+                    
+                }
+                break
+            case .failure(let err):
+                print(err.localizedDescription)
+                completion(.networkFail)
+            }
+        }
+    }
+
 }

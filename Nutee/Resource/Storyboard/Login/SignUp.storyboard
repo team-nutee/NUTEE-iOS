@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y1O-7I-VjN">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y1O-7I-VjN">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -268,10 +268,10 @@
             </objects>
             <point key="canvasLocation" x="3579.7101449275365" y="797.54464285714278"/>
         </scene>
-        <!--IdVC-->
+        <!--IDVC-->
         <scene sceneID="sTZ-2u-GBU">
             <objects>
-                <viewController storyboardIdentifier="IdVC" id="WTW-cv-2F2" customClass="IdVC" customModule="NUTEE" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="IdVC" id="WTW-cv-2F2" customClass="IDVC" customModule="NUTEE" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="1Zj-Yt-7sq">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -331,6 +331,12 @@
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="닫기"/>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oEa-Pn-zyV">
+                                <rect key="frame" x="20" y="299" width="33" height="16"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -348,8 +354,10 @@
                             <constraint firstItem="fmM-IT-w90" firstAttribute="top" secondItem="05y-XB-bF0" secondAttribute="bottom" constant="-35" id="ZRv-lN-qRy"/>
                             <constraint firstItem="sPU-8n-vWn" firstAttribute="top" secondItem="fmM-IT-w90" secondAttribute="bottom" constant="40" id="bkz-Io-Djf"/>
                             <constraint firstItem="o4Q-yV-GRn" firstAttribute="trailing" secondItem="05y-XB-bF0" secondAttribute="trailing" id="edg-0N-40i"/>
+                            <constraint firstItem="oEa-Pn-zyV" firstAttribute="leading" secondItem="NNl-FC-tNG" secondAttribute="leading" constant="-50" id="heE-od-wic"/>
                             <constraint firstItem="coZ-vW-ra0" firstAttribute="top" secondItem="o4Q-yV-GRn" secondAttribute="top" id="iLs-pE-7Xu"/>
                             <constraint firstItem="NNl-FC-tNG" firstAttribute="width" secondItem="05y-XB-bF0" secondAttribute="width" multiplier="0.88" id="ilR-ED-wI5"/>
+                            <constraint firstItem="oEa-Pn-zyV" firstAttribute="top" secondItem="NNl-FC-tNG" secondAttribute="bottom" constant="3" id="jGG-Jb-cbg"/>
                             <constraint firstItem="dU7-W7-qDl" firstAttribute="leading" secondItem="ejx-YR-LBj" secondAttribute="trailing" id="ojg-Qf-uds"/>
                             <constraint firstItem="fmM-IT-w90" firstAttribute="leading" secondItem="o4Q-yV-GRn" secondAttribute="leading" constant="20" id="r9F-7K-CRg"/>
                             <constraint firstItem="05y-XB-bF0" firstAttribute="leading" secondItem="o4Q-yV-GRn" secondAttribute="leading" id="yzY-3q-nu0"/>
@@ -359,6 +367,7 @@
                     <navigationItem key="navigationItem" id="PIA-CN-AX6"/>
                     <connections>
                         <outlet property="bottomYLayoutConstraint" destination="HYn-ZT-2jz" id="Bfs-LU-afe"/>
+                        <outlet property="checkLabel" destination="oEa-Pn-zyV" id="xtR-37-ri7"/>
                         <outlet property="closeBtn" destination="coZ-vW-ra0" id="Dfa-UK-4TB"/>
                         <outlet property="guideLabel" destination="fmM-IT-w90" id="1AV-6F-VwP"/>
                         <outlet property="guideLabel2" destination="sPU-8n-vWn" id="efc-XJ-PG4"/>
@@ -427,6 +436,12 @@
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <state key="normal" title="다음"/>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EjB-nB-clR">
+                                <rect key="frame" x="20" y="299" width="33" height="16"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -445,6 +460,8 @@
                             <constraint firstItem="fVE-ff-LyZ" firstAttribute="top" secondItem="mZV-rt-qM5" secondAttribute="bottom" constant="-35" id="Y6Q-wy-8Zl"/>
                             <constraint firstItem="ZvX-xr-GVN" firstAttribute="width" secondItem="4tg-IM-1zj" secondAttribute="width" multiplier="0.5" id="aaZ-Oj-tSz"/>
                             <constraint firstItem="u7g-ZV-PaY" firstAttribute="leading" secondItem="06a-Yl-BuO" secondAttribute="leading" constant="70" id="bpX-eb-n64"/>
+                            <constraint firstItem="EjB-nB-clR" firstAttribute="leading" secondItem="u7g-ZV-PaY" secondAttribute="leading" constant="-50" id="dE6-6g-lgt"/>
+                            <constraint firstItem="EjB-nB-clR" firstAttribute="top" secondItem="u7g-ZV-PaY" secondAttribute="bottom" constant="3" id="v76-NX-g01"/>
                             <constraint firstItem="u7g-ZV-PaY" firstAttribute="top" secondItem="06a-Yl-BuO" secondAttribute="top" constant="212" id="yAa-ei-ctJ"/>
                             <constraint firstItem="mZV-rt-qM5" firstAttribute="top" secondItem="06a-Yl-BuO" secondAttribute="top" constant="76" id="zd0-UH-qDe"/>
                         </constraints>

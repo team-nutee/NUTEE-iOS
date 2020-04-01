@@ -88,7 +88,7 @@ class EmailVC: UIViewController {
     }
     
     @objc func toNext(){
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "IdVC") as! IdVC
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "IdVC") as! IDVC
         vc.email = self.emailTextField.text ?? ""
         vc.modalPresentationStyle = .fullScreen
         

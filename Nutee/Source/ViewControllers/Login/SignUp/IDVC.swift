@@ -8,7 +8,7 @@
 
 import UIKit
 
-class IdVC: UIViewController {
+class IDVC: UIViewController {
     // MARK: - UI components
     @IBOutlet weak var progressView: UIProgressView!
     @IBOutlet weak var guideLabel: UILabel!
@@ -18,7 +18,7 @@ class IdVC: UIViewController {
     @IBOutlet weak var nextBtn: UIButton!
     @IBOutlet weak var closeBtn: UIButton!
     @IBOutlet weak var bottomYLayoutConstraint: NSLayoutConstraint!
-    
+    @IBOutlet weak var checkLabel: UILabel!
     
     // MARK: - Variables and Properties
     var animationDuration: TimeInterval = 1.4
@@ -32,7 +32,8 @@ class IdVC: UIViewController {
         
         addKeyboardNotification()
         idTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
-        nextBtn.addTarget(self, action: #selector(toNext), for: .touchUpInside)
+        
+        nextBtn.addTarget(self, action: #selector(checkID), for: .touchUpInside)
         
     }
     
@@ -61,6 +62,11 @@ class IdVC: UIViewController {
         nextBtn.isEnabled = false
         idTextField.tintColor = .nuteeGreen
         idTextField.addBorder(.bottom, color: .nuteeGreen, thickness: 1)
+        checkLabel.alpha = 0
+        
+    }
+    @objc func check(){
+        
     }
     
     @objc func toNext(){
@@ -69,20 +75,19 @@ class IdVC: UIViewController {
         vc.email = self.email
         vc.modalPresentationStyle = .fullScreen
 
-//        self.navigationController?.pushViewController(vc, animated: false)
         self.present(vc, animated: false)
     }
     
 }
 
-extension IdVC {
+extension IDVC {
   @IBAction func unwindSegue(_ segue: UIStoryboardSegue) {
   
     }
 }
 
 
-extension IdVC {
+extension IDVC {
     func addKeyboardNotification() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -127,7 +132,7 @@ extension IdVC {
     
 }
 
-extension IdVC : UITextFieldDelegate {
+extension IDVC : UITextFieldDelegate {
     
     @objc func textFieldDidChange(_ textField: UITextField) {
         if idTextField.text != "" {
@@ -144,7 +149,36 @@ extension IdVC : UITextFieldDelegate {
     }
 }
 
-extension IdVC {
+extension IDVC {
+    @objc func checkID(){
+        UserService.shared.checkID(idTextField.text!) { (responsedata) in
+            switch responsedata {
+                
+            case .success(_):
+                self.toNext()
+                
+            case .requestErr(_):
+                self.idTextField.addBorder(.bottom, color: .red, thickness: 1)
+                self.checkLabel.textColor = .red
+                self.checkLabel.text = "이미 사용중인 아이디입니다."
+                self.checkLabel.sizeToFit()
+                self.checkLabel.alpha = 1
+                
+            case .pathErr:
+                print(".pathErr")
+                
+            case .serverErr:
+                print(".serverErr")
+                
+            case .networkFail:
+                print(".networkFail")
+            }
+        }
+    }
+
+}
+
+extension IDVC {
     private func animate(){
         UIView.animate(withDuration: animationDuration,
                        delay: 1,
