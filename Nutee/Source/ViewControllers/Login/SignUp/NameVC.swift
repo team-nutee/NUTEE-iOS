@@ -17,6 +17,7 @@ class NameVC: UIViewController {
     @IBOutlet weak var preBtn: UIButton!
     @IBOutlet weak var nextBtn: UIButton!
     @IBOutlet weak var buttonYLayoutConstraint: NSLayoutConstraint!
+    @IBOutlet weak var checkLabel: UILabel!
     
     
     // MARK: - Variables and Properties
@@ -32,7 +33,7 @@ class NameVC: UIViewController {
         
         addKeyboardNotification()
         nameTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
-        nextBtn.addTarget(self, action: #selector(toNext), for: .touchUpInside)
+        nextBtn.addTarget(self, action: #selector(checkName), for: .touchUpInside)
 
     }
     
@@ -58,6 +59,7 @@ class NameVC: UIViewController {
         nextBtn.isEnabled = false
         nameTextField.tintColor = .nuteeGreen
         nameTextField.addBorder(.bottom, color: .nuteeGreen, thickness: 1)
+        checkLabel.alpha = 0
     }
     
     @objc func toNext(){
@@ -142,6 +144,35 @@ extension NameVC : UITextFieldDelegate {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
         self.view.endEditing(true)
     }
+}
+
+extension NameVC {
+    @objc func checkName(){
+        UserService.shared.checkNick(nameTextField.text!) { (responsedata) in
+            switch responsedata {
+                
+            case .success(_):
+                self.toNext()
+                
+            case .requestErr(_):
+                self.nameTextField.addBorder(.bottom, color: .red, thickness: 1)
+                self.checkLabel.textColor = .red
+                self.checkLabel.text = "이미 사용중인 닉네임입니다."
+                self.checkLabel.sizeToFit()
+                self.checkLabel.alpha = 1
+                
+            case .pathErr:
+                print(".pathErr")
+                
+            case .serverErr:
+                print(".serverErr")
+                
+            case .networkFail:
+                print(".networkFail")
+            }
+        }
+    }
+
 }
 
 extension NameVC {
