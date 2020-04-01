@@ -292,7 +292,7 @@ struct UserService {
                         completion(.success("otp send"))
                     case 409:
                         print("이미 등록 된 이메일입니다")
-                        completion(.pathErr)
+                        completion(.requestErr("이미 등록 된 이메일입니다"))
                     case 500:
                         print("실패 500")
                         completion(.serverErr)
