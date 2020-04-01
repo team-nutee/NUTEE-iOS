@@ -190,9 +190,9 @@ class NewsFeedCell: UITableViewCell {
         }
         let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
 
-        let userid = Int(KeychainWrapper.standard.string(forKey: "id") ?? "")
+        let userId = KeychainWrapper.standard.integer(forKey: "id")
         
-        if (userid == newsPost?.userID) {
+        if (userId == newsPost?.userID) {
             moreAlert.addAction(editAction)
             moreAlert.addAction(deleteAction)
             moreAlert.addAction(cancelAction)
