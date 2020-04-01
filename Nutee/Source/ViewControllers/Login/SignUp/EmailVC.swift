@@ -23,6 +23,8 @@ class EmailVC: UIViewController {
     @IBOutlet weak var progressView: UIProgressView!
     @IBOutlet weak var bottomYLayoutConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var checkLabel: UILabel!
+    @IBOutlet weak var otpCheckLabel: UILabel!
     
     // MARK: - Variables and Properties
     
@@ -81,6 +83,8 @@ class EmailVC: UIViewController {
         numTextField.tintColor = .nuteeGreen
         numTextField.addBorder(.bottom, color: .nuteeGreen, thickness: 1)
         numTextField.alpha = 0
+        checkLabel.alpha = 0
+        otpCheckLabel.alpha = 0
     }
     
     @objc func close() {
@@ -181,13 +185,19 @@ extension EmailVC {
         UserService.shared.sendOTP(email) { (responsedata) in
             switch responsedata {
                 
-            case .success(let res):
-                let response = res as! String
-                
-                print(response)
+            case .success(_):
+                self.checkLabel.text = "해당 이메일에서 인증번호를 확인해주세요"
+                self.checkLabel.alpha = 1
+                self.checkLabel.textColor = .nuteeGreen
+                self.emailTextField.addBorder(.bottom, color: .nuteeGreen, thickness: 1)
                 self.certificationAnimate()
                 
             case .requestErr(_):
+                self.checkLabel.text = "이미 인증된 이메일입니다."
+                self.checkLabel.alpha = 1
+                self.checkLabel.textColor = .red
+                self.emailTextField.addBorder(.bottom, color: .red, thickness: 1)
+
                 print(".requestErr")
             case .pathErr:
                 print(".pathErr")
@@ -203,13 +213,20 @@ extension EmailVC {
         UserService.shared.checkOTP(otp) { (responsedata) in
             switch responsedata {
                 
-            case .success(let res):
-                let response = res as! String
-                
-                print(response)
+            case .success(_):
+                self.otpCheckLabel.text = "인증번호가 확인되었습니다."
+                self.otpCheckLabel.alpha = 1
+                self.otpCheckLabel.textColor = .nuteeGreen
+                self.numTextField.addBorder(.bottom, color: .nuteeGreen, thickness: 1)
+
                 self.nextBtn.isEnabled = true
                 
             case .requestErr(_):
+                self.otpCheckLabel.text = "인증번호가 틀렸습니다."
+                self.otpCheckLabel.alpha = 1
+                self.otpCheckLabel.textColor = .nuteeGreen
+                self.numTextField.addBorder(.bottom, color: .nuteeGreen, thickness: 1)
+
                 print(".requestErr")
             case .pathErr:
                 print(".pathErr")

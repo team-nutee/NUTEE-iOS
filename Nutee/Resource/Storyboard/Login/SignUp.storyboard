@@ -80,6 +80,18 @@
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <state key="normal" title="다음"/>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F96-xe-dvp">
+                                <rect key="frame" x="20" y="299" width="29" height="14"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mKP-sO-Gi7">
+                                <rect key="frame" x="20" y="367" width="28.5" height="13.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -90,6 +102,7 @@
                             <constraint firstItem="ooT-no-LNJ" firstAttribute="trailing" secondItem="1t2-kv-imr" secondAttribute="trailing" id="4S7-IS-14k"/>
                             <constraint firstItem="FmI-DL-zwu" firstAttribute="leading" secondItem="ooT-no-LNJ" secondAttribute="leading" constant="20" id="9OD-6R-DrK"/>
                             <constraint firstItem="W6E-KV-jhf" firstAttribute="width" secondItem="74E-jg-rxb" secondAttribute="width" multiplier="0.5" id="Axm-MW-V31"/>
+                            <constraint firstItem="mKP-sO-Gi7" firstAttribute="leading" secondItem="sGy-tD-T8b" secondAttribute="leading" constant="-50" id="Dbm-9f-ZoL"/>
                             <constraint firstItem="sGy-tD-T8b" firstAttribute="width" secondItem="ElL-L2-pvZ" secondAttribute="width" id="G0I-YG-jpf"/>
                             <constraint firstItem="Hpd-ta-POF" firstAttribute="width" secondItem="74E-jg-rxb" secondAttribute="width" multiplier="0.5" id="Ge4-V6-lG7"/>
                             <constraint firstItem="1t2-kv-imr" firstAttribute="top" secondItem="ooT-no-LNJ" secondAttribute="top" constant="76" id="KSS-1q-vvd"/>
@@ -103,14 +116,17 @@
                             <constraint firstItem="1t2-kv-imr" firstAttribute="leading" secondItem="ooT-no-LNJ" secondAttribute="leading" id="eoD-8d-Kfv"/>
                             <constraint firstItem="sGy-tD-T8b" firstAttribute="top" secondItem="ElL-L2-pvZ" secondAttribute="bottom" constant="28" id="fDk-jD-4Fn"/>
                             <constraint firstItem="ZIg-b6-bmt" firstAttribute="top" secondItem="ElL-L2-pvZ" secondAttribute="bottom" constant="-40" id="jnf-bS-DDN"/>
+                            <constraint firstItem="mKP-sO-Gi7" firstAttribute="top" secondItem="sGy-tD-T8b" secondAttribute="bottom" constant="3" id="kQf-qF-bUV"/>
                             <constraint firstItem="ElL-L2-pvZ" firstAttribute="leading" secondItem="ooT-no-LNJ" secondAttribute="leading" constant="20" id="obK-nc-mGc"/>
                             <constraint firstItem="wpn-QL-jAS" firstAttribute="top" secondItem="sGy-tD-T8b" secondAttribute="bottom" constant="-40" id="r58-8m-sw9"/>
                             <constraint firstItem="ZIg-b6-bmt" firstAttribute="height" secondItem="ElL-L2-pvZ" secondAttribute="height" id="rZn-QQ-u7V"/>
+                            <constraint firstItem="F96-xe-dvp" firstAttribute="leading" secondItem="ElL-L2-pvZ" secondAttribute="leading" id="sWM-js-lUV"/>
                             <constraint firstItem="rz6-hJ-dMj" firstAttribute="width" secondItem="74E-jg-rxb" secondAttribute="width" multiplier="0.903382" id="t5N-Dx-9Ou"/>
                             <constraint firstItem="ZIg-b6-bmt" firstAttribute="leading" secondItem="ElL-L2-pvZ" secondAttribute="trailing" constant="10" id="tgL-NQ-rRh"/>
                             <constraint firstItem="wpn-QL-jAS" firstAttribute="height" secondItem="sGy-tD-T8b" secondAttribute="height" id="u2W-nQ-V8b"/>
                             <constraint firstItem="sGy-tD-T8b" firstAttribute="height" secondItem="ElL-L2-pvZ" secondAttribute="height" id="ur7-Mc-11h"/>
                             <constraint firstItem="sU5-90-mnt" firstAttribute="top" secondItem="rz6-hJ-dMj" secondAttribute="bottom" constant="40" id="uyc-HK-PaN"/>
+                            <constraint firstItem="F96-xe-dvp" firstAttribute="top" secondItem="ElL-L2-pvZ" secondAttribute="bottom" constant="3" id="yBX-Xw-1Yv"/>
                             <constraint firstItem="ooT-no-LNJ" firstAttribute="bottom" secondItem="Hpd-ta-POF" secondAttribute="bottom" id="yHf-1K-Yq3"/>
                             <constraint firstItem="Hpd-ta-POF" firstAttribute="bottom" secondItem="W6E-KV-jhf" secondAttribute="bottom" id="yV6-nv-d8b"/>
                         </constraints>
@@ -121,6 +137,7 @@
                     <connections>
                         <outlet property="bottomYLayoutConstraint" destination="yHf-1K-Yq3" id="p36-ct-yRP"/>
                         <outlet property="certificationBtn" destination="ZIg-b6-bmt" id="NPo-md-P3H"/>
+                        <outlet property="checkLabel" destination="F96-xe-dvp" id="RyX-CU-IEK"/>
                         <outlet property="closeBtn" destination="FmI-DL-zwu" id="q2m-Sf-MUR"/>
                         <outlet property="emailTextField" destination="ElL-L2-pvZ" id="kYE-oc-Bc2"/>
                         <outlet property="guideLabel" destination="rz6-hJ-dMj" id="n1s-0U-F8K"/>
@@ -128,6 +145,7 @@
                         <outlet property="nextBtn" destination="W6E-KV-jhf" id="83i-fV-ACA"/>
                         <outlet property="numCertificaionBtn" destination="wpn-QL-jAS" id="fTO-ea-CmC"/>
                         <outlet property="numTextField" destination="sGy-tD-T8b" id="vfP-XL-c6m"/>
+                        <outlet property="otpCheckLabel" destination="mKP-sO-Gi7" id="gpJ-bn-SCz"/>
                         <outlet property="preBtn" destination="Hpd-ta-POF" id="RTb-Ge-qRf"/>
                         <outlet property="progressView" destination="1t2-kv-imr" id="GPl-Y9-byE"/>
                     </connections>
@@ -332,8 +350,8 @@
                                 <state key="normal" title="닫기"/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oEa-Pn-zyV">
-                                <rect key="frame" x="20" y="299" width="33" height="16"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <rect key="frame" x="20" y="299" width="28.5" height="13.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -437,8 +455,8 @@
                                 <state key="normal" title="다음"/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EjB-nB-clR">
-                                <rect key="frame" x="20" y="299" width="33" height="16"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <rect key="frame" x="20" y="299" width="28.5" height="13.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -469,6 +487,7 @@
                     </view>
                     <connections>
                         <outlet property="buttonYLayoutConstraint" destination="Ki1-r5-Fn9" id="8wR-j7-T7t"/>
+                        <outlet property="checkLabel" destination="EjB-nB-clR" id="Ox0-6m-dNK"/>
                         <outlet property="guideLabel" destination="fVE-ff-LyZ" id="N93-rh-RxQ"/>
                         <outlet property="guideLabel2" destination="cxO-vh-MXT" id="3ub-8L-kDz"/>
                         <outlet property="nameTextField" destination="u7g-ZV-PaY" id="8g3-MU-tG4"/>
