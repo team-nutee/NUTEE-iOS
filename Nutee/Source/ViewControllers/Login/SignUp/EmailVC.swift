@@ -186,6 +186,7 @@ extension EmailVC {
             switch responsedata {
                 
             case .success(_):
+                self.checkLabel.shake(duration: 0.3)
                 self.checkLabel.text = "해당 이메일에서 인증번호를 확인해주세요"
                 self.checkLabel.alpha = 1
                 self.checkLabel.textColor = .nuteeGreen
@@ -193,6 +194,7 @@ extension EmailVC {
                 self.certificationAnimate()
                 
             case .requestErr(_):
+                self.checkLabel.shake(duration: 0.3)
                 self.checkLabel.text = "이미 인증된 이메일입니다."
                 self.checkLabel.alpha = 1
                 self.checkLabel.textColor = .red
@@ -214,6 +216,7 @@ extension EmailVC {
             switch responsedata {
                 
             case .success(_):
+                self.otpCheckLabel.shake(duration: 0.3)
                 self.otpCheckLabel.text = "인증번호가 확인되었습니다."
                 self.otpCheckLabel.alpha = 1
                 self.otpCheckLabel.textColor = .nuteeGreen
@@ -222,9 +225,10 @@ extension EmailVC {
                 self.nextBtn.isEnabled = true
                 
             case .requestErr(_):
+                self.otpCheckLabel.shake(duration: 0.3)
                 self.otpCheckLabel.text = "인증번호가 틀렸습니다."
                 self.otpCheckLabel.alpha = 1
-                self.otpCheckLabel.textColor = .nuteeGreen
+                self.otpCheckLabel.textColor = .red
                 self.numTextField.addBorder(.bottom, color: .nuteeGreen, thickness: 1)
 
                 print(".requestErr")

@@ -155,6 +155,7 @@ extension NameVC {
                 self.toNext()
                 
             case .requestErr(_):
+                self.checkLabel.shake(duration: 0.3)
                 self.nameTextField.addBorder(.bottom, color: .red, thickness: 1)
                 self.checkLabel.textColor = .red
                 self.checkLabel.text = "이미 사용중인 닉네임입니다."

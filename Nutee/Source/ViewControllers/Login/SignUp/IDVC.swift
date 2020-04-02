@@ -158,6 +158,7 @@ extension IDVC {
                 self.toNext()
                 
             case .requestErr(_):
+                self.checkLabel.shake(duration: 0.3)
                 self.idTextField.addBorder(.bottom, color: .red, thickness: 1)
                 self.checkLabel.textColor = .red
                 self.checkLabel.text = "이미 사용중인 아이디입니다."

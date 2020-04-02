@@ -156,7 +156,6 @@ extension PassWordVC : UITextFieldDelegate {
             nextBtn.tintColor = nil
             nextBtn.isEnabled = false
         } else if passwordTextField.text?.validatePassword() == true{
-            //            alertLabel.text = "8자 이상의 영어 대문자, 소문자, 숫자가 포함된 비밀번호를 입력해주세요."
             passwordTextField.addBorder(.bottom, color: .nuteeGreen, thickness: 1)
             reversAlertAnimation()
             nextBtn.tintColor = nil

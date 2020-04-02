@@ -26,7 +26,6 @@ class NewsFeedVC: UIViewController {
     var newsPost: NewsPostsContentElement?
     
     var loadCompleteBtn = UIButton()
-    var noPostsToShow = UIView()
     
     // MARK: - Dummy data
     
@@ -41,7 +40,6 @@ class NewsFeedVC: UIViewController {
         newsTV.separatorStyle = .none
         
         self.view.addSubview(loadCompleteBtn)
-        self.view.addSubview(noPostsToShow)
         
         initColor()
         setRefresh()
@@ -190,10 +188,12 @@ extension NewsFeedVC : UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        var postItems = newsPostsArr?.count ?? 0
+        let postItems = newsPostsArr?.count ?? 0
         
         if postItems == 0 {
-            postItems += 1
+            newsTV.setEmptyView(title: "게시글이 없습니다", message: "게시글을 작성해주세요✏️")
+        } else {
+            newsTV.restore()
         }
         
         return postItems
@@ -207,15 +207,6 @@ extension NewsFeedVC : UITableViewDataSource {
         cell.addBorder((.bottom), color: .lightGray, thickness: 0.3)
         cell.selectionStyle = .none
         
-        if newsPostsArr?.count == 0 || newsPostsArr?.count == nil {
-            // 불러올 게시물이 없을 경우
-            newsTV.setNoPostsToShowView(cell, emptyView: noPostsToShow)
-            noPostsToShow.isHidden = false
-            cell.contentsCell.isHidden = true
-        } else {
-            // 불러올 게시물이 있는 경우
-            noPostsToShow.isHidden = true
-            cell.contentsCell.isHidden = false
             
             // cell 초기화 진행
             // emptyStatusView(tag: 404) cell에서 제거하기
@@ -233,7 +224,6 @@ extension NewsFeedVC : UITableViewDataSource {
             
             // 사용자 프로필 이미지 탭 인식 설정
             cell.setClickActions()
-        }
         
         return cell
     }
