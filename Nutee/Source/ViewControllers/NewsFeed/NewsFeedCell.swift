@@ -140,8 +140,6 @@ class NewsFeedCell: UITableViewCell {
             (action: UIAlertAction) in
             // Code to edit
             // Posting 창으로 전환
-//            let editPostingVC = self.newsFeedVC?.storyboard?.instantiateViewController(withIdentifier: "Post") as! PostVC
-            
             let postSB = UIStoryboard(name: "Post", bundle: nil)
             let editPostingVC = postSB.instantiateViewController(withIdentifier: "PostVC") as! PostVC
             

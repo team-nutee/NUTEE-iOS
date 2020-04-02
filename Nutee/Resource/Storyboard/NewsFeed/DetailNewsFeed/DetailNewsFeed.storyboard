@@ -50,7 +50,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" bouncesZoom="NO" editable="NO" text="댓글 내용 구간 입니다" textAlignment="justified" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O0E-Kn-gbN">
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" bouncesZoom="NO" editable="NO" text="댓글 내용 구간 입니다" textAlignment="justified" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O0E-Kn-gbN">
                                                     <rect key="frame" x="65" y="32" width="295" height="33"/>
                                                     <color key="tintColor" red="0.074509803920000006" green="0.76078431369999999" blue="0.46274509800000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
