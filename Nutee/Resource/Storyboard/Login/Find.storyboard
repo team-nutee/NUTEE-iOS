@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="cqR-ZK-izy">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="cqR-ZK-izy">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -20,13 +20,13 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="Ytr-jS-2e9"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="20"/>
+                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="18"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="비밀번호를 잊어버리셨다면!! 😢" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bPN-ag-yTk">
-                                <rect key="frame" x="20" y="343" width="256" height="24"/>
-                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="20"/>
+                                <rect key="frame" x="20" y="343" width="256" height="21.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="18"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -65,7 +65,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="email@office.skhu.ac.kr" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PpL-d3-2KS">
-                                <rect key="frame" x="20" y="535" width="292" height="34"/>
+                                <rect key="frame" x="70" y="535" width="292" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="34" id="ex8-eN-hjK"/>
                                 </constraints>
@@ -73,7 +73,7 @@
                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6ci-CA-fLm">
-                                <rect key="frame" x="320" y="535" width="70" height="30"/>
+                                <rect key="frame" x="370" y="535" width="70" height="30"/>
                                 <state key="normal" title="찾으러가기!"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QVA-5W-97S">
@@ -87,7 +87,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="ID" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QNS-fs-IA4">
-                                <rect key="frame" x="20" y="437" width="292" height="34"/>
+                                <rect key="frame" x="70" y="437" width="292" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="34" id="dnq-6m-4dP"/>
                                 </constraints>
@@ -100,6 +100,7 @@
                             <constraint firstItem="PpL-d3-2KS" firstAttribute="top" secondItem="aso-VH-ame" secondAttribute="top" constant="491" id="3ba-AD-aKc"/>
                             <constraint firstItem="uuM-se-8Ho" firstAttribute="top" secondItem="Z0I-wb-sJ7" secondAttribute="bottom" constant="28" id="43d-vA-WGa"/>
                             <constraint firstItem="6ci-CA-fLm" firstAttribute="top" secondItem="PpL-d3-2KS" secondAttribute="top" id="6iQ-Ru-HBJ"/>
+                            <constraint firstItem="PpL-d3-2KS" firstAttribute="leading" secondItem="aso-VH-ame" secondAttribute="leading" constant="70" id="7NV-a0-wm0"/>
                             <constraint firstItem="bPN-ag-yTk" firstAttribute="leading" secondItem="Z0I-wb-sJ7" secondAttribute="leading" id="8Da-9C-VeO"/>
                             <constraint firstItem="Ckn-Iy-49O" firstAttribute="leading" secondItem="aso-VH-ame" secondAttribute="leading" constant="20" id="Dbh-kW-bFd"/>
                             <constraint firstItem="Ckn-Iy-49O" firstAttribute="top" secondItem="aso-VH-ame" secondAttribute="top" constant="146" id="Ef7-k8-Sh7"/>
@@ -114,7 +115,6 @@
                             <constraint firstItem="ygK-ch-VuZ" firstAttribute="top" secondItem="aso-VH-ame" secondAttribute="top" id="dVh-wN-M57"/>
                             <constraint firstItem="Z0I-wb-sJ7" firstAttribute="leading" secondItem="uuM-se-8Ho" secondAttribute="trailing" constant="-157" id="eR3-F4-5OY"/>
                             <constraint firstItem="LvM-VE-jJH" firstAttribute="top" secondItem="Z0I-wb-sJ7" secondAttribute="bottom" constant="370" id="efn-JY-enH"/>
-                            <constraint firstItem="PpL-d3-2KS" firstAttribute="leading" secondItem="Ckn-Iy-49O" secondAttribute="trailing" constant="-292" id="ey1-TD-xsb"/>
                             <constraint firstItem="6ci-CA-fLm" firstAttribute="leading" secondItem="PpL-d3-2KS" secondAttribute="trailing" constant="8" id="jfz-2V-e7l"/>
                             <constraint firstItem="PpL-d3-2KS" firstAttribute="top" secondItem="QNS-fs-IA4" secondAttribute="bottom" constant="64" id="jiM-X9-ALe"/>
                             <constraint firstItem="bPN-ag-yTk" firstAttribute="width" secondItem="Z0I-wb-sJ7" secondAttribute="width" multiplier="1.03644" id="kdU-YU-8ub"/>

@@ -153,7 +153,7 @@ class LoginVC: UIViewController {
         let vc = sb.instantiateViewController(withIdentifier: "FindVC") as! FindVC
         vc.modalPresentationStyle = .fullScreen
         
-        self.present(vc, animated: true)
+        self.present(vc, animated: false)
     }
     
     
