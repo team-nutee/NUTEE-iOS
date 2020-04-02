@@ -165,7 +165,7 @@ extension PassWordVC : UITextFieldDelegate {
         if passwordTextField2.text != passwordTextField.text && passwordTextField2.text != "" {
             alertLabel.text = "비밀번호를 확인해주세요"
             alertAnimation2()
-            alertAnimation()
+//            alertAnimation()
             passwordTextField2.addBorder(.bottom, color: .red, thickness: 1)
             passwordTextField.addBorder(.bottom, color: .red, thickness: 1)
             nextBtn.tintColor = nil
