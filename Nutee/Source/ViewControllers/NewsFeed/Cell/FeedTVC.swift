@@ -47,7 +47,12 @@ class FeedTVC: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+
+        likeBtn.setTitleColor(.veryLightPink, for: .normal)
+        likeBtn.setTitleColor(.red, for: .selected)
+
+        likeBtn.setTitleColor(.veryLightPink, for: .normal)
+        actionBtn.tintColor = .veryLightPink
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -59,7 +64,7 @@ class FeedTVC: UITableViewCell {
         userImg.setRounded(radius: nil)
         if newsPost?.user.image?.src == nil || newsPost?.user.image?.src == "" {
             userImg.imageFromUrl("http://15.164.50.161:9425/settings/nutee_profile.png", defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
-//            userImg.contentMode = .scaleAspectFit
+            //            userImg.contentMode = .scaleAspectFit
             userImg.contentMode = .scaleAspectFill
         } else {
             userImg.imageFromUrl((APIConstants.BaseURL) + "/" + (newsPost?.user.image?.src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
@@ -128,9 +133,37 @@ class FeedTVC: UITableViewCell {
             isClickedLike = false
         }
         // Comment 버튼
-        numComment = newsPost?.comments.count ?? 0
+        replyCntLabel.text = String(newsPost?.comments.count ?? 0)
+        imgCntLabel.text = String(newsPost?.images.count ?? 0)
         
-        
+    }
+    
+    @IBAction func btnLike(_ sender: UIButton) {
+        // .selected State를 활성화 하기 위한 코드
+        //        btnLike.isSelected = !btnLike.isSelected
+        if isClickedLike! {
+            setNormalLikeBtn()
+            likeDeleteService(postId: newsPost?.id ?? 0)
+        } else {
+            setSelectedLikeBtn()
+            likePostService(postId: newsPost?.id ?? 0)
+        }
+    }
+    
+    func setNormalLikeBtn() {
+        likeBtn.isSelected = false
+        numLike! -= 1
+        likeBtn.setTitle(" " + String(numLike!), for: .normal)
+        likeBtn.tintColor = .gray
+        isClickedLike = false
+    }
+    
+    func setSelectedLikeBtn() {
+        likeBtn.isSelected = true
+        numLike! += 1
+        likeBtn.setTitle(" " + String(numLike!), for: .selected)
+        likeBtn.tintColor = .systemPink
+        isClickedLike = true
     }
     
     

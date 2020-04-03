@@ -74,6 +74,8 @@
 		5EC02EC92437298900580194 /* FeedTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC02EC72437298900580194 /* FeedTVC.swift */; };
 		5EC02ECA2437298900580194 /* FeedTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5EC02EC82437298900580194 /* FeedTVC.xib */; };
 		5EC02ECD24372C6D00580194 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC02ECC24372C6D00580194 /* Font.swift */; };
+		5EC02ED02437628200580194 /* Search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5EC02ECF2437628200580194 /* Search.storyboard */; };
+		5EC02ED2243765E400580194 /* ProfileTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC02ED1243765E400580194 /* ProfileTVC.swift */; };
 		5ED1558524228E88004DCE02 /* PopUp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5ED1558424228E88004DCE02 /* PopUp.storyboard */; };
 		5ED155872423162B004DCE02 /* UITabar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED155862423162B004DCE02 /* UITabar.swift */; };
 		5ED93D76242A7A1F00CE6D3F /* PictureVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED93D75242A7A1F00CE6D3F /* PictureVC.swift */; };
@@ -197,6 +199,8 @@
 		5EC02EC72437298900580194 /* FeedTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedTVC.swift; sourceTree = "<group>"; };
 		5EC02EC82437298900580194 /* FeedTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeedTVC.xib; sourceTree = "<group>"; };
 		5EC02ECC24372C6D00580194 /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
+		5EC02ECF2437628200580194 /* Search.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Search.storyboard; sourceTree = "<group>"; };
+		5EC02ED1243765E400580194 /* ProfileTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTVC.swift; sourceTree = "<group>"; };
 		5ED1558424228E88004DCE02 /* PopUp.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PopUp.storyboard; sourceTree = "<group>"; };
 		5ED155862423162B004DCE02 /* UITabar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITabar.swift; sourceTree = "<group>"; };
 		5ED93D75242A7A1F00CE6D3F /* PictureVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PictureVC.swift; sourceTree = "<group>"; };
@@ -457,6 +461,7 @@
 		5E21446323C2F9B30053CFB9 /* Storyboard */ = {
 			isa = PBXGroup;
 			children = (
+				5EC02ECE2437626600580194 /* Search */,
 				5E79C0C323EC6AB400BD2FB3 /* Util */,
 				5E37CAAE23E98FB000C0E2A8 /* Cafeteria */,
 				5E0E6A6D23E73CBD00FBC15F /* Post */,
@@ -483,6 +488,7 @@
 				5E95CD6723EF35280090C39B /* SettingVC.swift */,
 				5E2BDCBD2403903700CE99A7 /* ProflieTableViewCell.swift */,
 				5E2BDCBE2403903700CE99A7 /* ProflieTableViewCell.xib */,
+				5EC02ED1243765E400580194 /* ProfileTVC.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -559,6 +565,14 @@
 				5EC02ECC24372C6D00580194 /* Font.swift */,
 			);
 			path = Enum;
+			sourceTree = "<group>";
+		};
+		5EC02ECE2437626600580194 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				5EC02ECF2437628200580194 /* Search.storyboard */,
+			);
+			path = Search;
 			sourceTree = "<group>";
 		};
 		67B0C5227CABA343A88C01B5 /* Pods */ = {
@@ -693,6 +707,7 @@
 				5E05AD7E23DEA5FB00E36AD4 /* MyChatTVC.xib in Resources */,
 				5EC02ECA2437298900580194 /* FeedTVC.xib in Resources */,
 				5E2BDCC02403903700CE99A7 /* ProflieTableViewCell.xib in Resources */,
+				5EC02ED02437628200580194 /* Search.storyboard in Resources */,
 				5E37CAA623E97DC800C0E2A8 /* SignUp.storyboard in Resources */,
 				D59718B823CEA9DA00117906 /* Chatting.storyboard in Resources */,
 				D59718B623CEA9DA00117906 /* NoticeBoard.storyboard in Resources */,
@@ -807,6 +822,7 @@
 				D55E94EF240A92F6009F738C /* UserPostContent.swift in Sources */,
 				5E93A72D2415727900C9C811 /* EventVC.swift in Sources */,
 				D53F61FA2403C5E200C8EE38 /* ContentService.swift in Sources */,
+				5EC02ED2243765E400580194 /* ProfileTVC.swift in Sources */,
 				5E37CA9C23E9765600C0E2A8 /* PostIMGCVC.swift in Sources */,
 				5E54303D23F44170004FF2FB /* InitVC.swift in Sources */,
 				5EA5C68023F02C9200BFB32B /* String+Extension.swift in Sources */,
