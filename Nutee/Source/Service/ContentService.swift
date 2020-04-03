@@ -251,7 +251,7 @@ struct ContentService {
         let URL = APIConstants.PostPost
         let headers: HTTPHeaders = [
             "Content-Type": "application/json",
-            "Cookie" : UserDefaults.standard.string(forKey: "Cookie")!
+            "Cookie" : KeychainWrapper.standard.string(forKey: "Cookie")!
         ]
         
         let body : Parameters = [

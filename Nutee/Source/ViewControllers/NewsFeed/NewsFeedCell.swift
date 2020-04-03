@@ -225,10 +225,17 @@ class NewsFeedCell: UITableViewCell {
             lblUserId.setTitle(newsPost?.user.nickname, for: .normal)
             lblUserId.sizeToFit()
             // 게시글 게시 시간 설정
-            let originPostTime = newsPost?.createdAt
-            let postTimeDateFormat = originPostTime?.getDateFormat(time: originPostTime!)
-            lblPostTime.text = postTimeDateFormat?.timeAgoSince(postTimeDateFormat!)
-
+            if newsPost?.createdAt == newsPost?.updatedAt {
+                let originPostTime = newsPost?.createdAt ?? ""
+                let postTimeDateFormat = originPostTime.getDateFormat(time: originPostTime)
+                lblPostTime.text = postTimeDateFormat?.timeAgoSince(postTimeDateFormat!)
+            } else {
+                let originPostTime = newsPost?.updatedAt ?? ""
+                let postTimeDateFormat = originPostTime.getDateFormat(time: originPostTime)
+                let updatePostTime = postTimeDateFormat?.timeAgoSince(postTimeDateFormat!)
+                lblPostTime.text = "✄ " + (updatePostTime ?? "")
+            }
+            
             // Posting 내용 설정
             txtvwContent.text = newsPost?.content
             txtvwContent.postingInit()
