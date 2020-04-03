@@ -313,7 +313,7 @@ extension PassWordVC {
                 print("회원가입 완료")
                 print(response)
                 
-                self.simpleAlertWithHandler(title: "회원가입이", msg: "완료되었습니다.", handler: { (action) in
+                self.oneAlertWithHandler(title: "회원가입이", msg: "완료되었습니다.", handler: { (action) in
                     self.view.window!.rootViewController?.dismiss(animated: true, completion: nil)
                 })
                 
