@@ -97,6 +97,16 @@ extension FollowerVC : UITableViewDataSource {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedFollowerUser = followersList?[indexPath.row]
+        
+        let vc = UIStoryboard.init(name: "Profile", bundle: Bundle.main).instantiateViewController(withIdentifier: "ProfileVC") as? ProfileVC
+        
+        vc?.userId = selectedFollowerUser?.id
+        
+        navigationController?.pushViewController(vc!, animated: true)
+    }
+    
 }
 
 //MARK: - FollowersList 서버 연결을 위한 Service 실행 구간
