@@ -29,7 +29,12 @@ class SearchResultVC: UIViewController {
         SearchTV.dataSource = self
         SearchTV.separatorInset.left = 0
         SearchTV.register(UINib(nibName: "FeedTVC", bundle: nil), forCellReuseIdentifier: "FeedTVC")
-
+        searchService(text: searchResult!,
+                      postCnt: 10,
+                      lastID: 0,
+                      completionHandler: {(returnedData) -> Void in
+            self.newsPostsArr = self.newsPosts
+        })
     }
     
     // MARK: - Helper
@@ -78,5 +83,30 @@ extension SearchResultVC : UITableViewDataSource {
 
 
 extension SearchResultVC {
-    
+    func searchService(text: String, postCnt: Int, lastID: Int, completionHandler: @escaping (_ returnedData: NewsPostsContent) -> Void ) {
+        ContentService.shared.searchPost(text: text, postCnt: postCnt, lastId: lastID) { responsedata in
+            
+            switch responsedata {
+                
+            case .success(let res):
+                let response = res as! NewsPostsContent
+                self.newsPosts = response
+
+                completionHandler(self.newsPosts!)
+                
+            case .requestErr(_):
+                print("request error")
+            
+            case .pathErr:
+                print(".pathErr")
+            
+            case .serverErr:
+                print(".serverErr")
+            
+            case .networkFail :
+                print("failure")
+                }
+        }
+    }
+
 }

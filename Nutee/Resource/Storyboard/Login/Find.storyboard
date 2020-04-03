@@ -137,6 +137,7 @@
                         <outlet property="idGuideLabelYLayoutConstraint" destination="Mfh-cH-QYA" id="p0B-9a-LkN"/>
                         <outlet property="idTextField" destination="Ckn-Iy-49O" id="gT5-nn-tLV"/>
                         <outlet property="idTextFieldXLayoutConstraint" destination="Dbh-kW-bFd" id="Xmo-w5-Xm6"/>
+                        <outlet property="lineView" destination="COh-RQ-B9Z" id="W6L-i7-Dp6"/>
                         <outlet property="pwCertificateBtn" destination="6ci-CA-fLm" id="5JM-TV-aXu"/>
                         <outlet property="pwGuideLabel" destination="bPN-ag-yTk" id="kaT-Qg-BDP"/>
                         <outlet property="pwGuideLabel2" destination="LvM-VE-jJH" id="8Vd-xu-aZv"/>

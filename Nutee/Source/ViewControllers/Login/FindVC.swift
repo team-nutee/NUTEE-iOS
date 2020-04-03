@@ -17,6 +17,8 @@ class FindVC: UIViewController {
     @IBOutlet weak var idTextField: UITextField!
     @IBOutlet weak var idCertificateBtn: UIButton!
     
+    @IBOutlet weak var lineView: UIView!
+    
     @IBOutlet weak var pwGuideLabel: UILabel!
     @IBOutlet weak var pwGuideLabel2: UILabel!
     @IBOutlet weak var pwGuideLabel3: UILabel!
@@ -26,6 +28,7 @@ class FindVC: UIViewController {
     
     @IBOutlet weak var idGuideLabelYLayoutConstraint: NSLayoutConstraint!
     @IBOutlet weak var idTextFieldXLayoutConstraint: NSLayoutConstraint!
+    
     
     
     var animationDuration = 1.3
@@ -39,6 +42,7 @@ class FindVC: UIViewController {
         initSetting()
         setAlphaZero()
         closeBtn.addTarget(self, action: #selector(close), for: .touchUpInside)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -62,9 +66,15 @@ class FindVC: UIViewController {
         pwTextField.tintColor = .nuteeGreen
         pwTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
         
+        pwTextField.delegate = self
+        pwIDTextField.delegate = self
+        
+        
         idGuideLabelYLayoutConstraint.constant = 15
         idTextFieldXLayoutConstraint.constant = 70
         
+
+
     }
     
     func setAlphaZero() {
@@ -93,6 +103,13 @@ class FindVC: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
+        self.view.endEditing(true)
+        dePWAnimate()
+        
+    }
+
+    
 }
 
 extension FindVC : UITextFieldDelegate {
@@ -114,6 +131,15 @@ extension FindVC : UITextFieldDelegate {
             pwCertificateBtn.isEnabled = false
         }
     }
+    
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        
+        if textField == pwTextField || textField == pwIDTextField {
+            pwAnimate()
+        }
+        return true
+    }
+    
     
 }
 
@@ -195,6 +221,50 @@ extension FindVC {
         
     }
     
+    private func pwAnimate(){
+        UIView.animate(withDuration: animationDuration,
+                       delay: 0,
+                       usingSpringWithDamping: 0.6,
+                       initialSpringVelocity: 1,
+                       options: [.curveEaseIn],
+                       animations: {
+                        // self를 항상 붙여줘야함 (클로저 안에서)
+                        self.idGuideLabel.alpha = 0
+                        self.idGuideLabel2.alpha = 0
+                        self.idTextField.alpha = 0
+                        self.idCertificateBtn.alpha = 0
+                        self.lineView.alpha = 0
+                        
+                        self.pwGuideLabel.transform = CGAffineTransform.init(translationX: 0, y: -130)
+                        self.pwGuideLabel2.transform = CGAffineTransform.init(translationX: 0, y: -130)
+                        self.pwGuideLabel3.transform = CGAffineTransform.init(translationX: 0, y: -130)
+                        self.pwTextField.transform = CGAffineTransform.init(translationX: -50, y: -180)
+                        self.pwIDTextField.transform = CGAffineTransform.init(translationX: -50, y: -180)
+                        self.pwCertificateBtn.transform = CGAffineTransform.init(translationX: -50, y: -180)
+        })
+    }
+    private func dePWAnimate(){
+        UIView.animate(withDuration: animationDuration,
+                       delay: 0,
+                       usingSpringWithDamping: 0.6,
+                       initialSpringVelocity: 1,
+                       options: [.curveEaseIn],
+                       animations: {
+                        // self를 항상 붙여줘야함 (클로저 안에서)
+                        self.idGuideLabel.alpha = 1
+                        self.idGuideLabel2.alpha = 1
+                        self.idTextField.alpha = 1
+                        self.idCertificateBtn.alpha = 1
+                        self.lineView.alpha = 1
+                        
+                        self.pwGuideLabel.transform = CGAffineTransform.init(translationX: 0, y: 50)
+                        self.pwGuideLabel2.transform = CGAffineTransform.init(translationX: 0, y: 50)
+                        self.pwGuideLabel3.transform = CGAffineTransform.init(translationX: 0, y: 50)
+                        self.pwTextField.transform = CGAffineTransform.init(translationX: -50, y: 0)
+                        self.pwIDTextField.transform = CGAffineTransform.init(translationX: -50, y: 0)
+                        self.pwCertificateBtn.transform = CGAffineTransform.init(translationX: -50, y: 0)
+        })
+    }
 }
 
 extension FindVC {

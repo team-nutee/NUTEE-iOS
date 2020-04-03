@@ -588,8 +588,8 @@ struct ContentService {
     }
     
     
-    func searchPost(_ text: String, completion: @escaping (NetworkResult<Any>) -> Void){
-        let URL = APIConstants.Search + text
+    func searchPost(text: String, postCnt: Int, lastId: Int, completion: @escaping (NetworkResult<Any>) -> Void){
+        let URL = APIConstants.Search + text + "?lastId=" + "\(lastId)" + "&limit=" + "\(postCnt)"
         let header: HTTPHeaders = [
             "Content-Type" : "application/json",
             "Cookie" : KeychainWrapper.standard.string(forKey: "Cookie")!
