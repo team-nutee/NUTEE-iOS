@@ -37,6 +37,8 @@ class FollowingTVC: UITableViewCell {
             follow(id: followingID!)
         }
     }
+    
+    
 
 }
 

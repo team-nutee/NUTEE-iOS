@@ -279,11 +279,15 @@ extension LoginVC {
             case .serverErr:
                 LoadingHUD.hide()
                 self.error()
+                self.idErrorLabel.text = "서버 에러입니다."
+                self.pwErrorLabel.text = "서버 에러입니다."
                 print(".serverErr")
                 
             case .networkFail :
                 LoadingHUD.hide()
                 self.error()
+                self.idErrorLabel.text = "서버 에러입니다."
+                self.pwErrorLabel.text = "서버 에러입니다."
                 print("failure")
                 
             }
