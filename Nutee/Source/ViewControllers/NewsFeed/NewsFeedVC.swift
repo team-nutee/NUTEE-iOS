@@ -39,6 +39,9 @@ class NewsFeedVC: UIViewController {
         newsTV.separatorInset.left = 0
         newsTV.separatorStyle = .none
         
+        newsTV.register(UINib(nibName: "FeedTVC", bundle: nil), forCellReuseIdentifier: "FeedTVC")
+
+        
         self.view.addSubview(loadCompleteBtn)
         
         initColor()
@@ -172,19 +175,19 @@ extension NewsFeedVC : UITableViewDelegate { }
 extension NewsFeedVC : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if newsPostsArr?.count == 0 {
-            return newsTV.frame.height - tabBarController!.tabBar.frame.size.height
-        } else {
+//        if newsPostsArr?.count == 0 {
+//            return newsTV.frame.height - tabBarController!.tabBar.frame.size.height
+//        } else {
             return UITableView.automaticDimension
-        }
+//        }
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        if newsPostsArr?.count == 0 {
-            return newsTV.frame.height - tabBarController!.tabBar.frame.size.height
-        } else {
+//        if newsPostsArr?.count == 0 {
+//            return newsTV.frame.height - tabBarController!.tabBar.frame.size.height
+//        } else {
             return UITableView.automaticDimension
-        }
+//        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -201,9 +204,10 @@ extension NewsFeedVC : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // Custom셀인 'NewsFeedCell' 형식으로 생성
-        let cell = tableView.dequeueReusableCell(withIdentifier: "NewsFeedCell", for: indexPath) as! NewsFeedCell
+        let cell =
+            tableView.dequeueReusableCell(withIdentifier: "FeedTVC", for: indexPath) as! FeedTVC
         
-//        // 셀 선택시 백그라운드 변경 안되게 하기 위한 코드
+        // 셀 선택시 백그라운드 변경 안되게 하기 위한 코드
         cell.addBorder((.bottom), color: .lightGray, thickness: 0.3)
         cell.selectionStyle = .none
         
