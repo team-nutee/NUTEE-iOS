@@ -239,7 +239,7 @@ extension ProfileVC : UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        _ = tableView.dequeueReusableCell(withIdentifier: "ArticleTVC", for: indexPath) as! ArticleTVC
+        _ = tableView.dequeueReusableCell(withIdentifier: "ProfileTVC", for: indexPath) as! ProfileTVC
         
         let sb = UIStoryboard(name: "DetailNewsFeed", bundle: nil)
         let vc = sb.instantiateViewController(withIdentifier: "DetailNewsFeed") as! DetailNewsFeedVC

@@ -78,6 +78,7 @@
 		5EC02ED2243765E400580194 /* ProfileTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC02ED1243765E400580194 /* ProfileTVC.swift */; };
 		5EC02ED4243769DE00580194 /* ProfileTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5EC02ED3243769DE00580194 /* ProfileTVC.xib */; };
 		5EC02ED724376B5C00580194 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC02ED624376B5C00580194 /* SearchVC.swift */; };
+		5EC02ED9243775DF00580194 /* SearchResultVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC02ED8243775DF00580194 /* SearchResultVC.swift */; };
 		5ED1558524228E88004DCE02 /* PopUp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5ED1558424228E88004DCE02 /* PopUp.storyboard */; };
 		5ED155872423162B004DCE02 /* UITabar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED155862423162B004DCE02 /* UITabar.swift */; };
 		5ED93D76242A7A1F00CE6D3F /* PictureVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED93D75242A7A1F00CE6D3F /* PictureVC.swift */; };
@@ -205,6 +206,7 @@
 		5EC02ED1243765E400580194 /* ProfileTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTVC.swift; sourceTree = "<group>"; };
 		5EC02ED3243769DE00580194 /* ProfileTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileTVC.xib; sourceTree = "<group>"; };
 		5EC02ED624376B5C00580194 /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
+		5EC02ED8243775DF00580194 /* SearchResultVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultVC.swift; sourceTree = "<group>"; };
 		5ED1558424228E88004DCE02 /* PopUp.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PopUp.storyboard; sourceTree = "<group>"; };
 		5ED155862423162B004DCE02 /* UITabar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITabar.swift; sourceTree = "<group>"; };
 		5ED93D75242A7A1F00CE6D3F /* PictureVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PictureVC.swift; sourceTree = "<group>"; };
@@ -585,6 +587,7 @@
 			isa = PBXGroup;
 			children = (
 				5EC02ED624376B5C00580194 /* SearchVC.swift */,
+				5EC02ED8243775DF00580194 /* SearchResultVC.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -825,6 +828,7 @@
 				5E05AD7D23DEA5FB00E36AD4 /* MyChatTVC.swift in Sources */,
 				D59718AD23CEA98400117906 /* ChattingVC.swift in Sources */,
 				5E21443D23C2F8500053CFB9 /* AppDelegate.swift in Sources */,
+				5EC02ED9243775DF00580194 /* SearchResultVC.swift in Sources */,
 				5ED93D78242A7A3400CE6D3F /* PopUpVC.swift in Sources */,
 				D59718AA23CEA98400117906 /* ProfileVC.swift in Sources */,
 				5E37CAA423E97D3700C0E2A8 /* FindVC.swift in Sources */,

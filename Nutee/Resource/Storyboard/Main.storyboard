@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="WTg-rr-kTx">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="WTg-rr-kTx">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -28,10 +28,10 @@
             </objects>
             <point key="canvasLocation" x="-150" y="169"/>
         </scene>
-        <!--NoticeBoard-->
+        <!--Search-->
         <scene sceneID="Wf2-dM-dlU">
             <objects>
-                <viewControllerPlaceholder storyboardName="NoticeBoard" id="yL7-Eu-Q7N" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="Search" id="yL7-Eu-Q7N" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="ybn-sq-77h"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aC3-jG-Uog" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -58,10 +58,10 @@
             </objects>
             <point key="canvasLocation" x="723" y="235"/>
         </scene>
-        <!--Cafeteria-->
+        <!--NoticeBoard-->
         <scene sceneID="bHT-yB-6mR">
             <objects>
-                <viewControllerPlaceholder storyboardName="Cafeteria" id="eL2-Bt-B8a" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="NoticeBoard" id="eL2-Bt-B8a" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="Ms0-oz-SGZ"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rgX-9W-b7I" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
