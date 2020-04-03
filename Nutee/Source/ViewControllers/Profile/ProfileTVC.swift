@@ -72,7 +72,8 @@ class ProfileTVC: UITableViewCell {
         
         // Posting 내용 설정
         contentLabel.text = loginUserPost?.content
-        
+        imgCntLabel.text = String(loginUserPost?.images.count ?? 0)
+        replyCntLabel.text = String(loginUserPost?.comments.count ?? 0)
         
     }
 }

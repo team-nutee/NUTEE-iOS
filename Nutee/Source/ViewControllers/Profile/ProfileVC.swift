@@ -56,9 +56,9 @@ class ProfileVC: UIViewController {
         
         myArticleTV.delegate = self
         myArticleTV.dataSource = self
-        self.myArticleTV.register(ArticleTVC.self, forCellReuseIdentifier: "ArticleTVC")
+//        self.myArticleTV.register(ArticleTVC.self, forCellReuseIdentifier: "ArticleTVC")
                 
-        myArticleTV.register(UINib(nibName: "ProflieTableViewCell", bundle: nil), forCellReuseIdentifier: "ProflieTableViewCell")
+        myArticleTV.register(UINib(nibName: "ProfileTVC", bundle: nil), forCellReuseIdentifier: "ProfileTVC")
         myArticleTV.separatorInset.left = 0
         
         setBtn()
@@ -203,8 +203,8 @@ extension ProfileVC : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
                 
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ProflieTableViewCell",
-                                                 for: indexPath) as! ProflieTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileTVC",
+                                                 for: indexPath) as! ProfileTVC
         
         myArticleTV.separatorStyle = .singleLine
         cell.selectionStyle = .none
@@ -213,7 +213,7 @@ extension ProfileVC : UITableViewDataSource {
             cell.backgroundColor = .lightGray
         } else {
             cell.backgroundColor = nil
-            textViewDidChange(cell.articleTextView)
+//            textViewDidChange(cell.articleTextView)
             let userPost = userPosts?[indexPath.row-1]
             
             // ProfileTableViewCell로 해당 Cell의 게시글 정보 전달
