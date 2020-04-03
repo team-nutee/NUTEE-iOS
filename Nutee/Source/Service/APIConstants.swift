@@ -98,4 +98,7 @@ struct APIConstants {
     static let ProfileImagePost = BaseURL + "/api/user/profile"
     // POST
     
+    
+    static let Search = BaseURL + "/api/search/"
+    // GET :text
 }

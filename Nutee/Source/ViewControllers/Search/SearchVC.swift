@@ -11,17 +11,21 @@ import UIKit
 class SearchVC: UIViewController {
     
     // MARK: - UI components
+    @IBOutlet weak var searchWrapView: UIView!
+    @IBOutlet weak var searchTextField: UITextField!
+    @IBOutlet weak var searchBtn: UIButton!
     
     
     // MARK: - Variables and Properties
-    let searchController = UISearchController(searchResultsController: nil)
-
+    
     
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setSearchController()
+        setSearch()
+        searchBtn.isHidden = true
+        searchBtn.addTarget(self, action: #selector(search), for: .touchUpInside)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -30,49 +34,49 @@ class SearchVC: UIViewController {
         self.navigationController?.navigationBar.backgroundColor = .white
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
+        searchTextField.becomeFirstResponder()
     }
     
-    func setSearchController(){
-        searchController.searchBar.delegate = self
-        searchController.searchResultsUpdater = self
-        searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "검색"
-        navigationItem.searchController = searchController
-        definesPresentationContext = true
-        let searchField = searchController.searchBar.searchTextField
-        searchField.becomeFirstResponder()
-        searchField.backgroundColor = .white
-    }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-      guard
-        segue.identifier == "ShowDetailSegue",
-        let vc = segue.destination as? SearchResultVC
-        else {
-          return
-      }
-    
-        vc.result = searchController.searchBar.text
-    }
-    
-    var isSearchBarEmpty: Bool {
-      return searchController.searchBar.text?.isEmpty ?? true
-    }
-
     // MARK: - Helper
+    func setSearch(){
+        self.searchTextField.delegate = self
+        searchWrapView.setBorder(borderColor: .nuteeGreen, borderWidth: 2)
+        searchTextField.placeholder = "검색"
+        searchTextField.tintColor = .nuteeGreen
+        searchBtn.tintColor = .nuteeGreen
+    }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
+        self.view.endEditing(true)
+    }
     
+    @objc func search(){
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "SearchResultVC") as! SearchResultVC
+        
+        vc.searchResult = searchTextField.text
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+        
 }
 
 // MARK: - extension에 따라 적당한 명칭 작성
-extension SearchVC: UISearchResultsUpdating {
-  func updateSearchResults(for searchController: UISearchController) {
-    let searchBar = searchController.searchBar
-  }
-}
-
-extension SearchVC: UISearchBarDelegate {
-  func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+extension SearchVC : UITextFieldDelegate {
     
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        if textField.text == "" {
+            searchBtn.isHidden = true
+        } else {
+            searchBtn.isHidden = false
+        }
     }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField.text != "" {
+            search()
+            searchTextField.resignFirstResponder()
+        }
+        return true
+    }
+    
 }
