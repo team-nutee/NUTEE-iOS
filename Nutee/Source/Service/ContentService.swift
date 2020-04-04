@@ -589,7 +589,10 @@ struct ContentService {
     
     
     func searchPost(text: String, postCnt: Int, lastId: Int, completion: @escaping (NetworkResult<Any>) -> Void){
-        let URL = APIConstants.Search + text + "?lastId=" + "\(lastId)" + "&limit=" + "\(postCnt)"
+        
+        let encodingText = text.stringByAddingPercentEncodingForFormData(plusForSpace: true)!
+
+        let URL = APIConstants.Search + encodingText + "?lastId=" + "\(lastId)" + "&limit=" + "\(postCnt)"
         let header: HTTPHeaders = [
             "Content-Type" : "application/json",
             "Cookie" : KeychainWrapper.standard.string(forKey: "Cookie")!
@@ -607,7 +610,7 @@ struct ContentService {
                         case 200:
                             do{
                                 let decoder = JSONDecoder()
-                                let result = try decoder.decode(NewsPostsContentElement.self, from: value)
+                                let result = try decoder.decode(NewsPostsContent.self, from: value)
                                 completion(.success(result))
                             } catch {
                                 completion(.pathErr)

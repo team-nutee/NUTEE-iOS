@@ -23,7 +23,7 @@ extension String {
         let predicate = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
         return predicate.evaluate(with: self)
     }
-
+    
     
     // Password validation 영어 대문자 소문자 , 숫자 8자 이상
     public func validatePassword() -> Bool {
@@ -44,4 +44,22 @@ extension String {
         
         return timeDateFormat
     }
+    
+    public func stringByAddingPercentEncodingForFormData(plusForSpace: Bool=false) -> String? {
+        let unreserved = "*-._"
+        let allowed = NSMutableCharacterSet.alphanumeric()
+        allowed.addCharacters(in: unreserved)
+        
+        if plusForSpace {
+            allowed.addCharacters(in: " ")
+        }
+        
+        var encoded = addingPercentEncoding(withAllowedCharacters: allowed as CharacterSet)
+        if plusForSpace {
+            encoded = encoded?.replacingOccurrences(of: " ", with: "+")
+        }
+        
+        return encoded
+    }
+    
 }

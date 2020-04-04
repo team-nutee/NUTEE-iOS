@@ -29,6 +29,9 @@ class FindVC: UIViewController {
     @IBOutlet weak var idGuideLabelYLayoutConstraint: NSLayoutConstraint!
     @IBOutlet weak var idTextFieldXLayoutConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var idErrorLabel: UILabel!
+    @IBOutlet weak var pwErrorLabel: UILabel!
+    @IBOutlet weak var pwError2Label: UILabel!
     
     
     var animationDuration = 1.3
@@ -89,6 +92,9 @@ class FindVC: UIViewController {
         pwTextField.alpha = 0
         pwIDTextField.alpha = 0
         pwCertificateBtn.alpha = 0
+        idErrorLabel.alpha = 0
+        pwErrorLabel.alpha = 0
+        pwError2Label.alpha = 0
     }
     
     @objc func findid(){
@@ -137,6 +143,10 @@ extension FindVC : UITextFieldDelegate {
         if textField == pwTextField || textField == pwIDTextField {
             pwAnimate()
         }
+        
+        idErrorLabel.alpha = 0
+        pwErrorLabel.alpha = 0
+        
         return true
     }
     
@@ -198,6 +208,7 @@ extension FindVC {
                         // self를 항상 붙여줘야함 (클로저 안에서)
                         self.idTextField.alpha = 1
                         self.idTextField.transform = CGAffineTransform.init(translationX: -50, y: 0)
+                        self.idErrorLabel.transform = CGAffineTransform.init(translationX: -50, y: 0)
                         self.idCertificateBtn.alpha = 1
                         self.idCertificateBtn.transform = CGAffineTransform.init(translationX: -50, y: 0)
         })
@@ -215,7 +226,8 @@ extension FindVC {
                         self.pwIDTextField.transform = CGAffineTransform.init(translationX: -50, y: 0)
                         self.pwCertificateBtn.alpha = 1
                         self.pwCertificateBtn.transform = CGAffineTransform.init(translationX: -50, y: 0)
-                        
+                        self.pwErrorLabel.transform = CGAffineTransform.init(translationX: -50, y: 0)
+
         })
         
         
@@ -234,7 +246,8 @@ extension FindVC {
                         self.idTextField.alpha = 0
                         self.idCertificateBtn.alpha = 0
                         self.lineView.alpha = 0
-                        
+                        self.pwErrorLabel.transform = CGAffineTransform.init(translationX: -50, y: -180)
+
                         self.pwGuideLabel.transform = CGAffineTransform.init(translationX: 0, y: -130)
                         self.pwGuideLabel2.transform = CGAffineTransform.init(translationX: 0, y: -130)
                         self.pwGuideLabel3.transform = CGAffineTransform.init(translationX: 0, y: -130)
@@ -256,7 +269,8 @@ extension FindVC {
                         self.idTextField.alpha = 1
                         self.idCertificateBtn.alpha = 1
                         self.lineView.alpha = 1
-                        
+                        self.pwErrorLabel.transform = CGAffineTransform.init(translationX: -50, y: 0)
+
                         self.pwGuideLabel.transform = CGAffineTransform.init(translationX: 0, y: 50)
                         self.pwGuideLabel2.transform = CGAffineTransform.init(translationX: 0, y: 50)
                         self.pwGuideLabel3.transform = CGAffineTransform.init(translationX: 0, y: 50)
@@ -273,19 +287,26 @@ extension FindVC {
             switch responsedata {
                 
             // NetworkResult 의 요소들
-            case .success(let res):
-                let response = res as! String
-                
-                print(response)
-                
-                self.simpleAlert(title: "", message: "이메일 발송이 완료되었습니다.")
+            case .success(_):
+                self.idErrorLabel.alpha = 1
+                self.pwErrorLabel.text = "이메일 발신 처리 되었습니다."
+                self.idErrorLabel.textColor = .nuteeGreen
+                self.idErrorLabel.sizeToFit()
+                self.idErrorLabel.shake(duration: 0.3)
+                self.idTextField.addBorder(.bottom, color: .nuteeGreen, thickness: 1)
+
                 
             case .requestErr(_):
                 print(".requestErr")
                 
             case .pathErr:
-                print(".pathErr")
-                
+                self.idErrorLabel.alpha = 1
+                self.idErrorLabel.text = "해당 이메일은 가입이 되어있지 않습니다."
+                self.idErrorLabel.sizeToFit()
+                self.idErrorLabel.textColor = .red
+                self.idErrorLabel.shake(duration: 0.3)
+                self.idTextField.addBorder(.bottom, color: .red, thickness: 1)
+
             case .serverErr:
                 print(".serverErr")
                 
@@ -301,19 +322,30 @@ extension FindVC {
             switch responsedata {
                 
             // NetworkResult 의 요소들
-            case .success(let res):
-                let response = res as! String
-                
-                print(response)
-                
-                self.simpleAlert(title: "", message: "이메일 발송이 완료되었습니다.")
-                
+            case .success(_):
+                self.pwErrorLabel.alpha = 1
+                self.pwErrorLabel.text = "이메일 발신 처리 되었습니다."
+                self.pwErrorLabel.sizeToFit()
+                self.pwErrorLabel.textColor = .nuteeGreen
+                self.pwErrorLabel.shake(duration: 0.3)
+                self.pwIDTextField.addBorder(.bottom, color: .nuteeGreen, thickness: 1)
+
             case .requestErr(_):
-                print(".requestErr")
-                
+                self.pwErrorLabel.alpha = 1
+                self.pwErrorLabel.text = "아이디 혹은 이메일이 틀립니다."
+                self.pwErrorLabel.sizeToFit()
+                self.pwErrorLabel.textColor = .red
+                self.pwErrorLabel.shake(duration: 0.3)
+                self.pwIDTextField.addBorder(.bottom, color: .red, thickness: 1)
+
             case .pathErr:
-                print(".pathErr")
-                
+                self.pwErrorLabel.alpha = 1
+                self.pwErrorLabel.text = "아이디 혹은 이메일이 틀립니다."
+                self.pwErrorLabel.sizeToFit()
+                self.pwErrorLabel.textColor = .red
+                self.pwErrorLabel.shake(duration: 0.3)
+                self.pwIDTextField.addBorder(.bottom, color: .red, thickness: 1)
+
             case .serverErr:
                 print(".serverErr")
                 

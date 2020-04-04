@@ -94,20 +94,43 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dRp-SH-hzr">
+                                <rect key="frame" x="20" y="232" width="31" height="15"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v2J-tQ-8fX">
+                                <rect key="frame" x="70" y="479" width="31" height="15"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qgc-tu-Nbf">
+                                <rect key="frame" x="70" y="577" width="31" height="15"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="PpL-d3-2KS" firstAttribute="top" secondItem="aso-VH-ame" secondAttribute="top" constant="491" id="3ba-AD-aKc"/>
                             <constraint firstItem="uuM-se-8Ho" firstAttribute="top" secondItem="Z0I-wb-sJ7" secondAttribute="bottom" constant="28" id="43d-vA-WGa"/>
+                            <constraint firstItem="dRp-SH-hzr" firstAttribute="leading" secondItem="Ckn-Iy-49O" secondAttribute="leading" id="5gg-ZI-EkN"/>
                             <constraint firstItem="6ci-CA-fLm" firstAttribute="top" secondItem="PpL-d3-2KS" secondAttribute="top" id="6iQ-Ru-HBJ"/>
                             <constraint firstItem="PpL-d3-2KS" firstAttribute="leading" secondItem="aso-VH-ame" secondAttribute="leading" constant="70" id="7NV-a0-wm0"/>
                             <constraint firstItem="bPN-ag-yTk" firstAttribute="leading" secondItem="Z0I-wb-sJ7" secondAttribute="leading" id="8Da-9C-VeO"/>
                             <constraint firstItem="Ckn-Iy-49O" firstAttribute="leading" secondItem="aso-VH-ame" secondAttribute="leading" constant="20" id="Dbh-kW-bFd"/>
                             <constraint firstItem="Ckn-Iy-49O" firstAttribute="top" secondItem="aso-VH-ame" secondAttribute="top" constant="146" id="Ef7-k8-Sh7"/>
                             <constraint firstItem="QVA-5W-97S" firstAttribute="height" secondItem="Ckn-Iy-49O" secondAttribute="height" multiplier="0.882353" id="JRf-ti-a6y"/>
+                            <constraint firstItem="qgc-tu-Nbf" firstAttribute="leading" secondItem="PpL-d3-2KS" secondAttribute="leading" id="MMQ-UX-Cwr"/>
                             <constraint firstItem="Z0I-wb-sJ7" firstAttribute="top" secondItem="aso-VH-ame" secondAttribute="top" constant="65" id="Mfh-cH-QYA"/>
+                            <constraint firstItem="v2J-tQ-8fX" firstAttribute="leading" secondItem="QNS-fs-IA4" secondAttribute="leading" id="N2k-0w-lG9"/>
+                            <constraint firstItem="v2J-tQ-8fX" firstAttribute="top" secondItem="QNS-fs-IA4" secondAttribute="bottom" constant="8" id="Onc-aF-nk3"/>
                             <constraint firstItem="vGZ-6S-zTK" firstAttribute="width" secondItem="LvM-VE-jJH" secondAttribute="width" id="PMb-DI-oy0"/>
                             <constraint firstItem="QVA-5W-97S" firstAttribute="leading" secondItem="Ckn-Iy-49O" secondAttribute="trailing" constant="8" id="SaW-7I-R1F"/>
+                            <constraint firstItem="dRp-SH-hzr" firstAttribute="top" secondItem="Ckn-Iy-49O" secondAttribute="bottom" constant="8" id="T8u-RG-9uH"/>
                             <constraint firstItem="QNS-fs-IA4" firstAttribute="width" secondItem="PpL-d3-2KS" secondAttribute="width" id="Wy7-Jt-gZf"/>
                             <constraint firstItem="LvM-VE-jJH" firstAttribute="top" secondItem="vGZ-6S-zTK" secondAttribute="bottom" constant="77" id="aXX-oJ-UOl"/>
                             <constraint firstItem="Z0I-wb-sJ7" firstAttribute="leading" secondItem="LvM-VE-jJH" secondAttribute="trailing" constant="-157" id="aj8-Ap-nsf"/>
@@ -119,6 +142,7 @@
                             <constraint firstItem="PpL-d3-2KS" firstAttribute="top" secondItem="QNS-fs-IA4" secondAttribute="bottom" constant="64" id="jiM-X9-ALe"/>
                             <constraint firstItem="bPN-ag-yTk" firstAttribute="width" secondItem="Z0I-wb-sJ7" secondAttribute="width" multiplier="1.03644" id="kdU-YU-8ub"/>
                             <constraint firstItem="Z0I-wb-sJ7" firstAttribute="leading" secondItem="aso-VH-ame" secondAttribute="leading" constant="20" id="m8b-6X-0BB"/>
+                            <constraint firstItem="qgc-tu-Nbf" firstAttribute="top" secondItem="PpL-d3-2KS" secondAttribute="bottom" constant="8" id="p8Y-vE-ixb"/>
                             <constraint firstItem="QNS-fs-IA4" firstAttribute="leading" secondItem="PpL-d3-2KS" secondAttribute="leading" id="pdB-Fy-7NY"/>
                             <constraint firstItem="Z0I-wb-sJ7" firstAttribute="width" secondItem="2es-v2-IRG" secondAttribute="width" multiplier="0.596618" id="rM1-w6-eh0"/>
                             <constraint firstItem="PpL-d3-2KS" firstAttribute="width" secondItem="2es-v2-IRG" secondAttribute="width" multiplier="0.705314" id="rSA-nJ-q6K"/>
@@ -132,6 +156,7 @@
                     <connections>
                         <outlet property="closeBtn" destination="ygK-ch-VuZ" id="cUR-Ha-SDa"/>
                         <outlet property="idCertificateBtn" destination="QVA-5W-97S" id="sdv-ZW-1eu"/>
+                        <outlet property="idErrorLabel" destination="dRp-SH-hzr" id="cdk-Uz-ipR"/>
                         <outlet property="idGuideLabel" destination="Z0I-wb-sJ7" id="sRB-Eu-vTZ"/>
                         <outlet property="idGuideLabel2" destination="uuM-se-8Ho" id="DUc-a6-w69"/>
                         <outlet property="idGuideLabelYLayoutConstraint" destination="Mfh-cH-QYA" id="p0B-9a-LkN"/>
@@ -139,6 +164,8 @@
                         <outlet property="idTextFieldXLayoutConstraint" destination="Dbh-kW-bFd" id="Xmo-w5-Xm6"/>
                         <outlet property="lineView" destination="COh-RQ-B9Z" id="W6L-i7-Dp6"/>
                         <outlet property="pwCertificateBtn" destination="6ci-CA-fLm" id="5JM-TV-aXu"/>
+                        <outlet property="pwError2Label" destination="qgc-tu-Nbf" id="m7r-IX-mNY"/>
+                        <outlet property="pwErrorLabel" destination="v2J-tQ-8fX" id="7vN-wc-Aqq"/>
                         <outlet property="pwGuideLabel" destination="bPN-ag-yTk" id="kaT-Qg-BDP"/>
                         <outlet property="pwGuideLabel2" destination="LvM-VE-jJH" id="8Vd-xu-aZv"/>
                         <outlet property="pwGuideLabel3" destination="vGZ-6S-zTK" id="3iA-S9-Hin"/>
