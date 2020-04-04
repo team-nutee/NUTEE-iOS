@@ -118,19 +118,19 @@ class PostVC: UIViewController {
             }
         } else {
             // 사진이 있을때는 사진 올리고 게시물 업로드를 위한 분기처리
-            var images: [String] = []
-            for img in self.editPostImg {
-                images.append(img.src ?? "")
-            }
             if pickedIMG != [] {
                 postImage(images: pickedIMG, completionHandler: {(returnedData)-> Void in
+                    var images: [String] = []
+                    for img in self.editPostImg {
+                        images.append(img.src ?? "")
+                    }
                     for uploadimg in self.uploadedImages {
                         images.append(uploadimg as String)
                     }
                     self.editPostContent(postId: self.editNewsPost?.id ?? 0, postContent: self.postingTextView.text, postImages: images)
                 })
             } else {
-                editPostContent(postId: editNewsPost?.id ?? 0, postContent: postingTextView.text, postImages: images)
+                editPostContent(postId: editNewsPost?.id ?? 0, postContent: postingTextView.text, postImages: [""])
             }
         }
         
