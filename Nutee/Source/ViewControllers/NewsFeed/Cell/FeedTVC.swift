@@ -216,11 +216,8 @@ class FeedTVC: UITableViewCell {
             let editPostingVC = postSB.instantiateViewController(withIdentifier: "PostVC") as! PostVC
             
             editPostingVC.loadViewIfNeeded()
-            
-            editPostingVC.isEditMode = true
-            editPostingVC.postingTextView.text = self.newsPost?.content
-            editPostingVC.postId = self.newsPost?.id
-            editPostingVC.postBtn.setTitle("수정", for: .normal)
+            editPostingVC.editNewsPost = self.newsPost
+            editPostingVC.setEditMode()
             
             editPostingVC.modalPresentationStyle = .currentContext
             self.newsFeedVC?.present(editPostingVC, animated: true, completion: nil)

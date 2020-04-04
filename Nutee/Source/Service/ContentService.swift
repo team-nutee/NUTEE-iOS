@@ -246,7 +246,7 @@ struct ContentService {
 //        }
 //    }
     
-    func editPost(_ postId: Int, _ content: String, completion: @escaping (NetworkResult<Any>) -> Void) {
+    func editPost(_ postId: Int, _ content: String, _ images: [String], completion: @escaping (NetworkResult<Any>) -> Void) {
         
         let URL = APIConstants.PostPost
         let headers: HTTPHeaders = [
@@ -256,7 +256,8 @@ struct ContentService {
         
         let body : Parameters = [
             "postId" : postId,
-            "content" : content
+            "content" : content,
+            "image" : images
         ]
         
         
