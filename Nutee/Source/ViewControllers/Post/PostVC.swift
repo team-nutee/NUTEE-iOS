@@ -55,6 +55,7 @@ class PostVC: UIViewController {
         postBtn.addTarget(self, action: #selector(posting), for: .touchUpInside)
         
         activePostBtn()
+        postBtn.isEnabled = false
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -66,7 +67,7 @@ class PostVC: UIViewController {
         self.postingTextView.becomeFirstResponder()
         
         self.postingTextView.placeholder = "내용을 입력해주세요"
-        postBtn.isEnabled = false
+        
         textViewDidChange(postingTextView)
 
     }
