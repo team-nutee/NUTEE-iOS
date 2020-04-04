@@ -318,7 +318,13 @@ extension PostVC : UICollectionViewDataSource {
         if isEditMode == false {
             pickedIMG.remove(at: indexPath.row)
         } else {
-            editPostImg.remove(at: indexPath.row)
+            if editPostImg.count > 0 && indexPath.row < editPostImg.count {
+                editPostImg.remove(at: indexPath.row)
+            } else {
+                let fixIndex = Int(indexPath.row) - (editPostImg.count)
+                pickedIMG.remove(at: fixIndex)
+            }
+            
         }
         
         self.imageCV.reloadData()
