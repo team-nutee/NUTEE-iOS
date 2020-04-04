@@ -146,7 +146,8 @@ extension FindVC : UITextFieldDelegate {
         
         idErrorLabel.alpha = 0
         pwErrorLabel.alpha = 0
-        
+        pwError2Label.alpha = 0
+
         return true
     }
     
@@ -208,7 +209,6 @@ extension FindVC {
                         // self를 항상 붙여줘야함 (클로저 안에서)
                         self.idTextField.alpha = 1
                         self.idTextField.transform = CGAffineTransform.init(translationX: -50, y: 0)
-                        self.idErrorLabel.transform = CGAffineTransform.init(translationX: -50, y: 0)
                         self.idCertificateBtn.alpha = 1
                         self.idCertificateBtn.transform = CGAffineTransform.init(translationX: -50, y: 0)
         })
@@ -226,7 +226,6 @@ extension FindVC {
                         self.pwIDTextField.transform = CGAffineTransform.init(translationX: -50, y: 0)
                         self.pwCertificateBtn.alpha = 1
                         self.pwCertificateBtn.transform = CGAffineTransform.init(translationX: -50, y: 0)
-                        self.pwErrorLabel.transform = CGAffineTransform.init(translationX: -50, y: 0)
 
         })
         
@@ -246,7 +245,8 @@ extension FindVC {
                         self.idTextField.alpha = 0
                         self.idCertificateBtn.alpha = 0
                         self.lineView.alpha = 0
-                        self.pwErrorLabel.transform = CGAffineTransform.init(translationX: -50, y: -180)
+                        self.pwErrorLabel.transform = CGAffineTransform.init(translationX: 0, y: -180)
+                        self.pwError2Label.transform = CGAffineTransform.init(translationX: 0, y: -180)
 
                         self.pwGuideLabel.transform = CGAffineTransform.init(translationX: 0, y: -130)
                         self.pwGuideLabel2.transform = CGAffineTransform.init(translationX: 0, y: -130)
@@ -269,7 +269,8 @@ extension FindVC {
                         self.idTextField.alpha = 1
                         self.idCertificateBtn.alpha = 1
                         self.lineView.alpha = 1
-                        self.pwErrorLabel.transform = CGAffineTransform.init(translationX: -50, y: 0)
+                        self.pwErrorLabel.transform = CGAffineTransform.init(translationX: 0, y: 0)
+                        self.pwError2Label.transform = CGAffineTransform.init(translationX: 0, y: 0)
 
                         self.pwGuideLabel.transform = CGAffineTransform.init(translationX: 0, y: 50)
                         self.pwGuideLabel2.transform = CGAffineTransform.init(translationX: 0, y: 50)
@@ -328,7 +329,14 @@ extension FindVC {
                 self.pwErrorLabel.sizeToFit()
                 self.pwErrorLabel.textColor = .nuteeGreen
                 self.pwErrorLabel.shake(duration: 0.3)
+                self.pwError2Label.alpha = 1
+                self.pwError2Label.text = "이메일 발신 처리 되었습니다."
+                self.pwError2Label.sizeToFit()
+                self.pwError2Label.textColor = .nuteeGreen
+                self.pwError2Label.shake(duration: 0.3)
+
                 self.pwIDTextField.addBorder(.bottom, color: .nuteeGreen, thickness: 1)
+                self.pwTextField.addBorder(.bottom, color: .nuteeGreen, thickness: 1)
 
             case .requestErr(_):
                 self.pwErrorLabel.alpha = 1
@@ -336,7 +344,14 @@ extension FindVC {
                 self.pwErrorLabel.sizeToFit()
                 self.pwErrorLabel.textColor = .red
                 self.pwErrorLabel.shake(duration: 0.3)
+                self.pwError2Label.alpha = 1
+                self.pwError2Label.text = "아이디 혹은 이메일이 틀립니다."
+                self.pwError2Label.sizeToFit()
+                self.pwError2Label.textColor = .red
+                self.pwError2Label.shake(duration: 0.3)
+
                 self.pwIDTextField.addBorder(.bottom, color: .red, thickness: 1)
+                self.pwTextField.addBorder(.bottom, color: .red, thickness: 1)
 
             case .pathErr:
                 self.pwErrorLabel.alpha = 1
@@ -344,7 +359,13 @@ extension FindVC {
                 self.pwErrorLabel.sizeToFit()
                 self.pwErrorLabel.textColor = .red
                 self.pwErrorLabel.shake(duration: 0.3)
+                self.pwError2Label.alpha = 1
+                self.pwError2Label.text = "아이디 혹은 이메일이 틀립니다."
+                self.pwError2Label.sizeToFit()
+                self.pwError2Label.textColor = .red
+                self.pwError2Label.shake(duration: 0.3)
                 self.pwIDTextField.addBorder(.bottom, color: .red, thickness: 1)
+                self.pwTextField.addBorder(.bottom, color: .red, thickness: 1)
 
             case .serverErr:
                 print(".serverErr")

@@ -167,7 +167,6 @@ extension SearchResultVC {
                 
             case .success(let res):
                 self.newsPosts = (res as! NewsPostsContent)
-
                 completionHandler(self.newsPosts!)
                 
             case .requestErr(_):

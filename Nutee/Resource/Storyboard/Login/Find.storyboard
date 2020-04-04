@@ -101,13 +101,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v2J-tQ-8fX">
-                                <rect key="frame" x="70" y="479" width="31" height="15"/>
+                                <rect key="frame" x="20" y="479" width="31" height="15"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qgc-tu-Nbf">
-                                <rect key="frame" x="70" y="577" width="31" height="15"/>
+                                <rect key="frame" x="20" y="577" width="31" height="15"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -117,16 +117,16 @@
                         <constraints>
                             <constraint firstItem="PpL-d3-2KS" firstAttribute="top" secondItem="aso-VH-ame" secondAttribute="top" constant="491" id="3ba-AD-aKc"/>
                             <constraint firstItem="uuM-se-8Ho" firstAttribute="top" secondItem="Z0I-wb-sJ7" secondAttribute="bottom" constant="28" id="43d-vA-WGa"/>
-                            <constraint firstItem="dRp-SH-hzr" firstAttribute="leading" secondItem="Ckn-Iy-49O" secondAttribute="leading" id="5gg-ZI-EkN"/>
                             <constraint firstItem="6ci-CA-fLm" firstAttribute="top" secondItem="PpL-d3-2KS" secondAttribute="top" id="6iQ-Ru-HBJ"/>
+                            <constraint firstItem="dRp-SH-hzr" firstAttribute="leading" secondItem="aso-VH-ame" secondAttribute="leading" constant="20" id="6ny-W2-J2h"/>
                             <constraint firstItem="PpL-d3-2KS" firstAttribute="leading" secondItem="aso-VH-ame" secondAttribute="leading" constant="70" id="7NV-a0-wm0"/>
                             <constraint firstItem="bPN-ag-yTk" firstAttribute="leading" secondItem="Z0I-wb-sJ7" secondAttribute="leading" id="8Da-9C-VeO"/>
                             <constraint firstItem="Ckn-Iy-49O" firstAttribute="leading" secondItem="aso-VH-ame" secondAttribute="leading" constant="20" id="Dbh-kW-bFd"/>
                             <constraint firstItem="Ckn-Iy-49O" firstAttribute="top" secondItem="aso-VH-ame" secondAttribute="top" constant="146" id="Ef7-k8-Sh7"/>
                             <constraint firstItem="QVA-5W-97S" firstAttribute="height" secondItem="Ckn-Iy-49O" secondAttribute="height" multiplier="0.882353" id="JRf-ti-a6y"/>
-                            <constraint firstItem="qgc-tu-Nbf" firstAttribute="leading" secondItem="PpL-d3-2KS" secondAttribute="leading" id="MMQ-UX-Cwr"/>
+                            <constraint firstItem="qgc-tu-Nbf" firstAttribute="leading" secondItem="PpL-d3-2KS" secondAttribute="leading" constant="-50" id="MMQ-UX-Cwr"/>
                             <constraint firstItem="Z0I-wb-sJ7" firstAttribute="top" secondItem="aso-VH-ame" secondAttribute="top" constant="65" id="Mfh-cH-QYA"/>
-                            <constraint firstItem="v2J-tQ-8fX" firstAttribute="leading" secondItem="QNS-fs-IA4" secondAttribute="leading" id="N2k-0w-lG9"/>
+                            <constraint firstItem="v2J-tQ-8fX" firstAttribute="leading" secondItem="QNS-fs-IA4" secondAttribute="leading" constant="-50" id="N2k-0w-lG9"/>
                             <constraint firstItem="v2J-tQ-8fX" firstAttribute="top" secondItem="QNS-fs-IA4" secondAttribute="bottom" constant="8" id="Onc-aF-nk3"/>
                             <constraint firstItem="vGZ-6S-zTK" firstAttribute="width" secondItem="LvM-VE-jJH" secondAttribute="width" id="PMb-DI-oy0"/>
                             <constraint firstItem="QVA-5W-97S" firstAttribute="leading" secondItem="Ckn-Iy-49O" secondAttribute="trailing" constant="8" id="SaW-7I-R1F"/>
