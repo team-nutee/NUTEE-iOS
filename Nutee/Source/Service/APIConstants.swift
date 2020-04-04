@@ -39,7 +39,7 @@ struct APIConstants {
     // POST formData : image filename , content : content
     static let PostGET = BaseURL + "/api/post/:id"
     // GET 뒤에 아이디 값을 넣어야 함                 // 아이디가 게시물의 id?
-    static let PostDelete = BaseURL + "/api/post/:id"
+    static let PostDelete = BaseURL + "/api/post" // /:id"
     // DELETE 뒤에 아이디 값을 넣어줘야함              // "
     static let Posts = BaseURL + "/api/posts"
     // GET +++"?offset=0&limit=10" <-- limit는 가져올 posts의 개수(10)

@@ -40,7 +40,6 @@ class NewsFeedVC: UIViewController {
         newsTV.separatorStyle = .none
         
         newsTV.register(UINib(nibName: "FeedTVC", bundle: nil), forCellReuseIdentifier: "FeedTVC")
-
         
         self.view.addSubview(loadCompleteBtn)
         
@@ -166,7 +165,7 @@ class NewsFeedVC: UIViewController {
             print("더 이상 불러올 게시글이 없습니다.")
         }
     }
-
+    
 }
 
 // MARK: - UITableView
@@ -211,23 +210,25 @@ extension NewsFeedVC : UITableViewDataSource {
         cell.addBorder((.bottom), color: .lightGray, thickness: 0.3)
         cell.selectionStyle = .none
         
-            
-            // cell 초기화 진행
-            // emptyStatusView(tag: 404) cell에서 제거하기
-            if let viewWithTag = self.view.viewWithTag(404) {
-                viewWithTag.removeFromSuperview()
-            }
-            
-            newsPost = newsPostsArr?[indexPath.row]
-            // 생성된 Cell클래스로 NewsPost 정보 넘겨주기
-            cell.newsPost = self.newsPost
-            cell.initPosting()
-            
-            // VC 컨트롤 권한을 Cell클래스로 넘겨주기
-            cell.newsFeedVC = self
-            
-            // 사용자 프로필 이미지 탭 인식 설정
-            cell.setClickActions()
+        
+        // cell 초기화 진행
+        // emptyStatusView(tag: 404) cell에서 제거하기
+        if let viewWithTag = self.view.viewWithTag(404) {
+            viewWithTag.removeFromSuperview()
+        }
+        
+        newsPost = newsPostsArr?[indexPath.row]
+        // 생성된 Cell클래스로 NewsPost 정보 넘겨주기
+        cell.newsPost = self.newsPost
+        cell.initPosting()
+        
+        // VC 컨트롤 권한을 Cell클래스로 넘겨주기
+        cell.newsFeedVC = self
+        // NewsFeedVC와 FeedTVC 사이를 통신하기 위한 변수 연결작업
+        cell.delegate = self
+        
+        // 사용자 프로필 이미지 탭 인식 설정
+        cell.setClickActions()
         
         return cell
     }
@@ -280,6 +281,17 @@ extension NewsFeedVC : UITableViewDataSource {
         }
     }
     
+}
+
+// MARK: - FeedTVC과 통신하여 게시글 삭제 후 테이블뷰 정보 다시 로드하기
+
+extension NewsFeedVC: FeedTVCDelegate {
+    func updateNewsTV() {
+        getNewsPostsService(postCnt: 10, lastId: 0, completionHandler: {returnedData -> Void in
+            self.newsPostsArr = self.newsPosts
+            self.newsTV.reloadData()
+        })
+    }
 }
 
 //MARK: - 뉴스피드 내용을 가져오기 위한 서버연결

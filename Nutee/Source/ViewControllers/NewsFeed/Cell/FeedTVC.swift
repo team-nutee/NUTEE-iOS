@@ -24,6 +24,9 @@ class FeedTVC: UITableViewCell {
     
     //MARK: - Variables and Properties
     
+    // NewsFeedVC와 통신하기 위한 델리게이트 변수 선언
+    weak var delegate: FeedTVCDelegate?
+    
     weak var newsFeedVC: UIViewController?
     var newsPost: NewsPostsContentElement?
     
@@ -228,7 +231,11 @@ class FeedTVC: UITableViewCell {
             let cancelAction = UIAlertAction(title: "취소", style: .default, handler: nil)
             let okAction = UIAlertAction(title: "확인", style: .default) {
                 (action: UIAlertAction) in
-                // Code to delete
+                // Code to 삭제
+                self.postDeleteService(postId: self.newsPost?.id ?? 0, completionHandler: {() -> Void in
+                    // delegate로 NewsFeedVC와 통신하기
+                    self.delegate?.updateNewsTV()
+                })
             }
             deleteAlert.addAction(cancelAction)
             deleteAlert.addAction(okAction)
@@ -307,6 +314,14 @@ class FeedTVC: UITableViewCell {
     
 }
 
+// MARK: - NewsFeedVC와 통신하기 위한 프로토콜 정의
+
+protocol FeedTVCDelegate: class {
+    func updateNewsTV() // NewsFeedVC에 정의되어 있는 프로토콜 함수
+}
+
+// MARK: - Repost
+
 extension FeedTVC {
     func reportPost( content: String) {
         let userid = KeychainWrapper.standard.string(forKey: "id") ?? ""
@@ -368,6 +383,31 @@ extension FeedTVC {
             case .success(let res):
                 
                 print("likePost succussful", res)
+            case .requestErr(_):
+                print("request error")
+                
+            case .pathErr:
+                print(".pathErr")
+                
+            case .serverErr:
+                print(".serverErr")
+                
+            case .networkFail :
+                print("failure")
+            }
+        }
+    }
+    
+    
+    // MARK: - Post
+    func postDeleteService(postId: Int, completionHandler: @escaping () -> Void ) {
+        ContentService.shared.postDelete(postId) { (responsedata) in
+            
+            switch responsedata {
+            case .success(let res):
+                
+                print("postPost succussful", res)
+                completionHandler()
             case .requestErr(_):
                 print("request error")
                 
