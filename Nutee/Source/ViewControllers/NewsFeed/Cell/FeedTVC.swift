@@ -83,7 +83,7 @@ class FeedTVC: UITableViewCell {
             let originPostTime = newsPost?.updatedAt ?? ""
             let postTimeDateFormat = originPostTime.getDateFormat(time: originPostTime)
             let updatePostTime = postTimeDateFormat?.timeAgoSince(postTimeDateFormat!)
-            dateLabel.text = "✄ " + (updatePostTime ?? "")
+            dateLabel.text = "수정 " + (updatePostTime ?? "")
         }
         
         // Posting 내용 설정
@@ -216,11 +216,8 @@ class FeedTVC: UITableViewCell {
             let editPostingVC = postSB.instantiateViewController(withIdentifier: "PostVC") as! PostVC
             
             editPostingVC.loadViewIfNeeded()
-            
-            editPostingVC.isEditMode = true
-            editPostingVC.postingTextView.text = self.newsPost?.content
-            editPostingVC.postId = self.newsPost?.id
-            editPostingVC.postBtn.setTitle("수정", for: .normal)
+            editPostingVC.editNewsPost = self.newsPost
+            editPostingVC.setEditMode()
             
             editPostingVC.modalPresentationStyle = .currentContext
             self.newsFeedVC?.present(editPostingVC, animated: true, completion: nil)

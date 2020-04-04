@@ -32,8 +32,11 @@ class PostVC: UIViewController {
     
     var selectedItems = [YPMediaItem]()
     
+    var uploadedImages: [NSString] = []
+    
+    var editNewsPost: NewsPostsContentElement?
     var isEditMode = false
-    var postId: Int?
+    var editPostImg: [Image] = []
     
     // MARK: - Life Cycle
     
@@ -87,6 +90,14 @@ class PostVC: UIViewController {
         self.imageCV.reloadData()
     }
     
+    func setEditMode() {
+        isEditMode = true
+        postingTextView.text = editNewsPost?.content
+        editPostImg = editNewsPost?.images ?? []
+        closeBtn.setTitle("취소", for: .normal)
+        postBtn.setTitle("수정", for: .normal)
+    }
+    
     @objc func closePosting() {
         setDefault()
         self.dismiss(animated: true, completion: nil)
@@ -99,16 +110,27 @@ class PostVC: UIViewController {
         if isEditMode == false {
             // 사진이 있을때는 사진 올리고 게시물 업로드를 위한 분기처리
             if pickedIMG != [] {
-                postImage(images: pickedIMG)
+                postImage(images: pickedIMG, completionHandler: {(returnedData)-> Void in
+                    self.postContent(images: self.uploadedImages, postContent: self.postingTextView.text)
+                })
             } else {
                 postContent(images: [], postContent: postingTextView.text)
             }
         } else {
             // 사진이 있을때는 사진 올리고 게시물 업로드를 위한 분기처리
+            var images: [String] = []
+            for img in self.editPostImg {
+                images.append(img.src ?? "")
+            }
             if pickedIMG != [] {
-                postImage(images: pickedIMG)
+                postImage(images: pickedIMG, completionHandler: {(returnedData)-> Void in
+                    for uploadimg in self.uploadedImages {
+                        images.append(uploadimg as String)
+                    }
+                    self.editPostContent(postId: self.editNewsPost?.id ?? 0, postContent: self.postingTextView.text, postImages: images)
+                })
             } else {
-                editPostContent(postId: postId ?? 0, postContent: postingTextView.text)
+                editPostContent(postId: editNewsPost?.id ?? 0, postContent: postingTextView.text, postImages: images)
             }
         }
         
@@ -264,22 +286,39 @@ extension PostVC: UICollectionViewDelegate { }
 
 extension PostVC : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return pickedIMG.count
+        if isEditMode == false {
+            return pickedIMG.count
+        } else {
+            return (editPostImg.count ) + pickedIMG.count
+        }
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PostIMGCVC", for: indexPath) as! PostIMGCVC
-        cell.postIMG.image = pickedIMG[indexPath.row]
+        
         cell.postIMG.cornerRadius = 10
+        if isEditMode == false {
+            cell.postIMG.image = pickedIMG[indexPath.row]
+        } else {
+            if editPostImg.count >= 1 && indexPath.row < editPostImg.count {
+                cell.postIMG.imageFromUrl((APIConstants.BaseURL) + "/" + (editNewsPost?.images[indexPath.row].src ?? ""), defaultImgPath: (APIConstants.BaseURL) + "/" + "settings/nutee_profile.png")
+            } else {
+                let fixIndex = Int(indexPath.row) - (editPostImg.count)
+                cell.postIMG.image = pickedIMG[fixIndex]
+            }
+        }
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PostIMGCVC", for: indexPath) as! PostIMGCVC
-        
-        cell.postIMG.image = nil
-        pickedIMG.remove(at: indexPath.row)
+
+        if isEditMode == false {
+            pickedIMG.remove(at: indexPath.row)
+        } else {
+            editPostImg.remove(at: indexPath.row)
+        }
         
         self.imageCV.reloadData()
     }
@@ -317,7 +356,7 @@ extension PostVC {
         
     }
     
-    func postImage(images: [UIImage]){
+    func postImage(images: [UIImage], completionHandler: @escaping (_ returnedData: [NSString]) -> Void ) {
         ContentService.shared.uploadImage(pictures: images){
             [weak self]
             data in
@@ -326,8 +365,9 @@ extension PostVC {
             
             switch data {
             case .success(let res):
-                self.postContent(images: res as! [NSString], postContent: self.postingTextView.text)
-                
+                self.uploadedImages = res as! [NSString]
+                print(".successful uploadImage")
+                completionHandler(self.uploadedImages)
             case .requestErr:
                 self.simpleAlert(title: "실패", message: "")
                 
@@ -345,8 +385,8 @@ extension PostVC {
         
     }
     
-    func editPostContent(postId: Int, postContent: String){
-        ContentService.shared.editPost(postId, postContent){
+    func editPostContent(postId: Int, postContent: String, postImages: [String]){
+        ContentService.shared.editPost(postId, postContent, postImages){
             [weak self]
             data in
             
