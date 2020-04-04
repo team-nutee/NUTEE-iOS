@@ -215,37 +215,6 @@ struct ContentService {
         }
     }
     
-    // EditPosting
-//    func editPost(pictures: [NSString], postContent: String, completion: @escaping(NetworkResult<Any>)->Void) {
-//
-//        let headers: HTTPHeaders = [
-//            "Content-Type": "multipart/form-data",
-//            "Cookie" : UserDefaults.standard.string(forKey: "Cookie") ?? ""
-//        ]
-//
-//        Alamofire.upload(multipartFormData: { (multipartFormData) in
-//            //            multipartFormData.append(pictures, withName: "image")
-//            for image in pictures {
-//
-//                multipartFormData.append((image as String).data(using: .utf8) ?? Data() , withName: "image")
-//            }
-//            multipartFormData.append(postContent.data(using: .utf8) ?? Data(), withName: "content")
-//
-//        }, to: APIConstants.PostPost, method: .patch, headers: headers) { (encodingResult) in
-//
-//            switch encodingResult {
-//
-//            case .success(let upload, _, _):
-//                upload.responseJSON { (response) in
-//
-//                    completion(.success(response.data as Any))
-//                }
-//            case .failure(let encodingError):
-//                print(encodingError.localizedDescription)
-//            }
-//        }
-//    }
-    
     func editPost(_ postId: Int, _ content: String, _ images: [String], completion: @escaping (NetworkResult<Any>) -> Void) {
         
         let URL = APIConstants.PostPost
