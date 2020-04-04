@@ -219,7 +219,7 @@ class FeedTVC: UITableViewCell {
             editPostingVC.editNewsPost = self.newsPost
             editPostingVC.setEditMode()
             
-            editPostingVC.modalPresentationStyle = .currentContext
+            editPostingVC.modalPresentationStyle = .fullScreen
             self.newsFeedVC?.present(editPostingVC, animated: true, completion: nil)
         }
         let deleteAction = UIAlertAction(title: "삭제", style: .destructive) {
