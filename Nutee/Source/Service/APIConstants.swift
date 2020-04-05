@@ -27,6 +27,10 @@ struct APIConstants {
     // POST { "userId":"asdf123" }
     static let NickCheck = BaseURL + "/api/user/nicknamecheck"
     // POST { "userId":"asdf123" }
+    static let PWCheck = BaseURL + "/api/user/passwordcheck"
+    // POST { "password" : "123123"}
+    static let PWChange = BaseURL + "/api/user/passwordchange"
+    // POST { "newpassword" : "asdf" }
 
     
 

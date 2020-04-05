@@ -590,4 +590,91 @@ struct UserService {
         }
     }
 
+    
+    func checkPW(_ password: String, completion: @escaping (NetworkResult<Any>) -> Void) {
+        
+        let URL = APIConstants.PWCheck
+        let headers: HTTPHeaders = [
+            "Content-Type": "application/json",
+            "Cookie" : KeychainWrapper.standard.string(forKey: "Cookie")!
+        ]
+        
+        let body : Parameters = [
+            "password" : password
+        ]
+        
+        
+        Alamofire.request(URL, method: .post, parameters: body, encoding: JSONEncoding.default, headers: headers).responseData{
+            response in
+            
+            switch response.result {
+                
+            case .success:
+                // parameter 위치
+                if let status = response.response?.statusCode {
+                    print ("status", status)
+                    switch status {
+                    case 200:
+                        completion(.success(200))
+                    case 401:
+                        completion(.requestErr(401))
+                    case 500:
+                        print("실패 500")
+                        completion(.serverErr)
+                    default:
+                        break
+                    }
+                    
+                }
+                break
+            case .failure(let err):
+                print(err.localizedDescription)
+                completion(.networkFail)
+            }
+        }
+    }
+
+    func changePW(_ password: String, completion: @escaping (NetworkResult<Any>) -> Void) {
+        
+        let URL = APIConstants.PWChange
+        let headers: HTTPHeaders = [
+            "Content-Type": "application/json",
+            "Cookie" : KeychainWrapper.standard.string(forKey: "Cookie")!
+        ]
+        
+        let body : Parameters = [
+            "newpassword" : password
+        ]
+        
+        
+        Alamofire.request(URL, method: .post, parameters: body, encoding: JSONEncoding.default, headers: headers).responseData{
+            response in
+            
+            switch response.result {
+                
+            case .success:
+                // parameter 위치
+                if let status = response.response?.statusCode {
+                    print ("status", status)
+                    switch status {
+                    case 200:
+                        completion(.success(200))
+                    case 401:
+                        completion(.requestErr(401))
+                    case 500:
+                        print("실패 500")
+                        completion(.serverErr)
+                    default:
+                        break
+                    }
+                    
+                }
+                break
+            case .failure(let err):
+                print(err.localizedDescription)
+                completion(.networkFail)
+            }
+        }
+    }
+
 }
