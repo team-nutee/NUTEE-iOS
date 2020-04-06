@@ -26,8 +26,8 @@ class FeedTVC: UITableViewCell {
     
     // NewsFeedVC와 통신하기 위한 델리게이트 변수 선언
     weak var delegate: FeedTVCDelegate?
-    
     weak var newsFeedVC: UIViewController?
+    
     var newsPost: NewsPostsContentElement?
     
     var imgCnt: Int?
@@ -232,10 +232,7 @@ class FeedTVC: UITableViewCell {
             let okAction = UIAlertAction(title: "확인", style: .default) {
                 (action: UIAlertAction) in
                 // Code to 삭제
-                self.postDeleteService(postId: self.newsPost?.id ?? 0, completionHandler: {() -> Void in
-                    // delegate로 NewsFeedVC와 통신하기
-                    self.delegate?.updateNewsTV()
-                })
+                self.deletePost()
             }
             deleteAlert.addAction(cancelAction)
             deleteAlert.addAction(okAction)
@@ -312,6 +309,13 @@ class FeedTVC: UITableViewCell {
         btn.tintColor = color
     }
     
+    func deletePost() {
+        self.postDeleteService(postId: self.newsPost?.id ?? 0, completionHandler: {() -> Void in
+            // delegate로 NewsFeedVC와 통신하기
+            self.delegate?.updateNewsTV()
+        })
+    }
+    
 }
 
 // MARK: - NewsFeedVC와 통신하기 위한 프로토콜 정의
@@ -319,6 +323,15 @@ class FeedTVC: UITableViewCell {
 protocol FeedTVCDelegate: class {
     func updateNewsTV() // NewsFeedVC에 정의되어 있는 프로토콜 함수
 }
+
+// MARK: - HeaderNewsFeedView와 통신하하여 게시글 삭제
+
+//extension FeedTVC: HeaderNewsFeedViewDelegate {
+//    func deletePostAndBackToMainNewsTV(completionHandler: @escaping () -> Void {
+//        deletePost()
+//        completionHandler()
+//    })
+//}
 
 // MARK: - Repost
 
