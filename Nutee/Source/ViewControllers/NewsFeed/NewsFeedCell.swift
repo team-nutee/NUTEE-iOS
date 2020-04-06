@@ -585,7 +585,7 @@ class NewsFeedCell: UITableViewCell {
         btn.setAttributedTitle(NSAttributedString(string: " " + String(num), attributes: stateAttributes), for: state)
         btn.tintColor = color
     }
-    
+ 
 }
 
 // MARK: - 서버 연결 코드 구간
