@@ -12,6 +12,13 @@ import Then
 import SwiftKeychainWrapper
 import SnapKit
 
+extension ProfileVC: ProfileTVCDelegate {
+    func updateProfileTV() {
+        getUserPostService(userId: userId ?? 0)
+    }
+}
+
+
 class ProfileVC: UIViewController {
     // MARK: - UI components
     
@@ -209,6 +216,8 @@ extension ProfileVC : UITableViewDataSource {
         myArticleTV.separatorStyle = .singleLine
         cell.selectionStyle = .none
         
+        cell.ProfileVC = self
+        
         if indexPath.row == 0 {
             cell.backgroundColor = .lightGray
         } else {
@@ -218,7 +227,6 @@ extension ProfileVC : UITableViewDataSource {
             
             // ProfileTableViewCell로 해당 Cell의 게시글 정보 전달
             cell.loginUserPost = userPost
-            
             cell.initLoginUserPost()
             
         }

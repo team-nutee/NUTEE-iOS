@@ -12,6 +12,7 @@ import Foundation
 struct UserPostContentElement: Codable {
     let id: Int?
     let content, createdAt, updatedAt: String?
+    let isDeleted, isBlocked: Bool
     let userID: Int?
     let retweetID: Int?
     let user: User
@@ -19,9 +20,9 @@ struct UserPostContentElement: Codable {
     let likers: [Liker]
     let retweet: Retweet?
     let comments: [Comment]
-
+    
     enum CodingKeys: String, CodingKey {
-        case id, content, createdAt, updatedAt
+        case id, content, createdAt, updatedAt,isDeleted, isBlocked
         case userID = "UserId"
         case retweetID = "RetweetId"
         case user = "User"
@@ -37,6 +38,8 @@ struct UserPostContentElement: Codable {
         content = (try? values.decode(String.self, forKey: .content)) ?? ""
         createdAt = (try? values.decode(String.self, forKey: .createdAt)) ?? ""
         updatedAt = (try? values.decode(String.self, forKey: .updatedAt)) ?? ""
+        isDeleted = (try? values.decode(Bool.self, forKey: .isDeleted)) ?? false
+        isBlocked = (try? values.decode(Bool.self, forKey: .isBlocked)) ?? false
         userID = (try? values.decode(Int.self, forKey: .userID)) ?? 0
         retweetID = (try? values.decode(Int.self, forKey: .retweetID)) ?? nil
         user = (try? values.decode(User.self, forKey: .user)) ?? User.init(id: 0, nickname: "", image: nil)

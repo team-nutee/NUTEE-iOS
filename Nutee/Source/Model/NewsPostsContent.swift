@@ -10,8 +10,8 @@ import Foundation
 
 // MARK: - NewsPostsContentElement
 struct NewsPostsContentElement: Codable {
-    let id: Int
-    let content, createdAt, updatedAt: String
+    let id: Int?
+    let content, createdAt, updatedAt: String?
     let isDeleted, isBlocked: Bool
     var userID: Int
     let retweetID: Int?
