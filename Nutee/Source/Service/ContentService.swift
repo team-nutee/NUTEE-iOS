@@ -118,7 +118,6 @@ struct ContentService {
             "Cookie" : KeychainWrapper.standard.string(forKey: "Cookie") ?? ""
         ]
         
-        print(URL)
         Alamofire.request(URL, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: header).responseData{ response in
             
             switch response.result {
@@ -134,7 +133,6 @@ struct ContentService {
                                 let result = try decoder.decode(NewsPostsContent.self, from: value)
                                 completion(.success(result))
                             } catch {
-                                print("123")
                                 completion(.pathErr)
                             }
                         case 409:
