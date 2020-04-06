@@ -33,7 +33,7 @@ class ProfileTVC: UITableViewCell {
     
     // MARK: - Variables and Properties
     
-    var loginUserPost: UserPostContentElement?
+    var loginUserPost: NewsPostsContentElement?
     
     weak var ProfileVC: UIViewController?
     
@@ -189,7 +189,8 @@ class ProfileTVC: UITableViewCell {
             let editPostingVC = postSB.instantiateViewController(withIdentifier: "PostVC") as! PostVC
             
             editPostingVC.loadViewIfNeeded()
-            editPostingVC.editNewsPost = self.loginUserPost as? NewsPostsContentElement
+            let model : NewsPostsContentElement = self.loginUserPost as! NewsPostsContentElement
+            editPostingVC.editNewsPost = model
             editPostingVC.setEditMode()
             
             editPostingVC.modalPresentationStyle = .fullScreen

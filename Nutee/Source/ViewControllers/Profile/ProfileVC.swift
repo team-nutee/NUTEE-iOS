@@ -47,7 +47,7 @@ class ProfileVC: UIViewController {
     // MARK: - Variables and Properties
     
     var userInfo: SignIn?
-    var userPosts: UserPostContent?
+    var userPosts: NewsPostsContent?
     // 기본적으로 로그인한 사용자의 아이디 값으로 설정
     var userId = KeychainWrapper.standard.integer(forKey: "id")
     
@@ -497,7 +497,7 @@ extension ProfileVC {
 
             switch responsedata {
             case .success(let res):
-                let response = res as! UserPostContent
+                let response = res as! NewsPostsContent
                 self.userPosts = response
                 self.searchFollow()
                 self.myArticleTV.reloadData()
