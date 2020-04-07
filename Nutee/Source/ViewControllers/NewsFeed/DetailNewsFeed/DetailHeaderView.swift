@@ -10,43 +10,32 @@ import UIKit
 
 import SwiftKeychainWrapper
 
-class DetailHederView: UITableViewHeaderFooterView {
+class DetailHeaderView: UITableViewHeaderFooterView {
     
     //MARK: - UI components
     
     // User Information
     @IBOutlet var userIMG: UIImageView!
-    @IBOutlet var lblUserId: UIButton!
+    @IBOutlet var userName: UIButton!
     @IBOutlet var userLabel: UILabel!
     @IBOutlet var dateLabel: UILabel!
     
     // Posting
-    @IBOutlet var contentTextView: UITextView!
-    @IBOutlet var ContentsToRepost: NSLayoutConstraint!
+    @IBOutlet weak var contentTextView: UITextView!
     
     @IBOutlet var oneImageView : UIImageView!
-//    @IBOutlet var threeImageViewArr : [UIImageView]!
     @IBOutlet var threeImageViewArr: [UIImageView]!
     @IBOutlet var fourImageViewArr : [UIImageView]!
     
     //앨범 프레임 three, four 버전을 통합관리 할 view 객체 생성
-    @IBOutlet var vwSquare: UIView!
-    @IBOutlet var vwSquareToRepost: NSLayoutConstraint!
-    // ver. OneImage(without frame)
-    @IBOutlet var imgvwOne: UIImageView!
+    @IBOutlet weak var imageWrapperView: UIView!
     // ver. ThreeFrame
-    @IBOutlet var vwThree: UIView!
-    @IBOutlet var imgvwThree: [UIImageView]!
-    @IBOutlet var lblThreeMoreImg: UILabel!
+    @IBOutlet var moreLabel: UILabel!
     // ver. FourFrame
-    @IBOutlet var vwFour: UIView!
-    @IBOutlet var imgvwFour: [UIImageView]!
-    @IBOutlet var lblFourMoreImg: UILabel!
+    @IBOutlet var fourMoreLabel: UILabel!
     
     // function buttons
-    @IBOutlet var btnRepost: UIButton!
     @IBOutlet var btnLike: UIButton!
-    @IBOutlet var btnComment: UIButton!
     @IBOutlet var btnMore: UIButton!
     
     //MARK: - Variables and Properties
@@ -80,7 +69,7 @@ class DetailHederView: UITableViewHeaderFooterView {
     override func prepareForReuse() {
         super.prepareForReuse()
         
-        btnRepost.isEnabled = true
+
         btnLike.isEnabled = true
         btnMore.isEnabled = true
     }
@@ -93,13 +82,13 @@ class DetailHederView: UITableViewHeaderFooterView {
     
     @IBAction func btnRepost(_ sender: UIButton) {
         // .selected State를 활성화 하기 위한 코드
-        btnRepost.isSelected = !btnRepost.isSelected
+//        btnRepost.isSelected = !btnRepost.isSelected
         if isClickedRepost! {
             isClickedRepost = false
-            btnRepost.tintColor = .gray
+//            btnRepost.tintColor = .gray
         } else {
             isClickedRepost = true
-            btnRepost.tintColor = .nuteeGreen
+//            btnRepost.tintColor = .nuteeGreen
         }
     }
     
@@ -188,8 +177,8 @@ class DetailHederView: UITableViewHeaderFooterView {
             }
             // 사용자 이름 설정
             //            let nickname = newsPost?.user.nickname ?? ""
-            lblUserId.setTitle(detailNewsPost?.user.nickname, for: .normal)
-            lblUserId.sizeToFit()
+//            lblUserId.setTitle(detailNewsPost?.user.nickname, for: .normal)
+//            lblUserId.sizeToFit()
             // 게시글 게시 시간 설정
             let originPostTime = detailNewsPost?.createdAt
             let postTimeDateFormat = originPostTime?.getDateFormat(time: originPostTime!)
@@ -205,7 +194,6 @@ class DetailHederView: UITableViewHeaderFooterView {
             var containLoginUser = false
             // Repost 버튼
             isClickedRepost = false
-            btnRepost.tintColor = .gray
             if containLoginUser {
                 // 로그인 한 사용자가 좋아요를 누른 상태일 경우
                 btnLike.isSelected = true
@@ -245,7 +233,6 @@ class DetailHederView: UITableViewHeaderFooterView {
             }
             // Comment 버튼
             numComment = detailNewsPost?.comments.count ?? 0
-            setButtonPlain(btn: btnComment, num: numComment!, color: .gray, state: .normal)
         }
     }
     
@@ -274,7 +261,7 @@ class DetailHederView: UITableViewHeaderFooterView {
     // 사진 개수에 따른 이미지 표시 유형 선택
     func showImgFrame() {
         //constrain layout 충돌 방지를 위한 이미지 뷰 전체 hidden 설정
-        vwSquare.isHidden = true
+        
         
         var num = 0
         
@@ -292,57 +279,53 @@ class DetailHederView: UITableViewHeaderFooterView {
         }
         switch imageCnt {
         case 0:
+            break
             // 보여줄 사진이 없는 경우(글만 표시)
-            lblThreeMoreImg.isHidden = true
-            lblFourMoreImg.isHidden = true
             
             //            ContentToVwTwo.isActive = false
             //            ContentToVwSquare.isActive = false
 //            vwSquareToRepost.isActive = false
-            ContentsToRepost.isActive = true
             
         case 1:
             // ver. only OneImage
-            vwSquare.isHidden = false
+            imageWrapperView.isHidden = false
             
-            imgvwOne.isHidden = false
-            vwThree.isHidden = true
-            vwFour.isHidden = true
+//            imgvwOne.isHidden = false
+//            vwThree.isHidden = true
+//            vwFour.isHidden = true
             
             //            ContentToVwTwo.isActive = false
             //            ContentToVwSquare.isActive = true
-            vwSquareToRepost.isActive = true
-            ContentsToRepost.isActive = false
+//            vwSquareToRepost.isActive = true
+//            ContentsToRepost.isActive = false
             
             if isRepost {
-                imgvwOne.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.retweet?.images[0].src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+                oneImageView.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.retweet?.images[0].src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
             } else {
-                imgvwOne.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.images[0].src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+                oneImageView.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.images[0].src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
             }
             
         case 2:
             //            ContentToVwSquare.isActive = false
-            vwSquareToRepost.isActive = false
-            ContentsToRepost.isActive = false
             
             if isRepost {
-                imgvwOne.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.retweet?.images[0].src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+                oneImageView.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.retweet?.images[0].src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
             } else {
-                imgvwOne.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.images[0].src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+                oneImageView.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.images[0].src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
             }
         case 3:
             // ver. ThreeFrame
-            vwSquare.isHidden = false
-            
-            imgvwOne.isHidden = true
-            vwFour.isHidden = true
+//            vwSquare.isHidden = false
+//
+//            imgvwOne.isHidden = true
+//            vwFour.isHidden = true
             
             //            ContentToVwTwo.isActive = false
             //            ContentToVwSquare.isActive = true
-            vwSquareToRepost.isActive = true
-            ContentsToRepost.isActive = false
+//            vwSquareToRepost.isActive = true
+//            ContentsToRepost.isActive = false
             
-            for imgvw in imgvwThree {
+            for imgvw in threeImageViewArr {
                 if isRepost {
                     imgvw.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.retweet?.images[num].src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
                 } else {
@@ -353,28 +336,28 @@ class DetailHederView: UITableViewHeaderFooterView {
                     imgvw.alpha = 1.0
                     if leftImg > 0 {
                         imgvw.alpha = 0.5
-                        lblThreeMoreImg.isHidden = false
-                        lblThreeMoreImg.text = String(leftImg) + " +"
-                        lblThreeMoreImg.sizeToFit()
+//                        lblThreeMoreImg.isHidden = false
+//                        lblThreeMoreImg.text = String(leftImg) + " +"
+//                        lblThreeMoreImg.sizeToFit()
                     } else {
-                        lblThreeMoreImg.isHidden = true
+//                        lblThreeMoreImg.isHidden = true
                     }
                 }
                 num += 1
             }
         default:
             // ver. FourFrame
-            vwSquare.isHidden = false
-            
-            imgvwOne.isHidden = true
-            vwThree.isHidden = true
-            
-            //            ContentToVwTwo.isActive = false
-            //            ContentToVwSquare.isActive = true
-            vwSquareToRepost.isActive = true
-            ContentsToRepost.isActive = false
-            
-            for imgvw in imgvwFour {
+//            vwSquare.isHidden = false
+//
+//            imgvwOne.isHidden = true
+//            vwThree.isHidden = true
+//
+//            //            ContentToVwTwo.isActive = false
+//            //            ContentToVwSquare.isActive = true
+//            vwSquareToRepost.isActive = true
+//            ContentsToRepost.isActive = false
+//
+            for imgvw in fourImageViewArr {
                 if num <= 3 {
                     if isRepost {
                         imgvw.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.retweet?.images[num].src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
@@ -387,11 +370,11 @@ class DetailHederView: UITableViewHeaderFooterView {
                     imgvw.alpha = 1.0
                     if leftImg > 0 {
                         imgvw.alpha = 0.5
-                        lblFourMoreImg.isHidden = false
-                        lblFourMoreImg.text = String(leftImg) + " +"
-                        lblFourMoreImg.sizeToFit()
+//                        lblFourMoreImg.isHidden = false
+//                        lblFourMoreImg.text = String(leftImg) + " +"
+//                        lblFourMoreImg.sizeToFit()
                     } else {
-                        lblFourMoreImg.isHidden = true
+//                        lblFourMoreImg.isHidden = true
                     }
                 }
                 num += 1
@@ -442,7 +425,7 @@ class DetailHederView: UITableViewHeaderFooterView {
 
 // MARK: - 서버 연결 코드 구간
 
-extension DetailHederView {
+extension DetailHeaderView {
     
     func reportPost( content: String) {
         let userid = KeychainWrapper.standard.string(forKey: "id") ?? ""
