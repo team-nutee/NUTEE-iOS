@@ -196,6 +196,7 @@ class DetailHeaderView: UITableViewHeaderFooterView {
                 numLike = detailNewsPost?.likers.count ?? 0
                 btnLike.setTitle(" " + String(numLike!), for: .selected)
                 btnLike.tintColor = .systemPink
+                btnLike.setTitleColor(.systemPink, for: .selected)
                 isClickedLike = true
             } else {
                 // 로그인 한 사용자가 좋아요를 누르지 않은 상태일 경우
@@ -203,6 +204,7 @@ class DetailHeaderView: UITableViewHeaderFooterView {
                 numLike = detailNewsPost?.likers.count ?? 0
                 btnLike.setTitle(" " + String(numLike!), for: .normal)
                 btnLike.tintColor = .gray
+                btnLike.setTitleColor(.gray, for: .normal)
                 isClickedLike = false
             }
         }
@@ -213,6 +215,7 @@ class DetailHeaderView: UITableViewHeaderFooterView {
         numLike! -= 1
         btnLike.setTitle(" " + String(numLike ?? 0), for: .normal)
         btnLike.tintColor = .gray
+        btnLike.setTitleColor(.gray, for: .normal)
         isClickedLike = false
     }
     
@@ -221,6 +224,7 @@ class DetailHeaderView: UITableViewHeaderFooterView {
         numLike! += 1
         btnLike.setTitle(" " + String(numLike ?? 0), for: .selected)
         btnLike.tintColor = .systemPink
+        btnLike.setTitleColor(.systemPink, for: .selected)
         isClickedLike = true
     }
     
@@ -239,7 +243,7 @@ class DetailHeaderView: UITableViewHeaderFooterView {
         switch imageCnt {
         case 0:
             // 보여줄 사진이 없는 경우(글만 표시)
-            imageWrapperView.frame.size.height = 0
+            imageWrapperViewHeight.constant = 0
         case 1:
             // ver. only OneImage
             oneImageView.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.images[0].src ?? ""), defaultImgPath: (APIConstants.BaseURL) + "/settings/nutee_profile.png")

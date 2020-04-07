@@ -15,7 +15,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="70" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="1MS-nu-hQ5">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="70" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="2" translatesAutoresizingMaskIntoConstraints="NO" id="1MS-nu-hQ5">
                                 <rect key="frame" x="0.0" y="44" width="375" height="691"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
@@ -35,7 +35,10 @@
                                                     </constraints>
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fkO-Yc-TQ3">
-                                                    <rect key="frame" x="70" y="10" width="36" height="22"/>
+                                                    <rect key="frame" x="70" y="8" width="36" height="27"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="27" id="q7S-QD-wwa"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <state key="normal" title="name">
                                                         <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -45,13 +48,13 @@
                                                     </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="time" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hEa-f3-4GT">
-                                                    <rect key="frame" x="334" y="11" width="21" height="21"/>
+                                                    <rect key="frame" x="334" y="15.666666666666664" width="21" height="12"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" bouncesZoom="NO" editable="NO" text="댓글 내용 구간 입니다" textAlignment="justified" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O0E-Kn-gbN">
-                                                    <rect key="frame" x="65" y="32" width="295" height="33"/>
+                                                    <rect key="frame" x="65" y="35" width="295" height="30"/>
                                                     <color key="tintColor" red="0.074509803920000006" green="0.76078431369999999" blue="0.46274509800000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -59,14 +62,13 @@
                                                 </textView>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="hEa-f3-4GT" firstAttribute="centerY" secondItem="fkO-Yc-TQ3" secondAttribute="centerY" id="1gv-Oe-NAK"/>
                                                 <constraint firstItem="fkO-Yc-TQ3" firstAttribute="leading" secondItem="OW2-rG-Pny" secondAttribute="trailing" constant="15" id="4Ja-XZ-VQF"/>
                                                 <constraint firstAttribute="bottom" secondItem="O0E-Kn-gbN" secondAttribute="bottom" constant="5" id="8tN-tc-DRs"/>
-                                                <constraint firstItem="hEa-f3-4GT" firstAttribute="top" secondItem="a6w-ke-aV7" secondAttribute="topMargin" id="DsG-qY-a9m"/>
-                                                <constraint firstItem="O0E-Kn-gbN" firstAttribute="top" secondItem="hEa-f3-4GT" secondAttribute="bottom" id="P3l-Qv-c3L"/>
                                                 <constraint firstAttribute="trailing" secondItem="O0E-Kn-gbN" secondAttribute="trailing" constant="15" id="bLr-sf-AC7"/>
                                                 <constraint firstItem="OW2-rG-Pny" firstAttribute="top" secondItem="a6w-ke-aV7" secondAttribute="top" constant="10" id="c15-gE-Fp1"/>
                                                 <constraint firstItem="O0E-Kn-gbN" firstAttribute="top" secondItem="fkO-Yc-TQ3" secondAttribute="bottom" id="cBT-Qp-hUG"/>
-                                                <constraint firstItem="fkO-Yc-TQ3" firstAttribute="top" secondItem="a6w-ke-aV7" secondAttribute="top" constant="10" id="ebY-AO-LkD"/>
+                                                <constraint firstItem="fkO-Yc-TQ3" firstAttribute="top" secondItem="a6w-ke-aV7" secondAttribute="top" constant="8" id="ebY-AO-LkD"/>
                                                 <constraint firstItem="O0E-Kn-gbN" firstAttribute="leading" secondItem="OW2-rG-Pny" secondAttribute="trailing" constant="10" id="fZc-A8-GZH"/>
                                                 <constraint firstItem="OW2-rG-Pny" firstAttribute="leading" secondItem="a6w-ke-aV7" secondAttribute="leading" constant="15" id="pG0-DB-yjf"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="hEa-f3-4GT" secondAttribute="trailing" constant="5" id="vk3-tY-ZkA"/>
@@ -86,8 +88,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Q7-NF-uqq">
                                 <rect key="frame" x="0.0" y="735" width="375" height="43"/>
                                 <subviews>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" scrollEnabled="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="pdD-0u-Mb2">
-                                        <rect key="frame" x="6" y="5" width="365" height="33"/>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="pdD-0u-Mb2">
+                                        <rect key="frame" x="5" y="5" width="365" height="33"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="lessThanOrEqual" constant="100" id="LXT-HS-xTS"/>
                                         </constraints>
