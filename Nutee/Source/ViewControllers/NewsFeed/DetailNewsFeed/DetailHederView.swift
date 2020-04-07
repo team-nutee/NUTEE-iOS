@@ -442,7 +442,7 @@ class DetailHederView: UITableViewHeaderFooterView {
 
 // MARK: - 서버 연결 코드 구간
 
-extension DetailHederView {
+extension FeedHederView {
     
     func reportPost( content: String) {
         let userid = KeychainWrapper.standard.string(forKey: "id") ?? ""

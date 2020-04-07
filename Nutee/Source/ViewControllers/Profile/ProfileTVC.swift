@@ -189,9 +189,7 @@ class ProfileTVC: UITableViewCell {
             let editPostingVC = postSB.instantiateViewController(withIdentifier: "PostVC") as! PostVC
             
             editPostingVC.loadViewIfNeeded()
-
             editPostingVC.editNewsPost = self.loginUserPost
-//            editPostingVC.editNewsPost = self.loginUserPost as? NewsPostsContentElement
             editPostingVC.setEditMode()
             
             editPostingVC.modalPresentationStyle = .fullScreen
