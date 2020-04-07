@@ -12,7 +12,7 @@ import SwiftKeychainWrapper
 class FeedTVC: UITableViewCell {
     
     @IBOutlet weak var userImg: UIImageView!
-    @IBOutlet weak var userNAMELabel: UILabel!
+    @IBOutlet weak var userNAMEButton: UIButton!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var contentLabel: UILabel!
     
@@ -60,23 +60,20 @@ class FeedTVC: UITableViewCell {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        
     }
     
     func initPosting() {
         userImg.setRounded(radius: nil)
         if newsPost?.user.image?.src == nil || newsPost?.user.image?.src == "" {
-            userImg.imageFromUrl("http://15.164.50.161:9425/settings/nutee_profile.png", defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
-            //            userImg.contentMode = .scaleAspectFit
+            userImg.imageFromUrl((APIConstants.BaseURL) + "/settings/nutee_profile.png", defaultImgPath: (APIConstants.BaseURL) + "/settings/nutee_profile.png")
             userImg.contentMode = .scaleAspectFill
         } else {
-            userImg.imageFromUrl((APIConstants.BaseURL) + "/" + (newsPost?.user.image?.src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+            userImg.imageFromUrl((APIConstants.BaseURL) + "/" + (newsPost?.user.image?.src ?? ""), defaultImgPath: (APIConstants.BaseURL) + "/settings/nutee_profile.png")
             userImg.contentMode = .scaleAspectFill
         }
         // 사용자 이름 설정
-        //            let nickname = newsPost?.user.nickname ?? ""
-        userNAMELabel.text = newsPost?.user.nickname
-        userNAMELabel.sizeToFit()
+        userNAMEButton.setTitle(newsPost?.user.nickname, for: .normal)
+        userNAMEButton.sizeToFit()
         // 게시글 게시 시간 설정
         if newsPost?.createdAt == newsPost?.updatedAt {
             let originPostTime = newsPost?.createdAt ?? ""
@@ -169,25 +166,9 @@ class FeedTVC: UITableViewCell {
         isClickedLike = true
     }
     
-    
     @IBAction func showDetailProfile(_ sender: UIButton) {
         showProfile()
     }
-    
-    //    @IBAction func btnRepost(_ sender: UIButton) {
-    //        // .selected State를 활성화 하기 위한 코드
-    //        btnRepost.isSelected = !btnRepost.isSelected
-    //        if isClickedRepost! {
-    //            isClickedRepost = false
-    //            btnRepost.tintColor = .gray
-    //            retweetDeleteService(postId: newsPost?.id ?? 0)
-    //        } else {
-    //            isClickedRepost = true
-    //            btnRepost.tintColor = .nuteeGreen
-    //            retweetPostService(postId: newsPost?.id ?? 0)
-    //        }
-    //    }
-    
     
     // 프로필 이미지에 탭 인식하게 만들기
     func setClickActions() {

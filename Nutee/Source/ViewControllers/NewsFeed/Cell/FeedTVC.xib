@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -23,15 +23,19 @@
                             <constraint firstAttribute="width" constant="50" id="igK-Xy-e80"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZGS-87-1XP">
-                        <rect key="frame" x="68" y="10" width="37.5" height="21"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rlA-Cp-84w">
+                        <rect key="frame" x="68" y="10" width="69" height="21"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="21" id="JOq-gV-ZVo"/>
+                            <constraint firstAttribute="height" constant="21" id="tNw-s0-Ulw"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <state key="normal" title="UserName">
+                            <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                        </state>
+                        <connections>
+                            <action selector="showDetailProfile:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="clq-pH-P4S"/>
+                        </connections>
+                    </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MXa-cL-zH5">
                         <rect key="frame" x="68" y="41" width="381" height="59"/>
                         <constraints>
@@ -103,17 +107,17 @@
                     <constraint firstItem="JOh-2B-ckn" firstAttribute="top" secondItem="MXa-cL-zH5" secondAttribute="bottom" constant="30" id="CJU-nd-5yE"/>
                     <constraint firstItem="JOh-2B-ckn" firstAttribute="height" secondItem="YmR-yT-5JJ" secondAttribute="height" id="CUI-gF-mkr"/>
                     <constraint firstItem="85t-nh-YOJ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="H7b-Kt-Ia2"/>
-                    <constraint firstItem="ZGS-87-1XP" firstAttribute="leading" secondItem="NfD-9a-TEp" secondAttribute="trailing" constant="8" id="Hoa-1x-OHK"/>
                     <constraint firstItem="YmR-yT-5JJ" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.25" id="INw-fp-kQa"/>
-                    <constraint firstItem="MXa-cL-zH5" firstAttribute="top" secondItem="ZGS-87-1XP" secondAttribute="bottom" constant="10" id="Rb2-W8-zbA"/>
-                    <constraint firstItem="ZGS-87-1XP" firstAttribute="top" secondItem="NfD-9a-TEp" secondAttribute="top" id="WpE-07-2Kh"/>
+                    <constraint firstItem="rlA-Cp-84w" firstAttribute="leading" secondItem="MXa-cL-zH5" secondAttribute="leading" id="IwG-Dd-seI"/>
                     <constraint firstAttribute="trailing" secondItem="YmR-yT-5JJ" secondAttribute="trailing" id="YNG-9d-Efy"/>
                     <constraint firstItem="NfD-9a-TEp" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="b88-cz-fgZ"/>
+                    <constraint firstItem="rlA-Cp-84w" firstAttribute="leading" secondItem="NfD-9a-TEp" secondAttribute="trailing" constant="8" id="cbm-sa-nJS"/>
                     <constraint firstItem="NfD-9a-TEp" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="dFQ-wE-PPU"/>
                     <constraint firstAttribute="bottom" secondItem="YmR-yT-5JJ" secondAttribute="bottom" id="fSg-Hs-10F"/>
-                    <constraint firstItem="MXa-cL-zH5" firstAttribute="leading" secondItem="ZGS-87-1XP" secondAttribute="leading" id="gRI-LK-GJd"/>
                     <constraint firstItem="JOh-2B-ckn" firstAttribute="width" secondItem="YmR-yT-5JJ" secondAttribute="width" id="iEM-zo-d3C"/>
                     <constraint firstItem="YmR-yT-5JJ" firstAttribute="leading" secondItem="JOh-2B-ckn" secondAttribute="trailing" id="mL1-xe-ap0"/>
+                    <constraint firstItem="rlA-Cp-84w" firstAttribute="top" secondItem="NfD-9a-TEp" secondAttribute="top" id="v7O-gd-4ts"/>
+                    <constraint firstItem="MXa-cL-zH5" firstAttribute="top" secondItem="rlA-Cp-84w" secondAttribute="bottom" constant="10" id="wzv-XQ-rS2"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
@@ -125,16 +129,16 @@
                 <outlet property="likeBtn" destination="JOh-2B-ckn" id="dnn-LS-GcV"/>
                 <outlet property="replyCntLabel" destination="g6m-9J-hSO" id="vgJ-rH-Fhy"/>
                 <outlet property="userImg" destination="NfD-9a-TEp" id="pWV-1J-Wsi"/>
-                <outlet property="userNAMELabel" destination="ZGS-87-1XP" id="sqr-fp-7Rw"/>
+                <outlet property="userNAMEButton" destination="rlA-Cp-84w" id="3Al-li-E8N"/>
             </connections>
             <point key="canvasLocation" x="239.85507246376812" y="185.49107142857142"/>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="ellipsis" catalog="system" width="128" height="37"/>
-        <image name="heart" catalog="system" width="128" height="109"/>
-        <image name="heart.fill" catalog="system" width="128" height="109"/>
+        <image name="ellipsis" catalog="system" width="64" height="18"/>
+        <image name="heart" catalog="system" width="64" height="54"/>
+        <image name="heart.fill" catalog="system" width="64" height="54"/>
         <image name="icPicture" width="28" height="28"/>
-        <image name="message.circle" catalog="system" width="128" height="121"/>
+        <image name="message.circle" catalog="system" width="64" height="60"/>
     </resources>
 </document>

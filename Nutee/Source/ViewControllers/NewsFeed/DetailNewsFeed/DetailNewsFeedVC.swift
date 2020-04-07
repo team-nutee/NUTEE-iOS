@@ -144,14 +144,14 @@ extension DetailNewsFeedVC : UITableViewDataSource {
         let headerNewsFeed = tableView.dequeueReusableHeaderFooterView(withIdentifier: "DetailHeaderView") as? DetailHeaderView
         
         // HeaderView로 NewsFeedVC에서 받아온 게시글 정보룰 넘김
-//        headerNewsFeed?.detailNewsPost = self.content
-//        headerNewsFeed?.initPosting()
+        headerNewsFeed?.detailNewsPost = self.content
+        headerNewsFeed?.initPosting()
         
         // VC 컨트롤 권한을 HeaderView로 넘겨주기
-//        headerNewsFeed?.detailNewsFeedVC = self
+        headerNewsFeed?.RootVC = self
         
         // 사용자 프로필 이미지 탭 인식 설정
-//        headerNewsFeed?.setClickActions()
+        headerNewsFeed?.setClickActions()
         
         return headerNewsFeed
     }
