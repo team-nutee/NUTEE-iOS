@@ -44,8 +44,8 @@ class DetailNewsFeedVC: UIViewController {
         txtvwComment.delegate = self
         
         // Register the custom header view
-        let nibHead = UINib(nibName: "HeaderNewsFeedView", bundle: nil)
-        self.replyTV.register(nibHead, forHeaderFooterViewReuseIdentifier: "HeaderNewsFeedView")
+        let nibHead = UINib(nibName: "DetailNewsFeedVC", bundle: nil)
+        self.replyTV.register(nibHead, forHeaderFooterViewReuseIdentifier: "DetailNewsFeedVC")
         
         initCommentWindow()
     }
@@ -148,7 +148,7 @@ extension DetailNewsFeedVC : UITableViewDataSource {
         headerNewsFeed.initPosting()
         
         // VC 컨트롤 권한을 HeaderView로 넘겨주기
-        headerNewsFeed.detailNewsFeedVC = self
+//        headerNewsFeed.detailNewsFeedVC = self
         
         // 사용자 프로필 이미지 탭 인식 설정
         headerNewsFeed.setClickActions()
