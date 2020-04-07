@@ -34,7 +34,7 @@ class ProflieTableViewCell: UITableViewCell {
    
     // MARK: - Variables and Properties
     
-    var loginUserPost: NewsPostsContentElement?
+    var loginUserPost: UserPostContentElement?
     
     //MARK: - Life Cycle
     

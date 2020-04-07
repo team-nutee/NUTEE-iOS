@@ -57,6 +57,8 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
     
     //MARK: - Variables and Properties
     
+    // NewsFeedVC와 통신하기 위한 델리게이트 변수 선언
+    weak var delegate: HeaderNewsFeedViewDelegate?
     weak var detailNewsFeedVC: UIViewController?
     
     var detailNewsPost: NewsPostsContentElement?
@@ -128,6 +130,16 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
         let editAction = UIAlertAction(title: "수정", style: .default){
             (action: UIAlertAction) in
             // Code to edit
+            // Posting 창으로 전환
+            let postSB = UIStoryboard(name: "Post", bundle: nil)
+            let editPostingVC = postSB.instantiateViewController(withIdentifier: "PostVC") as! PostVC
+            
+            editPostingVC.loadViewIfNeeded()
+            editPostingVC.editNewsPost = self.detailNewsPost
+            editPostingVC.setEditMode()
+            
+            editPostingVC.modalPresentationStyle = .fullScreen
+            self.detailNewsFeedVC?.present(editPostingVC, animated: true, completion: nil)
         }
         let deleteAction = UIAlertAction(title: "삭제", style: .destructive) {
             (action: UIAlertAction) in
@@ -135,7 +147,10 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
             let cancelAction = UIAlertAction(title: "취소", style: .default, handler: nil)
             let okAction = UIAlertAction(title: "확인", style: .default) {
                 (action: UIAlertAction) in
-                // Code to delete
+                // Code to 삭제
+//                self.delegate?.deletePostAndBackToMainNewsTV(completionHandler: {returnedData -> Void in
+//                    self.detailNewsFeedVC?.navigationController?.popViewController(animated: true)
+//                }) // MianNewsfeed에 있는 FeedTVC의 삭제 기능을 통해 글 삭제
             }
             deleteAlert.addAction(cancelAction)
             deleteAlert.addAction(okAction)
@@ -149,12 +164,9 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
                 = UIAlertAction(title: "취소", style: .cancel, handler: nil)
             let reportAction = UIAlertAction(title: "신고", style: .destructive) {
                 (action: UIAlertAction) in
-                // <---- 신고 기능 구현
                 let content = reportAlert.textFields?[0].text ?? "" // 신고 내용
-                //                let postId = self.newsPost?.id ?? 0
                 self.reportPost(content: content)
-                
-                
+                //신고 여부 알림 <-- 서버연결 코드에서 구현됨
             }
             reportAlert.addTextField { (mytext) in
                 mytext.tintColor = .nuteeGreen
@@ -167,7 +179,7 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
         }
         let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
         
-        let userid = Int(KeychainWrapper.standard.string(forKey: "id") ?? "")
+        let userid = KeychainWrapper.standard.integer(forKey: "id")
         
         if (userid == detailNewsPost?.userID) {
             moreAlert.addAction(editAction)
@@ -177,6 +189,7 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
             moreAlert.addAction(userReportAction)
             moreAlert.addAction(cancelAction)
         }
+        
         detailNewsFeedVC?.present(moreAlert, animated: true, completion: nil)
     }
     
@@ -549,6 +562,12 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
         btn.setAttributedTitle(NSAttributedString(string: " " + String(num), attributes: stateAttributes), for: state)
         btn.tintColor = color
     }
+}
+
+// MARK: - DetailNewsFeedVC와 통신하기 위한 프로토콜 정의
+
+protocol HeaderNewsFeedViewDelegate: class {
+    func deletePostAndBackToMainNewsTV(completionHandler: @escaping () -> Void) // FeedTVC에 정의되어 있는 프로토콜 함수
 }
 
 // MARK: - 서버 연결 코드 구간

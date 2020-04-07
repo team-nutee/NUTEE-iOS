@@ -1,8 +1,8 @@
 //
-//  NewsFeedVO.swift
+//  FeedHederView.swift
 //  Nutee
 //
-//  Created by Hee Jae Kim on 2020/01/14.
+//  Created by Junhyeon on 2020/04/06.
 //  Copyright © 2020 S.OWL. All rights reserved.
 //
 
@@ -10,45 +10,34 @@ import UIKit
 
 import SwiftKeychainWrapper
 
-class NewsFeedCell: UITableViewCell {
+class DetailHederView: UITableViewHeaderFooterView {
     
     //MARK: - UI components
     
-    @IBOutlet var contentsCell: UIView!
-    // Repost Info Section
-    @IBOutlet var lblRepostInfo: UILabel!
-    @IBOutlet var TopToRepostImg: NSLayoutConstraint!
-    
     // User Information
-    @IBOutlet var imgvwUserImg: UIImageView!
-    @IBOutlet var TopToUserImg: NSLayoutConstraint!
+    @IBOutlet var userIMG: UIImageView!
     @IBOutlet var lblUserId: UIButton!
-    @IBOutlet var lblPostTime: UILabel!
+    @IBOutlet var userLabel: UILabel!
+    @IBOutlet var dateLabel: UILabel!
     
     // Posting
-    @IBOutlet var txtvwContent: UITextView!
+    @IBOutlet var contentTextView: UITextView!
     @IBOutlet var ContentsToRepost: NSLayoutConstraint!
     
-    // ver. TwoFrame
-    @IBOutlet var vwTwo: UIView!
-    @IBOutlet var imgvwTwo: [UIImageView]!
-    @IBOutlet var lblTwoMoreImg: UILabel!
-    @IBOutlet var ContentToVwTwo: NSLayoutConstraint!
-    @IBOutlet var vwTwoToRepost: NSLayoutConstraint!
+    @IBOutlet var oneImageView : UIImageView!
+//    @IBOutlet var threeImageViewArr : [UIImageView]!
+    @IBOutlet var threeImageViewArr: [UIImageView]!
+    @IBOutlet var fourImageViewArr : [UIImageView]!
     
     //앨범 프레임 three, four 버전을 통합관리 할 view 객체 생성
     @IBOutlet var vwSquare: UIView!
-    @IBOutlet var ContentToVwSquare: NSLayoutConstraint!
     @IBOutlet var vwSquareToRepost: NSLayoutConstraint!
-    
     // ver. OneImage(without frame)
     @IBOutlet var imgvwOne: UIImageView!
-    
     // ver. ThreeFrame
     @IBOutlet var vwThree: UIView!
     @IBOutlet var imgvwThree: [UIImageView]!
     @IBOutlet var lblThreeMoreImg: UILabel!
-    
     // ver. FourFrame
     @IBOutlet var vwFour: UIView!
     @IBOutlet var imgvwFour: [UIImageView]!
@@ -62,12 +51,12 @@ class NewsFeedCell: UITableViewCell {
     
     //MARK: - Variables and Properties
     
-    weak var newsFeedVC: UIViewController?
+    weak var RootVC: UIViewController?
     
-    var newsPost: NewsPostsContentElement?
+    var detailNewsPost: NewsPostsContentElement?
     
     var imgCnt: Int?
-
+    
     var numLike: Int?
     var numComment: Int?
     
@@ -86,7 +75,6 @@ class NewsFeedCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
     }
     
     override func prepareForReuse() {
@@ -109,46 +97,29 @@ class NewsFeedCell: UITableViewCell {
         if isClickedRepost! {
             isClickedRepost = false
             btnRepost.tintColor = .gray
-            retweetDeleteService(postId: newsPost?.id ?? 0)
         } else {
             isClickedRepost = true
             btnRepost.tintColor = .nuteeGreen
-            retweetPostService(postId: newsPost?.id ?? 0)
         }
     }
-        
+    
     @IBAction func btnLike(_ sender: UIButton) {
         // .selected State를 활성화 하기 위한 코드
-//        btnLike.isSelected = !btnLike.isSelected
+        //        btnLike.isSelected = !btnLike.isSelected
         if isClickedLike! {
             setNormalLikeBtn()
-            likeDeleteService(postId: newsPost?.id ?? 0)
+            likeDeleteService(postId: detailNewsPost?.id ?? 0)
         } else {
             setSelectedLikeBtn()
-            likePostService(postId: newsPost?.id ?? 0)
+            likePostService(postId: detailNewsPost?.id ?? 0)
         }
     }
     
-    @IBAction func btnComment(sender: Any) {
-        showDetailNewsFeed()
-    }
-    
-    //수정, 삭제 알림창 기능
-    @IBAction func btnMore(sender: AnyObject) {
+    @IBAction func btnMore(_ sender: Any) {
         let moreAlert = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertController.Style.actionSheet)
         let editAction = UIAlertAction(title: "수정", style: .default){
             (action: UIAlertAction) in
             // Code to edit
-            // Posting 창으로 전환
-            let postSB = UIStoryboard(name: "Post", bundle: nil)
-            let editPostingVC = postSB.instantiateViewController(withIdentifier: "PostVC") as! PostVC
-            
-            editPostingVC.loadViewIfNeeded()
-            editPostingVC.editNewsPost = self.newsPost
-            editPostingVC.setEditMode()
-            
-            editPostingVC.modalPresentationStyle = .currentContext
-            self.newsFeedVC?.present(editPostingVC, animated: true, completion: nil)
         }
         let deleteAction = UIAlertAction(title: "삭제", style: .destructive) {
             (action: UIAlertAction) in
@@ -160,7 +131,7 @@ class NewsFeedCell: UITableViewCell {
             }
             deleteAlert.addAction(cancelAction)
             deleteAlert.addAction(okAction)
-            self.newsFeedVC?.present(deleteAlert, animated: true, completion: nil)
+            self.RootVC?.present(deleteAlert, animated: true, completion: nil)
         }
         let userReportAction = UIAlertAction(title: "신고하기🚨", style: .destructive) {
             (action: UIAlertAction) in
@@ -170,9 +141,12 @@ class NewsFeedCell: UITableViewCell {
                 = UIAlertAction(title: "취소", style: .cancel, handler: nil)
             let reportAction = UIAlertAction(title: "신고", style: .destructive) {
                 (action: UIAlertAction) in
+                // <---- 신고 기능 구현
                 let content = reportAlert.textFields?[0].text ?? "" // 신고 내용
+                //                let postId = self.newsPost?.id ?? 0
                 self.reportPost(content: content)
-                //신고 여부 알림 <-- 서버연결 코드에서 구현됨
+                
+                
             }
             reportAlert.addTextField { (mytext) in
                 mytext.tintColor = .nuteeGreen
@@ -181,13 +155,13 @@ class NewsFeedCell: UITableViewCell {
             reportAlert.addAction(cancelAction)
             reportAlert.addAction(reportAction)
             
-            self.newsFeedVC?.present(reportAlert, animated: true, completion: nil)
+            self.RootVC?.present(reportAlert, animated: true, completion: nil)
         }
         let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
-
-        let userId = KeychainWrapper.standard.integer(forKey: "id")
         
-        if (userId == newsPost?.userID) {
+        let userid = Int(KeychainWrapper.standard.string(forKey: "id") ?? "")
+        
+        if (userid == detailNewsPost?.userID) {
             moreAlert.addAction(editAction)
             moreAlert.addAction(deleteAction)
             moreAlert.addAction(cancelAction)
@@ -195,49 +169,37 @@ class NewsFeedCell: UITableViewCell {
             moreAlert.addAction(userReportAction)
             moreAlert.addAction(cancelAction)
         }
-        
-        newsFeedVC?.present(moreAlert, animated: true, completion: nil)
+        RootVC?.present(moreAlert, animated: true, completion: nil)
     }
     
-    //포스팅 내용 초기설정
     func initPosting() {
-        if newsPost?.retweetID == nil {
+        if detailNewsPost?.retweetID == nil {
             // <-----공유한 글이 아닐 경우-----> //
-            TopToUserImg.isActive = true
-            TopToRepostImg.isActive = false
-            lblRepostInfo.isHidden = true
             
             // User 정보 설정 //
             // 사용자 프로필 이미지 설정
-            imgvwUserImg.setRounded(radius: nil)
-            if newsPost?.user.image?.src == nil || newsPost?.user.image?.src == ""{
-                imgvwUserImg.imageFromUrl("http://15.164.50.161:9425/settings/nutee_profile.png", defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
-                imgvwUserImg.contentMode = .scaleAspectFit
+            userIMG.setRounded(radius: nil)
+            if detailNewsPost?.user.image?.src == nil || detailNewsPost?.user.image?.src == ""{
+                userIMG.imageFromUrl("http://15.164.50.161:9425/settings/nutee_profile.png", defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+                userIMG.contentMode = .scaleAspectFit
             } else {
-                imgvwUserImg.imageFromUrl((APIConstants.BaseURL) + "/" + (newsPost?.user.image?.src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
-                imgvwUserImg.contentMode = .scaleAspectFill
+                userIMG.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.user.image?.src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+                userIMG.contentMode = .scaleAspectFill
             }
             // 사용자 이름 설정
-//            let nickname = newsPost?.user.nickname ?? ""
-            lblUserId.setTitle(newsPost?.user.nickname, for: .normal)
+            //            let nickname = newsPost?.user.nickname ?? ""
+            lblUserId.setTitle(detailNewsPost?.user.nickname, for: .normal)
             lblUserId.sizeToFit()
             // 게시글 게시 시간 설정
-            if newsPost?.createdAt == newsPost?.updatedAt {
-                let originPostTime = newsPost?.createdAt ?? ""
-                let postTimeDateFormat = originPostTime.getDateFormat(time: originPostTime)
-                lblPostTime.text = postTimeDateFormat?.timeAgoSince(postTimeDateFormat!)
-            } else {
-                let originPostTime = newsPost?.updatedAt ?? ""
-                let postTimeDateFormat = originPostTime.getDateFormat(time: originPostTime)
-                let updatePostTime = postTimeDateFormat?.timeAgoSince(postTimeDateFormat!)
-                lblPostTime.text = "✄ " + (updatePostTime ?? "")
-            }
+            let originPostTime = detailNewsPost?.createdAt
+            let postTimeDateFormat = originPostTime?.getDateFormat(time: originPostTime!)
+            dateLabel.text = postTimeDateFormat?.timeAgoSince(postTimeDateFormat!)
             
             // Posting 내용 설정
-            txtvwContent.text = newsPost?.content
-            txtvwContent.postingInit()
+            contentTextView.text = detailNewsPost?.content
+            contentTextView.postingInit()
             
-            imgCnt = newsPost?.images.count
+            imgCnt = detailNewsPost?.images.count
             showImgFrame()
             
             var containLoginUser = false
@@ -247,21 +209,21 @@ class NewsFeedCell: UITableViewCell {
             if containLoginUser {
                 // 로그인 한 사용자가 좋아요를 누른 상태일 경우
                 btnLike.isSelected = true
-                numLike = newsPost?.likers.count ?? 0
+                numLike = detailNewsPost?.likers.count ?? 0
                 btnLike.setTitle(" " + String(numLike!), for: .selected)
                 btnLike.tintColor = .systemPink
                 isClickedLike = true
             } else {
                 // 로그인 한 사용자가 좋아요를 누르지 않은 상태일 경우
                 btnLike.isSelected = false
-                numLike = newsPost?.likers.count ?? 0
+                numLike = detailNewsPost?.likers.count ?? 0
                 btnLike.setTitle(" " + String(numLike!), for: .normal)
                 btnLike.tintColor = .gray
                 isClickedLike = false
             }
             // Like 버튼
             containLoginUser = false
-            for arrSearch in newsPost?.likers ?? [] {
+            for arrSearch in detailNewsPost?.likers ?? [] {
                 if arrSearch.like.userID == KeychainWrapper.standard.integer(forKey: "id") {
                     containLoginUser = true
                 }
@@ -269,89 +231,20 @@ class NewsFeedCell: UITableViewCell {
             if containLoginUser {
                 // 로그인 한 사용자가 좋아요를 누른 상태일 경우
                 btnLike.isSelected = true
-                numLike = newsPost?.likers.count ?? 0
+                numLike = detailNewsPost?.likers.count ?? 0
                 btnLike.setTitle(" " + String(numLike!), for: .selected)
                 btnLike.tintColor = .systemPink
                 isClickedLike = true
             } else {
                 // 로그인 한 사용자가 좋아요를 누르지 않은 상태일 경우
                 btnLike.isSelected = false
-                numLike = newsPost?.likers.count ?? 0
+                numLike = detailNewsPost?.likers.count ?? 0
                 btnLike.setTitle(" " + String(numLike!), for: .normal)
                 btnLike.tintColor = .gray
                 isClickedLike = false
             }
             // Comment 버튼
-            numComment = newsPost?.comments.count ?? 0
-            setButtonPlain(btn: btnComment, num: numComment!, color: .gray, state: .normal)
-        } else {
-            // <-----공유한 글 일 경우-----> //
-            TopToUserImg.isActive = false
-            TopToRepostImg.isActive = true
-            lblRepostInfo.isHidden = false
-            lblRepostInfo.text = (newsPost?.user.nickname)! + " 님이 공유했습니다"
-            // User 정보 설정 //
-            // 사용자 프로필 이미지 설정
-            imgvwUserImg.setRounded(radius: nil)
-            if newsPost?.retweet?.user.image?.src == nil || newsPost?.retweet?.user.image?.src == ""{
-                imgvwUserImg.imageFromUrl("http://15.164.50.161:9425/settings/nutee_profile.png", defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
-                imgvwUserImg.contentMode = .scaleAspectFit
-            } else {
-                imgvwUserImg.imageFromUrl((APIConstants.BaseURL) + "/" + (newsPost?.retweet?.user.image?.src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
-                imgvwUserImg.contentMode = .scaleAspectFill
-            }
-            // 사용자 이름 설정
-//            let nickname = newsPost?.retweet?.user.nickname ?? ""
-            lblUserId.setTitle(newsPost?.retweet?.user.nickname, for: .normal)
-            lblUserId.sizeToFit()
-            // 게시글 게시 시간 설정
-            let originPostTime = newsPost?.retweet?.createdAt
-            let postTimeDateFormat = originPostTime?.getDateFormat(time: originPostTime!)
-            lblPostTime.text = postTimeDateFormat?.timeAgoSince(postTimeDateFormat!)
-            
-            // Posting 내용 설정
-            txtvwContent.text = newsPost?.retweet?.content
-            txtvwContent.postingInit()
-            
-            imgCnt = newsPost?.retweet?.images.count
-            showImgFrame()
-            
-            // Like 버튼
-            var containLoginUser = false
-            for arrSearch in newsPost?.retweet?.likers ?? [] {
-                if arrSearch.like.userID == KeychainWrapper.standard.integer(forKey: "id") {
-                    containLoginUser = true
-                }
-            }
-            if containLoginUser {
-                // 로그인 한 사용자가 좋아요를 누른 상태일 경우
-                btnLike.isSelected = true
-                numLike = newsPost?.retweet?.likers.count ?? 0
-                btnLike.setTitle(" " + String(numLike!), for: .selected)
-                btnLike.tintColor = .systemPink
-                isClickedLike = true
-            } else {
-                // 로그인 한 사용자가 좋아요를 누르지 않은 상태일 경우
-                btnLike.isSelected = false
-                numLike = newsPost?.retweet?.likers.count ?? 0
-                btnLike.setTitle(" " + String(numLike!), for: .normal)
-                btnLike.tintColor = .gray
-                isClickedLike = false
-            }
-            
-//            // Repost 버튼
-//            isClickedRepost = false
-//            btnRepost.isSelected = false
-//            btnRepost.tintColor = .gray
-//            btnRepost.isEnabled = false
-//            // Like 버튼
-//            isClickedLike = false
-//            numLike = nil
-//            btnLike.setTitle(String(""), for: .normal)
-//            btnLike.isEnabled = false
-            
-            // Comment 버튼
-            numComment = newsPost?.retweet?.comments.count ?? 0
+            numComment = detailNewsPost?.comments.count ?? 0
             setButtonPlain(btn: btnComment, num: numComment!, color: .gray, state: .normal)
         }
     }
@@ -381,34 +274,31 @@ class NewsFeedCell: UITableViewCell {
     // 사진 개수에 따른 이미지 표시 유형 선택
     func showImgFrame() {
         //constrain layout 충돌 방지를 위한 이미지 뷰 전체 hidden 설정
-        vwTwo.isHidden = true
         vwSquare.isHidden = true
         
         var num = 0
         
         var isRepost = false
-        if newsPost?.retweet == nil {
+        if detailNewsPost?.retweet == nil {
             isRepost = false
         } else {
             isRepost = true
         }
         var imageCnt = 0
         if isRepost {
-            imageCnt = newsPost?.retweet?.images.count ?? 0
+            imageCnt = detailNewsPost?.retweet?.images.count ?? 0
         } else {
-            imageCnt = newsPost?.images.count ?? 0
+            imageCnt = detailNewsPost?.images.count ?? 0
         }
         switch imageCnt {
         case 0:
             // 보여줄 사진이 없는 경우(글만 표시)
-            lblTwoMoreImg.isHidden = true
             lblThreeMoreImg.isHidden = true
             lblFourMoreImg.isHidden = true
             
-            ContentToVwTwo.isActive = false
-            vwTwoToRepost.isActive = false
-            ContentToVwSquare.isActive = false
-            vwSquareToRepost.isActive = false
+            //            ContentToVwTwo.isActive = false
+            //            ContentToVwSquare.isActive = false
+//            vwSquareToRepost.isActive = false
             ContentsToRepost.isActive = true
             
         case 1:
@@ -419,47 +309,26 @@ class NewsFeedCell: UITableViewCell {
             vwThree.isHidden = true
             vwFour.isHidden = true
             
-            ContentToVwTwo.isActive = false
-            vwTwoToRepost.isActive = false
-            ContentToVwSquare.isActive = true
+            //            ContentToVwTwo.isActive = false
+            //            ContentToVwSquare.isActive = true
             vwSquareToRepost.isActive = true
             ContentsToRepost.isActive = false
             
             if isRepost {
-                imgvwOne.imageFromUrl((APIConstants.BaseURL) + "/" + (newsPost?.retweet?.images[0].src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+                imgvwOne.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.retweet?.images[0].src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
             } else {
-                imgvwOne.imageFromUrl((APIConstants.BaseURL) + "/" + (newsPost?.images[0].src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+                imgvwOne.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.images[0].src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
             }
-
-        case 2:
-            // ver. TwoFrame
-            vwTwo.isHidden = false
             
-            ContentToVwTwo.isActive = true
-            vwTwoToRepost.isActive = true
-            ContentToVwSquare.isActive = false
+        case 2:
+            //            ContentToVwSquare.isActive = false
             vwSquareToRepost.isActive = false
             ContentsToRepost.isActive = false
             
-            for imgvw in imgvwTwo {
-                if isRepost {
-                    imgvw.imageFromUrl((APIConstants.BaseURL) + "/" + (newsPost?.retweet?.images[num].src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
-                } else {
-                    imgvw.imageFromUrl((APIConstants.BaseURL) + "/" + (newsPost?.images[num].src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
-                }
-                if num == 1 {
-                    let leftImg = imageCnt - 2
-                    imgvw.alpha = 1.0
-                    if leftImg > 0 {
-                        imgvw.alpha = 0.5
-                        lblTwoMoreImg.isHidden = false
-                        lblTwoMoreImg.text = String(leftImg) + " +"
-                        lblTwoMoreImg.sizeToFit()
-                    } else {
-                        lblTwoMoreImg.isHidden = true
-                    }
-                }
-                num += 1
+            if isRepost {
+                imgvwOne.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.retweet?.images[0].src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+            } else {
+                imgvwOne.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.images[0].src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
             }
         case 3:
             // ver. ThreeFrame
@@ -468,17 +337,16 @@ class NewsFeedCell: UITableViewCell {
             imgvwOne.isHidden = true
             vwFour.isHidden = true
             
-            ContentToVwTwo.isActive = false
-            vwTwoToRepost.isActive = false
-            ContentToVwSquare.isActive = true
+            //            ContentToVwTwo.isActive = false
+            //            ContentToVwSquare.isActive = true
             vwSquareToRepost.isActive = true
             ContentsToRepost.isActive = false
             
             for imgvw in imgvwThree {
                 if isRepost {
-                    imgvw.imageFromUrl((APIConstants.BaseURL) + "/" + (newsPost?.retweet?.images[num].src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+                    imgvw.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.retweet?.images[num].src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
                 } else {
-                    imgvw.imageFromUrl((APIConstants.BaseURL) + "/" + (newsPost?.images[num].src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+                    imgvw.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.images[num].src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
                 }
                 if num == 2 {
                     let leftImg = imageCnt - 3
@@ -501,18 +369,17 @@ class NewsFeedCell: UITableViewCell {
             imgvwOne.isHidden = true
             vwThree.isHidden = true
             
-            ContentToVwTwo.isActive = false
-            vwTwoToRepost.isActive = false
-            ContentToVwSquare.isActive = true
+            //            ContentToVwTwo.isActive = false
+            //            ContentToVwSquare.isActive = true
             vwSquareToRepost.isActive = true
             ContentsToRepost.isActive = false
             
             for imgvw in imgvwFour {
                 if num <= 3 {
                     if isRepost {
-                        imgvw.imageFromUrl((APIConstants.BaseURL) + "/" + (newsPost?.retweet?.images[num].src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+                        imgvw.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.retweet?.images[num].src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
                     } else {
-                        imgvw.imageFromUrl((APIConstants.BaseURL) + "/" + (newsPost?.images[num].src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+                        imgvw.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.images[num].src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
                     }
                 }
                 if num == 3 {
@@ -529,17 +396,17 @@ class NewsFeedCell: UITableViewCell {
                 }
                 num += 1
             }
-        
+            
         } // case문 종료
     } // ShowImageFrame 설정 끝
     
     // 프로필 이미지에 탭 인식하게 만들기
     func setClickActions() {
-        imgvwUserImg.tag = 1
+        userIMG.tag = 1
         let tapGestureRecognizer1 = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
         tapGestureRecognizer1.numberOfTapsRequired = 1
-        imgvwUserImg.isUserInteractionEnabled = true
-        imgvwUserImg.addGestureRecognizer(tapGestureRecognizer1)
+        userIMG.isUserInteractionEnabled = true
+        userIMG.addGestureRecognizer(tapGestureRecognizer1)
     }
     
     // 프로필 이미지 클릭시 실행 함수
@@ -553,44 +420,30 @@ class NewsFeedCell: UITableViewCell {
         }
     }
     
-    func showDetailNewsFeed() {
-        // DetailNewsFeed 창으로 전환
-        let detailNewsFeedSB = UIStoryboard(name: "DetailNewsFeed", bundle: nil)
-        let showDetailNewsFeedVC = detailNewsFeedSB.instantiateViewController(withIdentifier: "DetailNewsFeed") as! DetailNewsFeedVC
-        
-        // 현재 게시물 id를 DetailNewsFeedVC로 넘겨줌
-        showDetailNewsFeedVC.postId = self.newsPost?.id
-        showDetailNewsFeedVC.getPostService(postId: showDetailNewsFeedVC.postId!, completionHandler: {(returnedData)-> Void in
-            showDetailNewsFeedVC.replyTV.reloadData()
-        })
-        
-        newsFeedVC?.navigationController?.pushViewController(showDetailNewsFeedVC, animated: true)
-    }
-
     func showProfile() {
         let vc = UIStoryboard.init(name: "Profile", bundle: Bundle.main).instantiateViewController(withIdentifier: "ProfileVC") as? ProfileVC
         
         // 해당 글이 공유글인지 아닌지 판단
-        if newsPost?.retweet == nil {
-            vc?.userId = newsPost?.user.id ?? KeychainWrapper.standard.integer(forKey: "id")
+        if detailNewsPost?.retweet == nil {
+            vc?.userId = detailNewsPost?.user.id ?? KeychainWrapper.standard.integer(forKey: "id")
         } else {
-            vc?.userId = newsPost?.retweet?.user.id ?? KeychainWrapper.standard.integer(forKey: "id")
+            vc?.userId = detailNewsPost?.retweet?.user.id ?? KeychainWrapper.standard.integer(forKey: "id")
         }
         
-        newsFeedVC?.navigationController?.pushViewController(vc!, animated: true)
+        RootVC?.navigationController?.pushViewController(vc!, animated: true)
     }
-
+    
     func setButtonAttributed(btn: UIButton, num: Int, color: UIColor, state: UIControl.State) {
         let stateAttributes = [NSAttributedString.Key.foregroundColor: color]
         btn.setAttributedTitle(NSAttributedString(string: " " + String(num), attributes: stateAttributes), for: state)
         btn.tintColor = color
     }
- 
 }
 
 // MARK: - 서버 연결 코드 구간
 
-extension NewsFeedCell {
+extension DetailHederView {
+    
     func reportPost( content: String) {
         let userid = KeychainWrapper.standard.string(forKey: "id") ?? ""
         ContentService.shared.reportPost(userid, content) { (responsedata) in
@@ -605,20 +458,21 @@ extension NewsFeedCell {
                 
                 successfulAlert.addAction(okAction)
                 
-                self.newsFeedVC?.present(successfulAlert, animated: true, completion: nil)
-
+                self.RootVC?.present(successfulAlert, animated: true, completion: nil)
+                
+                
             case .requestErr(_):
                 print("request error")
-            
+                
             case .pathErr:
                 print(".pathErr")
-            
+                
             case .serverErr:
                 print(".serverErr")
-            
+                
             case .networkFail :
                 print("failure")
-                }
+            }
         }
     }
     
@@ -633,16 +487,16 @@ extension NewsFeedCell {
                 print("likePost succussful", res)
             case .requestErr(_):
                 print("request error")
-            
+                
             case .pathErr:
                 print(".pathErr")
-            
+                
             case .serverErr:
                 print(".serverErr")
-            
+                
             case .networkFail :
                 print("failure")
-                }
+            }
         }
     }
     
@@ -655,79 +509,18 @@ extension NewsFeedCell {
                 print("likePost succussful", res)
             case .requestErr(_):
                 print("request error")
-            
+                
             case .pathErr:
                 print(".pathErr")
-            
-            case .serverErr:
-                print(".serverErr")
-            
-            case .networkFail :
-                print("failure")
-                }
-        }
-    }
-    
-    // MARK: - Retweet
-    
-    func retweetPostService(postId: Int) {
-        ContentService.shared.retweetPost(postId) { (responsedata) in
-            
-            switch responsedata {
-            case .success(let res):
                 
-                print("retweetPost succussful", res)
-            case .requestErr(_):
-                print("request error")
-                
-                self.isClickedRepost = true
-                self.btnRepost.tintColor = .nuteeGreen
-                
-                let alreadyAlert = UIAlertController(title: nil, message: "❣️이미 공유한 글입니다❣️", preferredStyle: UIAlertController.Style.actionSheet)
-                let okayAction = UIAlertAction(title: "확인", style: .default)
-                alreadyAlert.addAction(okayAction)
-                self.newsFeedVC?.present(alreadyAlert, animated: true, completion: nil)
-            
-            case .pathErr:
-                print(".pathErr")
-            
-            case .serverErr:
-                print(".serverErr")
-            
-            case .networkFail :
-                print("failure")
-                }
-        }
-    }
-    
-    func retweetDeleteService(postId: Int) {
-        ContentService.shared.retweetDelete(postId) { (responsedata) in
-            
-            switch responsedata {
-            case .success(let res):
-                
-                print("retweetPost succussful", res)
-            case .requestErr(_):
-                print("request error")
-            
-            case .pathErr:
-                print(".pathErr")
-            
             case .serverErr:
                 print(".serverErr")
                 
-                let failAlert = UIAlertController(title: nil, message: "이미 공유한 글은\n취소 할 수 없습니다😵", preferredStyle: UIAlertController.Style.alert)
-                let okayAction = UIAlertAction(title: "확인", style: .default)
-                failAlert.addAction(okayAction)
-                self.newsFeedVC?.present(failAlert, animated: true, completion: nil)
-            
-                self.isClickedRepost = true
-                self.btnRepost.tintColor = .nuteeGreen
-                
             case .networkFail :
                 print("failure")
-                }
+            }
         }
     }
-
+    
 }
+
