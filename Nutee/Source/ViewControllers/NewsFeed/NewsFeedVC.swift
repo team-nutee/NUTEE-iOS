@@ -117,7 +117,6 @@ class NewsFeedVC: UIViewController {
         loadCompleteBtn.backgroundColor = .white
         
         loadCompleteBtn.alpha = 0
-        loadCompleteBtn.isHidden = true
     }
     
     @objc func loadingBtn(){

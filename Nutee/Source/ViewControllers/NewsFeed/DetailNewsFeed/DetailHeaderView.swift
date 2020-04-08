@@ -64,6 +64,8 @@ class DetailHeaderView: UITableViewHeaderFooterView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        setImageView()
     }
     
     override func prepareForReuse() {
@@ -250,8 +252,9 @@ class DetailHeaderView: UITableViewHeaderFooterView {
         case 2:
             oneImageView.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.images[0].src ?? ""), defaultImgPath: (APIConstants.BaseURL) + "/settings/nutee_profile.png")
             moreLabel1.isHidden = false
-            oneImageView.alpha = 0.5
+            oneImageView.alpha = 0.7
             moreLabel1.text = "+1"
+            moreLabel1.textColor = .black
         case 3:
             for imgvw in threeImageViewArr {
                 imgvw.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.images[num].src ?? ""), defaultImgPath: (APIConstants.BaseURL) + "/settings/nutee_profile.png")
@@ -267,9 +270,10 @@ class DetailHeaderView: UITableViewHeaderFooterView {
                 if num == 3 {
                     let leftImg = (imageCnt ?? 3) - 4
                     if leftImg > 0 {
-                        imgvw.alpha = 0.5
+                        imgvw.alpha = 0.7
                         moreLabel4.isHidden = false
                         moreLabel4.text = "+" + String(leftImg)
+                        moreLabel4.textColor = .black
                     }
                 }
                 num += 1
@@ -296,6 +300,35 @@ class DetailHeaderView: UITableViewHeaderFooterView {
             showProfile()
         }
     }
+    
+    func setImageView(){
+        oneImageView.isUserInteractionEnabled = true
+        oneImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(imageTap(tapGestureRecognizer:))))
+
+
+        for imageView in threeImageViewArr {
+            imageView.isUserInteractionEnabled = true
+            imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(imageTap(tapGestureRecognizer:))))
+
+        }
+        for imageView in fourImageViewArr {
+            imageView.isUserInteractionEnabled = true
+            imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(imageTap(tapGestureRecognizer:))))
+
+        }
+    }
+    
+    @objc func imageTap(tapGestureRecognizer: UITapGestureRecognizer){
+        let vc =
+            UIStoryboard.init(name: "PopUp",
+                                   bundle: Bundle.main).instantiateViewController(
+                                    withIdentifier: "PictureVC") as? PictureVC
+        vc?.modalPresentationStyle = .overFullScreen
+        vc?.imageArr = self.detailNewsPost?.images
+
+        self.RootVC?.present(vc!, animated: false)
+    }
+
     
     func showProfile() {
         let vc = UIStoryboard.init(name: "Profile", bundle: Bundle.main).instantiateViewController(withIdentifier: "ProfileVC") as? ProfileVC

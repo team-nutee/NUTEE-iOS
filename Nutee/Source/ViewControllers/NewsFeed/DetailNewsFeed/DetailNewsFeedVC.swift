@@ -152,6 +152,7 @@ extension DetailNewsFeedVC : UITableViewDataSource {
         
         // 사용자 프로필 이미지 탭 인식 설정
         headerNewsFeed?.setClickActions()
+        headerNewsFeed?.setImageView()
         
         return headerNewsFeed
     }
