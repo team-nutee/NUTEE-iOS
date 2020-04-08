@@ -26,7 +26,7 @@ extension CALayer {
                 border.frame = CGRect.init(x: frame.width - width, y: 0, width: width, height: frame.height)
                 break
             default:
-                break
+                break 
             }
             border.backgroundColor = color.cgColor;
             self.addSublayer(border)

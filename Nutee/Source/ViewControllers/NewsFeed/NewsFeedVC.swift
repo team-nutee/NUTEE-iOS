@@ -14,7 +14,7 @@ import SwiftKeychainWrapper
 class NewsFeedVC: UIViewController {
     
     // MARK: - UI components
-        
+    
     @IBOutlet var newsTV: UITableView!
     
     var refreshControl: UIRefreshControl!
@@ -48,11 +48,7 @@ class NewsFeedVC: UIViewController {
         
         setLoadBtn()
         self.loadCompleteBtn.addTarget(self, action: #selector(loadingBtn), for: .touchUpInside)
-        
-        LoadingHUD.show()
-        getNewsPostsService(postCnt: 10, lastId: 0, completionHandler: {(returnedData)-> Void in
-            self.newsPostsArr = self.newsPosts
-        })
+                
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -65,18 +61,32 @@ class NewsFeedVC: UIViewController {
                 // 업데이트 된 최신 게시글 id
                 tmpNewsPost = self.newsPosts?[0]
                 let updatedLastestPostId = tmpNewsPost?.id
-
+                
                 // 새로 올라온 게시글이 있을 경우
                 if(updatedLastestPostId != lastestPostId){
-                    self.loadCompleteBtn.isHidden = false
-                    UIView.animate(withDuration: 0.3) {
-                        self.loadCompleteBtn.alpha = 1
-                    }
+                    UIView.animate(withDuration: 1,
+                                   delay: 0,
+                                   usingSpringWithDamping: 0.6,
+                                   initialSpringVelocity: 1,
+                                   options: [.curveEaseIn],
+                                   animations: {
+                                    self.loadCompleteBtn.alpha = 1
+                                    self.loadCompleteBtn.transform = CGAffineTransform.init(translationX: 0, y: 50)
+                    })
+                    
                 }
+                
+            } else {
+                
+                self.newsPostsArr = self.newsPosts
+                
             }
-
-        })
+        }
+            
+        )
     }
+    
+    
     
     
     override func viewDidAppear(_ animated: Bool) {
@@ -98,21 +108,29 @@ class NewsFeedVC: UIViewController {
         loadCompleteBtn.makeRounded(cornerRadius: 15)
         loadCompleteBtn.borderColor = .nuteeGreen
         loadCompleteBtn.borderWidth = 0.5
-//        loadCompleteBtn.backgroundColor = .greenLighter
+        //        loadCompleteBtn.backgroundColor = .greenLighter
         loadCompleteBtn.translatesAutoresizingMaskIntoConstraints = false
-        loadCompleteBtn.topAnchor.constraint(equalTo: self.newsTV.topAnchor, constant: 20).isActive = true
+        loadCompleteBtn.topAnchor.constraint(equalTo: self.newsTV.topAnchor, constant: 0).isActive = true
         loadCompleteBtn.centerXAnchor.constraint(equalTo: self.newsTV.centerXAnchor).isActive = true
         loadCompleteBtn.heightAnchor.constraint(equalToConstant: 30).isActive = true
         loadCompleteBtn.widthAnchor.constraint(equalToConstant: 100).isActive = true
         loadCompleteBtn.backgroundColor = .white
         
-        loadCompleteBtn.alpha = 1
+        loadCompleteBtn.alpha = 0
         loadCompleteBtn.isHidden = true
     }
     
     @objc func loadingBtn(){
         updatePosts()
-        loadCompleteBtn.isHidden = true
+        UIView.animate(withDuration: 1,
+                       delay: 0,
+                       usingSpringWithDamping: 0.6,
+                       initialSpringVelocity: 1,
+                       options: [.curveEaseIn],
+                       animations: {
+                        self.loadCompleteBtn.alpha = 0
+                        self.loadCompleteBtn.transform = CGAffineTransform.init(translationX: 0, y: 0)
+        })
         
         let indexPath = IndexPath(row: 0, section: 0)
         newsTV.scrollToRow(at: indexPath, at: .top, animated: true)
@@ -130,7 +148,7 @@ class NewsFeedVC: UIViewController {
             self.present(vc, animated: true, completion: nil)
         }
     }
-
+    
     func initColor() {
         self.tabBarController?.tabBar.tintColor = .nuteeGreen
     }
@@ -142,7 +160,6 @@ class NewsFeedVC: UIViewController {
     }
     
     @objc func updatePosts() {
-        LoadingHUD.show()
         getNewsPostsService(postCnt: 10, lastId: 0, completionHandler: {(returnedData)-> Void in
             self.newsPostsArr = self.newsPosts
             self.newsTV.reloadData()
@@ -174,19 +191,11 @@ extension NewsFeedVC : UITableViewDelegate { }
 extension NewsFeedVC : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        if newsPostsArr?.count == 0 {
-//            return newsTV.frame.height - tabBarController!.tabBar.frame.size.height
-//        } else {
-            return UITableView.automaticDimension
-//        }
+        return UITableView.automaticDimension
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-//        if newsPostsArr?.count == 0 {
-//            return newsTV.frame.height - tabBarController!.tabBar.frame.size.height
-//        } else {
-            return UITableView.automaticDimension
-//        }
+        return UITableView.automaticDimension
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -207,7 +216,7 @@ extension NewsFeedVC : UITableViewDataSource {
             tableView.dequeueReusableCell(withIdentifier: "FeedTVC", for: indexPath) as! FeedTVC
         
         // 셀 선택시 백그라운드 변경 안되게 하기 위한 코드
-        cell.addBorder((.bottom), color: .lightGray, thickness: 0.3)
+        cell.addBorder((.bottom), color: .lightGray, thickness: 0.1)
         cell.selectionStyle = .none
         
         
@@ -218,6 +227,7 @@ extension NewsFeedVC : UITableViewDataSource {
         }
         
         newsPost = newsPostsArr?[indexPath.row]
+        
         // 생성된 Cell클래스로 NewsPost 정보 넘겨주기
         cell.newsPost = self.newsPost
         cell.initPosting()
@@ -237,7 +247,7 @@ extension NewsFeedVC : UITableViewDataSource {
         // DetailNewsFeed 창으로 전환
         let detailNewsFeedSB = UIStoryboard(name: "DetailNewsFeed", bundle: nil)
         let showDetailNewsFeedVC = detailNewsFeedSB.instantiateViewController(withIdentifier: "DetailNewsFeed") as! DetailNewsFeedVC
-
+        
         // 현재 게시물 id를 DetailNewsFeedVC로 넘겨줌
         showDetailNewsFeedVC.postId = newsPostsArr?[indexPath.row].id
         showDetailNewsFeedVC.getPostService(postId: showDetailNewsFeedVC.postId!, completionHandler: {(returnedData)-> Void in
@@ -266,18 +276,18 @@ extension NewsFeedVC : UITableViewDataSource {
                 spinner.hidesWhenStopped = true
                 newsTV.tableFooterView = spinner
                 newsTV.tableFooterView?.isHidden = false
-
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                     self.loadMorePosts(lastId: self.newsPost?.id ?? 0)
                 }
             } else {
                 // 사용자 NewsFeed의 마지막 포스팅일 경우
                 self.newsTV.tableFooterView?.isHidden = true
                 spinner.stopAnimating()
-//                newsTV.tableFooterView = nil
+                //                newsTV.tableFooterView = nil
             }
-
-           
+            
+            
         }
     }
     
@@ -298,6 +308,7 @@ extension NewsFeedVC: FeedTVCDelegate {
 
 extension NewsFeedVC {
     func getNewsPostsService(postCnt: Int, lastId: Int, completionHandler: @escaping (_ returnedData: NewsPostsContent) -> Void ) {
+        print(#function)
         ContentService.shared.getNewsPosts(postCnt, lastId: lastId) { responsedata in
             
             switch responsedata {
@@ -305,22 +316,21 @@ extension NewsFeedVC {
             case .success(let res):
                 let response = res as! NewsPostsContent
                 self.newsPosts = response
-                print("newsPosts server connect successful")
-                LoadingHUD.hide()
                 completionHandler(self.newsPosts!)
+                
                 
             case .requestErr(_):
                 print("request error")
-            
+                
             case .pathErr:
                 print(".pathErr")
-            
+                
             case .serverErr:
                 print(".serverErr")
-            
+                
             case .networkFail :
                 print("failure")
-                }
+            }
         }
     }
 }
