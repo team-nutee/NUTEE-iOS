@@ -329,7 +329,7 @@ extension ProfileVC : UITableViewDataSource {
         myNickLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
         myNickLabel.widthAnchor.constraint(equalToConstant: view.frame.size.width - 120).isActive = true
         
-        let myArticle1 = NSMutableAttributedString(string: String(userInfo?.posts.count ?? 0))
+        let myArticle1 = NSMutableAttributedString(string: String(userPosts?.count ?? 0))
         myArticle1Btn.setAttributedTitle(myArticle1, for: .normal)
         myArticle1Btn.titleLabel?.font = .systemFont(ofSize: 15)
         myArticle1Btn.translatesAutoresizingMaskIntoConstraints = false
