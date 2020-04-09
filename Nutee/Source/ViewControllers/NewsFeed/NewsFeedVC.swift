@@ -294,8 +294,15 @@ extension NewsFeedVC : UITableViewDataSource {
 
 // MARK: - FeedTVC과 통신하여 게시글 삭제 후 테이블뷰 정보 다시 로드하기
 
-extension NewsFeedVC: FeedTVCDelegate {
+extension NewsFeedVC: FeedTVCDelegate, DetailHeaderViewDelegate {
     func updateNewsTV() {
+        getNewsPostsService(postCnt: 10, lastId: 0, completionHandler: {returnedData -> Void in
+            self.newsPostsArr = self.newsPosts
+            self.newsTV.reloadData()
+        })
+    }
+    
+    func backToUpdateNewsTV() {
         getNewsPostsService(postCnt: 10, lastId: 0, completionHandler: {returnedData -> Void in
             self.newsPostsArr = self.newsPosts
             self.newsTV.reloadData()

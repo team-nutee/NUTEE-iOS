@@ -40,6 +40,8 @@ class DetailHeaderView: UITableViewHeaderFooterView {
     
     //MARK: - Variables and Properties
     
+    // FeedTVC와 통신하기 위한 델리게이트 변수 선언
+    weak var delegate: DetailHeaderViewDelegate?
     weak var RootVC: UIViewController?
     
     var detailNewsPost: NewsPostsContentElement?
@@ -116,6 +118,8 @@ class DetailHeaderView: UITableViewHeaderFooterView {
             let okAction = UIAlertAction(title: "확인", style: .default) {
                 (action: UIAlertAction) in
                 // Code to delete
+                self.deletePost()
+                self.RootVC?.navigationController?.popViewController(animated: true)
             }
             deleteAlert.addAction(cancelAction)
             deleteAlert.addAction(okAction)
@@ -348,7 +352,25 @@ class DetailHeaderView: UITableViewHeaderFooterView {
         btn.setAttributedTitle(NSAttributedString(string: " " + String(num), attributes: stateAttributes), for: state)
         btn.tintColor = color
     }
+    
+    func deletePost() {
+        self.postDeleteService(postId: self.detailNewsPost?.id ?? 0, completionHandler: {() -> Void in
+            // delegate로 NewsFeedVC와 통신하기
+            self.delegate?.backToUpdateNewsTV()
+            let deleteAlert = UIAlertController(title: nil, message: "게시글이 삭제되었습니다", preferredStyle: UIAlertController.Style.alert)
+            let okAction = UIAlertAction(title: "확인", style: .default)
+            deleteAlert.addAction(okAction)
+            self.RootVC?.present(deleteAlert, animated: true, completion: nil)
+        })
+    }
 }
+
+// MARK: - NewsFeedVC와 통신하기 위한 프로토콜 정의
+
+protocol DetailHeaderViewDelegate: class {
+    func backToUpdateNewsTV() // NewsFeedVC에 정의되어 있는 프로토콜 함수
+}
+
 
 // MARK: - 서버 연결 코드 구간
 
@@ -432,5 +454,28 @@ extension DetailHeaderView {
         }
     }
     
+    // MARK: - Post
+    func postDeleteService(postId: Int, completionHandler: @escaping () -> Void ) {
+        ContentService.shared.postDelete(postId) { (responsedata) in
+            
+            switch responsedata {
+            case .success(let res):
+                
+                print("postPost succussful", res)
+                completionHandler()
+            case .requestErr(_):
+                print("request error")
+                
+            case .pathErr:
+                print(".pathErr")
+                
+            case .serverErr:
+                print(".serverErr")
+                
+            case .networkFail :
+                print("failure")
+            }
+        }
+    }
 }
 

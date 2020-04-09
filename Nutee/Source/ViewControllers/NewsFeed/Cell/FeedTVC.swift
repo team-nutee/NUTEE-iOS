@@ -305,15 +305,6 @@ protocol FeedTVCDelegate: class {
     func updateNewsTV() // NewsFeedVC에 정의되어 있는 프로토콜 함수
 }
 
-// MARK: - HeaderNewsFeedView와 통신하하여 게시글 삭제
-
-//extension FeedTVC: HeaderNewsFeedViewDelegate {
-//    func deletePostAndBackToMainNewsTV(completionHandler: @escaping () -> Void {
-//        deletePost()
-//        completionHandler()
-//    })
-//}
-
 // MARK: - Repost
 
 extension FeedTVC {
