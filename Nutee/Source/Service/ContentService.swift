@@ -595,8 +595,51 @@ struct ContentService {
                 completion(.networkFail)
             }
         }
+        
     }
     
+    func commentEdit(_ postId: Int, _ commentId: Int, _ editComment: String, completion: @escaping (NetworkResult<Any>) -> Void) {
+        
+        let URL = APIConstants.CommentsEdit + "/\(postId)/comment/\(commentId)"
+        let headers: HTTPHeaders = [
+            "Content-Type": "application/json",
+            "Cookie" : KeychainWrapper.standard.string(forKey: "Cookie")!
+        ]
+        
+        let body : Parameters = [
+            "content" : editComment
+        ]
+        
+        Alamofire.request(URL, method: .patch, parameters: body, encoding: JSONEncoding.default, headers: headers).responseData{
+            response in
+            
+            switch response.result {
+                
+            case .success:
+                
+                if let status = response.response?.statusCode {
+                    switch status {
+                    case 200:
+                        completion(.success("commentEdit에 성공했습니다."))
+                    case 401:
+                        print("실패 401")
+                        completion(.pathErr)
+                    case 500:
+                        print("실패 500")
+                        completion(.serverErr)
+                    default:
+                        break
+                    }
+                }
+                
+                break
+                
+            case .failure(let err):
+                print(err.localizedDescription)
+                completion(.networkFail)
+            }
+        }
+    }
     
     func searchPost(text: String, postCnt: Int, lastId: Int, completion: @escaping (NetworkResult<Any>) -> Void){
         

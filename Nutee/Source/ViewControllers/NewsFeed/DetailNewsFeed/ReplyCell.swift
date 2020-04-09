@@ -48,18 +48,32 @@ class ReplyCell: UITableViewCell{
         // 사용자 프로필 이미지 설정
         imgCommentUser.setRounded(radius: imgCommentUser.frame.height/2)
         if comment?.user.image?.src == nil || comment?.user.image?.src == ""{
-            imgCommentUser.imageFromUrl("http://15.164.50.161:9425/settings/nutee_profile.png", defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+            imgCommentUser.imageFromUrl((APIConstants.BaseURL) + "/settings/nutee_profile.png", defaultImgPath: (APIConstants.BaseURL) + "/settings/nutee_profile.png")
             imgCommentUser.contentMode = .scaleAspectFit
         } else {
-            imgCommentUser.imageFromUrl((APIConstants.BaseURL) + "/" + (comment?.user.image?.src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+            imgCommentUser.imageFromUrl((APIConstants.BaseURL) + "/" + (comment?.user.image?.src ?? ""), defaultImgPath: (APIConstants.BaseURL) + "/settings/nutee_profile.png")
             imgCommentUser.contentMode = .scaleAspectFill
         }
         
         lblCommentUserId.setTitle(comment?.user.nickname, for: .normal)
         lblCommentUserId.sizeToFit()
-        let originPostTime = comment?.createdAt
-        let postTimeDateFormat = originPostTime?.getDateFormat(time: originPostTime!)
-        lblCommentTime.text = postTimeDateFormat?.timeAgoSince(postTimeDateFormat!)
+        
+        
+        // 댓글 작성 시간 설정
+        if comment?.createdAt == comment?.updatedAt {
+            let originPostTime = comment?.createdAt ?? "1970-01-01T00:00:00.000Z" // 기본값 지정 안했을 경우 getDateFormat함수에서 nil값 에러 발생. 시간 임의 지정
+            let postTimeDateFormat = originPostTime.getDateFormat(time: originPostTime)
+            lblCommentTime.text = postTimeDateFormat?.timeAgoSince(postTimeDateFormat!)
+        } else {
+            let originPostTime = comment?.updatedAt ?? ""
+            let postTimeDateFormat = originPostTime.getDateFormat(time: originPostTime)
+            let updatePostTime = postTimeDateFormat?.timeAgoSince(postTimeDateFormat!)
+            lblCommentTime.text = "수정 " + (updatePostTime ?? "")
+        }
+        
+//        let originPostTime = comment?.createdAt
+//        let postTimeDateFormat = originPostTime?.getDateFormat(time: originPostTime!)
+//        lblCommentTime.text = postTimeDateFormat?.timeAgoSince(postTimeDateFormat!)
         
         txtvwCommentContents.sizeToFit()
         txtvwCommentContents.text = comment?.content

@@ -63,6 +63,8 @@ struct APIConstants {
     // POST requestPayload     {postId : postId ,  content: content}
     static let CommentsDelete = BaseURL + "/api/post"// /:postId/comment/:id"
     // DELETE
+    static let CommentsEdit = BaseURL + "/api/post"// /:postId/comment/:id"
+    // PATCH
     
     static let LikePost = BaseURL + "/api/post"// /:id/like"
     // POST

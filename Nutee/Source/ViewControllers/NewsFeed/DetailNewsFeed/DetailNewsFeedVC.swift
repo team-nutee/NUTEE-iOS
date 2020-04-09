@@ -19,6 +19,12 @@ class DetailNewsFeedVC: UIViewController {
     
     // 댓글창 표시
     @IBOutlet var vwCommentWindow: UIView!
+    // 댓글창 상태표시(수정 or 답글)
+    @IBOutlet var statusView: UIView!
+    @IBOutlet var statusViewHeight: NSLayoutConstraint!
+    @IBOutlet var lblStatus: UILabel!
+    @IBOutlet var btnCancel: UIButton!
+    // 댓글작성
     @IBOutlet var txtvwComment: UITextView!
     @IBOutlet var btnSubmit: UIButton!
     @IBOutlet var CommentWindowToBottom: NSLayoutConstraint!
@@ -28,6 +34,9 @@ class DetailNewsFeedVC: UIViewController {
     
     var content: NewsPostsContentElement?
     var postId: Int?
+    
+    var isEditCommentMode = false
+    var currentCommentId: Int?
     
     let statusNoReply = UIView()
     
@@ -70,31 +79,60 @@ class DetailNewsFeedVC: UIViewController {
     }
     
     @IBAction func btnSubmit(_ sender: Any) {
-        postCommentService(postId: postId ?? 0, comment: txtvwComment.text, completionHandler: {() -> Void in
-            self.txtvwComment.text = ""
-            // 전송 버튼 가리기
-            UIView.animate(withDuration: 0.1) {
-                self.btnSubmit.alpha = 0
-            }
-            self.CommentToTrailing.constant = 5
-            UIView.animate(withDuration: 0.1, delay: 0.0, options: .curveEaseInOut, animations: {
-                self.view.layoutIfNeeded()
-            }, completion: nil)
-            self.txtvwComment.endEditing(true)
-            self.txtvwComment.translatesAutoresizingMaskIntoConstraints = true
-            
-            self.getPostService(postId: self.postId ?? 0, completionHandler: {(returnedData)-> Void in
-                self.replyTV.reloadData()
+        if isEditCommentMode == false {
+            postCommentService(postId: postId ?? 0, comment: txtvwComment.text, completionHandler: {() -> Void in
+                self.txtvwComment.endEditing(true)
+                self.txtvwComment.text = ""
+                self.textViewDidChange(self.txtvwComment)
+                self.textViewDidEndEditing(self.txtvwComment)
                 
-                let lastRow = IndexPath(row: (self.content?.comments.count ?? 1) - 1, section: 0)
-                self.replyTV.scrollToRow(at: lastRow, at: .bottom, animated: true)
+                self.getPostService(postId: self.postId ?? 0, completionHandler: {(returnedData)-> Void in
+                    self.replyTV.reloadData()
+                    
+                    let lastRow = IndexPath(row: (self.content?.comments.count ?? 1) - 1, section: 0)
+                    self.replyTV.scrollToRow(at: lastRow, at: .bottom, animated: true)
+                })
             })
-        })
+        } else {
+            editCommentService(postId: postId ?? 0, commentId: currentCommentId ?? 0, editComment: txtvwComment.text, completionHandler: {() -> Void in
+                self.txtvwComment.text = ""
+                
+                // 수정모드 종료
+                self.isEditCommentMode = false
+                self.textViewDidChange(self.txtvwComment)
+                
+                self.btnCancel.isHidden = true
+                self.lblStatus.isHidden = true
+                self.statusViewHeight.constant = 0
+                
+                self.txtvwComment.endEditing(true)
+                
+                self.getPostService(postId: self.postId ?? 0, completionHandler: {(returnedData)-> Void in
+                    self.replyTV.reloadData()
+                })
+            })
+        }
+    }
+    
+    @IBAction func btnCancel(_ sender: Any) {
+        isEditCommentMode = false
         
+        txtvwComment.text = ""
+        textViewDidChange(txtvwComment)
+        
+        btnCancel.isHidden = true
+        lblStatus.isHidden = true
+        statusViewHeight.constant = 0
+        
+        txtvwComment.endEditing(true)
     }
     
     func initCommentWindow() {
         txtvwComment.tintColor = .nuteeGreen
+        
+        btnCancel.isHidden = true
+        lblStatus.isHidden = true
+        statusViewHeight.constant = 0
         
         // 시스템 Light or Dark 설정에 의한 댓글입력 창 배경색 설정
         txtvwComment.backgroundColor = .white
@@ -106,7 +144,6 @@ class DetailNewsFeedVC: UIViewController {
         vwCommentWindow.layer.shadowRadius = 5.0
         vwCommentWindow.layer.shadowColor = UIColor.gray.cgColor
         
-//        txtvwComment.placeholder = " 댓글을 입력하세요"
         if (txtvwComment.text == "") {
             textViewDidEndEditing(txtvwComment)
         }
@@ -247,14 +284,28 @@ extension DetailNewsFeedVC : UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("tapped.")
         let comment = content?.comments[indexPath.row]
+        currentCommentId = comment?.id
         
         let moreAlert = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertController.Style.actionSheet)
         let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
         if comment?.user.id == KeychainWrapper.standard.integer(forKey: "id") {
             let editAction = UIAlertAction(title: "수정", style: .default) {
                 (action: UIAlertAction) in
-                // Call edit action
-                // Reset state
+                // Code to EditComment
+                self.isEditCommentMode = true
+                
+                self.btnCancel.isHidden = false
+                self.lblStatus.isHidden = false
+                self.lblStatus.text = "댓글수정"
+                self.statusViewHeight.constant = 40
+                
+                self.txtvwComment.text = comment?.content
+                self.txtvwComment.textColor = .black
+                
+                self.view.setNeedsLayout()
+                UIView.animate(withDuration: 0.1, delay: 0.0, options: .curveEaseOut, animations: {
+                    self.view.layoutIfNeeded()
+                }, completion: nil)
             }
             let deleteAction = UIAlertAction(title: "삭제", style: .destructive) {
                 (action: UIAlertAction) in
@@ -542,6 +593,38 @@ extension DetailNewsFeedVC {
                 print(res)
             case .requestErr(_):
                 let errorAlert = UIAlertController(title: "오류발생😵", message: "오류가 발생하여 댓글을 삭제하지 못했습니다", preferredStyle: UIAlertController.Style.alert)
+                let okAction = UIAlertAction(title: "확인", style: .default, handler: nil)
+                
+                errorAlert.addAction(okAction)
+                
+                self.present(errorAlert, animated: true, completion: nil)
+                
+                print("request error")
+            
+            case .pathErr:
+                print(".pathErr")
+            
+            case .serverErr:
+                print(".serverErr")
+            
+            case .networkFail :
+                print("failure")
+                }
+        }
+    }
+    
+    // 댓글 수정
+    func editCommentService(postId: Int, commentId: Int, editComment: String, completionHandler: @escaping () -> Void ) {
+        ContentService.shared.commentEdit(postId, commentId, editComment) { (responsedata) in
+            
+            switch responsedata {
+            case .success(let res):
+                
+                print("commentEdit succussful", res)
+                completionHandler()
+                print(res)
+            case .requestErr(_):
+                let errorAlert = UIAlertController(title: "오류발생😵", message: "오류가 발생하여 댓글을 수정하지 못했습니다", preferredStyle: UIAlertController.Style.alert)
                 let okAction = UIAlertAction(title: "확인", style: .default, handler: nil)
                 
                 errorAlert.addAction(okAction)
