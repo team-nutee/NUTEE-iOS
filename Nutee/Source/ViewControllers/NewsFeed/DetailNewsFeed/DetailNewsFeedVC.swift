@@ -85,16 +85,6 @@ class DetailNewsFeedVC: UIViewController {
                 self.txtvwComment.text = ""
                 self.textViewDidChange(self.txtvwComment)
                 self.textViewDidEndEditing(self.txtvwComment)
-//                // 전송 버튼 가리기
-//                UIView.animate(withDuration: 0.1) {
-//                    self.btnSubmit.alpha = 0
-//                }
-//                self.CommentToTrailing.constant = 5
-//                UIView.animate(withDuration: 0.1, delay: 0.0, options: .curveEaseInOut, animations: {
-//                    self.view.layoutIfNeeded()
-//                }, completion: nil)
-//                self.txtvwComment.endEditing(true)
-//                self.txtvwComment.translatesAutoresizingMaskIntoConstraints = true
                 
                 self.getPostService(postId: self.postId ?? 0, completionHandler: {(returnedData)-> Void in
                     self.replyTV.reloadData()

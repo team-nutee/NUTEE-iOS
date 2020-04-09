@@ -94,15 +94,13 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UnZ-JO-Nan">
                                                 <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                                                 <constraints>
+                                                    <constraint firstAttribute="width" secondItem="UnZ-JO-Nan" secondAttribute="height" multiplier="1:1" id="NrS-bM-LWJ"/>
                                                     <constraint firstAttribute="height" constant="40" id="Tt9-mj-WmP"/>
                                                     <constraint firstAttribute="width" constant="40" id="Xwx-df-yLg"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <color key="tintColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <state key="normal" image="x.circle" catalog="system"/>
-                                                <connections>
-                                                    <action selector="btnCancel:" destination="Hpe-Qd-MQ9" eventType="touchUpInside" id="0TJ-nZ-6O6"/>
-                                                </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="StatusLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WUj-Wk-rWS">
                                                 <rect key="frame" x="40" y="0.0" width="67" height="40"/>
