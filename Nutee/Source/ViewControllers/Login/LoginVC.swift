@@ -107,7 +107,7 @@ class LoginVC: UIViewController {
         let password = KeychainWrapper.standard.string(forKey: "pw")
         
         if userid != nil && password != nil {
-            signInService(userid!, password as! String)
+            signInService(userid!, password!)
         } else {
             Splash.hide()
             return

@@ -34,7 +34,7 @@ class PictureVC: UIViewController {
         
         setScrollView()
         
-        backBtn.tintColor = .nuteeGreen
+        backBtn.tintColor = .white
         backBtn.addTarget(self, action: #selector(back), for: .touchUpInside)
     }
     
@@ -55,7 +55,7 @@ class PictureVC: UIViewController {
             imageView.contentMode = .scaleAspectFill //  사진의 비율을 맞춤.
             let xPosition = self.view.frame.width * CGFloat(i) // 현재 보이는 스크린에서 하나의 이미지만 보이게 하기 위해
                     
-            imageView.frame = CGRect(x: xPosition, y: (scrollView.frame.height-self.view.frame.width)/2, width: self.view.frame.width, height: self.view.frame.width)            
+            imageView.frame = CGRect(x: xPosition, y: (scrollView.frame.height-self.view.frame.width)/2, width: self.view.frame.width, height: self.view.frame.width)
             
             scrollView.contentSize.width = self.view.frame.width * CGFloat(1+i)
 

@@ -36,6 +36,7 @@ class ReplyCell: UITableViewCell{
         super.awakeFromNib()
         
 //        initComments()
+        txtvwCommentContents.font = .systemFont(ofSize: 13)
     }
     
     //MARK: - Helper
