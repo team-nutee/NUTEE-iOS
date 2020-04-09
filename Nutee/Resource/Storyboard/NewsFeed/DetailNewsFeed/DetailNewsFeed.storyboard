@@ -54,22 +54,37 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" bouncesZoom="NO" editable="NO" text="댓글 내용 구간 입니다" textAlignment="justified" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O0E-Kn-gbN">
-                                                    <rect key="frame" x="65" y="35" width="295" height="30"/>
+                                                    <rect key="frame" x="65" y="35" width="250" height="30"/>
                                                     <color key="tintColor" red="0.074509803920000006" green="0.76078431369999999" blue="0.46274509800000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 </textView>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FeV-lY-0bx">
+                                                    <rect key="frame" x="315" y="27.666666666666671" width="40" height="40"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="40" id="8rs-Fe-cK0"/>
+                                                        <constraint firstAttribute="width" secondItem="FeV-lY-0bx" secondAttribute="height" multiplier="1:1" id="TdL-Hj-oYi"/>
+                                                        <constraint firstAttribute="height" constant="40" id="xFm-wW-XHe"/>
+                                                    </constraints>
+                                                    <color key="tintColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <state key="normal" image="ellipsis" catalog="system"/>
+                                                    <connections>
+                                                        <action selector="btnCommentMore:" destination="yAo-b1-Y4a" eventType="touchUpInside" id="OAX-PQ-FFy"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="hEa-f3-4GT" firstAttribute="centerY" secondItem="fkO-Yc-TQ3" secondAttribute="centerY" id="1gv-Oe-NAK"/>
+                                                <constraint firstItem="FeV-lY-0bx" firstAttribute="leading" secondItem="O0E-Kn-gbN" secondAttribute="trailing" id="3m1-qk-q2p"/>
                                                 <constraint firstItem="fkO-Yc-TQ3" firstAttribute="leading" secondItem="OW2-rG-Pny" secondAttribute="trailing" constant="15" id="4Ja-XZ-VQF"/>
                                                 <constraint firstAttribute="bottom" secondItem="O0E-Kn-gbN" secondAttribute="bottom" constant="5" id="8tN-tc-DRs"/>
-                                                <constraint firstAttribute="trailing" secondItem="O0E-Kn-gbN" secondAttribute="trailing" constant="15" id="bLr-sf-AC7"/>
+                                                <constraint firstItem="FeV-lY-0bx" firstAttribute="trailing" secondItem="hEa-f3-4GT" secondAttribute="trailing" id="VLn-IV-vZm"/>
                                                 <constraint firstItem="OW2-rG-Pny" firstAttribute="top" secondItem="a6w-ke-aV7" secondAttribute="top" constant="10" id="c15-gE-Fp1"/>
                                                 <constraint firstItem="O0E-Kn-gbN" firstAttribute="top" secondItem="fkO-Yc-TQ3" secondAttribute="bottom" id="cBT-Qp-hUG"/>
                                                 <constraint firstItem="fkO-Yc-TQ3" firstAttribute="top" secondItem="a6w-ke-aV7" secondAttribute="top" constant="8" id="ebY-AO-LkD"/>
                                                 <constraint firstItem="O0E-Kn-gbN" firstAttribute="leading" secondItem="OW2-rG-Pny" secondAttribute="trailing" constant="10" id="fZc-A8-GZH"/>
+                                                <constraint firstItem="hEa-f3-4GT" firstAttribute="bottom" secondItem="FeV-lY-0bx" secondAttribute="top" id="jvJ-63-CmO"/>
                                                 <constraint firstItem="OW2-rG-Pny" firstAttribute="leading" secondItem="a6w-ke-aV7" secondAttribute="leading" constant="15" id="pG0-DB-yjf"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="hEa-f3-4GT" secondAttribute="trailing" constant="5" id="vk3-tY-ZkA"/>
                                             </constraints>
@@ -101,6 +116,9 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <color key="tintColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <state key="normal" image="x.circle" catalog="system"/>
+                                                <connections>
+                                                    <action selector="btnCancel:" destination="Hpe-Qd-MQ9" eventType="touchUpInside" id="XgE-dg-PYR"/>
+                                                </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="StatusLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WUj-Wk-rWS">
                                                 <rect key="frame" x="40" y="0.0" width="67" height="40"/>
@@ -190,7 +208,7 @@
                     <connections>
                         <outlet property="CommentToTrailing" destination="CXZ-tr-OrD" id="1vd-l7-JZc"/>
                         <outlet property="CommentWindowToBottom" destination="TNU-nG-o4g" id="F8W-b4-3C2"/>
-                        <outlet property="btnCancel" destination="UnZ-JO-Nan" id="5Cg-kS-Foc"/>
+                        <outlet property="btnCancel" destination="UnZ-JO-Nan" id="GBo-vX-6aJ"/>
                         <outlet property="btnSubmit" destination="Jnc-pI-VMN" id="fnD-lZ-yp6"/>
                         <outlet property="lblStatus" destination="WUj-Wk-rWS" id="bDL-2R-C8j"/>
                         <outlet property="replyTV" destination="1MS-nu-hQ5" id="CiM-hb-21h"/>
@@ -212,6 +230,7 @@
     </scenes>
     <resources>
         <image name="arrow.up.circle.fill" catalog="system" width="64" height="60"/>
+        <image name="ellipsis" catalog="system" width="64" height="18"/>
         <image name="x.circle" catalog="system" width="64" height="60"/>
     </resources>
 </document>

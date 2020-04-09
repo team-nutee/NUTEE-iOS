@@ -25,8 +25,9 @@ class ReplyCell: UITableViewCell{
     
     //MARK: - Variables and Properties
     
-    weak var newsTV: UITableView?
-    weak var detailNewsFeedVC: UIViewController?
+    // NewsFeedVC와 통신하기 위한 델리게이트 변수 선언
+    weak var delegate: ReplyCellDelegate?
+    weak var RootVC: UIViewController?
     
     var comment: Comment?
     
@@ -43,6 +44,63 @@ class ReplyCell: UITableViewCell{
     
     @IBAction func showDetailProfile(_ sender: UIButton) {
         showProfile()
+    }
+    
+    @IBAction func btnCommentMore(_ sender: Any) {
+        let moreAlert = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertController.Style.actionSheet)
+        let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+            let editAction = UIAlertAction(title: "수정", style: .default) {
+                (action: UIAlertAction) in
+                // Code to EditComment
+                self.delegate?.setEditCommentMode(commentId: self.comment?.id ?? 0, commentContent: self.txtvwCommentContents.text)
+            }
+            let deleteAction = UIAlertAction(title: "삭제", style: .destructive) {
+                (action: UIAlertAction) in
+                // Code to 수정/삭제 기능
+                let deleteAlert = UIAlertController(title: nil, message: "댓글을 삭제 하시겠습니까?", preferredStyle: UIAlertController.Style.alert)
+                let cancelAction = UIAlertAction(title: "취소", style: .default, handler: nil)
+                let okAction = UIAlertAction(title: "삭제", style: .destructive) {
+                    (action: UIAlertAction) in
+                    // Code to delete
+                    self.deleteCommentService(postId: self.comment?.postID ?? 0, commentId: self.comment?.id ?? 0, completionHandler: {()-> Void in
+                        self.delegate?.updateReplyTV()
+                    })
+                }
+                deleteAlert.addAction(cancelAction)
+                deleteAlert.addAction(okAction)
+                self.RootVC?.present(deleteAlert, animated: true, completion: nil)
+            }
+            let reportAction = UIAlertAction(title: "신고하기🚨", style: .destructive) {
+                (action: UIAlertAction) in
+                // Code to 신고 기능
+                let reportAlert = UIAlertController(title: "🚨댓글 신고🚨", message: "", preferredStyle: UIAlertController.Style.alert)
+                let cancelAction
+                    = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+                let reportAction = UIAlertAction(title: "신고", style: .destructive) {
+                    (action: UIAlertAction) in
+                    let reason = reportAlert.textFields?[0].text ?? "" // 신고 내용
+                    self.reportCommentService(reportReason: reason)
+                    //신고 여부 알림 <-- 서버연결 코드에서 구현됨
+                }
+                reportAlert.addTextField { (mytext) in
+                    mytext.tintColor = .nuteeGreen
+                    mytext.placeholder = "신고할 내용을 입력해주세요."
+                }
+                reportAlert.addAction(cancelAction)
+                reportAlert.addAction(reportAction)
+                
+                self.RootVC?.present(reportAlert, animated: true, completion: nil)
+            }
+        
+        if comment?.userID == KeychainWrapper.standard.integer(forKey: "id") {
+            moreAlert.addAction(editAction)
+            moreAlert.addAction(deleteAction)
+            moreAlert.addAction(cancelAction)
+        } else {
+            moreAlert.addAction(reportAction)
+            moreAlert.addAction(cancelAction)
+        }
+        self.RootVC?.present(moreAlert, animated: true, completion: nil)
     }
     
     func initComments() {
@@ -104,7 +162,7 @@ class ReplyCell: UITableViewCell{
         // 선택된 사용자 아이디를 넘거줌
         vc?.userId = comment?.user.id  ?? KeychainWrapper.standard.integer(forKey: "id")
         
-        detailNewsFeedVC?.navigationController?.pushViewController(vc!, animated: true)
+        RootVC?.navigationController?.pushViewController(vc!, animated: true)
     }
     
     // 프로필 이미지에 탭 인식하게 만들기
@@ -124,6 +182,81 @@ class ReplyCell: UITableViewCell{
         //Give your image View tag
         if (imgView.tag == 1) {
             showProfile()
+        }
+    }
+}
+
+// MARK: - DetailNewsFeedVC와 통신하기 위한 프로토콜 정의
+
+protocol ReplyCellDelegate: class {
+    func updateReplyTV()
+    func setEditCommentMode(commentId: Int, commentContent: String)
+}
+
+// MARK: - 서버 연결 코드 구간
+
+extension ReplyCell {
+    // 뎃글 신고 <-- 확인 필요
+    func reportCommentService(reportReason: String) {
+        let userid = KeychainWrapper.standard.string(forKey: "id") ?? "" // <-- 수정 必
+        ContentService.shared.reportPost(userid, reportReason) { (responsedata) in // <-- 현재 작성된 API는 게시글(post)에 대한 신고기능
+            
+            switch responsedata {
+            case .success(let res):
+                
+                print(res)
+                
+                let successfulAlert = UIAlertController(title: "신고가 완료되었습니다", message: nil, preferredStyle: UIAlertController.Style.alert)
+                let okAction = UIAlertAction(title: "확인", style: .default, handler: nil)
+                
+                successfulAlert.addAction(okAction)
+                
+                self.RootVC?.present(successfulAlert, animated: true, completion: nil)
+
+            case .requestErr(_):
+                print("request error")
+            
+            case .pathErr:
+                print(".pathErr")
+            
+            case .serverErr:
+                print(".serverErr")
+            
+            case .networkFail :
+                print("failure")
+                }
+        }
+    }
+    
+    // 댓글 삭제
+    func deleteCommentService(postId: Int, commentId: Int, completionHandler: @escaping () -> Void ) {
+        ContentService.shared.commentDelete(postId, commentId: commentId) { (responsedata) in
+            
+            switch responsedata {
+            case .success(let res):
+                
+                print("commentDelete succussful", res)
+                completionHandler()
+                print(res)
+            case .requestErr(_):
+                let errorAlert = UIAlertController(title: "오류발생😵", message: "오류가 발생하여 댓글을 삭제하지 못했습니다", preferredStyle: UIAlertController.Style.alert)
+                let okAction = UIAlertAction(title: "확인", style: .default, handler: nil)
+                
+                errorAlert.addAction(okAction)
+                
+                self.RootVC?.present(errorAlert, animated: true, completion: nil)
+                
+                print("request error")
+            
+            case .pathErr:
+                print(".pathErr")
+            
+            case .serverErr:
+                print(".serverErr")
+            
+            case .networkFail :
+                print("failure")
+                }
         }
     }
 }
