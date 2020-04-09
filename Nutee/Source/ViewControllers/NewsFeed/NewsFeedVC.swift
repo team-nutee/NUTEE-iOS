@@ -253,6 +253,9 @@ extension NewsFeedVC : UITableViewDataSource {
             showDetailNewsFeedVC.replyTV.reloadData()
         })
         
+        // NewsFeedVC와 중간 매개 델리게이트(DetailNewsFeed) 사이를 통신하기 위한 변수 연결작업
+        showDetailNewsFeedVC.delegate = self
+        
         self.navigationController?.pushViewController(showDetailNewsFeedVC, animated: true)
     }
     

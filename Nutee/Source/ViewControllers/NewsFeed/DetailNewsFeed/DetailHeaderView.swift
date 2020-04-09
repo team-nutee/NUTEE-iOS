@@ -357,10 +357,6 @@ class DetailHeaderView: UITableViewHeaderFooterView {
         self.postDeleteService(postId: self.detailNewsPost?.id ?? 0, completionHandler: {() -> Void in
             // delegate로 NewsFeedVC와 통신하기
             self.delegate?.backToUpdateNewsTV()
-            let deleteAlert = UIAlertController(title: nil, message: "게시글이 삭제되었습니다", preferredStyle: UIAlertController.Style.alert)
-            let okAction = UIAlertAction(title: "확인", style: .default)
-            deleteAlert.addAction(okAction)
-            self.RootVC?.present(deleteAlert, animated: true, completion: nil)
         })
     }
 }

@@ -32,6 +32,9 @@ class DetailNewsFeedVC: UIViewController {
     
     //MARK: - Variables and Properties
     
+    // FeedTVC와 DetailHeadderView가 통신하기 위해 중간(DetailNewsFeed) 연결 델리게이트 변수 선언
+    weak var delegate: DetailHeaderViewDelegate?
+    
     var content: NewsPostsContentElement?
     var postId: Int?
     
@@ -194,6 +197,8 @@ extension DetailNewsFeedVC : UITableViewDataSource {
         
         // VC 컨트롤 권한을 HeaderView로 넘겨주기
         headerNewsFeed?.RootVC = self
+        // 중간 매개 델리게이트(DetailNewsFeed)와 DetailHeaderView 사이를 통신하기 위한 변수 연결작업
+        headerNewsFeed?.delegate = self.delegate
         
         // 사용자 프로필 이미지 탭 인식 설정
         headerNewsFeed?.setClickActions()
