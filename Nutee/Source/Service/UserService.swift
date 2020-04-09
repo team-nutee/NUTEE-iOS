@@ -199,6 +199,7 @@ struct UserService {
                             do{
                                 let decoder = JSONDecoder()
                                 let result = try decoder.decode(SignIn.self, from: value)
+                                dump(result)
                                 completion(.success(result))
                             } catch {
                                 completion(.pathErr)
@@ -244,6 +245,7 @@ struct UserService {
                             do{
                                 let decoder = JSONDecoder()
                                 let result = try decoder.decode(SignIn.self, from: value)
+                                dump(result)
                                 completion(.success(result))
                             } catch {
                                 completion(.pathErr)

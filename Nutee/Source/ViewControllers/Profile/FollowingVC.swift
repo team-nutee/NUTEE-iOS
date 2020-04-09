@@ -51,7 +51,7 @@ extension FollowingVC : UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         followingsNums = followingsList?.count ?? 0
         if followingsNums == 0 {
-            tableView.setEmptyView(title: "팔로워가 없습니다.", message: "")
+            tableView.setEmptyView(title: "팔로잉을 해보세요!.", message: "")
         } else {
             tableView.restore()
         }
