@@ -288,7 +288,6 @@ extension DetailNewsFeedVC : UITableViewDataSource {
         
         let moreAlert = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertController.Style.actionSheet)
         let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
-        if comment?.user.id == KeychainWrapper.standard.integer(forKey: "id") {
             let editAction = UIAlertAction(title: "수정", style: .default) {
                 (action: UIAlertAction) in
                 // Code to EditComment
@@ -325,13 +324,7 @@ extension DetailNewsFeedVC : UITableViewDataSource {
                 deleteAlert.addAction(okAction)
                 self.present(deleteAlert, animated: true, completion: nil)
             }
-            moreAlert.addAction(editAction)
-            moreAlert.addAction(deleteAction)
-            moreAlert.addAction(cancelAction)
-            
-        } else {
-            
-            let deleteAction = UIAlertAction(title: "신고하기🚨", style: .destructive) {
+            let reportAction = UIAlertAction(title: "신고하기🚨", style: .destructive) {
                 (action: UIAlertAction) in
                 // Code to 신고 기능
                 let reportAlert = UIAlertController(title: "🚨댓글 신고🚨", message: "", preferredStyle: UIAlertController.Style.alert)
@@ -352,7 +345,12 @@ extension DetailNewsFeedVC : UITableViewDataSource {
                 
                 self.present(reportAlert, animated: true, completion: nil)
             }
+        if comment?.user.id == KeychainWrapper.standard.integer(forKey: "id") {
+            moreAlert.addAction(editAction)
             moreAlert.addAction(deleteAction)
+            moreAlert.addAction(cancelAction)
+        }else{
+            moreAlert.addAction(reportAction)
             moreAlert.addAction(cancelAction)
         }
         present(moreAlert, animated: true, completion: nil)
