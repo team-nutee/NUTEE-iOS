@@ -268,6 +268,8 @@ extension DetailNewsFeedVC : UITableViewDataSource {
             }
         } else {
             // 불러올 댓글이 있는 경우 cell 초기화 진행
+            cell.backgroundColor = .white
+            tableView.separatorStyle = .singleLine
             cell.contentsCell.isHidden = false
             statusNoReply.isHidden = true
             
