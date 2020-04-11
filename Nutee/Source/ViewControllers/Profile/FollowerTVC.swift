@@ -36,7 +36,7 @@ class FollowerTVC: UITableViewCell {
 }
 
 extension FollowerTVC {
-        
+        //test
         @objc func deleteFollowerService(id : Int) {
             FollowService.shared.deleteFollow(id) { responsedata in
                 
