@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         UINavigationBar.appearance().tintColor = UIColor.nuteeGreen
-                
+        sleep(1)
         return true
     }
 
