@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -16,7 +16,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="70" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="2" translatesAutoresizingMaskIntoConstraints="NO" id="1MS-nu-hQ5">
-                                <rect key="frame" x="0.0" y="44" width="375" height="656"/>
+                                <rect key="frame" x="0.0" y="44" width="375" height="641"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ReplyCell" rowHeight="70" id="yAo-b1-Y4a" customClass="ReplyCell" customModule="NUTEE" customModuleProvider="target">
@@ -101,7 +101,7 @@
                                 </prototypes>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Q7-NF-uqq">
-                                <rect key="frame" x="0.0" y="700" width="375" height="78"/>
+                                <rect key="frame" x="0.0" y="685" width="375" height="93"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BHo-U7-jNu">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
@@ -141,7 +141,7 @@
                                         </constraints>
                                     </view>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="pdD-0u-Mb2">
-                                        <rect key="frame" x="5" y="40" width="365" height="33"/>
+                                        <rect key="frame" x="5" y="50" width="365" height="33"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="lessThanOrEqual" constant="100" id="LXT-HS-xTS"/>
                                         </constraints>
@@ -158,7 +158,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </textView>
                                     <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jnc-pI-VMN">
-                                        <rect key="frame" x="335" y="36" width="40" height="40"/>
+                                        <rect key="frame" x="335" y="51" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="OAR-tj-ONU"/>
                                             <constraint firstAttribute="width" constant="40" id="Yco-0r-Y7f"/>
@@ -177,10 +177,10 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="Jnc-pI-VMN" secondAttribute="bottom" constant="2" id="1Ka-fl-gms"/>
-                                    <constraint firstAttribute="bottom" secondItem="pdD-0u-Mb2" secondAttribute="bottom" constant="5" id="2hJ-Mh-7h8"/>
+                                    <constraint firstAttribute="bottom" secondItem="pdD-0u-Mb2" secondAttribute="bottom" constant="10" id="2hJ-Mh-7h8"/>
                                     <constraint firstItem="pdD-0u-Mb2" firstAttribute="leading" secondItem="2Q7-NF-uqq" secondAttribute="leading" constant="5" id="9gs-G9-cTz"/>
                                     <constraint firstAttribute="trailing" secondItem="pdD-0u-Mb2" secondAttribute="trailing" constant="5" id="CXZ-tr-OrD"/>
-                                    <constraint firstItem="pdD-0u-Mb2" firstAttribute="top" secondItem="BHo-U7-jNu" secondAttribute="bottom" id="Jjp-wb-2ra"/>
+                                    <constraint firstItem="pdD-0u-Mb2" firstAttribute="top" secondItem="BHo-U7-jNu" secondAttribute="bottom" constant="10" id="Jjp-wb-2ra"/>
                                     <constraint firstAttribute="trailing" secondItem="BHo-U7-jNu" secondAttribute="trailing" id="ekN-jw-fGt"/>
                                     <constraint firstItem="BHo-U7-jNu" firstAttribute="leading" secondItem="2Q7-NF-uqq" secondAttribute="leading" id="mlu-Zz-A8R"/>
                                     <constraint firstItem="BHo-U7-jNu" firstAttribute="top" secondItem="2Q7-NF-uqq" secondAttribute="top" id="tdb-76-AS7"/>
@@ -229,8 +229,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="arrow.up.circle.fill" catalog="system" width="128" height="121"/>
-        <image name="ellipsis" catalog="system" width="128" height="37"/>
-        <image name="x.circle" catalog="system" width="128" height="121"/>
+        <image name="arrow.up.circle.fill" catalog="system" width="64" height="60"/>
+        <image name="ellipsis" catalog="system" width="64" height="18"/>
+        <image name="x.circle" catalog="system" width="64" height="60"/>
     </resources>
 </document>
