@@ -301,12 +301,19 @@ extension PostVC : UICollectionViewDataSource {
         cell.postIMG.cornerRadius = 10
         if isEditMode == false {
             cell.postIMG.image = pickedIMG[indexPath.row]
+            if ( pickedIMG.count != 0 ) {
+                postBtn.isEnabled = true
+            } else {
+                postBtn.isEnabled = false
+            }
         } else {
             if editPostImg.count >= 1 && indexPath.row < editPostImg.count {
                 cell.postIMG.imageFromUrl((APIConstants.BaseURL) + "/" + (editNewsPost?.images[indexPath.row].src ?? ""), defaultImgPath: (APIConstants.BaseURL) + "/" + "settings/nutee_profile.png")
+                postBtn.isEnabled = true
             } else {
                 let fixIndex = Int(indexPath.row) - (editPostImg.count)
                 cell.postIMG.image = pickedIMG[fixIndex]
+                postBtn.isEnabled = true
             }
         }
         
@@ -317,12 +324,19 @@ extension PostVC : UICollectionViewDataSource {
 
         if isEditMode == false {
             pickedIMG.remove(at: indexPath.row)
+            if (pickedIMG.count != 0){
+                postBtn.isEnabled = true
+            } else {
+                postBtn.isEnabled = false
+            }
         } else {
             if editPostImg.count > 0 && indexPath.row < editPostImg.count {
                 editPostImg.remove(at: indexPath.row)
+                postBtn.isEnabled = true
             } else {
                 let fixIndex = Int(indexPath.row) - (editPostImg.count)
                 pickedIMG.remove(at: fixIndex)
+                postBtn.isEnabled = true
             }
             
         }

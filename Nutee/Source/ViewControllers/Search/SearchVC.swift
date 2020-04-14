@@ -41,7 +41,7 @@ class SearchVC: UIViewController {
     // MARK: - Helper
     func setSearch(){
         self.searchTextField.delegate = self
-        searchWrapView.setBorder(borderColor: .nuteeGreen, borderWidth: 2)
+        searchWrapView.setBorder(borderColor: .nuteeGreen, borderWidth: 1)
         searchTextField.placeholder = "검색"
         searchTextField.tintColor = .nuteeGreen
         searchBtn.tintColor = .nuteeGreen
