@@ -176,7 +176,7 @@
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="Jnc-pI-VMN" secondAttribute="bottom" constant="2" id="1Ka-fl-gms"/>
+                                    <constraint firstAttribute="bottom" secondItem="Jnc-pI-VMN" secondAttribute="bottom" constant="7" id="1Ka-fl-gms"/>
                                     <constraint firstAttribute="bottom" secondItem="pdD-0u-Mb2" secondAttribute="bottom" constant="10" id="2hJ-Mh-7h8"/>
                                     <constraint firstItem="pdD-0u-Mb2" firstAttribute="leading" secondItem="2Q7-NF-uqq" secondAttribute="leading" constant="5" id="9gs-G9-cTz"/>
                                     <constraint firstAttribute="trailing" secondItem="pdD-0u-Mb2" secondAttribute="trailing" constant="5" id="CXZ-tr-OrD"/>
