@@ -19,7 +19,7 @@
                                 <rect key="frame" x="20" y="93" width="374" height="40"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hpW-nH-1eD">
-                                        <rect key="frame" x="7" y="2" width="360" height="36"/>
+                                        <rect key="frame" x="7" y="2" width="347" height="36"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="36" id="R0L-mT-e5g"/>
                                         </constraints>
@@ -30,7 +30,7 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="S73-AT-8p3"/>
-                                    <constraint firstAttribute="trailing" secondItem="hpW-nH-1eD" secondAttribute="trailing" constant="7" id="Tj3-cS-TeW"/>
+                                    <constraint firstAttribute="trailing" secondItem="hpW-nH-1eD" secondAttribute="trailing" constant="20" id="Tj3-cS-TeW"/>
                                     <constraint firstItem="hpW-nH-1eD" firstAttribute="leading" secondItem="wfM-1V-q6z" secondAttribute="leading" constant="7" id="aG1-2t-nd9"/>
                                     <constraint firstItem="hpW-nH-1eD" firstAttribute="top" secondItem="wfM-1V-q6z" secondAttribute="top" constant="2" id="tTb-05-UBD"/>
                                 </constraints>
