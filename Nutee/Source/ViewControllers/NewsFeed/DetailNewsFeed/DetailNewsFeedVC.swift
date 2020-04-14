@@ -142,10 +142,11 @@ class DetailNewsFeedVC: UIViewController {
         txtvwComment.borderColor = .white
 
         // 댓글창 top부분과 table Cell의 경계 구분을 위한 shadow 효과 적용
-        vwCommentWindow.layer.shadowOpacity = 0.7
-        vwCommentWindow.layer.shadowOffset = CGSize(width: 3, height: 3)
-        vwCommentWindow.layer.shadowRadius = 5.0
-        vwCommentWindow.layer.shadowColor = UIColor.gray.cgColor
+//        vwCommentWindow.layer.shadowOpacity = 0.7
+//        vwCommentWindow.layer.shadowOffset = CGSize(width: 3, height: 3)
+//        vwCommentWindow.layer.shadowRadius = 5.0
+//        vwCommentWindow.layer.shadowColor = UIColor.gray.cgColor
+        vwCommentWindow.addBorder(.top, color: .veryLightPink, thickness: 0.3)
         
         if (txtvwComment.text == "") {
             textViewDidEndEditing(txtvwComment)
