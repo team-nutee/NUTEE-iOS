@@ -17,13 +17,17 @@ class PictureVC: UIViewController {
     
     
     var imageArr : [Image]?
-    
+    var imageView = UIImageView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         scrollView.delegate = self
         view.backgroundColor = nil
+        
+        scrollView.minimumZoomScale = 0.5
+        scrollView.maximumZoomScale = 1.5
+        
         
         pageControl.numberOfPages = imageArr?.count ?? 0
         pageControl.currentPage = 0
@@ -49,10 +53,11 @@ class PictureVC: UIViewController {
     
     func setScrollView(){
         for i in 0 ..< (imageArr?.count ?? 0) {
-            let imageView = UIImageView()
+            imageView = UIImageView()
+            scrollView.contentSize = imageView.frame.size
             imageView.imageFromUrl((APIConstants.BaseURL) + "/" + (imageArr?[i].src ?? ""), defaultImgPath: (APIConstants.BaseURL) + "/settings/nutee_profile.png")
             
-            imageView.contentMode = .scaleAspectFill //  사진의 비율을 맞춤.
+            imageView.contentMode = .scaleAspectFit
             let xPosition = self.view.frame.width * CGFloat(i) // 현재 보이는 스크린에서 하나의 이미지만 보이게 하기 위해
                     
             imageView.frame = CGRect(x: xPosition, y: (scrollView.frame.height-self.view.frame.width)/2, width: self.view.frame.width, height: self.view.frame.width)
@@ -60,10 +65,17 @@ class PictureVC: UIViewController {
             scrollView.contentSize.width = self.view.frame.width * CGFloat(1+i)
 
             scrollView.addSubview(imageView)
+
         }
+
 
     }
 
+//    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+//        return self.imageView
+//    }
+
+    
 }
 
 extension PictureVC : UIScrollViewDelegate {
