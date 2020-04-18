@@ -205,13 +205,20 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
             // User 정보 설정 //
             // 사용자 프로필 이미지 설정
             imgvwUserImg.setRounded(radius: nil)
-            if detailNewsPost?.user.image?.src == nil || detailNewsPost?.user.image?.src == ""{
-                imgvwUserImg.imageFromUrl("http://15.164.50.161:9425/settings/nutee_profile.png", defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
-                imgvwUserImg.contentMode = .scaleAspectFit
-            } else {
-                imgvwUserImg.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.user.image?.src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
-                imgvwUserImg.contentMode = .scaleAspectFill
-            }
+            
+
+            //      To do 이미지 변경 확인한 이후 삭제
+//            if detailNewsPost?.user.image?.src == nil || detailNewsPost?.user.image?.src == ""{
+//                imgvwUserImg.imageFromUrl("http://15.164.50.161:9425/settings/nutee_profile.png", defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+//                imgvwUserImg.contentMode = .scaleAspectFit
+//            } else {
+//                imgvwUserImg.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.user.image?.src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+//                imgvwUserImg.contentMode = .scaleAspectFill
+//            }
+            
+            imgvwUserImg.setImageNutee(detailNewsPost?.user.image?.src)
+            imgvwUserImg.contentMode = .scaleAspectFit
+            
             // 사용자 이름 설정
             //            let nickname = newsPost?.user.nickname ?? ""
             lblUserId.setTitle(detailNewsPost?.user.nickname, for: .normal)
@@ -284,13 +291,19 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
             // User 정보 설정 //
             // 사용자 프로필 이미지 설정
             imgvwUserImg.setRounded(radius: nil)
-            if detailNewsPost?.retweet?.user.image?.src == nil || detailNewsPost?.retweet?.user.image?.src == "" {
-                imgvwUserImg.imageFromUrl("http://15.164.50.161:9425/settings/nutee_profile.png", defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
-                imgvwUserImg.contentMode = .scaleAspectFit
-            } else {
-                imgvwUserImg.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.retweet?.user.image?.src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
-                imgvwUserImg.contentMode = .scaleAspectFill
-            }
+
+
+            //      To do 이미지 변경 확인한 이후 삭제
+//            if detailNewsPost?.retweet?.user.image?.src == nil || detailNewsPost?.retweet?.user.image?.src == "" {
+//                imgvwUserImg.imageFromUrl("http://15.164.50.161:9425/settings/nutee_profile.png", defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+//                imgvwUserImg.contentMode = .scaleAspectFit
+//            } else {
+//                imgvwUserImg.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.retweet?.user.image?.src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+//                imgvwUserImg.contentMode = .scaleAspectFill
+//            }
+            imgvwUserImg.setImageNutee(detailNewsPost?.retweet?.user.image?.src)
+            imgvwUserImg.contentMode = .scaleAspectFit
+            
             // 사용자 이름 설정
             let nickname = detailNewsPost?.retweet?.user.nickname ?? ""
             lblUserId.setTitle(detailNewsPost?.retweet?.user.nickname, for: .normal)
@@ -417,9 +430,11 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
             ContentsToRepost.isActive = false
             
             if isRepost {
-                imgvwOne.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.retweet?.images[0].src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+//                imgvwOne.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.retweet?.images[0].src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+                imgvwOne.setImageNutee(detailNewsPost?.retweet?.images[0].src)
             } else {
-                imgvwOne.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.images[0].src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+//                imgvwOne.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.images[0].src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+                imgvwOne.setImageNutee(detailNewsPost?.images[0].src)
             }
             
         case 2:
@@ -434,9 +449,11 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
             
             for imgvw in imgvwTwo {
                 if isRepost {
-                    imgvw.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.retweet?.images[num].src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+//                    imgvw.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.retweet?.images[num].src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+                    imgvw.setImageNutee(detailNewsPost?.retweet?.images[num].src)
                 } else {
-                    imgvw.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.images[num].src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+//                    imgvw.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.images[num].src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+                    imgvw.setImageNutee(detailNewsPost?.images[num].src)
                 }
                 if num == 1 {
                     let leftImg = imageCnt - 2
@@ -467,9 +484,11 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
             
             for imgvw in imgvwThree {
                 if isRepost {
-                    imgvw.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.retweet?.images[num].src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+//                    imgvw.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.retweet?.images[num].src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+                    imgvw.setImageNutee(detailNewsPost?.retweet?.images[num].src)
                 } else {
-                    imgvw.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.images[num].src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+//                    imgvw.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.images[num].src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+                    imgvw.setImageNutee(detailNewsPost?.images[num].src)
                 }
                 if num == 2 {
                     let leftImg = imageCnt - 3
@@ -501,9 +520,11 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
             for imgvw in imgvwFour {
                 if num <= 3 {
                     if isRepost {
-                        imgvw.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.retweet?.images[num].src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+//                        imgvw.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.retweet?.images[num].src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+                        imgvw.setImageNutee(detailNewsPost?.retweet?.images[num].src)
                     } else {
-                        imgvw.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.images[num].src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+//                        imgvw.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.images[num].src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+                        imgvw.setImageNutee(detailNewsPost?.images[num].src)
                     }
                 }
                 if num == 3 {

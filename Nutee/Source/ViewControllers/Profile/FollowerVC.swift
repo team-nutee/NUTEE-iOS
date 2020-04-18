@@ -81,12 +81,14 @@ extension FollowerVC : UITableViewDataSource {
             cell.followerDeleteBtn.isHidden = true
         }
         
-        if followersList?[indexPath.row].image.src == "" {
-        cell.followerImgView.imageFromUrl("http://15.164.50.161:9425/settings/nutee_profile.png", defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
-        } else {
-        cell.followerImgView.imageFromUrl((APIConstants.BaseURL) + "/" + (followersList?[indexPath.row].image.src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
-        }
+//      To do 이미지 변경 확인한 이후 삭제
+//        if followersList?[indexPath.row].image.src == "" {
+//        cell.followerImgView.imageFromUrl("http://15.164.50.161:9425/settings/nutee_profile.png", defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+//        } else {
+//        cell.followerImgView.imageFromUrl((APIConstants.BaseURL) + "/" + (followersList?[indexPath.row].image.src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+//        }
         
+        cell.followerImgView.setImageNutee(followersList?[indexPath.row].image.src ?? "")
         cell.followerLabel.text = followersList?[indexPath.row].nickname
         cell.followerLabel.sizeToFit()
         

@@ -55,7 +55,8 @@ class PictureVC: UIViewController {
         for i in 0 ..< (imageArr?.count ?? 0) {
             imageView = UIImageView()
             scrollView.contentSize = imageView.frame.size
-            imageView.imageFromUrl((APIConstants.BaseURL) + "/" + (imageArr?[i].src ?? ""), defaultImgPath: (APIConstants.BaseURL) + "/settings/nutee_profile.png")
+//            imageView.imageFromUrl((APIConstants.BaseURL) + "/" + (imageArr?[i].src ?? ""), defaultImgPath: (APIConstants.BaseURL) + "/settings/nutee_profile.png")
+            imageView.setImageNutee(imageArr?[i].src)
             
             imageView.contentMode = .scaleAspectFit
             let xPosition = self.view.frame.width * CGFloat(i) // 현재 보이는 스크린에서 하나의 이미지만 보이게 하기 위해

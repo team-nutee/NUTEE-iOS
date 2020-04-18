@@ -64,13 +64,18 @@ class FeedTVC: UITableViewCell {
     
     func initPosting() {
         userImg.setRounded(radius: nil)
-        if newsPost?.user.image?.src == nil || newsPost?.user.image?.src == "" {
-            userImg.imageFromUrl((APIConstants.BaseURL) + "/settings/nutee_profile.png", defaultImgPath: (APIConstants.BaseURL) + "/settings/nutee_profile.png")
-            userImg.contentMode = .scaleAspectFill
-        } else {
-            userImg.imageFromUrl((APIConstants.BaseURL) + "/" + (newsPost?.user.image?.src ?? ""), defaultImgPath: (APIConstants.BaseURL) + "/settings/nutee_profile.png")
-            userImg.contentMode = .scaleAspectFill
-        }
+        
+        //      To do 이미지 변경 확인한 이후 삭제
+//        if newsPost?.user.image?.src == nil || newsPost?.user.image?.src == "" {
+//            userImg.imageFromUrl((APIConstants.BaseURL) + "/settings/nutee_profile.png", defaultImgPath: (APIConstants.BaseURL) + "/settings/nutee_profile.png")
+//            userImg.contentMode = .scaleAspectFill
+//        } else {
+//            userImg.imageFromUrl((APIConstants.BaseURL) + "/" + (newsPost?.user.image?.src ?? ""), defaultImgPath: (APIConstants.BaseURL) + "/settings/nutee_profile.png")
+//            userImg.contentMode = .scaleAspectFill
+//        }
+        userImg.setImageNutee(newsPost?.user.image?.src)
+        userImg.contentMode = .scaleAspectFit
+        
         // 사용자 이름 설정
         userNAMEButton.setTitle(newsPost?.user.nickname, for: .normal)
         userNAMEButton.sizeToFit()
