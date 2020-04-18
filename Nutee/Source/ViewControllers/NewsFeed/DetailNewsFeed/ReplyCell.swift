@@ -106,13 +106,15 @@ class ReplyCell: UITableViewCell{
     func initComments() {
         // 사용자 프로필 이미지 설정
         imgCommentUser.setRounded(radius: imgCommentUser.frame.height/2)
-        if comment?.user.image?.src == nil || comment?.user.image?.src == ""{
-            imgCommentUser.imageFromUrl((APIConstants.BaseURL) + "/settings/nutee_profile.png", defaultImgPath: (APIConstants.BaseURL) + "/settings/nutee_profile.png")
-            imgCommentUser.contentMode = .scaleAspectFit
-        } else {
-            imgCommentUser.imageFromUrl((APIConstants.BaseURL) + "/" + (comment?.user.image?.src ?? ""), defaultImgPath: (APIConstants.BaseURL) + "/settings/nutee_profile.png")
-            imgCommentUser.contentMode = .scaleAspectFill
-        }
+//        if comment?.user.image?.src == nil || comment?.user.image?.src == ""{
+//            imgCommentUser.imageFromUrl((APIConstants.BaseURL) + "/settings/nutee_profile.png", defaultImgPath: (APIConstants.BaseURL) + "/settings/nutee_profile.png")
+//            imgCommentUser.contentMode = .scaleAspectFit
+//        } else {
+//            imgCommentUser.imageFromUrl((APIConstants.BaseURL) + "/" + (comment?.user.image?.src ?? ""), defaultImgPath: (APIConstants.BaseURL) + "/settings/nutee_profile.png")
+//            imgCommentUser.contentMode = .scaleAspectFill
+//        }
+        imgCommentUser.setImageNutee(comment?.user.image?.src)
+        imgCommentUser.contentMode = .scaleAspectFit
         
         lblCommentUserId.setTitle(comment?.user.nickname, for: .normal)
         lblCommentUserId.sizeToFit()

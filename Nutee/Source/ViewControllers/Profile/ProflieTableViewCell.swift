@@ -74,12 +74,18 @@ class ProflieTableViewCell: UITableViewCell {
                 // User 정보 설정 //
                 // 사용자 프로필 이미지 설정
                 profileIMG.setRounded(radius: nil)
-                if loginUserPost?.user.image?.src == nil || loginUserPost?.user.image?.src == ""{ profileIMG.imageFromUrl("http://15.164.50.161:9425/settings/nutee_profile.png", defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
-                    profileIMG.contentMode = .scaleAspectFit
-                } else {
-                    profileIMG.imageFromUrl((APIConstants.BaseURL) + "/" + (loginUserPost?.user.image?.src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
-                    profileIMG.contentMode = .scaleAspectFill
-                }
+                
+                
+                //      To do 이미지 변경 확인한 이후 삭제
+//                if loginUserPost?.user.image?.src == nil || loginUserPost?.user.image?.src == ""{ profileIMG.imageFromUrl("http://15.164.50.161:9425/settings/nutee_profile.png", defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+//                    profileIMG.contentMode = .scaleAspectFit
+//                } else {
+//                    profileIMG.imageFromUrl((APIConstants.BaseURL) + "/" + (loginUserPost?.user.image?.src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+//                    profileIMG.contentMode = .scaleAspectFill
+//                }
+                
+                profileIMG.setImageNutee(loginUserPost?.user.image?.src ?? "")
+                profileIMG.contentMode = .scaleAspectFit
                 // 사용자 이름 설정
                 profileNameLabel.text = loginUserPost?.user.nickname
                 profileNameLabel.sizeToFit()
@@ -147,13 +153,19 @@ class ProflieTableViewCell: UITableViewCell {
                 // User 정보 설정 //
                 // 사용자 프로필 이미지 설정
                 profileIMG.setRounded(radius: nil)
-                if loginUserPost?.retweet?.user.image?.src == nil || loginUserPost?.retweet?.user.image?.src == "" {
-                    profileIMG.imageFromUrl("http://15.164.50.161:9425/settings/nutee_profile.png", defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
-                    profileIMG.contentMode = .scaleAspectFit
-                } else {
-                    profileIMG.imageFromUrl((APIConstants.BaseURL) + "/" + (loginUserPost?.retweet?.user.image?.src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
-                    profileIMG.contentMode = .scaleAspectFill
-                }
+
+                //      To do 이미지 변경 확인한 이후 삭제
+//                if loginUserPost?.retweet?.user.image?.src == nil || loginUserPost?.retweet?.user.image?.src == "" {
+//                    profileIMG.imageFromUrl("http://15.164.50.161:9425/settings/nutee_profile.png", defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+//                    profileIMG.contentMode = .scaleAspectFit
+//                } else {
+//                    profileIMG.imageFromUrl((APIConstants.BaseURL) + "/" + (loginUserPost?.retweet?.user.image?.src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+//                    profileIMG.contentMode = .scaleAspectFill
+//                }
+                
+                profileIMG.setImageNutee(loginUserPost?.retweet?.user.image?.src ?? "")
+                profileIMG.contentMode = .scaleAspectFit
+                
                 // 사용자 이름 설정
                 profileNameLabel.text = loginUserPost?.retweet?.user.nickname
                 profileNameLabel.sizeToFit()

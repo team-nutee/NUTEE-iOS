@@ -292,12 +292,14 @@ extension ProfileVC : UITableViewDataSource {
             followBtn.isHidden = true
         }
         
-
-        if userInfo?.image.src == "" {
-        profileImage.imageFromUrl("http://15.164.50.161:9425/settings/nutee_profile.png", defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
-        }else{
-        profileImage.imageFromUrl((APIConstants.BaseURL) + "/" + (userInfo?.image.src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
-        }
+//      Todo: 이미지 처리 확인 이후 삭제
+//        if userInfo?.image.src == "" {
+//        profileImage.imageFromUrl("http://15.164.50.161:9425/settings/nutee_profile.png", defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+//        }else{
+//        profileImage.imageFromUrl((APIConstants.BaseURL) + "/" + (userInfo?.image.src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+//        }
+        
+        profileImage.setImageNutee(userInfo?.image.src)
 
         profileImage.contentMode = .scaleAspectFill
         profileImage.setRounded(radius: 50)

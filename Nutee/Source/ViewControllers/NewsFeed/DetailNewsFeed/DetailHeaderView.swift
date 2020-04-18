@@ -166,13 +166,18 @@ class DetailHeaderView: UITableViewHeaderFooterView {
         if detailNewsPost?.retweetID == nil {
             // 사용자 프로필 이미지 설정
             userIMG.setRounded(radius: nil)
-            if detailNewsPost?.user.image?.src == nil || detailNewsPost?.user.image?.src == ""{
-                userIMG.imageFromUrl((APIConstants.BaseURL) + "/settings/nutee_profile.png", defaultImgPath: (APIConstants.BaseURL) + "/settings/nutee_profile.png")
-                userIMG.contentMode = .scaleAspectFit
-            } else {
-                userIMG.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.user.image?.src ?? ""), defaultImgPath: (APIConstants.BaseURL) + "/settings/nutee_profile.png")
-                userIMG.contentMode = .scaleAspectFill
-            }
+
+            //      To do 이미지 변경 확인한 이후 삭제
+//            if detailNewsPost?.user.image?.src == nil || detailNewsPost?.user.image?.src == ""{
+//                userIMG.imageFromUrl((APIConstants.BaseURL) + "/settings/nutee_profile.png", defaultImgPath: (APIConstants.BaseURL) + "/settings/nutee_profile.png")
+//                userIMG.contentMode = .scaleAspectFit
+//            } else {
+//                userIMG.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.user.image?.src ?? ""), defaultImgPath: (APIConstants.BaseURL) + "/settings/nutee_profile.png")
+//                userIMG.contentMode = .scaleAspectFill
+//            }
+            userIMG.setImageNutee(detailNewsPost?.user.image?.src)
+            userIMG.contentMode = .scaleAspectFit
+            
             // 사용자 이름 설정
             userName.setTitle(detailNewsPost?.user.nickname, for: .normal)
             userName.sizeToFit()
@@ -252,23 +257,27 @@ class DetailHeaderView: UITableViewHeaderFooterView {
             imageWrapperViewHeight.constant = 0
         case 1:
             // ver. only OneImage
-            oneImageView.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.images[0].src ?? ""), defaultImgPath: (APIConstants.BaseURL) + "/settings/nutee_profile.png")
+//            oneImageView.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.images[0].src ?? ""), defaultImgPath: (APIConstants.BaseURL) + "/settings/nutee_profile.png")
+            oneImageView.setImageNutee(detailNewsPost?.images[0].src)
         case 2:
-            oneImageView.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.images[0].src ?? ""), defaultImgPath: (APIConstants.BaseURL) + "/settings/nutee_profile.png")
+//            oneImageView.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.images[0].src ?? ""), defaultImgPath: (APIConstants.BaseURL) + "/settings/nutee_profile.png")
+            oneImageView.setImageNutee(detailNewsPost?.images[0].src)
             moreLabel1.isHidden = false
             oneImageView.alpha = 0.7
             moreLabel1.text = "+1"
             moreLabel1.textColor = .black
         case 3:
             for imgvw in threeImageViewArr {
-                imgvw.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.images[num].src ?? ""), defaultImgPath: (APIConstants.BaseURL) + "/settings/nutee_profile.png")
+//                imgvw.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.images[num].src ?? ""), defaultImgPath: (APIConstants.BaseURL) + "/settings/nutee_profile.png")
+                imgvw.setImageNutee(detailNewsPost?.images[num].src)
                 num += 1
             }
         default:
             // ver. FourFrame
             for imgvw in fourImageViewArr {
                 if num <= 3 {
-                    imgvw.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.images[num].src ?? ""), defaultImgPath: (APIConstants.BaseURL) + "/settings/nutee_profile.png")
+//                    imgvw.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.images[num].src ?? ""), defaultImgPath: (APIConstants.BaseURL) + "/settings/nutee_profile.png")
+                    imgvw.setImageNutee(detailNewsPost?.images[num].src)
                 }
                 
                 if num == 3 {

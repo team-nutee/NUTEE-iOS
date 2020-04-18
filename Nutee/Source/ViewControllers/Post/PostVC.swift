@@ -308,7 +308,8 @@ extension PostVC : UICollectionViewDataSource {
             }
         } else {
             if editPostImg.count >= 1 && indexPath.row < editPostImg.count {
-                cell.postIMG.imageFromUrl((APIConstants.BaseURL) + "/" + (editNewsPost?.images[indexPath.row].src ?? ""), defaultImgPath: (APIConstants.BaseURL) + "/" + "settings/nutee_profile.png")
+//                cell.postIMG.imageFromUrl((APIConstants.BaseURL) + "/" + (editNewsPost?.images[indexPath.row].src ?? ""), defaultImgPath: (APIConstants.BaseURL) + "/" + "settings/nutee_profile.png")
+                cell.postIMG.setImageNutee(editNewsPost?.images[indexPath.row].src ?? "")
                 postBtn.isEnabled = true
             } else {
                 let fixIndex = Int(indexPath.row) - (editPostImg.count)

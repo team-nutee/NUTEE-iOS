@@ -73,15 +73,18 @@ extension FollowingVC : UITableViewDataSource {
             cell.followingDeleteBtn.isHidden = true
         }
         
-        if followingsList?[indexPath.row].image.src == "" {
-        cell.followingImgView.imageFromUrl("http://15.164.50.161:9425/settings/nutee_profile.png",
-                            defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
-        }else{
-        cell.followingImgView.imageFromUrl((APIConstants.BaseURL)
-            + "/" +
-            (followingsList?[indexPath.row].image.src ?? ""),
-                    defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
-        }
+        //      To do 이미지 변경 확인한 이후 삭제
+//        if followingsList?[indexPath.row].image.src == "" {
+//        cell.followingImgView.imageFromUrl("http://15.164.50.161:9425/settings/nutee_profile.png",
+//                            defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+//        }else{
+//        cell.followingImgView.imageFromUrl((APIConstants.BaseURL)
+//            + "/" +
+//            (followingsList?[indexPath.row].image.src ?? ""),
+//                    defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+//        }
+        
+        cell.followingImgView.setImageNutee(followingsList?[indexPath.row].image.src ?? "")
         
         cell.followingLabel.text = followingsList?[indexPath.row].nickname
         cell.followingLabel.sizeToFit()

@@ -210,13 +210,19 @@ class NewsFeedCell: UITableViewCell {
             // User 정보 설정 //
             // 사용자 프로필 이미지 설정
             imgvwUserImg.setRounded(radius: nil)
-            if newsPost?.user.image?.src == nil || newsPost?.user.image?.src == ""{
-                imgvwUserImg.imageFromUrl("http://15.164.50.161:9425/settings/nutee_profile.png", defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
-                imgvwUserImg.contentMode = .scaleAspectFit
-            } else {
-                imgvwUserImg.imageFromUrl((APIConstants.BaseURL) + "/" + (newsPost?.user.image?.src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
-                imgvwUserImg.contentMode = .scaleAspectFill
-            }
+
+
+            //      To do 이미지 변경 확인한 이후 삭제
+//            if newsPost?.user.image?.src == nil || newsPost?.user.image?.src == ""{
+//                imgvwUserImg.imageFromUrl("http://15.164.50.161:9425/settings/nutee_profile.png", defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+//                imgvwUserImg.contentMode = .scaleAspectFit
+//            } else {
+//                imgvwUserImg.imageFromUrl((APIConstants.BaseURL) + "/" + (newsPost?.user.image?.src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+//                imgvwUserImg.contentMode = .scaleAspectFill
+//            }
+            
+            imgvwUserImg.setImageNutee(newsPost?.user.image?.src ?? "")
+            imgvwUserImg.contentMode = .scaleAspectFit
             // 사용자 이름 설정
 //            let nickname = newsPost?.user.nickname ?? ""
             lblUserId.setTitle(newsPost?.user.nickname, for: .normal)
@@ -293,13 +299,20 @@ class NewsFeedCell: UITableViewCell {
             // User 정보 설정 //
             // 사용자 프로필 이미지 설정
             imgvwUserImg.setRounded(radius: nil)
-            if newsPost?.retweet?.user.image?.src == nil || newsPost?.retweet?.user.image?.src == ""{
-                imgvwUserImg.imageFromUrl("http://15.164.50.161:9425/settings/nutee_profile.png", defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
-                imgvwUserImg.contentMode = .scaleAspectFit
-            } else {
-                imgvwUserImg.imageFromUrl((APIConstants.BaseURL) + "/" + (newsPost?.retweet?.user.image?.src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
-                imgvwUserImg.contentMode = .scaleAspectFill
-            }
+
+
+            //      To do 이미지 변경 확인한 이후 삭제
+//            if newsPost?.retweet?.user.image?.src == nil || newsPost?.retweet?.user.image?.src == ""{
+//                imgvwUserImg.imageFromUrl("http://15.164.50.161:9425/settings/nutee_profile.png", defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+//                imgvwUserImg.contentMode = .scaleAspectFit
+//            } else {
+//                imgvwUserImg.imageFromUrl((APIConstants.BaseURL) + "/" + (newsPost?.retweet?.user.image?.src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+//                imgvwUserImg.contentMode = .scaleAspectFill
+//            }
+            
+            imgvwUserImg.setImageNutee(newsPost?.retweet?.user.image?.src)
+            imgvwUserImg.contentMode = .scaleAspectFit
+            
             // 사용자 이름 설정
 //            let nickname = newsPost?.retweet?.user.nickname ?? ""
             lblUserId.setTitle(newsPost?.retweet?.user.nickname, for: .normal)
@@ -427,6 +440,7 @@ class NewsFeedCell: UITableViewCell {
             
             if isRepost {
                 imgvwOne.imageFromUrl((APIConstants.BaseURL) + "/" + (newsPost?.retweet?.images[0].src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+//                imgvwOne.imag
             } else {
                 imgvwOne.imageFromUrl((APIConstants.BaseURL) + "/" + (newsPost?.images[0].src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
             }

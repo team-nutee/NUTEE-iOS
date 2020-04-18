@@ -50,12 +50,14 @@ class SetProfileVC: UIViewController {
         saveBtn.titleLabel?.font = .boldSystemFont(ofSize: 15)
         setIMGBtn.tintColor = .white
         setIMGBtn.backgroundColor = .nuteeGreen
-        if profileImgSrc == "" {
-        profileIMG.imageFromUrl("http://15.164.50.161:9425/settings/nutee_profile.png", defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
-        }else{
-        profileIMG.imageFromUrl((APIConstants.BaseURL) + "/" + (profileImgSrc ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
-        }
-
+        
+        //      To do 이미지 변경 확인한 이후 삭제
+//        if profileImgSrc == "" {
+//        profileIMG.imageFromUrl("http://15.164.50.161:9425/settings/nutee_profile.png", defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+//        }else{
+//        profileIMG.imageFromUrl((APIConstants.BaseURL) + "/" + (profileImgSrc ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
+//        }
+        profileIMG.setImageNutee(profileImgSrc)
 
         nameTextField.addBorder(.bottom, color: .nuteeGreen, thickness: 1)
         nameTextField.tintColor = .nuteeGreen
