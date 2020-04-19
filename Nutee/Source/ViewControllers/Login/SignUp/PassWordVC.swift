@@ -112,13 +112,13 @@ class PassWordVC: UIViewController {
             isAgree = true
             agreeCircleBtn.backgroundColor = .nuteeGreen
             if isPassword {
-                nextBtn.isEnabled = false
-            } else {
                 passwordTextField.addBorder(.bottom, color: .nuteeGreen, thickness: 1)
                 passwordTextField2.addBorder(.bottom, color: .nuteeGreen, thickness: 1)
                 reversAlertAnimation()
                 reversAlertAnimation2()
                 nextBtn.isEnabled = true
+            } else {
+                nextBtn.isEnabled = false
             }
         }
     }
@@ -194,6 +194,8 @@ extension PassWordVC : UITextFieldDelegate {
     
     @objc func textFieldDidChange(_ textField: UITextField) {
         if passwordTextField.text?.validatePassword() == false  {
+            print(isAgree)
+
             alertAnimation()
             alertLabel.text = "8자 이상의 영어 대문자, 소문자, 숫자가 포함된 비밀번호를 입력해주세요."
             passwordTextField.addBorder(.bottom, color: .red, thickness: 1)
@@ -201,6 +203,8 @@ extension PassWordVC : UITextFieldDelegate {
             isPassword = false
 
         } else if passwordTextField.text?.validatePassword() == true{
+            print(isAgree)
+
             passwordTextField.addBorder(.bottom, color: .nuteeGreen, thickness: 1)
             reversAlertAnimation()
             nextBtn.isEnabled = false
@@ -209,6 +213,8 @@ extension PassWordVC : UITextFieldDelegate {
         }
         
         if passwordTextField2.text != passwordTextField.text && passwordTextField2.text != ""  {
+            print(isAgree)
+
             alertLabel.text = "비밀번호를 확인해주세요"
             alertAnimation2()
 //            alertAnimation()
@@ -218,14 +224,15 @@ extension PassWordVC : UITextFieldDelegate {
             isPassword = false
 
         } else if passwordTextField2.text != "" && passwordTextField2.text?.validatePassword() == true {
+            print(isAgree)
             passwordTextField.addBorder(.bottom, color: .nuteeGreen, thickness: 1)
             passwordTextField2.addBorder(.bottom, color: .nuteeGreen, thickness: 1)
             reversAlertAnimation()
             reversAlertAnimation2()
-        } else if passwordTextField2.text != "" && passwordTextField2.text?.validatePassword() == true && isAgree {
-            nextBtn.isEnabled = true
             isPassword = true
-
+            if isAgree {
+                nextBtn.isEnabled = true
+            }
         }
     }
     
