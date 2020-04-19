@@ -76,4 +76,19 @@ extension UITextView : UITextViewDelegate {
         self.delegate = self
     }
 
+    public func postingInit() {
+        isEditable = false
+        isScrollEnabled = false
+        isSelectable = false
+        sizeToFit()
+    }
+
+    func centerVertically() {
+           let fittingSize = CGSize(width: bounds.width, height: CGFloat.greatestFiniteMagnitude)
+           let size = sizeThatFits(fittingSize)
+           let topOffset = (bounds.size.height - size.height * zoomScale) / 2
+           let positiveTopOffset = max(1, topOffset)
+           contentOffset.y = -positiveTopOffset
+    }
+
 }

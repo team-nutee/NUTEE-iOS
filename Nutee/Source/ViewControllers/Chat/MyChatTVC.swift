@@ -17,7 +17,7 @@ class MyChatTVC: UITableViewCell {
         super.awakeFromNib()
         
         checkView.setRounded(radius: nil)
-        checkView.backgroundColor = UIColor.nuteeGreen
+        checkView.backgroundColor = UIColor.pantoneGreen2019
         checkView.isHidden = true
     }
 

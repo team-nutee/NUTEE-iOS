@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="qzf-MI-Oc1">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--검색-->
+        <scene sceneID="gx6-BM-DXV">
+            <objects>
+                <viewController restorationIdentifier="SearchVC" storyboardIdentifier="SearchVC" id="cB3-wd-uGU" customClass="SearchVC" customModule="NUTEE" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="BBY-ko-XqC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wfM-1V-q6z">
+                                <rect key="frame" x="20" y="93" width="374" height="40"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hpW-nH-1eD">
+                                        <rect key="frame" x="7" y="2" width="347" height="36"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="36" id="R0L-mT-e5g"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="search"/>
+                                    </textField>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="S73-AT-8p3"/>
+                                    <constraint firstAttribute="trailing" secondItem="hpW-nH-1eD" secondAttribute="trailing" constant="20" id="Tj3-cS-TeW"/>
+                                    <constraint firstItem="hpW-nH-1eD" firstAttribute="leading" secondItem="wfM-1V-q6z" secondAttribute="leading" constant="7" id="aG1-2t-nd9"/>
+                                    <constraint firstItem="hpW-nH-1eD" firstAttribute="top" secondItem="wfM-1V-q6z" secondAttribute="top" constant="2" id="tTb-05-UBD"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DGt-Lc-MjL">
+                                <rect key="frame" x="349" y="88" width="60" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="owO-n7-Dhm"/>
+                                    <constraint firstAttribute="height" constant="50" id="xh2-vj-BxR"/>
+                                </constraints>
+                                <state key="normal" image="magnifyingglass" catalog="system"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="lZW-5A-LPV" firstAttribute="trailing" secondItem="wfM-1V-q6z" secondAttribute="trailing" constant="20" id="1yL-YK-DMu"/>
+                            <constraint firstItem="wfM-1V-q6z" firstAttribute="leading" secondItem="lZW-5A-LPV" secondAttribute="leading" constant="20" id="AQk-5u-FYv"/>
+                            <constraint firstItem="wfM-1V-q6z" firstAttribute="top" secondItem="lZW-5A-LPV" secondAttribute="top" constant="5" id="Tty-ee-EYE"/>
+                            <constraint firstItem="lZW-5A-LPV" firstAttribute="trailing" secondItem="DGt-Lc-MjL" secondAttribute="trailing" constant="5" id="e2v-fl-dV4"/>
+                            <constraint firstItem="DGt-Lc-MjL" firstAttribute="top" secondItem="lZW-5A-LPV" secondAttribute="top" id="lTQ-jU-Rn1"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="lZW-5A-LPV"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="검색" id="2TL-fm-JJv"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="searchBtn" destination="DGt-Lc-MjL" id="jIK-kR-Y3c"/>
+                        <outlet property="searchTextField" destination="hpW-nH-1eD" id="wxz-oS-Qrv"/>
+                        <outlet property="searchWrapView" destination="wfM-1V-q6z" id="7mo-UK-Y9p"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2i2-JX-WBv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1649.2753623188407" y="108.48214285714285"/>
+        </scene>
+        <!--SearchResultVC-->
+        <scene sceneID="Kp6-gf-UJ8">
+            <objects>
+                <viewController storyboardIdentifier="SearchResultVC" title="SearchResultVC" id="KCK-xX-2Lw" customClass="SearchResultVC" customModule="NUTEE" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="GxC-W7-qHS">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="1QF-UR-yo3">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="1QF-UR-yo3" firstAttribute="leading" secondItem="d02-eh-ZO7" secondAttribute="leading" id="SJe-Hr-Afr"/>
+                            <constraint firstItem="1QF-UR-yo3" firstAttribute="top" secondItem="d02-eh-ZO7" secondAttribute="top" id="SaD-eh-PCY"/>
+                            <constraint firstItem="d02-eh-ZO7" firstAttribute="trailing" secondItem="1QF-UR-yo3" secondAttribute="trailing" id="a0h-Wv-KEX"/>
+                            <constraint firstItem="d02-eh-ZO7" firstAttribute="bottom" secondItem="1QF-UR-yo3" secondAttribute="bottom" id="ds6-QT-P2m"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="d02-eh-ZO7"/>
+                    </view>
+                    <connections>
+                        <outlet property="SearchTV" destination="1QF-UR-yo3" id="TJW-r1-8Yx"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6on-hT-L48" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2336" y="108"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="0xY-Cz-2cE">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="qzf-MI-Oc1" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" image="magnifyingglass" catalog="system" id="P5A-Sp-3U6"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="4zx-zK-irz">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="cB3-wd-uGU" kind="relationship" relationship="rootViewController" id="tZc-wc-Js4"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AFo-sE-SIf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="739.13043478260875" y="108.48214285714285"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="magnifyingglass" catalog="system" width="128" height="115"/>
+    </resources>
+</document>

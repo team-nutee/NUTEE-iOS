@@ -28,6 +28,10 @@ import UIKit
         bottomAnchor.constraint(equalTo: superView.bottomAnchor).isActive = true
         rightAnchor.constraint(equalTo: superView.rightAnchor).isActive = true
     }
+    
+    func setAnchor(top: NSLayoutConstraint){
+        
+    }
 
     
     func setRounded(radius : CGFloat?){
@@ -64,6 +68,35 @@ import UIKit
         
     }
     
+    func addBorder(_ edge: UIRectEdge, color: UIColor, thickness: CGFloat) {
+        let subview = UIView()
+        subview.translatesAutoresizingMaskIntoConstraints = false
+        subview.backgroundColor = color
+        self.addSubview(subview)
+        switch edge {
+        case .top, .bottom:
+            subview.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 0).isActive = true
+            subview.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 0).isActive = true
+            subview.heightAnchor.constraint(equalToConstant: thickness).isActive = true
+            if edge == .top {
+                subview.topAnchor.constraint(equalTo: self.topAnchor, constant: 0).isActive = true
+            } else {
+                subview.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0).isActive = true
+            }
+        case .left, .right:
+            subview.topAnchor.constraint(equalTo: self.topAnchor, constant: 0).isActive = true
+            subview.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0).isActive = true
+            subview.widthAnchor.constraint(equalToConstant: thickness).isActive = true
+            if edge == .left {
+                subview.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 0).isActive = true
+            } else {
+                subview.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 0).isActive = true
+            }
+        default:
+            break
+        }
+    }
+    
     @IBInspectable var borderWidth: CGFloat {
         set {
             layer.borderWidth = newValue
@@ -92,7 +125,24 @@ import UIKit
             return UIColor(cgColor: color)
         }
     }
-
     
+    func shake(duration: CFTimeInterval) {
+        let translation = CAKeyframeAnimation(keyPath: "transform.translation.x");
+        translation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
+        translation.values = [-5, 5, -5, 5, -3, 3, -2, 2, 0]
+        
+        let rotation = CAKeyframeAnimation(keyPath: "transform.rotation.z")
+        rotation.values = [-5, 5, -5, 5, -3, 3, -2, 2, 0].map {
+            ( degrees: Double) -> Double in
+            let radians: Double = (.pi * degrees) / 180.0
+            return radians
+        }
+        
+        let shakeGroup: CAAnimationGroup = CAAnimationGroup()
+        shakeGroup.animations = [translation, rotation]
+        shakeGroup.duration = duration
+        self.layer.add(shakeGroup, forKey: "shakeIt")
+    }
+
     
 }

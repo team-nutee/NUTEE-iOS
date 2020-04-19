@@ -5,9 +5,13 @@ target 'Nutee' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 
-  pod 'Kingfisher', '~> 4.10.1'  
-
+  pod 'Tabman', '~> 2.6'
+  pod 'Kingfisher'
+  pod 'SnapKit', '~> 5.0.0'
   pod 'Alamofire', '~> 4.8.2'
+  pod 'YPImagePicker'
+  pod 'Then'
+  pod 'SwiftKeychainWrapper'
   # Pods for Nutee
 
 end

@@ -7,58 +7,79 @@
 //
 
 import UIKit
+import Tabman
+import Pageboy
 
-class NoticeBoardVC: UIViewController {
+class NoticeBoardVC: TabmanViewController {
     
     // MARK: - UI components
-    @IBOutlet weak var noticeTV: UITableView!
-    
+    let bar = TMBar.ButtonBar()
+
     
     // MARK: - Variables and Properties
+    private var viewControllers = [BachelorVC(), ClassVC(), ExchangeVC(), ScholarshipVC(), GeneralVC(), EventVC()]
     
-    
+    var content : [[String]] = Array(repeating: Array(repeating: "", count: 0), count: 0)
+    var link : [[String]] = Array(repeating: Array(repeating: "", count: 0), count: 0)
+    let title1 : [String] = ["학사공지","수업공지","학점교류","장학공지","일반공지","행사공지"]
+
     // MARK: - dummy data
     
-    
     // MARK: - Life Cycle
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        noticeTV.delegate = self
-        noticeTV.dataSource = self
+        self.dataSource = self
+        bar.layout.transitionStyle = .snap
+        
+        addBar(bar, dataSource: self, at: .top)
+        setting()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        // 네비바 border 삭제
+        self.navigationController?.navigationBar.backgroundColor = .white
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        
+    }
+    
+    func setting(){
+        let view = UIView()
+        view.backgroundColor = .white
+        bar.backgroundView.style = .custom(view: view)
+        bar.layout.contentInset = UIEdgeInsets(top: 0.0, left: 10, bottom: 0.0, right: 10.0)
+        bar.layout.contentMode = .intrinsic
+        bar.indicator.tintColor = .nuteeGreen
+        bar.buttons.customize { (button) in
+            button.borderColor = .orange
+            button.selectedTintColor = .nuteeGreen
+        }
+    }
+    
+    
     
 }
 
-extension NoticeBoardVC : UITableViewDelegate { }
-
-extension NoticeBoardVC : UITableViewDataSource {
+extension NoticeBoardVC : PageboyViewControllerDataSource, TMBarDataSource {
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+    func numberOfViewControllers(in pageboyViewController: PageboyViewController) -> Int {
+        return viewControllers.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let row = self.noticeList[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: "NoticeBoardTVC", for: indexPath) as! NoticeBoardTVC
-        
-        
-        /*let title = cell.viewWithTag(101) as? UILabel
-        let wirteDate = cell.viewWithTag(102) as? UILabel
-        
-        title?.text = row.title
-        //writeDate?.text = row.description
-        */
-        
-//        cell.noticeDateLabel?.text = title
-//        cell.noticeTitleLabel?.text = date
-        
-        return cell
+    func viewController(for pageboyViewController: PageboyViewController, at index: PageboyViewController.PageIndex) -> UIViewController? {
+        return viewControllers[index]
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        NSLog("선택된 행은 \(indexPath.row) 번째 행입니다.")
+    func defaultPage(for pageboyViewController: PageboyViewController) -> PageboyViewController.Page? {
+        return nil
     }
     
+    func barItem(for bar: TMBar, at index: Int) -> TMBarItemable {
+        let title2 = title1[index]
+        return TMBarItem(title: title2)
+    }
 }
+
