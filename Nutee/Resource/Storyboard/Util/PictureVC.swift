@@ -55,7 +55,6 @@ class PictureVC: UIViewController {
         for i in 0 ..< (imageArr?.count ?? 0) {
             imageView = UIImageView()
             scrollView.contentSize = imageView.frame.size
-//            imageView.imageFromUrl((APIConstants.BaseURL) + "/" + (imageArr?[i].src ?? ""), defaultImgPath: (APIConstants.BaseURL) + "/settings/nutee_profile.png")
             imageView.setImageNutee(imageArr?[i].src)
             
             imageView.contentMode = .scaleAspectFit

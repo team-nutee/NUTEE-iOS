@@ -6,11 +6,12 @@
 //  Copyright © 2020 S.OWL. All rights reserved.
 //
 
-import UIKit
-import YPImagePicker
 import AVFoundation
 import AVKit
+import UIKit
 import Photos
+
+import YPImagePicker
 
 
 class PostVC: UIViewController {
@@ -61,9 +62,8 @@ class PostVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
-        print(#function)
-
         addKeyboardNotification()
+        
         self.postingTextView.becomeFirstResponder()
         
         self.postingTextView.placeholder = "내용을 입력해주세요"
@@ -100,8 +100,10 @@ class PostVC: UIViewController {
     }
     
     @objc func closePosting() {
-        setDefault()
-        self.dismiss(animated: true, completion: nil)
+        simpleAlertWithHandler(title: "작성을 취소하시겠습니까??", msg: "") { (action) in
+            self.setDefault()
+            self.dismiss(animated: true, completion: nil)
+        }
     }
     
     @objc func posting(){
@@ -112,7 +114,8 @@ class PostVC: UIViewController {
             // 사진이 있을때는 사진 올리고 게시물 업로드를 위한 분기처리
             if pickedIMG != [] {
                 postImage(images: pickedIMG, completionHandler: {(returnedData)-> Void in
-                    self.postContent(images: self.uploadedImages, postContent: self.postingTextView.text)
+                    self.postContent(images: self.uploadedImages,
+                                     postContent: self.postingTextView.text)
                 })
             } else {
                 postContent(images: [], postContent: postingTextView.text)
@@ -128,10 +131,13 @@ class PostVC: UIViewController {
                     for uploadimg in self.uploadedImages {
                         images.append(uploadimg as String)
                     }
-                    self.editPostContent(postId: self.editNewsPost?.id ?? 0, postContent: self.postingTextView.text, postImages: images)
+                    self.editPostContent(postId: self.editNewsPost?.id ?? 0,
+                                         postContent: self.postingTextView.text, postImages: images)
                 })
             } else {
-                editPostContent(postId: editNewsPost?.id ?? 0, postContent: postingTextView.text, postImages: images)
+                editPostContent(postId: editNewsPost?.id ?? 0,
+                                postContent: postingTextView.text,
+                                postImages: images)
             }
         }
         
@@ -139,7 +145,9 @@ class PostVC: UIViewController {
     }
     
     @objc func activePostBtn() {
-        NotificationCenter.default.addObserver(forName: UITextView.textDidChangeNotification, object: postingTextView , queue: OperationQueue.main) { (notification) in
+        NotificationCenter.default.addObserver(forName: UITextView.textDidChangeNotification,
+                                               object: postingTextView ,
+                                               queue: OperationQueue.main) { (notification) in
             if self.postingTextView.text != "" || self.pickedIMG != []{
                 self.postBtn.isEnabled = true
             } else {
@@ -166,8 +174,6 @@ extension PostVC {
         config.hidesBottomBar = false
         config.hidesStatusBar = false
         config.library.preselectedItems = selectedItems
-        
-        
         config.colors.tintColor = .nuteeGreen
 
         let picker = YPImagePicker(configuration: config)
@@ -178,11 +184,8 @@ extension PostVC {
                 picker.dismiss(animated: true, completion: nil)
                 return
             }
-            
             for item in items {
-                
                 switch item {
-                    
                 case .photo(let p):
                     self.pickedIMG.append(p.image)
                     
@@ -190,16 +193,13 @@ extension PostVC {
                     print("")
                     
                 }
-                
             }
             picker.dismiss(animated: true) {
                 self.imageCV.reloadData()
             }
         }
-        
         present(picker, animated: true, completion: nil)
     }
-    
 }
 
 
@@ -207,8 +207,14 @@ extension PostVC {
 
 extension PostVC {
     func addKeyboardNotification() {
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillHide(_:)),
+                                               name: UIResponder.keyboardWillHideNotification,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillShow(_:)),
+                                               name: UIResponder.keyboardWillShowNotification,
+                                               object: nil)
     }
     
     @objc private func keyboardWillShow(_ notification: Notification)  {
@@ -226,10 +232,16 @@ extension PostVC {
             let bottomPadding = keyWindow?.safeAreaInsets.bottom ?? 0
             
             pickerViewBottomConstraint.constant = -( keyboardHeight - (bottomPadding))
-            scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardHeight - bottomPadding, right: 0)
+            scrollView.contentInset = UIEdgeInsets(top: 0,
+                                                   left: 0,
+                                                   bottom: keyboardHeight - bottomPadding,
+                                                   right: 0)
             
             self.view.setNeedsLayout()
-            UIView.animate(withDuration: duration, delay: 0, options: .init(rawValue: curve), animations: {
+            UIView.animate(withDuration: duration,
+                           delay: 0,
+                           options: .init(rawValue: curve),
+                           animations: {
                 self.view.layoutIfNeeded()
             })
         }
@@ -243,7 +255,10 @@ extension PostVC {
             pickerViewBottomConstraint.constant = 0
             scrollView.contentInset = .zero
             self.view.setNeedsLayout()
-            UIView.animate(withDuration: duration, delay: 0, options: .init(rawValue: curve), animations: {
+            UIView.animate(withDuration: duration,
+                           delay: 0,
+                           options: .init(rawValue: curve),
+                           animations: {
                 self.view.layoutIfNeeded()
             })
         }
@@ -259,11 +274,21 @@ extension PostVC {
 
 extension PostVC: UITextViewDelegate {
     
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        if self.postingTextView.text != ""{
-            self.postBtn.isEnabled = true
+    func textView(_ textView: UITextView,
+                  shouldChangeTextIn range: NSRange,
+                  replacementText text: String) -> Bool {
+        if self.postingTextView.text != "" {
+            if pickedIMG.count != 0 || editPostImg.count != 0 {
+                self.postBtn.isEnabled = true
+            } else {
+                self.postBtn.isEnabled = true
+            }
         } else {
-            self.postBtn.isEnabled = false
+            if pickedIMG.count != 0 || editPostImg.count != 0 {
+                self.postBtn.isEnabled = true
+            } else {
+                self.postBtn.isEnabled = false
+            }
         }
         return true
     }
@@ -286,7 +311,8 @@ extension PostVC: UITextViewDelegate {
 extension PostVC: UICollectionViewDelegate { }
 
 extension PostVC : UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView,
+                        numberOfItemsInSection section: Int) -> Int {
         if isEditMode == false {
             return pickedIMG.count
         } else {
@@ -295,20 +321,21 @@ extension PostVC : UICollectionViewDataSource {
         
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PostIMGCVC", for: indexPath) as! PostIMGCVC
+    func collectionView(_ collectionView: UICollectionView,
+                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PostIMGCVC",
+                                                      for: indexPath) as! PostIMGCVC
         
         cell.postIMG.cornerRadius = 10
         if isEditMode == false {
             cell.postIMG.image = pickedIMG[indexPath.row]
-            if ( pickedIMG.count != 0 ) {
+            if ( pickedIMG.count != 0 || editPostImg.count != 0) {
                 postBtn.isEnabled = true
             } else {
                 postBtn.isEnabled = false
             }
         } else {
             if editPostImg.count >= 1 && indexPath.row < editPostImg.count {
-//                cell.postIMG.imageFromUrl((APIConstants.BaseURL) + "/" + (editNewsPost?.images[indexPath.row].src ?? ""), defaultImgPath: (APIConstants.BaseURL) + "/" + "settings/nutee_profile.png")
                 cell.postIMG.setImageNutee(editNewsPost?.images[indexPath.row].src ?? "")
                 postBtn.isEnabled = true
             } else {
@@ -325,12 +352,13 @@ extension PostVC : UICollectionViewDataSource {
 
         if isEditMode == false {
             pickedIMG.remove(at: indexPath.row)
-            if (pickedIMG.count != 0){
+            if (pickedIMG.count != 0 || editPostImg.count > 1 || postingTextView.text != ""){
                 postBtn.isEnabled = true
             } else {
                 postBtn.isEnabled = false
             }
         } else {
+            print(false)
             if editPostImg.count > 0 && indexPath.row < editPostImg.count {
                 editPostImg.remove(at: indexPath.row)
                 postBtn.isEnabled = true
@@ -338,6 +366,12 @@ extension PostVC : UICollectionViewDataSource {
                 let fixIndex = Int(indexPath.row) - (editPostImg.count)
                 pickedIMG.remove(at: fixIndex)
                 postBtn.isEnabled = true
+            }
+            
+            if (pickedIMG.count != 0 || editPostImg.count != 0 || postingTextView.text != "" ){
+                postBtn.isEnabled = true
+            } else {
+                postBtn.isEnabled = false
             }
             
         }
@@ -378,7 +412,8 @@ extension PostVC {
         
     }
     
-    func postImage(images: [UIImage], completionHandler: @escaping (_ returnedData: [NSString]) -> Void ) {
+    func postImage(images: [UIImage],
+                   completionHandler: @escaping (_ returnedData: [NSString]) -> Void ) {
         ContentService.shared.uploadImage(pictures: images){
             [weak self]
             data in

@@ -13,7 +13,6 @@ import UIKit
 // Kingfisher를 이용하여 url로부터 이미지를 가져오는 extension
 extension UIImageView {
 
-    // http://15.164.50.161:9425/settings/nutee_profile.png
     public func imageFromUrl(_ urlString: String?, defaultImgPath : String?) {
 
         let tmpUrl : String?
@@ -34,8 +33,8 @@ extension UIImageView {
     }
     
     func setImageNutee(_ urlString: String?){
-        if urlString == ""{
-            setImage(with: "http://15.164.50.161:9425/settings/nutee_profile.png")
+        if urlString == "" || urlString == nil {
+            setImage(with: APIConstants.BaseURL + "/settings/nutee_profile.png")
         } else {
             setImage(with: APIConstants.BaseURL + "/"  + (urlString ?? ""))
         }

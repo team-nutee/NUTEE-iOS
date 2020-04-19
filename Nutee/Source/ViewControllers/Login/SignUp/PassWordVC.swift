@@ -17,6 +17,9 @@ class PassWordVC: UIViewController {
     @IBOutlet weak var guideLabel3: UILabel!
     @IBOutlet weak var preBtn: UIButton!
     @IBOutlet weak var nextBtn: UIButton!
+    @IBOutlet weak var agreeCircleBtn: UIButton!
+    @IBOutlet weak var agreeBtn: UIButton!
+    @IBOutlet weak var viewAgreeBtn: UIButton!
     
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var passwordTextField2: UITextField!
@@ -30,6 +33,8 @@ class PassWordVC: UIViewController {
     var id : String = ""
     var name : String = ""
     var email : String = ""
+    var isAgree : Bool = false
+    var isPassword : Bool = false
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
@@ -39,7 +44,10 @@ class PassWordVC: UIViewController {
         
         passwordTextField.addTarget(self, action: #selector(PassWordVC.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
         passwordTextField2.addTarget(self, action: #selector(PassWordVC.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
-        
+        agreeBtn.addTarget(self, action: #selector(agree), for: .touchUpInside)
+        agreeCircleBtn.addTarget(self, action: #selector(agree), for: .touchUpInside)
+        viewAgreeBtn.addTarget(self, action: #selector(viewAgree), for: .touchUpInside)
+
         nextBtn.addTarget(self, action: #selector(toNext), for: .touchUpInside)
         
     }
@@ -54,7 +62,7 @@ class PassWordVC: UIViewController {
     
     
     // MARK: - Helper
-    
+        
     func setInit() {
         
         progressView.tintColor = .nuteeGreen
@@ -69,12 +77,22 @@ class PassWordVC: UIViewController {
         passwordTextField.alpha = 0
         passwordTextField2.alpha = 0
         preBtn.tintColor = .nuteeGreen
+        nextBtn.tintColor = .nuteeGreen
         nextBtn.isEnabled = false
         passwordTextField.tintColor = .nuteeGreen
         passwordTextField2.tintColor = .nuteeGreen
         passwordTextField.addBorder(.bottom, color: .nuteeGreen, thickness: 1)
         passwordTextField2.addBorder(.bottom, color: .nuteeGreen, thickness: 1)
         
+        agreeBtn.alpha = 0
+        agreeCircleBtn.alpha = 0
+        viewAgreeBtn.alpha = 0
+        agreeCircleBtn.makeRounded(cornerRadius: nil)
+        agreeCircleBtn.borderColor = .nuteeGreen
+        agreeCircleBtn.borderWidth = 1
+        agreeBtn.tintColor = .nuteeGreen
+        viewAgreeBtn.tintColor = .nuteeGreen
+
     }
     
     @objc func toNext(){
@@ -83,6 +101,32 @@ class PassWordVC: UIViewController {
     
     @IBAction func dis(_ sender: UIButton){
         
+    }
+    
+    @objc func agree(){
+        if isAgree {
+            isAgree = false
+            agreeCircleBtn.backgroundColor = nil
+            nextBtn.isEnabled = false
+        } else {
+            isAgree = true
+            agreeCircleBtn.backgroundColor = .nuteeGreen
+            if isPassword {
+                nextBtn.isEnabled = false
+            } else {
+                passwordTextField.addBorder(.bottom, color: .nuteeGreen, thickness: 1)
+                passwordTextField2.addBorder(.bottom, color: .nuteeGreen, thickness: 1)
+                reversAlertAnimation()
+                reversAlertAnimation2()
+                nextBtn.isEnabled = true
+            }
+        }
+    }
+    
+    @objc func viewAgree(){
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "TermsVC") as! TermsVC
+        
+        self.present(vc, animated: true, completion: nil)
     }
     
 }
@@ -153,30 +197,35 @@ extension PassWordVC : UITextFieldDelegate {
             alertAnimation()
             alertLabel.text = "8자 이상의 영어 대문자, 소문자, 숫자가 포함된 비밀번호를 입력해주세요."
             passwordTextField.addBorder(.bottom, color: .red, thickness: 1)
-            nextBtn.tintColor = nil
             nextBtn.isEnabled = false
+            isPassword = false
+
         } else if passwordTextField.text?.validatePassword() == true{
             passwordTextField.addBorder(.bottom, color: .nuteeGreen, thickness: 1)
             reversAlertAnimation()
-            nextBtn.tintColor = nil
             nextBtn.isEnabled = false
+            isPassword = false
+
         }
         
-        if passwordTextField2.text != passwordTextField.text && passwordTextField2.text != "" {
+        if passwordTextField2.text != passwordTextField.text && passwordTextField2.text != ""  {
             alertLabel.text = "비밀번호를 확인해주세요"
             alertAnimation2()
 //            alertAnimation()
             passwordTextField2.addBorder(.bottom, color: .red, thickness: 1)
             passwordTextField.addBorder(.bottom, color: .red, thickness: 1)
-            nextBtn.tintColor = nil
             nextBtn.isEnabled = false
-        } else if passwordTextField2.text != "" {
+            isPassword = false
+
+        } else if passwordTextField2.text != "" && passwordTextField2.text?.validatePassword() == true {
             passwordTextField.addBorder(.bottom, color: .nuteeGreen, thickness: 1)
             passwordTextField2.addBorder(.bottom, color: .nuteeGreen, thickness: 1)
             reversAlertAnimation()
             reversAlertAnimation2()
-            nextBtn.tintColor = .nuteeGreen
+        } else if passwordTextField2.text != "" && passwordTextField2.text?.validatePassword() == true && isAgree {
             nextBtn.isEnabled = true
+            isPassword = true
+
         }
     }
     
@@ -230,10 +279,17 @@ extension PassWordVC {
                         self.passwordTextField.transform = CGAffineTransform.init(translationX: -50, y: 0)
                         self.passwordTextField2.alpha = 1
                         self.passwordTextField2.transform = CGAffineTransform.init(translationX: -50, y: 0)
-                        
+                        self.agreeBtn.alpha = 1
+                        self.agreeBtn.transform = CGAffineTransform.init(translationX: -50, y: 0)
+                        self.agreeCircleBtn.alpha = 1
+                        self.agreeCircleBtn.transform = CGAffineTransform.init(translationX: -50, y: 0)
+                        self.viewAgreeBtn.alpha = 1
+                        self.viewAgreeBtn.transform = CGAffineTransform.init(translationX: -50, y: 0)
+
         })
         
     }
+    
     
     private func alertAnimation(){
         UIView.animate(withDuration: 0.7,

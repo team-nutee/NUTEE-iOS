@@ -205,19 +205,8 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
             // User 정보 설정 //
             // 사용자 프로필 이미지 설정
             imgvwUserImg.setRounded(radius: nil)
-            
-
-            //      To do 이미지 변경 확인한 이후 삭제
-//            if detailNewsPost?.user.image?.src == nil || detailNewsPost?.user.image?.src == ""{
-//                imgvwUserImg.imageFromUrl("http://15.164.50.161:9425/settings/nutee_profile.png", defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
-//                imgvwUserImg.contentMode = .scaleAspectFit
-//            } else {
-//                imgvwUserImg.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.user.image?.src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
-//                imgvwUserImg.contentMode = .scaleAspectFill
-//            }
-            
             imgvwUserImg.setImageNutee(detailNewsPost?.user.image?.src)
-            imgvwUserImg.contentMode = .scaleAspectFit
+            imgvwUserImg.contentMode = .scaleAspectFill
             
             // 사용자 이름 설정
             //            let nickname = newsPost?.user.nickname ?? ""
@@ -291,18 +280,8 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
             // User 정보 설정 //
             // 사용자 프로필 이미지 설정
             imgvwUserImg.setRounded(radius: nil)
-
-
-            //      To do 이미지 변경 확인한 이후 삭제
-//            if detailNewsPost?.retweet?.user.image?.src == nil || detailNewsPost?.retweet?.user.image?.src == "" {
-//                imgvwUserImg.imageFromUrl("http://15.164.50.161:9425/settings/nutee_profile.png", defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
-//                imgvwUserImg.contentMode = .scaleAspectFit
-//            } else {
-//                imgvwUserImg.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.retweet?.user.image?.src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
-//                imgvwUserImg.contentMode = .scaleAspectFill
-//            }
             imgvwUserImg.setImageNutee(detailNewsPost?.retweet?.user.image?.src)
-            imgvwUserImg.contentMode = .scaleAspectFit
+            imgvwUserImg.contentMode = .scaleAspectFill
             
             // 사용자 이름 설정
             let nickname = detailNewsPost?.retweet?.user.nickname ?? ""
@@ -430,10 +409,8 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
             ContentsToRepost.isActive = false
             
             if isRepost {
-//                imgvwOne.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.retweet?.images[0].src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
                 imgvwOne.setImageNutee(detailNewsPost?.retweet?.images[0].src)
             } else {
-//                imgvwOne.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.images[0].src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
                 imgvwOne.setImageNutee(detailNewsPost?.images[0].src)
             }
             

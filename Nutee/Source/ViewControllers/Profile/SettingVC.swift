@@ -21,6 +21,7 @@ class SettingVC: UIViewController {
     @IBOutlet weak var pwChangeTextField: UITextField!
     @IBOutlet weak var pwChangeTextField2: UITextField!
     
+    @IBOutlet weak var ourInfoBtn: UIButton!
     @IBOutlet weak var pwCertificationErrorLabel: UILabel!
     @IBOutlet weak var errorLabel: UILabel!
     @IBOutlet weak var certificationErrorLabel: UILabel!
@@ -39,6 +40,7 @@ class SettingVC: UIViewController {
         pwCertificationTextField.addTarget(self, action: #selector(checkTextField), for: .editingChanged)
         pwChangeTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
         pwChangeTextField2.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
+        ourInfoBtn.addTarget(self, action: #selector(goInfo), for: .touchUpInside)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -58,13 +60,20 @@ class SettingVC: UIViewController {
     @objc func pwCheckTextField(){
 
     }
+    
+    @objc func goInfo(){
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "OurInfoVC") as! OurInfoVC
+        
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
 
     
     func setInit() {
         logoutBtn.tintColor = .nuteeGreen
         certificationBtn.tintColor = .nuteeGreen
         pwChangeBtn.tintColor = .nuteeGreen
-        
+        ourInfoBtn.tintColor = .nuteeGreen
+
         pwCertificationTextField.addBorder(.bottom, color: .nuteeGreen, thickness: 1)
         pwChangeTextField.addBorder(.bottom, color: .nuteeGreen, thickness: 1)
         pwChangeTextField2.addBorder(.bottom, color: .nuteeGreen, thickness: 1)
@@ -90,7 +99,9 @@ class SettingVC: UIViewController {
     }
     
     @objc func logout(){
-        signOutService()
+        simpleAlertWithHandler(title: "로그아웃", msg: "하시겠습니까??") { (action) in
+            self.signOutService()
+        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){

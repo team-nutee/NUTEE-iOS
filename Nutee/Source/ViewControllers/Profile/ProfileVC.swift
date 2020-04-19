@@ -281,9 +281,9 @@ extension ProfileVC : UITableViewDataSource {
         
         let name = NSMutableAttributedString(string: etcname)
         // userId 값이 로그인 한 사용자 일때만 활성화
-        if userId == KeychainWrapper.standard.integer(forKey: "id") {
-            name.addAttribute(NSAttributedString.Key.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: NSMakeRange(0, etcname.count))
-        }
+//        if userId == KeychainWrapper.standard.integer(forKey: "id") {
+//            name.addAttribute(NSAttributedString.Key.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: NSMakeRange(0, etcname.count))
+//        }
         
         // 팔로우 하기 버튼 활성화
         if KeychainWrapper.standard.integer(forKey: "id") != userId {
@@ -291,13 +291,6 @@ extension ProfileVC : UITableViewDataSource {
         } else {
             followBtn.isHidden = true
         }
-        
-//      Todo: 이미지 처리 확인 이후 삭제
-//        if userInfo?.image.src == "" {
-//        profileImage.imageFromUrl("http://15.164.50.161:9425/settings/nutee_profile.png", defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
-//        }else{
-//        profileImage.imageFromUrl((APIConstants.BaseURL) + "/" + (userInfo?.image.src ?? ""), defaultImgPath: "http://15.164.50.161:9425/settings/nutee_profile.png")
-//        }
         
         profileImage.setImageNutee(userInfo?.image.src)
 

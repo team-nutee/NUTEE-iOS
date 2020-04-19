@@ -167,16 +167,8 @@ class DetailHeaderView: UITableViewHeaderFooterView {
             // 사용자 프로필 이미지 설정
             userIMG.setRounded(radius: nil)
 
-            //      To do 이미지 변경 확인한 이후 삭제
-//            if detailNewsPost?.user.image?.src == nil || detailNewsPost?.user.image?.src == ""{
-//                userIMG.imageFromUrl((APIConstants.BaseURL) + "/settings/nutee_profile.png", defaultImgPath: (APIConstants.BaseURL) + "/settings/nutee_profile.png")
-//                userIMG.contentMode = .scaleAspectFit
-//            } else {
-//                userIMG.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.user.image?.src ?? ""), defaultImgPath: (APIConstants.BaseURL) + "/settings/nutee_profile.png")
-//                userIMG.contentMode = .scaleAspectFill
-//            }
             userIMG.setImageNutee(detailNewsPost?.user.image?.src)
-            userIMG.contentMode = .scaleAspectFit
+            userIMG.contentMode = .scaleAspectFill
             
             // 사용자 이름 설정
             userName.setTitle(detailNewsPost?.user.nickname, for: .normal)
@@ -255,29 +247,31 @@ class DetailHeaderView: UITableViewHeaderFooterView {
         case 0:
             // 보여줄 사진이 없는 경우(글만 표시)
             imageWrapperViewHeight.constant = 0
+            
+            break
         case 1:
             // ver. only OneImage
-//            oneImageView.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.images[0].src ?? ""), defaultImgPath: (APIConstants.BaseURL) + "/settings/nutee_profile.png")
-            oneImageView.setImageNutee(detailNewsPost?.images[0].src)
+            oneImageView.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.images[0].src ?? ""), defaultImgPath: (APIConstants.BaseURL) + "/settings/nutee_profile.png")
+            break
         case 2:
-//            oneImageView.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.images[0].src ?? ""), defaultImgPath: (APIConstants.BaseURL) + "/settings/nutee_profile.png")
-            oneImageView.setImageNutee(detailNewsPost?.images[0].src)
+            oneImageView.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.images[0].src ?? ""), defaultImgPath: (APIConstants.BaseURL) + "/settings/nutee_profile.png")
             moreLabel1.isHidden = false
             oneImageView.alpha = 0.7
             moreLabel1.text = "+1"
             moreLabel1.textColor = .black
+            
+            break
         case 3:
             for imgvw in threeImageViewArr {
-//                imgvw.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.images[num].src ?? ""), defaultImgPath: (APIConstants.BaseURL) + "/settings/nutee_profile.png")
-                imgvw.setImageNutee(detailNewsPost?.images[num].src)
+                imgvw.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.images[num].src ?? ""), defaultImgPath: (APIConstants.BaseURL) + "/settings/nutee_profile.png")
                 num += 1
             }
+            break
         default:
             // ver. FourFrame
             for imgvw in fourImageViewArr {
                 if num <= 3 {
-//                    imgvw.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.images[num].src ?? ""), defaultImgPath: (APIConstants.BaseURL) + "/settings/nutee_profile.png")
-                    imgvw.setImageNutee(detailNewsPost?.images[num].src)
+                    imgvw.imageFromUrl((APIConstants.BaseURL) + "/" + (detailNewsPost?.images[num].src ?? ""), defaultImgPath: (APIConstants.BaseURL) + "/settings/nutee_profile.png")
                 }
                 
                 if num == 3 {
