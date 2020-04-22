@@ -475,9 +475,7 @@ extension DetailNewsFeedVC {
             switch responsedata {
             case .success(let res):
                 let response = res as! NewsPostsContentElement
-                self.content = response
-                print("newsPost server connect successful")
-                
+                self.content = response                
                 completionHandler(self.content!)
                 
             case .requestErr(_):

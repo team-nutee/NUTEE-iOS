@@ -194,8 +194,6 @@ extension PassWordVC : UITextFieldDelegate {
     
     @objc func textFieldDidChange(_ textField: UITextField) {
         if passwordTextField.text?.validatePassword() == false  {
-            print(isAgree)
-
             alertAnimation()
             alertLabel.text = "8자 이상의 영어 대문자, 소문자, 숫자가 포함된 비밀번호를 입력해주세요."
             passwordTextField.addBorder(.bottom, color: .red, thickness: 1)
@@ -203,28 +201,20 @@ extension PassWordVC : UITextFieldDelegate {
             isPassword = false
 
         } else if passwordTextField.text?.validatePassword() == true{
-            print(isAgree)
-
             passwordTextField.addBorder(.bottom, color: .nuteeGreen, thickness: 1)
             reversAlertAnimation()
             nextBtn.isEnabled = false
             isPassword = false
-
         }
-        
         if passwordTextField2.text != passwordTextField.text && passwordTextField2.text != ""  {
-            print(isAgree)
-
             alertLabel.text = "비밀번호를 확인해주세요"
             alertAnimation2()
-//            alertAnimation()
             passwordTextField2.addBorder(.bottom, color: .red, thickness: 1)
             passwordTextField.addBorder(.bottom, color: .red, thickness: 1)
             nextBtn.isEnabled = false
             isPassword = false
 
         } else if passwordTextField2.text != "" && passwordTextField2.text?.validatePassword() == true {
-            print(isAgree)
             passwordTextField.addBorder(.bottom, color: .nuteeGreen, thickness: 1)
             passwordTextField2.addBorder(.bottom, color: .nuteeGreen, thickness: 1)
             reversAlertAnimation()
@@ -361,7 +351,6 @@ extension PassWordVC {
         self.passwordTextField2.text = "에러로 인해 회원가입이 진행되지 않았습니다."
         self.passwordTextField.sizeToFit()
         self.passwordTextField2.sizeToFit()
-        print("request error")
     }
     
     func signUpService(_ userId: String, _ password: String,_ nickname : String) {
@@ -370,12 +359,7 @@ extension PassWordVC {
             switch responsedata {
                 
             // NetworkResult 의 요소들
-            case .success(let res):
-                let response = res as! SignUp
-                
-                print("회원가입 완료")
-                print(response)
-                
+            case .success(_):
                 self.oneAlertWithHandler(title: "회원가입이", msg: "완료되었습니다.", handler: { (action) in
                     self.view.window!.rootViewController?.dismiss(animated: true, completion: nil)
                 })

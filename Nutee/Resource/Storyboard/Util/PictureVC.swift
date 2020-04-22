@@ -12,34 +12,34 @@ class PictureVC: UIViewController {
 
     
     @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var backBtn: UIButton!
+    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var collectionView: UICollectionView!
     
-    
-    var imageArr : [Image]?
-    var imageView = UIImageView()
+    @IBOutlet weak var beforeBtn: UIButton!
+    @IBOutlet weak var nextBtn: UIButton!
+    var imageArr: [Image]?
+    var imageNumber: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         scrollView.delegate = self
         view.backgroundColor = nil
+        imageView.contentMode = .scaleAspectFit
         
-        scrollView.minimumZoomScale = 0.5
-        scrollView.maximumZoomScale = 1.5
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.backgroundView?.backgroundColor = nil
         
+        scrollView.minimumZoomScale = 1.0
+        scrollView.maximumZoomScale = 2.4
+        imageView.setImageNutee(imageArr?[imageNumber].src)
         
-        pageControl.numberOfPages = imageArr?.count ?? 0
-        pageControl.currentPage = 0
-        pageControl.translatesAutoresizingMaskIntoConstraints = false
-        pageControl.heightAnchor.constraint(equalToConstant: 30).isActive = true
-        
-        self.view.bringSubviewToFront(pageControl)
-        
-        setScrollView()
         
         backBtn.tintColor = .white
         backBtn.addTarget(self, action: #selector(back), for: .touchUpInside)
+        
+        setBtn()
     }
     
     @objc func back(){
@@ -51,37 +51,69 @@ class PictureVC: UIViewController {
         dismiss(animated: false)
     }
     
-    func setScrollView(){
-        for i in 0 ..< (imageArr?.count ?? 0) {
-            imageView = UIImageView()
-            scrollView.contentSize = imageView.frame.size
-            imageView.setImageNutee(imageArr?[i].src)
-            
-            imageView.contentMode = .scaleAspectFit
-            let xPosition = self.view.frame.width * CGFloat(i) // 현재 보이는 스크린에서 하나의 이미지만 보이게 하기 위해
-                    
-            imageView.frame = CGRect(x: xPosition, y: (scrollView.frame.height-self.view.frame.width)/2, width: self.view.frame.width, height: self.view.frame.width)
-            
-            scrollView.contentSize.width = self.view.frame.width * CGFloat(1+i)
 
-            scrollView.addSubview(imageView)
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        return self.imageView
+    }
 
+    func setBtn(){
+        beforeBtn.tintColor = .nuteeGreen
+        nextBtn.tintColor = .nuteeGreen
+        beforeBtn.backgroundColor = .veryLightPink
+        nextBtn.backgroundColor = .veryLightPink
+        beforeBtn.alpha = 0.65
+        nextBtn.alpha = 0.65
+        
+        beforeBtn.setRounded(radius: nil)
+        nextBtn.setRounded(radius: nil)
+        
+        beforeBtn.addTarget(self, action: #selector(before), for: .touchUpInside)
+        nextBtn.addTarget(self, action: #selector(tapNext), for: .touchUpInside)
+    }
+    
+    @objc func before(){
+        if imageNumber == 0 {
+            imageNumber = imageArr!.count - 1
+            imageView.setImageNutee(imageArr![imageNumber].src)
+        } else {
+            imageNumber = imageNumber - 1
+            imageView.setImageNutee(imageArr![imageNumber].src)
+        }
+    }
+    
+    @objc func tapNext(){
+        if imageNumber == (imageArr!.count - 1) {
+            imageNumber = 0
+            imageView.setImageNutee(imageArr![imageNumber].src)
+        } else {
+            imageNumber = imageNumber + 1
+            imageView.setImageNutee(imageArr![imageNumber].src)
         }
 
-
     }
-
-//    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
-//        return self.imageView
-//    }
-
-    
 }
 
-extension PictureVC : UIScrollViewDelegate {
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let currentPage = round(scrollView.contentOffset.x / self.view.frame.width)
-        pageControl.currentPage = Int(CGFloat(currentPage))
-    }
+extension PictureVC: UIScrollViewDelegate{ }
 
+extension PictureVC: UICollectionViewDelegate { }
+
+extension PictureVC: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return imageArr?.count ?? 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PictureCVC",
+                                                      for: indexPath) as! PictureCVC
+        
+        cell.collectionImageView.setImageNutee(imageArr![indexPath.row].src)
+        
+        
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        imageView.setImageNutee(imageArr![indexPath.row].src)
+        imageNumber = indexPath.row
+    }
 }

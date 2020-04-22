@@ -32,7 +32,6 @@ struct UserService {
             "schoolEmail" : email
         ]
         
-        
         Alamofire.request(URL, method: .post, parameters: body, encoding: JSONEncoding.default, headers: headers).responseData{
             response in
             
@@ -52,10 +51,8 @@ struct UserService {
                                 completion(.pathErr)
                             }
                         case 409:
-                            print("실패 409")
                             completion(.pathErr)
                         case 500:
-                            print("실패 500")
                             completion(.serverErr)
                         default:
                             break
@@ -115,10 +112,8 @@ struct UserService {
                                 completion(.pathErr)
                             }
                         case 401:
-                            print("실패 401")
                             completion(.pathErr)
                         case 500:
-                            print("실패 500")
                             completion(.serverErr)
                         default:
                             break
@@ -150,15 +145,12 @@ struct UserService {
                 
             case .success:
                 if let status = response.response?.statusCode {
-                    print(status)
                     switch status {
                     case 200:
                         completion(.success("로그아웃 성공"))
                     case 409:
-                        print("실패 409")
                         completion(.pathErr)
                     case 500:
-                        print("실패 500")
                         completion(.serverErr)
                     default:
                         break
@@ -205,10 +197,8 @@ struct UserService {
                                 completion(.pathErr)
                             }
                         case 401:
-                            print("실패 401")
                             completion(.pathErr)
                         case 500:
-                            print("실패 500")
                             completion(.serverErr)
                         default:
                             break
@@ -251,10 +241,8 @@ struct UserService {
                                 completion(.pathErr)
                             }
                         case 401:
-                            print("실패 401")
                             completion(.pathErr)
                         case 500:
-                            print("실패 500")
                             completion(.serverErr)
                         default:
                             break
@@ -288,15 +276,12 @@ struct UserService {
                 
             case .success:
                 if let status = response.response?.statusCode {
-                    print("status : ",status)
                     switch status {
                     case 200:
                         completion(.success("otp send"))
                     case 409:
-                        print("이미 등록 된 이메일입니다")
                         completion(.requestErr("이미 등록 된 이메일입니다"))
                     case 500:
-                        print("실패 500")
                         completion(.serverErr)
                     default:
                         break
@@ -325,19 +310,15 @@ struct UserService {
         
         Alamofire.request(URL, method: .post, parameters: body, encoding: JSONEncoding.default, headers: headers).responseData{
             response in
-            
             switch response.result {
-                
             case .success:
                 if let status = response.response?.statusCode {
                     switch status {
                     case 200:
-                        completion(.success("otp checked"))
+                        completion(.success(status))
                     case 401:
-                        print("실패 401")
                         completion(.pathErr)
                     case 500:
-                        print("실패 500")
                         completion(.serverErr)
                     default:
                         break
@@ -375,10 +356,8 @@ struct UserService {
                     case 200:
                         completion(.success("입력하신 이메일로 아이디가 발송되었습니다."))
                     case 401:
-                        print("실패 401")
                         completion(.pathErr)
                     case 500:
-                        print("실패 500")
                         completion(.serverErr)
                     default:
                         break
@@ -418,10 +397,8 @@ struct UserService {
                     case 200:
                         completion(.success("입력하신 이메일로 아이디가 발송되었습니다."))
                     case 401:
-                        print("실패 401")
                         completion(.pathErr)
                     case 500:
-                        print("실패 500")
                         completion(.serverErr)
                     default:
                         break
@@ -460,10 +437,8 @@ struct UserService {
                     case 200:
                         completion(.success("nickname chnaged"))
                     case 401:
-                        print("실패 401")
                         completion(.pathErr)
                     case 500:
-                        print("실패 500")
                         completion(.serverErr)
                     default:
                         break
@@ -526,15 +501,12 @@ struct UserService {
             case .success:
                 // parameter 위치
                 if let status = response.response?.statusCode {
-                    print ("status", status)
                     switch status {
                     case 200:
                         completion(.success(200))
                     case 409:
-                        print("이미 사용중인 아이디")
                         completion(.requestErr(409))
                     case 500:
-                        print("실패 500")
                         completion(.serverErr)
                     default:
                         break
@@ -569,15 +541,12 @@ struct UserService {
             case .success:
                 // parameter 위치
                 if let status = response.response?.statusCode {
-                    print ("status", status)
                     switch status {
                     case 200:
                         completion(.success(200))
                     case 409:
-                        print("이미 사용중인 닉네임")
                         completion(.requestErr(409))
                     case 500:
-                        print("실패 500")
                         completion(.serverErr)
                     default:
                         break
@@ -614,14 +583,12 @@ struct UserService {
             case .success:
                 // parameter 위치
                 if let status = response.response?.statusCode {
-                    print ("status", status)
                     switch status {
                     case 200:
                         completion(.success(200))
                     case 401:
                         completion(.requestErr(401))
                     case 500:
-                        print("실패 500")
                         completion(.serverErr)
                     default:
                         break
@@ -657,14 +624,12 @@ struct UserService {
             case .success:
                 // parameter 위치
                 if let status = response.response?.statusCode {
-                    print ("status", status)
                     switch status {
                     case 200:
                         completion(.success(200))
                     case 401:
                         completion(.requestErr(401))
                     case 500:
-                        print("실패 500")
                         completion(.serverErr)
                     default:
                         break
