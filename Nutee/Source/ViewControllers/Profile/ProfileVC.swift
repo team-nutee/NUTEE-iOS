@@ -24,6 +24,8 @@ class ProfileVC: UIViewController {
     
     @IBOutlet weak var myArticleTV: UITableView!
     
+    var refreshControl: UIRefreshControl!
+    
     let headerView = UIView()
     let profileImage = UIImageView()
     let setProfile = UIButton()
@@ -68,8 +70,8 @@ class ProfileVC: UIViewController {
         myArticleTV.register(UINib(nibName: "ProfileTVC", bundle: nil), forCellReuseIdentifier: "ProfileTVC")
         myArticleTV.separatorInset.left = 0
         
+        setRefresh()
         setBtn()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -102,6 +104,33 @@ class ProfileVC: UIViewController {
     func setInit() {
         searchFollow()
 
+    }
+    
+    func setRefresh() {
+        refreshControl = UIRefreshControl()
+        myArticleTV.addSubview(refreshControl)
+        refreshControl.addTarget(self, action: #selector(updateProfile), for: UIControl.Event.valueChanged)
+    }
+    
+    @objc func updateProfile() {
+        // 보여주려는 프로필 정보가 로그인 사용자인지 다른 사람인지 확인
+        if userId == KeychainWrapper.standard.integer(forKey: "id") {
+            getLoginUserInfoService(completionHandler: {(returnedData)-> Void in
+                self.getUserPostService(userId: self.userInfo!.id)
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    self.refreshControl.endRefreshing()
+                }
+            })
+        } else {
+            getUserInfoService(userId: userId ?? 0, completionHandler: {(returnedData)-> Void in
+                self.getUserPostService(userId: self.userId ?? 0)
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    self.refreshControl.endRefreshing()
+                }
+            })
+        }
     }
     
     func setDefault() {
