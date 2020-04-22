@@ -11,8 +11,10 @@ import UIKit
 class SearchResultVC: UIViewController {
     
     // MARK: - UI components
+    
     @IBOutlet weak var SearchTV: UITableView!
     
+    var refreshControl: UIRefreshControl!
     
     // MARK: - Variables and Properties
     
@@ -39,9 +41,27 @@ class SearchResultVC: UIViewController {
         
         self.navigationItem.title = searchResult
 
+        setRefresh()
     }
     
     // MARK: - Helper
+    
+    func setRefresh() {
+        refreshControl = UIRefreshControl()
+        SearchTV.addSubview(refreshControl)
+        refreshControl.addTarget(self, action: #selector(updateSearchResult), for: UIControl.Event.valueChanged)
+    }
+    
+    @objc func updateSearchResult() {
+        searchService(text: searchResult!, postCnt: 10, lastID: 0, completionHandler: {(returnedData) -> Void in
+            self.newsPostsArr = self.newsPosts
+            self.SearchTV.reloadData()
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                self.refreshControl.endRefreshing()
+            }
+        })
+    }
     
     func loadMorePosts(lastId: Int) {
         if newsPosts?.count != 0 {
@@ -60,6 +80,7 @@ class SearchResultVC: UIViewController {
 // MARK: - extension에 따라 적당한 명칭 작성
 extension SearchResultVC : UITableViewDelegate { }
 extension SearchResultVC : UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let postItems = newsPostsArr?.count ?? 0
         
@@ -86,13 +107,12 @@ extension SearchResultVC : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FeedTVC", for: indexPath) as! FeedTVC
-       
+        
         newsPost = newsPostsArr?[indexPath.row]
         
         // 셀 선택시 백그라운드 변경 안되게 하기 위한 코드
         cell.addBorder((.bottom), color: .lightGray, thickness: 0.3)
         cell.selectionStyle = .none
-
         
         cell.newsPost = self.newsPost
         cell.initPosting()
@@ -103,58 +123,58 @@ extension SearchResultVC : UITableViewDataSource {
         // 사용자 프로필 이미지 탭 인식 설정
         cell.setClickActions()
         
-
+        
         return cell
     }
     
-        func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-            // DetailNewsFeed 창으로 전환
-            let detailNewsFeedSB = UIStoryboard(name: "DetailNewsFeed", bundle: nil)
-            let showDetailNewsFeedVC = detailNewsFeedSB.instantiateViewController(withIdentifier: "DetailNewsFeed") as! DetailNewsFeedVC
-
-            // 현재 게시물 id를 DetailNewsFeedVC로 넘겨줌
-            showDetailNewsFeedVC.postId = newsPostsArr?[indexPath.row].id
-            showDetailNewsFeedVC.getPostService(postId: showDetailNewsFeedVC.postId!, completionHandler: {(returnedData)-> Void in
-                showDetailNewsFeedVC.replyTV.reloadData()
-            })
-            
-            self.navigationController?.pushViewController(showDetailNewsFeedVC, animated: true)
-        }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // DetailNewsFeed 창으로 전환
+        let detailNewsFeedSB = UIStoryboard(name: "DetailNewsFeed", bundle: nil)
+        let showDetailNewsFeedVC = detailNewsFeedSB.instantiateViewController(withIdentifier: "DetailNewsFeed") as! DetailNewsFeedVC
         
-        // 마지막 셀일 때 ActivateIndicator와 함께 새로운 cell 정보 로딩
-        func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-            // 로딩된 cell 중 마지막 셀 찾기
-            let lastSectionIndex = tableView.numberOfSections - 1
-            let lastRowIndex = tableView.numberOfRows(inSection: lastSectionIndex) - 1
-            if indexPath.section ==  lastSectionIndex && indexPath.row == lastRowIndex {
-                
-                let spinner = UIActivityIndicatorView()
-                
+        // 현재 게시물 id를 DetailNewsFeedVC로 넘겨줌
+        showDetailNewsFeedVC.postId = newsPostsArr?[indexPath.row].id
+        showDetailNewsFeedVC.getPostService(postId: showDetailNewsFeedVC.postId!, completionHandler: {(returnedData)-> Void in
+            showDetailNewsFeedVC.replyTV.reloadData()
+        })
+        
+        self.navigationController?.pushViewController(showDetailNewsFeedVC, animated: true)
+    }
+    
+    // 마지막 셀일 때 ActivateIndicator와 함께 새로운 cell 정보 로딩
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        // 로딩된 cell 중 마지막 셀 찾기
+        let lastSectionIndex = tableView.numberOfSections - 1
+        let lastRowIndex = tableView.numberOfRows(inSection: lastSectionIndex) - 1
+        if indexPath.section ==  lastSectionIndex && indexPath.row == lastRowIndex {
+            
+            let spinner = UIActivityIndicatorView()
+            
+            SearchTV.tableFooterView = spinner
+            SearchTV.tableFooterView?.isHidden = false
+            
+            if newsPosts?.count != 0 && newsPosts?.count != nil {
+                // 불러올 포스팅이 있을 경우
+                spinner.startAnimating()
+                spinner.frame = CGRect(x: CGFloat(0), y: CGFloat(0), width: SearchTV.bounds.width, height: CGFloat(44))
+                spinner.hidesWhenStopped = true
                 SearchTV.tableFooterView = spinner
                 SearchTV.tableFooterView?.isHidden = false
                 
-                if newsPosts?.count != 0 && newsPosts?.count != nil {
-                    // 불러올 포스팅이 있을 경우
-                    spinner.startAnimating()
-                    spinner.frame = CGRect(x: CGFloat(0), y: CGFloat(0), width: SearchTV.bounds.width, height: CGFloat(44))
-                    spinner.hidesWhenStopped = true
-                    SearchTV.tableFooterView = spinner
-                    SearchTV.tableFooterView?.isHidden = false
-
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                        self.loadMorePosts(lastId: self.newsPost?.id ?? 0)
-                    }
-                } else {
-                    // 사용자 NewsFeed의 마지막 포스팅일 경우
-                    self.SearchTV.tableFooterView?.isHidden = true
-                    spinner.stopAnimating()
-    //                newsTV.tableFooterView = nil
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    self.loadMorePosts(lastId: self.newsPost?.id ?? 0)
                 }
-
-               
+            } else {
+                // 사용자 NewsFeed의 마지막 포스팅일 경우
+                self.SearchTV.tableFooterView?.isHidden = true
+                spinner.stopAnimating()
+                //                newsTV.tableFooterView = nil
             }
+            
+            
         }
-
+    }
+    
     
 }
 
