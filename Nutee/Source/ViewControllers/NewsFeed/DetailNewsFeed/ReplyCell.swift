@@ -232,7 +232,7 @@ extension ReplyCell {
                 
                 print("commentDelete succussful", res)
                 completionHandler()
-                print(res)
+                
             case .requestErr(_):
                 let errorAlert = UIAlertController(title: "오류발생😵", message: "오류가 발생하여 댓글을 삭제하지 못했습니다", preferredStyle: UIAlertController.Style.alert)
                 let okAction = UIAlertAction(title: "확인", style: .default, handler: nil)

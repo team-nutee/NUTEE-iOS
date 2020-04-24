@@ -175,7 +175,8 @@ extension PostVC {
         config.hidesStatusBar = false
         config.library.preselectedItems = selectedItems
         config.colors.tintColor = .nuteeGreen
-
+        config.overlayView = UIView()
+        
         let picker = YPImagePicker(configuration: config)
         
         picker.didFinishPicking { [unowned picker] items, cancelled in

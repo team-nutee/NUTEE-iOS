@@ -534,8 +534,6 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
     // 프로필 이미지 클릭시 실행 함수
     @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
         let imgView = tapGestureRecognizer.view as! UIImageView
-        print("your taped image view tag is : \(imgView.tag)")
-        
         //Give your image View tag
         if (imgView.tag == 1) {
             showProfile()
@@ -578,9 +576,6 @@ extension HeaderNewsFeedView {
             
             switch responsedata {
             case .success(let res):
-                
-                print(res)
-                
                 let successfulAlert = UIAlertController(title: "신고가 완료되었습니다", message: nil, preferredStyle: UIAlertController.Style.alert)
                 let okAction = UIAlertAction(title: "확인", style: .default, handler: nil)
                 

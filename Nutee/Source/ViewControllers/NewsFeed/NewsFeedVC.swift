@@ -317,7 +317,6 @@ extension NewsFeedVC: FeedTVCDelegate, DetailHeaderViewDelegate {
 
 extension NewsFeedVC {
     func getNewsPostsService(postCnt: Int, lastId: Int, completionHandler: @escaping (_ returnedData: NewsPostsContent) -> Void ) {
-        print(#function)
         ContentService.shared.getNewsPosts(postCnt, lastId: lastId) { responsedata in
             
             switch responsedata {

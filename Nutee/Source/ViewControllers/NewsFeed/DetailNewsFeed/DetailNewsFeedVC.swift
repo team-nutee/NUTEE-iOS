@@ -17,6 +17,8 @@ class DetailNewsFeedVC: UIViewController {
     
     @IBOutlet var replyTV: UITableView!
     
+    var refreshControl: UIRefreshControl!
+    
     // 댓글창 표시
     @IBOutlet var vwCommentWindow: UIView!
     // 댓글창 상태표시(수정 or 답글)
@@ -60,6 +62,8 @@ class DetailNewsFeedVC: UIViewController {
         self.replyTV.register(nibHead, forHeaderFooterViewReuseIdentifier: "DetailHeaderView")
         
         initCommentWindow()
+        
+        setRefresh()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -153,6 +157,22 @@ class DetailNewsFeedVC: UIViewController {
         }
     }
 
+    func setRefresh() {
+        refreshControl = UIRefreshControl()
+        replyTV.addSubview(refreshControl)
+        refreshControl.addTarget(self, action: #selector(updatePost), for: UIControl.Event.valueChanged)
+    }
+    
+    @objc func updatePost() {
+        self.getPostService(postId: self.postId ?? 0, completionHandler: {(returnedData)-> Void in
+            self.replyTV.reloadData()
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                self.refreshControl.endRefreshing()
+            }
+        })
+    }
+    
     // 해당 이용자의 light or dark 모드를 감지하는 함수
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
@@ -475,9 +495,7 @@ extension DetailNewsFeedVC {
             switch responsedata {
             case .success(let res):
                 let response = res as! NewsPostsContentElement
-                self.content = response
-                print("newsPost server connect successful")
-                
+                self.content = response                
                 completionHandler(self.content!)
                 
             case .requestErr(_):

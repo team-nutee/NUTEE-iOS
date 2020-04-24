@@ -112,13 +112,13 @@ class PassWordVC: UIViewController {
             isAgree = true
             agreeCircleBtn.backgroundColor = .nuteeGreen
             if isPassword {
-                nextBtn.isEnabled = false
-            } else {
                 passwordTextField.addBorder(.bottom, color: .nuteeGreen, thickness: 1)
                 passwordTextField2.addBorder(.bottom, color: .nuteeGreen, thickness: 1)
                 reversAlertAnimation()
                 reversAlertAnimation2()
                 nextBtn.isEnabled = true
+            } else {
+                nextBtn.isEnabled = false
             }
         }
     }
@@ -205,13 +205,10 @@ extension PassWordVC : UITextFieldDelegate {
             reversAlertAnimation()
             nextBtn.isEnabled = false
             isPassword = false
-
         }
-        
         if passwordTextField2.text != passwordTextField.text && passwordTextField2.text != ""  {
             alertLabel.text = "비밀번호를 확인해주세요"
             alertAnimation2()
-//            alertAnimation()
             passwordTextField2.addBorder(.bottom, color: .red, thickness: 1)
             passwordTextField.addBorder(.bottom, color: .red, thickness: 1)
             nextBtn.isEnabled = false
@@ -222,10 +219,10 @@ extension PassWordVC : UITextFieldDelegate {
             passwordTextField2.addBorder(.bottom, color: .nuteeGreen, thickness: 1)
             reversAlertAnimation()
             reversAlertAnimation2()
-        } else if passwordTextField2.text != "" && passwordTextField2.text?.validatePassword() == true && isAgree {
-            nextBtn.isEnabled = true
             isPassword = true
-
+            if isAgree {
+                nextBtn.isEnabled = true
+            }
         }
     }
     
@@ -354,7 +351,6 @@ extension PassWordVC {
         self.passwordTextField2.text = "에러로 인해 회원가입이 진행되지 않았습니다."
         self.passwordTextField.sizeToFit()
         self.passwordTextField2.sizeToFit()
-        print("request error")
     }
     
     func signUpService(_ userId: String, _ password: String,_ nickname : String) {
@@ -363,12 +359,7 @@ extension PassWordVC {
             switch responsedata {
                 
             // NetworkResult 의 요소들
-            case .success(let res):
-                let response = res as! SignUp
-                
-                print("회원가입 완료")
-                print(response)
-                
+            case .success(_):
                 self.oneAlertWithHandler(title: "회원가입이", msg: "완료되었습니다.", handler: { (action) in
                     self.view.window!.rootViewController?.dismiss(animated: true, completion: nil)
                 })
