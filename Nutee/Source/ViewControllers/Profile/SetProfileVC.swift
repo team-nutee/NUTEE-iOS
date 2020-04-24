@@ -29,10 +29,9 @@ class SetProfileVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         picker.delegate = self
         
-        setIMGBtn.addTarget(self, action: #selector(showImagePickerController), for: .touchUpInside)
+        setIMGBtn.addTarget(self, action: #selector(tapImageSettingBtn), for: .touchUpInside)
         closeBtn.addTarget(self, action: #selector(close), for: .touchUpInside)
         saveBtn.addTarget(self, action: #selector(saveChangedProfileInfo), for: .touchUpInside)
         
@@ -67,6 +66,25 @@ class SetProfileVC: UIViewController {
     
     @objc func close() {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func tapImageSettingBtn(){
+        let actionAlert = UIAlertController(title: nil,
+                                            message: nil,
+                                            preferredStyle: UIAlertController.Style.actionSheet)
+//        let defaultAction = UIAlertAction(title:"기본 이미지로 변경", style: .default){ action in
+//            self.profileIMG.setImageNutee("")
+//            self.pickedIMG = UIImage()
+//        }
+        let imagePickerAction = UIAlertAction(title: "앨범에서 이미지 선택", style: .default) { (action) in
+            self.showImagePickerController()
+        }
+        let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+        
+//        actionAlert.addAction(defaultAction)
+        actionAlert.addAction(imagePickerAction)
+        actionAlert.addAction(cancelAction)
+        self.present(actionAlert, animated: true)
     }
     
     @objc func saveChangedProfileInfo() {
