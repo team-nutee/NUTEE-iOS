@@ -18,7 +18,7 @@ extension String {
     }
     
     public func validateSkhuEmail() -> Bool {
-        let emailRegEx = "^.+@office.skhu.ac.kr"
+        let emailRegEx = "^.+@office+\\.skhu+\\.ac+\\.kr"
         
         let predicate = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
         return predicate.evaluate(with: self)
