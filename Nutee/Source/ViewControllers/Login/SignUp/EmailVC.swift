@@ -249,7 +249,7 @@ extension EmailVC {
                 self.otpCheckLabel.text = "인증번호가 틀렸습니다."
                 self.otpCheckLabel.alpha = 1
                 self.otpCheckLabel.textColor = .red
-                self.numTextField.addBorder(.bottom, color: .nuteeGreen, thickness: 1)
+                self.numTextField.addBorder(.bottom, color: .red, thickness: 1)
 
                 print(".requestErr")
             case .pathErr:
@@ -257,21 +257,21 @@ extension EmailVC {
                 self.otpCheckLabel.text = "인증번호가 틀렸습니다."
                 self.otpCheckLabel.alpha = 1
                 self.otpCheckLabel.textColor = .red
-                self.numTextField.addBorder(.bottom, color: .nuteeGreen, thickness: 1)
+                self.numTextField.addBorder(.bottom, color: .red, thickness: 1)
                 
             case .serverErr:
                 self.otpCheckLabel.shake(duration: 0.3)
                 self.otpCheckLabel.text = "서버 에러가 발생했습니다."
                 self.otpCheckLabel.alpha = 1
                 self.otpCheckLabel.textColor = .red
-                self.numTextField.addBorder(.bottom, color: .nuteeGreen, thickness: 1)
+                self.numTextField.addBorder(.bottom, color: .red, thickness: 1)
                 
             case .networkFail:
                 self.otpCheckLabel.shake(duration: 0.3)
                 self.otpCheckLabel.text = "네트워크 에러가 발생했습니다."
                 self.otpCheckLabel.alpha = 1
                 self.otpCheckLabel.textColor = .red
-                self.numTextField.addBorder(.bottom, color: .nuteeGreen, thickness: 1)
+                self.numTextField.addBorder(.bottom, color: .red, thickness: 1)
             }
         }
     }

@@ -94,13 +94,16 @@ class SettingVC: UIViewController {
         pwChangeTextField.addBorder(.bottom, color: .nuteeGreen, thickness: 1)
         pwChangeTextField2.addBorder(.bottom, color: .nuteeGreen, thickness: 1)
         
+        pwCertificationTextField.tintColor = .nuteeGreen
+        pwChangeTextField.tintColor = .nuteeGreen
+        pwChangeTextField2.tintColor = .nuteeGreen
+        
         certificationBtn.isEnabled = false
         pwChangeBtn.isEnabled = false
         
         pwCertificationTextField.delegate = self
         pwChangeTextField.delegate = self
         pwChangeTextField2.delegate = self
-
         
     }
     
