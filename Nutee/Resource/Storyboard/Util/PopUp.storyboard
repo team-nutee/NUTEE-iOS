@@ -103,7 +103,7 @@
                                     <constraint firstAttribute="height" constant="30" id="fcE-ac-eDX"/>
                                     <constraint firstAttribute="width" constant="30" id="zS3-Ao-v92"/>
                                 </constraints>
-                                <state key="normal" image="arrow.left" catalog="system"/>
+                                <state key="normal" image="chevron.left" catalog="system"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6jO-0m-Nzo">
                                 <rect key="frame" x="384" y="452" width="30" height="30"/>
@@ -111,7 +111,7 @@
                                     <constraint firstAttribute="width" constant="30" id="YZu-ua-XOX"/>
                                     <constraint firstAttribute="height" constant="30" id="rhU-JS-qIj"/>
                                 </constraints>
-                                <state key="normal" image="arrow.right" catalog="system"/>
+                                <state key="normal" image="chevron.right" catalog="system"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c3f-Ns-LYc">
                                 <rect key="frame" x="364" y="44" width="50" height="50"/>
@@ -159,8 +159,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="arrow.left" catalog="system" width="128" height="98"/>
-        <image name="arrow.right" catalog="system" width="128" height="98"/>
+        <image name="chevron.left" catalog="system" width="96" height="128"/>
+        <image name="chevron.right" catalog="system" width="96" height="128"/>
         <image name="xmark" catalog="system" width="128" height="113"/>
     </resources>
 </document>
