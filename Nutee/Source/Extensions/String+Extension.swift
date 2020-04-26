@@ -33,6 +33,13 @@ extension String {
         return predicate.evaluate(with: self)
     }
     
+    public func validateID() -> Bool {
+        let passwordRegEx = "^([0-9a-zA-Z_-]+){1,2}$"
+        
+        let predicate = NSPredicate(format:"SELF MATCHES %@", passwordRegEx)
+        return predicate.evaluate(with: self)
+    }
+
     public func getDateFormat(time: String) -> Date? {
         let timeSplit = time.components(separatedBy: ["T", "."])
         let timeFormatted = timeSplit[0] + " " + timeSplit[1]

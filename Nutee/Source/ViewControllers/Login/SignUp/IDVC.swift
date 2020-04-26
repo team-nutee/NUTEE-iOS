@@ -135,7 +135,7 @@ extension IDVC {
 extension IDVC : UITextFieldDelegate {
     
     @objc func textFieldDidChange(_ textField: UITextField) {
-        if idTextField.text != "" {
+        if idTextField.text != "" && idTextField.text?.validateID() == true {
             nextBtn.isEnabled = true
             nextBtn.tintColor = .nuteeGreen
         } else {
