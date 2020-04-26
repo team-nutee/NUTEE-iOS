@@ -21,6 +21,7 @@ class SettingVC: UIViewController {
     @IBOutlet weak var pwChangeTextField: UITextField!
     @IBOutlet weak var pwChangeTextField2: UITextField!
     
+    @IBOutlet weak var TermsBtn: UIButton!
     @IBOutlet weak var ourInfoBtn: UIButton!
     @IBOutlet weak var pwCertificationErrorLabel: UILabel!
     @IBOutlet weak var errorLabel: UILabel!
@@ -34,20 +35,39 @@ class SettingVC: UIViewController {
         setInit()
         alphaZero()
 
-        certificationBtn.addTarget(self, action: #selector(checkPW), for: .touchUpInside)
-        pwChangeBtn.addTarget(self, action: #selector(changePW), for: .touchUpInside)
-        logoutBtn.addTarget(self, action: #selector(logout), for: .touchUpInside)
-        pwCertificationTextField.addTarget(self, action: #selector(checkTextField), for: .editingChanged)
-        pwChangeTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
-        pwChangeTextField2.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
-        ourInfoBtn.addTarget(self, action: #selector(goInfo), for: .touchUpInside)
+        certificationBtn.addTarget(self,
+                                   action: #selector(checkPW),
+                                   for: .touchUpInside)
+        
+        pwChangeBtn.addTarget(self,
+                              action: #selector(changePW),
+                              for: .touchUpInside)
+        
+        logoutBtn.addTarget(self,
+                            action: #selector(logout),
+                            for: .touchUpInside)
+        
+        pwCertificationTextField.addTarget(self,
+                                           action: #selector(checkTextField),
+                                           for: .editingChanged)
+        
+        pwChangeTextField.addTarget(self,
+                                    action: #selector(textFieldDidChange(_:)),
+                                    for: UIControl.Event.editingChanged)
+        
+        pwChangeTextField2.addTarget(self,
+                                     action: #selector(textFieldDidChange(_:)),
+                                     for: UIControl.Event.editingChanged)
+        
+        ourInfoBtn.addTarget(self,
+                             action: #selector(goInfo),
+                             for: .touchUpInside)
+        
+        TermsBtn.addTarget(self,
+                                 action: #selector(tapServiceInfo),
+                                 for: .touchUpInside)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        
-        
-    }
     
     @objc func checkTextField(){
         if pwCertificationTextField.text != "" {
@@ -61,11 +81,6 @@ class SettingVC: UIViewController {
 
     }
     
-    @objc func goInfo(){
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "OurInfoVC") as! OurInfoVC
-        
-        self.navigationController?.pushViewController(vc, animated: true)
-    }
 
     
     func setInit() {
@@ -73,6 +88,7 @@ class SettingVC: UIViewController {
         certificationBtn.tintColor = .nuteeGreen
         pwChangeBtn.tintColor = .nuteeGreen
         ourInfoBtn.tintColor = .nuteeGreen
+        TermsBtn.tintColor = .nuteeGreen
 
         pwCertificationTextField.addBorder(.bottom, color: .nuteeGreen, thickness: 1)
         pwChangeTextField.addBorder(.bottom, color: .nuteeGreen, thickness: 1)
@@ -103,6 +119,20 @@ class SettingVC: UIViewController {
             self.signOutService()
         }
     }
+    
+    @objc func tapServiceInfo(){
+        let vc = UIStoryboard.init(name: "SignUp",
+                               bundle: Bundle.main).instantiateViewController(
+                                withIdentifier: "TermsVC") as? TermsVC
+        self.present(vc!, animated: true, completion: nil)
+    }
+    
+    @objc func goInfo(){
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "OurInfoVC") as! OurInfoVC
+        
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
         self.view.endEditing(true)
