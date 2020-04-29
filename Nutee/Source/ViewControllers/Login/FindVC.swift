@@ -121,7 +121,7 @@ class FindVC: UIViewController {
 extension FindVC : UITextFieldDelegate {
     
     @objc func textFieldDidChange(_ textField: UITextField) {
-        if idTextField.text?.validateSkhuEmail() ?? false  {
+        if idTextField.text?.validateSkhuEmail() ?? false || idTextField.text?.validateOfficeEmail() ?? false  {
             idCertificateBtn.isEnabled = true
             idCertificateBtn.tintColor = .nuteeGreen
         } else {
@@ -129,7 +129,7 @@ extension FindVC : UITextFieldDelegate {
             idCertificateBtn.isEnabled = false
         }
         
-        if pwTextField.text?.validateSkhuEmail() ?? false && pwIDTextField.text != ""  {
+        if (pwTextField.text?.validateSkhuEmail() ?? false || pwTextField.text?.validateOfficeEmail() ?? false) && pwIDTextField.text != ""  {
             pwCertificateBtn.isEnabled = true
             pwCertificateBtn.tintColor = .nuteeGreen
         } else {

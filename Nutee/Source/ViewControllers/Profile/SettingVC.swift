@@ -29,7 +29,6 @@ class SettingVC: UIViewController {
 
     var animationDuration: TimeInterval = 1
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setInit()
@@ -119,6 +118,7 @@ class SettingVC: UIViewController {
     
     @objc func logout(){
         simpleAlertWithHandler(title: "로그아웃", msg: "하시겠습니까??") { (action) in
+            LoadingHUD.show()
             self.signOutService()
         }
     }
@@ -191,26 +191,28 @@ extension SettingVC {
             // NetworkResult 의 요소들
             case .success(let res):
                 let response = res as! String
-                
+                LoadingHUD.hide()
                 KeychainWrapper.standard.removeObject(forKey: "Cookie")
                 KeychainWrapper.standard.removeObject(forKey: "id")
                 KeychainWrapper.standard.removeObject(forKey: "userId")
                 KeychainWrapper.standard.removeObject(forKey: "pw")
-
-                print(response)
                 self.dismiss(animated: true, completion: nil)
             //                self.successAdd = true
             case .requestErr(_):
-                print("request error")
+                LoadingHUD.hide()
+                self.simpleAlert(title: "로그아웃에", message: "실패했습니다.")
             //                self.successAdd = false
             case .pathErr:
-                print(".pathErr")
+                LoadingHUD.hide()
+                self.simpleAlert(title: "로그아웃에", message: "실패했습니다.")
             //                self.successAdd = false
             case .serverErr:
-                print(".serverErr")
+                LoadingHUD.hide()
+                self.simpleAlert(title: "로그아웃에", message: "실패했습니다.")
             //                self.successAdd = false
             case .networkFail :
-                print("failure")
+                LoadingHUD.hide()
+                self.simpleAlert(title: "로그아웃에", message: "실패했습니다.")
                 //                self.successAdd = false
             }
         }

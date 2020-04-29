@@ -165,7 +165,7 @@ extension EmailVC {
 extension EmailVC : UITextFieldDelegate {
     
     @objc func textFieldDidChange(_ textField: UITextField) {
-        if emailTextField.text?.validateSkhuEmail() ?? false  {
+        if emailTextField.text?.validateSkhuEmail() ?? false || emailTextField.text?.validateOfficeEmail() ?? false  {
             certificationBtn.isEnabled = true
             certificationBtn.tintColor = .nuteeGreen
             certificationBtn.isEnabled = true
@@ -235,7 +235,7 @@ extension EmailVC {
             switch responsedata {
                 
             case .success(let res):
-                print(res)
+
                 self.otpCheckLabel.shake(duration: 0.3)
                 self.otpCheckLabel.text = "인증번호가 확인되었습니다."
                 self.otpCheckLabel.alpha = 1
