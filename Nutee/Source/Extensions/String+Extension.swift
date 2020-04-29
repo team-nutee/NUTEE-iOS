@@ -24,14 +24,20 @@ extension String {
         return predicate.evaluate(with: self)
     }
     
-    public func validateSkhuEmail() -> Bool {
+    public func validateSkhuKrEmail() -> Bool {
         let emailRegEx = "^.+@skhu+\\.kr"
         
         let predicate = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
         return predicate.evaluate(with: self)
     }
 
-    
+    public func validateSkhuCoKrEmail() -> Bool {
+        let emailRegEx = "^.+@skhu+\\.ac+\\.kr"
+        
+        let predicate = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        return predicate.evaluate(with: self)
+    }
+
     
     // Password validation 영어 대문자 소문자 , 숫자 8자 이상
     public func validatePassword() -> Bool {

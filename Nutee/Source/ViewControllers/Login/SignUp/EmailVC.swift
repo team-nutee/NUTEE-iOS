@@ -165,7 +165,7 @@ extension EmailVC {
 extension EmailVC : UITextFieldDelegate {
     
     @objc func textFieldDidChange(_ textField: UITextField) {
-        if emailTextField.text?.validateSkhuEmail() ?? false || emailTextField.text?.validateOfficeEmail() ?? false  {
+        if emailTextField.text?.validateSkhuKrEmail() ?? false || emailTextField.text?.validateSkhuCoKrEmail() ?? false   || emailTextField.text?.validateOfficeEmail() ?? false  {
             certificationBtn.isEnabled = true
             certificationBtn.tintColor = .nuteeGreen
             certificationBtn.isEnabled = true
