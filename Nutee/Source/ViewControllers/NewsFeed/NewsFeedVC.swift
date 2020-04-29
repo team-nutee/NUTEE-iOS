@@ -33,7 +33,6 @@ class NewsFeedVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         newsTV.delegate = self
         newsTV.dataSource = self
         newsTV.separatorInset.left = 0
@@ -48,10 +47,12 @@ class NewsFeedVC: UIViewController {
         
         setLoadBtn()
         self.loadCompleteBtn.addTarget(self, action: #selector(loadingBtn), for: .touchUpInside)
-                
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewDidLoad()
+        
         getNewsPostsService(postCnt: 10, lastId: 0, completionHandler: {(returnedData)-> Void in
             if self.newsPostsArr?.count ?? 0 > 0 {
                 var tmpNewsPost: NewsPostsContentElement?
@@ -77,9 +78,8 @@ class NewsFeedVC: UIViewController {
                 }
                 
             } else {
-                
                 self.newsPostsArr = self.newsPosts
-                
+                self.newsTV.reloadData()
             }
         }
             
@@ -87,15 +87,14 @@ class NewsFeedVC: UIViewController {
     }
     
     
-    
-    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(false)
+        
         
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         
-        self.newsTV.reloadData()
+        
     }
     
     // MARK: -Helper
@@ -320,7 +319,6 @@ extension NewsFeedVC {
         ContentService.shared.getNewsPosts(postCnt, lastId: lastId) { responsedata in
             
             switch responsedata {
-                
             case .success(let res):
                 let response = res as! NewsPostsContent
                 self.newsPosts = response

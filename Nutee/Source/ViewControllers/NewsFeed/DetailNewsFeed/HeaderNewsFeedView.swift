@@ -575,7 +575,7 @@ extension HeaderNewsFeedView {
         ContentService.shared.reportPost(userid, content) { (responsedata) in
             
             switch responsedata {
-            case .success(let res):
+            case .success(_):
                 let successfulAlert = UIAlertController(title: "신고가 완료되었습니다", message: nil, preferredStyle: UIAlertController.Style.alert)
                 let okAction = UIAlertAction(title: "확인", style: .default, handler: nil)
                 

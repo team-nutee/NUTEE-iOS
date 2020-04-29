@@ -135,10 +135,17 @@ extension IDVC {
 extension IDVC : UITextFieldDelegate {
     
     @objc func textFieldDidChange(_ textField: UITextField) {
-        if idTextField.text != "" {
+        if idTextField.text != "" && idTextField.text?.validateID() == true {
             nextBtn.isEnabled = true
             nextBtn.tintColor = .nuteeGreen
+            self.idTextField.addBorder(.bottom, color: .nuteeGreen, thickness: 1)
+            self.checkLabel.alpha = 0
         } else {
+            self.idTextField.addBorder(.bottom, color: .red, thickness: 1)
+            self.checkLabel.textColor = .red
+            self.checkLabel.text = "영문 혹은 숫자만 이용가능합니다."
+            self.checkLabel.sizeToFit()
+            self.checkLabel.alpha = 1
             nextBtn.isEnabled = false
             nextBtn.tintColor = nil
         }
@@ -166,13 +173,28 @@ extension IDVC {
                 self.checkLabel.alpha = 1
                 
             case .pathErr:
-                print(".pathErr")
-                
+                self.checkLabel.shake(duration: 0.3)
+                self.idTextField.addBorder(.bottom, color: .red, thickness: 1)
+                self.checkLabel.textColor = .red
+                self.checkLabel.text = "에러가 발생했습니다."
+                self.checkLabel.sizeToFit()
+                self.checkLabel.alpha = 1
+
             case .serverErr:
-                print(".serverErr")
-                
+                self.checkLabel.shake(duration: 0.3)
+                self.idTextField.addBorder(.bottom, color: .red, thickness: 1)
+                self.checkLabel.textColor = .red
+                self.checkLabel.text = "서버 에러가 발생했습니다."
+                self.checkLabel.sizeToFit()
+                self.checkLabel.alpha = 1
+
             case .networkFail:
-                print(".networkFail")
+                self.checkLabel.shake(duration: 0.3)
+                self.idTextField.addBorder(.bottom, color: .red, thickness: 1)
+                self.checkLabel.textColor = .red
+                self.checkLabel.text = "네트워크 에러가 발생했습니다."
+                self.checkLabel.sizeToFit()
+                self.checkLabel.alpha = 1
             }
         }
     }

@@ -36,16 +36,29 @@ class ProfileVC: UIViewController {
     let myFollower2Btn = UIButton()
     let myFollowing1Btn = UIButton()
     let myFollowing2Btn = UIButton()
+    let userReportBtn = UIButton()
     
     let followBtn = UIButton()
     
     let cellTextLabel = UILabel()
-        
+    
     lazy var rightBarButton : UIBarButtonItem = {
-        let button = UIBarButtonItem(title: "설정", style: .plain, target: self, action: #selector(toSetting))
+        let button = UIBarButtonItem(title: "설정",
+                                     style: .plain,
+                                     target: self,
+                                     action: #selector(toSetting))
         return button
     }()
-
+    
+    lazy var otherUserBtn : UIBarButtonItem = {
+        let image = UIImage(systemName: "ellipsis")
+        let button = UIBarButtonItem(image: image,
+                                     style: .done,
+                                     target: self,
+                                     action: #selector(tapUserMore))
+        return button
+    }()
+    
     // MARK: - Variables and Properties
     
     var userInfo: SignIn?
@@ -65,8 +78,6 @@ class ProfileVC: UIViewController {
         
         myArticleTV.delegate = self
         myArticleTV.dataSource = self
-//        self.myArticleTV.register(ArticleTVC.self, forCellReuseIdentifier: "ArticleTVC")
-                
         myArticleTV.register(UINib(nibName: "ProfileTVC", bundle: nil), forCellReuseIdentifier: "ProfileTVC")
         myArticleTV.separatorInset.left = 0
         
@@ -76,7 +87,7 @@ class ProfileVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-         // 네비바 border 삭제
+        // 네비바 border 삭제
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         
@@ -96,14 +107,14 @@ class ProfileVC: UIViewController {
         super.viewDidAppear(true)
         
     }
-
+    
     
     // MARK: -Helpers
     
     // 초기 설정
     func setInit() {
         searchFollow()
-
+        
     }
     
     func setRefresh() {
@@ -117,7 +128,6 @@ class ProfileVC: UIViewController {
         if userId == KeychainWrapper.standard.integer(forKey: "id") {
             getLoginUserInfoService(completionHandler: {(returnedData)-> Void in
                 self.getUserPostService(userId: self.userInfo!.id)
-                
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                     self.refreshControl.endRefreshing()
                 }
@@ -125,7 +135,6 @@ class ProfileVC: UIViewController {
         } else {
             getUserInfoService(userId: userId ?? 0, completionHandler: {(returnedData)-> Void in
                 self.getUserPostService(userId: self.userId ?? 0)
-                
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                     self.refreshControl.endRefreshing()
                 }
@@ -152,9 +161,12 @@ class ProfileVC: UIViewController {
         // userId 값이 로그인 한 사용자 일때만 활성화
         if userId == KeychainWrapper.standard.integer(forKey: "id") {
             self.navigationItem.rightBarButtonItem = self.rightBarButton
-            
             myNickLabel.addTarget(self, action: #selector(settingProfile), for: .touchUpInside)
+        } else {
+            self.navigationItem.rightBarButtonItem = self.otherUserBtn
+            otherUserBtn.tintColor = .veryLightPink
         }
+        
         setProfile.addTarget(self, action: #selector(settingProfile), for: .touchUpInside)
         myFollowing1Btn.addTarget(self, action: #selector(viewFollowing), for: .touchUpInside)
         myFollowing2Btn.addTarget(self, action: #selector(viewFollowing), for: .touchUpInside)
@@ -163,7 +175,7 @@ class ProfileVC: UIViewController {
         myArticle1Btn.addTarget(self, action: #selector(viewArticle), for: .touchUpInside)
         myArticle2Btn.addTarget(self, action: #selector(viewArticle), for: .touchUpInside)
         followBtn.addTarget(self, action: #selector(followAction), for: .touchUpInside)
-
+        
     }
     
     @objc func settingProfile() {
@@ -215,6 +227,41 @@ class ProfileVC: UIViewController {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
+    @objc func tapUserMore(){
+        
+        let actionAlert = UIAlertController(title: nil,
+                                            message: nil,
+                                            preferredStyle: UIAlertController.Style.actionSheet)
+
+        let userReportAction = UIAlertAction(title: "신고하기🚨", style: .destructive) {
+            (action: UIAlertAction) in
+            // Code to 신고 기능
+            let reportAlert = UIAlertController(title: "이 게시글을 신고하시겠습니까?", message: "", preferredStyle: UIAlertController.Style.alert)
+            let cancelAction
+                = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+            let reportAction = UIAlertAction(title: "신고", style: .destructive) {
+                (action: UIAlertAction) in
+                // <---- 신고 기능 구현
+//                let content = reportAlert.textFields?[0].text ?? "" // 신고 내용
+                //신고 여부 알림 <-- 서버연결 코드에서 구현됨
+                self.simpleAlert(title: "신고가 완료되었습니다.", message: "")
+            }
+            reportAlert.addTextField { (mytext) in
+                mytext.tintColor = .nuteeGreen
+                mytext.placeholder = "신고할 내용을 입력해주세요."
+            }
+            reportAlert.addAction(cancelAction)
+            reportAlert.addAction(reportAction)
+            
+            self.present(reportAlert, animated: true, completion: nil)
+        }
+        
+        let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+        
+        actionAlert.addAction(userReportAction)
+        actionAlert.addAction(cancelAction)
+        self.present(actionAlert, animated: true)
+    }
 }
 
 // MARK: - UITableView
@@ -222,7 +269,7 @@ class ProfileVC: UIViewController {
 extension ProfileVC : UITableViewDelegate { }
 
 extension ProfileVC : UITableViewDataSource {
-        
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         var userPostsNum = userPosts?.count ?? 0
@@ -238,7 +285,7 @@ extension ProfileVC : UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-                
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileTVC",
                                                  for: indexPath) as! ProfileTVC
         
@@ -251,7 +298,7 @@ extension ProfileVC : UITableViewDataSource {
             cell.backgroundColor = .lightGray
         } else {
             cell.backgroundColor = nil
-//            textViewDidChange(cell.articleTextView)
+            //            textViewDidChange(cell.articleTextView)
             let userPost = userPosts?[indexPath.row-1]
             
             // ProfileTableViewCell로 해당 Cell의 게시글 정보 전달
@@ -270,11 +317,11 @@ extension ProfileVC : UITableViewDataSource {
             return UITableView.automaticDimension
         }
     }
-        
+    
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
-
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         _ = tableView.dequeueReusableCell(withIdentifier: "ProfileTVC", for: indexPath) as! ProfileTVC
         
@@ -298,6 +345,7 @@ extension ProfileVC : UITableViewDataSource {
         if userId == KeychainWrapper.standard.integer(forKey: "id") {
             self.headerView.addSubview(setProfile)
         }
+        
         self.headerView.addSubview(myArticle1Btn)
         self.headerView.addSubview(myArticle2Btn)
         self.headerView.addSubview(myFollower1Btn)
@@ -310,9 +358,9 @@ extension ProfileVC : UITableViewDataSource {
         
         let name = NSMutableAttributedString(string: etcname)
         // userId 값이 로그인 한 사용자 일때만 활성화
-//        if userId == KeychainWrapper.standard.integer(forKey: "id") {
-//            name.addAttribute(NSAttributedString.Key.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: NSMakeRange(0, etcname.count))
-//        }
+        //        if userId == KeychainWrapper.standard.integer(forKey: "id") {
+        //            name.addAttribute(NSAttributedString.Key.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: NSMakeRange(0, etcname.count))
+        //        }
         
         // 팔로우 하기 버튼 활성화
         if KeychainWrapper.standard.integer(forKey: "id") != userId {
@@ -322,7 +370,7 @@ extension ProfileVC : UITableViewDataSource {
         }
         
         profileImage.setImageNutee(userInfo?.image.src)
-
+        
         profileImage.contentMode = .scaleAspectFill
         profileImage.setRounded(radius: 50)
         profileImage.translatesAutoresizingMaskIntoConstraints = false
@@ -427,7 +475,6 @@ extension ProfileVC : UITableViewDataSource {
         followBtn.leftAnchor.constraint(equalTo: profileImage.rightAnchor).isActive = true
         followBtn.heightAnchor.constraint(equalToConstant: 40).isActive = true
         followBtn.widthAnchor.constraint(equalToConstant: (view.frame.size.width - 120)).isActive = true
-
         
         return headerView
     }
@@ -474,16 +521,16 @@ extension ProfileVC {
                 self.myArticleTV.reloadData()
             case .requestErr(_):
                 print("request error")
-            
+                
             case .pathErr:
                 print(".pathErr")
-            
+                
             case .serverErr:
                 print(".serverErr")
-            
+                
             case .networkFail :
                 print("failure")
-                }
+            }
         }
         
     }
@@ -502,49 +549,49 @@ extension ProfileVC {
                 self.myArticleTV.reloadData()
             case .requestErr(_):
                 print("request error")
-            
+                
             case .pathErr:
                 print(".pathErr")
-            
+                
             case .serverErr:
                 print(".serverErr")
-            
+                
             case .networkFail :
                 print("failure")
-                }
+            }
         }
         
     }
     
     func getUserPostService(userId: Int) {
         ContentService.shared.getUserPosts(userId) { responsedata in
-
+            
             switch responsedata {
             case .success(let res):
                 let response = res as! NewsPostsContent
                 self.userPosts = response
                 self.searchFollow()
                 self.myArticleTV.reloadData()
-
+                
             case .requestErr(_):
                 print("request error")
-
+                
             case .pathErr:
                 print(".pathErr")
-
+                
             case .serverErr:
                 print(".serverErr")
-
+                
             case .networkFail :
                 print("failure")
-                }
+            }
         }
-
+        
     }
-
+    
     func follow(userId: Int) {
         FollowService.shared.follow(userId) { responsedata in
-
+            
             switch responsedata {
             case .success(_):
                 self.isInit = true
@@ -553,26 +600,26 @@ extension ProfileVC {
                 self.follwerCnt = (self.follwerCnt ?? 0) + 1
                 
                 self.myArticleTV.reloadData()
-
+                
             case .requestErr(_):
                 print("request error")
-
+                
             case .pathErr:
                 print(".pathErr")
-
+                
             case .serverErr:
                 print(".serverErr")
-
+                
             case .networkFail :
                 print("failure")
-                }
+            }
         }
-
+        
     }
-
+    
     func unfollow(userId: Int) {
         FollowService.shared.unFollow(userId) { responsedata in
-
+            
             switch responsedata {
             case .success(_):
                 self.isInit = true
@@ -581,21 +628,21 @@ extension ProfileVC {
                 self.follwerCnt = (self.follwerCnt ?? 0) - 1
                 
                 self.myArticleTV.reloadData()
-
+                
             case .requestErr(_):
                 print("request error")
-
+                
             case .pathErr:
                 print(".pathErr")
-
+                
             case .serverErr:
                 print(".serverErr")
-
+                
             case .networkFail :
                 print("failure")
-                }
+            }
         }
-
+        
     }
-
+    
 }

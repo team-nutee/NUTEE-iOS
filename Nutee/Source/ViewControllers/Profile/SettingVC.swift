@@ -21,6 +21,7 @@ class SettingVC: UIViewController {
     @IBOutlet weak var pwChangeTextField: UITextField!
     @IBOutlet weak var pwChangeTextField2: UITextField!
     
+    @IBOutlet weak var TermsBtn: UIButton!
     @IBOutlet weak var ourInfoBtn: UIButton!
     @IBOutlet weak var pwCertificationErrorLabel: UILabel!
     @IBOutlet weak var errorLabel: UILabel!
@@ -28,26 +29,44 @@ class SettingVC: UIViewController {
 
     var animationDuration: TimeInterval = 1
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setInit()
         alphaZero()
 
-        certificationBtn.addTarget(self, action: #selector(checkPW), for: .touchUpInside)
-        pwChangeBtn.addTarget(self, action: #selector(changePW), for: .touchUpInside)
-        logoutBtn.addTarget(self, action: #selector(logout), for: .touchUpInside)
-        pwCertificationTextField.addTarget(self, action: #selector(checkTextField), for: .editingChanged)
-        pwChangeTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
-        pwChangeTextField2.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
-        ourInfoBtn.addTarget(self, action: #selector(goInfo), for: .touchUpInside)
+        certificationBtn.addTarget(self,
+                                   action: #selector(checkPW),
+                                   for: .touchUpInside)
+        
+        pwChangeBtn.addTarget(self,
+                              action: #selector(changePW),
+                              for: .touchUpInside)
+        
+        logoutBtn.addTarget(self,
+                            action: #selector(logout),
+                            for: .touchUpInside)
+        
+        pwCertificationTextField.addTarget(self,
+                                           action: #selector(checkTextField),
+                                           for: .editingChanged)
+        
+        pwChangeTextField.addTarget(self,
+                                    action: #selector(textFieldDidChange(_:)),
+                                    for: UIControl.Event.editingChanged)
+        
+        pwChangeTextField2.addTarget(self,
+                                     action: #selector(textFieldDidChange(_:)),
+                                     for: UIControl.Event.editingChanged)
+        
+        ourInfoBtn.addTarget(self,
+                             action: #selector(goInfo),
+                             for: .touchUpInside)
+        
+        TermsBtn.addTarget(self,
+                                 action: #selector(tapServiceInfo),
+                                 for: .touchUpInside)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        
-        
-    }
     
     @objc func checkTextField(){
         if pwCertificationTextField.text != "" {
@@ -61,11 +80,6 @@ class SettingVC: UIViewController {
 
     }
     
-    @objc func goInfo(){
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "OurInfoVC") as! OurInfoVC
-        
-        self.navigationController?.pushViewController(vc, animated: true)
-    }
 
     
     func setInit() {
@@ -73,10 +87,15 @@ class SettingVC: UIViewController {
         certificationBtn.tintColor = .nuteeGreen
         pwChangeBtn.tintColor = .nuteeGreen
         ourInfoBtn.tintColor = .nuteeGreen
+        TermsBtn.tintColor = .nuteeGreen
 
         pwCertificationTextField.addBorder(.bottom, color: .nuteeGreen, thickness: 1)
         pwChangeTextField.addBorder(.bottom, color: .nuteeGreen, thickness: 1)
         pwChangeTextField2.addBorder(.bottom, color: .nuteeGreen, thickness: 1)
+        
+        pwCertificationTextField.tintColor = .nuteeGreen
+        pwChangeTextField.tintColor = .nuteeGreen
+        pwChangeTextField2.tintColor = .nuteeGreen
         
         certificationBtn.isEnabled = false
         pwChangeBtn.isEnabled = false
@@ -84,7 +103,6 @@ class SettingVC: UIViewController {
         pwCertificationTextField.delegate = self
         pwChangeTextField.delegate = self
         pwChangeTextField2.delegate = self
-
         
     }
     
@@ -100,9 +118,24 @@ class SettingVC: UIViewController {
     
     @objc func logout(){
         simpleAlertWithHandler(title: "로그아웃", msg: "하시겠습니까??") { (action) in
+            LoadingHUD.show()
             self.signOutService()
         }
     }
+    
+    @objc func tapServiceInfo(){
+        let vc = UIStoryboard.init(name: "SignUp",
+                               bundle: Bundle.main).instantiateViewController(
+                                withIdentifier: "TermsVC") as? TermsVC
+        self.present(vc!, animated: true, completion: nil)
+    }
+    
+    @objc func goInfo(){
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "OurInfoVC") as! OurInfoVC
+        
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
         self.view.endEditing(true)
@@ -158,26 +191,28 @@ extension SettingVC {
             // NetworkResult 의 요소들
             case .success(let res):
                 let response = res as! String
-                
+                LoadingHUD.hide()
                 KeychainWrapper.standard.removeObject(forKey: "Cookie")
                 KeychainWrapper.standard.removeObject(forKey: "id")
                 KeychainWrapper.standard.removeObject(forKey: "userId")
                 KeychainWrapper.standard.removeObject(forKey: "pw")
-
-                print(response)
                 self.dismiss(animated: true, completion: nil)
             //                self.successAdd = true
             case .requestErr(_):
-                print("request error")
+                LoadingHUD.hide()
+                self.simpleAlert(title: "로그아웃에", message: "실패했습니다.")
             //                self.successAdd = false
             case .pathErr:
-                print(".pathErr")
+                LoadingHUD.hide()
+                self.simpleAlert(title: "로그아웃에", message: "실패했습니다.")
             //                self.successAdd = false
             case .serverErr:
-                print(".serverErr")
+                LoadingHUD.hide()
+                self.simpleAlert(title: "로그아웃에", message: "실패했습니다.")
             //                self.successAdd = false
             case .networkFail :
-                print("failure")
+                LoadingHUD.hide()
+                self.simpleAlert(title: "로그아웃에", message: "실패했습니다.")
                 //                self.successAdd = false
             }
         }

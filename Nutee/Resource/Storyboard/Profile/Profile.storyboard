@@ -156,12 +156,18 @@
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <state key="normal" title="개발자 정보"/>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="chF-VX-OHl">
+                                <rect key="frame" x="0.0" y="607" width="375" height="33"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <state key="normal" title="NUTEE 서비스 이용약관"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="TYW-R9-v0x" firstAttribute="top" secondItem="Kd1-iS-McU" secondAttribute="bottom" constant="30" id="0n0-AK-r0E"/>
                             <constraint firstItem="Kd1-iS-McU" firstAttribute="top" secondItem="FUp-nu-BQa" secondAttribute="bottom" constant="8" id="2dQ-Ny-JO2"/>
                             <constraint firstItem="az6-XJ-1uG" firstAttribute="trailing" secondItem="sdK-63-lke" secondAttribute="trailing" constant="24" id="3p2-SX-x58"/>
+                            <constraint firstItem="chF-VX-OHl" firstAttribute="leading" secondItem="az6-XJ-1uG" secondAttribute="leading" id="3to-jd-CWU"/>
                             <constraint firstItem="PXf-7I-NTO" firstAttribute="top" secondItem="cMr-8B-eqT" secondAttribute="bottom" constant="8" id="40o-fA-QCn"/>
                             <constraint firstItem="FUp-nu-BQa" firstAttribute="leading" secondItem="az6-XJ-1uG" secondAttribute="leading" constant="24" id="4CW-r6-Srv"/>
                             <constraint firstItem="sdK-63-lke" firstAttribute="leading" secondItem="az6-XJ-1uG" secondAttribute="leading" constant="24" id="4eL-uV-9DF"/>
@@ -176,12 +182,14 @@
                             <constraint firstItem="PXf-7I-NTO" firstAttribute="leading" secondItem="cMr-8B-eqT" secondAttribute="leading" constant="-50" id="EbK-Xs-Uui"/>
                             <constraint firstItem="CaL-sp-D1D" firstAttribute="centerY" secondItem="T97-qa-rNg" secondAttribute="centerY" id="HfV-bD-edq"/>
                             <constraint firstItem="TYW-R9-v0x" firstAttribute="leading" secondItem="Kd1-iS-McU" secondAttribute="leading" constant="50" id="KHx-XF-nkm"/>
+                            <constraint firstItem="az6-XJ-1uG" firstAttribute="trailing" secondItem="chF-VX-OHl" secondAttribute="trailing" id="L7R-ZU-NCM"/>
                             <constraint firstItem="FUp-nu-BQa" firstAttribute="top" secondItem="az6-XJ-1uG" secondAttribute="top" constant="60" id="QKC-X6-JcA"/>
                             <constraint firstItem="DEl-ZE-LHV" firstAttribute="top" secondItem="T97-qa-rNg" secondAttribute="bottom" constant="8" id="Ra7-en-lVJ"/>
                             <constraint firstItem="T97-qa-rNg" firstAttribute="height" secondItem="cMr-8B-eqT" secondAttribute="height" id="Rvw-iI-DS8"/>
                             <constraint firstItem="az6-XJ-1uG" firstAttribute="trailing" secondItem="6Lg-7F-doX" secondAttribute="trailing" id="U5n-pz-Xzd"/>
                             <constraint firstItem="cMr-8B-eqT" firstAttribute="top" secondItem="TYW-R9-v0x" secondAttribute="bottom" constant="8" id="Zg0-8b-rBk"/>
                             <constraint firstItem="az6-XJ-1uG" firstAttribute="bottom" secondItem="sdK-63-lke" secondAttribute="bottom" constant="20" id="hNM-AB-7RL"/>
+                            <constraint firstItem="6Lg-7F-doX" firstAttribute="top" secondItem="chF-VX-OHl" secondAttribute="bottom" constant="18" id="jnw-Sg-dfJ"/>
                             <constraint firstItem="bha-va-bKy" firstAttribute="leading" secondItem="Kd1-iS-McU" secondAttribute="trailing" constant="4.3333333333333712" id="nIg-en-j34"/>
                             <constraint firstItem="Kd1-iS-McU" firstAttribute="width" secondItem="gb2-jE-kZm" secondAttribute="width" multiplier="0.65" id="tXX-hx-QTB"/>
                             <constraint firstItem="6Lg-7F-doX" firstAttribute="leading" secondItem="az6-XJ-1uG" secondAttribute="leading" id="v5K-fK-uL3"/>
@@ -193,6 +201,7 @@
                         <viewLayoutGuide key="safeArea" id="az6-XJ-1uG"/>
                     </view>
                     <connections>
+                        <outlet property="TermsBtn" destination="chF-VX-OHl" id="Djy-dT-SUb"/>
                         <outlet property="certificationBtn" destination="bha-va-bKy" id="vX1-1e-dSx"/>
                         <outlet property="certificationErrorLabel" destination="DEl-ZE-LHV" id="rGW-RU-iUU"/>
                         <outlet property="errorLabel" destination="PXf-7I-NTO" id="7nx-n3-Ppj"/>
@@ -581,6 +590,6 @@
     </scenes>
     <resources>
         <image name="person" catalog="system" width="128" height="117"/>
-        <image name="plus" catalog="system" width="32" height="32"/>
+        <image name="plus" catalog="system" width="128" height="113"/>
     </resources>
 </document>

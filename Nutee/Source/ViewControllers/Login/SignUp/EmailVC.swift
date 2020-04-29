@@ -165,7 +165,11 @@ extension EmailVC {
 extension EmailVC : UITextFieldDelegate {
     
     @objc func textFieldDidChange(_ textField: UITextField) {
-        if emailTextField.text?.validateSkhuEmail() ?? false  {
+        if emailTextField.text?.validateSkhuEmail() ?? false || emailTextField.text?.validateOfficeEmail() ?? false  {
+            certificationBtn.isEnabled = true
+            certificationBtn.tintColor = .nuteeGreen
+            certificationBtn.isEnabled = true
+        } else if emailTextField.text == "nutee.skhu.2020@gmail.com" {
             certificationBtn.isEnabled = true
             certificationBtn.tintColor = .nuteeGreen
             certificationBtn.isEnabled = true
@@ -202,11 +206,26 @@ extension EmailVC {
 
                 print(".requestErr")
             case .pathErr:
-                print(".pathErr")
+                self.checkLabel.shake(duration: 0.3)
+                self.checkLabel.text = "에러가 발생했습니다."
+                self.checkLabel.alpha = 1
+                self.checkLabel.textColor = .red
+                self.emailTextField.addBorder(.bottom, color: .red, thickness: 1)
+                
             case .serverErr:
-                print(".serverErr")
+                self.checkLabel.shake(duration: 0.3)
+                self.checkLabel.text = "서버 에러가 발생했습니다."
+                self.checkLabel.alpha = 1
+                self.checkLabel.textColor = .red
+                self.emailTextField.addBorder(.bottom, color: .red, thickness: 1)
+                
             case .networkFail:
-                print(".networkFail")
+                
+                self.checkLabel.shake(duration: 0.3)
+                self.checkLabel.text = "네트워크 에러가 발생했습니다."
+                self.checkLabel.alpha = 1
+                self.checkLabel.textColor = .red
+                self.emailTextField.addBorder(.bottom, color: .red, thickness: 1)
             }
         }
     }
@@ -216,7 +235,7 @@ extension EmailVC {
             switch responsedata {
                 
             case .success(let res):
-                print(res)
+
                 self.otpCheckLabel.shake(duration: 0.3)
                 self.otpCheckLabel.text = "인증번호가 확인되었습니다."
                 self.otpCheckLabel.alpha = 1
@@ -230,15 +249,29 @@ extension EmailVC {
                 self.otpCheckLabel.text = "인증번호가 틀렸습니다."
                 self.otpCheckLabel.alpha = 1
                 self.otpCheckLabel.textColor = .red
-                self.numTextField.addBorder(.bottom, color: .nuteeGreen, thickness: 1)
+                self.numTextField.addBorder(.bottom, color: .red, thickness: 1)
 
                 print(".requestErr")
             case .pathErr:
-                print(".pathErr")
+                self.otpCheckLabel.shake(duration: 0.3)
+                self.otpCheckLabel.text = "인증번호가 틀렸습니다."
+                self.otpCheckLabel.alpha = 1
+                self.otpCheckLabel.textColor = .red
+                self.numTextField.addBorder(.bottom, color: .red, thickness: 1)
+                
             case .serverErr:
-                print(".serverErr")
+                self.otpCheckLabel.shake(duration: 0.3)
+                self.otpCheckLabel.text = "서버 에러가 발생했습니다."
+                self.otpCheckLabel.alpha = 1
+                self.otpCheckLabel.textColor = .red
+                self.numTextField.addBorder(.bottom, color: .red, thickness: 1)
+                
             case .networkFail:
-                print(".networkFail")
+                self.otpCheckLabel.shake(duration: 0.3)
+                self.otpCheckLabel.text = "네트워크 에러가 발생했습니다."
+                self.otpCheckLabel.alpha = 1
+                self.otpCheckLabel.textColor = .red
+                self.numTextField.addBorder(.bottom, color: .red, thickness: 1)
             }
         }
     }

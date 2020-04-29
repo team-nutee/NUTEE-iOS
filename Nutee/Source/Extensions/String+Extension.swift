@@ -17,12 +17,20 @@ extension String {
         return predicate.evaluate(with: self)
     }
     
-    public func validateSkhuEmail() -> Bool {
-        let emailRegEx = "^.+@office.skhu.ac.kr"
+    public func validateOfficeEmail() -> Bool {
+        let emailRegEx = "^.+@office+\\.skhu+\\.ac+\\.kr"
         
         let predicate = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
         return predicate.evaluate(with: self)
     }
+    
+    public func validateSkhuEmail() -> Bool {
+        let emailRegEx = "^.+@skhu+\\.kr"
+        
+        let predicate = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        return predicate.evaluate(with: self)
+    }
+
     
     
     // Password validation 영어 대문자 소문자 , 숫자 8자 이상
@@ -33,6 +41,13 @@ extension String {
         return predicate.evaluate(with: self)
     }
     
+    public func validateID() -> Bool {
+        let passwordRegEx = "^([0-9a-zA-Z_-]+){1,2}$"
+        
+        let predicate = NSPredicate(format:"SELF MATCHES %@", passwordRegEx)
+        return predicate.evaluate(with: self)
+    }
+
     public func getDateFormat(time: String) -> Date? {
         let timeSplit = time.components(separatedBy: ["T", "."])
         let timeFormatted = timeSplit[0] + " " + timeSplit[1]

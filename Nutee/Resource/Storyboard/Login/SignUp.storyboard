@@ -323,7 +323,7 @@
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="w8W-F1-VBe">
                                 <rect key="frame" x="0.0" y="94" width="414" height="768"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <mutableString key="text">제1조(목적)
+                                <string key="text">제1조(목적)
 NUTEE(이하 누티) 서비스 이용약관은 S&amp;N(이하 소울)이 서비스를 제공함에 있어, 소울와 이용자 간의 권리, 의무 및 책임 사항 등을 규정함을 목적으로 합니다.
 
 제2조(정의)
@@ -431,7 +431,7 @@ NUTEE(이하 누티) 서비스 이용약관은 S&amp;N(이하 소울)이 서비�
 •	이 약관은 2020년 4월 7일에 마지막으로 작성했습니다.
 •	이 약관에서 정하지 아니한 사항과 이 약관의 해석에 관하여는 관련법 또는 관례에 따릅니다.
 •	이 약관에도 불구하고 다른 약관이나 서비스 이용 중 안내 문구 등으로 달리 정함이 있는 경우에는 해당 내용을 우선으로 합니다.
-</mutableString>
+</string>
                                 <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -445,7 +445,7 @@ NUTEE(이하 누티) 서비스 이용약관은 S&amp;N(이하 소울)이 서비�
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w44-vt-RbO">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w44-vt-RbO">
                                         <rect key="frame" x="352" y="0.0" width="62" height="50"/>
                                         <state key="normal" title="완료"/>
                                     </button>

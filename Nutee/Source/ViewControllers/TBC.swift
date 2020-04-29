@@ -49,6 +49,7 @@ class TBC: UITabBarController {
     
     
     @objc func toPost() {
+        print(#function)
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "PostVC") as! PostVC
         self.definesPresentationContext = true
         vc.modalPresentationStyle = .overCurrentContext
@@ -75,7 +76,7 @@ class TBC: UITabBarController {
         // here, you should edit "0" to be matched with your selected item
         // for instance, if there is 5 items and the desired item is in the middle, the compared value should be "2"
         if tabBarController.selectedIndex == 2 {
-            
+            print(#function)
             // simply, you will need to get the desired view controller and persent it:
             let desiredStoryboard = UIStoryboard(name: "Post", bundle: nil)
             let desiredViewController = desiredStoryboard.instantiateViewController(withIdentifier: "PostVC")
