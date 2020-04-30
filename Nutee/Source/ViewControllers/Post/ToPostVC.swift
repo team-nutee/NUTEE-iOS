@@ -21,7 +21,6 @@ class ToPostVC: UIViewController {
     }
     
     func toPost() {
-        print(#function)
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "PostVC") as! PostVC
         vc.modalPresentationStyle = .fullScreen
         

@@ -290,7 +290,7 @@ extension FindVC {
             // NetworkResult 의 요소들
             case .success(_):
                 self.idErrorLabel.alpha = 1
-                self.pwErrorLabel.text = "이메일 발신 처리 되었습니다."
+                self.idErrorLabel.text = "이메일 발신 처리 되었습니다."
                 self.idErrorLabel.textColor = .nuteeGreen
                 self.idErrorLabel.sizeToFit()
                 self.idErrorLabel.shake(duration: 0.3)

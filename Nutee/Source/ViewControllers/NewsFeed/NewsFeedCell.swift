@@ -239,21 +239,21 @@ class NewsFeedCell: UITableViewCell {
             // Repost 버튼
             isClickedRepost = false
             btnRepost.tintColor = .gray
-            if containLoginUser {
-                // 로그인 한 사용자가 좋아요를 누른 상태일 경우
-                btnLike.isSelected = true
-                numLike = newsPost?.likers.count ?? 0
-                btnLike.setTitle(" " + String(numLike!), for: .selected)
-                btnLike.tintColor = .systemPink
-                isClickedLike = true
-            } else {
+//            if containLoginUser {
+//                // 로그인 한 사용자가 좋아요를 누른 상태일 경우
+//                btnLike.isSelected = true
+//                numLike = newsPost?.likers.count ?? 0
+//                btnLike.setTitle(" " + String(numLike!), for: .selected)
+//                btnLike.tintColor = .systemPink
+//                isClickedLike = true
+//            } else {
                 // 로그인 한 사용자가 좋아요를 누르지 않은 상태일 경우
                 btnLike.isSelected = false
                 numLike = newsPost?.likers.count ?? 0
                 btnLike.setTitle(" " + String(numLike!), for: .normal)
                 btnLike.tintColor = .gray
                 isClickedLike = false
-            }
+//            }
             // Like 버튼
             containLoginUser = false
             for arrSearch in newsPost?.likers ?? [] {

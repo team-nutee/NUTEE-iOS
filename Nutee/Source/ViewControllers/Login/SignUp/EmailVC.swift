@@ -234,7 +234,7 @@ extension EmailVC {
         UserService.shared.checkOTP(otp) { (responsedata) in
             switch responsedata {
                 
-            case .success(let res):
+            case .success(_):
 
                 self.otpCheckLabel.shake(duration: 0.3)
                 self.otpCheckLabel.text = "인증번호가 확인되었습니다."

@@ -172,7 +172,6 @@ class ReplyCell: UITableViewCell{
     // 프로필 이미지 클릭시 실행 함수
     @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
         let imgView = tapGestureRecognizer.view as! UIImageView
-        print("your taped image view tag is : \(imgView.tag)")
         
         //Give your image View tag
         if (imgView.tag == 1) {

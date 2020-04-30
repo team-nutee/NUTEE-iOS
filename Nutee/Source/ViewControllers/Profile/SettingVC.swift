@@ -189,8 +189,7 @@ extension SettingVC {
             switch responsedata {
                 
             // NetworkResult 의 요소들
-            case .success(let res):
-                let response = res as! String
+            case .success(_):
                 LoadingHUD.hide()
                 KeychainWrapper.standard.removeObject(forKey: "Cookie")
                 KeychainWrapper.standard.removeObject(forKey: "id")

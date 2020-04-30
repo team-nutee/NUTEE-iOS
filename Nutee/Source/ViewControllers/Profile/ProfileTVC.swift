@@ -98,26 +98,26 @@ class ProfileTVC: UITableViewCell {
         imgCntLabel.text = String(loginUserPost?.images.count ?? 0)
         replyCntLabel.text = String(loginUserPost?.comments.count ?? 0)
         
-        var containLoginUser = false
-        // Repost 버튼
-        isClickedRepost = false
-        if containLoginUser {
-            // 로그인 한 사용자가 좋아요를 누른 상태일 경우
-            likeBtn.isSelected = true
-            numLike = loginUserPost?.likers.count ?? 0
-            likeBtn.setTitle(" " + String(numLike!), for: .selected)
-            likeBtn.tintColor = .systemPink
-            isClickedLike = true
-        } else {
+//        var containLoginUser = false
+//        // Repost 버튼
+//        isClickedRepost = false
+//        if containLoginUser {
+//            // 로그인 한 사용자가 좋아요를 누른 상태일 경우
+//            likeBtn.isSelected = true
+//            numLike = loginUserPost?.likers.count
+//            likeBtn.setTitle(" " + String(numLike!), for: .selected)
+//            likeBtn.tintColor = .systemPink
+//            isClickedLike = true
+//        } else {
             // 로그인 한 사용자가 좋아요를 누르지 않은 상태일 경우
             likeBtn.isSelected = false
             numLike = loginUserPost?.likers.count ?? 0
             likeBtn.setTitle(" " + String(numLike!), for: .normal)
             likeBtn.tintColor = .gray
             isClickedLike = false
-        }
+//        }
         // Like 버튼
-        containLoginUser = false
+        var containLoginUser = false
         for arrSearch in loginUserPost?.likers ?? [] {
             if arrSearch.like.userID == KeychainWrapper.standard.integer(forKey: "id") {
                 containLoginUser = true
@@ -177,7 +177,6 @@ class ProfileTVC: UITableViewCell {
     }
 
     @IBAction func tapActionBtn(sender: AnyObject) {
-        print("멤메ㅔㅁ메메메메")
         let moreAlert = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertController.Style.actionSheet)
         let editAction = UIAlertAction(title: "수정", style: .default){
             (action: UIAlertAction) in

@@ -92,21 +92,21 @@ class FeedTVC: UITableViewCell {
         var containLoginUser = false
         // Repost 버튼
         isClickedRepost = false
-        if containLoginUser {
-            // 로그인 한 사용자가 좋아요를 누른 상태일 경우
-            likeBtn.isSelected = true
-            numLike = newsPost?.likers.count ?? 0
-            likeBtn.setTitle(" " + String(numLike!), for: .selected)
-            likeBtn.tintColor = .systemPink
-            isClickedLike = true
-        } else {
+//        if containLoginUser {
+//            // 로그인 한 사용자가 좋아요를 누른 상태일 경우
+//            likeBtn.isSelected = true
+//            numLike = newsPost?.likers.count ?? 0
+//            likeBtn.setTitle(" " + String(numLike!), for: .selected)
+//            likeBtn.tintColor = .systemPink
+//            isClickedLike = true
+//        } else {
             // 로그인 한 사용자가 좋아요를 누르지 않은 상태일 경우
             likeBtn.isSelected = false
             numLike = newsPost?.likers.count ?? 0
             likeBtn.setTitle(" " + String(numLike!), for: .normal)
             likeBtn.tintColor = .gray
             isClickedLike = false
-        }
+//        }
         // Like 버튼
         containLoginUser = false
         for arrSearch in newsPost?.likers ?? [] {

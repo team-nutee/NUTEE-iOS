@@ -64,7 +64,7 @@ class NewsFeedVC: UIViewController {
                 let updatedLastestPostId = tmpNewsPost?.id
                 
                 // 새로 올라온 게시글이 있을 경우
-                if(updatedLastestPostId != lastestPostId){
+                if(updatedLastestPostId ?? 0 > lastestPostId ?? 0){
                     UIView.animate(withDuration: 1,
                                    delay: 0,
                                    usingSpringWithDamping: 0.6,
