@@ -166,7 +166,6 @@ struct ContentService {
         Alamofire.upload(multipartFormData: { (multipartFormData) in
             //            multipartFormData.append(pictures, withName: "image")
             for image in pictures {
-                
                 multipartFormData.append((image as String).data(using: .utf8) ?? Data() , withName: "image")
             }
             multipartFormData.append(postContent.data(using: .utf8) ?? Data(), withName: "content")
@@ -187,7 +186,6 @@ struct ContentService {
     }
     
     func uploadImage(pictures: [UIImage], completion: @escaping(NetworkResult<Any>)->Void) {
-        
         let headers: HTTPHeaders = [
             "Content-Type": "multipart/form-data",
             "Cookie" : KeychainWrapper.standard.string(forKey: "Cookie")!
@@ -196,6 +194,7 @@ struct ContentService {
         Alamofire.upload(multipartFormData: { (multipartFormData) in
             for image in pictures {
                 if let imageData = image.jpegData(compressionQuality: 0.3) {
+                    print(imageData)
                     multipartFormData.append(imageData, withName: "image", fileName: "image.jpg", mimeType: "image/jpg")
                 }
             }
