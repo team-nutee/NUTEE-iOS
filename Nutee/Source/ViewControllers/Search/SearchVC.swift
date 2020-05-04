@@ -64,7 +64,11 @@ class SearchVC: UIViewController {
 extension SearchVC : UITextFieldDelegate {
     
     func textFieldDidChangeSelection(_ textField: UITextField) {
-        if textField.text == "" {
+        // 입력된 빈칸 감지하기
+        var str = textField.text
+        str = str?.replacingOccurrences(of: " ", with: "")
+        
+        if str?.count == 0 {
             searchBtn.isHidden = true
         } else {
             searchBtn.isHidden = false
