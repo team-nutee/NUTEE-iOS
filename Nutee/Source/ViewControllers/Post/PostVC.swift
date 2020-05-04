@@ -167,7 +167,7 @@ extension PostVC {
         config.showsPhotoFilters = false
         config.shouldSaveNewPicturesToAlbum = true
         config.startOnScreen = .library
-        config.wordings.libraryTitle = "Gallery"
+        config.wordings.libraryTitle = "갤러리"
         config.maxCameraZoomFactor = 2.0
         config.library.maxNumberOfItems = 10
         config.gallery.hidesRemoveButton = false
@@ -415,6 +415,8 @@ extension PostVC {
     
     func postImage(images: [UIImage],
                    completionHandler: @escaping (_ returnedData: [NSString]) -> Void ) {
+        dump(images[0])
+
         ContentService.shared.uploadImage(pictures: images){
             [weak self]
             data in
