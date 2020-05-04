@@ -15,9 +15,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="476" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Yci-bv-OvW">
-                                <rect key="frame" x="0.0" y="88" width="375" height="725"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="476" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Yci-bv-OvW">
+                                <rect key="frame" x="0.0" y="88" width="375" height="641"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="newsTV" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="NewsFeedCell" rowHeight="476" id="OuS-jG-NfV" customClass="NewsFeedCell" customModule="NUTEE" customModuleProvider="target">
@@ -134,7 +133,7 @@
                                                                     <rect key="frame" x="141" y="182" width="204" height="118"/>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00+" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rHc-1L-3Rr">
-                                                                    <rect key="frame" x="223" y="229" width="40.333333333333314" height="24"/>
+                                                                    <rect key="frame" x="222.66666666666666" y="229" width="40.666666666666657" height="24"/>
                                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
@@ -175,7 +174,7 @@
                                                                     <gestureRecognizers/>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00+" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gzh-W4-SEP">
-                                                                    <rect key="frame" x="251.66666666666669" y="214.33333333333331" width="41" height="24"/>
+                                                                    <rect key="frame" x="251.66666666666666" y="214.33333333333331" width="40.666666666666657" height="24"/>
                                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
@@ -358,6 +357,12 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="Yci-bv-OvW" firstAttribute="bottom" secondItem="RlG-Z8-t1e" secondAttribute="bottom" id="4ed-ab-QMd"/>
+                            <constraint firstItem="Yci-bv-OvW" firstAttribute="top" secondItem="RlG-Z8-t1e" secondAttribute="top" id="LEj-4I-z01"/>
+                            <constraint firstItem="RlG-Z8-t1e" firstAttribute="trailing" secondItem="Yci-bv-OvW" secondAttribute="trailing" id="Vgf-gp-guv"/>
+                            <constraint firstItem="Yci-bv-OvW" firstAttribute="leading" secondItem="RlG-Z8-t1e" secondAttribute="leading" id="zrm-TD-baV"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="RlG-Z8-t1e"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="house" catalog="system" id="4Rx-g3-iv1"/>
