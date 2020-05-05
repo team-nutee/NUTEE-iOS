@@ -100,7 +100,7 @@ class PostVC: UIViewController {
     }
     
     @objc func closePosting() {
-        simpleAlertWithHandler(title: "작성을 취소하시겠습니까??", msg: "") { (action) in
+        simpleAlertWithHandler(title: "작성을 취소하시겠습니까?", msg: "") { (action) in
             self.setDefault()
             self.dismiss(animated: true, completion: nil)
         }

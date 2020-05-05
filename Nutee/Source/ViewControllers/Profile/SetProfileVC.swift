@@ -18,6 +18,7 @@ class SetProfileVC: UIViewController {
     @IBOutlet weak var setIMGBtn: UIButton!
     @IBOutlet weak var nameTextField: UITextField!
     
+    @IBOutlet weak var checkLabel: UILabel!
     // MARK: - Variables and Properties
     
     let picker = UIImagePickerController()
@@ -30,11 +31,11 @@ class SetProfileVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         picker.delegate = self
-        
+        nameTextField.delegate = self
         setIMGBtn.addTarget(self, action: #selector(tapImageSettingBtn), for: .touchUpInside)
         closeBtn.addTarget(self, action: #selector(close), for: .touchUpInside)
         saveBtn.addTarget(self, action: #selector(saveChangedProfileInfo), for: .touchUpInside)
-        
+        nameTextField.addTarget(self, action: #selector(checkName), for: .editingDidEnd)
         setInit()
     }
     
@@ -42,7 +43,7 @@ class SetProfileVC: UIViewController {
     
     // 초기 설정
     func setInit() {
-
+        
         closeBtn.tintColor = .nuteeGreen
         closeBtn.titleLabel?.font = .boldSystemFont(ofSize: 15)
         saveBtn.tintColor = .nuteeGreen
@@ -51,13 +52,15 @@ class SetProfileVC: UIViewController {
         setIMGBtn.backgroundColor = .nuteeGreen
         
         profileIMG.setImageNutee(profileImgSrc)
-
+        
         nameTextField.addBorder(.bottom, color: .nuteeGreen, thickness: 1)
         nameTextField.tintColor = .nuteeGreen
         nameTextField.text = name
         
         setIMGBtn.setRounded(radius: nil)
         profileIMG.setRounded(radius: nil)
+        
+        checkLabel.alpha = 0
     }
     
     func setDefault() {
@@ -68,20 +71,24 @@ class SetProfileVC: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
+        self.view.endEditing(true)
+    }
+    
     @objc func tapImageSettingBtn(){
         let actionAlert = UIAlertController(title: nil,
                                             message: nil,
                                             preferredStyle: UIAlertController.Style.actionSheet)
-//        let defaultAction = UIAlertAction(title:"기본 이미지로 변경", style: .default){ action in
-//            self.profileIMG.setImageNutee("")
-//            self.pickedIMG = UIImage()
-//        }
+        //        let defaultAction = UIAlertAction(title:"기본 이미지로 변경", style: .default){ action in
+        //            self.profileIMG.setImageNutee("")
+        //            self.pickedIMG = UIImage()
+        //        }
         let imagePickerAction = UIAlertAction(title: "앨범에서 이미지 선택", style: .default) { (action) in
             self.showImagePickerController()
         }
         let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
         
-//        actionAlert.addAction(defaultAction)
+        //        actionAlert.addAction(defaultAction)
         actionAlert.addAction(imagePickerAction)
         actionAlert.addAction(cancelAction)
         self.present(actionAlert, animated: true)
@@ -90,7 +97,7 @@ class SetProfileVC: UIViewController {
     @objc func saveChangedProfileInfo() {
         // 닉네임 변경
         if nameTextField.text != "" {
-            changeNicknameService(changedNickname: nameTextField.text!)
+            checkName()
         } else {
             let emptyAlert = UIAlertController(title: nil, message: "닉네임을 입력하세요!", preferredStyle: UIAlertController.Style.alert)
             let okayAction = UIAlertAction(title: "확인", style: .default)
@@ -123,6 +130,8 @@ extension SetProfileVC : UINavigationControllerDelegate, UIImagePickerController
         dismiss(animated: true, completion:  nil)
     }
 }
+
+extension SetProfileVC: UITextFieldDelegate { }
 
 // MARK: - 프로필 이미지 혹은 닉네임 변경을 위한 서버 연결 코드
 extension SetProfileVC {
@@ -176,4 +185,36 @@ extension SetProfileVC {
             }
         }
     }
+    
+    @objc func checkName(){
+        print(#function)
+        UserService.shared.checkNick(nameTextField.text!) { (responsedata) in
+            print(#function)
+            switch responsedata {
+                
+            case .success(let res):
+                print(res)
+                self.changeNicknameService(changedNickname: self.nameTextField.text!)
+                
+            case .requestErr(let res):
+                print(res)
+                self.checkLabel.shake(duration: 0.3)
+                self.nameTextField.addBorder(.bottom, color: .red, thickness: 1)
+                self.checkLabel.textColor = .red
+                self.checkLabel.text = "이미 사용중인 닉네임입니다."
+                self.checkLabel.sizeToFit()
+                self.checkLabel.alpha = 1
+                
+            case .pathErr:
+                print(".pathErr")
+                
+            case .serverErr:
+                print(".serverErr")
+                
+            case .networkFail:
+                print(".networkFail")
+            }
+        }
+    }
+    
 }

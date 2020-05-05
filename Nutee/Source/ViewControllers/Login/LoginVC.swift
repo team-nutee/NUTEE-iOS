@@ -94,6 +94,7 @@ class LoginVC: UIViewController {
         autoSignUpBtn.addTarget(self, action: #selector(autoSignUpBt), for: .touchUpInside)
         autoSignUpBtn2.addTarget(self, action: #selector(autoSignUpBt), for: .touchUpInside)
         
+        logoLabel.sizeToFit()
         logoLabel.textColor = .nuteeGreen
         logoLabel.alpha = 0
     }
