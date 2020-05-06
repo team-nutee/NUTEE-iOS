@@ -9,7 +9,16 @@
 import Foundation
 
 // MARK: - Notice
-struct Notice: Codable {
-    let content: [[String]]
-    let hrefs: [[String]]
+//struct Notice: Codable {
+//    let content: [[String]]
+//    let hrefs: [[String]]
+//}
+
+struct NoticeElement: Codable {
+    let no, title: String
+    let href: String
+    let author: String
+    let date: String
 }
+
+typealias Notice = [NoticeElement]

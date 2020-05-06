@@ -13,8 +13,11 @@ import UIKit
 class ScholarshipVC: UIViewController {
     
     let scholarshipTV: UITableView = UITableView()
-    var notice : [String] = []
-    var link : [String] = []
+    var isNotice: [String] = []
+    var notice: [String] = []
+    var link: [String] = []
+    var date: [String] = []
+    var author: [String] = []
 
     
     override func viewDidLoad() {
@@ -22,13 +25,16 @@ class ScholarshipVC: UIViewController {
         self.scholarshipTV.dataSource = self
         self.scholarshipTV.delegate = self
         
-        self.scholarshipTV.register(UITableViewCell.self, forCellReuseIdentifier: "ScholarTVC")
-        
+        self.scholarshipTV.register(UITableViewCell.self, forCellReuseIdentifier: "NoticeTVC")
+                
+        scholarshipTV.register(UINib(nibName: "NoticeTVC", bundle: nil), forCellReuseIdentifier: "NoticeTVC")
+
         self.view.addSubview(self.scholarshipTV)
         
         self.scholarshipTV.snp.makeConstraints({ (make) in
             make.width.equalToSuperview()
-            make.height.equalToSuperview()
+            make.top.equalToSuperview().inset(70)
+            make.bottom.equalToSuperview()
             make.left.equalTo(0)
         })
         
@@ -45,20 +51,31 @@ extension ScholarshipVC : UITableViewDataSource {
         return notice.count
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60
+        return 80
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "ScholarTVC", for: indexPath) as UITableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "NoticeTVC", for: indexPath) as! NoticeTVC
+
+        cell.titleLabel.text = notice[indexPath.row]
+        cell.authorLabel.text = author[indexPath.row]
+        cell.dateLabel.text = date[indexPath.row]
+        
         let backgroundView = UIView()
         backgroundView.backgroundColor = .greenLighter
         cell.selectedBackgroundView = backgroundView
-        cell.textLabel?.text = notice[indexPath.row]
 
+        if (isNotice[indexPath.row] == "공지") {
+            cell.isNoticeView.isHidden = false
+        } else {
+            cell.isNoticeView.isHidden = true
+        }
+
+        
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ScholarTVC", for: indexPath) as UITableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "NoticeTVC", for: indexPath) as! NoticeTVC
         let backgroundView = UIView()
         backgroundView.backgroundColor = .greenLighter
         cell.selectedBackgroundView = backgroundView
@@ -76,7 +93,7 @@ extension ScholarshipVC : UITableViewDataSource {
 
 extension ScholarshipVC {
     func setNotice(){
-        NoticeService.shared.getNotice(){
+        NoticeService.shared.getScholarshipNotice(){
             [weak self]
             data in
             
@@ -87,10 +104,15 @@ extension ScholarshipVC {
             // 매개변수에 어떤 값을 가져올 것인지
             case .success(let res):
                 let response = res as! Notice
-                
-                self.notice = response.content[3]
-                self.link = response.hrefs[3]
-                
+                for i in response {
+                    self.notice.append(i.title)
+                    self.link.append(i.href)
+                    self.date.append(i.date)
+                    self.isNotice.append(i.no)
+                    self.author.append(i.author)
+                }
+
+
                 self.scholarshipTV.reloadData()
 
             case .requestErr(let message):

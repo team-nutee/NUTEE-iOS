@@ -14,28 +14,32 @@ import SnapKit
 class BachelorVC: UIViewController {
     
     let bachelorTV: UITableView = UITableView()
-    var notice : [String] = []
-    var link : [String] = []
+    var isNotice: [String] = []
+    var notice: [String] = []
+    var link: [String] = []
+    var date: [String] = []
+    var author: [String] = []
     
+    let cellReuseIdentifier = "cell"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.bachelorTV.dataSource = self
         self.bachelorTV.delegate = self
         
-        self.bachelorTV.register(UITableViewCell.self, forCellReuseIdentifier: "BachelorTVC")
-        
-//        bachelorTV.isScrollEnabled = false
+        self.bachelorTV.register(UITableViewCell.self, forCellReuseIdentifier: "NoticeTVC")
+                
+        bachelorTV.register(UINib(nibName: "NoticeTVC", bundle: nil), forCellReuseIdentifier: "NoticeTVC")
+
         
         self.view.addSubview(self.bachelorTV)
         
-        
         self.bachelorTV.snp.makeConstraints({ (make) in
             make.width.equalToSuperview()
-            make.height.equalToSuperview()
+            make.top.equalToSuperview().inset(70)
+            make.bottom.equalToSuperview()
             make.left.equalTo(0)
         })
-        
         
         setNotice()
         
@@ -53,30 +57,38 @@ extension BachelorVC : UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "BachelorTVC", for: indexPath) as UITableViewCell
-        
-        cell.textLabel?.text = notice[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "NoticeTVC", for: indexPath) as! NoticeTVC
+                
+        cell.titleLabel.text = notice[indexPath.row]
+        cell.authorLabel.text = author[indexPath.row]
+        cell.dateLabel.text = date[indexPath.row]
         
         let backgroundView = UIView()
         backgroundView.backgroundColor = .greenLighter
         cell.selectedBackgroundView = backgroundView
+
+        if (isNotice[indexPath.row] == "공지") {
+            cell.isNoticeView.isHidden = false
+        } else {
+            cell.isNoticeView.isHidden = true
+        }
 
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        return 60
+        return 80
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "BachelorTVC", for: indexPath) as UITableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "NoticeTVC", for: indexPath) as! NoticeTVC
         
         let backgroundView = UIView()
         backgroundView.backgroundColor = .greenLighter
         cell.selectedBackgroundView = backgroundView
         cell.textLabel?.text = notice[indexPath.row]
-
+        
         if let url = URL(string: link[indexPath.row]) {
             UIApplication.shared.open(url)
         }
@@ -89,7 +101,7 @@ extension BachelorVC : UITableViewDataSource {
 
 extension BachelorVC {
     func setNotice(){
-        NoticeService.shared.getNotice(){
+        NoticeService.shared.getBachelorNotice(){
             [weak self]
             data in
             
@@ -100,9 +112,15 @@ extension BachelorVC {
             // 매개변수에 어떤 값을 가져올 것인지
             case .success(let res):
                 let response = res as! Notice
+
+                for i in response {
+                    self.notice.append(i.title)
+                    self.link.append(i.href)
+                    self.date.append(i.date)
+                    self.isNotice.append(i.no)
+                    self.author.append(i.author)
+                }
                 
-                self.notice = response.content[0]
-                self.link = response.hrefs[0]
                 
                 self.bachelorTV.reloadData()
 
