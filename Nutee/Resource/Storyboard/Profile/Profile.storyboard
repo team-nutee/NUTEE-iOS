@@ -298,15 +298,23 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tTO-O2-L5r">
+                                <rect key="frame" x="87.666666666666671" y="437" width="28.666666666666671" height="13.333333333333314"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="O5p-fs-F21" firstAttribute="top" secondItem="MOE-Ae-ckn" secondAttribute="top" constant="108" id="0yC-Hv-KoR"/>
+                            <constraint firstItem="tTO-O2-L5r" firstAttribute="top" secondItem="RDu-XR-bje" secondAttribute="bottom" constant="8" id="2oS-kE-3lR"/>
                             <constraint firstItem="RDu-XR-bje" firstAttribute="centerX" secondItem="MOE-Ae-ckn" secondAttribute="centerX" id="6Cz-QY-aTd"/>
                             <constraint firstItem="oud-hk-DYH" firstAttribute="centerX" secondItem="MOE-Ae-ckn" secondAttribute="centerX" id="6Si-kS-VwP"/>
                             <constraint firstItem="oud-hk-DYH" firstAttribute="top" secondItem="O5p-fs-F21" secondAttribute="bottom" constant="58" id="ASa-d9-iWw"/>
                             <constraint firstItem="gBK-D1-Iay" firstAttribute="top" secondItem="MOE-Ae-ckn" secondAttribute="top" id="Emb-Df-DsL"/>
                             <constraint firstItem="gBK-D1-Iay" firstAttribute="leading" secondItem="MOE-Ae-ckn" secondAttribute="leading" id="FAr-x7-gcD"/>
+                            <constraint firstItem="tTO-O2-L5r" firstAttribute="leading" secondItem="RDu-XR-bje" secondAttribute="leading" id="PXi-le-CKk"/>
                             <constraint firstItem="hgq-BB-LU3" firstAttribute="top" secondItem="O5p-fs-F21" secondAttribute="bottom" constant="-50" id="cVK-8T-9oC"/>
                             <constraint firstItem="RDu-XR-bje" firstAttribute="top" secondItem="O5p-fs-F21" secondAttribute="bottom" constant="87" id="eYZ-Kj-Yu1"/>
                             <constraint firstItem="gBK-D1-Iay" firstAttribute="width" secondItem="lRP-It-P4F" secondAttribute="width" id="t2F-xC-c3n"/>
@@ -318,6 +326,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="프로필 설정" id="apc-W5-RmD"/>
                     <connections>
+                        <outlet property="checkLabel" destination="tTO-O2-L5r" id="8ee-SY-EKg"/>
                         <outlet property="closeBtn" destination="DOO-QT-WC0" id="MIc-YS-vpQ"/>
                         <outlet property="nameTextField" destination="RDu-XR-bje" id="Qeg-oH-bgy"/>
                         <outlet property="profileIMG" destination="O5p-fs-F21" id="vcT-WW-Emr"/>

@@ -1,39 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="cw7-pD-xB0">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="cw7-pD-xB0">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--InitVC-->
-        <scene sceneID="jRQ-U7-b5a">
-            <objects>
-                <viewController storyboardIdentifier="InitVC" id="w28-RG-d1X" customClass="InitVC" customModule="NUTEE" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="9Ng-Df-7LX">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NUTEE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CTr-aj-YxA">
-                                <rect key="frame" x="158.5" y="100" width="97" height="36"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <constraints>
-                            <constraint firstItem="CTr-aj-YxA" firstAttribute="centerY" secondItem="NYQ-MA-Bm4" secondAttribute="centerY" constant="-335" id="5dh-OC-Yhq"/>
-                            <constraint firstItem="CTr-aj-YxA" firstAttribute="centerX" secondItem="NYQ-MA-Bm4" secondAttribute="centerX" id="alX-UM-hlM"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="NYQ-MA-Bm4"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="xOa-ce-Kxv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-546" y="-737"/>
-        </scene>
         <!--LoginVC-->
         <scene sceneID="Xn1-b8-PNn">
             <objects>
@@ -72,7 +45,7 @@
                                     <constraint firstAttribute="height" constant="66" id="R2n-cP-5ur"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="11"/>
-                                <state key="normal" title="아이디혹은 비밀번호를 잊으셨나요??"/>
+                                <state key="normal" title="아이디 혹은 비밀번호를 잊으셨나요?"/>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c38-Mv-f1s">
                                 <rect key="frame" x="309" y="607" width="80" height="1"/>
@@ -114,11 +87,8 @@
                                 </constraints>
                                 <state key="normal" title=" 로그인 유지"/>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NUTEE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ihg-p7-k48">
-                                <rect key="frame" x="158.5" y="84" width="97" height="36"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="97" id="XsT-1A-AuM"/>
-                                </constraints>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NUTEE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ihg-p7-k48">
+                                <rect key="frame" x="0.0" y="84" width="414" height="36"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -159,6 +129,7 @@
                             <constraint firstItem="OFS-Ac-HML" firstAttribute="leading" secondItem="nSB-gz-6EH" secondAttribute="leading" constant="24" id="KZn-Zh-bvf"/>
                             <constraint firstItem="nSB-gz-6EH" firstAttribute="trailing" secondItem="Nvs-Lb-0MU" secondAttribute="trailing" constant="24" id="NFy-D0-HNG"/>
                             <constraint firstItem="nSB-gz-6EH" firstAttribute="trailing" secondItem="gRc-1i-Prm" secondAttribute="trailing" constant="24" id="ObN-I0-NUF"/>
+                            <constraint firstItem="nSB-gz-6EH" firstAttribute="trailing" secondItem="Ihg-p7-k48" secondAttribute="trailing" id="P4O-bI-Bx9"/>
                             <constraint firstItem="W6u-TN-p4k" firstAttribute="top" secondItem="Nvs-Lb-0MU" secondAttribute="bottom" constant="8" id="PnL-ea-O15"/>
                             <constraint firstItem="gRc-1i-Prm" firstAttribute="leading" secondItem="nSB-gz-6EH" secondAttribute="leading" constant="24" id="T0R-mJ-BUw"/>
                             <constraint firstItem="np8-fD-ylu" firstAttribute="top" secondItem="OFS-Ac-HML" secondAttribute="bottom" constant="8.6666666666666856" id="Uay-8b-f7p"/>
@@ -171,6 +142,7 @@
                             <constraint firstItem="W6u-TN-p4k" firstAttribute="centerY" secondItem="nSB-gz-6EH" secondAttribute="centerY" constant="50.166666666666686" id="gmG-Uk-0k7"/>
                             <constraint firstItem="Ihg-p7-k48" firstAttribute="top" secondItem="nSB-gz-6EH" secondAttribute="top" constant="40" id="hgE-Mi-a6W"/>
                             <constraint firstItem="arN-Q6-REF" firstAttribute="leading" secondItem="nSB-gz-6EH" secondAttribute="leading" constant="112" id="lAN-hx-d4W"/>
+                            <constraint firstItem="Ihg-p7-k48" firstAttribute="leading" secondItem="nSB-gz-6EH" secondAttribute="leading" id="nFS-1b-uiP"/>
                             <constraint firstItem="Ihg-p7-k48" firstAttribute="centerX" secondItem="nSB-gz-6EH" secondAttribute="centerX" id="ogG-Em-NyN"/>
                             <constraint firstItem="nSB-gz-6EH" firstAttribute="trailing" secondItem="W6u-TN-p4k" secondAttribute="trailing" constant="24" id="t23-dL-qTx"/>
                             <constraint firstItem="arN-Q6-REF" firstAttribute="top" secondItem="W6u-TN-p4k" secondAttribute="bottom" constant="60.999999999999943" id="vgb-mQ-YAh"/>
