@@ -15,11 +15,7 @@
 		5E05AD7623DB0F1E00E36AD4 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E05AD7523DB0F1E00E36AD4 /* UIImageView+Extension.swift */; };
 		5E05AD7823DB104600E36AD4 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E05AD7723DB104600E36AD4 /* UIView+Extension.swift */; };
 		5E05AD7A23DB1AC500E36AD4 /* NetworkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E05AD7923DB1AC500E36AD4 /* NetworkResult.swift */; };
-		5E05AD7D23DEA5FB00E36AD4 /* MyChatTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E05AD7B23DEA5FB00E36AD4 /* MyChatTVC.swift */; };
-		5E05AD7E23DEA5FB00E36AD4 /* MyChatTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E05AD7C23DEA5FB00E36AD4 /* MyChatTVC.xib */; };
 		5E0E6A6023E7345F00FBC15F /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0E6A5F23E7345F00FBC15F /* Date+Extension.swift */; };
-		5E0E6A6323E7349600FBC15F /* YourChatTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0E6A6123E7349600FBC15F /* YourChatTVC.swift */; };
-		5E0E6A6423E7349600FBC15F /* YourChatTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E0E6A6223E7349600FBC15F /* YourChatTVC.xib */; };
 		5E0E6A6F23E73CC800FBC15F /* Post.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E0E6A6E23E73CC800FBC15F /* Post.storyboard */; };
 		5E0E6A7223E73ECE00FBC15F /* PostVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0E6A7123E73ECE00FBC15F /* PostVC.swift */; };
 		5E1752F2242124B900013D55 /* Splash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1752F1242124B900013D55 /* Splash.swift */; };
@@ -44,10 +40,9 @@
 		5E37CAA423E97D3700C0E2A8 /* FindVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E37CAA323E97D3700C0E2A8 /* FindVC.swift */; };
 		5E37CAA623E97DC800C0E2A8 /* SignUp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E37CAA523E97DC800C0E2A8 /* SignUp.storyboard */; };
 		5E37CAAA23E97DDA00C0E2A8 /* Find.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E37CAA923E97DDA00C0E2A8 /* Find.storyboard */; };
-		5E37CAB023E9900B00C0E2A8 /* Cafeteria.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E37CAAF23E9900B00C0E2A8 /* Cafeteria.storyboard */; };
-		5E37CAB323E9903500C0E2A8 /* CafeteriaVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E37CAB223E9903500C0E2A8 /* CafeteriaVC.swift */; };
+		5E4203E724631092002B0066 /* NoticeTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4203E524631092002B0066 /* NoticeTVC.swift */; };
+		5E4203E824631092002B0066 /* NoticeTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E4203E624631092002B0066 /* NoticeTVC.xib */; };
 		5E4A2B3D2450281E00BDFA4B /* PictureCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4A2B3C2450281E00BDFA4B /* PictureCVC.swift */; };
-		5E54303D23F44170004FF2FB /* InitVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E54303C23F44170004FF2FB /* InitVC.swift */; };
 		5E6BC49B243B220900F33053 /* DetailHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E6BC49A243B220900F33053 /* DetailHeaderView.xib */; };
 		5E6BC49D243B2A1700F33053 /* DetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6BC49C243B2A1700F33053 /* DetailHeaderView.swift */; };
 		5E796733244F1DEA0053974F /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E796732244F1DEA0053974F /* Model.swift */; };
@@ -58,12 +53,6 @@
 		5E93A7292415724200C9C811 /* ScholarshipVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E93A7282415724200C9C811 /* ScholarshipVC.swift */; };
 		5E93A72B2415725C00C9C811 /* GeneralVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E93A72A2415725C00C9C811 /* GeneralVC.swift */; };
 		5E93A72D2415727900C9C811 /* EventVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E93A72C2415727900C9C811 /* EventVC.swift */; };
-		5E93A72F2415774400C9C811 /* BachelorTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E93A72E2415774400C9C811 /* BachelorTVC.swift */; };
-		5E93A7312415775300C9C811 /* ClassTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E93A7302415775300C9C811 /* ClassTVC.swift */; };
-		5E93A7332415775F00C9C811 /* ExchangeTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E93A7322415775F00C9C811 /* ExchangeTVC.swift */; };
-		5E93A7352415776C00C9C811 /* ScholarTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E93A7342415776C00C9C811 /* ScholarTVC.swift */; };
-		5E93A7372415777A00C9C811 /* GeneralTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E93A7362415777A00C9C811 /* GeneralTVC.swift */; };
-		5E93A7392415778C00C9C811 /* EventTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E93A7382415778C00C9C811 /* EventTVC.swift */; };
 		5E95CD6423EF30180090C39B /* FollowerTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E95CD6323EF30180090C39B /* FollowerTVC.swift */; };
 		5E95CD6623EF30280090C39B /* FollowingTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E95CD6523EF30280090C39B /* FollowingTVC.swift */; };
 		5E95CD6823EF35280090C39B /* SettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E95CD6723EF35280090C39B /* SettingVC.swift */; };
@@ -74,7 +63,6 @@
 		5EA5C68623F1470B00BFB32B /* IDVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA5C68523F1470B00BFB32B /* IDVC.swift */; };
 		5EA5C68823F1472200BFB32B /* NameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA5C68723F1472200BFB32B /* NameVC.swift */; };
 		5EA5C68A23F1475000BFB32B /* PassWordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA5C68923F1475000BFB32B /* PassWordVC.swift */; };
-		5EB7415323F18AEE006AE529 /* CafeteriaTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB7415223F18AEE006AE529 /* CafeteriaTVC.swift */; };
 		5EC02EC92437298900580194 /* FeedTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC02EC72437298900580194 /* FeedTVC.swift */; };
 		5EC02ECA2437298900580194 /* FeedTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5EC02EC82437298900580194 /* FeedTVC.xib */; };
 		5EC02ECD24372C6D00580194 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC02ECC24372C6D00580194 /* Font.swift */; };
@@ -103,11 +91,9 @@
 		D59718A923CEA98400117906 /* NewsFeedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59718A323CEA98300117906 /* NewsFeedVC.swift */; };
 		D59718AA23CEA98400117906 /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59718A423CEA98300117906 /* ProfileVC.swift */; };
 		D59718AB23CEA98400117906 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59718A523CEA98300117906 /* LoginVC.swift */; };
-		D59718AD23CEA98400117906 /* ChattingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59718A723CEA98300117906 /* ChattingVC.swift */; };
 		D59718B523CEA9DA00117906 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D59718B023CEA9D900117906 /* Login.storyboard */; };
 		D59718B623CEA9DA00117906 /* NoticeBoard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D59718B123CEA9DA00117906 /* NoticeBoard.storyboard */; };
 		D59718B723CEA9DA00117906 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D59718B223CEA9DA00117906 /* Profile.storyboard */; };
-		D59718B823CEA9DA00117906 /* Chatting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D59718B323CEA9DA00117906 /* Chatting.storyboard */; };
 		D5DAA88F23E7EF2E0052E17B /* ReplyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5DAA88C23E7EF2E0052E17B /* ReplyCell.swift */; };
 		D5DAA89023E7EF2E0052E17B /* HeaderNewsFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5DAA88D23E7EF2E0052E17B /* HeaderNewsFeedView.swift */; };
 		D5DAA89423E7F0C70052E17B /* HeaderNewsFeedView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5DAA89223E7F0C60052E17B /* HeaderNewsFeedView.xib */; };
@@ -148,11 +134,7 @@
 		5E05AD7523DB0F1E00E36AD4 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 		5E05AD7723DB104600E36AD4 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		5E05AD7923DB1AC500E36AD4 /* NetworkResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResult.swift; sourceTree = "<group>"; };
-		5E05AD7B23DEA5FB00E36AD4 /* MyChatTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyChatTVC.swift; sourceTree = "<group>"; };
-		5E05AD7C23DEA5FB00E36AD4 /* MyChatTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyChatTVC.xib; sourceTree = "<group>"; };
 		5E0E6A5F23E7345F00FBC15F /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
-		5E0E6A6123E7349600FBC15F /* YourChatTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YourChatTVC.swift; sourceTree = "<group>"; };
-		5E0E6A6223E7349600FBC15F /* YourChatTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YourChatTVC.xib; sourceTree = "<group>"; };
 		5E0E6A6E23E73CC800FBC15F /* Post.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Post.storyboard; sourceTree = "<group>"; };
 		5E0E6A7123E73ECE00FBC15F /* PostVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostVC.swift; sourceTree = "<group>"; };
 		5E1752F1242124B900013D55 /* Splash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Splash.swift; sourceTree = "<group>"; };
@@ -179,10 +161,9 @@
 		5E37CAA323E97D3700C0E2A8 /* FindVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindVC.swift; sourceTree = "<group>"; };
 		5E37CAA523E97DC800C0E2A8 /* SignUp.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SignUp.storyboard; sourceTree = "<group>"; };
 		5E37CAA923E97DDA00C0E2A8 /* Find.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Find.storyboard; sourceTree = "<group>"; };
-		5E37CAAF23E9900B00C0E2A8 /* Cafeteria.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Cafeteria.storyboard; sourceTree = "<group>"; };
-		5E37CAB223E9903500C0E2A8 /* CafeteriaVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeteriaVC.swift; sourceTree = "<group>"; };
+		5E4203E524631092002B0066 /* NoticeTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeTVC.swift; sourceTree = "<group>"; };
+		5E4203E624631092002B0066 /* NoticeTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoticeTVC.xib; sourceTree = "<group>"; };
 		5E4A2B3C2450281E00BDFA4B /* PictureCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PictureCVC.swift; sourceTree = "<group>"; };
-		5E54303C23F44170004FF2FB /* InitVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitVC.swift; sourceTree = "<group>"; };
 		5E6BC49A243B220900F33053 /* DetailHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailHeaderView.xib; sourceTree = "<group>"; };
 		5E6BC49C243B2A1700F33053 /* DetailHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailHeaderView.swift; sourceTree = "<group>"; };
 		5E796732244F1DEA0053974F /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
@@ -193,12 +174,6 @@
 		5E93A7282415724200C9C811 /* ScholarshipVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScholarshipVC.swift; sourceTree = "<group>"; };
 		5E93A72A2415725C00C9C811 /* GeneralVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralVC.swift; sourceTree = "<group>"; };
 		5E93A72C2415727900C9C811 /* EventVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventVC.swift; sourceTree = "<group>"; };
-		5E93A72E2415774400C9C811 /* BachelorTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BachelorTVC.swift; sourceTree = "<group>"; };
-		5E93A7302415775300C9C811 /* ClassTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassTVC.swift; sourceTree = "<group>"; };
-		5E93A7322415775F00C9C811 /* ExchangeTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeTVC.swift; sourceTree = "<group>"; };
-		5E93A7342415776C00C9C811 /* ScholarTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScholarTVC.swift; sourceTree = "<group>"; };
-		5E93A7362415777A00C9C811 /* GeneralTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralTVC.swift; sourceTree = "<group>"; };
-		5E93A7382415778C00C9C811 /* EventTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTVC.swift; sourceTree = "<group>"; };
 		5E95CD6323EF30180090C39B /* FollowerTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerTVC.swift; sourceTree = "<group>"; };
 		5E95CD6523EF30280090C39B /* FollowingTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingTVC.swift; sourceTree = "<group>"; };
 		5E95CD6723EF35280090C39B /* SettingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingVC.swift; sourceTree = "<group>"; };
@@ -209,7 +184,6 @@
 		5EA5C68523F1470B00BFB32B /* IDVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDVC.swift; sourceTree = "<group>"; };
 		5EA5C68723F1472200BFB32B /* NameVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameVC.swift; sourceTree = "<group>"; };
 		5EA5C68923F1475000BFB32B /* PassWordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassWordVC.swift; sourceTree = "<group>"; };
-		5EB7415223F18AEE006AE529 /* CafeteriaTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeteriaTVC.swift; sourceTree = "<group>"; };
 		5EC02EC72437298900580194 /* FeedTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedTVC.swift; sourceTree = "<group>"; };
 		5EC02EC82437298900580194 /* FeedTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeedTVC.xib; sourceTree = "<group>"; };
 		5EC02ECC24372C6D00580194 /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
@@ -237,11 +211,9 @@
 		D59718A323CEA98300117906 /* NewsFeedVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsFeedVC.swift; sourceTree = "<group>"; };
 		D59718A423CEA98300117906 /* ProfileVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
 		D59718A523CEA98300117906 /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
-		D59718A723CEA98300117906 /* ChattingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChattingVC.swift; sourceTree = "<group>"; };
 		D59718B023CEA9D900117906 /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		D59718B123CEA9DA00117906 /* NoticeBoard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = NoticeBoard.storyboard; sourceTree = "<group>"; };
 		D59718B223CEA9DA00117906 /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
-		D59718B323CEA9DA00117906 /* Chatting.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Chatting.storyboard; sourceTree = "<group>"; };
 		D5DAA88C23E7EF2E0052E17B /* ReplyCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReplyCell.swift; sourceTree = "<group>"; };
 		D5DAA88D23E7EF2E0052E17B /* HeaderNewsFeedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderNewsFeedView.swift; sourceTree = "<group>"; };
 		D5DAA89223E7F0C60052E17B /* HeaderNewsFeedView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HeaderNewsFeedView.xib; sourceTree = "<group>"; };
@@ -264,18 +236,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		5E05AD7F23DEC1D600E36AD4 /* Chat */ = {
-			isa = PBXGroup;
-			children = (
-				D59718A723CEA98300117906 /* ChattingVC.swift */,
-				5E05AD7B23DEA5FB00E36AD4 /* MyChatTVC.swift */,
-				5E05AD7C23DEA5FB00E36AD4 /* MyChatTVC.xib */,
-				5E0E6A6123E7349600FBC15F /* YourChatTVC.swift */,
-				5E0E6A6223E7349600FBC15F /* YourChatTVC.xib */,
-			);
-			path = Chat;
-			sourceTree = "<group>";
-		};
 		5E0E6A6523E734D600FBC15F /* Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -301,14 +261,6 @@
 				D59718B123CEA9DA00117906 /* NoticeBoard.storyboard */,
 			);
 			path = Notice;
-			sourceTree = "<group>";
-		};
-		5E0E6A6A23E73C2D00FBC15F /* Chat */ = {
-			isa = PBXGroup;
-			children = (
-				D59718B323CEA9DA00117906 /* Chatting.storyboard */,
-			);
-			path = Chat;
 			sourceTree = "<group>";
 		};
 		5E0E6A6B23E73C3200FBC15F /* Profile */ = {
@@ -412,15 +364,12 @@
 			isa = PBXGroup;
 			children = (
 				5EC02ED524376B4100580194 /* Search */,
-				5E37CAB123E9901E00C0E2A8 /* Cafeteria */,
 				5E37CAAB23E9866D00C0E2A8 /* Profile */,
 				5E0E6A7023E73EA500FBC15F /* Post */,
 				5E0E6A6623E7381300FBC15F /* Notice */,
 				5E0E6A6523E734D600FBC15F /* Login */,
 				D519844323E325C2001AB351 /* NewsFeed */,
-				5E05AD7F23DEC1D600E36AD4 /* Chat */,
 				5E37CA9D23E97B0600C0E2A8 /* TBC.swift */,
-				5E54303C23F44170004FF2FB /* InitVC.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -485,11 +434,9 @@
 			children = (
 				5EC02ECE2437626600580194 /* Search */,
 				5E79C0C323EC6AB400BD2FB3 /* Util */,
-				5E37CAAE23E98FB000C0E2A8 /* Cafeteria */,
 				5E0E6A6D23E73CBD00FBC15F /* Post */,
 				5E0E6A6C23E73C3B00FBC15F /* Login */,
 				5E0E6A6B23E73C3200FBC15F /* Profile */,
-				5E0E6A6A23E73C2D00FBC15F /* Chat */,
 				5E0E6A6923E73C2700FBC15F /* Notice */,
 				D519843B23E32402001AB351 /* NewsFeed */,
 				D5EBD78323CFE69F00C2B7F5 /* Main.storyboard */,
@@ -518,23 +465,6 @@
 			path = Profile;
 			sourceTree = "<group>";
 		};
-		5E37CAAE23E98FB000C0E2A8 /* Cafeteria */ = {
-			isa = PBXGroup;
-			children = (
-				5E37CAAF23E9900B00C0E2A8 /* Cafeteria.storyboard */,
-			);
-			path = Cafeteria;
-			sourceTree = "<group>";
-		};
-		5E37CAB123E9901E00C0E2A8 /* Cafeteria */ = {
-			isa = PBXGroup;
-			children = (
-				5E37CAB223E9903500C0E2A8 /* CafeteriaVC.swift */,
-				5EB7415223F18AEE006AE529 /* CafeteriaTVC.swift */,
-			);
-			path = Cafeteria;
-			sourceTree = "<group>";
-		};
 		5E79C0C323EC6AB400BD2FB3 /* Util */ = {
 			isa = PBXGroup;
 			children = (
@@ -550,17 +480,13 @@
 			isa = PBXGroup;
 			children = (
 				5E93A7222415720E00C9C811 /* BachelorVC.swift */,
-				5E93A72E2415774400C9C811 /* BachelorTVC.swift */,
 				5E93A7242415721F00C9C811 /* ClassVC.swift */,
-				5E93A7302415775300C9C811 /* ClassTVC.swift */,
 				5E93A7262415723200C9C811 /* ExchangeVC.swift */,
-				5E93A7322415775F00C9C811 /* ExchangeTVC.swift */,
 				5E93A7282415724200C9C811 /* ScholarshipVC.swift */,
-				5E93A7342415776C00C9C811 /* ScholarTVC.swift */,
 				5E93A72A2415725C00C9C811 /* GeneralVC.swift */,
-				5E93A7362415777A00C9C811 /* GeneralTVC.swift */,
 				5E93A72C2415727900C9C811 /* EventVC.swift */,
-				5E93A7382415778C00C9C811 /* EventTVC.swift */,
+				5E4203E524631092002B0066 /* NoticeTVC.swift */,
+				5E4203E624631092002B0066 /* NoticeTVC.xib */,
 			);
 			path = NoticeView;
 			sourceTree = "<group>";
@@ -640,10 +566,10 @@
 		D519844323E325C2001AB351 /* NewsFeed */ = {
 			isa = PBXGroup;
 			children = (
+				D591156D23FD06E1004E6A75 /* DetailNewsFeed */,
 				5EC02EC62437296700580194 /* Cell */,
 				D59718A323CEA98300117906 /* NewsFeedVC.swift */,
 				D59718A123CEA96700117906 /* NewsFeedCell.swift */,
-				D591156D23FD06E1004E6A75 /* DetailNewsFeed */,
 			);
 			path = NewsFeed;
 			sourceTree = "<group>";
@@ -739,17 +665,14 @@
 				5E0E6A6F23E73CC800FBC15F /* Post.storyboard in Resources */,
 				D59718B723CEA9DA00117906 /* Profile.storyboard in Resources */,
 				5E6BC49B243B220900F33053 /* DetailHeaderView.xib in Resources */,
+				5E4203E824631092002B0066 /* NoticeTVC.xib in Resources */,
 				D59718B523CEA9DA00117906 /* Login.storyboard in Resources */,
-				5E37CAB023E9900B00C0E2A8 /* Cafeteria.storyboard in Resources */,
 				5E21444623C2F8560053CFB9 /* Assets.xcassets in Resources */,
-				5E0E6A6423E7349600FBC15F /* YourChatTVC.xib in Resources */,
-				5E05AD7E23DEA5FB00E36AD4 /* MyChatTVC.xib in Resources */,
 				5EC02ED4243769DE00580194 /* ProfileTVC.xib in Resources */,
 				5EC02ECA2437298900580194 /* FeedTVC.xib in Resources */,
 				5E2BDCC02403903700CE99A7 /* ProflieTableViewCell.xib in Resources */,
 				5EC02ED02437628200580194 /* Search.storyboard in Resources */,
 				5E37CAA623E97DC800C0E2A8 /* SignUp.storyboard in Resources */,
-				D59718B823CEA9DA00117906 /* Chatting.storyboard in Resources */,
 				D59718B623CEA9DA00117906 /* NoticeBoard.storyboard in Resources */,
 				5E37CAAA23E97DDA00C0E2A8 /* Find.storyboard in Resources */,
 				5ED1558524228E88004DCE02 /* PopUp.storyboard in Resources */,
@@ -807,13 +730,11 @@
 			files = (
 				5E95CD6823EF35280090C39B /* SettingVC.swift in Sources */,
 				5E6BC49D243B2A1700F33053 /* DetailHeaderView.swift in Sources */,
-				5E93A7332415775F00C9C811 /* ExchangeTVC.swift in Sources */,
 				5E93A72B2415725C00C9C811 /* GeneralVC.swift in Sources */,
 				5EA5C68823F1472200BFB32B /* NameVC.swift in Sources */,
 				D5F651D12407DF4C00263A34 /* FollowList.swift in Sources */,
 				D59718A923CEA98400117906 /* NewsFeedVC.swift in Sources */,
 				5E3560E623EC11F1002B8C87 /* FollowingVC.swift in Sources */,
-				5E93A72F2415774400C9C811 /* BachelorTVC.swift in Sources */,
 				5E2BDCBA24038F7300CE99A7 /* UserService.swift in Sources */,
 				5E93A7252415721F00C9C811 /* ClassVC.swift in Sources */,
 				5E95CD6A23EF36230090C39B /* ToPostVC.swift in Sources */,
@@ -821,10 +742,8 @@
 				D5DAA88F23E7EF2E0052E17B /* ReplyCell.swift in Sources */,
 				5E05AD7423DB0F0200E36AD4 /* UIButton+Extension.swift in Sources */,
 				5EA5C68623F1470B00BFB32B /* IDVC.swift in Sources */,
-				5E93A7392415778C00C9C811 /* EventTVC.swift in Sources */,
 				5E95CD6423EF30180090C39B /* FollowerTVC.swift in Sources */,
 				5E3560E423EC11E3002B8C87 /* FollowerVC.swift in Sources */,
-				5E93A7352415776C00C9C811 /* ScholarTVC.swift in Sources */,
 				5E05AD7623DB0F1E00E36AD4 /* UIImageView+Extension.swift in Sources */,
 				D59718AB23CEA98400117906 /* LoginVC.swift in Sources */,
 				5E93A7232415720E00C9C811 /* BachelorVC.swift in Sources */,
@@ -836,7 +755,6 @@
 				5ED3DFB7244C450100B34D20 /* TermsVC.swift in Sources */,
 				5EA5C68A23F1475000BFB32B /* PassWordVC.swift in Sources */,
 				D53F61F82403C3F200C8EE38 /* PostContent.swift in Sources */,
-				5E0E6A6323E7349600FBC15F /* YourChatTVC.swift in Sources */,
 				5E2BDCB524038F0300CE99A7 /* SignUp.swift in Sources */,
 				D5DAA89023E7EF2E0052E17B /* HeaderNewsFeedView.swift in Sources */,
 				5EC02ECD24372C6D00580194 /* Font.swift in Sources */,
@@ -847,31 +765,25 @@
 				D5F651CF2407B46500263A34 /* FollowService.swift in Sources */,
 				5E0E6A7223E73ECE00FBC15F /* PostVC.swift in Sources */,
 				5EC02EC92437298900580194 /* FeedTVC.swift in Sources */,
-				5EB7415323F18AEE006AE529 /* CafeteriaTVC.swift in Sources */,
 				5E93A7272415723200C9C811 /* ExchangeVC.swift in Sources */,
-				5E05AD7D23DEA5FB00E36AD4 /* MyChatTVC.swift in Sources */,
-				D59718AD23CEA98400117906 /* ChattingVC.swift in Sources */,
 				5E21443D23C2F8500053CFB9 /* AppDelegate.swift in Sources */,
 				5EC02ED9243775DF00580194 /* SearchResultVC.swift in Sources */,
 				5ED93D78242A7A3400CE6D3F /* PopUpVC.swift in Sources */,
 				D59718AA23CEA98400117906 /* ProfileVC.swift in Sources */,
 				5E37CAA423E97D3700C0E2A8 /* FindVC.swift in Sources */,
-				5E37CAB323E9903500C0E2A8 /* CafeteriaVC.swift in Sources */,
 				5E05AD7A23DB1AC500E36AD4 /* NetworkResult.swift in Sources */,
 				5E05AD7223DB0EEA00E36AD4 /* UITextView+Extension.swift in Sources */,
 				D597189E23CEA79100117906 /* NoticeBoardVC.swift in Sources */,
 				5E4A2B3D2450281E00BDFA4B /* PictureCVC.swift in Sources */,
 				5E05AD7823DB104600E36AD4 /* UIView+Extension.swift in Sources */,
 				5E21443F23C2F8500053CFB9 /* SceneDelegate.swift in Sources */,
-				5E93A7372415777A00C9C811 /* GeneralTVC.swift in Sources */,
 				D55E94EF240A92F6009F738C /* UserPostContent.swift in Sources */,
 				5E93A72D2415727900C9C811 /* EventVC.swift in Sources */,
+				5E4203E724631092002B0066 /* NoticeTVC.swift in Sources */,
 				D53F61FA2403C5E200C8EE38 /* ContentService.swift in Sources */,
 				5EC02ED2243765E400580194 /* ProfileTVC.swift in Sources */,
 				5E37CA9C23E9765600C0E2A8 /* PostIMGCVC.swift in Sources */,
-				5E54303D23F44170004FF2FB /* InitVC.swift in Sources */,
 				5EA5C68023F02C9200BFB32B /* String+Extension.swift in Sources */,
-				5E93A7312415775300C9C811 /* ClassTVC.swift in Sources */,
 				5E93A7292415724200C9C811 /* ScholarshipVC.swift in Sources */,
 				D59718A223CEA96700117906 /* NewsFeedCell.swift in Sources */,
 				5ED3DFBB244C4A3F00B34D20 /* OurInfoTVC.swift in Sources */,
@@ -1035,7 +947,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.3;
+				MARKETING_VERSION = 1.0.4;
 				PRODUCT_BUNDLE_IDENTIFIER = kr.nutee;
 				PRODUCT_NAME = NUTEE;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1059,7 +971,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.3;
+				MARKETING_VERSION = 1.0.4;
 				PRODUCT_BUNDLE_IDENTIFIER = kr.nutee;
 				PRODUCT_NAME = NUTEE;
 				PROVISIONING_PROFILE_SPECIFIER = "";

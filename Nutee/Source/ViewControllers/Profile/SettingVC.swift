@@ -117,7 +117,7 @@ class SettingVC: UIViewController {
     }
     
     @objc func logout(){
-        simpleAlertWithHandler(title: "로그아웃", msg: "하시겠습니까??") { (action) in
+        simpleAlertWithHandler(title: "로그아웃 하시겠습니까?", msg: "") { (action) in
             LoadingHUD.show()
             self.signOutService()
         }

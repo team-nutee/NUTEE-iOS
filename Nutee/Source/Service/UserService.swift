@@ -521,7 +521,10 @@ struct UserService {
     
     func checkNick(_ nick: String, completion: @escaping (NetworkResult<Any>) -> Void) {
         
+        
         let URL = APIConstants.NickCheck
+        print(URL)
+        
         let headers: HTTPHeaders = [
             "Content-Type": "application/json"
         ]
@@ -539,11 +542,15 @@ struct UserService {
             case .success:
                 // parameter 위치
                 if let status = response.response?.statusCode {
+                    print(status)
+                    print(body)
                     switch status {
                     case 200:
                         completion(.success(200))
+                    case 401:
+                        completion(.requestErr("현재 로그인 중입니다."))
                     case 409:
-                        completion(.requestErr(409))
+                        completion(.requestErr("이미 사용중인 닉네임입니다."))
                     case 500:
                         completion(.serverErr)
                     default:
