@@ -47,7 +47,7 @@
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="내용을 입력해주세요" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9BJ-Yg-92Y">
-                                                <rect key="frame" x="29" y="29" width="361" height="18"/>
+                                                <rect key="frame" x="29" y="30" width="361" height="18"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <color key="textColor" red="0.69013684990000002" green="0.69023543600000004" blue="0.69010573630000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -100,7 +100,7 @@
                                             <constraint firstAttribute="trailing" secondItem="9BJ-Yg-92Y" secondAttribute="trailing" constant="24" id="Nj6-oM-AQK"/>
                                             <constraint firstItem="fET-w1-DKH" firstAttribute="leading" secondItem="EeZ-Kg-LiA" secondAttribute="leading" constant="24" id="TvQ-7W-Dwx"/>
                                             <constraint firstItem="9BJ-Yg-92Y" firstAttribute="leading" secondItem="EeZ-Kg-LiA" secondAttribute="leading" constant="29" id="XZB-fh-Nlo"/>
-                                            <constraint firstItem="9BJ-Yg-92Y" firstAttribute="top" secondItem="EeZ-Kg-LiA" secondAttribute="top" constant="29" id="ZTP-zJ-F31"/>
+                                            <constraint firstItem="9BJ-Yg-92Y" firstAttribute="top" secondItem="EeZ-Kg-LiA" secondAttribute="top" constant="30" id="ZTP-zJ-F31"/>
                                             <constraint firstAttribute="trailing" secondItem="POb-9S-SR8" secondAttribute="trailing" constant="24" id="e4r-Xt-vOm"/>
                                             <constraint firstItem="fET-w1-DKH" firstAttribute="top" secondItem="EeZ-Kg-LiA" secondAttribute="top" constant="23" id="qxl-UT-Kyb"/>
                                             <constraint firstItem="POb-9S-SR8" firstAttribute="leading" secondItem="EeZ-Kg-LiA" secondAttribute="leading" constant="24" id="zBj-rH-zZV"/>
