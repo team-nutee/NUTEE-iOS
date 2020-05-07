@@ -25,11 +25,12 @@ extension UIViewController {
     // 예 버튼을 누를때 핸들러로 핸들링하는 Alert with cancel
     func simpleAlertWithHandler(title: String, msg: String?, handler: ((UIAlertAction) -> Void)?) {
         let alert = UIAlertController(title: title, message: msg, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "예", style: .cancel, handler: handler)
-        let noAction = UIAlertAction(title: "아니오", style: .default)
+        let okAction = UIAlertAction(title: "아니오", style: .default)
+        let noAction = UIAlertAction(title: "예", style: .destructive, handler: handler)
         
-        alert.addAction(noAction)
         alert.addAction(okAction)
+        alert.addAction(noAction)
+        
         self.present(alert, animated: true)
     }
     
