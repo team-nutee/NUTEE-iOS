@@ -104,8 +104,14 @@ class PostVC: UIViewController {
         var str = postingTextView.text.replacingOccurrences(of: " ", with: "")
         str = str.replacingOccurrences(of: "\n", with: "")
         // 빈칸이나 줄바꿈으로만 입력된 경우 포스팅 창 바로 나가기
-        if str.count != 0 {
-            simpleAlertWithHandler(title: "작성을 취소하시겠습니까?", msg: "") { (action) in
+        if pickedIMG.count != 0 || editPostImg.count > 1 || str.count != 0 {
+            var title = ""
+            if isEditMode == true {
+                title = "수정을 취소하시겠습니까?"
+            } else {
+                title = "작성을 취소하시겠습니까?"
+            }
+            simpleAlertWithHandler(title: title, msg: "") { (action) in
                 self.setDefault()
                 self.dismiss(animated: true, completion: nil)
             }
@@ -382,13 +388,13 @@ extension PostVC : UICollectionViewDataSource {
                 postBtn.isEnabled = false
             }
         } else {
+            postBtn.isEnabled = true
+            
             if editPostImg.count >= 1 && indexPath.row < editPostImg.count {
                 cell.postIMG.setImageNutee(editNewsPost?.images[indexPath.row].src ?? "")
-                postBtn.isEnabled = true
             } else {
                 let fixIndex = Int(indexPath.row) - (editPostImg.count)
                 cell.postIMG.image = pickedIMG[fixIndex]
-                postBtn.isEnabled = true
             }
         }
         
@@ -419,7 +425,7 @@ extension PostVC : UICollectionViewDataSource {
                 postBtn.isEnabled = true
             }
 
-            if (pickedIMG.count != 0 || editPostImg.count != 0 || str.count != 0 ){
+            if (pickedIMG.count != 0 || editPostImg.count != 0 || str.count != 0){
                 postBtn.isEnabled = true
             } else {
                 postBtn.isEnabled = false
