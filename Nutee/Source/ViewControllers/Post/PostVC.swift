@@ -55,8 +55,8 @@ class PostVC: UIViewController {
         imagePickerBtn.addTarget(self, action: #selector(showPicker), for: .touchUpInside)
         postBtn.addTarget(self, action: #selector(posting), for: .touchUpInside)
         
-        activePostBtn()
-        postBtn.isEnabled = false
+//        activePostBtn()
+//        postBtn.isEnabled = false
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -66,7 +66,7 @@ class PostVC: UIViewController {
         
         self.postingTextView.becomeFirstResponder()
         
-        self.postingTextView.placeholder = "내용을 입력해주세요"
+//        self.postingTextView.placeholder = "내용을 입력해주세요"
         
         textViewDidChange(postingTextView)
 
@@ -289,24 +289,30 @@ extension PostVC {
 
 extension PostVC: UITextViewDelegate {
     
-    func textView(_ textView: UITextView,
-                  shouldChangeTextIn range: NSRange,
-                  replacementText text: String) -> Bool {
-        if self.postingTextView.text != "" {
-            if pickedIMG.count != 0 || editPostImg.count != 0 {
-                self.postBtn.isEnabled = true
-            } else {
-                self.postBtn.isEnabled = true
-            }
-        } else {
-            if pickedIMG.count != 0 || editPostImg.count != 0 {
-                self.postBtn.isEnabled = true
-            } else {
-                self.postBtn.isEnabled = false
-            }
-        }
-        return true
-    }
+//    func textView(_ textView: UITextView,
+//                  shouldChangeTextIn range: NSRange,
+//                  replacementText text: String) -> Bool {
+//
+//        // 입력된 빈칸과 줄바꿈 개수 구하기
+//        var str = postingTextView.text.replacingOccurrences(of: " ", with: "")
+//        str = str.replacingOccurrences(of: "\n", with: "")
+//        // 빈칸이나 줄바꿈으로만 입력된 경우 버튼 비활성화
+//        if str.count == 0 {
+////            if pickedIMG.count != 0 || editPostImg.count != 0 {
+////                self.postBtn.isEnabled = true
+////            } else {
+//                self.postBtn.isEnabled = false
+////            }
+//        } else {
+////            if pickedIMG.count != 0 || editPostImg.count != 0 {
+//                self.postBtn.isEnabled = true
+////            } else {
+////                self.postBtn.isEnabled = false
+////            }
+//        }
+//
+//        return true
+//    }
     
     // TextView의 동적인 크기 변화를 위한 function
     func textViewDidChange(_ textView: UITextView) {
@@ -317,8 +323,34 @@ extension PostVC: UITextViewDelegate {
                 constraint.constant = estimatedSize.height
             }
         }
+        
+        // 입력된 빈칸과 줄바꿈 개수 구하기
+        var str = postingTextView.text.replacingOccurrences(of: " ", with: "")
+        str = str.replacingOccurrences(of: "\n", with: "")
+        // 빈칸이나 줄바꿈으로만 입력된 경우 버튼 비활성화
+        if pickedIMG.count != 0 || editPostImg.count > 1 || str.count != 0 {
+            self.postBtn.isEnabled = true
+        } else {
+            self.postBtn.isEnabled = false
+        }
     }
     
+    // PlaceHolder 따로 지정해주기(기존 것 사용시 충돌 일어남)
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if (textView.text == "") {
+            postingTextView.text = "내용을 입력해주세요"
+            textView.textColor = UIColor.lightGray
+        }
+        textView.resignFirstResponder()
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView){
+        if (postingTextView.text == "내용을 입력해주세요"){
+            textView.text = ""
+            textView.textColor = UIColor.black
+        }
+        textView.becomeFirstResponder()
+    }
 }
 
 // MARK: -UICollectionView
@@ -365,9 +397,13 @@ extension PostVC : UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
+        // 입력된 빈칸과 줄바꿈 개수 구하기
+        var str = postingTextView.text.replacingOccurrences(of: " ", with: "")
+        str = str.replacingOccurrences(of: "\n", with: "")
+        
         if isEditMode == false {
             pickedIMG.remove(at: indexPath.row)
-            if (pickedIMG.count != 0 || editPostImg.count > 1 || postingTextView.text != ""){
+            if (pickedIMG.count != 0 || editPostImg.count > 1 || str.count != 0){
                 postBtn.isEnabled = true
             } else {
                 postBtn.isEnabled = false
@@ -382,13 +418,13 @@ extension PostVC : UICollectionViewDataSource {
                 pickedIMG.remove(at: fixIndex)
                 postBtn.isEnabled = true
             }
-            
-            if (pickedIMG.count != 0 || editPostImg.count != 0 || postingTextView.text != "" ){
+
+            if (pickedIMG.count != 0 || editPostImg.count != 0 || str.count != 0 ){
                 postBtn.isEnabled = true
             } else {
                 postBtn.isEnabled = false
             }
-            
+
         }
         
         self.imageCV.reloadData()
