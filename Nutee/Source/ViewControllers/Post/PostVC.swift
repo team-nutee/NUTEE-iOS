@@ -21,6 +21,7 @@ class PostVC: UIViewController {
     @IBOutlet weak var closeBtn: UIButton!
     @IBOutlet weak var postBtn: UIButton!
     @IBOutlet weak var postingTextView: UITextView!
+    @IBOutlet weak var placeholderLabel: UILabel!
     @IBOutlet weak var imageCV: UICollectionView!
     @IBOutlet weak var imagePickerBtn: UIButton!
     @IBOutlet weak var imagePickerView: UIView!
@@ -338,6 +339,12 @@ extension PostVC: UITextViewDelegate {
             self.postBtn.isEnabled = true
         } else {
             self.postBtn.isEnabled = false
+        }
+        
+        if postingTextView.text != "" {
+            self.placeholderLabel.isHidden = true
+        } else {
+            self.placeholderLabel.isHidden = false
         }
     }
     
