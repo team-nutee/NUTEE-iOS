@@ -119,6 +119,7 @@
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                         <state key="normal" title="닫기"/>
                                         <connections>
+                                            <action selector="closePosting:" destination="tBh-TW-f1i" eventType="touchUpInside" id="doM-FU-J7C"/>
                                             <segue destination="kzk-fd-pCN" kind="unwind" unwindAction="unwindToOrigin:" id="yaf-Yf-ydm"/>
                                         </connections>
                                     </button>
