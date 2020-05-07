@@ -51,7 +51,7 @@ class PostVC: UIViewController {
         imageCV.delegate = self
         imageCV.dataSource = self
         
-        closeBtn.addTarget(self, action: #selector(closePosting), for: .touchUpInside)
+//        closeBtn.addTarget(self, action: #selector(closePosting), for: .touchUpInside)
         imagePickerBtn.addTarget(self, action: #selector(showPicker), for: .touchUpInside)
         postBtn.addTarget(self, action: #selector(posting), for: .touchUpInside)
         
@@ -99,6 +99,21 @@ class PostVC: UIViewController {
         postBtn.setTitle("수정", for: .normal)
     }
     
+    @IBAction func closePosting(_ sender: Any) {
+        // 입력된 빈칸과 줄바꿈 개수 구하기
+        var str = postingTextView.text.replacingOccurrences(of: " ", with: "")
+        str = str.replacingOccurrences(of: "\n", with: "")
+        // 빈칸이나 줄바꿈으로만 입력된 경우 포스팅 창 바로 나가기
+        if str.count != 0 {
+            simpleAlertWithHandler(title: "작성을 취소하시겠습니까?", msg: "") { (action) in
+                self.setDefault()
+                self.dismiss(animated: true, completion: nil)
+            }
+        } else {
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
+    
     @objc func closePosting() {
         simpleAlertWithHandler(title: "작성을 취소하시겠습니까?", msg: "") { (action) in
             self.setDefault()
@@ -109,7 +124,6 @@ class PostVC: UIViewController {
     @objc func posting(){
         
         LoadingHUD.show()
-        
         if isEditMode == false {
             // 사진이 있을때는 사진 올리고 게시물 업로드를 위한 분기처리
             if pickedIMG != [] {
