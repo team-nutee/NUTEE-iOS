@@ -115,7 +115,7 @@ class DetailHeaderView: UITableViewHeaderFooterView {
             (action: UIAlertAction) in
             let deleteAlert = UIAlertController(title: nil, message: "삭제하시겠습니까?", preferredStyle: UIAlertController.Style.alert)
             let cancelAction = UIAlertAction(title: "취소", style: .default, handler: nil)
-            let okAction = UIAlertAction(title: "확인", style: .default) {
+            let okAction = UIAlertAction(title: "삭제", style: .destructive) {
                 (action: UIAlertAction) in
                 // Code to delete
                 self.deletePost()
