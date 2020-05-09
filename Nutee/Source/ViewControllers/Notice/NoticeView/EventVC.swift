@@ -84,13 +84,12 @@ extension EventVC : UITableViewDataSource {
         let backgroundView = UIView()
         backgroundView.backgroundColor = .greenLighter
         cell.selectedBackgroundView = backgroundView
-        cell.textLabel?.text = notice[indexPath.row]
         
         if let url = URL(string: link[indexPath.row]) {
             UIApplication.shared.open(url)
         }
         
-        
+        eventTV.reloadData()
     }
     
 }

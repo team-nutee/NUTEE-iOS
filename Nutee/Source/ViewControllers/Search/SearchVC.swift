@@ -76,7 +76,11 @@ extension SearchVC : UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if textField.text != "" {
+        // 입력된 빈칸 감지하기
+        var str = textField.text
+        str = str?.replacingOccurrences(of: " ", with: "")
+        
+        if str?.count != 0 {
             search()
             searchTextField.resignFirstResponder()
         }

@@ -17,8 +17,8 @@ class NoticeTVC: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        isNoticeView.setRounded(radius: nil)
-        isNoticeView.backgroundColor = .greenLight
+//        isNoticeView.setRounded(radius: nil)
+//        isNoticeView.backgroundColor = .greenLight
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
