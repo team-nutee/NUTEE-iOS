@@ -39,6 +39,14 @@ extension UIImageView {
             setImage(with: APIConstants.BaseURL + "/"  + (urlString ?? ""))
         }
     }
+    
+    func setImageContentMode(_ urlString: String?, imgvw: ImageView){
+        if urlString == "" || urlString == nil {
+            imgvw.contentMode = .scaleAspectFit
+        } else {
+            imgvw.contentMode = .scaleAspectFill
+        }
+    }
 
     func setImage(with urlString: String) {
         let cache = ImageCache.default

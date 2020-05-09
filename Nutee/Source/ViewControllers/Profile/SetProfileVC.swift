@@ -25,6 +25,7 @@ class SetProfileVC: UIViewController {
     var pickedIMG = UIImage()
     var name : String = ""
     var profileImgSrc : String?
+    var originalNickname: String?
     
     // MARK: - Life Cycle
     
@@ -43,7 +44,7 @@ class SetProfileVC: UIViewController {
     
     // 초기 설정
     func setInit() {
-        
+
         closeBtn.tintColor = .nuteeGreen
         closeBtn.titleLabel?.font = .boldSystemFont(ofSize: 15)
         saveBtn.tintColor = .nuteeGreen
@@ -56,9 +57,11 @@ class SetProfileVC: UIViewController {
         nameTextField.addBorder(.bottom, color: .nuteeGreen, thickness: 1)
         nameTextField.tintColor = .nuteeGreen
         nameTextField.text = name
+        originalNickname = name
         
         setIMGBtn.setRounded(radius: nil)
         profileIMG.setRounded(radius: nil)
+        setClickProfileImageActions()
         
         checkLabel.alpha = 0
     }
@@ -68,27 +71,59 @@ class SetProfileVC: UIViewController {
     }
     
     @objc func close() {
-        self.dismiss(animated: true, completion: nil)
+        // 앞뒤 공백문자 제거
+        let presentedNickname = nameTextField.text?.trimmingCharacters(in: .whitespaces)
+        if(originalNickname != presentedNickname) {
+            var title = ""
+            title = "변경사항이 저장되지 않았습니다.\n정말 나가시겠습니까?"
+            
+            normalAlertWithHandler(title: title, msg: "", okTitle: "나가기", noTitle: "취소") { (action) in
+                self.setDefault()
+                self.dismiss(animated: true, completion: nil)
+            }
+        } else {
+            self.dismiss(animated: true, completion: nil)
+        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
         self.view.endEditing(true)
     }
     
+    // 프로필 이미지에 탭 인식하게 만들기
+    func setClickProfileImageActions() {
+        profileIMG.tag = 1
+        let tapGestureRecognizer1 = UITapGestureRecognizer(target: self, action: #selector(profileImageTapped(tapGestureRecognizer:)))
+        tapGestureRecognizer1.numberOfTapsRequired = 1
+        profileIMG.isUserInteractionEnabled = true
+        profileIMG.addGestureRecognizer(tapGestureRecognizer1)
+    }
+    
+    // 프로필 이미지 클릭시 실행 함수
+    @objc func profileImageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
+        let imgView = tapGestureRecognizer.view as! UIImageView
+        print("your taped image view tag is : \(imgView.tag)")
+        
+        //Give your image View tag
+        if (imgView.tag == 1) {
+            tapImageSettingBtn()
+        }
+    }
+    
     @objc func tapImageSettingBtn(){
         let actionAlert = UIAlertController(title: nil,
                                             message: nil,
                                             preferredStyle: UIAlertController.Style.actionSheet)
-        //        let defaultAction = UIAlertAction(title:"기본 이미지로 변경", style: .default){ action in
-        //            self.profileIMG.setImageNutee("")
-        //            self.pickedIMG = UIImage()
-        //        }
+        let defaultAction = UIAlertAction(title:"기본 누티 이미지로 설정", style: .default){ action in
+            self.profileIMG.setImageNutee("")
+            self.profileIMG.setImageContentMode("", imgvw: self.profileIMG)
+        }
         let imagePickerAction = UIAlertAction(title: "앨범에서 이미지 선택", style: .default) { (action) in
             self.showImagePickerController()
         }
         let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
         
-        //        actionAlert.addAction(defaultAction)
+        actionAlert.addAction(defaultAction)
         actionAlert.addAction(imagePickerAction)
         actionAlert.addAction(cancelAction)
         self.present(actionAlert, animated: true)
@@ -124,6 +159,7 @@ extension SetProfileVC : UINavigationControllerDelegate, UIImagePickerController
         
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage  {
             self.profileIMG.image = image
+            self.profileIMG.setImageContentMode("ThisIsStringForSetContentMode", imgvw: self.profileIMG)
             self.pickedIMG = image
         }
         
@@ -188,7 +224,7 @@ extension SetProfileVC {
     
     @objc func checkName(){
         print(#function)
-        UserService.shared.checkNick(nameTextField.text!) { (responsedata) in
+        UserService.shared.checkNick(nameTextField.text!.trimmingCharacters(in: .whitespaces)) { (responsedata) in
             print(#function)
             switch responsedata {
                 

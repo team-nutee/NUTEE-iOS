@@ -66,7 +66,7 @@ class FeedTVC: UITableViewCell {
         userImg.setRounded(radius: nil)
         
         userImg.setImageNutee(newsPost?.user.image?.src)
-        userImg.contentMode = .scaleAspectFill
+        userImg.setImageContentMode(newsPost?.user.image?.src, imgvw: userImg)
         
         // 사용자 이름 설정
         userNAMEButton.setTitle(newsPost?.user.nickname, for: .normal)
