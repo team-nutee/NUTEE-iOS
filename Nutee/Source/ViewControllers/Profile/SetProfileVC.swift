@@ -79,16 +79,16 @@ class SetProfileVC: UIViewController {
         let actionAlert = UIAlertController(title: nil,
                                             message: nil,
                                             preferredStyle: UIAlertController.Style.actionSheet)
-        //        let defaultAction = UIAlertAction(title:"기본 이미지로 변경", style: .default){ action in
-        //            self.profileIMG.setImageNutee("")
-        //            self.pickedIMG = UIImage()
-        //        }
+        let defaultAction = UIAlertAction(title:"기본 누티 이미지로 설정", style: .default){ action in
+            self.profileIMG.setImageNutee("")
+            self.profileIMG.setImageContentMode("", imgvw: self.profileIMG)
+        }
         let imagePickerAction = UIAlertAction(title: "앨범에서 이미지 선택", style: .default) { (action) in
             self.showImagePickerController()
         }
         let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
         
-        //        actionAlert.addAction(defaultAction)
+        actionAlert.addAction(defaultAction)
         actionAlert.addAction(imagePickerAction)
         actionAlert.addAction(cancelAction)
         self.present(actionAlert, animated: true)
@@ -124,6 +124,7 @@ extension SetProfileVC : UINavigationControllerDelegate, UIImagePickerController
         
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage  {
             self.profileIMG.image = image
+            self.profileIMG.setImageContentMode("ThisIsStringForSetContentMode", imgvw: self.profileIMG)
             self.pickedIMG = image
         }
         
