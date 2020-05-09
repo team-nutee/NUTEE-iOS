@@ -59,6 +59,7 @@ class SetProfileVC: UIViewController {
         
         setIMGBtn.setRounded(radius: nil)
         profileIMG.setRounded(radius: nil)
+        setClickProfileImageActions()
         
         checkLabel.alpha = 0
     }
@@ -73,6 +74,26 @@ class SetProfileVC: UIViewController {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
         self.view.endEditing(true)
+    }
+    
+    // 프로필 이미지에 탭 인식하게 만들기
+    func setClickProfileImageActions() {
+        profileIMG.tag = 1
+        let tapGestureRecognizer1 = UITapGestureRecognizer(target: self, action: #selector(profileImageTapped(tapGestureRecognizer:)))
+        tapGestureRecognizer1.numberOfTapsRequired = 1
+        profileIMG.isUserInteractionEnabled = true
+        profileIMG.addGestureRecognizer(tapGestureRecognizer1)
+    }
+    
+    // 프로필 이미지 클릭시 실행 함수
+    @objc func profileImageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
+        let imgView = tapGestureRecognizer.view as! UIImageView
+        print("your taped image view tag is : \(imgView.tag)")
+        
+        //Give your image View tag
+        if (imgView.tag == 1) {
+            tapImageSettingBtn()
+        }
     }
     
     @objc func tapImageSettingBtn(){
