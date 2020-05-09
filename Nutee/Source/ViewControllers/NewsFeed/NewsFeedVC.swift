@@ -8,6 +8,7 @@
 
 import UIKit
 
+import FirebaseAnalytics
 import SnapKit
 import SwiftKeychainWrapper
 
@@ -52,7 +53,11 @@ class NewsFeedVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidLoad()
-        
+        Analytics.logEvent("Main View", parameters: [
+           "name": "메인 뷰 선택" as NSObject,
+           "full_text": "메인 뷰 선택" as NSObject
+           ])
+
         getNewsPostsService(postCnt: 10, lastId: 0, completionHandler: {(returnedData)-> Void in
             if self.newsPostsArr?.count ?? 0 > 0 {
                 var tmpNewsPost: NewsPostsContentElement?

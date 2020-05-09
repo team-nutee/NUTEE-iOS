@@ -55,11 +55,6 @@ class LoginVC: UIViewController {
         navigationController?.navigationBar.isHidden = true
     }
     
-//    override func viewDidAppear(_ animated: Bool) {
-//        super.viewDidAppear(true)
-//        Splash.show()
-//    }
-//
     
     // MARK: -Helpers
     

@@ -9,6 +9,7 @@
 import UIKit
 import Tabman
 import Pageboy
+import FirebaseAnalytics
 
 class NoticeBoardVC: TabmanViewController {
     
@@ -39,6 +40,12 @@ class NoticeBoardVC: TabmanViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        
+        Analytics.logEvent("noticeView", parameters: [
+           "name": "공지사항 뷰 선택" as NSObject,
+           "full_text": "공지사항 뷰 선택" as NSObject
+           ])
+        
         // 네비바 border 삭제
         self.navigationController?.navigationBar.backgroundColor = .white
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
