@@ -46,6 +46,12 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="내용을 입력해주세요" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9BJ-Yg-92Y">
+                                                <rect key="frame" x="29" y="30" width="361" height="18"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                <color key="textColor" red="0.69013684990000002" green="0.69023543600000004" blue="0.69010573630000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="POb-9S-SR8">
                                                 <rect key="frame" x="24" y="75" width="366" height="100"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -91,7 +97,10 @@
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="fET-w1-DKH" secondAttribute="trailing" constant="24" id="CDA-ih-ped"/>
                                             <constraint firstItem="POb-9S-SR8" firstAttribute="top" secondItem="fET-w1-DKH" secondAttribute="bottom" constant="18" id="FjH-8P-r2H"/>
+                                            <constraint firstAttribute="trailing" secondItem="9BJ-Yg-92Y" secondAttribute="trailing" constant="24" id="Nj6-oM-AQK"/>
                                             <constraint firstItem="fET-w1-DKH" firstAttribute="leading" secondItem="EeZ-Kg-LiA" secondAttribute="leading" constant="24" id="TvQ-7W-Dwx"/>
+                                            <constraint firstItem="9BJ-Yg-92Y" firstAttribute="leading" secondItem="EeZ-Kg-LiA" secondAttribute="leading" constant="29" id="XZB-fh-Nlo"/>
+                                            <constraint firstItem="9BJ-Yg-92Y" firstAttribute="top" secondItem="EeZ-Kg-LiA" secondAttribute="top" constant="30" id="ZTP-zJ-F31"/>
                                             <constraint firstAttribute="trailing" secondItem="POb-9S-SR8" secondAttribute="trailing" constant="24" id="e4r-Xt-vOm"/>
                                             <constraint firstItem="fET-w1-DKH" firstAttribute="top" secondItem="EeZ-Kg-LiA" secondAttribute="top" constant="23" id="qxl-UT-Kyb"/>
                                             <constraint firstItem="POb-9S-SR8" firstAttribute="leading" secondItem="EeZ-Kg-LiA" secondAttribute="leading" constant="24" id="zBj-rH-zZV"/>
@@ -190,6 +199,7 @@
                         <outlet property="imagePickerBtn" destination="oUh-IB-hiA" id="9hs-ja-F4F"/>
                         <outlet property="imagePickerView" destination="ZKg-Yt-BDb" id="DZp-qa-jE9"/>
                         <outlet property="pickerViewBottomConstraint" destination="QRK-EK-t1V" id="fIR-xk-qcg"/>
+                        <outlet property="placeholderLabel" destination="9BJ-Yg-92Y" id="rdS-cW-6kD"/>
                         <outlet property="postBtn" destination="LOC-Lf-eDr" id="HTo-ch-t6D"/>
                         <outlet property="postingTextView" destination="fET-w1-DKH" id="Rra-hi-Ju2"/>
                         <outlet property="scrollView" destination="PTy-zj-GzA" id="zgC-AN-42e"/>
