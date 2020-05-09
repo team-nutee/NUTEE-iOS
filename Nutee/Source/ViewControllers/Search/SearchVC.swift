@@ -8,6 +8,8 @@
 
 import UIKit
 
+import FirebaseAnalytics
+
 class SearchVC: UIViewController {
     
     // MARK: - UI components
@@ -30,6 +32,13 @@ class SearchVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        
+        Analytics.logEvent("Search View", parameters: [
+           "name": "검색 뷰 선택" as NSObject,
+           "full_text": "검색 뷰 선택" as NSObject
+           ])
+
+        
         // 네비바 border 삭제
         self.navigationController?.navigationBar.backgroundColor = .white
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
@@ -55,6 +64,11 @@ class SearchVC: UIViewController {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "SearchResultVC") as! SearchResultVC
         
         vc.searchResult = searchTextField.text
+        Analytics.logEvent(searchTextField.text ?? "", parameters: [
+           "name": "검색 뷰 선택" as NSObject,
+           "full_text": "검색 뷰 선택" as NSObject
+           ])
+
         self.navigationController?.pushViewController(vc, animated: true)
     }
         

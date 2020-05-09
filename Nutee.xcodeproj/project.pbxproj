@@ -19,6 +19,7 @@
 		5E0E6A6F23E73CC800FBC15F /* Post.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E0E6A6E23E73CC800FBC15F /* Post.storyboard */; };
 		5E0E6A7223E73ECE00FBC15F /* PostVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0E6A7123E73ECE00FBC15F /* PostVC.swift */; };
 		5E1752F2242124B900013D55 /* Splash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1752F1242124B900013D55 /* Splash.swift */; };
+		5E207BCC2466DA0500FFDE79 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5E207BCB2466DA0500FFDE79 /* GoogleService-Info.plist */; };
 		5E21443D23C2F8500053CFB9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E21443C23C2F8500053CFB9 /* AppDelegate.swift */; };
 		5E21443F23C2F8500053CFB9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E21443E23C2F8500053CFB9 /* SceneDelegate.swift */; };
 		5E21444623C2F8560053CFB9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5E21444523C2F8560053CFB9 /* Assets.xcassets */; };
@@ -138,6 +139,7 @@
 		5E0E6A6E23E73CC800FBC15F /* Post.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Post.storyboard; sourceTree = "<group>"; };
 		5E0E6A7123E73ECE00FBC15F /* PostVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostVC.swift; sourceTree = "<group>"; };
 		5E1752F1242124B900013D55 /* Splash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Splash.swift; sourceTree = "<group>"; };
+		5E207BCB2466DA0500FFDE79 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5E21443923C2F8500053CFB9 /* NUTEE.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NUTEE.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E21443C23C2F8500053CFB9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5E21443E23C2F8500053CFB9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -356,6 +358,7 @@
 				5E21443C23C2F8500053CFB9 /* AppDelegate.swift */,
 				5E21443E23C2F8500053CFB9 /* SceneDelegate.swift */,
 				5E21444A23C2F8560053CFB9 /* Info.plist */,
+				5E207BCB2466DA0500FFDE79 /* GoogleService-Info.plist */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -674,6 +677,7 @@
 				5EC02ED02437628200580194 /* Search.storyboard in Resources */,
 				5E37CAA623E97DC800C0E2A8 /* SignUp.storyboard in Resources */,
 				D59718B623CEA9DA00117906 /* NoticeBoard.storyboard in Resources */,
+				5E207BCC2466DA0500FFDE79 /* GoogleService-Info.plist in Resources */,
 				5E37CAAA23E97DDA00C0E2A8 /* Find.storyboard in Resources */,
 				5ED1558524228E88004DCE02 /* PopUp.storyboard in Resources */,
 			);
@@ -947,7 +951,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.5;
+				MARKETING_VERSION = 1.0.6;
 				PRODUCT_BUNDLE_IDENTIFIER = kr.nutee;
 				PRODUCT_NAME = NUTEE;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -971,7 +975,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.5;
+				MARKETING_VERSION = 1.0.6;
 				PRODUCT_BUNDLE_IDENTIFIER = kr.nutee;
 				PRODUCT_NAME = NUTEE;
 				PROVISIONING_PROFILE_SPECIFIER = "";

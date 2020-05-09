@@ -12,6 +12,7 @@ import UIKit
 import Photos
 
 import YPImagePicker
+import FirebaseAnalytics
 
 
 class PostVC: UIViewController {
@@ -62,7 +63,11 @@ class PostVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        
+        Analytics.logEvent("Post View", parameters: [
+           "name": "포스팅 뷰 선택" as NSObject,
+           "full_text": "포스팅 뷰 선택" as NSObject
+           ])
+
         addKeyboardNotification()
         
         self.postingTextView.becomeFirstResponder()
