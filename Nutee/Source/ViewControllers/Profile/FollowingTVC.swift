@@ -22,7 +22,6 @@ class FollowingTVC: UITableViewCell {
         super.awakeFromNib()
         
         followingImgView.setRounded(radius: nil)
-        followingImgView.contentMode = .scaleAspectFill
 
         followingDeleteBtn.setTitle("팔로잉", for: .normal)
         followingDeleteBtn.setTitleColor(.nuteeGreen, for: .normal)

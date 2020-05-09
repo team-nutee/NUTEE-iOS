@@ -83,7 +83,7 @@ class ProfileTVC: UITableViewCell {
         profileIMG.setRounded(radius: nil)
                 
         profileIMG.setImageNutee(loginUserPost?.user.image?.src ?? "")
-        profileIMG.contentMode = .scaleAspectFill
+        profileIMG.setImageContentMode(loginUserPost?.user.image?.src, imgvw: profileIMG)
         
         // 사용자 이름 설정
         profileNameLabel.text = loginUserPost?.user.nickname

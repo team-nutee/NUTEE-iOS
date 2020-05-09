@@ -107,7 +107,7 @@ class ReplyCell: UITableViewCell{
         // 사용자 프로필 이미지 설정
         imgCommentUser.setRounded(radius: imgCommentUser.frame.height/2)
         imgCommentUser.setImageNutee(comment?.user.image?.src)
-        imgCommentUser.contentMode = .scaleAspectFill
+        imgCommentUser.setImageContentMode(comment?.user.image?.src, imgvw: imgCommentUser)
         
         lblCommentUserId.setTitle(comment?.user.nickname, for: .normal)
         lblCommentUserId.sizeToFit()

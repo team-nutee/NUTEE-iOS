@@ -74,6 +74,7 @@ extension FollowingVC : UITableViewDataSource {
         }
                 
         cell.followingImgView.setImageNutee(followingsList?[indexPath.row].image.src ?? "")
+        cell.followingImgView.setImageContentMode(followingsList?[indexPath.row].image.src, imgvw: cell.followingImgView)
         
         cell.followingLabel.text = followingsList?[indexPath.row].nickname
         cell.followingLabel.sizeToFit()

@@ -168,7 +168,7 @@ class DetailHeaderView: UITableViewHeaderFooterView {
             userIMG.setRounded(radius: nil)
 
             userIMG.setImageNutee(detailNewsPost?.user.image?.src)
-            userIMG.contentMode = .scaleAspectFill
+            userIMG.setImageContentMode(detailNewsPost?.user.image?.src, imgvw: userIMG)
             
             // 사용자 이름 설정
             userName.setTitle(detailNewsPost?.user.nickname, for: .normal)

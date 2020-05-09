@@ -389,7 +389,7 @@ extension ProfileVC : UITableViewDataSource {
         
         profileImage.setImageNutee(userInfo?.image.src)
         
-        profileImage.contentMode = .scaleAspectFill
+        profileImage.setImageContentMode(userInfo?.image.src, imgvw: profileImage)
         profileImage.setRounded(radius: 50)
         profileImage.translatesAutoresizingMaskIntoConstraints = false
         profileImage.topAnchor.constraint(equalTo: headerView.topAnchor, constant: 10).isActive = true
