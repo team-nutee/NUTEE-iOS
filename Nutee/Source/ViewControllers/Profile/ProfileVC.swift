@@ -18,8 +18,8 @@ extension ProfileVC: ProfileTVCDelegate {
     }
 }
 
-
 class ProfileVC: UIViewController {
+    
     // MARK: - UI components
     
     @IBOutlet weak var myArticleTV: UITableView!
@@ -71,6 +71,7 @@ class ProfileVC: UIViewController {
     var isFollowTxt : String?
     var follwerCnt : Int?
     var myFollower1 : NSMutableAttributedString?
+    
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
@@ -83,6 +84,7 @@ class ProfileVC: UIViewController {
         
         setRefresh()
         setBtn()
+        setClickProfileImageActions()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -104,8 +106,7 @@ class ProfileVC: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
-        
+        super.viewDidAppear(true)   
     }
     
     
@@ -114,7 +115,6 @@ class ProfileVC: UIViewController {
     // 초기 설정
     func setInit() {
         searchFollow()
-        
     }
     
     func setRefresh() {
@@ -142,9 +142,7 @@ class ProfileVC: UIViewController {
         }
     }
     
-    func setDefault() {
-        
-    }
+    func setDefault() {}
     
     func searchFollow(){
         for i in userInfo!.followers {
@@ -176,6 +174,26 @@ class ProfileVC: UIViewController {
         myArticle2Btn.addTarget(self, action: #selector(viewArticle), for: .touchUpInside)
         followBtn.addTarget(self, action: #selector(followAction), for: .touchUpInside)
         
+    }
+    
+    // 프로필 이미지에 탭 인식하게 만들기
+    func setClickProfileImageActions() {
+        profileImage.tag = 1
+        let tapGestureRecognizer1 = UITapGestureRecognizer(target: self, action: #selector(profileImageTapped(tapGestureRecognizer:)))
+        tapGestureRecognizer1.numberOfTapsRequired = 1
+        profileImage.isUserInteractionEnabled = true
+        profileImage.addGestureRecognizer(tapGestureRecognizer1)
+    }
+    
+    // 프로필 이미지 클릭시 실행 함수
+    @objc func profileImageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
+        let imgView = tapGestureRecognizer.view as! UIImageView
+        print("your taped image view tag is : \(imgView.tag)")
+        
+        //Give your image View tag
+        if (imgView.tag == 1) {
+            settingProfile()
+        }
     }
     
     @objc func settingProfile() {
