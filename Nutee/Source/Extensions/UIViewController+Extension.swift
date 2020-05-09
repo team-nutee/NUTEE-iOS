@@ -34,6 +34,17 @@ extension UIViewController {
         self.present(alert, animated: true)
     }
     
+    func normalAlertWithHandler(title: String, msg: String?, okTitle: String, noTitle: String, handler: ((UIAlertAction) -> Void)?) {
+        let alert = UIAlertController(title: title, message: msg, preferredStyle: .alert)
+        let noAction = UIAlertAction(title: noTitle, style: .default)
+        let okAction = UIAlertAction(title: okTitle, style: .destructive, handler: handler)
+
+        alert.addAction(noAction)
+        alert.addAction(okAction)
+        
+        self.present(alert, animated: true)
+    }
+    
     func oneAlertWithHandler(title: String, msg: String?, handler: ((UIAlertAction) -> Void)?) {
         let alert = UIAlertController(title: title, message: msg, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "예", style: .cancel, handler: handler)

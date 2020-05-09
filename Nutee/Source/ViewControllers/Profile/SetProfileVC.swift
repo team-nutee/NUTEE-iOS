@@ -25,6 +25,7 @@ class SetProfileVC: UIViewController {
     var pickedIMG = UIImage()
     var name : String = ""
     var profileImgSrc : String?
+    var originalNickname: String?
     
     // MARK: - Life Cycle
     
@@ -43,7 +44,7 @@ class SetProfileVC: UIViewController {
     
     // 초기 설정
     func setInit() {
-        
+
         closeBtn.tintColor = .nuteeGreen
         closeBtn.titleLabel?.font = .boldSystemFont(ofSize: 15)
         saveBtn.tintColor = .nuteeGreen
@@ -56,6 +57,7 @@ class SetProfileVC: UIViewController {
         nameTextField.addBorder(.bottom, color: .nuteeGreen, thickness: 1)
         nameTextField.tintColor = .nuteeGreen
         nameTextField.text = name
+        originalNickname = name
         
         setIMGBtn.setRounded(radius: nil)
         profileIMG.setRounded(radius: nil)
@@ -69,7 +71,19 @@ class SetProfileVC: UIViewController {
     }
     
     @objc func close() {
-        self.dismiss(animated: true, completion: nil)
+        // 앞뒤 공백문자 제거
+        let presentedNickname = nameTextField.text?.trimmingCharacters(in: .whitespaces)
+        if(originalNickname != presentedNickname) {
+            var title = ""
+            title = "변경사항이 저장되지 않았습니다.\n정말 나가시겠습니까?"
+            
+            normalAlertWithHandler(title: title, msg: "", okTitle: "나가기", noTitle: "취소") { (action) in
+                self.setDefault()
+                self.dismiss(animated: true, completion: nil)
+            }
+        } else {
+            self.dismiss(animated: true, completion: nil)
+        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
@@ -210,7 +224,7 @@ extension SetProfileVC {
     
     @objc func checkName(){
         print(#function)
-        UserService.shared.checkNick(nameTextField.text!) { (responsedata) in
+        UserService.shared.checkNick(nameTextField.text!.trimmingCharacters(in: .whitespaces)) { (responsedata) in
             print(#function)
             switch responsedata {
                 
