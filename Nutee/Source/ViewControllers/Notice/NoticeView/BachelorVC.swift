@@ -11,6 +11,8 @@
 import UIKit
 import SnapKit
 
+import SafariServices
+
 class BachelorVC: UIViewController {
     
     let bachelorTV: UITableView = UITableView()
@@ -88,9 +90,11 @@ extension BachelorVC : UITableViewDataSource {
         backgroundView.backgroundColor = .greenLighter
         cell.selectedBackgroundView = backgroundView
         
-        if let url = URL(string: link[indexPath.row]) {
-            UIApplication.shared.open(url)
-        }
+        let url = URL(string: link[indexPath.row])
+        let safariViewController = SFSafariViewController(url: url!)
+        safariViewController.preferredControlTintColor = .nuteeGreen
+        
+        present(safariViewController, animated: true, completion: nil)
         
         bachelorTV.reloadData()
         

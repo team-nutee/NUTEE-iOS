@@ -10,6 +10,8 @@
 
 import UIKit
 
+import SafariServices
+
 class GeneralVC: UIViewController {
     
     
@@ -82,9 +84,11 @@ extension GeneralVC : UITableViewDataSource {
         backgroundView.backgroundColor = .greenLighter
         cell.selectedBackgroundView = backgroundView
         
-        if let url = URL(string: link[indexPath.row]) {
-            UIApplication.shared.open(url)
-        }
+        let url = URL(string: link[indexPath.row])
+        let safariViewController = SFSafariViewController(url: url!)
+        safariViewController.preferredControlTintColor = .nuteeGreen
+        
+        present(safariViewController, animated: true, completion: nil)
         
         generalTV.reloadData()
     }
