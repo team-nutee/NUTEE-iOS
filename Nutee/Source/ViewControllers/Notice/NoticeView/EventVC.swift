@@ -52,8 +52,13 @@ extension EventVC : UITableViewDelegate { }
 extension EventVC : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if notice.count == 0 {
+            tableView.setEmptyView(title: "", message: "")
+        } else {
+            tableView.restore()
+        }
+
         return notice.count
-        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

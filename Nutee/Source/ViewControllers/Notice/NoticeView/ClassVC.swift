@@ -49,6 +49,12 @@ extension ClassVC : UITableViewDelegate { }
 
 extension ClassVC : UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if notice.count == 0 {
+            tableView.setEmptyView(title: "", message: "")
+        } else {
+            tableView.restore()
+        }
+
         return notice.count
     }
     

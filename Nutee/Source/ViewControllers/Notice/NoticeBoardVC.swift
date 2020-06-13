@@ -41,7 +41,7 @@ class NoticeBoardVC: TabmanViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
-        Analytics.logEvent("noticeView", parameters: [
+        Analytics.logEvent("noticeview", parameters: [
            "name": "공지사항 뷰 선택" as NSObject,
            "full_text": "공지사항 뷰 선택" as NSObject
            ])

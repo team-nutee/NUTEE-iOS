@@ -79,6 +79,9 @@
 		5ED3DFBB244C4A3F00B34D20 /* OurInfoTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED3DFBA244C4A3F00B34D20 /* OurInfoTVC.swift */; };
 		5ED93D76242A7A1F00CE6D3F /* PictureVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED93D75242A7A1F00CE6D3F /* PictureVC.swift */; };
 		5ED93D78242A7A3400CE6D3F /* PopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED93D77242A7A3400CE6D3F /* PopUpVC.swift */; };
+		5EE26DC82495492600FAD9B2 /* LinkTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE26DC72495492600FAD9B2 /* LinkTextView.swift */; };
+		5EE26DCB249549DA00FAD9B2 /* HashVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE26DCA249549DA00FAD9B2 /* HashVC.swift */; };
+		5EE26DCE2495516700FAD9B2 /* Hash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5EE26DCD2495516700FAD9B2 /* Hash.storyboard */; };
 		9BAC66A7C5A62E83BF84D416 /* Pods_Nutee.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5915003F64084812BCF9F67 /* Pods_Nutee.framework */; };
 		D519843E23E32418001AB351 /* NewsFeed.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D519843C23E32418001AB351 /* NewsFeed.storyboard */; };
 		D519843F23E32418001AB351 /* DetailNewsFeed.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D519843D23E32418001AB351 /* DetailNewsFeed.storyboard */; };
@@ -201,6 +204,9 @@
 		5ED3DFBA244C4A3F00B34D20 /* OurInfoTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OurInfoTVC.swift; sourceTree = "<group>"; };
 		5ED93D75242A7A1F00CE6D3F /* PictureVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PictureVC.swift; sourceTree = "<group>"; };
 		5ED93D77242A7A3400CE6D3F /* PopUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpVC.swift; sourceTree = "<group>"; };
+		5EE26DC72495492600FAD9B2 /* LinkTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkTextView.swift; sourceTree = "<group>"; };
+		5EE26DCA249549DA00FAD9B2 /* HashVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashVC.swift; sourceTree = "<group>"; };
+		5EE26DCD2495516700FAD9B2 /* Hash.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Hash.storyboard; sourceTree = "<group>"; };
 		D519843C23E32418001AB351 /* NewsFeed.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = NewsFeed.storyboard; sourceTree = "<group>"; };
 		D519843D23E32418001AB351 /* DetailNewsFeed.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DetailNewsFeed.storyboard; sourceTree = "<group>"; };
 		D519844423E325EE001AB351 /* DetailNewsFeedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailNewsFeedVC.swift; sourceTree = "<group>"; };
@@ -366,6 +372,7 @@
 		5E21445323C2F8870053CFB9 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				5EE26DC9249549B000FAD9B2 /* Hash */,
 				5EC02ED524376B4100580194 /* Search */,
 				5E37CAAB23E9866D00C0E2A8 /* Profile */,
 				5E0E6A7023E73EA500FBC15F /* Post */,
@@ -400,6 +407,7 @@
 			children = (
 				5E21445D23C2F8FC0053CFB9 /* LoadingHUD.swift */,
 				5E1752F1242124B900013D55 /* Splash.swift */,
+				5EE26DC72495492600FAD9B2 /* LinkTextView.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -435,6 +443,7 @@
 		5E21446323C2F9B30053CFB9 /* Storyboard */ = {
 			isa = PBXGroup;
 			children = (
+				5EE26DCC2495515A00FAD9B2 /* Hash */,
 				5EC02ECE2437626600580194 /* Search */,
 				5E79C0C323EC6AB400BD2FB3 /* Util */,
 				5E0E6A6D23E73CBD00FBC15F /* Post */,
@@ -538,6 +547,22 @@
 				5EC02ED8243775DF00580194 /* SearchResultVC.swift */,
 			);
 			path = Search;
+			sourceTree = "<group>";
+		};
+		5EE26DC9249549B000FAD9B2 /* Hash */ = {
+			isa = PBXGroup;
+			children = (
+				5EE26DCA249549DA00FAD9B2 /* HashVC.swift */,
+			);
+			path = Hash;
+			sourceTree = "<group>";
+		};
+		5EE26DCC2495515A00FAD9B2 /* Hash */ = {
+			isa = PBXGroup;
+			children = (
+				5EE26DCD2495516700FAD9B2 /* Hash.storyboard */,
+			);
+			path = Hash;
 			sourceTree = "<group>";
 		};
 		67B0C5227CABA343A88C01B5 /* Pods */ = {
@@ -674,6 +699,7 @@
 				5EC02ED4243769DE00580194 /* ProfileTVC.xib in Resources */,
 				5EC02ECA2437298900580194 /* FeedTVC.xib in Resources */,
 				5E2BDCC02403903700CE99A7 /* ProflieTableViewCell.xib in Resources */,
+				5EE26DCE2495516700FAD9B2 /* Hash.storyboard in Resources */,
 				5EC02ED02437628200580194 /* Search.storyboard in Resources */,
 				5E37CAA623E97DC800C0E2A8 /* SignUp.storyboard in Resources */,
 				D59718B623CEA9DA00117906 /* NoticeBoard.storyboard in Resources */,
@@ -755,6 +781,7 @@
 				5E2BDCBC2403901400CE99A7 /* Notice.swift in Sources */,
 				5E21445E23C2F8FC0053CFB9 /* LoadingHUD.swift in Sources */,
 				5E2BDCBF2403903700CE99A7 /* ProflieTableViewCell.swift in Sources */,
+				5EE26DCB249549DA00FAD9B2 /* HashVC.swift in Sources */,
 				5E05AD6C23DB0E8C00E36AD4 /* CALayer+Extension.swift in Sources */,
 				5ED3DFB7244C450100B34D20 /* TermsVC.swift in Sources */,
 				5EA5C68A23F1475000BFB32B /* PassWordVC.swift in Sources */,
@@ -797,6 +824,7 @@
 				5ED155872423162B004DCE02 /* UITabar.swift in Sources */,
 				5ED3DFB9244C493000B34D20 /* OurInfoVC.swift in Sources */,
 				5ED93D76242A7A1F00CE6D3F /* PictureVC.swift in Sources */,
+				5EE26DC82495492600FAD9B2 /* LinkTextView.swift in Sources */,
 				5E796733244F1DEA0053974F /* Model.swift in Sources */,
 				5E21445A23C2F8E50053CFB9 /* APIConstants.swift in Sources */,
 				5E2BDCB924038F7300CE99A7 /* NoticeService.swift in Sources */,
@@ -951,7 +979,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.6;
+				MARKETING_VERSION = 1.0.7;
 				PRODUCT_BUNDLE_IDENTIFIER = kr.nutee;
 				PRODUCT_NAME = NUTEE;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -975,7 +1003,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.6;
+				MARKETING_VERSION = 1.0.7;
 				PRODUCT_BUNDLE_IDENTIFIER = kr.nutee;
 				PRODUCT_NAME = NUTEE;
 				PROVISIONING_PROFILE_SPECIFIER = "";

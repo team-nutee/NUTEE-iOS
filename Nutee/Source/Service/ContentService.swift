@@ -644,6 +644,7 @@ struct ContentService {
         let encodingText = text.stringByAddingPercentEncodingForFormData(plusForSpace: true)!
 
         let URL = APIConstants.Search + encodingText + "?lastId=" + "\(lastId)" + "&limit=" + "\(postCnt)"
+        
         let header: HTTPHeaders = [
             "Content-Type" : "application/json",
             "Cookie" : KeychainWrapper.standard.string(forKey: "Cookie")!

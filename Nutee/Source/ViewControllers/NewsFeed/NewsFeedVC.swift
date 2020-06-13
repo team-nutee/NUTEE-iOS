@@ -53,7 +53,7 @@ class NewsFeedVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidLoad()
-        Analytics.logEvent("Main View", parameters: [
+        Analytics.logEvent("mainview", parameters: [
            "name": "메인 뷰 선택" as NSObject,
            "full_text": "메인 뷰 선택" as NSObject
            ])

@@ -26,7 +26,7 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
     @IBOutlet var lblPostTime: UILabel!
     
     // Posting
-    @IBOutlet var txtvwContent: UITextView!
+    @IBOutlet var txtvwContent: LinkTextView!
     @IBOutlet var ContentsToRepost: NSLayoutConstraint!
     
     // ver. TwoFrame
@@ -83,10 +83,21 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        print(#function)
+
+        txtvwContent.delegate = self
+        txtvwContent.isEditable = false
+        txtvwContent.isSelectable = true
+        txtvwContent.isUserInteractionEnabled = true
+        txtvwContent.linkTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.blue]
+        txtvwContent.dataDetectorTypes = .link
+        txtvwContent.resolveHashTags()
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        
+        print(#function)
         
         btnRepost.isEnabled = true
         btnLike.isEnabled = true
@@ -94,6 +105,33 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
     }
     
     //MARK: - Helper
+    
+    func initTextView() {
+        print(#function)
+        txtvwContent.delegate = self
+        txtvwContent.isEditable = false
+        txtvwContent.isSelectable = true
+        txtvwContent.isUserInteractionEnabled = true
+        txtvwContent.linkTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.blue]
+        txtvwContent.dataDetectorTypes = .link
+        txtvwContent.resolveHashTags()
+    }
+    
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
+        print("123")
+        print("text:",textView.text ?? "")
+        print(String(describing: characterRange))
+        print(characterRange.location)
+        print(characterRange.location)
+        let sub:String = (NSString(string: textView.text)).substring(with: characterRange)
+        print("sub:",sub)
+        print(sub.first ?? "")
+        print("URL",URL)
+        print("characterRange",characterRange)
+        print("interaction",interaction)
+        return false
+    }
+
     
     @IBAction func showDetailProfile(_ sender: UIButton) {
         showProfile()
@@ -565,6 +603,8 @@ class HeaderNewsFeedView: UITableViewHeaderFooterView {
 protocol HeaderNewsFeedViewDelegate: class {
     func deletePostAndBackToMainNewsTV(completionHandler: @escaping () -> Void) // FeedTVC에 정의되어 있는 프로토콜 함수
 }
+
+extension HeaderNewsFeedView : UITextViewDelegate {}
 
 // MARK: - 서버 연결 코드 구간
 

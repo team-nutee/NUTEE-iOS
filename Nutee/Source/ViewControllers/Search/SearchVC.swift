@@ -33,7 +33,7 @@ class SearchVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
-        Analytics.logEvent("Search View", parameters: [
+        Analytics.logEvent("searchview", parameters: [
            "name": "검색 뷰 선택" as NSObject,
            "full_text": "검색 뷰 선택" as NSObject
            ])

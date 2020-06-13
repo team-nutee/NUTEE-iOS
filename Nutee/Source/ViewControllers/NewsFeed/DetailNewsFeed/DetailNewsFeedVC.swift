@@ -56,7 +56,6 @@ class DetailNewsFeedVC: UIViewController {
         replyTV.dataSource = self
         
         txtvwComment.delegate = self
-        
         // Register the custom header view
         let nibHead = UINib(nibName: "DetailHeaderView", bundle: nil)
         self.replyTV.register(nibHead, forHeaderFooterViewReuseIdentifier: "DetailHeaderView")
@@ -220,11 +219,13 @@ extension DetailNewsFeedVC : UITableViewDataSource {
         headerNewsFeed?.RootVC = self
         // 중간 매개 델리게이트(DetailNewsFeed)와 DetailHeaderView 사이를 통신하기 위한 변수 연결작업
         headerNewsFeed?.delegate = self.delegate
-        
+        headerNewsFeed?.FeedVC = self
         // 사용자 프로필 이미지 탭 인식 설정
         headerNewsFeed?.setClickActions()
         headerNewsFeed?.setImageView()
-        
+        headerNewsFeed?.awakeFromNib()
+        headerNewsFeed?.initTextView()
+
         return headerNewsFeed
     }
     

@@ -7,10 +7,12 @@
 //
 
 import UIKit
+import SafariServices
+import Foundation
 
 import SwiftKeychainWrapper
 
-class DetailHeaderView: UITableViewHeaderFooterView {
+class DetailHeaderView: UITableViewHeaderFooterView, UITextViewDelegate {
     
     //MARK: - UI components
     
@@ -22,7 +24,7 @@ class DetailHeaderView: UITableViewHeaderFooterView {
     @IBOutlet var btnMore: UIButton!
     
     // Posting
-    @IBOutlet weak var contentTextView: UITextView!
+    @IBOutlet weak var contentTextView: LinkTextView!
     //앨범 이미지 1, 3, 4개수 프레임
     @IBOutlet weak var imageWrapperView: UIView!
     //앨범 이미지 높이
@@ -55,6 +57,8 @@ class DetailHeaderView: UITableViewHeaderFooterView {
     var isClickedRepost: Bool?
     var isClickedComment: Bool?
     
+    weak var FeedVC: UIViewController?
+
     // .normal 상태에서의 버튼 AttributedStringTitle의 색깔 지정
     let normalAttributes = [NSAttributedString.Key.foregroundColor: UIColor.gray]
     // .selected 상태에서의 Repost버튼 AttributedStringTitle의 색깔 지정
@@ -78,7 +82,44 @@ class DetailHeaderView: UITableViewHeaderFooterView {
     }
     
     //MARK: - Helper
+    func initTextView() {
+        contentTextView.delegate = self
+        contentTextView.isEditable = false
+        contentTextView.isSelectable = true
+        contentTextView.isUserInteractionEnabled = true
+        contentTextView.linkTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.blue]
+        contentTextView.dataDetectorTypes = .link
+        contentTextView.resolveHashTags()
+    }
     
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
+//        print("123")
+//        print("text:",textView.text ?? "")
+//        print(String(describing: characterRange))
+//        print(characterRange.location)
+//        print(characterRange.location)
+        let sub:String = (NSString(string: textView.text)).substring(with: characterRange)
+//        print("sub:",sub)
+//        print(sub.first ?? "")
+//        print("URL",URL)
+//        print("characterRange",characterRange)
+//        print("interaction",interaction)
+        
+        if (sub.first) == "#" {
+            
+        } else {
+            print("url")
+            let beforeURL = sub
+            let url: URL = Foundation.URL(string: beforeURL)!
+            let safariViewController = SFSafariViewController(url: url)
+            safariViewController.preferredControlTintColor = .nuteeGreen
+
+            self.FeedVC?.present(safariViewController, animated: true, completion: nil)
+        }
+        
+        return false
+    }
+
     @IBAction func showDetailProfile(_ sender: UIButton) {
         showProfile()
     }
@@ -369,6 +410,7 @@ protocol DetailHeaderViewDelegate: class {
     func backToUpdateNewsTV() // NewsFeedVC에 정의되어 있는 프로토콜 함수
 }
 
+extension DetailHeaderView : UITableViewDelegate { }
 
 // MARK: - 서버 연결 코드 구간
 
