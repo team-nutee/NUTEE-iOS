@@ -106,15 +106,18 @@ class DetailHeaderView: UITableViewHeaderFooterView, UITextViewDelegate {
 //        print("interaction",interaction)
         
         if (sub.first) == "#" {
+            let vc = UIStoryboard.init(name: "Hash", bundle: Bundle.main).instantiateViewController(withIdentifier: "HashVC") as? HashVC
             
+            vc?.hashTag = sub
+            RootVC?.navigationController?.pushViewController(vc!, animated: true)
+
         } else {
-            print("url")
             let beforeURL = sub
             let url: URL = Foundation.URL(string: beforeURL)!
             let safariViewController = SFSafariViewController(url: url)
             safariViewController.preferredControlTintColor = .nuteeGreen
 
-            self.FeedVC?.present(safariViewController, animated: true, completion: nil)
+            self.RootVC?.present(safariViewController, animated: true, completion: nil)
         }
         
         return false

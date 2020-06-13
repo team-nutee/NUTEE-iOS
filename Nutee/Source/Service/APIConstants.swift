@@ -50,7 +50,7 @@ struct APIConstants {
     static let UserPostsGET = BaseURL + "/api/user/:id/posts/"
     // GET
     
-    static let Hashtag = BaseURL + "/api/hashtag"
+    static let Hashtag = BaseURL + "/api/hashtag/"
     // GET
     static let Notice = BaseURL + "/api/notice"
     // GET
