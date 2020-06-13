@@ -84,7 +84,9 @@ class ProfileVC: UIViewController {
         
         setRefresh()
         setBtn()
-        setClickProfileImageActions()
+        if userId == KeychainWrapper.standard.integer(forKey: "id") {
+            setClickProfileImageActions()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
