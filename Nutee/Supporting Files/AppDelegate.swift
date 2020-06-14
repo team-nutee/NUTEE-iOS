@@ -7,7 +7,12 @@
 //
 
 import UIKit
+
 import Firebase
+#if DEBUG
+import Gedatsu
+#endif
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,6 +25,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         FirebaseApp.configure()
         sleep(1)
+        
+        #if DEBUG
+        Gedatsu.open()
+        #endif
+
         return true
     }
 

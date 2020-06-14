@@ -1,5 +1,6 @@
 ${PODS_ROOT}/Target Support Files/Pods-Nutee/Pods-Nutee-frameworks.sh
 ${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework
+${BUILT_PRODUCTS_DIR}/Gedatsu/Gedatsu.framework
 ${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework
 ${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework
 ${BUILT_PRODUCTS_DIR}/Pageboy/Pageboy.framework
