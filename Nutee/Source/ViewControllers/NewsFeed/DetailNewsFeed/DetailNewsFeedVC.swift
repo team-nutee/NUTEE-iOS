@@ -219,7 +219,6 @@ extension DetailNewsFeedVC : UITableViewDataSource {
         headerNewsFeed?.RootVC = self
         // 중간 매개 델리게이트(DetailNewsFeed)와 DetailHeaderView 사이를 통신하기 위한 변수 연결작업
         headerNewsFeed?.delegate = self.delegate
-        headerNewsFeed?.FeedVC = self
         // 사용자 프로필 이미지 탭 인식 설정
         headerNewsFeed?.setClickActions()
         headerNewsFeed?.setImageView()
@@ -277,7 +276,7 @@ extension DetailNewsFeedVC : UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ReplyCell", for: indexPath) as! ReplyCell
         
         cell.selectionStyle = .none
-        
+        cell.initTextView()
         if content?.comments.count == 0 {
             replyTV.allowsSelection = false
             if indexPath.row == 0 {

@@ -7,10 +7,11 @@
 //
 
 import UIKit
+import SafariServices
 
 import SwiftKeychainWrapper
 
-class ReplyCell: UITableViewCell{
+class ReplyCell: UITableViewCell, UITextViewDelegate{
     
     //MARK: - UI components
     
@@ -20,7 +21,7 @@ class ReplyCell: UITableViewCell{
     @IBOutlet var imgCommentUser: UIImageView!
     @IBOutlet var lblCommentUserId: UIButton!
     @IBOutlet var lblCommentTime: UILabel!
-    @IBOutlet var txtvwCommentContents: UITextView!
+    @IBOutlet var txtvwCommentContents: LinkTextView!
     @IBOutlet var LeadingToCommentUser: NSLayoutConstraint!
     
     //MARK: - Variables and Properties
@@ -41,7 +42,39 @@ class ReplyCell: UITableViewCell{
     }
     
     //MARK: - Helper
-    
+    func initTextView() {
+        txtvwCommentContents.delegate = self
+        txtvwCommentContents.isEditable = false
+        txtvwCommentContents.isSelectable = true
+        txtvwCommentContents.isUserInteractionEnabled = true
+        txtvwCommentContents.linkTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.blue]
+        txtvwCommentContents.dataDetectorTypes = .link
+        txtvwCommentContents.resolveHashTags()
+    }
+
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
+        var sub:String = (NSString(string: textView.text)).substring(with: characterRange)
+        if (sub.first) == "#" {
+            let vc = UIStoryboard.init(name: "Hash", bundle: Bundle.main).instantiateViewController(withIdentifier: "HashVC") as? HashVC
+            
+            vc?.hashTag = sub
+            RootVC?.navigationController?.pushViewController(vc!, animated: true)
+
+        } else {
+            if sub.lowercased().hasPrefix("http://")==false{
+                 sub = "http://" + sub
+            }
+            let beforeURL = sub
+            let url: URL = Foundation.URL(string: beforeURL)!
+            let safariViewController = SFSafariViewController(url: url)
+            safariViewController.preferredControlTintColor = .nuteeGreen
+
+            self.RootVC?.present(safariViewController, animated: true, completion: nil)
+        }
+        
+        return false
+    }
+
     @IBAction func showDetailProfile(_ sender: UIButton) {
         showProfile()
     }
@@ -186,6 +219,8 @@ protocol ReplyCellDelegate: class {
     func updateReplyTV()
     func setEditCommentMode(commentId: Int, commentContent: String)
 }
+
+extension ReplyCell : UITableViewDelegate { }
 
 // MARK: - 서버 연결 코드 구간
 

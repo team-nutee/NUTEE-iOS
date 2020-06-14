@@ -57,8 +57,6 @@ class DetailHeaderView: UITableViewHeaderFooterView, UITextViewDelegate {
     var isClickedRepost: Bool?
     var isClickedComment: Bool?
     
-    weak var FeedVC: UIViewController?
-
     // .normal 상태에서의 버튼 AttributedStringTitle의 색깔 지정
     let normalAttributes = [NSAttributedString.Key.foregroundColor: UIColor.gray]
     // .selected 상태에서의 Repost버튼 AttributedStringTitle의 색깔 지정
@@ -93,18 +91,7 @@ class DetailHeaderView: UITableViewHeaderFooterView, UITextViewDelegate {
     }
     
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
-//        print("123")
-//        print("text:",textView.text ?? "")
-//        print(String(describing: characterRange))
-//        print(characterRange.location)
-//        print(characterRange.location)
-        let sub:String = (NSString(string: textView.text)).substring(with: characterRange)
-//        print("sub:",sub)
-//        print(sub.first ?? "")
-//        print("URL",URL)
-//        print("characterRange",characterRange)
-//        print("interaction",interaction)
-        
+        var sub:String = (NSString(string: textView.text)).substring(with: characterRange)
         if (sub.first) == "#" {
             let vc = UIStoryboard.init(name: "Hash", bundle: Bundle.main).instantiateViewController(withIdentifier: "HashVC") as? HashVC
             
@@ -112,6 +99,9 @@ class DetailHeaderView: UITableViewHeaderFooterView, UITextViewDelegate {
             RootVC?.navigationController?.pushViewController(vc!, animated: true)
 
         } else {
+            if sub.lowercased().hasPrefix("http://")==false{
+                 sub = "http://" + sub
+            }
             let beforeURL = sub
             let url: URL = Foundation.URL(string: beforeURL)!
             let safariViewController = SFSafariViewController(url: url)
