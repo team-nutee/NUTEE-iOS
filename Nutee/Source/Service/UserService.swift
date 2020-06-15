@@ -523,14 +523,13 @@ struct UserService {
         
         
         let URL = APIConstants.NickCheck
-        print(URL)
         
         let headers: HTTPHeaders = [
             "Content-Type": "application/json"
         ]
         
         let body : Parameters = [
-            "userId" : nick
+            "nickname" : nick
         ]
         
         
@@ -542,8 +541,6 @@ struct UserService {
             case .success:
                 // parameter 위치
                 if let status = response.response?.statusCode {
-                    print(status)
-                    print(body)
                     switch status {
                     case 200:
                         completion(.success(200))

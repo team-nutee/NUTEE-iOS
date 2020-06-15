@@ -61,8 +61,8 @@ class ReplyCell: UITableViewCell, UITextViewDelegate{
             RootVC?.navigationController?.pushViewController(vc!, animated: true)
 
         } else {
-            if sub.lowercased().hasPrefix("http://")==false{
-                 sub = "http://" + sub
+            if (sub.hasPrefix("https://") || sub.hasPrefix("http://")) == false {
+                sub = "http://" + sub
             }
             let beforeURL = sub
             let url: URL = Foundation.URL(string: beforeURL)!

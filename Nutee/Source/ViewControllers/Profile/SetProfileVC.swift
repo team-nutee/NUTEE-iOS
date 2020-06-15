@@ -223,9 +223,9 @@ extension SetProfileVC {
     }
     
     @objc func checkName(){
-        print(#function)
+        
         UserService.shared.checkNick(nameTextField.text!.trimmingCharacters(in: .whitespaces)) { (responsedata) in
-            print(#function)
+            
             switch responsedata {
                 
             case .success(let res):
