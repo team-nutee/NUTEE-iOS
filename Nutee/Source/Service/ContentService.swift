@@ -193,8 +193,11 @@ struct ContentService {
         
         Alamofire.upload(multipartFormData: { (multipartFormData) in
             for image in pictures {
+                dump(image.jpegData(compressionQuality: 0.1)?.base64EncodedString())
+                dump(image.jpegData(compressionQuality: 0.1))
                 if let imageData = image.jpegData(compressionQuality: 0.3) {
                     print(imageData)
+                    dump(imageData)
                     multipartFormData.append(imageData, withName: "image", fileName: "image.jpg", mimeType: "image/jpg")
                 }
             }
