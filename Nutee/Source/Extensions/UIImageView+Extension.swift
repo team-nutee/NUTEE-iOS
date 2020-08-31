@@ -55,34 +55,11 @@ extension UIImageView {
                 self.image = image // 바로 이미지를 셋한다.
             } else {
                 let url = URL(string: urlString) // 캐시가 없다면
-                let resource = ImageResource(downloadURL: url! , cacheKey: urlString) // URL로부터 이미지를 다운받고 String 타입의 URL을 캐시키로 지정하고
+                let resource = ImageResource(downloadURL: url ?? URL.init(fileURLWithPath: "http://13.124.232.115:9425/settings/nutee_profile.png") , cacheKey: urlString) // URL로부터 이미지를 다운받고 String 타입의 URL을 캐시키로 지정하고
                 self.kf.setImage(with: resource) // 이미지를 셋한다.
             }
         }
     }
-
-//    func hasAlpha() -> Bool {
-//        guard let cgImage = cgImage else {
-//            return false
-//        }
-//        let alpha = cgImage.alphaInfo
-//        return alpha == .first || alpha == .last || alpha == .premultipliedFirst || alpha == .premultipliedLast
-//    }
-//
-//    func dataURL() -> String? {
-//        var imageData: Data? = nil
-//        var mimeType: String? = nil
-//
-//        if hasAlpha() {
-//            imageData = self.pngData()
-//            mimeType = "image/png"
-//        } else {
-//            imageData = self.jpegData(compressionQuality: 1.0)
-//            mimeType = "image/jpeg"
-//        }
-//
-//        return "data:\(mimeType ?? "");base64,\(imageData?.base64EncodedString(options: []) ?? "")"
-//    }
 
     
 }

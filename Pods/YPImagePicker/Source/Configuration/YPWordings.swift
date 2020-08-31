@@ -28,7 +28,7 @@ public struct YPWordings {
 //        public var title = ypLocalized("YPImagePickerVideoDurationTitle")
 //        public var tooShortMessage = ypLocalized("YPImagePickerVideoTooShort")
 //        public var tooLongMessage = ypLocalized("YPImagePickerVideoTooLong")
-        public var title = "동영상 길이"
+        public var title = ypLocalized("YPImagePickerVideoDurationTitle")
         public var tooShortMessage = "동영상 최소 시간을 채워주세요."
         public var tooLongMessage = "동영상 최대 시간을 벗어났습니다."
     }
